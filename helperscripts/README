@@ -1,0 +1,46 @@
+These are helper scripts to aid with your usage of the Agile Deployment Toolkit
+
+1)Connection Scripts
+
+There are scripts to connect you directly with deployed servers, based on type.
+You can use the Connect to Autoscaler script to connect to the autoscaler.
+The Connect to DB to connect to the Database and so on.
+If you don't use these scripts, you will need to mess about passing the required SSH
+keys and so on which these scipts find automatically. You have to know which encryption
+algorithm you are using, RSA or ECDSA to connect successfully.
+
+2) Copy script
+
+Just pass the path to the file you want to copy to a server and this script will copy it
+there for you. It's a convenience thing. Without it, you will need to mess about with 
+encryption keys and so on for SSH
+
+3) Get Infrastructure
+
+This scripts gets copies of all the infrastructure scripts to your local machine
+
+4) Monitor Webserver
+
+You can use this script to monitor your website. You need to put a token in the script which can be looked
+for in the websites response code. If it finds it then you know the site is functional, that's the idea.
+
+5)Reboot
+
+You can reboot all the infrastructure if you like
+
+6)Shutdown
+
+This scripts will shutdown all your infrastructure with limited prompting. Optionally, it can actually destroy
+the machines fully as well. Please note, if you want to shutdown your infrastructure or even a webserver,
+you must do so using this script.
+
+7)Super Safe Backup
+
+This makes a backup of your sourcecode to either a repository or your datastore. This is a manual way of making
+another copy of your sourcecode. 
+
+8) Reset Build Kit
+
+This removes all files/directories which are transient to the build process. If you "reset" the build kit, then you 
+know that your next build run will be fresh and clean.
+
