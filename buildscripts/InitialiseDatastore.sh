@@ -40,7 +40,7 @@ then
     status "region with the same provider you are currently deploying to, you may experience a failure because the bucket will exist but will"
     status "not be accessible in or from your current region. In short, make sure that all the buckets your application requires can be created"
     status "in the region you are currently deployting to"
-    status "We currently support  1: Amazon S3 2: Digital Ocean 3: Exoscale 4: Linode 5:Vultr"
+    status "We currently support  1: Amazon S3 2: Digital Ocean Spaces 3: Exoscale Object Store 4: Linode Object Store 5:Vultr Object Store"
     status "##################################################################################################################################"
     status "Please make you choice of datastore (1),(2),(3),(4),(5)"
     read choice
