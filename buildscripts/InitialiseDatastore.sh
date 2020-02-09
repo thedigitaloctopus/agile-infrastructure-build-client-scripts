@@ -76,6 +76,28 @@ then
         DATASTORE_CHOICE="vultr"
         ${BUILD_HOME}/providerscripts/datastore/InitialiseDatastore.sh "${DATASTORE_CHOICE}" "${BUILDOS}"
     fi
+    
+    status "#################################################################################################################"
+    status "Sometimes you can incur charge for 'data out' to the internet. If this is the case, you might want to switch off"
+    status "hourly backups because if your application is several hundred megabytes, that mounts up to gigabytes per week of"
+    status "hourly backups to your application git repo which can mean, in some cases, significant costs"
+    status "in such a scenario, you would likely want to limit your backups to daily periodicity and more infrequently"
+    status "Would you like to switch off or disable hourly backups to save costs?"
+    status "#################################################################################################################"
+    status "Please enter (Y|y) if you would like to disable hourly backups to your git repo"
+
+    read answer
+
+    if ( [ "${answer}" = "Y" ] || [ "${answer}" = "y" ] )
+    then
+        DISABLE_HOURLY="1"
+    else
+        DISABLE_HOURLY="0"
+    fi
+
+    status "NOTE: if you now enable super safe backups, hourly backups will still be made to your datastore"
+    status "Press any key to continue"
+    read x
 
     if ( [ "${DATASTORE_CHOICE}" != "none" ] )
     then
