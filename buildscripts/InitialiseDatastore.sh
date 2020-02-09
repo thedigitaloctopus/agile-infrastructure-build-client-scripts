@@ -91,13 +91,12 @@ then
     if ( [ "${answer}" = "Y" ] || [ "${answer}" = "y" ] )
     then
         DISABLE_HOURLY="1"
+        status "NOTE: if you now enable super safe backups, hourly backups will still be made to your datastore"
+        status "Press the <enter> key to continue"
+        read x
     else
         DISABLE_HOURLY="0"
     fi
-
-    status "NOTE: if you now enable super safe backups, hourly backups will still be made to your datastore"
-    status "Press any key to continue"
-    read x
 
     if ( [ "${DATASTORE_CHOICE}" != "none" ] )
     then
