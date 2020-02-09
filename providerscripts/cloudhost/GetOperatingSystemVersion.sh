@@ -79,41 +79,16 @@ then
         /bin/echo "${OSTYPE}"
 elif ( [ "${buildos}" = "ubuntu" ] )
     then
-        if ( [ "${buildosversion}" = "18.04" ] )
-        then
-            /bin/echo "The default AMI for ubuntu 18.04 is in the EU-WEST-1 region, if you wish to use a different AMI in a different region, please provide the AMI identifier here" >&3
-            /bin/echo "It will be of the format ami-xxxxxxxxxxxxxxx and you can find it through the AWS gui system" >&3
-            /bin/echo "Do you wish to use the default AMI for ubuntu 18.04? (Y|N)" >&3
-            read answer
-            if ( [ "${answer}" = "Y" ] || [ "${answer}" = "y" ] )
-            then
-                /bin/cp /dev/null /dev/stdout
-                /bin/echo "ami-0caa6a2dc87f66216"
-            else
-                /bin/echo "OK, please enter your prefered AMI identifier" >&3
-                read ami-identifier
-                /bin/cp /dev/null /dev/stdout
-                /bin/echo "${ami-identifier}"
-            fi
-        fi
-
-        if ( [ "${buildosversion}" = "19.04" ] )
-        then
-            /bin/echo "The default AMI for ubuntu 19.04 is in the EU-WEST-1 region, if you wish to use a different AMI in a different region, please provide the AMI identifier here" >&3
-            /bin/echo "It will be of the format ami-xxxxxxxxxxxxxxx and you can find it through the AWS gui system" >&3
-            /bin/echo "Do you wish to use the default AMI for ubuntu 19.04? (Y|N)" >&3
-            read answer
-            if ( [ "${answer}" = "Y" ] || [ "${answer}" = "y" ] )
-            then
-                /bin/cp /dev/null /dev/stdout
-                /bin/echo "ami-0405da8f658d2cff5"
-            else
-                /bin/echo "OK, please enter your prefered AMI identifier" >&3
-                read ami-identifier
-                /bin/cp /dev/null /dev/stdout
-                /bin/echo "${ami-identifier}"
-            fi
-        fi
+        /bin/echo "################################################################################################################" >&3
+        /bin/echo "Please enter the ami in the format ami-xxxxxxxxxxxxxxx that you wish to use for this ubuntu based machine" >&3
+        /bin/echo "You can find ami identifiers here: https://cloud-images.ubuntu.com/locator/ec2" >&3
+        /bin/echo "You are expecting an installation of ${buildosversion} of ubuntu" >&3
+        /bin/echo "Make sure that it supports your intended PHP version (if any) and is in the correct AWS region" >&3
+        /bin/echo "################################################################################################################" >&3
+        /bin/echo "OK, please enter your prefered AMI identifier" >&3
+        read ami_identifier
+        /bin/cp /dev/null /dev/stdout
+        /bin/echo "${ami_identifier}"
 elif ( [ "${buildos}" = "debian" ] )
     then
         if ( [ "${buildosversion}" = "9" ] )
