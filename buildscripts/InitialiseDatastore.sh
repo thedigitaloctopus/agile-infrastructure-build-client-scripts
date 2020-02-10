@@ -91,11 +91,18 @@ then
     if ( [ "${answer}" = "Y" ] || [ "${answer}" = "y" ] )
     then
         DISABLE_HOURLY="1"
-        status "NOTE: if you now enable super safe backups, hourly backups will still be made to your datastore"
+        status "NOTE: if you now subsequently enable super safe backups, hourly backups will still be made to your datastore"
+        status "but not to your git repo. You still might need to have awareness of costs"
+        status "Backups with all other periodicities will be made to your datastore (if you select super safe) and your git repo"
         status "Press the <enter> key to continue"
         read x
     else
         DISABLE_HOURLY="0"
+        status "NOTE: Hourly backups will be made to your git repo and if you now subsequently enable super safe backups"
+        status "They will be made to your git repo also. You may need to have an awareness of costs when configured like this"
+        status "Backups with all other periodicities will be made to your datastore (if you select super safe) and your git repo"
+        status "Press the <enter> key to continue"
+        read x
     fi
 
     if ( [ "${DATASTORE_CHOICE}" != "none" ] )
