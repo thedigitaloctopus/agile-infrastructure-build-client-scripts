@@ -107,9 +107,9 @@ then
 
     if ( [ "${DATASTORE_CHOICE}" != "none" ] )
     then
-        status "############################################################################################################################"
-        status "#####Super safe backups are additional backups to your repository backups (Super safe backups are highly recommended) ######"
-        status "############################################################################################################################"
+        status "################################################################################################################################"
+        status "#####Super safe backups are additional backups to your repository backups (recommended but with an eye to costs incurred) ######"
+        status "################################################################################################################################"
         status "Do you wish to have super safe backups of your webroot and database (if you have one) to your datastore of choice?"
         status "(Y/N)"
         read response
