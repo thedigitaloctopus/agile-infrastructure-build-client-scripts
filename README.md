@@ -2,7 +2,7 @@
 
 ###### ASSOCIATED WEBSITE: www.neonet.uk
 
-###### IMPORTANT: There are various configurations of deployment using this toolkit. Make sure you test what costs will be incurred depending on the scale of the deployment you are making. Different providers have different cost metrics and so, it's possible that with one provider's operational costs will be different to another. Keep an eye on what costs you are incurring therefore as they will vary by provider and the billing metrics that they use. Costs profiles vary depending upon what configuration settings you have chosen. For example, if you chose a datastore in a different region to your VPS systems, which this toolkit does not preclude you from doing, you may unwittingly incur considerable costs. 
+###### IMPORTANT: There are various configurations of deployment using this toolkit. Make sure you test what costs will be incurred depending on the scale of the deployment you are making. Different providers have different cost metrics and so, it's possible that one provider's operational costs will be different to another. Keep an eye on what costs you are incurring therefore as they will vary by provider and the billing metrics that they use. Costs profiles vary depending upon what configuration settings you have chosen. For example, if you chose a datastore in a different region to your VPS systems, which this toolkit does not preclude you from doing, you may unwittingly incur considerable costs. 
 This toolkit has the potential to be quite powerful, as with any power tool it should not be misused or used inappropriately.
 
 The vision for this toolkit is to have a well tested limited scope core for deploying web properties and CMS based systems.
