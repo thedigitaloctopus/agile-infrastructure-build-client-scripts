@@ -2,7 +2,9 @@
 
 ###### ASSOCIATED WEBSITE: www.neonet.uk
 
-The vision for this toolkit is to have a well tested limited scope core for deploying web properties and CMS based system.
+###### IMPORTANT: There are various configurations of deployment using this toolkit. Make sure you test what costs will be incurred depending on the scale of the deployment you are making. Different providers have different cost metrics and so, it's possible that with one provider's operational costs will be different to another. Keep an eye on what costs you are incurring therefore as they will vary by provider and some providers are simply more pricey than others. 
+
+The vision for this toolkit is to have a well tested limited scope core for deploying web properties and CMS based systems.
 The "core" currenlty supports Joomla, Wordpress, Moodle and Drupal. The "next" phase is to have more eyeballs on it and broader usage, it's only been me testing it so far. 
 This is the core and therefore has a limited functionality. The idea is that other developers can easily fork the repositories for The Agile Deployment Toolkit and develop additional capabilities such as support for additional VPS service providers, additional CMS systems, email providers and so on. The vision is that these extensions will not be merged back into the core, but, rather, can be kept as separate extension repos where deployers can choose the paricular fork for their deployment needs. For example, if someone were to fork this and extend it to support Google Cloud and a deployer wanted to deploy to Google Cloud, then, they would use a fork which supports Google Cloud which the core currently doesn't. In this way, the core can be kept with a small well tested, well maintained footprint making for a reliable experience. 
 Clearly, there's a plethora of deploymemt options out there if you want a CMS system, and, this is another one. It should fit you well if you want full access to the Linux VPS systems that your application is running on and if you don't want to necessarily be bothered with manual software installs and configurations.
@@ -11,7 +13,7 @@ There's many combinations of test scenario with this software. I am one develope
 
 ###### OBJECTIVE
 
-Personally, I like to have full control over the software on my VPS systems. Using traditional methods, this meant manually installing and security hardening each server.
+Personally, I like to have full control over the software on my VPS systems. Using traditional methods, this meant repeatedly manually installing and security hardening each server as evidenced by the plethora of installation guides available online.
 So, I decided to start scipting, with the aim of automating some of the processes and it is out of that scripting that this toolkit arose.
 What it has become is essentially an automated way of deploying which is extensible, has consistent security practices (I am open to recommendations about how the setup can be made even more secure).
 I think I have used good software design processes in terms of encapsulation and making the code easily modifiable and extensible.
