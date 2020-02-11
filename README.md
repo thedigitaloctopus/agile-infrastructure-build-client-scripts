@@ -67,35 +67,25 @@ You need to clone this build kit onto your new build server.
 
 Then you can start the process by running:
 
-${BUILD_HOME}/AgileDeploymentToolkit.sh 
+##### ${BUILD_HOME}/AgileDeploymentToolkit.sh 
 
 Where build home is the directory you where you placed the build scripts.
 
-Because you have a dedicate 'build machine' in the cloud which doesn't have any other purpose, you can run this build script as root 
-on that machine. I know it's lazy like that, but, by having a dedicated machine it makes it OK.  
+Because you have a dedicated 'build machine' in the cloud which doesn't have any other purpose, you can run this build script as root on that machine. I know it's lazy like that, but, by having a dedicated machine it makes it OK.  
 
-The build process is guided and it is essential to put in sane information when prompted for it to succeed. The build scripts do as 
-much checking for erroneous inputs as they can, but not everything can be checked and validated and erroneous inputs will have 
-unexpected behaviours downstream in the build process. The build script will deploy various server types to your selected cloudhost 
-and when completed, you will be able to navigate to you application through your browser.
+The build process is guided and it is essential to put in sane information when prompted for it to succeed. The build scripts do as much checking for erroneous inputs as they can, but not everything can be checked and validated and erroneous inputs will have 
+unexpected behaviours downstream in the build process. The build script will deploy various server types to your selected cloudhost and when completed, you will be able to navigate to you application through your browser.
 
 Currently, these repos are private, but, will be made public. Whilst they are private, you will need to request read access to the 
-
-Agile Infrastructure Webserver Scripts,
-Agile Infrastructure Autoscaler Scripts,
-Agile Infrastructure Database Scripts
+##### Agile Infrastructure Webserver Scripts,
+##### Agile Infrastructure Autoscaler Scripts,
+##### Agile Infrastructure Database Scripts
 
 Edit: (They have now been made public)
 
 ###### THE CONCLUSION
 
-So, the idea is that, I am not necessarily talking about industrial systems, but, for people who want a CMS application or a website of 
-some sort, their systems usually have basically the same requirements, a database, a webserver, loadbalacing and enough disk space for 
-the assets to be stored for their application. I use the DNS systems to facilitate load balancing between the webserves which they do 
-in a round robin fashion. I structured the scripts in such a way that they are easy to maintain and extend and that's part of what this 
-is about. Providing a deployment framework which automates a lot of the grunt work and still gives the deployer full access to 
-customise their servers. You don't have to learn anything except how to run the scripts so it has a lower experience threshold than 
-some other automated solutions. At the same time, you can get in there and easily tune your servers exactly as you want them. 
+So, the idea is that, I am not necessarily talking about industrial systems, but, for people who want a CMS application or a website of some sort, their systems usually have basically the same requirements, a database, a webserver, loadbalacing and enough disk space for the assets to be stored for their application. I use the DNS systems to facilitate load balancing between the webserves which they do in a round robin fashion. I structured the scripts in such a way that they are easy to maintain and extend and that's part of what this is about. Providing a deployment framework which automates a lot of the grunt work and still gives the deployer full access to customise their servers. You don't have to learn anything except how to run the scripts so it has a lower experience threshold than some other automated solutions. At the same time, you can get in there and easily tune your servers exactly as you want them. 
+
 So, that's a mile high view. I should say that I would consider this to be beta because there's a proliferation of test scenarios 
-depending upon what combination of software you are testing for. There's lots of different combinations lets say. So, you know, one man 
-can only do so much, so if there are any hidden gremlins in there they will only be exposed if other folks start using it. 
+depending upon what combination of software you are testing for. There's lots of different combinations lets say. So, you know, one man can only do so much, so if there are any hidden gremlins in there they will only be exposed if other folks start using it. 
