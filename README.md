@@ -54,7 +54,7 @@ Shared configuration files and settings are securely stored in the object store 
 servers are are shared between the machines with resilence built in should there be networking issues. 
 
 As far as the build procedure is concerned the normal modus operandi is to have a dedicated VPS build machine in a cloudhost
-of your choice and to pull down the build client scripts from bitbucket. 
+of your choice and to pull down the build client scripts from the git repository. 
 
 
 ###### THE BUILD
