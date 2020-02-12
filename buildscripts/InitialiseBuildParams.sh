@@ -151,16 +151,13 @@ fi
 ###########################################################################################################################################################
 
 status "####################################################################################################################################################"
-status "Do you wish to directly mount your image/media assets from a bucket in the cloud onto your webserver(s)?"
-status "If you choose this option, a bucket will be created in the cloud of your choice ( ${DATASTORE_CHOICE} ) and your assets will be stored there"
-status "This has the advantage that buckets in cloud systems can store a lot of data without much effort, but the disadvatage that you have to go out"
-status "to the cloud to get your assets. That said we can use caching to make the assets load faster in some cases."
+status "Do you wish to directly mount your image/media assets from a shared directory onto your webserver(s)?"
 status "####################################################################################################################################################"
 status "IF YOU USE MULTIPLE WEBSERVERS, AND SESSIONS ARE NOT PERSISTED TO THE DATABASE, YOUR ASSETS WILL NEED TO BE SHARED AMONG "
 status "THEM BY SELECTING THIS OPTION AND THE SESSION PATH IN YOUR APPLICATION SET TO THE SHARED IMAGE/MEDIA DIRECTORY PATH SO THE"
 status "SESSION DATA CAN BE WRITTEN THERE"
 status "####################################################################################################################################################"
-status "Do you wish to store your assets in the cloud?"
+status "Do you wish to store your assets in s shared directory either in the cloud of with an elastic file system when supported?"
 status "Please enter (Y|y) or (N|n)"
 read response
 
