@@ -367,6 +367,7 @@ then
     export AWS_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
     status "#########################################################################################################################"
     status "OK, your cloudhost is set to aws"
+    status "Make sure the account you are using has a security policy which allows full access to EC2, S3 and EFS services"
     status "#########################################################################################################################"
     status "Press enter when ready"
     read response
