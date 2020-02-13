@@ -478,6 +478,7 @@ BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
 /bin/touch ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/${BUILD_CLIENT_IP}
 
 . ${BUILD_HOME}/providerscripts/server/ObtainSubnetID.sh
+. ${BUILD_HOME}/providerscripts/server/ProvisionElasticFS.sh
 
 status "##############################################################################################"
 status "A recommended solution if you want to roll your own mail server with a custom domain for your"
