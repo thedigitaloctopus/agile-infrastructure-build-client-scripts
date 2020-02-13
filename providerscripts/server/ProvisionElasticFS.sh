@@ -113,12 +113,6 @@ then
                 /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
             done
         fi
-        status "###############################################################################################################"
-        status "MAKE SURE THAT YOU SETUP 'AWS BACKUP' TO FOR THIS EFS FILE SYSTEM ( ${filesystemid} ) TO ENSURE THAT YOUR DATA IS ALWAYS SAFE"
-        status "YOU CAN ALSO SET LIFECYCLE POLICY, THROUGHPUT MODE AND MORE FOR THIS FILE SYSTEM THROUGH THE AWS CONSOLE"
-        status "###############################################################################################################"
-        status "Press <enter>"
-        read x
      done
 
      status "You have elastic file systems available with the following identities"
