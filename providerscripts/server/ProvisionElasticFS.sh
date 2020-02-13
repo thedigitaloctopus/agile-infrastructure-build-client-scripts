@@ -73,8 +73,9 @@ then
 
         while ( [ "$?" != "0" ] )
         do
-            status "A file system with creation tokem ${EFS_IDENTIFIER} already exists. If you want to use it as is, please press Y"
+            status "A file system with creation token ${EFS_IDENTIFIER} already exists. If you want to use it as is, please press Y"
             status "Otherwise take action (through the AWS console) to remove the resource before continuing"
+            status "Please enter Y to accept, anything else to reject"
             read answer
 
             if ( [ "${answer}" = "Y" ] || [ "${answer}" = "y" ] )
