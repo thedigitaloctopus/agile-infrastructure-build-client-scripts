@@ -81,8 +81,10 @@ then
             if ( [ "${answer}" = "Y" ] || [ "${answer}" = "y" ] )
             then
                 /bin/echo "OK, thanks using existing file system"
+                EXISTING = "1" 
             else
                 /usr/bin/aws efs create-file-system --creation-token "${EFS_IDENTIFIER}" --region "${aws_region}"
+                EXISTING = "0" 
             fi
         done
 
@@ -97,7 +99,25 @@ then
             /bin/sleep 30
             /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
         done
+        if ( [ "${EXISTING}" = "0" ] )
+        then
+            filesystemid="`/usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g' | /bin/grep ${EFS_IDENTIFIER} | /usr/bin/awk '{print $NF}'`"
+            security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+        
+            /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
 
+            while ( [ "$?" != "0" ] )
+            do
+                status "Failed to create mount target for EFS system with ID: ${filesystemid} I will sleep for 30 seconds and try again...."
+                /bin/sleep 30
+                /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
+            done
+        fi
+        status "###############################################################################################################"
+        status "MAKE SURE THAT YOU SETUP 'AWS BACKUP' TO FOR THIS EFS FILE SYSTEM ( ${filesystemid} ) TO ENSURE THAT YOUR DATA IS ALWAYS SAFE"
+        status "###############################################################################################################"
+        status "Press <enter>"
+        read x
      done
 
      status "You have elastic file systems available with the following identities"
