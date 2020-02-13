@@ -157,7 +157,7 @@ status "IF YOU USE MULTIPLE WEBSERVERS, AND SESSIONS ARE NOT PERSISTED TO THE DA
 status "THEM BY SELECTING THIS OPTION AND THE SESSION PATH IN YOUR APPLICATION SET TO THE SHARED IMAGE/MEDIA DIRECTORY PATH SO THE"
 status "SESSION DATA CAN BE WRITTEN THERE"
 status "####################################################################################################################################################"
-status "Do you wish to store your assets in s shared directory either in the cloud of with an elastic file system when supported?"
+status "Do you wish to store your assets in a shared filesystem either in the cloud of with an elastic file system when supported?"
 status "Please enter (Y|y) or (N|n)"
 read response
 
