@@ -90,6 +90,13 @@ then
         security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
         
         /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
+       
+        while ( [ "$?" != "0" ] )
+        do
+            status "Failed to create mount target for EFS system with ID: ${filesystemid} I will sleep for 30 seconds and try again...."
+            /bin/sleep 30
+            /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
+        done
 
      done
 
