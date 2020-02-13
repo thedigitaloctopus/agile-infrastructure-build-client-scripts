@@ -115,6 +115,7 @@ then
         fi
         status "###############################################################################################################"
         status "MAKE SURE THAT YOU SETUP 'AWS BACKUP' TO FOR THIS EFS FILE SYSTEM ( ${filesystemid} ) TO ENSURE THAT YOUR DATA IS ALWAYS SAFE"
+        status "YOU CAN ALSO SET ENCRYPTION, LIFECYCLE POLICY, THROUGHPUT MODE AND MORE FOR THIS FILE SYSTEM THROUGH THE AWS CONSOLE"
         status "###############################################################################################################"
         status "Press <enter>"
         read x
