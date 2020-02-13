@@ -33,13 +33,16 @@ status "========================================================="
 status "======================FINALISING========================="
 status "========================================================="
 
-status "Cleaning out the tunnel in the datastore"
-status "################################################################################################################################################"
-status "It is recommended to expedite the process, if there is a lot of residual data, that you go to the datastore provider website (${DATASTORE_CHOICE})"
-status "And clean out (delete) all old content from the webrootsynctunnel subdirectory of the configuration bucket:"
-status "`/bin/echo "s3://${WEBSITE_URL}" | /bin/sed "s/\.//g"`-config/webrootsynctunnel/*"
-status "#################################################################################################################################################"
-. ${BUILD_HOME}/providerscripts/datastore/PurgeTunnel.sh
+if ( [ "${ENABLE_EFS}" = "0" ] )
+then
+    status "Cleaning out the tunnel in the datastore"
+    status "################################################################################################################################################"
+    status "It is recommended to expedite the process, if there is a lot of residual data, that you go to the datastore provider website (${DATASTORE_CHOICE})"
+    status "And clean out (delete) all old content from the webrootsynctunnel subdirectory of the configuration bucket:"
+    status "`/bin/echo "s3://${WEBSITE_URL}" | /bin/sed "s/\.//g"`-config/webrootsynctunnel/*"
+    status "#################################################################################################################################################"
+    . ${BUILD_HOME}/providerscripts/datastore/PurgeTunnel.sh
+fi
 
 OPTIONS="-o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
 SUDO="DEBIAN_FRONTEND=noninteractive /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E "
