@@ -99,7 +99,7 @@ then
     else
         DISABLE_HOURLY="0"
         status "NOTE: Hourly backups will be made to your git repo and if you now subsequently enable super safe backups"
-        status "They will be made to your git repo also. You may need to have an awareness of costs when configured like this"
+        status "They will be made to your data store in the cloud also. You may need to have an awareness of costs when configured like this"
         status "Backups with all other periodicities will be made to your datastore (if you select super safe) and your git repo"
         status "Press the <enter> key to continue"
         read x
