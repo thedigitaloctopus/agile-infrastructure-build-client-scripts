@@ -69,39 +69,26 @@ then
         EFS_IDENTIFIER="`/bin/echo ${fsprefix} | /bin/sed 's/\./-/g'`-${assettype}"
         EFS_IDENTIFIER="`/bin/echo ${EFS_IDENTIFIER} | /bin/sed 's/\./-/g'`"
 
+        EXISTING=""
+
         /usr/bin/aws efs create-file-system --creation-token "${EFS_IDENTIFIER}" --region "${aws_region}"
 
         while ( [ "$?" != "0" ] )
         do
-            status "A file system with creation token ${EFS_IDENTIFIER} already exists. If you want to use it as is, please press Y"
+            status "A file system with creation tokem ${EFS_IDENTIFIER} already exists. If you want to use it as is, please press Y"
             status "Otherwise take action (through the AWS console) to remove the resource before continuing"
-            status "Please enter Y to accept, anything else to reject"
             read answer
 
             if ( [ "${answer}" = "Y" ] || [ "${answer}" = "y" ] )
             then
                 /bin/echo "OK, thanks using existing file system"
-                EXISTING = "1" 
+                EXISTING="1"
             else
+                EXISTING="0"    
                 /usr/bin/aws efs create-file-system --creation-token "${EFS_IDENTIFIER}" --region "${aws_region}"
-                EXISTING = "0" 
             fi
         done
-        
-        EXISTING=""
 
-        filesystemid="`/usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g' | /bin/grep ${EFS_IDENTIFIER} | /usr/bin/awk '{print $NF}'`"
-        security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
-        
-        /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
-       
-        while ( [ "$?" != "0" ] )
-        do
-            status "Failed to create mount target for EFS system with ID: ${filesystemid} I will sleep for 30 seconds and try again...."
-            /bin/sleep 30
-            /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
-        done
-        
         if ( [ "${EXISTING}" = "" ] )
         then
             EXISTING="0"
