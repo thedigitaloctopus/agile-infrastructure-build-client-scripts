@@ -93,7 +93,8 @@ elif ( [ "${buildos}" = "debian" ] )
     then
         if ( [ "${buildosversion}" = "9" ] )
         then
-            /usr/bin/aws ec2 describe-images --owners 379101102735 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep stretch | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/grep x86_64 >&3            /bin/echo "Please enter the ami identifier for the OS you wish to use" >&3
+            /usr/bin/aws ec2 describe-images --owners 379101102735 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep stretch | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/grep x86_64 >&3            
+            /bin/echo "Please enter the ami identifier for the OS you wish to use" >&3
             read ami_identifier        
             /bin/cp /dev/null /dev/stdout
             /bin/echo "${ami_identifier}"
