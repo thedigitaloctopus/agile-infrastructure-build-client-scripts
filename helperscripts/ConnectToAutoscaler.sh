@@ -56,7 +56,23 @@ fi
 /bin/echo "Please enter the name of the build of the server you wish to connect with"
 read BUILD_IDENTIFIER
 
-AUTOSCALER_IP="`/bin/ls ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASIP* | /usr/bin/awk -F':' '{print $NF}'`"
+#AUTOSCALER_IP="`/bin/ls ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASIP* | /usr/bin/awk -F':' '{print $NF}'`"
+ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh *autoscaler* ${CLOUDHOST} ${BUILD_HOME}`"
+
+/bin/echo "Which autoscaler would you like to connect to?"
+count=1
+for ip in ${ips}
+do
+    /bin/echo "${count}:   ${ip}"
+    /bin/echo "Press Y/N to connect..."
+    read response
+    if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
+    then
+        AUTOSCALER_IP=${ip}
+        break
+    fi
+    count="`/usr/bin/expr ${count} + 1`"
+done
 
 /bin/echo "Does your server use Elliptic Curve Digital Signature Algorithm or the Rivest Shamir Adleman Algorithm for authenitcation?"
 /bin/echo "Please select (1) RSA (2) ECDSA"
