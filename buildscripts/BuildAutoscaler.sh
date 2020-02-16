@@ -71,16 +71,22 @@ status "========================================================="
 while ( [ "${done}" != "1" ] && [ "${counter}" -lt "5" ] )
 do
     counter="`/usr/bin/expr ${counter} + 1`"
-    status "OK... Building an autoscaler. This is the ${counter} attempt of 5"
+    no_autoscalers="`${BUILD_HOME}/providerscripts/server/NumberOfServers.sh "autoscaler" ${CLOUDHOST} 2>/dev/null`"
+    
+    status ""
+    status ""
+    status "######################################################################################################"
+    status "OK... Building autoscaler `/usr/bin/expr ${no_autoscalers} + 1`. This is the ${counter} attempt of 5"
+    
     WEBSITE_IDENTIFIER="`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`"
 
     #Check that an autoscaler isn't already running - if one is, then we report it  and exit, we can only have one autoscaler active
-    if ( [ "`${BUILD_HOME}/providerscripts/server/NumberOfServers.sh "autoscale" ${CLOUDHOST} 2>/dev/null`" -eq "0" ] )
+    if ( [ "${no_autoscalers}" -le "${NO_AUTOSCALERS}" ] )
     then
         ip=""
         #Set a unique identifier and name for our new autoscaler server
         RND="`/bin/echo ${SERVER_USER} | /usr/bin/fold -w 4 | /usr/bin/head -n 1`"
-        autoscaler_name="autoscaler-${RND}-${WEBSITE_NAME}-${BUILD_IDENTIFIER}"
+        autoscaler_name="${no_autoscalers}-autoscaler-${RND}-${WEBSITE_NAME}-${BUILD_IDENTIFIER}"
         autoscaler_name="`/bin/echo ${autoscaler_name} | /usr/bin/cut -c -32 | /bin/sed 's/-$//g'`"
 
         #See what os type we are building on. Currenly only Ubuntu and debian are supported
@@ -406,12 +412,15 @@ do
 
             if ( [ "${alive}" = "/home/${SERVER_USER}/runtime/AUTOSCALER_READY" ] )
             then
-                done=1
+                counter="0"
+                if ( [ "`${BUILD_HOME}/providerscripts/server/NumberOfServers.sh "autoscaler" ${CLOUDHOST} 2>/dev/null`" -eq "${NO_AUTOSCALERS}" ] )
+                then
+                    done=1
+                fi
             fi
         done
 
-        #if $done != 1, then, the autoscaler didn't build properly so, destroy the autoscaler
-        if ( [ "${done}" != "1" ] )
+        if ( [ "${alive}" != "/home/${SERVER_USER}/runtime/AUTOSCALER_READY" ] )
         then
             status "#########################################################################################################################"
             status "Hi, an autoscaler didn't seem to build correctly. I can destroy it and I can try again to build a new autoscaler for you."
