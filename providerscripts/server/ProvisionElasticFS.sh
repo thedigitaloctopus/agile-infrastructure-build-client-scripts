@@ -117,9 +117,16 @@ then
             while ( [ "$?" != "0" ] )
             do
                 status "Failed to create mount target for EFS system with ID: ${filesystemid} I will sleep for 30 seconds and try again...."
+                
                 /bin/sleep 30
+                
                 /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
-            done
+                if ( [ "$?" = "0" ] )
+                then
+                   status "Successfully created mount target for EFS system with ID: ${filesystemid}" 
+                   status "#########################################################################"
+                fi
+           done
         fi
      done
 
