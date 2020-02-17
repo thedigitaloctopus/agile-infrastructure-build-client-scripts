@@ -9,3 +9,5 @@ Joomla or Wordpress should be easy enough to integrate. I think it should take (
 idiosyncracies a practiced developer about 1 week of work to integrate a new application type).
 
 3) Inclusion of deployments to further VPS cloudhosts, perhaps rackspace, googlecloud, microsoft azure and you know, there's a lot more out there. 
+
+4) Possibly extend the scaling process to use dynamic scaling with providers that support it, this would enable applications with unpredictable workloads to be deployed. 
