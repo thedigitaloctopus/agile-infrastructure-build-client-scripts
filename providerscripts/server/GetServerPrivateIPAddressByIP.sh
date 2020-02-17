@@ -32,13 +32,7 @@ fi
 
 if ( [ "${cloudhost}" = "exoscale" ] )
 then
-    /bin/rm /tmp/ipaddresses /tmp/servernames
-    while ( [ "`/bin/cat /tmp/ipaddresses | /usr/bin/wc -l 2>/dev/null`" = "0" ]  || [ "`/bin/cat /tmp/servernames | /usr/bin/wc -l 2>/dev/null`" = "0" ] )
-    do
-        /usr/local/bin/cs listVirtualMachines | /usr/bin/jq ".virtualmachine[].nic[].ipaddress"  | /bin/grep -v 'null' | /bin/sed 's/\"//g' > /tmp/ipaddresses 2>/dev/null
-        /usr/local/bin/cs listVirtualMachines | /usr/bin/jq ".virtualmachine[].displayname"  | /bin/grep -v 'null' | /bin/sed 's/\"//g' > /tmp/servernames 2>/dev/null
-    done
-    /usr/bin/paste -d" " /tmp/servernames /tmp/ipaddresses | /bin/grep ${ip} | /usr/bin/awk '{print $2}'
+        /usr/local/bin/cs listVirtualMachines | /usr/bin/jq '.virtualmachine[] | .nic[].ipaddress + " " + .displayname' | /bin/grep "${ip}" | /bin/sed 's/"//g' | /usr/bin/awk '{print $1}'
 fi
 
 if ( [ "${cloudhost}" = "linode" ] )
