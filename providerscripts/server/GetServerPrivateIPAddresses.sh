@@ -25,7 +25,7 @@ cloudhost="${2}"
 
 if ( [ "${cloudhost}" = "digitalocean" ] )
 then
-    /usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk '{print $4}'
+    /usr/local/bin/doctl compute droplet list | /bin/grep ".*${server_type}" | /usr/bin/awk '{print $4}'
 fi
 
 if ( [ "${cloudhost}" = "exoscale" ] )
@@ -35,14 +35,14 @@ fi
 
 if ( [ "${cloudhost}" = "linode" ] )
 then
-    /usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /usr/bin/awk '{print $NF}'
+    /usr/local/bin/linode-cli linodes list --text | /bin/grep ".*${server_type}" | /usr/bin/awk '{print $NF}'
 fi
 
 if ( [ "${cloudhost}" = "vultr" ] )
 then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
     /bin/sleep 1
-    ids="`/usr/bin/vultr server list | /bin/grep ${server_type} | /usr/bin/awk '{print $1}' | /bin/sed 's/SUBID//g' | /bin/sed '/^$/d'`"
+    ids="`/usr/bin/vultr server list | /bin/grep ".*${server_type}" | /usr/bin/awk '{print $1}' | /bin/sed 's/SUBID//g' | /bin/sed '/^$/d'`"
     for id in ${ids}
     do
         /bin/sleep 1
