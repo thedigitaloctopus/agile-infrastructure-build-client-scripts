@@ -35,7 +35,7 @@ fi
 
 if ( [ "${cloudhost}" = "linode" ] )
 then
-    /usr/local/bin/linode-cli linodes list --text | /bin/grep ".*${server_type}" | /usr/bin/awk '{print $NF}'
+    /usr/local/bin/linode-cli linodes list --text | /bin/grep ".*${server_type}" | /bin/grep -o "192.168[^[:space:]]*"
 fi
 
 if ( [ "${cloudhost}" = "vultr" ] )
