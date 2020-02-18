@@ -38,7 +38,7 @@ fi
 if ( [ "${cloudhost}" = "linode" ] )
 then
     webserver_name="`./providerscripts/server/GetServerName.sh "${ip}" "linode"`"
-    /usr/local/bin/linode-cli linodes list --text | /bin/grep ${ip} | /usr/bin/awk '{print $(NF)}'
+    /usr/local/bin/linode-cli linodes list --text | /bin/grep ${ip} | /bin/grep -o "192.168[^[:space:]]*"
 fi
 
 if ( [ "${cloudhost}" = "vultr" ] )
