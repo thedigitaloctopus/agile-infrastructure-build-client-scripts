@@ -45,8 +45,9 @@ then
 fi
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
-    /usr/bin/scp ${OPTIONS} ${HOME}/.linode-cli ${SERVER_USER}@${IP}:/home/${SERVER_USER}/.linode-cli  >/dev/null 2>&1
-    /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${IP} "/bin/chmod 400 /home/${SERVER_USER}/.linode-cli"  >/dev/null 2>&1
+    /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${IP} "/bin/mkdir -p /home/${SERVER_USER}/.config"  >/dev/null 2>&1
+    /usr/bin/scp ${OPTIONS} ${HOME}/.config/linode-cli ${SERVER_USER}@${IP}:/home/${SERVER_USER}/.config/linode-cli  >/dev/null 2>&1
+    /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${IP} "/bin/chmod 400 /home/${SERVER_USER}/.config/linode-cli"  >/dev/null 2>&1
 fi
 if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
