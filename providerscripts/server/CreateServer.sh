@@ -77,6 +77,12 @@ password="${8}"
 
 if ( [ "${cloudhost}" = "linode" ] )
 then
+    
+    if ( [ "${password}" = "" ] )
+    then
+        password="156432wdfpdaiI"
+    fi
+    
     if ( [ "`/bin/echo ${distribution} | /bin/grep 'Ubuntu 18.04'`" != "" ] )
     then
         /usr/local/bin/linode-cli linodes create --root_pass ${password} --region ${location} --image linode/ubuntu18.04 --type ${server_size} --group "Agile Deployment Toolkit" --label "${server_name}"
