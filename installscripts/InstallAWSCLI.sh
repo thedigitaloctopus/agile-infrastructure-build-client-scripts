@@ -34,6 +34,8 @@ then
    /usr/bin/curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
    /usr/bin/unzip awscliv2.zip
    ./aws/install
+   /bin/rm /usr/bin/aws > /dev/null
+   /usr/bin/ln -s /usr/local/bin/aws /usr/bin/aws
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
@@ -45,5 +47,7 @@ then
    /usr/bin/curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
    /usr/bin/unzip awscliv2.zip
    ./aws/install
+   /bin/rm /usr/bin/aws > /dev/null
+   /usr/bin/ln -s /usr/local/bin/aws /usr/bin/aws
 fi
 
