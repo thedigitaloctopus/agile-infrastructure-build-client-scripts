@@ -53,7 +53,7 @@ then
         /bin/mkdir -p ${BUILD_HOME}/runtimedata/digitalocean
     fi
     ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
-    ${BUILD_HOME}/providerscripts/cloudhost/GetProviderAuthorisation.sh ${CLOUDHOST}${BUILDOS} ${BUILDOS_VERSION} ${SSH_PORT}
+    ${BUILD_HOME}/providerscripts/cloudhost/GetProviderAuthorisation.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION} ${SSH_PORT}
 
     #Digital ocean supports snapshots, so we offer that as a choice. With autoscaling using snapshots, new webservers
     #will be built using a snapshot rather than a fresh build using repositories and so on. It's probably faster like
