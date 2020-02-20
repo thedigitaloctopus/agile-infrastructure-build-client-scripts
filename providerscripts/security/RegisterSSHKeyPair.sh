@@ -91,6 +91,6 @@ fi
 
 if ( [ "${cloudhost}" = "aws" ] )
 then
-    /usr/bin/aws ec2 import-key-pair --key-name "${key_name}" --public-key-material "${key_substance}"
+    /usr/bin/aws ec2 import-key-pair --key-name "${key_name}" --public-key-material "`/bin/echo ${key_substance} | /usr/bin/base64`"
 fi
 
