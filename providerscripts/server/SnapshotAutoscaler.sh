@@ -49,7 +49,7 @@ then
     status "########################SNAPSHOTING YOUR AUTOSCALER IN THE BACKGROUND####################################"
     status ""
     
-    instance_id="`/usr/bin/aws ec2 describe-instances --filter "Name=tag:descriptiveName,Values=autoscaler*" "Name=instance-state-name,Values=running" | /usr/bin/jq ".Reservations[].Instances[].InstanceId" | /bin/sed 's/\"//g'`"
+    instance_id="`/usr/bin/aws ec2 describe-instances --filter "Name=tag:descriptiveName,Values=*autoscaler*" "Name=instance-state-name,Values=running" | /usr/bin/jq ".Reservations[].Instances[].InstanceId" | /bin/sed 's/\"//g'`"
     /usr/bin/aws ec2 create-image --instance-id ${instance_id} --name "autoscaler-${SERVER_USER}"
 fi
 
