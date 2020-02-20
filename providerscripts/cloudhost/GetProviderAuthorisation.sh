@@ -147,6 +147,12 @@ if ( [ "${cloudhost}" = "aws" ] )
 then
     if ( [ ! -f ${HOME}/.aws/config ] && [ ! -f ${HOME}/.aws/credentials ] )
     then
+        status "About to configure the AWS CLI tool"
+        status "#####################################################"
+        status "ESSENTIAL: Leave the 'output format' option as 'None'"
+        status "#####################################################"
+        status "Press <enter>"
+        read x
         /usr/bin/aws configure >&3
     else
         status "Your AWS access keys are set to:"
