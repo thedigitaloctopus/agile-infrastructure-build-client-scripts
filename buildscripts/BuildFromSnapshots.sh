@@ -193,38 +193,43 @@ then
     SUDO="DEBIAN_FRONTEND=noninteractive /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E "
 
     ########AUTOSCALER config#################
+    
+    ASIPS="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
 
-    #Wait until the autoscaler has been fully provisioned from its snapshot
-
-    status "Trying to connect to the autoscaler to perform initialisation...."
-
-    /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "exit"
-
-    while ( [ "$?" != "0" ] )
+    for ASIP in ${ASIPS}
     do
-        /bin/sleep 10
-        status "Still trying to connect to the autoscaler to perform initialisation...."
+
+        #Wait until the autoscaler has been fully provisioned from its snapshot
+
+        status "Trying to connect to the autoscaler to perform initialisation...."
+
         /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "exit"
+
+        while ( [ "$?" != "0" ] )
+        do
+            /bin/sleep 10
+            status "Still trying to connect to the autoscaler to perform initialisation...."
+            /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "exit"
+        done
+
+        status "Connected to the autoscaler, now initialising it..."
+
+        #There might be some stuff on the autoscaler which is from the build when the snapshots were generated, like IP addresses and so on, so
+        #clear them out as they have now been changed/renewed
+
+        /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/rm -rf /home/${FULL_SNAPSHOT_ID}/.ssh/BUILDARCHIVE:* /home/${FULL_SNAPSHOT_ID}/.ssh/KEYID:* /home/${FULL_SNAPSHOT_ID}/.ssh/SNAPAUTOSCALE:* /home/${FULL_SNAPSHOT_ID}/config/INSTALLEDSUCCESSFULLY /home/${FULL_SNAPSHOT_ID}/runtime/INITIALCONFIGSET /home/${FULL_SNAPSHOT_ID}/runtime/NETCONFIGURED /home/${FULL_SNAPSHOT_ID}/config/APPLICATION_DB_CONFIGURED /home/${FULL_SNAPSHOT_ID}/runtime/*lock*"
+
+
+        #swap out the ip addresses that were from the preceeding build and update them with the new ones for our newly provisioned machines
+        /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/rm /home/${FULL_SNAPSHOT_ID}/.ssh/*IP*"
+
+        /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/touch /home/${FULL_SNAPSHOT_ID}/.ssh/BUILDARCHIVE:${BUILD_ARCHIVE_CHOICE} /home/${FULL_SNAPSHOT_ID}/.ssh/AUTOSCALE:${WEBSERVER_SNAPSHOT_NAME} /home/${FULL_SNAPSHOT_ID}/.ssh/SNAPSHOTID:${WEBSERVER_IMAGE_ID} /home/${FULL_SNAPSHOT_ID}/.ssh/SNAPAUTOSCALE:1 /home/${FULL_SNAPSHOT_ID}/.ssh/KEYID:${PUBLIC_KEY_ID} /home/${FULL_SNAPSHOT_ID}/.ssh/BUILDCLIENTIP:${BUILD_CLIENT_IP} /home/${FULL_SNAPSHOT_ID}/.ssh/MYPUBLICIP:${ASIP} /home/${FULL_SNAPSHOT_ID}/.ssh/MYIP:${ASIP_PRIVATE} /home/${FULL_SNAPSHOT_ID}/.ssh/DBaaSREMOTESSHPROXYIP:${DBaaS_REMOTE_SSH_PROXY_IP} "
+
+        /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/RefreshNetworking.sh"
+
+        #Reinitialise everything by rebooting the machine
+        /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /sbin/shutdown -r now"
     done
-
-    status "Connected to the autoscaler, now initialising it..."
-
-    #There might be some stuff on the autoscaler which is from the build when the snapshots were generated, like IP addresses and so on, so
-    #clear them out as they have now been changed/renewed
-
-    /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/rm -rf /home/${FULL_SNAPSHOT_ID}/.ssh/BUILDARCHIVE:* /home/${FULL_SNAPSHOT_ID}/.ssh/KEYID:* /home/${FULL_SNAPSHOT_ID}/.ssh/SNAPAUTOSCALE:* /home/${FULL_SNAPSHOT_ID}/config/INSTALLEDSUCCESSFULLY /home/${FULL_SNAPSHOT_ID}/runtime/INITIALCONFIGSET /home/${FULL_SNAPSHOT_ID}/runtime/NETCONFIGURED /home/${FULL_SNAPSHOT_ID}/config/APPLICATION_DB_CONFIGURED /home/${FULL_SNAPSHOT_ID}/runtime/*lock*"
-
-
-    #swap out the ip addresses that were from the preceeding build and update them with the new ones for our newly provisioned machines
-    /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/rm /home/${FULL_SNAPSHOT_ID}/.ssh/*IP*"
-
-    /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/touch /home/${FULL_SNAPSHOT_ID}/.ssh/BUILDARCHIVE:${BUILD_ARCHIVE_CHOICE} /home/${FULL_SNAPSHOT_ID}/.ssh/AUTOSCALE:${WEBSERVER_SNAPSHOT_NAME} /home/${FULL_SNAPSHOT_ID}/.ssh/SNAPSHOTID:${WEBSERVER_IMAGE_ID} /home/${FULL_SNAPSHOT_ID}/.ssh/SNAPAUTOSCALE:1 /home/${FULL_SNAPSHOT_ID}/.ssh/KEYID:${PUBLIC_KEY_ID} /home/${FULL_SNAPSHOT_ID}/.ssh/BUILDCLIENTIP:${BUILD_CLIENT_IP} /home/${FULL_SNAPSHOT_ID}/.ssh/MYPUBLICIP:${ASIP} /home/${FULL_SNAPSHOT_ID}/.ssh/MYIP:${ASIP_PRIVATE} /home/${FULL_SNAPSHOT_ID}/.ssh/DBaaSREMOTESSHPROXYIP:${DBaaS_REMOTE_SSH_PROXY_IP} "
-
-    /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/RefreshNetworking.sh"
-
-    #Reinitialise everything by rebooting the machine
-    /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /sbin/shutdown -r now"
-
 
     ########WEBSERVER config############
 
