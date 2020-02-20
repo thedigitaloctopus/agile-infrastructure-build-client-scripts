@@ -62,6 +62,7 @@ then
     do
         status "You need to configure your datastore tools. You can get your access keys by going to your AWS account at aws.amazon.com and following the instructions"
         status "****IMPORTANT NOTE***** For AWS choose a secret key which has no forward slashes in it as this will cause issues later on"
+        status "Your S3 endpoint should be region specific. For example if you are in eu-west-1 in would be, s3.eu-west-1.amazonaws.com"
         /usr/bin/s3cmd --configure >&3
         /bin/cp ~/.s3cfg ${BUILD_HOME}/.s3cfg.amazon
         /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/amazonS3
