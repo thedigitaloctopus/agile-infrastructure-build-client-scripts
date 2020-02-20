@@ -36,60 +36,73 @@ OPTIONS="-o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/de
 if ( [ "${AUTOSCALER_IMAGE_ID}" != "" ] && [ "${WEBSERVER_IMAGE_ID}" != "" ] && [ "${DATABASE_IMAGE_ID}" != "" ] )
 then
     status "#########################BUILD FROM SNAPSHOTS#######################"
+    status ""
 
     #Generate the snapshot of the autoscaler. We use the username as the identifier as that will remain constant between
     #the original machine and the generated snapshot
     RND="`/bin/echo ${SERVER_USER} | /usr/bin/fold -w 4 | /usr/bin/head -n 1`"
     FULL_SNAPSHOT_ID="`/bin/ls ${BUILD_HOME}/snapshots | /bin/grep ${SNAPSHOT_ID}`"
 
-    autoscaler_name="autoscaler-${RND}-${WEBSITE_NAME}-${BUILD_IDENTIFIER}"
-    autoscaler_name="`/bin/echo ${autoscaler_name} | /usr/bin/cut -c -32 | /bin/sed 's/-$//g'`"
-
-    #Find out what operating system we are building for
-    ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${AS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
-
-    if ( [ "${SUBNET_ID}" = "" ] )
-    then
-        SUBNET_ID="FILLER"
-    fi
-
-    #Actually create the server from the snapshot. Note that the image id of the snapshot we want to build from is passed in as the
-    #last parameter
-    ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${ostype}" "${REGION_ID}" "${AS_SERVER_TYPE}" "${autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} "${SUBNET_ID}" "${AUTOSCALER_IMAGE_ID}"
-
-    #Get the ip addresses of the server we have just built
-    ip=""
-    private_ip=""
-    count="0"
-    while ( ( [ "${ip}" = "" ] || [ "${private_ip}" = "" ] ) && [ "${count}" -lt "20" ] )
+    no_autoscalers="0"
+    while ( [ "${no_autoscalers}" -lt "${NO_AUTOSCALERS}" ] )
     do
-        status "Interrogating for autoscaler ip addresses....."
-        ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-        private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-        /bin/sleep 10
-        count="`/usr/bin/expr ${count} + 1`"
+       status "#######################################################################################################"
+       status "Building autoscaler `/usr/bin/expr ${no_autoscalers} + 1` of ${NO_AUTOSCALERS} autoscalers"
+
+        autoscaler_name="autoscaler-${RND}-${WEBSITE_NAME}-${BUILD_IDENTIFIER}"
+        autoscaler_name="`/bin/echo ${autoscaler_name} | /usr/bin/cut -c -32 | /bin/sed 's/-$//g'`"
+
+        #Find out what operating system we are building for
+        ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${AS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
+
+        if ( [ "${SUBNET_ID}" = "" ] )
+        then
+            SUBNET_ID="FILLER"
+        fi
+
+        #Actually create the server from the snapshot. Note that the image id of the snapshot we want to build from is passed in as the
+        #last parameter
+        ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${ostype}" "${REGION_ID}" "${AS_SERVER_TYPE}" "${no_autoscalers}-${autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} "${SUBNET_ID}" "${AUTOSCALER_IMAGE_ID}"
+    
+    
+        #Get the ip addresses of the server we have just built
+        ip=""
+        private_ip=""
+        count="0"
+        while ( ( [ "${ip}" = "" ] || [ "${private_ip}" = "" ] ) && [ "${count}" -lt "20" ] )
+        do
+            status "Interrogating for autoscaler ip addresses....."
+            ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${no_autoscalers}-${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
+            private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${no_autoscalers}-${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
+            /bin/sleep 10
+            count="`/usr/bin/expr ${count} + 1`"
+        done
+
+        status "It looks like the machine has booted OK"
+        ASIP=${ip}
+        ASIP_PRIVATE=${private_ip}
+
+        status "Have got the ip addresses for your autoscaler"
+        status "Public IP address: ${ASIP}"
+        status "Private IP address: ${ASIP_PRIVATE}"
+
+        #record the server ip address(es)
+        /bin/rm ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASIP:*
+        /bin/rm ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASPRIVATEIP:*
+        /bin/touch ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASIP:${ASIP}
+        /bin/touch ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASPRIVATEIP:${ASIP_PRIVATE}
+
+
+        #We don't want to pass in our private keys to our remote commands every time from the command line as it will look unwieldy.
+        #So, we previously setup unique key files with out ssh private keys in them and now that we know the ip address of our autoscaler,
+        #We can tell ourselves where to look for the private key to that ip address by configuring the config file to point to it
+        /bin/echo "Host ${ASIP}" >> ~/.ssh/config
+        /bin/echo "IdentityFile ~/.ssh/${FULL_SNAPSHOT_ID}.key" >> ~/.ssh/config
+        /bin/echo "IdentitiesOnly yes" >> ~/.ssh/config
+        no_autoscalers="`/usr/bin/expr ${no_autoscalers} + 1`"
     done
-
-    status "It looks like the machine has booted OK"
-    ASIP=${ip}
-    ASIP_PRIVATE=${private_ip}
-
-    status "Have got the ip addresses for your autoscaler"
-    status "Public IP address: ${ASIP}"
-    status "Private IP address: ${ASIP_PRIVATE}"
-
-    #record the server ip address(es)
-    /bin/rm ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASIP:*
-    /bin/rm ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASPRIVATEIP:*
-    /bin/touch ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASIP:${ASIP}
-    /bin/touch ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASPRIVATEIP:${ASIP_PRIVATE}
-
-    #We don't want to pass in our private keys to our remote commands every time from the command line as it will look unwieldy.
-    #So, we previously setup unique key files with out ssh private keys in them and now that we know the ip address of our autoscaler,
-    #We can tell ourselves where to look for the private key to that ip address by configuring the config file to point to it
-    /bin/echo "Host ${ASIP}" >> ~/.ssh/config
-    /bin/echo "IdentityFile ~/.ssh/${FULL_SNAPSHOT_ID}.key" >> ~/.ssh/config
-    /bin/echo "IdentitiesOnly yes" >> ~/.ssh/config
+    
+    status "#########################################################################################################"
 
     #Generate the webserver snapshot. Again, we use the username to create the identifier of the machine as this will remain
     #the same between the original machine and the machine built from a snapshot
@@ -132,6 +145,9 @@ then
     /bin/echo "Host ${WSIP}" >> ~/.ssh/config
     /bin/echo "IdentityFile ~/.ssh/${FULL_SNAPSHOT_ID}.key" >> ~/.ssh/config
     /bin/echo "IdentitiesOnly yes" >> ~/.ssh/config
+    
+    status "#########################################################################################################"
+
 
     # generate the database snapshot. The username is used to create the identifier as it will remain consistent between the original machine
     # and the machine generated from a snapshot
