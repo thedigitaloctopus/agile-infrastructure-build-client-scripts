@@ -565,6 +565,8 @@ then
         read x
     fi
 
+    status "How many autoscalers do you want to deploy?"
+    read NO_AUTOSCALERS
     . ${BUILD_HOME}/buildscripts/BuildFromSnapshots.sh
 
     status ""
