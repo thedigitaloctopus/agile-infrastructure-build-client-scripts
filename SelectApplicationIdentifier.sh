@@ -110,7 +110,7 @@ then
          status "for your server configuration"
          status "Please enter one of 1, 2 or 3"
          read response
-         while ( ["`/bin/echo "1 2 3" | /bin/grep ${response}`" = "" ] )
+         while ( [ "`/bin/echo "1 2 3" | /bin/grep ${response}`" = "" ] )
          do
              status "That's an invalid response, please try again"
              status "Please enter one of 1,2 or 3"
