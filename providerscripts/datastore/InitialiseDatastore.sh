@@ -61,8 +61,6 @@ then
     while ( [ ! -f ${BUILD_HOME}/.s3cfg.amazon ] )
     do
         status "You need to configure your datastore tools. You can get your access keys by going to your AWS account at aws.amazon.com and following the instructions"
-        status "NOTE: you can alternatively configure for digital ocean spaces if you like, more info :"
-        status "https://www.digitalocean.com/community/tutorials/how-to-configure-s3cmd-2-x-to-manage-digitalocean-spaces"
         status "****IMPORTANT NOTE***** For AWS choose a secret key which has no forward slashes in it as this will cause issues later on"
         /usr/bin/s3cmd --configure >&3
         /bin/cp ~/.s3cfg ${BUILD_HOME}/.s3cfg.amazon
@@ -104,6 +102,10 @@ then
     do
         status "Please tell us the endpoint for your digital ocean spaces (for example, ams3.digitaloceanspaces.com)"
         read DIGITAL_OCEAN_SPACES_ENDPOINT
+        
+        status "Your digital ocean spaces endpoint is set to: ${DIGITAL_OCEAN_SPACES_ENDPOINT}"
+        status "If you are very sure this is correct, press <enter>"
+        read x
 
         status "You need to configure your datastore tools. You can get your access keys by going to your digital ocean account and using the API menu"
         status "Once you have your keys, please use them in the following configuration"
@@ -171,6 +173,10 @@ then
     do
         status "Please tell us the endpoint for your exoscale object store (for example, sos-ch-dk-2.exo.io)"
         read EXOSCALE_ENDPOINT
+        
+        status "Your Exoscale object store endpoint is set to: ${EXOSCALE_ENDPOINT}"
+        status "If you are very sure this is correct, press <enter>"
+        read x
 
         status "You need to configure your datastore tools. You can get your access keys by going to your exoscale account and going to object storage"
         status "Once you have your keys, please use them in the following configuration"
@@ -233,6 +239,10 @@ then
     do
         status "Please tell us the endpoint for your exoscale object store (for example, us-east-1.linodeobjects.com)"
         read LINODE_ENDPOINT
+        
+        status "Your Linode object store endpoint is set to: ${LINODE_ENDPOINT}"
+        status "If you are very sure this is correct, press <enter>"
+        read x
 
         status "You need to configure your datastore tools. You can get your access keys by going to your exoscale account and going to object storage"
         status "Once you have your keys, please use them in the following configuration"
@@ -295,6 +305,10 @@ then
     do
         status "Please tell us the endpoint for your vultr object store"
         read VULTR_ENDPOINT
+        
+        status "Your Vultr object store endpoint is set to: ${VULTR_ENDPOINT}"
+        status "If you are very sure this is correct, press <enter>"
+        read x
 
         status "You need to configure your datastore tools. You can get your access keys by going to your vultr account and going to object storage"
         status "Once you have your keys, please use them in the following configuration"
