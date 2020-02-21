@@ -1,13 +1,14 @@
 1) Let's imagine this is your first time using the Agile Deployment Toolkit. What should you do, how should you start.
 
-Well, first of all, it depends if you are running linux or windows. Because I built this for use with Ubuntu Linux, at least to for the first release, I can only guarantee that it will work with ubuntu or one of its derivatives. What do to then? Well, if you are running Windows or some other linux, there are two options for getting ubuntu. 
-
+Assuming that you have deployed a ubuntu or a debian instance in the cloud, you can then start to runt he build process. Of course, you don't have to run it on a cloud server, the scripts will only run on ubuntu or debian, not windows, so, you could use a usb to create an installation of a debian or ubuntu os and run this script from your latop rather than a cloud server. At the end of the day, the scripts run with sudo privileges so, just because of that alone, I know its lazy, it needs to be a dedicated machine that you use for your build processes. 
+So,
 a) You can install ubuntu on a USB and boot your desktop computer using that or 
 
-b) You can spin up an Ubuntu server on some cloud provider of your choice and you can access it using an ssh client like putty and use that as your 'build' machine.
+b) You can spin up an Ubuntu or debian server on some cloud provider of your choice and you can access it using an ssh client like putty and use that as your 'build' machine.
+
 NOTE: if you use putty, you will need to set the "Seconds between keep alives" to some value, such as 200. A value of 0 will not work.
 
-In the first case, if you are windows guy, you can use a tool linke Universal USB Installer. You can find it here:
+In the first case, if you are windows guy, you can use a tool like Universal USB Installer. You can find it here:
 
 https://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3/
 
@@ -48,7 +49,6 @@ You will need to have the following services available when the script asks for 
 4) Email Services (google mail, Send Pulse, Amazon SES)
 
 It is expected that the list of available services providers will increase with subsequent releases, giving more choice to you.
-
 
 4) Once your deployment is complete (or whilst it is building) you need to setup the email addresses for your administration team.
 
