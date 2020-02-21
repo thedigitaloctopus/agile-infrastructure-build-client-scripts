@@ -174,7 +174,7 @@ We also need the API key for your rackspace account. You can either request this
 You can find it by authenticating to your rackspace account, clicking on your name at the top right and then clicking on 'Account Settings'
 And you should find the API key there and copy and paste it below
 Please input your rackspace API key
-126572ea22sd207856804889e321120
+1hgd7ehdfh3738dhe73ndehyehwjru4jd
 Please enter the three letter identifier for the region you wish to deploy to from the following list
 Dallas - DFW, Chicago - ORD, Virginia IAD, London LON, Sydney SYD, Hong Kon HKG
 LON
