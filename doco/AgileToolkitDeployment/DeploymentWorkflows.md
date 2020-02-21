@@ -11,7 +11,5 @@ deployments as you like. A baseline build can take a considerable amout of time 
 3. Hourly Build - In an hourly build (representative of any of the build from backup scenarios), the assets for the application should already persist in the datastore, either from the baseline build or from active usage of the application.  
 
 N.B. As all the assets for the application are stored in buckets, you have the option to use them for sources to a CDN. The CDN,
-if your application supports it, can help with server load as the assets are retreived from the CDN. If you can use a CDN, then your application 
-won't need to use s3fs over the network to access your assets from the remote bucket. It is assumed that in the usual case, you will use a CDN, but,
-that in some cases, CDN usage is not possible and so, s3fs is a solution to that. 
+if your application supports it, can help with server load as the assets are retreived from the CDN. If you can use a CDN, then your application won't need to use s3fs over the network to access your assets from the remote bucket. It is assumed that in the usual case, you will use a CDN, but, that in some cases, CDN usage is not possible and so, s3fs is a solution to that. 
   
