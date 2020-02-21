@@ -1,9 +1,9 @@
-The SMTP service is used to send emails from the deployed applications and also system messages from the deployment infrastructure itself. As we have the facility to deploy our own mail server as a confuguration option, it may have made sense to simply send emails through our own mailserver. However, not all users of the framework will want to deploy their own mail server, so it is better if we give them the option to use 3rd party SMTP email services to send their emails through.
+The SMTP service is used to send emails from the deployed applications and also system messages from the deployment infrastructure itself. 
 At the time of writing, I have added 3 SMTP services for a deployer to choose from when making a build. One is www.sendpulse.com and the other is the trusty old gmail www.gmail.com and the 3rd one is Amazon SES
 
 To send SMTP mail, the first thing you will need to do is set yourself up an account with your provider of choice. With sendpulse, you have to use an existing email address that you already own. With gmail, you will get a brand new gmail address, if you don't have one already which you can use. 
 
-Note: If you have deployed a domain specific email server so, if your domain is darrens social network, www.darrensnet.com with emails from mail.darrensnet.com. then with Send Pulse and possibly other providers, if you register with them using your domain specific emails then the source email address will be set to your own domain name. If you use darren@yahoo.com. then that is the address your emails will be sent from telling little about the originator.
+Note: If you have deployed a domain specific email server which you can do using iRedmail, so, if your domain is "darren's social network", www.darrensnet.com with emails from mail.darrensnet.com. then with Send Pulse and possibly other providers, if you register with them using your domain specific emails then the source email address will be set to your own domain name. If you use darren@yahoo.com. then that is the address your emails will be sent from telling little about the originator.
 
 So, assuming we have an address notifications@darrensnet.com, then we can see how we need to configure the settings for our two SMTP service providers.
 
