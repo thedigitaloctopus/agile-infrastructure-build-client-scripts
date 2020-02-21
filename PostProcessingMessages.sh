@@ -33,8 +33,6 @@ then
     status
     status "########################################################################################################################################"
     status "You are installing a virgin copy of drupal. ****ESSENTIAL ACTION**** >> Please navigate to https://${WEBSITE_URL}/core/install.php"
-    status "SINCE DRUPAL 8.8.1, AN UNSIGHTLY SOFT ERROR HAS BEEN HAPPENING AT THE END OF THE INSTALLATION PROCESS. THIS WILL CLEAR ONCE"
-    status "THE BUILD PROCESS IS COMPLETED AND YOU WILL BE ABLE TO NAVIGATE TO YOUR APPLICATION"
     status "########################################################################################################################################"
     status "OK, I'll be kind and show you one time your drupal application credentials."
     status "Please make a note of them but remember to keep them safe and secret"
