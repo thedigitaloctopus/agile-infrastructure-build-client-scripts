@@ -50,6 +50,14 @@ then
         fi
         
         /usr/local/bin/doctl auth init >&3
+
+        while ( [ "$?" != "0" ] )
+        do
+            status "Failed to run authorisation tool, trying again...."
+            /bin/sleep 5
+            /usr/local/bin/doctl auth init >&3
+        done
+
     else
         status "`/bin/cat ~/.config/doctl/config.yaml`"
         status "############################################"
