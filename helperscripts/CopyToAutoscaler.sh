@@ -42,23 +42,23 @@ read response
 if ( [ "${response}" = "1" ] )
 then
     CLOUDHOST="digitalocean"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"autoscaler\" \"digitalocean\"`"
+    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"*autoscaler*\" \"digitalocean\"`"
 elif ( [ "${response}" = "2" ] )
 then
     CLOUDHOST="exoscale"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"autoscaler\" \"exoscale\"`"
+    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"*autoscaler*\" \"exoscale\"`"
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"autoscaler\" \"linode\"`"
+    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"*autoscaler*\" \"linode\"`"
 elif ( [ "${response}" = "4" ] )
 then
     CLOUDHOST="vultr"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"autoscaler\" \"vultr\"`"
+    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"*autoscaler*\" \"vultr\"`"
 elif ( [ "${response}" = "5" ] )
 then
     CLOUDHOST="aws"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"autoscaler\" \"aws\"`"
+    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"*autoscaler*\" \"aws\"`"
 fi
 
 /bin/echo "What is the build identifier you want to connect to?"
