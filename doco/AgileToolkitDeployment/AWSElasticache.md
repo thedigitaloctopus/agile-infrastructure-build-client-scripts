@@ -1,3 +1,6 @@
+###### Important: I haven't used elasticache in earnest and apparently it is expensive, so be very aware of costs if you decide to use elasticache. Also, there are other caching solutions you can deploy to EC2 based on docker and so on which most probably just rack up the cost of the EC2 instances that it is running on which is likely cheaper, so, you might want to consider that. 
+
+
 If you are deploying to the AWS cloud, you might like to use AWS Elasticache as a memcached or redis solution to your application's caching needs.
 To do this, you simply have to 
 1) If there is a security group with the group name "AgileDeploymentToolkitSecurityGroup" already existing delete it using the AWS console.
