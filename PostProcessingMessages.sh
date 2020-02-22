@@ -33,6 +33,8 @@ then
     status
     status "########################################################################################################################################"
     status "You are installing a virgin copy of drupal. ****ESSENTIAL ACTION**** >> Please navigate to https://${WEBSITE_URL}/core/install.php"
+    status "IMPORTANT: If you see an error message after you have intalled drupal go to your database tables and empty all cache_ tables"
+    status "The issue should then resolve"
     status "########################################################################################################################################"
     status "OK, I'll be kind and show you one time your drupal application credentials."
     status "Please make a note of them but remember to keep them safe and secret"
