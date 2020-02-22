@@ -1,6 +1,7 @@
 1 All the DNS A records are deleted as part of the initial build process. If a 3rd party (script maybe) or yourself navigates to your live URL whilst all A records are deleted they/you will be served an NXRecord which basically means that there is no record for that domain.
 THE NXRecord seems to be cached and it may cause an issue with SSL certificate issuance. In this case, you will see an error message with NXRecord in the message body and the build process will terminate. The solution is to wait for the caching to clear so that the NXRecord is no longer being served and restart the build process. Under normal operation, this should not happen. 
 
+2. To shutdown your infrastructure it is important not to simply shutdown the machines using a provider's GUI system or the cli tools. There's a script in the helperscripts directory called ShutdownInfrastructure.sh which you must run each time you want to shut your system down. This gives the machines a chance to clean up and so on which means that your data will be consistent.
 
 3 Once your application is live and deployed in production mode, you can increase and decrease the minimum number of webservers by accessing the file
 
