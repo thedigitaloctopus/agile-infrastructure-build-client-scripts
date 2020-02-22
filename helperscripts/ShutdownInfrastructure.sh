@@ -125,6 +125,7 @@ then
 fi
 
 
+
 for autoscalerip in ${autoscalerips}
 do
     ${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${autoscalerip} ${CLOUDHOST}
@@ -145,4 +146,3 @@ done
 /bin/echo "REMEMBER TO MANUALLY REVOKE ANY ACCESS RIGHTS GRANTED TO SECURIY GROUPS/ FIREWALLS AND SO ON ASSOCIATED WITH YOUR MANAGED DB"
 /bin/echo "THIS IS SO IF THE SECURITY GROUP IS REUSED AT A LATER TIME, ADDITIONAL ACCESS IS NOT INADVERTENTLY GRANTED"
 /bin/echo "#######################################################################################################################################"
-
