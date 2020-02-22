@@ -124,16 +124,20 @@ then
     exit
 fi
 
-${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${autoscalerip} ${CLOUDHOST}
 
-for ip in ${webserverips}
+for autoscalerip in ${autoscalerips}
 do
-    ${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${ip} ${CLOUDHOST}
+    ${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${autoscalerip} ${CLOUDHOST}
 done
 
-for ip in ${databaseips}
+for webserverip in ${webserverips}
 do
-    ${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${databaseips} ${CLOUDHOST}
+    ${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${webserverip} ${CLOUDHOST}
+done
+
+for databaseip in ${databaseips}
+do
+    ${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${databaseip} ${CLOUDHOST}
 done
 
 /bin/echo "#######################################################################################################################################"
