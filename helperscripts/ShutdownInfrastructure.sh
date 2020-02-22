@@ -57,7 +57,7 @@ fi
 /bin/echo "Please enter the name of the build of the server you wish to connect with"
 read BUILD_IDENTIFIER
 
-autoscalerip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "autoscaler*" ${CLOUDHOST}`"
+autoscalerips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST}`"
 webserverips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "webserver*" ${CLOUDHOST}`"
 databaseips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "database*" ${CLOUDHOST}`"
 
@@ -93,7 +93,10 @@ SERVER_USER_PASSWORD="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${
 SSH_PORT="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} | /bin/grep SSH_PORT | /bin/sed 's/"//g' | /usr/bin/awk -F'=' '{print $NF}'`"
 SUDO="DEBIAN_FRONTEND=noninteractive /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E "
 
-/usr/bin/ssh -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=5 -o ConnectionAttempts=6 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${autoscalerip} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/utilities/ShutdownTheAutoscaler.sh"
+for ip in ${autoscalerips}
+do
+    /usr/bin/ssh -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=5 -o ConnectionAttempts=6 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${ip} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/utilities/ShutdownThisDatabase.sh 'backup'" 2>/dev/null
+done
 
 first="1"
 for ip in ${webserverips}
