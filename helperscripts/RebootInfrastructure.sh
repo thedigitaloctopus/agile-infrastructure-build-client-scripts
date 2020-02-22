@@ -62,7 +62,7 @@ fi
 /bin/echo "Please enter the name of the build of the server you wish to connect with"
 read BUILD_IDENTIFIER
 
-autoscalerip="`./providerscripts/server/GetServerIPAddresses.sh "autoscaler*" ${CLOUDHOST}`"
+autoscalerips="`./providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST}`"
 webserverips="`./providerscripts/server/GetServerIPAddresses.sh "webserver*" ${CLOUDHOST}`"
 databaseips="`./providerscripts/server/GetServerIPAddresses.sh "database*" ${CLOUDHOST}`"
 
@@ -94,7 +94,10 @@ SSH_PORT="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTI
 
 /bin/echo "OK, rebooting your infrastructure"
 
-/usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ./keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} root@${autoscalerip} '/sbin/shutdown -r now' 2>/dev/null
+for ip in ${autoscalerips}
+do
+    /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ./keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} root@${ip} "/sbin/shutdown -r now" 2>/dev/null
+done
 
 for ip in ${webserverips}
 do
