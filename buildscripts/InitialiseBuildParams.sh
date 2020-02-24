@@ -158,8 +158,8 @@ status "THEM BY SELECTING THIS OPTION AND THE SESSION PATH IN YOUR APPLICATION S
 status "SESSION DATA CAN BE WRITTEN THERE"
 status "####################################################################################################################################################"
 status "Do you wish to store your assets in a shared filesystem either in the cloud or with an elastic file system when supported?"
-status "Note: if your application has the capability to use CDNs, then, you might not need to use this option as your application will deal wth it"
-status "This is here as an option for the case where an application can't or doesn't want to use a CDN"
+status "For **some** applications there are pluins or extensions which can offload media assets to an object store at an application level"
+status "If you find an application level solution that you are happy with, you won't need this option to be set on"
 status "Please enter (Y|y) or (N|n)"
 read response
 
