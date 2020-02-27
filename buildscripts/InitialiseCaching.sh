@@ -64,7 +64,7 @@ then
             IN_MEMORY_CACHING="memcache"
             IN_MEMORY_CACHING_PORT="${memcache_port}"
             IN_MEMORY_CACHING_HOST="${memcache_host}"
-            IN_MEMORY_SECURITY_GROUP="${memcache_security_group}"
+            IN_MEMORY_CACHING_SECURITY_GROUP="${memcache_security_group}"
         elif ( [ "${userresponse}" = "2" ] )
         then
             status "What port is your redis cluster running on or accepting connections on?"
@@ -79,7 +79,7 @@ then
             IN_MEMORY_CACHING="redis"
             IN_MEMORY_CACHING_PORT="${redis_port}"
             IN_MEMORY_CACHING_HOST="${redis_host}"
-            IN_MEMORY_SECURITY_GROUP="${redis_security_group}"
+            IN_MEMORY_CACHING_SECURITY_GROUP="${redis_security_group}"
         fi
     fi
 fi
