@@ -55,22 +55,30 @@ then
             status "What port is your memcache cluster running on or accepting connections on?"
             read memcache_port
 
+            status "What is the hostname or ip address of the machine where memcache is running?"
+            read memcache_host
+
             status "Please tell us the id of any security groups associated with your memcache cluster"
             read memcache_security_group
 
             IN_MEMORY_CACHING="memcache"
             IN_MEMORY_CACHING_PORT="${memcache_port}"
+            IN_MEMORY_CACHING_HOST="${memcache_host}"
             IN_MEMORY_SECURITY_GROUP="${memcache_security_group}"
         elif ( [ "${userresponse}" = "2" ] )
         then
             status "What port is your redis cluster running on or accepting connections on?"
             read redis_port
 
+            status "What is the hostname or ip address of the machine where redis is running?"
+            read redis_host
+            #
             status "Please tell us the id of any security groups associated with your memcache cluster"
             read redis_security_group
 
             IN_MEMORY_CACHING="redis"
             IN_MEMORY_CACHING_PORT="${redis_port}"
+            IN_MEMORY_CACHING_HOST="${redis_host}"
             IN_MEMORY_SECURITY_GROUP="${redis_security_group}"
         fi
     fi
