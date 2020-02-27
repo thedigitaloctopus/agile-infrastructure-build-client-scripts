@@ -188,7 +188,7 @@ else
 
         if ( [ "${DB_PORT}" = "" ] )
         then
-            DB_PORT="1035"
+            DB_PORT="2035"
         fi
 
         /usr/bin/expr ${DB_PORT} : '[0-9][0-9]*$' >/dev/null 2>&1
