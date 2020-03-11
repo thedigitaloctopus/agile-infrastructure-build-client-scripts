@@ -58,67 +58,70 @@ then
     else
         ENABLE_EFS="0"
     fi
-
-    aws_region="`/bin/cat ~/.aws/config | /bin/grep region | /usr/bin/awk '{print $NF}'`"
-
-    DIRECTORIES_TO_MOUNT="${DIRECTORIES_TO_MOUNT}:config"
     
-    for assettype in `/bin/echo ${DIRECTORIES_TO_MOUNT} | /bin/sed 's/:/ /'`
-    do
-        fsprefix="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`"
-        EFS_IDENTIFIER="`/bin/echo ${fsprefix} | /bin/sed 's/\./-/g'`-${assettype}"
-        EFS_IDENTIFIER="`/bin/echo ${EFS_IDENTIFIER} | /bin/sed 's/\./-/g'`"
+    if ( [ "${ENABLE_EFS}" = "1" ] )
+    then
+        aws_region="`/bin/cat ~/.aws/config | /bin/grep region | /usr/bin/awk '{print $NF}'`"
 
-        EXISTING=""
-
-        /usr/bin/aws efs create-file-system --creation-token "${EFS_IDENTIFIER}" --region "${aws_region}"
-
-        while ( [ "$?" != "0" ] )
+        DIRECTORIES_TO_MOUNT="${DIRECTORIES_TO_MOUNT}:config"
+    
+        for assettype in `/bin/echo ${DIRECTORIES_TO_MOUNT} | /bin/sed 's/:/ /'`
         do
-            status "A file system with creation tokem ${EFS_IDENTIFIER} already exists. If you want to use it as is, please press Y"
-            status "Otherwise take action (through the AWS console) to remove the resource before continuing"
-            read answer
+            fsprefix="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`"
+            EFS_IDENTIFIER="`/bin/echo ${fsprefix} | /bin/sed 's/\./-/g'`-${assettype}"
+            EFS_IDENTIFIER="`/bin/echo ${EFS_IDENTIFIER} | /bin/sed 's/\./-/g'`"
 
-            if ( [ "${answer}" = "Y" ] || [ "${answer}" = "y" ] )
-            then
-                /bin/echo "OK, thanks using existing file system"
-                EXISTING="1"
-            else
-                EXISTING="0"    
-                /usr/bin/aws efs create-file-system --creation-token "${EFS_IDENTIFIER}" --region "${aws_region}"
-            fi
-        done
+            EXISTING=""
 
-        if ( [ "${EXISTING}" = "" ] )
-        then
-            EXISTING="0"
-        fi
-        
-        if ( [ "${EXISTING}" = "0" ] )
-        then
-            filesystemid="`/usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g' | /bin/grep ${EFS_IDENTIFIER} | /usr/bin/awk '{print $NF}'`"
-            security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
-        
-            /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
+            /usr/bin/aws efs create-file-system --creation-token "${EFS_IDENTIFIER}" --region "${aws_region}"
 
             while ( [ "$?" != "0" ] )
             do
-                status "Failed to create mount target for EFS system with ID: ${filesystemid} I will sleep for 30 seconds and try again...."
-                
-                /bin/sleep 30
-                
-                /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
-                if ( [ "$?" = "0" ] )
-                then
-                   status "Successfully created mount target for EFS system with ID: ${filesystemid}" 
-                   status "#########################################################################"
-                fi
-           done
-        fi
-     done
+                status "A file system with creation tokem ${EFS_IDENTIFIER} already exists. If you want to use it as is, please press Y"
+                status "Otherwise take action (through the AWS console) to remove the resource before continuing"
+                read answer
 
-     status "You have elastic file systems available with the following identities"
-     status "`/usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g'`"
-     status "Press <enter> to continue with the build"
-     read x
+                if ( [ "${answer}" = "Y" ] || [ "${answer}" = "y" ] )
+                then
+                    /bin/echo "OK, thanks using existing file system"
+                    EXISTING="1"
+                else
+                    EXISTING="0"    
+                    /usr/bin/aws efs create-file-system --creation-token "${EFS_IDENTIFIER}" --region "${aws_region}"
+                fi
+            done
+
+            if ( [ "${EXISTING}" = "" ] )
+            then
+                EXISTING="0"
+            fi
+        
+            if ( [ "${EXISTING}" = "0" ] )
+            then
+                filesystemid="`/usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g' | /bin/grep ${EFS_IDENTIFIER} | /usr/bin/awk '{print $NF}'`"
+                security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+        
+                /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
+
+                while ( [ "$?" != "0" ] )
+                do
+                    status "Failed to create mount target for EFS system with ID: ${filesystemid} I will sleep for 30 seconds and try again...."
+                
+                    /bin/sleep 30
+                
+                    /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
+                    if ( [ "$?" = "0" ] )
+                    then
+                        status "Successfully created mount target for EFS system with ID: ${filesystemid}" 
+                        status "#########################################################################"
+                    fi
+               done
+            fi
+         done
+
+         status "You have elastic file systems available with the following identities"
+         status "`/usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g'`"
+         status "Press <enter> to continue with the build"
+         read x
+    fi
 fi
