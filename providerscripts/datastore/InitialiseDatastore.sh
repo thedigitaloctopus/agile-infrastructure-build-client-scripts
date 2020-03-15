@@ -125,7 +125,6 @@ then
         read x
         status "========================================================================================================"
         status "ESSENTIAL NOTE FOR CORRECT OPERATION. THE BUCKET(S) LOCATION HAS TO BE SET TO 'US' FOR CORRECT OPERATION"
-        status "IT'S A LITTLE CONFUSING AND TECHNICALLY A BUG, BUT EVEN WITH THE LOCATION MANDATED TO BE US IN ALL CASES"
         status "BUCKETS WILL STILL BE CREATED ACCORDING TO THE ENDPOINT YOU HAVE JUST SET, I.E. FOR EXAMPLE, AMS"
         status "========================================================================================================"
         /usr/bin/s3cmd --configure >&3
@@ -189,6 +188,8 @@ then
         status "   2) Just press enter key for all subsequent options until it says, 'test connection' it will fail but that's OK and expected"
         status "   3) When it asks if you want to save your configuration, say yes"
         status "   4) Don't re run the configuration process, it will rerun itself"
+        status "ESSENTIAL NOTE FOR CORRECT OPERATION. THE BUCKET(S) LOCATION HAS TO BE SET TO 'US' FOR CORRECT OPERATION"
+        status "BUCKETS WILL STILL BE CREATED ACCORDING TO THE ENDPOINT YOU HAVE JUST SET"
         status "The second time it runs, press enter to all the options and then say 'yes' to test the configuration and select yes to save configuration"
         status "====================================================================================================================================="
         status "Press the enter key to begin the configuration"
@@ -255,11 +256,14 @@ then
         status "   2) Just press enter key for all subsequent options until it says, 'test connection' it will fail but that's OK and expected"
         status "   3) When it asks if you want to save your configuration, say yes"
         status "   4) Don't re run the configuration process, it will rerun itself"
+        status "ESSENTIAL NOTE FOR CORRECT OPERATION. THE BUCKET(S) LOCATION HAS TO BE SET TO 'US' FOR CORRECT OPERATION"
+        status "BUCKETS WILL STILL BE CREATED ACCORDING TO THE ENDPOINT YOU HAVE JUST SET"
         status "The second time it runs, press enter to all the options and then say 'yes' to test the configuration and select yes to save configuration"
         status "====================================================================================================================================="
         status "Press the enter key to begin the configuration"
         status ""
         read x
+        
         /usr/bin/s3cmd --configure >&3
         /bin/sed -i "s/^host_base.*/host_base = ${LINODE_ENDPOINT}/" ~/.s3cfg
         /bin/sed -i "s/^host_bucket.*/host_bucket = %(bucket)s.${LINODE_ENDPOINT}/" ~/.s3cfg
@@ -321,6 +325,8 @@ then
         status "   2) Just press enter key for all subsequent options until it says, 'test connection' it will fail but that's OK and expected"
         status "   3) When it asks if you want to save your configuration, say yes"
         status "   4) Don't re run the configuration process, it will rerun itself"
+        status "ESSENTIAL NOTE FOR CORRECT OPERATION. THE BUCKET(S) LOCATION HAS TO BE SET TO 'US' FOR CORRECT OPERATION"
+        status "BUCKETS WILL STILL BE CREATED ACCORDING TO THE ENDPOINT YOU HAVE JUST SET"
         status "The second time it runs, press enter to all the options and then say 'yes' to test the configuration and select yes to save configuration"
         status "====================================================================================================================================="
         status "Press the enter key to begin the configuration"
