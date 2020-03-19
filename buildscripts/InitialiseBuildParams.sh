@@ -156,6 +156,8 @@ status "########################################################################
 status "IF YOU USE MULTIPLE WEBSERVERS, AND SESSIONS ARE NOT PERSISTED TO THE DATABASE, YOUR ASSETS WILL NEED TO BE SHARED AMONG "
 status "THEM BY SELECTING THIS OPTION AND THE SESSION PATH IN YOUR APPLICATION SET TO THE SHARED IMAGE/MEDIA DIRECTORY PATH SO THE"
 status "SESSION DATA CAN BE WRITTEN THERE"
+status "THE RECOMMENDED WAY TO SHARE YOUR MEDIA ASSETS IS TO USE A PLUGIN AT AN APPLICATION LEVEL TO OFFLOAD ASSETS TO THE DATASTORE"
+status "BUT, IF THAT IS NOT POSSIBLE, YOU CAN USE THIS METHOD WHICH MAY INCUR A SLIGHT PERFORMANCE HIT"
 status "####################################################################################################################################################"
 status "Do you wish to store your assets in a shared filesystem either in the cloud or with an elastic file system when supported?"
 status "For **some** applications there are pluins or extensions which can offload media assets to an object store at an application level"
