@@ -65,7 +65,7 @@ then
 
         DIRECTORIES_TO_MOUNT="${DIRECTORIES_TO_MOUNT}:config"
     
-        for assettype in `/bin/echo ${DIRECTORIES_TO_MOUNT} | /bin/sed 's/:/ /'`
+        for assettype in `/bin/echo ${DIRECTORIES_TO_MOUNT} | /bin/sed 's/:/ /g'`
         do
             fsprefix="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`"
             EFS_IDENTIFIER="`/bin/echo ${fsprefix} | /bin/sed 's/\./-/g'`-${assettype}"
