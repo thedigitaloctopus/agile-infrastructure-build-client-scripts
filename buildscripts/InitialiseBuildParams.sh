@@ -162,6 +162,8 @@ status "########################################################################
 status "Do you wish to store your assets in a shared filesystem either in the cloud or with an elastic file system when supported?"
 status "For **some** applications there are pluins or extensions which can offload media assets to an object store at an application level"
 status "If you find an application level solution that you are happy with, you won't need this option to be set on"
+status "(unless your session data is persisted to the shared filesystem when using multiple webservers (wordpress for example)"
+status "####################################################################################################################################################"
 status "Please enter (Y|y) or (N|n)"
 read response
 
