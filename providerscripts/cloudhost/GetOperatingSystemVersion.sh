@@ -93,7 +93,7 @@ elif ( [ "${buildos}" = "debian" ] )
     then
         if ( [ "${buildosversion}" = "9" ] )
         then
-            /usr/bin/aws ec2 describe-images --owners 379101102735 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep stretch | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/grep x86_64 >&3            
+            /usr/bin/aws ec2 describe-images --owners 379101102735 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep stretch | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/grep x86_64 | /bin/sed 's/"//g' >&3            
             /bin/echo "Please enter the ami identifier for the OS you wish to use" >&3
             read ami_identifier        
             /bin/cp /dev/null /dev/stdout
@@ -101,17 +101,7 @@ elif ( [ "${buildos}" = "debian" ] )
         fi
         if ( [ "${buildosversion}" = "10" ] )
         then
-            #There is no debian 10 ami image yet, so just set it to be debian 9 until debian 10 becomes available when we will update here
-            #/usr/bin/aws ec2 describe-images --owners 379101102735 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep buster | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/grep x86_64 >&3
-            #/bin/echo "Please enter the ami identifier for the OS you wish to use" >&3
-
-            #read ami_identifier
-            #/bin/cp /dev/null /dev/stdout
-            #/bin/echo "${ami_identifier}"
-            /bin/echo "There are no debian 10 buster ami images available at the moment, I will display debian 9 images to you" >&3
-            /bin/echo "Press <enter> to display available debian 9 ami images" >&3
-            read x
-            /usr/bin/aws ec2 describe-images --owners 379101102735 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep stretch | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/grep x86_64 >&3            
+            /usr/bin/aws ec2 describe-images --owners 136693071363 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep debian-10 | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/sed 's/"//g' >&3
             /bin/echo "Please enter the ami identifier for the OS you wish to use" >&3
             read ami_identifier        
             /bin/cp /dev/null /dev/stdout
