@@ -29,12 +29,16 @@ if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
     /usr/bin/apt-get -qq -y -f install python3-pip
     /bin/rm /usr/bin/python
-    /usr/bin/ln -s /usr/bin/python3 /usr/bin/python
+    /bin/ln -s /usr/bin/python3 /usr/bin/python
+    /bin/rm /usr/bin/pip
+    /bin/ln /usr/bin/pip3 /usr/bin/pip
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
     /usr/bin/apt-get -qq -y -f install python3-pip
     /bin/rm /usr/bin/python
-    /usr/bin/ln -s /usr/bin/python3 /usr/bin/python
+    /bin/ln -s /usr/bin/python3 /usr/bin/python
+    /bin/rm /usr/bin/pip
+    /bin/ln /usr/bin/pip3 /usr/bin/pip
 fi
