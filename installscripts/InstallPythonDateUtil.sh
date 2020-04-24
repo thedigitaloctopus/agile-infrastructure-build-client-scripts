@@ -27,10 +27,10 @@ fi
 
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
-    /usr/bin/apt-get install python-dateutil
+    /usr/bin/apt-get install python3-dateutil
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
-    /usr/bin/apt-get install python-dateutil
+    /usr/bin/apt-get install python3-dateutil
 fi
