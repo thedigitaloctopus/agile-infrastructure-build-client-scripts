@@ -44,12 +44,12 @@ if ( [ "${response}" = "1" ] )
 then
     BUILDOS="ubuntu"
     status "OK, thanks for that. Please now tell me what version of Ubuntu you would like to deploy. Currently, there is 18.04 (LTS) and 19.04 please choose one"
-    status "Please type one of '18.04' or '19.04' to specify which version of ubuntu you wish to deploy to"
+    status "Please type one of '18.04' or '19.04' or '20.04' to specify which version of ubuntu you wish to deploy to"
     read response
 
-    if (  [ "${response}" = "" ] || [ "`/bin/echo '18.04 19.04' | /bin/grep ${response}`" = "" ] )
+    if (  [ "${response}" = "" ] || [ "`/bin/echo '18.04 19.04 20.04' | /bin/grep ${response}`" = "" ] )
     then
-        status "Sorry mate, that's not a valid choice, please enter one of 18.04 and 19.04"
+        status "Sorry mate, that's not a valid choice, please enter one of 18.04 and 19.04 and 20.04"
         read response
     fi
 
