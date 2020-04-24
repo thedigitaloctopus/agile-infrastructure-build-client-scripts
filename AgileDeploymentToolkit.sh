@@ -5,7 +5,7 @@
 # Date 07/06/2016
 ##############################################################################################
 # Recommended best practice is to spin up a linux server on a cloud provider of your choice and
-# once you have secured it, run this script. Currently supported are Ubuntu 18.04, 19.04 and
+# once you have secured it, run this script. Currently supported are Ubuntu 18.04, 20.04 and
 # debian 9 and 10. Security of your build server is important because sensitive information will
 # be aggregated on it during the running of this script and you should consider a breach of your
 # build server to be equivalent to a breach of your actual live server machines that you are deploying.
