@@ -119,9 +119,7 @@ then
             status "####################################################"
             status "Can you please enter the password for your database:"
             status "####################################################"
-            /bin/stty -echo >&3
             read DBaaS_PASSWORD
-            /bin/stty echo >&3
 
             status "#############################################################################################"
             status "You should also have given your database a name. Please enter the name of your database here:"
@@ -194,9 +192,7 @@ then
             status "##############################################################################################################"
             status "####Can you please enter the password for your database:                                                  ####"
             status "##############################################################################################################"
-            /bin/stty -echo >&3
             read DBaaS_PASSWORD
-            /bin/stty echo >&3
 
             status ""
             status "##############################################################################################################"
