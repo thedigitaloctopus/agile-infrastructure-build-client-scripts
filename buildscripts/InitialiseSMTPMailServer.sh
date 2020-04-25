@@ -74,9 +74,7 @@ then
     fi
 
     status "Please enter your password for your SMTP provider"
-    /bin/stty -echo >&3
     read SYSTEM_EMAIL_PASSWORD
-    /bin/stty echo >&3
 
     /bin/rm ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat
 
