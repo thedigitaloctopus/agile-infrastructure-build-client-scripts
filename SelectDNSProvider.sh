@@ -79,9 +79,7 @@ then
         status "your name at the top right and then clicking on 'View API key for the Global API Key key"
         status "##########################################################################################################"
         status "Please input your cloudflare API key"
-        /bin/stty -echo >&3
         read DNS_SECURITY_KEY
-        /bin/stty echo >&3
         /bin/echo ${DNS_SECURITY_KEY} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-cloudflare-credentials/DNSSECURITYKEY
         DNS_SECURITY_KEY="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-cloudflare-credentials/DNSSECURITYKEY`"
     else
@@ -93,9 +91,7 @@ then
         if ( [ "`/bin/echo "${answer}" | /bin/grep 'y'`" = "" ]  && [ "`/bin/echo "${answer}" | /bin/grep 'Y'`" = "" ] )
         then
             status "So, please input the access key of your cloudflare account"
-            /bin/stty -echo >&3
             read DNS_SECURITY_KEY
-            /bin/stty echo >&3
             /bin/echo "${DNS_SECURITY_KEY}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-cloudflare-credentials/DNSSECURITYKEY
         fi
     fi
@@ -136,9 +132,7 @@ then
             status "there and copy and paste it below"
             status "#####################################################################################################"
             status "Please input your rackspace API key"
-            /bin/stty -echo >&3
             read DNS_SECURITY_KEY
-            /bin/stty echo >&3
             /bin/echo ${DNS_SECURITY_KEY} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-rackspace-credentials/DNSSECURITYKEY
             DNS_SECURITY_KEY="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-rackspace-credentials/DNSSECURITYKEY`"
         else
@@ -150,9 +144,7 @@ then
             if ( [ "`/bin/echo "${answer}" | /bin/grep 'y'`" = "" ]  && [ "`/bin/echo "${answer}" | /bin/grep 'Y'`" = "" ] )
             then
                 status "So, please input the access key of your rackspace account"
-                /bin/stty -echo >&3
                 read DNS_SECURITY_KEY
-                /bin/stty -echo >&3
                 /bin/echo "${DNS_SECURITY_KEY}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-rackspace-credentials/DNSSECURITYKEY
             fi
         fi
