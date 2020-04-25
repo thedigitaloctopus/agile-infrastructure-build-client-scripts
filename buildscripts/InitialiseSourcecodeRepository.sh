@@ -117,9 +117,7 @@ then
     status "YOUR ${APPLICATION_REPOSITORY_PROVIDER} USERNAME: "
     read APPLICATION_REPOSITORY_USERNAME
     status "YOUR ${APPLICATION_REPOSITORY_PROVIDER} PASSWORD: "
-    /bin/stty -echo >&3
     read APPLICATION_REPOSITORY_PASSWORD
-    /bin/stty echo >&3
 
     status ""
     status "##############################################################################################################"
@@ -179,9 +177,9 @@ then
     status "YOUR ${INFRASTRUCTURE_REPOSITORY_PROVIDER} USERNAME:"
     read INFRASTRUCTURE_REPOSITORY_USERNAME
     status "YOUR ${INFRASTRUCTURE_REPOSITORY_PROVIDER} PASSWORD (leave blank for no password if the infrastructure repos are public):"
-    /bin/stty -echo >&3
+
     read INFRASTRUCTURE_REPOSITORY_PASSWORD
-    /bin/stty echo >&3
+
     if ( [ "${INFRASTRUCTURE_REPOSITORY_PASSWORD}" = "" ] )
     then
         INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
