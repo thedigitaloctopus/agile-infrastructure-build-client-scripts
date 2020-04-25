@@ -221,9 +221,7 @@ then
     status "#####################################################################################################"
     CLOUDHOST_USERNAME="root"
     status "Linode root Password (at least 8 characters):"
-    /bin/stty -echo >&3
     read CLOUDHOST_PASSWORD
-    /bin/stty echo >&3
 
     if ( [ ! -d ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials ] )
     then
