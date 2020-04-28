@@ -158,7 +158,7 @@ then
     status "##### So, please enter the provider with which the agile deployment toolkit is currently kept                             #####"
     status "##### We currently support: 1)BITBUCKET 2)GITHUB 3)GITLAB                                                                 #####"
     status "###############################################################################################################################"
-    status "Please select which repo provier your application sourcecode is with: (1|2|3)"
+    status "Please select which repo provider the agile deployment toolkit infrastructure sourcecode is with: (1|2|3)"
     read choice
 
     while ( [ "`/bin/echo "1 2" | /bin/grep ${choice}`" = "" ] )
