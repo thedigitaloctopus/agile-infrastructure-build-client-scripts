@@ -79,6 +79,8 @@ then
     status "###############################################################################################################################"
     status "Please select the repository provider where your application sourcecode resides (1|2|3)"
     read choice
+    
+    APPLICATION_REPOSITORY_TOKEN=""
 
     while ( [ "`/bin/echo "1 2 3" | /bin/grep ${choice}`" = "" ] )
     do
@@ -93,6 +95,10 @@ then
     if ( [ "`/bin/echo ${choice} | /bin/grep '2'`" != "" ] )
     then
         APPLICATION_REPOSITORY_PROVIDER="github"
+        status "For this repository provider, we need a 'private auithorisation token' to be generated"
+        status "You can do this by logging into your account and going to: https://github.com/settings/tokens and then generating one"
+        status "If you make a note of the generated token and paste it below, that will be all we need"
+        read APPLICATION_REPOSITORY_TOKEN
     fi
     if ( [ "`/bin/echo ${choice} | /bin/grep '3'`" != "" ] )
     then
@@ -116,8 +122,16 @@ then
     status "###############################################################################################################"
     status "YOUR ${APPLICATION_REPOSITORY_PROVIDER} USERNAME: "
     read APPLICATION_REPOSITORY_USERNAME
-    status "YOUR ${APPLICATION_REPOSITORY_PROVIDER} PASSWORD: "
-    read APPLICATION_REPOSITORY_PASSWORD
+    
+    if ( [ "${APPLICATION_REPOSITORY_TOKEN}" = "" ] )
+    then
+        status "YOUR ${APPLICATION_REPOSITORY_PROVIDER} PASSWORD: "
+        read APPLICATION_REPOSITORY_PASSWORD
+    else
+        status "I HAVE SET YOUR APPLICATION REPOSITOTY PASSWORD TO BE THE PERSONAL ACCESS TOKEN YOU GAVE US"
+        APPLICATION_REPOSITORY_PASSWORD="${APPLICATION_REPOSITORY_TOKEN}"
+        read x
+    fi
 
     status ""
     status "##############################################################################################################"
