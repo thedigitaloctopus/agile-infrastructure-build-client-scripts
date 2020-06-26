@@ -63,7 +63,7 @@ then
         status "You need to configure your datastore tools. You can get your access keys by going to your AWS account at aws.amazon.com and following the instructions"
         status "****IMPORTANT NOTE***** For AWS choose a secret key which has no forward slashes in it as this will cause issues later on"
         status "Your S3 endpoint should be region specific. For example if you are in eu-west-1 in would be, s3.eu-west-1.amazonaws.com"
-        /usr/bin/s3cmd --configure >&3
+        /usr/bin/s3cmd --configure >&3 2>&3
         /bin/cp ~/.s3cfg ${BUILD_HOME}/.s3cfg.amazon
         /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/amazonS3
     done
@@ -127,13 +127,13 @@ then
         status "ESSENTIAL NOTE FOR CORRECT OPERATION. THE BUCKET(S) LOCATION HAS TO BE SET TO 'US' FOR CORRECT OPERATION"
         status "BUCKETS WILL STILL BE CREATED ACCORDING TO THE ENDPOINT YOU HAVE JUST SET, I.E. FOR EXAMPLE, AMS"
         status "========================================================================================================"
-        /usr/bin/s3cmd --configure >&3
+        /usr/bin/s3cmd --configure >&3 2>&3
         /bin/sed -i "s/^host_base.*/host_base = ${DIGITAL_OCEAN_SPACES_ENDPOINT}/" ~/.s3cfg
         /bin/sed -i "s/^host_bucket.*/host_bucket = %(bucket)s.${DIGITAL_OCEAN_SPACES_ENDPOINT}/" ~/.s3cfg
         status "=================================================================================================================================="
         status "FOR THIS PROVIDER IT IS NECESSARY TO RECONFIRM ALL THE DETAILS YOU HAVE SET. PLEASE JUST REPEATEDLY PRESS <ENTER> TO ACCEPT AS SET"
         status "=================================================================================================================================="
-        /usr/bin/s3cmd --configure >&3
+        /usr/bin/s3cmd --configure >&3 2>&3
         /bin/cp ~/.s3cfg ${BUILD_HOME}/.s3cfg.digitalocean
         /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/digitalocean
     done
@@ -195,13 +195,13 @@ then
         status "Press the enter key to begin the configuration"
         status ""
         read x
-        /usr/bin/s3cmd --configure >&3
+        /usr/bin/s3cmd --configure >&3 2>&3
         /bin/sed -i "s/^host_base.*/host_base = ${EXOSCALE_ENDPOINT}/" ~/.s3cfg
         /bin/sed -i "s/^host_bucket.*/host_bucket = %(bucket)s.${EXOSCALE_ENDPOINT}/" ~/.s3cfg
         status "=================================================================================================================================="
         status "FOR THIS PROVIDER IT IS NECESSARY TO RECONFIRM ALL THE DETAILS YOU HAVE SET. PLEASE JUST REPEATEDLY PRESS <ENTER> TO ACCEPT AS SET"
         status "=================================================================================================================================="
-        /usr/bin/s3cmd --configure >&3
+        /usr/bin/s3cmd --configure >&3 2>&3
         /bin/cp ~/.s3cfg ${BUILD_HOME}/.s3cfg.exoscale
         /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/exoscale
     done
@@ -264,13 +264,13 @@ then
         status ""
         read x
         
-        /usr/bin/s3cmd --configure >&3
+        /usr/bin/s3cmd --configure >&3 2>&3
         /bin/sed -i "s/^host_base.*/host_base = ${LINODE_ENDPOINT}/" ~/.s3cfg
         /bin/sed -i "s/^host_bucket.*/host_bucket = %(bucket)s.${LINODE_ENDPOINT}/" ~/.s3cfg
         status "=================================================================================================================================="
         status "FOR THIS PROVIDER IT IS NECESSARY TO RECONFIRM ALL THE DETAILS YOU HAVE SET. PLEASE JUST REPEATEDLY PRESS <ENTER> TO ACCEPT AS SET"
         status "=================================================================================================================================="
-        /usr/bin/s3cmd --configure >&3
+        /usr/bin/s3cmd --configure >&3 2>&3
         /bin/cp ~/.s3cfg ${BUILD_HOME}/.s3cfg.linode
         /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/linode
     done
@@ -332,13 +332,13 @@ then
         status "Press the enter key to begin the configuration"
         status ""
         read x
-        /usr/bin/s3cmd --configure >&3
+        /usr/bin/s3cmd --configure >&3 2>&3
         /bin/sed -i "s/^host_base.*/host_base = ${VULTR_ENDPOINT}/" ~/.s3cfg
         /bin/sed -i "s/^host_bucket.*/host_bucket = %(bucket)s.${VULTR_ENDPOINT}/" ~/.s3cfg
         status "=================================================================================================================================="
         status "FOR THIS PROVIDER IT IS NECESSARY TO RECONFIRM ALL THE DETAILS YOU HAVE SET. PLEASE JUST REPEATEDLY PRESS <ENTER> TO ACCEPT AS SET"
         status "=================================================================================================================================="
-        /usr/bin/s3cmd --configure >&3
+        /usr/bin/s3cmd --configure >&3 2>&3
         /bin/cp ~/.s3cfg ${BUILD_HOME}/.s3cfg.vultr
         /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/vultr
     done
