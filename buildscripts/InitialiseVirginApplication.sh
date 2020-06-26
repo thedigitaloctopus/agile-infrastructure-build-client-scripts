@@ -66,8 +66,8 @@ then
         status "https://github.com/joomla/joomla-cms/releases. At the time of typing, the latest version is 3.8.5 so,"
         status " it would be expected that you would enter 3.8.5 here to install it"
         read JOOMLA_VERSION
-        
-        while ( [ "`/usr/bin/curl --head https://github.com/joomla/joomla-cms/releases/download/${JOOMLA_VERSION}/Joomla_${JOOMLA_VERSION}-Stable-Full_Package.tar.gz | /bin/grep '302 Found'`" = "" ] &&  [ "`/usr/bin/curl --head https://github.com/joomla/joomla-cms/releases/download/${JOOMLA_VERSION}/Joomla_${JOOMLA_VERSION}-Alpha-Full_Package.tar.gz | /bin/grep '302 Found'`" = "" ] && [ "`/usr/bin/curl --head https://github.com/joomla/joomla-cms/releases/download/${JOOMLA_VERSION}/Joomla_${JOOMLA_VERSION}-Beta-Full_Package.tar.gz | /bin/grep '302 Found'`" = "" ] )
+        #Had to hardcode the beta one because it wasn't following the pattern - parameterise, if possible later on
+        while ( [ "`/usr/bin/curl --head https://github.com/joomla/joomla-cms/releases/download/${JOOMLA_VERSION}/Joomla_${JOOMLA_VERSION}-Stable-Full_Package.tar.gz | /bin/grep '302 Found'`" = "" ] &&  [ "`/usr/bin/curl --head https://github.com/joomla/joomla-cms/releases/download/${JOOMLA_VERSION}/Joomla_${JOOMLA_VERSION}-Alpha-Full_Package.tar.gz | /bin/grep '302 Found'`" = "" ] && [ "`/usr/bin/curl --head https://github.com/joomla/joomla-cms/releases/download/4.0.0-beta/Joomla_${JOOMLA_VERSION}-Beta-Full_Package.tar.gz | /bin/grep '302 Found'`" = "" ] )
         do
             status "That seems to be an invalid version number for joomla. Please try again..."
             read JOOMLA_VERSION
