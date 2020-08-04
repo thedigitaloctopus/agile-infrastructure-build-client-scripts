@@ -85,6 +85,7 @@ fi
 if ( [ "${actioned}" = "1" ] )
 then
     /bin/echo "ssh configuration settings have been updated, please rerun the AgileDeploymentToolkit script so that they are picked up"
+    /bin/echo "NOTE: please make sure that you desktop machine is also configured to not drop SSH connections within a few minutes as this will interupt the build"
     exit
 fi
 
