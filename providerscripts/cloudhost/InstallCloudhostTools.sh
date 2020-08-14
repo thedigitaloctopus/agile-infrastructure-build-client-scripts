@@ -64,7 +64,7 @@ then
         status "Installing Linode toolkit..."
         status  "Press <enter> key to continue"
         ${BUILD_HOME}/installscripts/Update.sh "${buildos}"
-        ${BUILD_HOME}/installscripts/InstallPIP.sh "${buildos}"
+        ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "${buildos}"
         ${BUILD_HOME}/installscripts/InstallLinodeCLI.sh "${buildos}"
         /usr/bin/unlink /usr/bin/python
         /usr/bin/ln -s /usr/bin/python3 /usr/bin/python
