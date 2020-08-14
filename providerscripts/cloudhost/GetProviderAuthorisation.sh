@@ -120,6 +120,11 @@ if ( [ "${cloudhost}" = "linode" ] )
 then
     if ( [ ! -f ${HOME}/.config/linode-cli ] )
     then
+    	status ""
+	    status "############################################################################################################################################"
+	    status "IMPORTANT: Please only enable read/write access for Linodes, Object Storage and IPs from your linode admin console when you generate the key"    
+	    status "############################################################################################################################################"
+	    status ""
         /usr/local/bin/linode-cli configure >&3
     fi
     /bin/chown ${USER} ${HOME}/.config/linode-cli
