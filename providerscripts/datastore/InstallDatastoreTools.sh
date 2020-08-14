@@ -30,13 +30,14 @@ BUILD_HOME="`/bin/pwd`"
 if ( [ "$1" = "S3CMD" ] )
 then
 
-    if ( [ ! -f /usr/bin/python ] )
+    if ( [ -f /usr/bin/python ] )
     then
         ${BUILD_HOME}/installscripts/PurgePython.sh ${buildos}
         ${BUILD_HOME}/installscripts/Update.sh ${buildos}
         ${BUILD_HOME}/installscripts/ForceInstall.sh  ${buildos}
-        ${BUILD_HOME}/installscripts/InstallPythonPIP.sh  ${buildos}
     fi
+        ${BUILD_HOME}/installscripts/InstallPythonPIP.sh  ${buildos}
+        ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh ${buildos}
 
     if ( [ ! -f /usr/bin/s3cmd ] )
     then
