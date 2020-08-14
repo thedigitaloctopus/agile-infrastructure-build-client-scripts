@@ -84,6 +84,12 @@ Currently, these repos are private, but, will be made public. Whilst they are pr
 
 Edit: (They have now been made public)
 
+Here are two instructional or demo videos for how to set up your build server and how to run an example build process. I think you will definitely want to watch these videos before you run a build of your own.
+
+[Agile Deployment Toolkit Build Server Setup Example!](https://www.youtube.com/watch?v=ONp_QuPxcsc)
+[Sample Build Process Agile Deployment Toolkit!](https://www.youtube.com/watch?v=mXpIRB_7O_M&t=80s)
+
+
 ###### THE CONCLUSION
 
 So, the idea is for people who want a CMS application or a website of some sort, their systems usually have basically the same requirements, a database, a webserver, loadbalacing and enough disk space for the assets to be stored for their application. I use the DNS systems to facilitate load balancing between the webserves which they do in a round robin fashion. I structured the scripts in such a way that they are easy to maintain and extend and that's part of what this is about. Providing a deployment framework which automates a lot of the grunt work and still gives the deployer full access to customise their servers. You don't have to learn anything except how to run the scripts so it has a lower experience threshold than some other automated solutions. At the same time, you can get in there and easily tune your servers exactly as you want them. 
