@@ -352,6 +352,17 @@ do
 
         status "Finished building the webserver"
         /bin/date >&3
+        
+        #Wait for the machine to become responsive before we check its integrity
+
+        /usr/bin/ping -c 10 ${ip}
+
+        while ( [ "$?" != "0" ] )
+        do
+            /usr/bin/ping -c 10 ${ip}
+        done
+
+        /bin/sleep 10
 
         #So, looking good. Now what we have to do is keep monitoring for the build process for our webserver to complete
         done="0"
