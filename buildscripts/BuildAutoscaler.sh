@@ -393,6 +393,18 @@ do
 
         status "Finished building the autoscaler"
         /bin/date >&3
+        
+        #Wait for the machine to become responsive before we check its integrity
+
+        /usr/bin/ping -c 10 ${ip}
+
+        while ( [ "$?" != "0" ] )
+        do
+            /usr/bin/ping -c 10 ${ip}
+        done
+
+        /bin/sleep 10
+
 
         done="0"
         alive=""
