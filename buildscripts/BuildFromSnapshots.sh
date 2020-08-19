@@ -74,7 +74,7 @@ then
             status "Interrogating for autoscaler ip addresses....."
             ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${no_autoscalers}-${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
             private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${no_autoscalers}-${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-            /bin/sleep 10
+            /bin/sleep 30
             count="`/usr/bin/expr ${count} + 1`"
         done
 
@@ -121,7 +121,7 @@ then
         status "Interrogating for webserver ip addresses....."
         ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${webserver_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
         private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${webserver_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-        /bin/sleep 10
+        /bin/sleep 30
         count="`/usr/bin/expr ${count} + 1`"
     done
 
@@ -164,7 +164,7 @@ then
         status "Interrogating for database ip addresses....."
         ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${database_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
         private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${database_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-        /bin/sleep 10
+        /bin/sleep 30
         count="`/usr/bin/expr ${count} + 1`"
     done
 
