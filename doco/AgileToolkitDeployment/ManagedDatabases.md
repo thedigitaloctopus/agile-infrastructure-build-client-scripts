@@ -10,5 +10,5 @@ There is a way around this.
 6. Do some work to modify the sql file to have primary keys for whichever create commands are missing them
 7. Once all tables have primary keys import the sql file into your managed database cluster with a command something like this example (replace all params with your own values):
         
-    /usr/bin/mysql -A -u <username> -p<password> --host="private-db-mysql-lon1-36076-do-user-219393-0.a.db.ondigitalocean.com" --port=25060 <db_name> < ${HOME}/backups/installDB/${WEBSITE_NAME}DB.sql
+    /usr/bin/mysql -A -u <username> -p<password> --host="private-db-mysql-lon1-36076-do-user-21398432-0.a.db.ondigitalocean.com" --port=25060 <db_name> < ${HOME}/backups/installDB/${WEBSITE_NAME}DB.sql
 8. Once the database sql file has successfully imported, return to the ssh command which should have reporte the failed build and request for it to try again. This time the build should complete and your application database is in your managed database cluster
