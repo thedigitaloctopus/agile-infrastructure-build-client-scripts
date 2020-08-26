@@ -55,6 +55,7 @@ As far as the build procedure is concerned the normal modus operandi is to have 
 
 So, to run this build kit, you need a vanilla (but secured) Ubuntu server 19.04 or later or a (vanilla but secured) debian 9 server or up. 
 Maybe more flavours of linux will be supported later. So, spin up a vanilla instance of ubuntu or debian your favourite cloudhost and then, having made sure it is secure, ssh onto it (if you are on windows, using putty - making sure putty is not set to drop long lasting connections) and start the build process for your deployment.
+If you don't want to pay for a dedicated build machine in the cloud, you could setup a USB image of ubuntu or debian which has persistent storage and use your local machine for running your builds. It is advised that you use an OS image dedicated for this process. 
 
 You need to clone this build kit onto your new build server.
 
