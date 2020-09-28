@@ -69,5 +69,6 @@ do
         status "There's no timezone ${continent}/${city}, press any key to try again"
         read response
     fi
+    /usr/bin/timedatectl set-ntp true
 done
 
