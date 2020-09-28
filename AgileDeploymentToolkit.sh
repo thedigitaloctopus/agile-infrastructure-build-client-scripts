@@ -45,41 +45,35 @@ then
 fi
 
 actioned="0"
-if ( [ "`/bin/cat /etc/ssh/ssh_config | /bin/grep 'ServerAliveInterval 240'`" = "" ] )
+if ( [ -f /etc/ssh/ssh_config ] && [ "`/bin/cat /etc/ssh/ssh_config | /bin/grep 'ServerAliveInterval 240'`" = "" ] )
 then
-    if ( [ -f /etc/ssh/ssh_config ] )
-    then
-        /bin/echo ""
-        /bin/echo ""
-        /bin/echo "########################################################################################################################"
-        /bin/echo "Updating your client ssh config so that connections don't drop."
-        /bin/echo "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
-        /bin/echo "########################################################################################################################"
-        read response
-        /bin/echo "ServerAliveInterval 240" >> /etc/ssh/ssh_config
-        /bin/echo "ServerAliveCountMax 5" >> /etc/ssh/ssh_config
-        /usr/sbin/service ssh restart
-        actioned="1"  
-    fi
+    /bin/echo ""
+    /bin/echo ""
+    /bin/echo "########################################################################################################################"
+    /bin/echo "Updating your client ssh config so that connections don't drop."
+    /bin/echo "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
+    /bin/echo "########################################################################################################################"
+    read response
+    /bin/echo "ServerAliveInterval 240" >> /etc/ssh/ssh_config
+    /bin/echo "ServerAliveCountMax 5" >> /etc/ssh/ssh_config
+    /usr/sbin/service ssh restart
+    actioned="1"  
 fi
 
-if ( [ "`/bin/cat /etc/ssh/sshd_config | /bin/grep 'ClientAliveInterval 60'`" = "" ] )
+if ( [ -f /etc/ssh/sshd_config ] && [ "`/bin/cat /etc/ssh/sshd_config | /bin/grep 'ClientAliveInterval 60'`" = "" ] )
 then
-    if ( [ -f /etc/ssh/sshd_config ] )
-    then
-        /bin/echo ""
-        /bin/echo ""
-        /bin/echo "########################################################################################################################"
-        /bin/echo "Updating your server ssh config so that connections don't drop from clients to this machine."
-        /bin/echo "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
-        /bin/echo "########################################################################################################################"
-        read response
-        /bin/echo "ClientAliveInterval 60
+    /bin/echo ""
+    /bin/echo ""
+    /bin/echo "########################################################################################################################"
+    /bin/echo "Updating your server ssh config so that connections don't drop from clients to this machine."
+    /bin/echo "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
+    /bin/echo "########################################################################################################################"
+    read response
+    /bin/echo "ClientAliveInterval 60
 TCPKeepAlive yes
 ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
-        /usr/sbin/service sshd restart
-        actioned="1"
-    fi
+    /usr/sbin/service sshd restart
+    actioned="1"
 fi
 
 if ( [ "${actioned}" = "1" ] )
