@@ -30,27 +30,25 @@ BUILD_HOME="`/bin/pwd`"
 if ( [ "$1" = "S3CMD" ] )
 then
 
-    if ( [ -f /usr/bin/python ] )
+    if ( [ -f /usr/bin/python ] && [ ! -f /usr/bin/s3cmd ]  )
     then
         ${BUILD_HOME}/installscripts/PurgePython.sh ${buildos}
         ${BUILD_HOME}/installscripts/Update.sh ${buildos}
         ${BUILD_HOME}/installscripts/ForceInstall.sh  ${buildos}
     fi
-        ${BUILD_HOME}/installscripts/InstallPythonPIP.sh  ${buildos}
-        ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh ${buildos}
+    
+    ${BUILD_HOME}/installscripts/InstallPythonPIP.sh  ${buildos}
+    ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh ${buildos}
 
-    if ( [ ! -f /usr/bin/s3cmd ] )
-    then
-        /bin/mkdir scratch
-        cd scratch
-        /usr/bin/git clone https://github.com/s3tools/s3cmd.git
-        /bin/mkdir -p /usr/bin/s3cmdtools
-        /bin/mv s3cmd S3 /usr/bin/s3cmdtools
-        /bin/ln -s /usr/bin/s3cmdtools/s3cmd/s3cmd /usr/bin/s3cmd
-        ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "${buildos}"
-        ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "${buildos}"
-        cd ..
-        /bin/rm -r scratch
-    fi
+    /bin/mkdir scratch
+    cd scratch
+    /usr/bin/git clone https://github.com/s3tools/s3cmd.git
+    /bin/mkdir -p /usr/bin/s3cmdtools
+    /bin/mv s3cmd S3 /usr/bin/s3cmdtools
+    /bin/ln -s /usr/bin/s3cmdtools/s3cmd/s3cmd /usr/bin/s3cmd
+    ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "${buildos}"
+    ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "${buildos}"
+    cd ..
+    /bin/rm -r scratch
 fi
 
