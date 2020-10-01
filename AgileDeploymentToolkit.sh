@@ -56,7 +56,7 @@ then
     read response
     /bin/echo "ServerAliveInterval 240" >> /etc/ssh/ssh_config
     /bin/echo "ServerAliveCountMax 5" >> /etc/ssh/ssh_config
-    /usr/sbin/service ssh restart
+   # /usr/sbin/service ssh restart
     actioned="1"  
 fi
 
