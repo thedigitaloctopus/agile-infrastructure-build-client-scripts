@@ -56,7 +56,6 @@ then
     read response
     /bin/echo "ServerAliveInterval 240" >> /etc/ssh/ssh_config
     /bin/echo "ServerAliveCountMax 5" >> /etc/ssh/ssh_config
-   # /usr/sbin/service ssh restart
     actioned="1"  
 fi
 
@@ -610,7 +609,8 @@ else
     status "###################################################################################################################"
     status "IMPORTANT, THE USERNAME FOR YOUR SERVERS IS: ${SERVER_USER}"
     status "THE PASSWORD FOR YOUR SERVERS IS: ${SERVER_USER_PASSWORD}"
-    status "PLEASE KEEP THIS INFORMATION SAFE AND SECURE. THERE IS A COPY OF THESE CREDENTIALS STORED IN:"
+    status "CONSIDER ANY COMPROMISE OF THESE CREDENTIALS AS POTENTIALLY GIVING ROOT ACCESS TO YOUR SERVERS. KEEP THEM VERY SECURE"
+    status "A COPY OF THESE CREDENTIALS IS STORED IN:"
     status "SERVER USERNAME :  ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER"
     status "SERVER PASSWORD :  ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSERPASSWORD"
     status "###################################################################################################################"
