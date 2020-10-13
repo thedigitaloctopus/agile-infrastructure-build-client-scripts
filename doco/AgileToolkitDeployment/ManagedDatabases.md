@@ -6,7 +6,7 @@ There is a way around this.
 2. The database will fail to complete because the sql file does not have primary keys set for all the tables it creates.
 3. Open a new ssh tab connect to the failed database droplet and look for the file
 4. ${HOME}/backups/installDB/*.sql
-5. grep through this file with the command cat *.sql | grep -e "CREATE\|PRIMARY" and that will show you which tables do not have a primary key set
+5. grep through this file with the command cat *.sql | grep -e "CREATE\\|PRIMARY" and that will show you which tables do not have a primary key set
 6. Do some work to modify the sql file to have dummy primary keys for whichever create commands are missing them. There should be a table "zzzz" at the end of the dump which is used as a marker, this shows you how to add a dummy PRIMARY KEY to any tables which need them. Once you have added the primary keys, your hourly backups and so on will include them, but, if you redeploy from a baseline and primary keys are missing from tables, you will have to re-add them on first deploy. You can, of course, make your own baseline and use that. 
 7. Once all tables have primary keys import the sql file into your managed database cluster with a command something like this example (replace all params with your own values):
         
