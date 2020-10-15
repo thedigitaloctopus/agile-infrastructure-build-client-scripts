@@ -26,12 +26,12 @@ status ""
 status ""
 status "#####################################################################################################"
 status "#####Which DNS provider tech would you like to use for you website/application                  #####"
-status "#####We currently support 0: None 1: Cloudflare 2: Rackspace                                    #####"
+status "#####We currently support 0: None 1: Cloudflare 2: Rackspace 3: Digital Ocean                   #####"
 status "#####################################################################################################"
 status "Please select a DNS provider (0|1|2)"
 read choice
 
-while ( [ "${choice}" = "" ] || [ "`/bin/echo "0 1 2" | /bin/grep ${choice}`" = "" ] )
+while ( [ "${choice}" = "" ] || [ "`/bin/echo "0 1 2 3" | /bin/grep ${choice}`" = "" ] )
 do
     status "Invalid choice, please try again..."
     read choice
@@ -209,4 +209,56 @@ then
         DNS_CHOICE="rackspace"
         /bin/echo ${DNS_CHOICE} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-rackspace-credentials/DNSCHOICE
     done
+elif ( [ "${choice}" = "3" ] )
+then
+    DNS_CHOICE="digitalocean"
+    /bin/mkdir -p ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials > /dev/null
+
+    if ( [ ! -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSSECURITYKEY ] )
+    then
+       status "#####################################################################################################"
+       status "We also need the access key for your digitalocean account. You can either request this from the domain owner"
+       status "or if you are the domain owner, you can find it by authenticating to your digitalocean account, clicking "
+       status "on your name at the top right and then clicking on 'Account Settings and you should find the access key "
+       status "there and copy and paste it below"
+       status "#####################################################################################################"
+       status "Please input your digitalocean access key"
+       read DNS_SECURITY_KEY
+       /bin/echo ${DNS_SECURITY_KEY} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSSECURITYKEY
+       DNS_SECURITY_KEY="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSSECURITYKEY`"
+    else
+       DNS_SECURITY_KEY="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSSECURITYKEY`"
+       status "Have found an access key stored from a previous build for your digitalocean account"
+       status "It is set to: ${DNS_SECURITY_KEY}"
+       status "Please enter Y/y if this is a correct access key"
+       read answer
+       if ( [ "`/bin/echo "${answer}" | /bin/grep 'y'`" = "" ]  && [ "`/bin/echo "${answer}" | /bin/grep 'Y'`" = "" ] )
+       then
+           status "So, please input the access key of your digitalocean account"
+           read DNS_SECURITY_KEY
+           /bin/echo "${DNS_SECURITY_KEY}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSSECURITYKEY
+       fi
+   fi
+
+    if ( [ ! -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSEMAILADDRESS ] )
+        then
+            status "Please input your digital ocean Email Address"
+            read DNS_EMAIL_ADDRESS
+            /bin/echo ${DNS_EMAIL_ADDRESS} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSEMAILADDRESS
+            DNS_EMAIL_ADDRESS="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSEMAILADDRESS`"
+        else
+            DNS_EMAIL_ADDRESS="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSEMAILADDRESS`"
+            status "Have found an email address stored from a previous build for your digital ocean account"
+            status "It is set to: ${DNS_EMAIL_ADDRESS}"
+            status "Please enter Y/y if this is a correct email address"
+            read answer
+            if ( [ "`/bin/echo "${answer}" | /bin/grep 'y'`" = "" ]  && [ "`/bin/echo "${answer}" | /bin/grep 'Y'`" = "" ] )
+            then
+                status "So, please input the access email address of your digital ocean account"
+                read DNS_EMAIL_ADDRESS
+                /bin/echo "${DNS_EMAIL_ADDRESS}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSEMAILADDRESS
+            fi
+        fi
+
 fi
+
