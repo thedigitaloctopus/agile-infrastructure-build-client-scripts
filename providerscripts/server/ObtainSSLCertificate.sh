@@ -142,3 +142,41 @@ then
     read x
 fi
 
+if ( [ "${DNS_CHOICE}" = "digitalocean" ] )
+then
+    #For production
+    command="DO_AUTH_TOKEN="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+
+    status ""
+    status ""
+    status "##################################################################################################"
+    status ""
+    status "WE NEED A NEW SSL CERTRIFICATE. FOLLOW THESE STEPS EXACLTY AND THINGS WILL BE FINE..."
+    status ""
+    status " 1) Open up a new terminal on your build client machine - something like:"
+    status "------------COMMAND-----------------"
+    status "    /usr/bin/ssh ${BUILD_CLIENT_IP}"
+    status "------------COMMAND-----------------"
+    status ""
+    status " 2) Precisely and carefully change working directory to your build home directory, precisely like:"
+    status "-----------------COMMAND--------------------------"
+    status "    cd ${BUILD_HOME}"
+    status "-----------------COMMAND--------------------------"
+    status ""
+    status " 3) Issue the following command (you can copy and paste it all onto the command line of your new terminal window) "
+    status "     ------------------------------------------COMMAND-------------------------------------------"
+    status "       ${command} "
+    status "     ------------------------------------------COMMAND-------------------------------------------"
+    status ""
+    status " 4) Check that there is a directory ${BUILD_HOME}/.lego that has up to date (check the timestamp) certificates in it"
+    status ""
+    status "   Also, when you issue the command it should say whether a certificate was successfully generated or not"
+    status ""
+    status "###################################################################################################"
+    status "Once you have done all that, you can press the <enter> key to continue with the build"
+    status ""
+    status ""
+    read x
+fi
+
+
