@@ -77,7 +77,7 @@ then
         status "Installing Vultr toolkit..."
         status  "Press <enter> key to continue"
         ${BUILD_HOME}/installscripts/InstallSudo.sh "${buildos}"
-
+        ${BUILD_HOME}/installscripts/InstallVultrCLI.sh "${buildos}"        
     fi
 fi
 
