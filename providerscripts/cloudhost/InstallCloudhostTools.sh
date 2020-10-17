@@ -77,12 +77,7 @@ then
         status "Installing Vultr toolkit..."
         status  "Press <enter> key to continue"
         ${BUILD_HOME}/installscripts/InstallSudo.sh "${buildos}"
-        latest="`/usr/bin/curl https://github.com/JamesClonk/vultr/releases/latest | /bin/sed 's/.*tag\///g' | /bin/sed 's/\".*//g' | /bin/sed 's/v//g'`"
-        /usr/bin/wget https://github.com/JamesClonk/vultr/releases/download/${latest}/vultr_linux_amd64.tar.gz
-        /bin/tar xvfz ${BUILD_HOME}/vultr_linux_amd64.tar.gz
-        /bin/cp ${BUILD_HOME}/vultr_linux_amd64/vultr /usr/bin
-        /bin/rm -r ${BUILD_HOME}/vultr_linux_amd64
-        /bin/rm ${BUILD_HOME}/vultr_linux_amd64.tar.gz
+
     fi
 fi
 
