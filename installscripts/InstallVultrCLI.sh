@@ -1,6 +1,4 @@
 #!/bin/sh
-
-#!/bin/sh
 ######################################################################################################
 # Description: This script will install the Vultr CLI toolkit
 # Author: Peter Winter
@@ -20,7 +18,7 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #######################################################################################################
 #######################################################################################################
-#set -x
+set -x
 
 if ( [ "${1}" != "" ] )
 then
@@ -30,21 +28,25 @@ fi
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
     latest="`/usr/bin/curl https://github.com/JamesClonk/vultr/releases/latest | /bin/sed 's/.*tag\///g' | /bin/sed 's/\".*//g' | /bin/sed 's/v//g'`"
-    /usr/bin/wget https://github.com/JamesClonk/vultr/releases/download/${latest}/vultr_linux_386.tar.gz
-    /bin/tar xvfz ${BUILD_HOME}/vultr_linux_386.tar.gz
-    /bin/cp ${BUILD_HOME}/vultr_linux_386/vultr /usr/bin
-    /bin/rm -r ${BUILD_HOME}/vultr_linux_386
-    /bin/rm ${BUILD_HOME}/vultr_linux_386.tar.gz
+    /usr/bin/wget https://github.com/JamesClonk/vultr/releases/download/v${latest}/vultr_${latest}_Linux-64bit.tar.gz
+    if ( [ ! -d ${BUILD_HOME}/vultr ] )
+    then
+        /bin/mkdir ${BUILD_HOME}/vultr
+    fi
+    /bin/tar xvfz ${BUILD_HOME}/vultr_${latest}_Linux-64bit.tar.gz  -C ${BUILD_HOME}/vultr
+    /bin/mv ${BUILD_HOME}/vultr/vultr /usr/bin
+    /bin/rm -r ${BUILD_HOME}/vultr
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
     latest="`/usr/bin/curl https://github.com/JamesClonk/vultr/releases/latest | /bin/sed 's/.*tag\///g' | /bin/sed 's/\".*//g' | /bin/sed 's/v//g'`"
-    /usr/bin/wget https://github.com/JamesClonk/vultr/releases/download/${latest}/vultr_linux_386.tar.gz
-    /bin/tar xvfz ${BUILD_HOME}/vultr_linux_386.tar.gz
-    /bin/cp ${BUILD_HOME}/vultr_linux_386/vultr /usr/bin
-    /bin/rm -r ${BUILD_HOME}/vultr_linux_386
-    /bin/rm ${BUILD_HOME}/vultr_linux_386.tar.gz
+    /usr/bin/wget https://github.com/JamesClonk/vultr/releases/download/v${latest}/vultr_${latest}_Linux-64bit.tar.gz
+    if ( [ ! -d ${BUILD_HOME}/vultr ] )
+    then
+        /bin/mkdir ${BUILD_HOME}/vultr
+    fi
+    /bin/tar xvfz ${BUILD_HOME}/vultr_${latest}_Linux-64bit.tar.gz  -C ${BUILD_HOME}/vultr
+    /bin/mv ${BUILD_HOME}/vultr/vultr /usr/bin
+    /bin/mv ${BUILD_HOME}/vultr /usr/bin
 fi
-
-
