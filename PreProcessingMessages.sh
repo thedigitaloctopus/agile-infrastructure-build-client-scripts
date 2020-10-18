@@ -41,7 +41,7 @@ then
     status  ""
     status "You can add your IP addresses by going to the URL, https://my.vultr.com/settings/#settingsapi. The Build Client IP you can add now, I will try and"
     status "Get the IP address of your machine so you can  add it."
-    status "The IP address of your BUILD CLIENT is: `/usr/bin/curl http://myip.dnsomatic.com 2>/dev/null`"
+    status "The IP address of your BUILD CLIENT is: `/usr/bin/curl ifconfig.me 2>/dev/null`"
     status "Please also whitelist it on your vultr account"
     status ""
     if ( [ "${DEVELOPMENT}" = "1" ] )
