@@ -28,13 +28,14 @@ Another example, then, might be AWS or "Amazon Webservices". If you want to have
 Before you run the Agile Deployment Toolkit build scripts, what you need to do, is get your database instance up and running with Amazon, so assuming you have a valid and active account with Amazon here are the steps.
 
 1) Select the RDS service.
-2) Decide what type of database you are deploying, MySQl, Postgres and so on and select it.
+2) Using standard mode and NOT easy mode, decide what type of database you are deploying, MySQl, Postgres and so on and select it.
 3) Set the size and so on of your database and review all the settings of your database.
 4) Set the username, password and name of your database. Make a note of them as you will need them for the agile deployment script.
-5) Deploy the database instance, it will take a bit of time.
-6) Grant security access to the security group that our webservers belong to
-7) Once the 'endpoint' becomes available, make a note of it, minus the colon and port number at the end of it.
-8) Once the amazon database is all set for you, run the agile deployment toolkit and use the credentials and so on that you have set up as parameters to the script when appropriate.
+5) Set the availability zone and port of the database (if you forget this, you can modify it post deployment). 
+6) Deploy the database instance, it will take a bit of time.
+7) Grant security access to the security group that our webservers belong to (AgileDeploymentToolkitSecurityGroup)
+8) Once the 'endpoint' becomes available, make a note of it, minus the colon and port number at the end of it.
+9) Once the amazon database is all set for you, run the agile deployment toolkit and use the credentials and so on that you have set up as parameters to the script when appropriate.
 
 ##### ESSENTIAL- Make sure you set the DB port in the Agile Deployment Scripts configuration process to be the same as the port you chose when you deployed your RDS instance with Amazon. 
 
