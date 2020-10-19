@@ -362,11 +362,19 @@ do
 
         /usr/bin/ping -c 10 ${ip}
 
+        pingcount="0"
+
         while ( [ "$?" != "0" ] )
         do
             /usr/bin/ping -c 10 ${ip}
+            pingcount="`/usr/bin/expr ${pingcount} + 1`"
+            if ( [ "${pingcount}" = "10" ] )
+            then
+                status "I am having trouble pinging your new database server, maybe check that your security policy allows ping requests"
+                pingcount="0"
+            fi
         done
-
+        
         /bin/sleep 10
 
         done="0"
