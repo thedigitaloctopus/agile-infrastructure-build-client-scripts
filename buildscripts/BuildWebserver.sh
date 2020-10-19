@@ -363,7 +363,9 @@ do
             pingcount="`/usr/bin/expr ${pingcount} + 1`"
             if ( [ "${pingcount}" = "10" ] )
             then
-                status "I am having trouble pinging your new webserver, maybe check that your security policy allows ping requests"
+                status "I am having trouble pinging your new webserver."
+                status "If you see this message repeatedly, maybe check that your security policy allows ping requests"
+                status "----------------------------------------------------------------------------------------------"
                 pingcount="0"
             fi
         done
