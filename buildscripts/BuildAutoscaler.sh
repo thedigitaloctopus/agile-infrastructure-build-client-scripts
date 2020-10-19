@@ -404,7 +404,8 @@ do
             pingcount="`/usr/bin/expr ${pingcount} + 1`"
             if ( [ "${pingcount}" = "10" ] )
             then
-                status "I am having trouble pinging your new autoscaling server, maybe check that your security policy allows ping requests"
+                status "I am having trouble pinging your new autoscaling server."
+                status "If you see this message repeatedly, maybe check that your security policy allows ping requests"
                 pingcount="0"
             fi
         done
