@@ -32,8 +32,8 @@ Before you run the Agile Deployment Toolkit build scripts, what you need to do, 
 3) Set the size and so on of your database and review all the settings of your database.
 4) Set the username, password and name of your database. Make a note of them as you will need them for the agile deployment script.
 5) Set the availability zone and port of the database (if you forget this, you can modify it post deployment). 
-6) Deploy the database instance, it will take a bit of time.
-7) Grant security access to the security group that our webservers belong to (AgileDeploymentToolkitSecurityGroup)
+6) Grant security access to the security group that our webservers belong to (AgileDeploymentToolkitSecurityGroup) and set a VPC which is accessible by this security group.
+7) Deploy the database instance, it will take a bit of time.
 8) Once the 'endpoint' becomes available, make a note of it, minus the colon and port number at the end of it.
 9) Once the amazon database is all set for you, run the agile deployment toolkit and use the credentials and so on that you have set up as parameters to the script when appropriate.
 
