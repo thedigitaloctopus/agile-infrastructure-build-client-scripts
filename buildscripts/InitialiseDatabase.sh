@@ -127,8 +127,10 @@ then
             read DBaaS_DBNAME
             
             status "############################################################################################################################"
-            status "If your provider assigns security groups to your database, please can you tell us the identifier for the security group your"
-            status "Database is assigned to. For example, on AWS, it is likely to be something like, sg-0fad5hf744c044361 press <enter> for no group"
+            status "If your provider uses security groups, you should check if a security group called AgileDeploymentToolkitSecurityGroup has been created"
+            status "for your account. If it hasn't you should create a security group called precisely AgileDeploymentToolkitSecurityGroup and assign it to your managed database"
+            status "You should then tell us the security group ID here by entering it below. For AWS this will likely have a format something like: sg-0fad5hf744c044361"
+            status "Just press enter with no input if your provider doesn't use security groups"
             status "############################################################################################################################"
             read DBaaS_DBSECURITYGROUP
 
