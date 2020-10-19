@@ -372,6 +372,7 @@ do
             then
                 status "I am having trouble pinging your new database server."
                 status "If you see this message repeatedly, maybe check that your security policy allows ping requests"
+                status "----------------------------------------------------------------------------------------------"
                 pingcount="0"
             fi
         done
