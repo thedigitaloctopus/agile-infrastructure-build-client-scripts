@@ -396,11 +396,17 @@ do
         
         #Wait for the machine to become responsive before we check its integrity
 
-        /usr/bin/ping -c 10 ${ip}
+        pingcount="0"
 
         while ( [ "$?" != "0" ] )
         do
             /usr/bin/ping -c 10 ${ip}
+            pingcount="`/usr/bin/expr ${pingcount} + 1`"
+            if ( [ "${pingcount}" = "10" ] )
+            then
+                status "I am having trouble pinging your new autoscaling server, maybe check that your security policy allows ping requests"
+                pingcount="0"
+            fi
         done
 
         /bin/sleep 10
