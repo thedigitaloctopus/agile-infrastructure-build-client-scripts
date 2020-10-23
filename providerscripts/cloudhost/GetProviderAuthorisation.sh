@@ -57,12 +57,11 @@ then
             /bin/sleep 5
             /usr/local/bin/doctl auth init >&3
         done
-
     else
-        status "`/bin/cat ~/.config/doctl/config.yaml`"
+        status "`/bin/cat ~/.config/doctl/config.yaml | /bin/grep "access-token"`"
         status "############################################"
-        status "Above is your Digital Ocean config"
-        status "Please review and if you want them altered you can manually edit the file at ~/.config/doctl/config.yaml"
+        status "Above is your Digital Ocean access key"
+        status "Please review and if you want it altered you can manually edit the file at ~/.config/doctl/config.yaml"
         status "Press <enter> to continue"
         read x
     fi
