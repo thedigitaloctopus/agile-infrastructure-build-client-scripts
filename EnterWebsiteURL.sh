@@ -37,7 +37,7 @@ status "Enter Website URL:"
 read WEBSITE_URL
 while ( [ "`/bin/echo ${WEBSITE_URL} | /bin/grep -P '(?=^.{5,254}$)(^(?:(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z]{2,})$)'`" = "" ] )
 do
-    /bin/echo "Invalid URL, please try again"
+    status "Invalid URL, please try again"
     read WEBSITE_URL
 done
 
