@@ -25,9 +25,9 @@
 SERVER_TIMEZONE_CONTINENT="UNDEFINED"
 SERVER_TIMEZONE_CITY="UNDEFINED"
 
-pushd .
+dir="`/bin/pwd`"
 timezones="`cd /usr/share/zoneinfo/posix && /usr/bin/find * -type f -or -type l`"
-popd
+cd ${dir}
 
 while ( [ "`/bin/echo ${timezones} | /bin/grep ${SERVER_TIMEZONE_CONTINENT} | /bin/grep ${SERVER_TIMEZONE_CITY}`" = "" ] )
 do
@@ -35,9 +35,10 @@ do
     status "Hi Mate and welcome. First of all let's figure out what timezone you are in"
     status "###########################################################################"
     status "Please type in one of the following to make a selection:"
-    pushd .
+    
     continents="`cd /usr/share/zoneinfo/posix && /usr/bin/find * -type f -or -type l | /usr/bin/sort | /usr/bin/awk -F'/' '{print $1}' | /usr/bin/uniq | /bin/sed ':a;N;$!ba;s/\n/ /g'`"
-    popd
+    cd ${dir}
+    
     continent=""
     /bin/echo ${continents} >&3
     read continent
@@ -54,9 +55,9 @@ do
     status "Press the <enter> key to continue>"
     read response
 
-    pushd .
     cities="`cd /usr/share/zoneinfo/posix && /usr/bin/find * -type f -or -type l | /usr/bin/sort | /usr/bin/awk -F'/' '{print $2}' | /usr/bin/uniq | /bin/sed ':a;N;$!ba;s/\n/ /g'`"
-    popd
+    cd ${dir}
+    
     city=""
     /bin/echo ${cities} >&3
     read city
