@@ -30,6 +30,14 @@
 ###############################################################################################
 #set -x
 
+/bin/echo "##################################################################################################################################"
+/bin/echo "WARNING, THIS SCRIPT WILL MAKE CHANGES AND INSTALL SOFTWWARE ON YOUR MACHINE. YOU SHOULD BE USING A DEDICATED LINUX MACHINE EITHER"
+/bin/echo "RUNNING ON A VPS SYSTEM, OR POSSIBLY OFF A PERSISTENT USB ON YOUR LOCAL MACHINE". 
+/bin/echo "IF YOU CONTINUE, YOU ACKNOWLEDGE THIS....."
+/bin/echo "##################################################################################################################################"
+/bin/echo "PRESS ENTER KEY TO CONTINUE"
+read x
+
 status () {
     /bin/echo "$1" | /usr/bin/tee /dev/fd/3
 }
@@ -60,9 +68,9 @@ fi
 
 UPGRADE_LOG="${BUILD_HOME}/logs/upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
 
-/bin/echo "####################################################################################################"
-/bin/echo "Checking that the build software is up to date on this machine. Please wait ....."
-/bin/echo "####################################################################################################"
+/bin/echo "##############################################################################################################"
+/bin/echo "Checking that the build software is up to date on this machine. Please wait .....This might take a few minutes"
+/bin/echo "##############################################################################################################"
 
 if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubuntu"`" != "" ] )
 then
