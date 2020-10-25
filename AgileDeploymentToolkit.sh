@@ -71,6 +71,7 @@ UPGRADE_LOG="${BUILD_HOME}/logs/upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
 
 /bin/echo "##############################################################################################################"
 /bin/echo "Checking that the build software is up to date on this machine. Please wait .....This might take a few minutes"
+/bin/echo "A log of the process is available at: ${UPGRADE_LOG}"
 /bin/echo "##############################################################################################################"
 
 if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubuntu"`" != "" ] )
