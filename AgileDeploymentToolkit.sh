@@ -128,8 +128,11 @@ fi
 
 if ( [ "${actioned}" = "1" ] )
 then
-    /bin/echo "ssh configuration settings have been updated, please rerun the AgileDeploymentToolkit script so that they are picked up"
-    /bin/echo "NOTE: please make sure that you desktop machine is also configured to not drop SSH connections within a few minutes as this will interupt the build"
+    /bin/echo "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
+    /bin/echo "SSH configuration settings have been updated, please rerun the AgileDeploymentToolkit script so that they are picked up"
+    /bin/echo "NOTE: if this is a VPS machine running remotely to your desktop, please make sure that you desktop machine is also configured to not drop"
+    /bin/echo "SSH connections within a few minutes as this will interrupt the build"
+    /bin/echo "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
     exit
 fi
 
@@ -138,7 +141,7 @@ if ( [ "`/usr/bin/dpkg --print-architecture`" = "i386" ] )
 then
     /bin/echo "############################################################################################################"
     /bin/echo "Darn it. This script requires a 64 bit machine to run on. I have to exit. If you don't have a 64 bit machine"
-    /bin/echo "To build on of your own, you can spin one up in the cloud (ubuntu 18.04 and up) or (debian 9 and up ) and use that as your build machine to deploy from"
+    /bin/echo "To build on of your own, you can spin one up in the cloud (ubuntu 20.04 and up) or (debian 10 and up ) and use that as your build machine to deploy from"
     /bin/echo "############################################################################################################"
     exit
 fi
@@ -161,7 +164,7 @@ then
     /bin/echo "###################################################################################################################################"
     /bin/echo "You need to run this script either directly as root or with the sudo command as it needs to make some installations to your machine"
     /bin/echo "If this is a problem and you don't want stuff installed on your machine, I recommend that you spin up a dedicated build machine"
-    /bin/echo "in the cloud for dedicated use when building/deploying with this toolkit (ubuntu 17.10 or debian 9) are suitable build machines to use"
+    /bin/echo "in the cloud for dedicated use when building/deploying with this toolkit (ubuntu 20.04 or debian 10) are suitable build machines to use"
     /bin/echo "###################################################################################################################################"
     exit
 fi
@@ -186,7 +189,7 @@ if ( [ ! -f ${BUILD_HOME}/runtimedata/INSTALLUSER ] )
 then
     status "##############################################"
     status "It doesn't seem like you have run this before"
-    status "Press enter when you are ready"
+    status "Press <enter> when you are ready"
     status "##############################################"
     read response
     /bin/mkdir -p ${BUILD_HOME}/runtimedata
@@ -199,8 +202,8 @@ fi
 #YOU ARE ENCOURAGED TO SET YOUR OWN PORT FOR YOUR DATABASE. CHECK WITH YOUR DATBASE WHEN IT
 #IS RUNNING AND SELECT A PORT WHICH IS FREE IF YOU ARE USING DBaaS, MAKE SURE THE DATABASE
 #HAS BEEN DEPLOYED WITH THE CORRECT PORT WITH YOUR DB as a Service provider
-status
-status
+status ""
+status ""
 status "###########################################################################################"
 status "By default the port used for the database (if you deploy one) is 2035."
 status "If you would like to use another port, please enter it now. Press <enter> to accept default"
