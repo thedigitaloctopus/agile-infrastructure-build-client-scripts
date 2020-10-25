@@ -341,6 +341,7 @@ status "########################################################################
 
 #Configure the datastore (s3cmd tool)
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
+. ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
 
 #These have to be persisted here for later use (necessary in case we decide to use the .dat file from a previous build, in which case these
 #values may be different to what we have set this time). To see where these are mostly set, look to the end of the Finaliser script in the
@@ -509,7 +510,7 @@ fi
 . ${BUILD_HOME}/buildscripts/InitialiseBuildParams.sh
 . ${BUILD_HOME}/buildscripts/InitialiseDatastore.sh
 . ${BUILD_HOME}/buildscripts/InitialiseBuildChoice.sh
-. ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
+#. ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
 /bin/rm ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/* 2>/dev/null
 
 #Get the ip address of our build machine
