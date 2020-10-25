@@ -132,6 +132,8 @@ read answer
 #source the environment
 . `/bin/pwd`/buildscripts/BuildEnvironment.sh
 
+export BUILD_HOME="`/bin/pwd`"
+
 #Check that you are root and if not make some recommendations
 if ( [ "`/usr/bin/id -u`" != "0" ] )
 then
