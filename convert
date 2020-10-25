@@ -1,4 +1,4 @@
-apt-get install libxml2-utils
+apt-get install libxml2-utils xmllint
 
 
 while read line
