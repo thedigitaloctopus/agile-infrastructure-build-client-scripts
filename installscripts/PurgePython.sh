@@ -27,10 +27,16 @@ fi
 
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
-    /usr/bin/apt-get -q -yy purge python-pkg-resources
+    if ( [ ! -f /usr/bin/python3 ] )
+    then
+        /usr/bin/apt-get -q -yy purge python-pkg-resources
+    fi
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
-    /usr/bin/apt-get -q -yy purge python-pkg-resources
+    if ( [ ! -f /usr/bin/python3 ] )
+    then
+        /usr/bin/apt-get -q -yy purge python-pkg-resources
+    fi
 fi
