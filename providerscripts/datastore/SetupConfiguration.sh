@@ -26,8 +26,8 @@ then
     ${BUILD_HOME}/providerscripts/datastore/InstallDatastoreTools.sh 'S3CMD' ${BUILDOS}
 fi
 
-/usr/bin/s3cmd mb s3://1$$agile
-/usr/bin/s3cmd rb s3://1$$agile
+/usr/bin/s3cmd mb s3://1$$agile 3>&1
+/usr/bin/s3cmd rb s3://1$$agile 3>&1
 
 while ( [ "$?" != "0" ] )
 do
@@ -80,8 +80,8 @@ gpg_decrypt = %(gpg_command)s -d --verbose --no-use-agent --batch --yes --passph
 gpg_encrypt = %(gpg_command)s -c --verbose --no-use-agent --batch --yes --passphrase-fd %(passphrase_fd)s -o %(output_file)s %(input_file)s
 gpg_passphrase = ${encryption_password} " > ~/.s3cfg
 
-    /usr/bin/s3cmd mb s3://1$$agile
-    /usr/bin/s3cmd rb s3://1$$agile
+    /usr/bin/s3cmd mb s3://1$$agile 3>&1
+    /usr/bin/s3cmd rb s3://1$$agile 3>&1
 done
 
 /bin/cp ~/.s3cfg ${BUILD_HOME}/.s3cfg.${CLOUDHOST}    
