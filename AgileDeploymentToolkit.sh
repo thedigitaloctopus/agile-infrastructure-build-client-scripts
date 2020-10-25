@@ -50,7 +50,7 @@ export USER="`/usr/bin/whoami`"
 
 /bin/chmod -R 700 ${BUILD_HOME}/.
 
-if ( [ ! -d ${BUILD_HOME}/log ] )
+if ( [ ! -d ${BUILD_HOME}/logs ] )
 then
     /bin/mkdir -p ${BUILD_HOME}/logs
 fi
