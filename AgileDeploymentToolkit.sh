@@ -68,10 +68,18 @@ if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubunt
 then
     ./installscripts/Update.sh "ubuntu"  >>${UPGRADE_LOG} 2>&1
     ./installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+    #Make Sure python PIP is at the latest version:
+    ./installscripts/PurgePython.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
+    ./installscripts/InstallPythonPIP.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
+    ./installscripts/InstallPythonDateUtil.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
 elif ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Debian"`" != "" ] )
 then
     ./installscripts/Update.sh "debian" >>${UPGRADE_LOG} 2>&1
     ./installscripts/Upgrade.sh "debian" >>${UPGRADE_LOG} 2>&1
+    #Make Sure python PIP is at the latest version:
+    ./installscripts/PurgePython.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ./installscripts/InstallPythonPIP.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ./installscripts/InstallPythonDateUtil.sh "debian" >>${UPGRADE_LOG} 2>&1
 fi
 
 actioned="0"
