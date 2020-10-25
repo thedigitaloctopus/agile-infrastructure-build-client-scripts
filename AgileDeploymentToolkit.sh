@@ -44,18 +44,31 @@ then
     exit
 fi
 
+#Couple of variables for you
+export BUILD_HOME="`/bin/pwd`"
+export USER="`/usr/bin/whoami`"
+
+/bin/chmod -R 700 ${BUILD_HOME}/.
+
+if ( [ ! -d ${BUILD_HOME}/log ] )
+then
+    /bin/mkdir -p ${BUILD_HOME}/logs
+fi
+
+UPGRADE_LOG="upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
+
 /bin/echo "####################################################################################################"
 /bin/echo "Checking that the build software is up to date on this machine. Please wait ....."
 /bin/echo "####################################################################################################"
 
 if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubuntu"`" != "" ] )
 then
-    ./installscripts/Update.sh "ubuntu"
-    ./installscripts/Upgrade.sh "ubuntu"
+    ./installscripts/Update.sh "ubuntu"  2&1>>${UPGRADE_LOG}
+    ./installscripts/Upgrade.sh "ubuntu" 2&1>>${UPGRADE_LOG}
 elif ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Debian"`" != "" ] )
 then
-    ./installscripts/Update.sh "debian"
-    ./installscripts/Upgrade.sh "debian"
+    ./installscripts/Update.sh "debian" 2&1>>${UPGRADE_LOG}
+    ./installscripts/Upgrade.sh "debian" 2&1>>${UPGRADE_LOG}
 fi
 
 actioned="0"
@@ -130,15 +143,6 @@ then
     /bin/echo "in the cloud for dedicated use when building/deploying with this toolkit (ubuntu 17.10 or debian 9) are suitable build machines to use"
     /bin/echo "###################################################################################################################################"
     exit
-fi
-
-#Couple of variables for you
-export BUILD_HOME="`/bin/pwd`"
-export USER="`/usr/bin/whoami`"
-
-if ( [ ! -d ${BUILD_HOME}/log ] )
-then
-    /bin/mkdir -p ${BUILD_HOME}/logs
 fi
 
 exec 3>&1
