@@ -339,6 +339,9 @@ status "########################################################################
 #Ask the user what cloudhost (has to be a supported cloudhost) they want to deploy to this time
 . ${BUILD_HOME}/SelectCloudhost.sh
 
+#Configure the datastore (s3cmd tool)
+. ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
+
 #These have to be persisted here for later use (necessary in case we decide to use the .dat file from a previous build, in which case these
 #values may be different to what we have set this time). To see where these are mostly set, look to the end of the Finaliser script in the
 #buildscripts directory
