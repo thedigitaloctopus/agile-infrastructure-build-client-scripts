@@ -55,7 +55,7 @@ then
     /bin/mkdir -p ${BUILD_HOME}/logs
 fi
 
-UPGRADE_LOG="upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
+UPGRADE_LOG="${BUILD_HOME}/logs/upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
 
 /bin/echo "####################################################################################################"
 /bin/echo "Checking that the build software is up to date on this machine. Please wait ....."
@@ -63,12 +63,12 @@ UPGRADE_LOG="upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
 
 if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubuntu"`" != "" ] )
 then
-    ./installscripts/Update.sh "ubuntu"  2&1>>${UPGRADE_LOG}
-    ./installscripts/Upgrade.sh "ubuntu" 2&1>>${UPGRADE_LOG}
+    ./installscripts/Update.sh "ubuntu"  >>${UPGRADE_LOG} 2>&1
+    ./installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
 elif ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Debian"`" != "" ] )
 then
-    ./installscripts/Update.sh "debian" 2&1>>${UPGRADE_LOG}
-    ./installscripts/Upgrade.sh "debian" 2&1>>${UPGRADE_LOG}
+    ./installscripts/Update.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ./installscripts/Upgrade.sh "debian" >>${UPGRADE_LOG} 2>&1
 fi
 
 actioned="0"
