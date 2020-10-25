@@ -44,6 +44,20 @@ then
     exit
 fi
 
+/bin/echo "####################################################################################################"
+/bin/echo "Checking that the build software is up to date on this machine. Please wait ....."
+/bin/echo "####################################################################################################"
+
+if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubuntu"`" != "" ] )
+then
+    ./installscripts/Update.sh "ubuntu"
+    ./installscripts/Upgrade.sh "ubuntu"
+elif ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Debian"`" != "" ] )
+then
+    ./installscripts/Update.sh "debian"
+    ./installscripts/Upgrade.sh "debian"
+fi
+
 actioned="0"
 if ( [ -f /etc/ssh/ssh_config ] && [ "`/bin/cat /etc/ssh/ssh_config | /bin/grep 'ServerAliveInterval 240'`" = "" ] )
 then
