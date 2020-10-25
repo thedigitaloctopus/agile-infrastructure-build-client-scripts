@@ -27,10 +27,12 @@ fi
 
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
-    /usr/bin/apt-get -qq update
+    /usr/bin/apt install -y -qq apt-utils 2&1>/dev/null
+    /usr/bin/apt-get -qq -y update
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
-    /usr/bin/apt-get -qq update
+    /usr/bin/apt install -y -qq apt-utils 2&1>/dev/null
+    /usr/bin/apt-get -qq -y update
 fi
