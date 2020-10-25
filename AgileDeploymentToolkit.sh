@@ -44,6 +44,9 @@ then
     exit
 fi
 
+#source the environment
+. `/bin/pwd`/buildscripts/BuildEnvironment.sh
+
 #Couple of variables for you
 export BUILD_HOME="`/bin/pwd`"
 export USER="`/usr/bin/whoami`"
@@ -128,11 +131,6 @@ fi
 /bin/echo "#######################################################################################################################"
 /bin/echo "Press <enter> to start"
 read answer
-
-#source the environment
-. `/bin/pwd`/buildscripts/BuildEnvironment.sh
-
-export BUILD_HOME="`/bin/pwd`"
 
 #Check that you are root and if not make some recommendations
 if ( [ "`/usr/bin/id -u`" != "0" ] )
