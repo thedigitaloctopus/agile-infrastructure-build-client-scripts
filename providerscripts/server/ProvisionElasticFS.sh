@@ -71,7 +71,7 @@ then
             EFS_IDENTIFIER="`/bin/echo ${fsprefix} | /bin/sed 's/\./-/g'`-${assettype}"
             EFS_IDENTIFIER="`/bin/echo ${EFS_IDENTIFIER} | /bin/sed 's/\./-/g'`"
 
-            EXISTING=""
+            existing=""
 
             /usr/bin/aws efs create-file-system --creation-token "${EFS_IDENTIFIER}" --region "${aws_region}"
 
@@ -84,19 +84,19 @@ then
                 if ( [ "${answer}" = "Y" ] || [ "${answer}" = "y" ] )
                 then
                     /bin/echo "OK, thanks using existing file system"
-                    EXISTING="1"
+                    existing="1"
                 else
-                    EXISTING="0"    
+                    existing="0"    
                     /usr/bin/aws efs create-file-system --creation-token "${EFS_IDENTIFIER}" --region "${aws_region}"
                 fi
             done
 
-            if ( [ "${EXISTING}" = "" ] )
+            if ( [ "${existing}" = "" ] )
             then
-                EXISTING="0"
+                existing="0"
             fi
         
-            if ( [ "${EXISTING}" = "0" ] )
+            if ( [ "${existing}" = "0" ] )
             then
                 filesystemid="`/usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g' | /bin/grep ${EFS_IDENTIFIER} | /usr/bin/awk '{print $NF}'`"
                 security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
