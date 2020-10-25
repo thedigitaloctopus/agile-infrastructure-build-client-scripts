@@ -32,7 +32,8 @@
 
 /bin/echo "##################################################################################################################################"
 /bin/echo "WARNING, THIS SCRIPT WILL MAKE CHANGES AND INSTALL SOFTWWARE ON YOUR MACHINE. YOU SHOULD BE USING A DEDICATED LINUX MACHINE EITHER"
-/bin/echo "RUNNING ON A VPS SYSTEM, OR POSSIBLY OFF A PERSISTENT USB ON YOUR LOCAL MACHINE". 
+/bin/echo "RUNNING ON A VPS SYSTEM, OR POSSIBLY OFF A PERSISTENT USB ON YOUR LOCAL MACHINE"
+/bin/echo "IF YOU ARE RUNNING THIS ON A LOCAL MACHINE, I RECOMMEND 'MX LINUX' ON A PERSISTENT USB"
 /bin/echo "IF YOU CONTINUE, YOU ACKNOWLEDGE THIS....."
 /bin/echo "##################################################################################################################################"
 /bin/echo "PRESS ENTER KEY TO CONTINUE"
