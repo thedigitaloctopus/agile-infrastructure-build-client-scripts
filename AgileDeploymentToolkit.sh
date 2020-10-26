@@ -50,6 +50,15 @@ exec 1>>${BUILD_HOME}/logs/${OUT_FILE}
 ERR_FILE="build_err-`/bin/date | /bin/sed 's/ //g'`"
 exec 2>>${BUILD_HOME}/logs/${ERR_FILE}
 
+#Check that our current working directory is the same directory as this script
+if ( [ ! -f ./AgileDeploymentToolkit.sh ] )
+then
+    status "####################################################################################################"
+    status "This script is expected to run from the same directory as the AgileDeploymentToolkit.sh script is in"
+    status "####################################################################################################"
+    exit
+fi
+
 status "##################################################################################################################################"
 status "WARNING, THIS SCRIPT WILL MAKE CHANGES AND INSTALL SOFTWWARE ON YOUR MACHINE. YOU SHOULD BE USING A DEDICATED LINUX MACHINE EITHER"
 status "RUNNING ON A VPS SYSTEM, OR POSSIBLY OFF A PERSISTENT USB ON YOUR LOCAL MACHINE"
@@ -61,18 +70,6 @@ status "IF YOU CONTINUE, YOU ACKNOWLEDGE THIS....."
 status "##################################################################################################################################"
 status "PRESS ENTER KEY TO CONTINUE"
 read x
-
-
-
-#Check that our current working directory is the same directory as this script
-
-if ( [ ! -f ./AgileDeploymentToolkit.sh ] )
-then
-    status "####################################################################################################"
-    status "This script is expected to run from the same directory as the AgileDeploymentToolkit.sh script is in"
-    status "####################################################################################################"
-    exit
-fi
 
 #source the environment
 . `/bin/pwd`/buildscripts/BuildEnvironment.sh
