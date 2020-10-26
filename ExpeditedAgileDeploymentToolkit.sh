@@ -35,6 +35,15 @@ status () {
     /bin/echo "$1" | /usr/bin/tee /dev/fd/3
 }
 
+export BUILD_HOME="`/bin/pwd`"
+export USER="`/usr/bin/whoami`"
+/bin/chmod -R 700 ${BUILD_HOME}/.
+
+if ( [ ! -d ${BUILD_HOME}/logs ] )
+then
+    /bin/mkdir -p ${BUILD_HOME}/logs
+fi
+
 exec 3>&1
 OUT_FILE="build_out-`/bin/date | /bin/sed 's/ //g'`"
 exec 1>>${BUILD_HOME}/logs/${OUT_FILE}
@@ -49,15 +58,6 @@ then
     status "This script is expected to run from the same directory as the ExpeditedAgileDeploymentToolkit.sh script is in"
     status "#############################################################################################################"
     exit
-fi
-
-export BUILD_HOME="`/bin/pwd`"
-export USER="`/usr/bin/whoami`"
-/bin/chmod -R 700 ${BUILD_HOME}/.
-
-if ( [ ! -d ${BUILD_HOME}/logs ] )
-then
-    /bin/mkdir -p ${BUILD_HOME}/logs
 fi
 
 status "##################################################################################################################################"
