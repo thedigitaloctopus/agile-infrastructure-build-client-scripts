@@ -66,6 +66,47 @@ status "########################################################################
 status "PRESS ENTER KEY TO CONTINUE"
 read x
 
+actioned="0"
+if ( [ -f /etc/ssh/ssh_config ] && [ "`/bin/cat /etc/ssh/ssh_config | /bin/grep 'ServerAliveInterval 240'`" = "" ] )
+then
+    /bin/echo ""
+    /bin/echo ""
+    /bin/echo "########################################################################################################################"
+    /bin/echo "Updating your client ssh config so that connections don't drop."
+    /bin/echo "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
+    /bin/echo "########################################################################################################################"
+    read response
+    /bin/echo "ServerAliveInterval 240" >> /etc/ssh/ssh_config
+    /bin/echo "ServerAliveCountMax 5" >> /etc/ssh/ssh_config
+    actioned="1"  
+fi
+
+if ( [ -f /etc/ssh/sshd_config ] && [ "`/bin/cat /etc/ssh/sshd_config | /bin/grep 'ClientAliveInterval 60'`" = "" ] )
+then
+    /bin/echo ""
+    /bin/echo ""
+    /bin/echo "########################################################################################################################"
+    /bin/echo "Updating your server ssh config so that connections don't drop from clients to this machine."
+    /bin/echo "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
+    /bin/echo "########################################################################################################################"
+    read response
+    /bin/echo "ClientAliveInterval 60
+TCPKeepAlive yes
+ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
+    /usr/sbin/service sshd restart
+    actioned="1"
+fi
+
+if ( [ "${actioned}" = "1" ] )
+then
+    /bin/echo "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
+    /bin/echo "SSH configuration settings have been updated, please rerun the ExpeditedAgileDeploymentToolkit script so that they are picked up"
+    /bin/echo "NOTE: if this is a VPS machine running remotely to your desktop, please make sure that you desktop machine is also configured to not drop"
+    /bin/echo "SSH connections within a few minutes as this will interrupt the build"
+    /bin/echo "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
+    exit
+fi
+
 status "#########################################################################################################################################################"
 status "This is the Expedited Agile Deployment toolkit. It REQUIRES a configuration template which has ALL the necessary parameters populated within it"
 status "Templates for each cloudhost are stored under ${BUILD_HOME}/templatedconfigurations/<yourcloudhost>/template[n].tmpl"
@@ -74,7 +115,7 @@ status "ALL of the configuration parameters must be sane and correct and without
 status "There's a few ways you can run a build process. You can use the AgileDeploymentToolkit or the ExpeditedAgileDeploymentToolkit. Each are a little different"
 status "To perform a build with this toolkit."
 status "1: You can run the ExpeditedAgileDeploymentToolkit.sh and use one of the predefined configuration templates that we have provided"
-status "   In this case, you will need to modify the following configuration settings within in a copy of the default template:"
+status "   In this case, as a minimum, you will need to modify the following configuration settings to match your own needs within in your copy of the default template:"
 
 
 
@@ -114,47 +155,6 @@ then
     ./installscripts/InstallPythonPIP.sh "debian" >>${UPGRADE_LOG} 2>&1
     ./installscripts/InstallPythonDateUtil.sh "debian" >>${UPGRADE_LOG} 2>&1
     . ${BUILD_HOME}/buildscripts/InitialiseBuild.sh >>${UPGRADE_LOG} 2&1
-fi
-
-actioned="0"
-if ( [ -f /etc/ssh/ssh_config ] && [ "`/bin/cat /etc/ssh/ssh_config | /bin/grep 'ServerAliveInterval 240'`" = "" ] )
-then
-    /bin/echo ""
-    /bin/echo ""
-    /bin/echo "########################################################################################################################"
-    /bin/echo "Updating your client ssh config so that connections don't drop."
-    /bin/echo "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
-    /bin/echo "########################################################################################################################"
-    read response
-    /bin/echo "ServerAliveInterval 240" >> /etc/ssh/ssh_config
-    /bin/echo "ServerAliveCountMax 5" >> /etc/ssh/ssh_config
-    actioned="1"  
-fi
-
-if ( [ -f /etc/ssh/sshd_config ] && [ "`/bin/cat /etc/ssh/sshd_config | /bin/grep 'ClientAliveInterval 60'`" = "" ] )
-then
-    /bin/echo ""
-    /bin/echo ""
-    /bin/echo "########################################################################################################################"
-    /bin/echo "Updating your server ssh config so that connections don't drop from clients to this machine."
-    /bin/echo "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
-    /bin/echo "########################################################################################################################"
-    read response
-    /bin/echo "ClientAliveInterval 60
-TCPKeepAlive yes
-ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
-    /usr/sbin/service sshd restart
-    actioned="1"
-fi
-
-if ( [ "${actioned}" = "1" ] )
-then
-    /bin/echo "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
-    /bin/echo "SSH configuration settings have been updated, please rerun the AgileDeploymentToolkit script so that they are picked up"
-    /bin/echo "NOTE: if this is a VPS machine running remotely to your desktop, please make sure that you desktop machine is also configured to not drop"
-    /bin/echo "SSH connections within a few minutes as this will interrupt the build"
-    /bin/echo "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
-    exit
 fi
 
 #Check that we are 64 bit
@@ -247,6 +247,8 @@ status "########################################################################
 /usr/sbin/ufw default allow outgoing
 /usr/sbin/ufw allow ssh
 /usr/sbin/ufw enable
+
+. ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
 
 if (    [ "`${BUILD_HOME}/providerscripts/server/ListServerIDs.sh "autoscale*" ${CLOUDHOST} 2> /dev/null`" != "" ] )
 then
