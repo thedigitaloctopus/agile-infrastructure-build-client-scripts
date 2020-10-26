@@ -35,6 +35,12 @@ status () {
     /bin/echo "$1" | /usr/bin/tee /dev/fd/3
 }
 
+exec 3>&1
+OUT_FILE="build_out-`/bin/date | /bin/sed 's/ //g'`"
+exec 1>>${BUILD_HOME}/logs/${OUT_FILE}
+ERR_FILE="build_err-`/bin/date | /bin/sed 's/ //g'`"
+exec 2>>${BUILD_HOME}/logs/${ERR_FILE}
+
 #Check that our current working directory is the same directory as this script
 
 if ( [ ! -f ./ExpeditedAgileDeploymentToolkit.sh ] )
@@ -69,12 +75,12 @@ read x
 actioned="0"
 if ( [ -f /etc/ssh/ssh_config ] && [ "`/bin/cat /etc/ssh/ssh_config | /bin/grep 'ServerAliveInterval 240'`" = "" ] )
 then
-    /bin/echo ""
-    /bin/echo ""
-    /bin/echo "########################################################################################################################"
-    /bin/echo "Updating your client ssh config so that connections don't drop."
-    /bin/echo "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
-    /bin/echo "########################################################################################################################"
+    status ""
+    status ""
+    status "########################################################################################################################"
+    status "Updating your client ssh config so that connections don't drop."
+    status "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
+    status "########################################################################################################################"
     read response
     /bin/echo "ServerAliveInterval 240" >> /etc/ssh/ssh_config
     /bin/echo "ServerAliveCountMax 5" >> /etc/ssh/ssh_config
@@ -83,12 +89,12 @@ fi
 
 if ( [ -f /etc/ssh/sshd_config ] && [ "`/bin/cat /etc/ssh/sshd_config | /bin/grep 'ClientAliveInterval 60'`" = "" ] )
 then
-    /bin/echo ""
-    /bin/echo ""
-    /bin/echo "########################################################################################################################"
-    /bin/echo "Updating your server ssh config so that connections don't drop from clients to this machine."
-    /bin/echo "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
-    /bin/echo "########################################################################################################################"
+    status ""
+    status ""
+    status "########################################################################################################################"
+    status "Updating your server ssh config so that connections don't drop from clients to this machine."
+    status "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
+    status "########################################################################################################################"
     read response
     /bin/echo "ClientAliveInterval 60
 TCPKeepAlive yes
@@ -99,11 +105,11 @@ fi
 
 if ( [ "${actioned}" = "1" ] )
 then
-    /bin/echo "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
-    /bin/echo "SSH configuration settings have been updated, please rerun the ExpeditedAgileDeploymentToolkit script so that they are picked up"
-    /bin/echo "NOTE: if this is a VPS machine running remotely to your desktop, please make sure that you desktop machine is also configured to not drop"
-    /bin/echo "SSH connections within a few minutes as this will interrupt the build"
-    /bin/echo "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
+    status "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
+    status "SSH configuration settings have been updated, please rerun the ExpeditedAgileDeploymentToolkit script so that they are picked up"
+    status "NOTE: if this is a VPS machine running remotely to your desktop, please make sure that you desktop machine is also configured to not drop"
+    status "SSH connections within a few minutes as this will interrupt the build"
+    status "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
     exit
 fi
 
@@ -131,10 +137,10 @@ read x
 
 UPGRADE_LOG="${BUILD_HOME}/logs/upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
 
-/bin/echo "##############################################################################################################"
-/bin/echo "Checking that the build software is up to date on this machine. Please wait .....This might take a few minutes"
-/bin/echo "A log of the process is available at: ${UPGRADE_LOG}"
-/bin/echo "##############################################################################################################"
+status "##############################################################################################################"
+status "Checking that the build software is up to date on this machine. Please wait .....This might take a few minutes"
+status "A log of the process is available at: ${UPGRADE_LOG}"
+status "##############################################################################################################"
 
 if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubuntu"`" != "" ] )
 then
@@ -177,33 +183,27 @@ fi
 #Check that we are 64 bit
 if ( [ "`/usr/bin/dpkg --print-architecture`" = "i386" ] )
 then
-    /bin/echo "############################################################################################################"
-    /bin/echo "Darn it. This script requires a 64 bit machine to run on. I have to exit. If you don't have a 64 bit machine"
-    /bin/echo "To build on of your own, you can spin one up in the cloud (ubuntu 20.04 and up) or (debian 10 and up ) and use that as your build machine to deploy from"
-    /bin/echo "############################################################################################################"
+    status "############################################################################################################"
+    status "Darn it. This script requires a 64 bit machine to run on. I have to exit. If you don't have a 64 bit machine"
+    status "To build on of your own, you can spin one up in the cloud (ubuntu 20.04 and up) or (debian 10 and up ) and use that as your build machine to deploy from"
+    status "############################################################################################################"
     exit
 fi
 
 #Check that you are root and if not make some recommendations
 if ( [ "`/usr/bin/id -u`" != "0" ] )
 then
-    /bin/echo
-    /bin/echo
-    /bin/echo "###################################################################################################################################"
-    /bin/echo "You need to run this script either directly as root or with the sudo command as it needs to make some installations to your machine"
-    /bin/echo "If this is a problem and you don't want stuff installed on your machine, I recommend that you spin up a dedicated build machine"
-    /bin/echo "in the cloud for dedicated use when building/deploying with this toolkit (ubuntu 20.04 or debian 10) are suitable build machines to use"
-    /bin/echo "###################################################################################################################################"
+    status ""
+    status ""
+    status "###################################################################################################################################"
+    status "You need to run this script either directly as root or with the sudo command as it needs to make some installations to your machine"
+    status "If this is a problem and you don't want stuff installed on your machine, I recommend that you spin up a dedicated build machine"
+    status "in the cloud for dedicated use when building/deploying with this toolkit (ubuntu 20.04 or debian 10) are suitable build machines to use"
+    status "###################################################################################################################################"
     exit
 fi
 
-exec 3>&1
-OUT_FILE="build_out-`/bin/date | /bin/sed 's/ //g'`"
-exec 1>>${BUILD_HOME}/logs/${OUT_FILE}
-ERR_FILE="build_err-`/bin/date | /bin/sed 's/ //g'`"
-exec 2>>${BUILD_HOME}/logs/${ERR_FILE}
-
-/bin/echo "Most of the messages you will see here are soft errors. All errors are recorded though, should you need to review them" > ${BUILD_HOME}/logs/${ERR_FILE}
+status "Most of the messages you will see here are soft errors. All errors are recorded though, should you need to review them" > ${BUILD_HOME}/logs/${ERR_FILE}
 
 status "#################################################################################################"
 status "If the build process freezes or fails to complete for some reason, please review the error stream"
@@ -264,7 +264,6 @@ status "########################################################################
 /usr/sbin/ufw default allow outgoing
 /usr/sbin/ufw allow ssh
 /usr/sbin/ufw enable
-
 
 . ${BUILD_HOME}/SelectCloudhost.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
