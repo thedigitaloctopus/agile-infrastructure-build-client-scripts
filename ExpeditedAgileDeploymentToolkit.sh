@@ -138,23 +138,40 @@ UPGRADE_LOG="${BUILD_HOME}/logs/upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
 
 if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubuntu"`" != "" ] )
 then
-    ./installscripts/Update.sh "ubuntu"  >>${UPGRADE_LOG} 2>&1
-    ./installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/Update.sh "ubuntu"  >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
     #Make Sure python PIP is at the latest version:
-    ./installscripts/PurgePython.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
-    ./installscripts/InstallPythonPIP.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
-    ./installscripts/InstallPythonDateUtil.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    . ${BUILD_HOME}/buildscripts/InitialiseBuild.sh >>${UPGRADE_LOG} 2&1
-
+    ${BUILD_HOME}/installscripts/PurgePython.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
+    ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
+    ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallCS.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallCurl.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallGo.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallJQ.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallLego.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallRuby.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallSSHPass.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallSudo.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallSysVBanner.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallUFW.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
 elif ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Debian"`" != "" ] )
 then
-    ./installscripts/Update.sh "debian" >>${UPGRADE_LOG} 2>&1
-    ./installscripts/Upgrade.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/Update.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/Upgrade.sh "debian" >>${UPGRADE_LOG} 2>&1
     #Make Sure Python PIP is at the latest version:
-    ./installscripts/PurgePython.sh "debian" >>${UPGRADE_LOG} 2>&1
-    ./installscripts/InstallPythonPIP.sh "debian" >>${UPGRADE_LOG} 2>&1
-    ./installscripts/InstallPythonDateUtil.sh "debian" >>${UPGRADE_LOG} 2>&1
-    . ${BUILD_HOME}/buildscripts/InitialiseBuild.sh >>${UPGRADE_LOG} 2&1
+    ${BUILD_HOME}/installscripts/PurgePython.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallCS.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallCurl.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallGo.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallJQ.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallLego.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallRuby.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallSSHPass.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallSudo.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallSysVBanner.sh "debian" >>${UPGRADE_LOG} 2>&1
+    ${BUILD_HOME}/installscripts/InstallUFW.sh "debian" >>${UPGRADE_LOG} 2>&1
 fi
 
 #Check that we are 64 bit
