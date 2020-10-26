@@ -35,7 +35,6 @@ status () {
 }
 
 #Couple of variables for you
-export BUILD_HOME="`/bin/pwd`"
 export USER="`/usr/bin/whoami`"
 
 /bin/chmod -R 700 ${BUILD_HOME}/.
@@ -77,6 +76,8 @@ fi
 
 #source the environment
 . `/bin/pwd`/buildscripts/BuildEnvironment.sh
+
+export BUILD_HOME="`/bin/pwd`"
 
 UPGRADE_LOG="${BUILD_HOME}/logs/upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
 
