@@ -79,10 +79,10 @@ export BUILD_HOME="`/bin/pwd`"
 
 UPGRADE_LOG="${BUILD_HOME}/logs/upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
 
-status "##############################################################################################################"
-status "Checking that the build software is up to date on this machine. Please wait .....This might take a few minutes"
+status "#################################################################################################################################################"
+status "Checking that the build software is up to date on this machine. Please wait .....This might take a few minutes the first time you run this script"
 status "A log of the process is available at: ${UPGRADE_LOG}"
-status "##############################################################################################################"
+status "#################################################################################################################################################"
 
 if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubuntu"`" != "" ] )
 then
