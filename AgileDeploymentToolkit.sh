@@ -81,6 +81,7 @@ UPGRADE_LOG="${BUILD_HOME}/logs/upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
 
 status "#################################################################################################################################################"
 status "Checking that the build software is up to date on this machine. Please wait .....This might take a few minutes the first time you run this script"
+status "This is best practice to make sure that all the software is at its latest versions prior to the build process"
 status "A log of the process is available at: ${UPGRADE_LOG}"
 status "#################################################################################################################################################"
 
