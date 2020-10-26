@@ -149,29 +149,29 @@ then
     status "Performing software upgrade....."
     ${BUILD_HOME}/installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
     #Make Sure python PIP is at the latest version:
-    status "Installing or upgrading python"
+    status "Updating python"
     ${BUILD_HOME}/installscripts/PurgePython.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
     ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
     ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    status "Installing the CS tool"
+    status "Updating the CS tool"
     ${BUILD_HOME}/installscripts/InstallCS.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    status "Installing curl"
+    status "Updating curl"
     ${BUILD_HOME}/installscripts/InstallCurl.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    status "Installing go"
+    status "Updating go"
     ${BUILD_HOME}/installscripts/InstallGo.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    status "Installing JQ"
+    status "Updating JQ"
     ${BUILD_HOME}/installscripts/InstallJQ.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    status "installing Lego"
+    status "Updating Lego"
     ${BUILD_HOME}/installscripts/InstallLego.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    status "Installing Ruby"
+    status "Updating Ruby"
     ${BUILD_HOME}/installscripts/InstallRuby.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    status "Installing SSHPass"
+    status "Updating SSHPass"
     ${BUILD_HOME}/installscripts/InstallSSHPass.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    status "Installing Sudo"
+    status "Updating Sudo"
     ${BUILD_HOME}/installscripts/InstallSudo.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    status "Installing SysVBanner"
+    status "Updating SysVBanner"
     ${BUILD_HOME}/installscripts/InstallSysVBanner.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    status "Installing UFW"
+    status "Updating UFW"
     ${BUILD_HOME}/installscripts/InstallUFW.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
 elif ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Debian"`" != "" ] )
 then
@@ -180,29 +180,29 @@ then
     status "Performing software upgrade....."
     ${BUILD_HOME}/installscripts/Upgrade.sh "debian" >>${UPGRADE_LOG} 2>&1
     #Make Sure python PIP is at the latest version:
-    status "Installing or upgrading python"
+    status "Updating python"
     ${BUILD_HOME}/installscripts/PurgePython.sh "debian" >>${UPGRADE_LOG} 2>&1 
     ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "debian" >>${UPGRADE_LOG} 2>&1 
     ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "debian" >>${UPGRADE_LOG} 2>&1
-    status "Installing the CS tool"
+    status "Updating the CS tool"
     ${BUILD_HOME}/installscripts/InstallCS.sh "debian" >>${UPGRADE_LOG} 2>&1
-    status "Installing curl"
+    status "Updating curl"
     ${BUILD_HOME}/installscripts/InstallCurl.sh "debian" >>${UPGRADE_LOG} 2>&1
-    status "Installing go"
+    status "Updating go"
     ${BUILD_HOME}/installscripts/InstallGo.sh "debian" >>${UPGRADE_LOG} 2>&1
-    status "Installing JQ"
+    status "Updating JQ"
     ${BUILD_HOME}/installscripts/InstallJQ.sh "debian" >>${UPGRADE_LOG} 2>&1
-    status "installing Lego"
+    status "Updating Lego"
     ${BUILD_HOME}/installscripts/InstallLego.sh "debian" >>${UPGRADE_LOG} 2>&1
-    status "Installing Ruby"
+    status "Updating Ruby"
     ${BUILD_HOME}/installscripts/InstallRuby.sh "debian" >>${UPGRADE_LOG} 2>&1
-    status "Installing SSHPass"
+    status "Updating SSHPass"
     ${BUILD_HOME}/installscripts/InstallSSHPass.sh "debian" >>${UPGRADE_LOG} 2>&1
-    status "Installing Sudo"
+    status "Updating Sudo"
     ${BUILD_HOME}/installscripts/InstallSudo.sh "debian" >>${UPGRADE_LOG} 2>&1
-    status "Installing SysVBanner"
+    status "Updating SysVBanner"
     ${BUILD_HOME}/installscripts/InstallSysVBanner.sh "debian" >>${UPGRADE_LOG} 2>&1
-    status "Installing UFW"
+    status "Updating UFW"
     ${BUILD_HOME}/installscripts/InstallUFW.sh "debian" >>${UPGRADE_LOG} 2>&1
 fi
 
@@ -229,7 +229,7 @@ then
     exit
 fi
 
-status "Most of the messages you will see here are soft errors. All errors are recorded though, should you need to review them" > ${BUILD_HOME}/logs/${ERR_FILE}
+/bin/echo "Most of the messages you will see here are soft errors. All errors are recorded though, should you need to review them" > ${BUILD_HOME}/logs/${ERR_FILE}
 
 status "#################################################################################################"
 status "If the build process freezes or fails to complete for some reason, please review the error stream"
