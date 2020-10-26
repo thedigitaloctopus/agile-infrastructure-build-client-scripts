@@ -248,6 +248,8 @@ status "########################################################################
 /usr/sbin/ufw allow ssh
 /usr/sbin/ufw enable
 
+
+. ${BUILD_HOME}/SelectCloudhost.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
 
 if (    [ "`${BUILD_HOME}/providerscripts/server/ListServerIDs.sh "autoscale*" ${CLOUDHOST} 2> /dev/null`" != "" ] )
