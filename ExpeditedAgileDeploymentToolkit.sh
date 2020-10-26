@@ -110,7 +110,7 @@ fi
 status "#########################################################################################################################################################"
 status "This is the Expedited Agile Deployment toolkit. It REQUIRES a configuration template which has ALL the necessary parameters populated within it"
 status "Templates for each cloudhost are stored under ${BUILD_HOME}/templatedconfigurations/<yourcloudhost>/template[n].tmpl"
-status "You can create a new template for selection by naming it ${BUILD_HOME}/templatedconfigurations/<yourcloudhost>/template[n+1].tmpl
+status "You can create a new template for selection by naming it ${BUILD_HOME}/templatedconfigurations/<yourcloudhost>/template[n+1].tmpl"
 status "ALL of the configuration parameters must be sane and correct and without errors for a build to complete correctly"
 status "There's a few ways you can run a build process. You can use the AgileDeploymentToolkit or the ExpeditedAgileDeploymentToolkit. Each are a little different"
 status "To perform a build with this toolkit."
