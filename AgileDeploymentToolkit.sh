@@ -36,6 +36,7 @@ status () {
 
 #Couple of variables for you
 export USER="`/usr/bin/whoami`"
+export BUILD_HOME="`/bin/pwd`"
 
 /bin/chmod -R 700 ${BUILD_HOME}/.
 
