@@ -111,6 +111,8 @@ ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
     actioned="1"
 fi
 
+. ${BUILD_HOME}/SelectDeploymentOS.sh
+
 if ( [ "${actioned}" = "1" ] )
 then
     status "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
@@ -139,82 +141,86 @@ then
     then
         /bin/rm ${BUILD_HOME}/runtimedata/EXUPDATEDSOFTWARE
     else
-        /bin/touch ${BUILD_HOME}/runtimedata/EXUPDATEDSOFTWARE
-    fi
-fi
+        if ( [ ! -f ${BUILD_HOME}/runtimedata/EXUPDATEDSOFTWARE ] )
+        then
+            UPGRADE_LOG="${BUILD_HOME}/logs/upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
 
-if ( [ ! -f ${BUILD_HOME}/runtimedata/EXUPDATEDSOFTWARE ] )
-then
-    UPGRADE_LOG="${BUILD_HOME}/logs/upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
+            status "##################################################################################################################################################"
+            status "Checking that the build software is up to date on this machine. Please wait .....This might take a few minutes the first time you run this script"
+            status "This is best practice to make sure that all the software is at its latest versions prior to the build process"
+            status "A log of the process is available at: ${UPGRADE_LOG}"
+            status "##################################################################################################################################################"
 
-    status "##################################################################################################################################################"
-    status "Checking that the build software is up to date on this machine. Please wait .....This might take a few minutes the first time you run this script"
-    status "This is best practice to make sure that all the software is at its latest versions prior to the build process"
-    status "A log of the process is available at: ${UPGRADE_LOG}"
-    status "##################################################################################################################################################"
-
-    if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubuntu"`" != "" ] )
-    then
-        status "Performing software update....."
-        ${BUILD_HOME}/installscripts/Update.sh "ubuntu"  >>${UPGRADE_LOG} 2>&1
-        status "Performing software upgrade....."
-        ${BUILD_HOME}/installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-        #Make Sure python PIP is at the latest version:
-        status "Updating python"
-        ${BUILD_HOME}/installscripts/PurgePython.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
-        ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
-        ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-        status "Updating the CS tool"
-        ${BUILD_HOME}/installscripts/InstallCS.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-        status "Updating curl"
-        ${BUILD_HOME}/installscripts/InstallCurl.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-        status "Updating go"
-        ${BUILD_HOME}/installscripts/InstallGo.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-        status "Updating JQ"
-        ${BUILD_HOME}/installscripts/InstallJQ.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-        status "Updating Lego"
-        ${BUILD_HOME}/installscripts/InstallLego.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-        status "Updating Ruby"
-        ${BUILD_HOME}/installscripts/InstallRuby.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-        status "Updating SSHPass"
-        ${BUILD_HOME}/installscripts/InstallSSHPass.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-        status "Updating Sudo"
-        ${BUILD_HOME}/installscripts/InstallSudo.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-        status "Updating SysVBanner"
-        ${BUILD_HOME}/installscripts/InstallSysVBanner.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-        status "Updating UFW"
-        ${BUILD_HOME}/installscripts/InstallUFW.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    elif ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Debian"`" != "" ] )
-    then
-        status "Performing software update....."
-        ${BUILD_HOME}/installscripts/Update.sh "debian"  >>${UPGRADE_LOG} 2>&1
-        status "Performing software upgrade....."
-        ${BUILD_HOME}/installscripts/Upgrade.sh "debian" >>${UPGRADE_LOG} 2>&1
-        #Make Sure python PIP is at the latest version:
-        status "Updating python"
-        ${BUILD_HOME}/installscripts/PurgePython.sh "debian" >>${UPGRADE_LOG} 2>&1 
-        ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "debian" >>${UPGRADE_LOG} 2>&1 
-        ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "debian" >>${UPGRADE_LOG} 2>&1
-        status "Updating the CS tool"
-        ${BUILD_HOME}/installscripts/InstallCS.sh "debian" >>${UPGRADE_LOG} 2>&1
-        status "Updating curl"
-        ${BUILD_HOME}/installscripts/InstallCurl.sh "debian" >>${UPGRADE_LOG} 2>&1
-        status "Updating go"
-        ${BUILD_HOME}/installscripts/InstallGo.sh "debian" >>${UPGRADE_LOG} 2>&1
-        status "Updating JQ"
-        ${BUILD_HOME}/installscripts/InstallJQ.sh "debian" >>${UPGRADE_LOG} 2>&1
-        status "Updating Lego"
-        ${BUILD_HOME}/installscripts/InstallLego.sh "debian" >>${UPGRADE_LOG} 2>&1
-        status "Updating Ruby"
-        ${BUILD_HOME}/installscripts/InstallRuby.sh "debian" >>${UPGRADE_LOG} 2>&1
-        status "Updating SSHPass"
-        ${BUILD_HOME}/installscripts/InstallSSHPass.sh "debian" >>${UPGRADE_LOG} 2>&1
-        status "Updating Sudo"
-        ${BUILD_HOME}/installscripts/InstallSudo.sh "debian" >>${UPGRADE_LOG} 2>&1
-        status "Updating SysVBanner"
-        ${BUILD_HOME}/installscripts/InstallSysVBanner.sh "debian" >>${UPGRADE_LOG} 2>&1
-        status "Updating UFW"
-        ${BUILD_HOME}/installscripts/InstallUFW.sh "debian" >>${UPGRADE_LOG} 2>&1
+            if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubuntu"`" != "" ] )
+            then
+                status "Performing software update....."
+                ${BUILD_HOME}/installscripts/Update.sh "ubuntu"  >>${UPGRADE_LOG} 2>&1
+                status "Performing software upgrade....."
+                ${BUILD_HOME}/installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                #Make Sure python PIP is at the latest version:
+                status "Updating python"
+                ${BUILD_HOME}/installscripts/PurgePython.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
+                ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
+                ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                status "Updating the CS tool"
+                ${BUILD_HOME}/installscripts/InstallCS.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                status "Updating curl"
+                ${BUILD_HOME}/installscripts/InstallCurl.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                status "Updating go"
+                ${BUILD_HOME}/installscripts/InstallGo.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                status "Updating JQ"
+                ${BUILD_HOME}/installscripts/InstallJQ.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                status "Updating Lego"
+                ${BUILD_HOME}/installscripts/InstallLego.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                status "Updating Ruby"
+                ${BUILD_HOME}/installscripts/InstallRuby.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                status "Updating SSHPass"
+                ${BUILD_HOME}/installscripts/InstallSSHPass.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                status "Updating Sudo"
+                ${BUILD_HOME}/installscripts/InstallSudo.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                status "Updating SysVBanner"
+                ${BUILD_HOME}/installscripts/InstallSysVBanner.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                status "Updating UFW"
+                ${BUILD_HOME}/installscripts/InstallUFW.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                status "Updating Datastore tools"
+                ${BUILD_HOME}/providerscripts/datastore/InstallDatastoreTools.sh 'S3CMD' "ubuntu"
+                /bin/touch ${BUILD_HOME}/runtimedata/EXUPDATEDSOFTWARE
+            elif ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Debian"`" != "" ] )
+            then
+                status "Performing software update....."
+                ${BUILD_HOME}/installscripts/Update.sh "debian"  >>${UPGRADE_LOG} 2>&1
+                status "Performing software upgrade....."
+                ${BUILD_HOME}/installscripts/Upgrade.sh "debian" >>${UPGRADE_LOG} 2>&1
+                #Make Sure python PIP is at the latest version:
+                status "Updating python"
+                ${BUILD_HOME}/installscripts/PurgePython.sh "debian" >>${UPGRADE_LOG} 2>&1 
+                ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "debian" >>${UPGRADE_LOG} 2>&1 
+                ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "debian" >>${UPGRADE_LOG} 2>&1
+                status "Updating the CS tool"
+                ${BUILD_HOME}/installscripts/InstallCS.sh "debian" >>${UPGRADE_LOG} 2>&1
+                status "Updating curl"
+                ${BUILD_HOME}/installscripts/InstallCurl.sh "debian" >>${UPGRADE_LOG} 2>&1
+                status "Updating go"
+                ${BUILD_HOME}/installscripts/InstallGo.sh "debian" >>${UPGRADE_LOG} 2>&1
+                status "Updating JQ"
+                ${BUILD_HOME}/installscripts/InstallJQ.sh "debian" >>${UPGRADE_LOG} 2>&1
+                status "Updating Lego"
+                ${BUILD_HOME}/installscripts/InstallLego.sh "debian" >>${UPGRADE_LOG} 2>&1
+                status "Updating Ruby"
+                ${BUILD_HOME}/installscripts/InstallRuby.sh "debian" >>${UPGRADE_LOG} 2>&1
+                status "Updating SSHPass"
+                ${BUILD_HOME}/installscripts/InstallSSHPass.sh "debian" >>${UPGRADE_LOG} 2>&1
+                status "Updating Sudo"
+                ${BUILD_HOME}/installscripts/InstallSudo.sh "debian" >>${UPGRADE_LOG} 2>&1
+                status "Updating SysVBanner"
+                ${BUILD_HOME}/installscripts/InstallSysVBanner.sh "debian" >>${UPGRADE_LOG} 2>&1
+                status "Updating UFW"
+                ${BUILD_HOME}/installscripts/InstallUFW.sh "debian" >>${UPGRADE_LOG} 2>&1 
+                status "Updating Datastore tools"
+                ${BUILD_HOME}/providerscripts/datastore/InstallDatastoreTools.sh 'S3CMD' "debian" >>${UPGRADE_LOG} 2>&1 
+                /bin/touch ${BUILD_HOME}/runtimedata/EXUPDATEDSOFTWARE
+            fi
+       fi
     fi
 fi
 
@@ -254,6 +260,7 @@ do
             case  ${response}  in
                 1)       
                     CLOUDHOST="digitalocean"
+		    ${BUILD_HOME}/installscripts/InstallDoctl.sh ${BUILDOS}
                     ;;
                 2)
                     CLOUDHOST="exoscale"
@@ -373,9 +380,6 @@ do
 done
 
 BUILD_IDENTIFIER="`/bin/echo ${BUILD_IDENTIFIER} | /usr/bin/tr '[:upper:]' '[:lower:]' | /bin/sed 's/-//g'`"
-
-. ${BUILD_HOME}/SelectDeploymentOS.sh
-
 
 #. ${BUILD_HOME}/SelectCloudhost.sh
 #. ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
