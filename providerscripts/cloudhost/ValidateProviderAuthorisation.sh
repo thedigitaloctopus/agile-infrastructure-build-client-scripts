@@ -38,7 +38,7 @@ then
         then
            status "TOKEN mismatch detected"
            status "The token in your digital ocean configuration file is: ${access_token}"
-           status "And, the access token you are provinding from your chosen template is: ${TOKEN}"
+           status "And, the access token you are providing from your chosen template is: ${TOKEN}"
            status "Enter Y or y to update your live configuration with your the token from your template"
            read response
            if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
@@ -54,36 +54,25 @@ fi
 
 if ( [ "${cloudhost}" = "exoscale" ] )
 then
-    /usr/local/bin/cs listVirtualMachines 2>/dev/null
 
-    while ( [ "$?" != "0" ] || ( [ ! -f ${BUILD_HOME}/runtimedata/${cloudhost}/ACCESS_KEY ] || [ ! -f ${BUILD_HOME}/runtimedata/${cloudhost}/SECRET_KEY ] ) )
-    do
-        /bin/rm -r ${BUILD_HOME}/runtimedata/${cloudhost}
-        /bin/mkdir ${BUILD_HOME}/runtimedata/${cloudhost}
-        /bin/rm ${BUILD_HOME}/runtimedata/${cloudhost}/ACCESS_KEY 2>/dev/null
-        /bin/rm ${BUILD_HOME}/runtimedata/${cloudhost}/SECRET_KEY 2>/dev/null
-        /bin/rm ${HOME}/.cloudstack.ini 2>/dev/null
-        status "Couldn't find valid authentication keys for Exoscale"
-        status ""
-        status "Welcome to the Exoscale build process using the Agile Deployment Toolkit"
-        status ""
-        status "You will need to set yourself up a Exoscale account (www.exoscale.ch) and obtain an Access Key and a Secret Key"
-        status ""
-        status "Please sign in to your exoscale account. Click on your email address at the top right, then click on Account Details"
-        status "Following that, you should see your Access Key and you Secret Key under \"API Keys\""
-        status ""
-        status "Copy them to your clipboard"
+    if ( [ -f ${HOME}/.cloudstack.ini ] )
+    then
+        access_key="`/bin/cat ${HOME}/.cloudstack.ini | /bin/grep "^key" | /usr/bin/awk '{print $NF}'`"
+        secret_key="`/bin/cat ${HOME}/.cloudstack.ini | /bin/grep "^secret" | /usr/bin/awk '{print $NF}'`"
 
-        answer="N"
-        while ( [ "${answer}" != "Y" ] )
-        do
-            status "Please enter your access key:"
-            read ACCESS_KEY
-            status "Please enter your Secret Key:"
-            read SECRET_KEY
-            status "Your exoscale access key is set to: ${ACCESS_KEY} and the secret key is set to ${SECRET_KEY} are you very sure that this is correct (Y or N)"
-            read answer
-        done
+	if ( [ "${access_key}" != "${ACCESS_KEY}" ] || [ "${secret_key}" != "${SECRET_KEY}" ] )
+	then
+            status "KEYS MISMATCH DETECTED"
+	    status "The keys in your exoscale configuration file are: ${access_key} and ${secret_key}"
+	    status "And, the access keys you are providing from your chosen template are: ${ACCESS_KEY} and ${SECRET_KEY}"
+            status "Enter Y or y to update your live configuration with your the token from your template"
+            read response
+            if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
+            then
+               /bin/sed -i "/^key/c key = ${ACCESS_KEY}" ${HOME}/.cloudstack.ini
+               /bin/sed -i "/^secret/c secret = ${SECRET_KEY}" ${HOME}/.cloudstack.ini
+            fi
+	fi
 
         /bin/mkdir -p ${BUILD_HOME}/runtimedata/${cloudhost}
 
@@ -95,8 +84,7 @@ key = ${ACCESS_KEY}
 secret = ${SECRET_KEY}" > ${HOME}/.cloudstack.ini
         /bin/chown ${USER} ${HOME}/.cloudstack.ini
         /bin/chmod 400 ${HOME}/.cloudstack.ini
-        /usr/local/bin/cs listVirtualMachines
-    done
+    fi
 fi
 if ( [ "${cloudhost}" = "linode" ] )
 then
@@ -161,4 +149,5 @@ then
         read x
     fi
 fi
+
 
