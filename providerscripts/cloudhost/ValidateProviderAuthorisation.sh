@@ -52,28 +52,34 @@ then
     /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN
 fi
 
-if ( [ "${cloudhost}" = "exoscale" ] )
+if ( [ "${CLOUDHOST}" = "exoscale" ] )
 then
 
     if ( [ -f ${HOME}/.cloudstack.ini ] )
     then
         access_key="`/bin/cat ${HOME}/.cloudstack.ini | /bin/grep "^key" | /usr/bin/awk '{print $NF}'`"
         secret_key="`/bin/cat ${HOME}/.cloudstack.ini | /bin/grep "^secret" | /usr/bin/awk '{print $NF}'`"
+    else 
+        access_key=""
+        secret_key="" 
+    fi
 
-	if ( [ "${access_key}" != "${ACCESS_KEY}" ] || [ "${secret_key}" != "${SECRET_KEY}" ] )
-	then
-            status "KEYS MISMATCH DETECTED"
-	    status "The keys in your exoscale configuration file are: ${access_key} and ${secret_key}"
-	    status "And, the access keys you are providing from your chosen template are: ${ACCESS_KEY} and ${SECRET_KEY}"
-            status "Enter Y or y to update your live configuration with your the token from your template"
-            read response
-            if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
-            then
-               /bin/sed -i "/^key/c key = ${ACCESS_KEY}" ${HOME}/.cloudstack.ini
-               /bin/sed -i "/^secret/c secret = ${SECRET_KEY}" ${HOME}/.cloudstack.ini
-            fi
-	fi
+    if ( ( [ "${access_key}" != "" ] && [ "${secret_key}" != "" ] ) && ( [ "${access_key}" != "${ACCESS_KEY}" ] || [ "${secret_key}" != "${SECRET_KEY}" ] ) )
+    then
+        status "KEYS MISMATCH DETECTED"
+        status "The keys in your exoscale configuration file are: ${access_key} and ${secret_key}"
+        status "And, the access keys you are providing from your chosen template are: ${ACCESS_KEY} and ${SECRET_KEY}"
+        status "Enter Y or y to update your live configuration with your the token from your template"
+        read response
+        if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
+        then
+           /bin/sed -i "/^key/c key = ${ACCESS_KEY}" ${HOME}/.cloudstack.ini
+           /bin/sed -i "/^secret/c secret = ${SECRET_KEY}" ${HOME}/.cloudstack.ini
+        fi
+    fi
 
+    if ( [ "${access_key}" != "" ] && [ "${secret_key}" != "" ] )
+    then
         /bin/mkdir -p ${BUILD_HOME}/runtimedata/${cloudhost}
 
         /bin/echo "${ACCESS_KEY}" > ${BUILD_HOME}/runtimedata/${cloudhost}/ACCESS_KEY
@@ -86,7 +92,8 @@ secret = ${SECRET_KEY}" > ${HOME}/.cloudstack.ini
         /bin/chmod 400 ${HOME}/.cloudstack.ini
     fi
 fi
-if ( [ "${cloudhost}" = "linode" ] )
+
+if ( [ "${CLOUDHOST}" = "linode" ] )
 then
     if ( [ ! -f ${HOME}/.config/linode-cli ] )
     then
@@ -100,7 +107,7 @@ then
     /bin/chown ${USER} ${HOME}/.config/linode-cli
     /bin/chmod 400 ${HOME}/.config/linode-cli
 fi
-if ( [ "${cloudhost}" = "vultr" ] )
+if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
     while ( [ "`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`" = "" ] )
     do
@@ -126,7 +133,7 @@ then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
 fi
 
-if ( [ "${cloudhost}" = "aws" ] )
+if ( [ "${CLOUDHOST}" = "aws" ] )
 then
     if ( [ ! -f ${HOME}/.aws/config ] && [ ! -f ${HOME}/.aws/credentials ] )
     then
