@@ -85,28 +85,49 @@ status "This is best practice to make sure that all the software is at its lates
 status "A log of the process is available at: ${UPGRADE_LOG}"
 status "#################################################################################################################################################"
 
-if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubuntu"`" != "" ] )
+if ( [ ! -f ${BUILD_HOME}/runtimedata/AGUPDATEDSOFTWARE ] )
 then
-    status "Performing software update....."
-    ${BUILD_HOME}/installscripts/Update.sh "ubuntu"  >>${UPGRADE_LOG} 2>&1
-    status "Performing software upgrade....."
-    ${BUILD_HOME}/installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-    #Make Sure python PIP is at the latest version:
-    status "Updating Python....."
-    ${BUILD_HOME}/installscripts/PurgePython.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
-    ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
-    ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-elif ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Debian"`" != "" ] )
-then
-    status "Performing software update....."
-    ${BUILD_HOME}/installscripts/Update.sh "debian" >>${UPGRADE_LOG} 2>&1
-    status "Performing software upgrade....."
-    ${BUILD_HOME}/installscripts/Upgrade.sh "debian" >>${UPGRADE_LOG} 2>&1
-    #Make Sure python PIP is at the latest version:
-    status "Updating Python....."
-    ${BUILD_HOME}/installscripts/PurgePython.sh "debian" >>${UPGRADE_LOG} 2>&1
-    ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "debian" >>${UPGRADE_LOG} 2>&1
-    ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "debian" >>${UPGRADE_LOG} 2>&1
+    if ( "`/usr/bin/find "${BUILD_HOME}/runtimedata/AGUPDATEDSOFTWARE" -mtime +10 -print 2>/dev/null`" = "" ] )
+    then
+        /bin/rm ${BUILD_HOME}/runtimedata/AGUPDATEDSOFTWARE
+    else
+        if ( [ ! -f ${BUILD_HOME}/runtimedata/AGUPDATEDSOFTWARE ] )
+        then
+            UPGRADE_LOG="${BUILD_HOME}/logs/upgrade_out-`/bin/date | /bin/sed 's/ //g'`"
+
+            status "##################################################################################################################################################"
+            status "Checking that the build software is up to date on this machine. Please wait .....This might take a few minutes the first time you run this script"
+            status "This is best practice to make sure that all the software is at its latest versions prior to the build process"
+            status "A log of the process is available at: ${UPGRADE_LOG}"
+            status "##################################################################################################################################################"
+
+            if ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Ubuntu"`" != "" ] )
+            then
+                status "Performing software update....."
+                ${BUILD_HOME}/installscripts/Update.sh "ubuntu"  >>${UPGRADE_LOG} 2>&1
+                status "Performing software upgrade....."
+                ${BUILD_HOME}/installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                #Make Sure python PIP is at the latest version:
+                status "Updating Python....."
+                ${BUILD_HOME}/installscripts/PurgePython.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
+                ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
+                ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                /bin/touch ${BUILD_HOME}/runtimedata/AGUPDATEDSOFTWARE
+            elif ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Debian"`" != "" ] )
+            then
+                status "Performing software update....."
+                ${BUILD_HOME}/installscripts/Update.sh "debian" >>${UPGRADE_LOG} 2>&1
+                status "Performing software upgrade....."
+                ${BUILD_HOME}/installscripts/Upgrade.sh "debian" >>${UPGRADE_LOG} 2>&1
+                #Make Sure python PIP is at the latest version:
+                status "Updating Python....."
+                ${BUILD_HOME}/installscripts/PurgePython.sh "debian" >>${UPGRADE_LOG} 2>&1
+                ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "debian" >>${UPGRADE_LOG} 2>&1
+                ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "debian" >>${UPGRADE_LOG} 2>&1
+                /bin/touch ${BUILD_HOME}/runtimedata/AGUPDATEDSOFTWARE
+            fi
+       fi
+    fi
 fi
 
 actioned="0"
