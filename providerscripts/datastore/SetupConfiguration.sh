@@ -31,7 +31,7 @@ fi
 
 while ( [ "$?" != "0" ] )
 do
-    if ( [ "${S3_ACCESS_KEY}" = "" ] || [ "${S3_SECRET_KEY}" = "" ] || [ "${S3_HOST_BASE}" = "" ] || [ "${S3_LOCATION}" ] )
+    if ( [ "${S3_ACCESS_KEY}" = "" ] || [ "${S3_SECRET_KEY}" = "" ] || [ "${S3_HOST_BASE}" = "" ] || [ "${S3_LOCATION}" = "" ] )
     then
         status "Your Datastore configuration is not set up correctly, please take a moment to configure it"
     
