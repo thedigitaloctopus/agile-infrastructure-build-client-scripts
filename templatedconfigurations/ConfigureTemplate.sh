@@ -32,6 +32,12 @@ do
 done
 
 status "#############AVAILABLE TEMPLATES#####################"
+if ( [ "${numberoftemplates}" = "0" ] )
+then
+    status "There are no templates available, cannot build using this method, please use the ${BUILD_HOME}/AgileDeploymentToolkit.sh method to build for this cloudhost"
+    status "Terminating this attempt...."
+    exit
+fi
 status "Please enter a template number between 1 and ${numberoftemplates} to select the template that you want to use for the build process"
 read response
 wrong="1"
