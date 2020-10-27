@@ -31,6 +31,7 @@ fi
 
 while ( [ "$?" != "0" ] )
 do
+    status "Configuring your datastore... if you see this message repeatedly, there is something wrong, possibly check your template"
     if ( [ "${S3_ACCESS_KEY}" = "" ] || [ "${S3_SECRET_KEY}" = "" ] || [ "${S3_HOST_BASE}" = "" ] || [ "${S3_LOCATION}" = "" ] )
     then
         status "Your Datastore configuration is not set up correctly, please take a moment to configure it"
@@ -70,14 +71,17 @@ do
         read S3_LOCATION
     fi
 
-    /usr/bin/s3cmd --configure --access_key=${S3_ACCESS_KEY} --secret_key=${S3_SECRET_KEY} --dump-config 2>&1 | tee /root/.s3cfg
+    /usr/bin/s3cmd --configure --access_key=${S3_ACCESS_KEY} --secret_key=${S3_SECRET_KEY} --dump-config 2>&1 | /usr/bin/tee /root/.s3cfg
 
     /bin/sed -i "/host_base/c\host_base = ${S3_HOST_BASE}" /root/.s3cfg
     /bin/sed -i "/host_bucket/c\host_bucket = %(bucket)s.${S3_HOST_BASE}" /root/.s3cfg
     /bin/sed -i "/bucket_location/c\bucket_location = ${S3_LOCATION}" /root/.s3cfg
+
+    /bin/sleep 5
 
     /usr/bin/s3cmd mb s3://1$$agile 3>&1
     /usr/bin/s3cmd rb s3://1$$agile 3>&1
 done
 
 /bin/cp ~/.s3cfg ${BUILD_HOME}/.s3cfg.${CLOUDHOST}
+
