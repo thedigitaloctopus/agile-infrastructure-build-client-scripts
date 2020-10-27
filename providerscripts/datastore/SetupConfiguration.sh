@@ -31,57 +31,60 @@ fi
 
 while ( [ "$?" != "0" ] )
 do
-    status "Your Datastore configuration is not set up correctly, please take a moment to configure it"
+    if ( [ "${S3_ACCESS_KEY}" = "" ] || [ "${S3_SECRET_KEY}" = "" ] || [ "${S3_HOST_BASE}" = "" ] || [ "${S3_ENCRYPTION_PASSWORD}" = "" ] )
+    then
+        status "Your Datastore configuration is not set up correctly, please take a moment to configure it"
     
-    status ""
-    status "I want to setup your S3 datastore. For this to be possible, I will need a few pieces of information from you"
-    status "###################################################################################################################################"
-    status "Please tell me the access key for your S3 datastore service provider"
-    status "You can create these keys via the GUI system of your cloudhost according to their documentation"
-    status "The keys or personal access tokens you create should follow the principle of least privilege meaning that you only grant the power to modify the Object Store"
-    status "to these keys and not other capabilities as well"
-    status "###################################################################################################################################"
-    status "Please enter your access key"
-    read access_key
+        status ""
+        status "I want to setup your S3 datastore. For this to be possible, I will need a few pieces of information from you"
+        status "###################################################################################################################################"
+        status "Please tell me the access key for your S3 datastore service provider"
+        status "You can create these keys via the GUI system of your cloudhost according to their documentation"
+        status "The keys or personal access tokens you create should follow the principle of least privilege meaning that you only grant the power to modify the Object Store"
+        status "to these keys and not other capabilities as well"
+        status "###################################################################################################################################"
+        status "Please enter your access key"
+        read S3_ACCESS_KEY
 
-    status ""
-    status "Please also tell me the secret key for your S3 datastore service provider"
-    read secret_key
+        status ""
+        status "Please also tell me the secret key for your S3 datastore service provider"
+        read S3_SECRET_KEY
 
-    status ""
+        status ""
 
-    status "We need to set up a hostbase value"
-    status "###################################################################################################################################"
-    status "Some example hostbases for different providers are:"
-    status "Digital Ocean: ams3.digitaloceanspaces.com"
-    status "Exoscale:"
-    status "Linode:"
-    status "Vultr:"
-    status "Amazon:"
-    status "The hostbase you provide here should be of a similar format based on the provider you are using for your S3 compatible object store"
-    status "###################################################################################################################################"
-    status "Please tell me the hostbase for your S3 datastore service provider"
-    read host_base
+        status "We need to set up a hostbase value"
+        status "###################################################################################################################################"
+        status "Some example hostbases for different providers are:"
+        status "Digital Ocean: ams3.digitaloceanspaces.com"
+        status "Exoscale:"
+        status "Linode:"
+        status "Vultr:"
+        status "Amazon:"
+        status "The hostbase you provide here should be of a similar format based on the provider you are using for your S3 compatible object store"
+        status "###################################################################################################################################"
+        status "Please tell me the hostbase for your S3 datastore service provider"
+        read S3_HOST_BASE
 
-    status ""
-    status "Please enter a password for in transit encryption to your datastore (make a note of it or look in ~/.s3cfg if you need a reminder"
-    read encryption_password 
+        status ""
+        status "Please enter a password for in transit encryption to your datastore (make a note of it or look in ~/.s3cfg if you need a reminder"
+        read S3_ENCRYPTION_PASSWORD
+    fi
 
     /bin/echo "[default]
-access_key = ${access_key}
+access_key = ${S3_ACCESS_KEY}
 bucket_location = US
-host_base = ${host_base}
-host_bucket = %(bucket)s.${host_base}
-secret_key = ${secret_key}
+host_base = ${S3_HOST_BASE}
+host_bucket = %(bucket)s.${S3_HOST_BASE}
+secret_key = ${S3_SECRET_KEY}
 check_ssl_certificate = True
 check_ssl_hostname = True
 gpg_command = /usr/bin/gpg
 gpg_decrypt = %(gpg_command)s -d --verbose --no-use-agent --batch --yes --passphrase-fd %(passphrase_fd)s -o %(output_file)s %(input_file)s
 gpg_encrypt = %(gpg_command)s -c --verbose --no-use-agent --batch --yes --passphrase-fd %(passphrase_fd)s -o %(output_file)s %(input_file)s
-gpg_passphrase = ${encryption_password} " > ~/.s3cfg
+gpg_passphrase = ${S3_ENCRYPTION_PASSWORD} " > ~/.s3cfg
 
     /usr/bin/s3cmd mb s3://1$$agile 3>&1
     /usr/bin/s3cmd rb s3://1$$agile 3>&1
 done
 
-/bin/cp ~/.s3cfg ${BUILD_HOME}/.s3cfg.${CLOUDHOST}    
+/bin/cp ~/.s3cfg ${BUILD_HOME}/.s3cfg.${CLOUDHOST}  
