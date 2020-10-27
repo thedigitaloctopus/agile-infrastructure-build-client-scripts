@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -x
+#set -x
 
 
 status ""
@@ -85,13 +85,13 @@ templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLO
 #/bin/sed -i '/TOKEN=/d' ${templatefile}
 #/bin/echo "export TOKEN=\"${token}\"" >> ${templatefile}
 
-PUBLIC_KEY_NAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYNAME`"
-/bin/sed -i '/PUBLIC_KEY_NAME=/d' ${templatefile}
-/bin/echo "export PUBLIC_KEY_NAME=\"${PUBLIC_KEY_NAME}\"" >> ${templatefile}
-
-PUBLIC_KEY_ID="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYID`"
-/bin/sed -i '/PUBLIC_KEY_ID=/d' ${templatefile}
-/bin/echo "export PUBLIC_KEY_ID=\"${PUBLIC_KEY_ID}\"" >> ${templatefile}
+#PUBLIC_KEY_NAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYNAME`"
+#/bin/sed -i '/PUBLIC_KEY_NAME=/d' ${templatefile}
+#/bin/echo "export PUBLIC_KEY_NAME=\"${PUBLIC_KEY_NAME}\"" >> ${templatefile}
+#
+#PUBLIC_KEY_ID="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYID`"
+#/bin/sed -i '/PUBLIC_KEY_ID=/d' ${templatefile}
+#/bin/echo "export PUBLIC_KEY_ID=\"${PUBLIC_KEY_ID}\"" >> ${templatefile}
 
 
 #load the environment from the template file
@@ -101,3 +101,4 @@ PUBLIC_KEY_ID="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_I
 /bin/cp ${templatefile} ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
+
