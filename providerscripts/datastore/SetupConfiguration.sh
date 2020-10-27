@@ -31,7 +31,7 @@ fi
 
 while ( [ "$?" != "0" ] )
 do
-    if ( [ "${S3_ACCESS_KEY}" = "" ] || [ "${S3_SECRET_KEY}" = "" ] || [ "${S3_HOST_BASE}" = "" ] || [ "${S3_LOCATION}" = "" ] )
+    if ( [ "${S3_ACCESS_KEY}" = "" ] || [ "${S3_SECRET_KEY}" = "" ] || [ "${S3_HOST_BASE}" = "" ] || [ "${S3_LOCATION}" ] )
     then
         status "Your Datastore configuration is not set up correctly, please take a moment to configure it"
     
@@ -66,8 +66,8 @@ do
         read S3_HOST_BASE
 
         status ""
-        status "Please enter a password for in transit encryption to your datastore (make a note of it or look in ~/.s3cfg if you need a reminder"
-        read S3_ENCRYPTION_PASSWORD
+        status "If necessary, please enter a location for your S3 bucket"
+        read S3_LOCATION
     fi
 
     /usr/bin/s3cmd --configure --access_key=${S3_ACCESS_KEY} --secret_key=${S3_SECRET_KEY} --dump-config 2>&1 | tee /root/.s3cfg
@@ -75,8 +75,7 @@ do
     /bin/sed -i "/host_base/c\host_base = ${S3_HOST_BASE}" /root/.s3cfg
     /bin/sed -i "/host_bucket/c\host_bucket = %(bucket)s.${S3_HOST_BASE}" /root/.s3cfg
     /bin/sed -i "/bucket_location/c\bucket_location = ${S3_LOCATION}" /root/.s3cfg
-    /bin/sed -i "/gpg_command/c\gpg_command = /usr/bin/gpg" /root/.s3cfg
-    
+
     /usr/bin/s3cmd mb s3://1$$agile 3>&1
     /usr/bin/s3cmd rb s3://1$$agile 3>&1
 done
