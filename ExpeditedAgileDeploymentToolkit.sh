@@ -5,19 +5,25 @@
 # Author Peter Winter
 # Date 22/9/2020
 ##############################################################################################
-#This is the Expedited Agile Deployment toolkit. It REQUIRES a configuration template which has ALL the necessary parameters populated within it
-#Templates for each cloudhost are stored under ${BUILD_HOME}/templatedconfigurations/<yourcloudhost>/template[n].tmpl
-#You can create a new template for selection by naming it ${BUILD_HOME}/templatedconfigurations/<yourcloudhost>/template[n+1].tmpl
+#This is the Expedited Agile Deployment toolkit. It REQUIRES a configuration template which has ALL 
+#the necessary parameters populated within it templates for each cloudhost are stored under 
+#${BUILD_HOME}/templatedconfigurations/<yourcloudhost>/<yourcloudhost>[n].tmpl
+#You can create a new template for selection by naming it 
+#${BUILD_HOME}/templatedconfigurations/<yourcloudhost>/<yourcloudhost>[n+1].tmpl
 #ALL of the configuration parameters must be sane and correct and without errors for a build to complete correctly
-#There's a few ways you can run a build process. You can use the AgileDeploymentToolkit or the ExpeditedAgileDeploymentToolkit. Each are a little different
-#To perform a build with this toolkit.
-#    1: You can run the ExpeditedAgileDeploymentToolkit.sh and use one of the predefined configuration templates that we have provided
-#       In this case, as a minimum, you will need to modify the following configuration settings to match your own needs within in your copy of the default template:
+#There's a few ways you can run a build process. You can use the AgileDeploymentToolkit or the 
+# ExpeditedAgileDeploymentToolkit. Each are a little different to perform a build with using this toolkit.
+#    1: You can run the ExpeditedAgileDeploymentToolkit.sh and use one of the predefined configuration templates 
+#       that we have provided. In this case, as a minimum, you will need to modify the following configuration settings 
+#       to match your own needs within in your copy of the default template:
 #    2: You can take one of the predefined templates, make a copy and modify it to make a custom configuration template
-#    3: You can run the AgileDeploymentToolkit.sh script and at the end it will create a basic template which you can copy make your own template out of
-#       This is a safe and easy way to create templates such that you can perform expedited builds. You will need to modify values within your template
-#       if, for example, you are using different credentials, if, for example you are switching to a managed database from a regular VPS hosted deployment
-#    4. Expert: You can completely hand craft your own template from scratch. This requires that you know what you are doing in detail and is the most error prone
+#    3: You can run the AgileDeploymentToolkit.sh script and at the end it will create a basic template which you can 
+#       copy make your own template out of this is a safe and easy way to create templates such that you can perform 
+#       expedited builds. You will need to modify values within your template if, for example, you are using different 
+#       credentials, if, for example you are switching to a managed database from a regular VPS hosted deployment
+#    4. Expert: You can completely hand craft your own template from scratch. This requires that you know what you are 
+#       doing in detail and is the most error prone. I'd probably even make mistakes like this, so, it's best to try
+#       and use a default template or a generated one which will involve the less chance of mistakes being made. 
 ###############################################################################################
 # License Agreement:
 # This file is part of The Agile Deployment Toolkit.
@@ -459,6 +465,7 @@ status ""
 
 . ${BUILD_HOME}/templatedconfigurations/ConfigureTemplate.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
+. ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 
 . ${BUILD_HOME}/buildscripts/InitialiseSecurityKeys.sh
 
