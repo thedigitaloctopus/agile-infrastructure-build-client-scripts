@@ -14,7 +14,7 @@ then
     exit
 fi
 status "######################################################################"
-status "There are ${numberoftemplates} available template(s) for digital ocean"
+status "There are ${numberoftemplates} available template(s) for ${CLOUDHOST}"
 status "######################################################################"
 status "" 
 status "You can use one of these default templates or you can make your own and place it in the ${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST} directory"
