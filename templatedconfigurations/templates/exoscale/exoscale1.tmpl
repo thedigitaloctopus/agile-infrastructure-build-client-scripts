@@ -1,4 +1,3 @@
-################################################################################################################################
 ######################YOU WILL NEED AN EXOSCALE ACCOUNT AND A CLOUDFLARE ACCOUNT FOR THIS TEMPLATE##############################
 ######################OPTIONALLY, IF YOU WANT SYSTEM EMAILS, YOU WILL NEED AN SMTP SERVER AVAILABLE#############################
 ######################CURRENTLY, GOOGLE, SENDPULSE AND AMAZON SES ARE SUPPORTED#################################################
@@ -7,13 +6,13 @@
 ###############These two variables are your exoscale IAM access and secret keys with capability manipulate the object store#####
 export S3_ACCESS_KEY=""
 export S3_SECRET_KEY=""
-export S3_HOST_BASE="sos-ch-dk-2.exo.io"
-export S3_LOCATION="none"
+export S3_HOST_BASE="sos-ch-gva-2.exo.io"
+export S3_LOCATION="NONE" #The exoscale S3 tools ignore the location, but, we ordinarily set it, so set it to a dummy value
 ###############This will override whatever is set at build time for the buildos and buildos-version#############################
 ###############You need to set them to the same values as here at build time also.This is becuase###############################
 ###############We need to know what these are set to before we are able to load this template###################################
-export BUILDOS="debian"
-export BUILDOS_VERSION="10"
+#export BUILDOS="debian"
+#export BUILDOS_VERSION="10"
 ###############These two variables are your exoscale IAM access and secret keys with capability to create servers###############
 export ACCESS_KEY="" 
 export SECRET_KEY=""
@@ -21,17 +20,18 @@ export SECRET_KEY=""
 export DNS_USERNAME=""
 export DNS_SECURITY_KEY=""
 export DNS_CHOICE="cloudflare"
+export DEFAULT_USER="debian" ####SWAP THIS FROM debian TO root IF YOU WANT TO DEPLOY TO UBUNTU
+###^^^^^^^^^^^^^^^^^^^^^^^^^^^^ESSENTIAL TO REVIEW ALL THE ABOVE PARAMETERS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #################################################################################################################################
-##########################VARIABLES ABOVE HERE MUST BE SET MANUALLY BEFORE BUILD#################################################
-##########################VARIABLES BELOW HERE CAN BE SET OR UNSET ACCORDING TO YOUR CONFIGURATION REQUIREMENTS##################
+##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
+##########################VARIABLES BELOW HERE CAN BE SET OR UNSET ACCORDING TO YOUR PREFERED CONFIGURATION #####################
 #################################################################################################################################
-export WEBSITE_DISPLAY_NAME=""
-export WEBSITE_NAME=""
+export WEBSITE_DISPLAY_NAME="Nuocial"
+export WEBSITE_NAME="nuocial"
 export WEBSITE_URL=""
-export BUILD_IDENTIFIER=""
-export APPLICATION_REPOSITORY_PROVIDER=""
-export APPLICATION_REPOSITORY_OWNER=""
-export APPLICATION_REPOSITORY_USERNAME=""
+export APPLICATION_REPOSITORY_PROVIDER="bitbucket"
+export APPLICATION_REPOSITORY_OWNER="agiledeployer"
+export APPLICATION_REPOSITORY_USERNAME="agiledeployer"
 export APPLICATION_REPOSITORY_PASSWORD=""
 export SYSTEM_EMAIL_PROVIDER=""
 export SYSTEM_TOEMAIL_ADDRESS=""
@@ -39,12 +39,11 @@ export SYSTEM_FROMEMAIL_ADDRESS=""
 export SYSTEM_EMAIL_USERNAME=""
 export SYSTEM_EMAIL_PASSWORD=""
 #################################################################################################################################
-###########################VARIABLES ABOVE HERE YOU WILL LIKELY WANT TO SET FOR YOUR APPLICATION TO FUNCTION#####################
+###########################VARIABLES ABOVE HERE YOU WILL NEED TO SET FOR YOUR APPLICATION TO FUNCTION FULLY #####################
 #################################################################################################################################
 export DB_PORT="2035"
 export SSH_PORT="1035"
 export CLOUDHOST="exoscale"
-export DEFAULT_USER="debian"
 export MACHINE_TYPE="EXOSCALE"
 export ALGORITHM="rsa"
 export USER="root"
@@ -95,9 +94,6 @@ export FIRST_USER_PASSWD=""
 export ASIP=""
 export ASIP_PRIVATE=""
 export TOKEN=""
-export WEBSITE_DISPLAY_NAME=""
-export WEBSITE_NAME=""
-export WEBSITE_URL=""
 export DBaaS_DBNAME=""
 export APPLICATION="wordpress"
 export APPLICATION_LANGUAGE="PHP"
