@@ -29,8 +29,8 @@ for template in ${templates}
 do
     status "Template ID ${templateid}: ${template}"
     templatebasename="`/bin/echo ${template} | /bin/sed 's/\.tmpl//g'`"
-    templatefile="${BUILD_HOME}/templatedconfigurations/templates/digitalocean/${templatebasename}.tmpl"
-    templatedescription="`/bin/cat ${BUILD_HOME}/templatedconfigurations/templates/digitalocean/${templatebasename}.description`"
+    templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${templatebasename}.tmpl"
+    templatedescription="`/bin/cat ${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${templatebasename}.description`"
     status "Template File: ${templatefile}"
     status "Description: ${templatedescription}"
     status "---------------"
