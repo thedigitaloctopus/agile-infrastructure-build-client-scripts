@@ -159,7 +159,7 @@ status "Build process fully complete"
 ###########################################################################################
 
 /bin/rm ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
-
+/bin/sed -i '/^$/d' ${BUILD_HOME}/builddescriptors/envdump.dat
 while read line
 do
     name="`/bin/echo ${line} | /usr/bin/awk -F':' '{print $1}'`"
