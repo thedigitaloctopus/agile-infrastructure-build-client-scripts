@@ -19,10 +19,6 @@ export DEFAULT_USER="debian" ####SWAP THIS FROM debian TO root IF YOU WANT TO DE
 export WEBSITE_DISPLAY_NAME="Nuocial"
 export WEBSITE_NAME="nuocial"
 export WEBSITE_URL=""
-export APPLICATION_REPOSITORY_PROVIDER="bitbucket"
-export APPLICATION_REPOSITORY_OWNER="agiledeployer"
-export APPLICATION_REPOSITORY_USERNAME="agiledeployer"
-export APPLICATION_REPOSITORY_PASSWORD=""
 ###^^^^^^^^^^^^^^^^^^^^^^^^^^^^ESSENTIAL TO REVIEW ALL THE ABOVE PARAMETERS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #################################################################################################################################
 ##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
@@ -36,6 +32,10 @@ export SYSTEM_EMAIL_PASSWORD=""
 #################################################################################################################################
 ###########################VARIABLES ABOVE HERE YOU WILL NEED TO SET FOR YOUR APPLICATION TO FUNCTION FULLY #####################
 #################################################################################################################################
+export APPLICATION_REPOSITORY_PROVIDER="bitbucket"
+export APPLICATION_REPOSITORY_OWNER="agiledeployer"
+export APPLICATION_REPOSITORY_USERNAME="agiledeployer"
+export APPLICATION_REPOSITORY_PASSWORD=""
 export DB_PORT="2035"
 export SSH_PORT="1035"
 export CLOUDHOST="exoscale"
