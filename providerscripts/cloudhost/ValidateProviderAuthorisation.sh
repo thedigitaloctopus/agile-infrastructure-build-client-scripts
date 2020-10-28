@@ -5,7 +5,7 @@
 # Description : This script will test for access and successful authentication for our
 # particular provider.
 # It also generates a generic configuration file for that provider. Please keep your
-# config files safe as they have access keys which if leaked may render your cloudhost
+# config files safe as they have access keys which if leaked may render your CLOUDHOST
 # provider account susceptible to compromise
 #####################################################################################
 # License Agreement:
@@ -22,7 +22,7 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 ######################################################################################
 ######################################################################################
-#set -x
+set -x
 
 status () {
     /bin/echo "$1" | /usr/bin/tee /dev/fd/3
@@ -49,59 +49,67 @@ then
     else
         /usr/local/bin/doctl auth init
     fi
-    /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN
+    /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
 fi
 
 if ( [ "${CLOUDHOST}" = "exoscale" ] )
 then
+    /usr/local/bin/cs listVirtualMachines 2>/dev/null
 
-    if ( [ -f ${HOME}/.cloudstack.ini ] )
-    then
-        access_key="`/bin/cat ${HOME}/.cloudstack.ini | /bin/grep "^key" | /usr/bin/awk '{print $NF}'`"
-        secret_key="`/bin/cat ${HOME}/.cloudstack.ini | /bin/grep "^secret" | /usr/bin/awk '{print $NF}'`"
-    else 
+    while ( [ "$?" != "0" ] )
+    do
         access_key=""
-        secret_key="" 
-    fi
+        secret_key=""
 
-    if ( ( [ "${access_key}" != "" ] && [ "${secret_key}" != "" ] ) && ( [ "${access_key}" != "${ACCESS_KEY}" ] || [ "${secret_key}" != "${SECRET_KEY}" ] ) )
-    then
-        status "KEYS MISMATCH DETECTED"
-        status "The keys in your exoscale configuration file are: ${access_key} and ${secret_key}"
-        status "And, the access keys you are providing from your chosen template are: ${ACCESS_KEY} and ${SECRET_KEY}"
-        status "Enter Y or y to update your live configuration with your the token from your template"
-        read response
-        if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
+        if ( [ -f ${HOME}/.cloudstack.ini ] )
         then
-           /bin/sed -i "/^key/c key = ${ACCESS_KEY}" ${HOME}/.cloudstack.ini
-           /bin/sed -i "/^secret/c secret = ${SECRET_KEY}" ${HOME}/.cloudstack.ini
+            access_key="`/bin/cat ${HOME}/.cloudstack.ini | /bin/grep "^key" | /usr/bin/awk '{print $NF}'`"
+            secret_key="`/bin/cat ${HOME}/.cloudstack.ini | /bin/grep "^secret" | /usr/bin/awk '{print $NF}'`"
         fi
-    fi
 
-    if ( [ "${access_key}" != "" ] && [ "${secret_key}" != "" ] )
-    then
-        /bin/mkdir -p ${BUILD_HOME}/runtimedata/${cloudhost}
+        if ( ( [ "${access_key}" != "" ] && [ "${secret_key}" != "" ] ) && ( [ "${access_key}" != "${ACCESS_KEY}" ] || [ "${secret_key}" != "${SECRET_KEY}" ] ) )
+        then
+            status "KEYS MISMATCH DETECTED"
+            status "The keys in your exoscale configuration file are: ${access_key} and ${secret_key}"
+            status "And, the access keys you are providing from your chosen template are: ${ACCESS_KEY} and ${SECRET_KEY}"
+            status "Enter Y or y to update your live configuration with your the token from your template"
+            read response
+            if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
+            then
+               /bin/sed -i "/^key/c key = ${ACCESS_KEY}" ${HOME}/.cloudstack.ini
+               /bin/sed -i "/^secret/c secret = ${SECRET_KEY}" ${HOME}/.cloudstack.ini
+            fi
+        elif ( [ "${ACCESS_KEY}" != "" ] && [ "${SECRET_KEY}" != "" ] )
+        then
+            status "Using your the keys from your template for your ${CLOUDHOST} authentication"
+            /bin/mkdir -p ${BUILD_HOME}/runtimedata/${CLOUDHOST}
 
-        /bin/echo "${ACCESS_KEY}" > ${BUILD_HOME}/runtimedata/${cloudhost}/ACCESS_KEY
-        /bin/echo "${SECRET_KEY}" > ${BUILD_HOME}/runtimedata/${cloudhost}/SECRET_KEY
-        /bin/echo "[cloudstack]
+            /bin/echo "${ACCESS_KEY}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/ACCESS_KEY
+            /bin/echo "${SECRET_KEY}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/SECRET_KEY
+
+            /bin/echo "[cloudstack]
 endpoint = https://api.exoscale.ch/compute
 key = ${ACCESS_KEY}
 secret = ${SECRET_KEY}" > ${HOME}/.cloudstack.ini
-        /bin/chown ${USER} ${HOME}/.cloudstack.ini
-        /bin/chmod 400 ${HOME}/.cloudstack.ini
-    fi
+
+            /bin/chown ${USER} ${HOME}/.cloudstack.ini
+            /bin/chmod 400 ${HOME}/.cloudstack.ini
+        fi
+
+        /usr/local/bin/cs listVirtualMachines 2>/dev/null
+
+    done
 fi
 
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
     if ( [ ! -f ${HOME}/.config/linode-cli ] )
     then
-    	status ""
-	    status "############################################################################################################################################"
-	    status "IMPORTANT: Please only enable read/write access for Linodes, Object Storage and IPs from your linode admin console when you generate the key"    
-	    status "############################################################################################################################################"
-	    status ""
+        status ""
+            status "############################################################################################################################################"
+            status "IMPORTANT: Please only enable read/write access for Linodes, Object Storage and IPs from your linode admin console when you generate the key"    
+            status "############################################################################################################################################"
+            status ""
         /usr/local/bin/linode-cli configure >&3
     fi
     /bin/chown ${USER} ${HOME}/.config/linode-cli
@@ -109,7 +117,7 @@ then
 fi
 if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
-    while ( [ "`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`" = "" ] )
+    while ( [ "`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`" = "" ] )
     do
         status "Couldn't find valid authentication keys for Vultr"
         status ""
@@ -128,9 +136,9 @@ then
             read answer
         done
 
-        /bin/echo "${API_KEY}" > ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN
+        /bin/echo "${API_KEY}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
     done
-    export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
+    export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
 fi
 
 if ( [ "${CLOUDHOST}" = "aws" ] )
@@ -156,5 +164,3 @@ then
         read x
     fi
 fi
-
-
