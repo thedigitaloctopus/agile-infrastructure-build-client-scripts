@@ -101,7 +101,7 @@ templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLO
 /bin/echo "export BUILD_IDENTIFIER=\"${BUILD_IDENTIFIER}\"" >> ${templatefile}
 
 #load the environment from the template file
-. ${templatefile}
+export . ${templatefile}
 
 #Make it live
 /bin/cp ${templatefile} ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
