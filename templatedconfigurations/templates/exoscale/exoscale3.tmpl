@@ -1,6 +1,7 @@
 ######################YOU WILL NEED AN EXOSCALE ACCOUNT AND A CLOUDFLARE ACCOUNT FOR THIS TEMPLATE##############################
 ######################OPTIONALLY, IF YOU WANT SYSTEM EMAILS, YOU WILL NEED AN SMTP SERVER AVAILABLE#############################
 ######################CURRENTLY, GOOGLE, SENDPULSE AND AMAZON SES ARE SUPPORTED#################################################
+######################AS A MINIMUM REVIEW AND SET ALL VARIABLES MARKED "MANDATORY"##############################################
 ################################################################################################################################
 export APPLICATION="wordpress"
 export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="WORDPRESS"
@@ -21,9 +22,9 @@ export DEFAULT_USER="debian" ####SWAP THIS FROM debian TO root IF YOU WANT TO DE
 ##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
 ##########################THESE NEXT VARIABLES ARE RELATED TO THE APPLICATION FUNCTIONING########################################
 #################################################################################################################################
-export WEBSITE_DISPLAY_NAME=""
-export WEBSITE_NAME=""
-export WEBSITE_URL=""
+export WEBSITE_DISPLAY_NAME="" #MANDATORY
+export WEBSITE_NAME="" #MANDATORY
+export WEBSITE_URL=""  #MANDATORY
 export APPLICATION_REPOSITORY_PROVIDER="bitbucket"
 export APPLICATION_REPOSITORY_OWNER="agiledeployer"
 export APPLICATION_REPOSITORY_USERNAME="agiledeployer"
