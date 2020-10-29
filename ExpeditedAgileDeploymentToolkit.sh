@@ -117,7 +117,7 @@ ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
     actioned="1"
 fi
 
-#. ${BUILD_HOME}/SelectDeploymentOS.sh
+. ${BUILD_HOME}/SelectDeploymentOS.sh
 
 if ( [ "${actioned}" = "1" ] )
 then
