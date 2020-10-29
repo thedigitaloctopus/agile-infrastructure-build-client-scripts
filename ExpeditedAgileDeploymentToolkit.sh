@@ -117,6 +117,15 @@ ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
     actioned="1"
 fi
 
+status ""
+status "###################################################ATTENTION###########################################################################"
+status "There is a GOTCHA which is that if the DEFAULT_USER variable is not set correctly for the OS you choose next the build will not complete"
+status "Please review the template you select to make sure that what you choose next as your deployment OS, matches correctly with the user you"
+status "Have set as the DEFAULT_USER in your template. For example, if your DEFAULT_USER="debian", obviously this will not work if you select"
+status "Ubutnu 20.04 through the choice you make next"
+status "###################################################ATTENTION###########################################################################"
+status ""
+
 . ${BUILD_HOME}/SelectDeploymentOS.sh
 
 if ( [ "${actioned}" = "1" ] )
