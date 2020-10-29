@@ -1,7 +1,7 @@
 VIRGIN DEVELOPMENT MODE INSTALLATION OF WORDPRESS 
 ----------------------------------------------
 
-DETAIL: This template, as is, will deploy to Geneva on Exoscale. It will deploy a Wordpress instance in development mode . You will need a Cloudflare account with your email address and global API key and you will also need an Exoscale account with API keys for an IAM user with sufficient access rights to manipulate the object store and the cloud server machines. The first 25 export statements of the template require review and configuration and some of these are marked mandatory. You need to give the requisite API keys here so that the build can complete. You can review the settings that have values against the spec for the templating system 
+DETAIL: This template, as is, will deploy to Geneva on Exoscale. It will deploy a Wordpress instance in development mode . You will need a Cloudflare account with your email address and global API key and you will also need an Exoscale account with API keys for an IAM user with sufficient access rights to manipulate the object store and the cloud server machines. The first 15 export statements of the template require review and configuration and some of these are marked mandatory. You need to give the requisite API keys here so that the build can complete. You can review the settings that have values against the spec for the templating system 
     ${BUILD_HOME}/templatedconfigurations/templates/specification.md
 to get a better idea of what they are doing.
 The database used by default is MySQL on a VPS and the webserver is Apache. 
