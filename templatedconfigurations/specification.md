@@ -68,7 +68,7 @@ vultr - @@@@@@@@@@@@@@@@@
 
 This will be the username for your DNS service provider
 
-cloudflare - the emal address of your cloudflare account
+##### cloudflare - the emal address of your cloudflare account
 
 digital ocean - @@@@@@@@@@@@@
 
@@ -80,7 +80,7 @@ rackspace - @@@@@@@@@@@@@@@@@@@
 
 This is the security key which will enable us to manipulate records as needed with your DNS provider. You can find this key as follows for each provider:
 
-cloudflare - Ths is the Global API key for your cloudflare account which you can find by clicking on your profile at the top right of the screen
+##### cloudflare - Ths is the Global API key for your cloudflare account which you can find by clicking on your profile at the top right of the screen
 
 digital ocean - @@@@@@@@@@@@@@
 
@@ -90,7 +90,13 @@ rackspace  - @@@@@@@@@@@@@@@@
 
 ### DNS_CHOICE - 
 
-This can be set to one of three values at the time of writing (2020) - "cloudflare", "digitalocean", "rackspace". It defines which of the (supported) DNS service you would like to use with your deployment.
+This can be set to one of three values at the time of writing (2020) - 
+
+##### 1. "cloudflare" 
+##### 2. "digitalocean" 
+##### 3. "rackspace". 
+
+It defines which of the (supported) DNS service you would like to use with your deployment.
 
 -----
 
