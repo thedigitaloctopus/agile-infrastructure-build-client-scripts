@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#set -x
+set -x
 
 
 status ""
@@ -27,44 +27,69 @@ templateid="1"
 status "You can edit these templates directly if you wish to alter the configurations"
 for template in ${templates}
 do
+    status "###############################################################################################################"
     status "Template ID ${templateid}: ${template}"
     templatebasename="`/bin/echo ${template} | /bin/sed 's/\.tmpl//g'`"
     templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${templatebasename}.tmpl"
     templatedescription="`/bin/cat ${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${templatebasename}.description`"
+    status ""
     status "Template File: ${templatefile}"
+    status ""
     status "Description: ${templatedescription}"
-    status "---------------"
+    status "Press the <enter> key to see the next template or enter the template ID to select the template"
+    read response
+
+    while ( [ "${response}" != "${templateid}" ]  && [ "${response}" != "" ] )
+    do
+        status "Sorry, that's not a valid input, try again..."
+        read response
+    done
+
+    chosen="0"
+
+    if ( [ "${response}" = "${templateid}" ] )
+    then
+       chosen="1"
+       selectedtemplate=${templateid}
+       break
+    fi
+
     templateid="`/usr/bin/expr ${templateid} + 1`"
 done
 
-status "#############AVAILABLE TEMPLATES#####################"
-status "Please enter a template number between 1 and ${numberoftemplates} to select the template that you want to use for the build process"
-read response
-wrong="1"
-selectedtemplate="0"
-while ( [ "${wrong}" = "1" ] )
-do
-    if ( [ -n "${response}" ] && [ "${response}" -eq "${response}" ] 2>/dev/null )
-    then
-        if ( [ "${response}" -lt "1" ] || [ "${response}" -gt "${numberoftemplates}" ] )
+if ( [ "${chosen}" = "0" ] )
+then
+    status "#############AVAILABLE TEMPLATES#####################"
+    status "Please enter a template number between 1 and ${numberoftemplates} to select the template that you want to use for the build process"
+    read response
+    wrong="1"
+    selectedtemplate="0"
+    while ( [ "${wrong}" = "1" ] )
+    do
+        if ( [ -n "${response}" ] && [ "${response}" -eq "${response}" ] 2>/dev/null )
         then
-            wrong="1"
-        else
-            wrong="0"
-            selectedtemplate="${response}"
+            if ( [ "${response}" -lt "1" ] || [ "${response}" -gt "${numberoftemplates}" ] )
+            then
+                wrong="1"
+            else
+                wrong="0"
+                selectedtemplate="${response}"
+            fi
         fi
-    fi
-    if ( [ "${wrong}" = "1" ] )
-    then
-        status "Sorry, that's not a valid template number. Please enter a number between 1 and ${numberoftemplates}"
-        read response
-    fi
-done
+        if ( [ "${wrong}" = "1" ] )
+        then
+            status "Sorry, that's not a valid template number. Please enter a number between 1 and ${numberoftemplates}"
+            read response
+        fi
+    done
+fi
 status "You have selected template: ${selectedtemplate}"
 status "Press <enter> to continue"
 read x
 
 templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
+
+/bin/sed -i '/^$/d' ${templatefile}
 
 /bin/sed -i '/BUILD_HOME=/d' ${templatefile}
 /bin/echo "export BUILD_HOME=\"${BUILD_HOME}\"" >> ${templatefile}
@@ -75,25 +100,6 @@ templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLO
 /bin/sed -i '/BUILD_IDENTIFIER=/d' ${templatefile}
 /bin/echo "export BUILD_IDENTIFIER=\"${BUILD_IDENTIFIER}\"" >> ${templatefile}
 
-#/bin/sed -i '/BUILDOS=/d' ${templatefile}
-#/bin/echo "export BUILDOS=\"${BUILDOS}\"" >> ${templatefile}
-
-#/bin/sed -i '/BUILDOS_VERSION=/d' ${templatefile}
-#/bin/echo "export BUILDOS_VERSION=\"${BUILDOS_VERSION}\"" >> ${templatefile}
-#
-#token="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
-#/bin/sed -i '/TOKEN=/d' ${templatefile}
-#/bin/echo "export TOKEN=\"${token}\"" >> ${templatefile}
-
-#PUBLIC_KEY_NAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYNAME`"
-#/bin/sed -i '/PUBLIC_KEY_NAME=/d' ${templatefile}
-#/bin/echo "export PUBLIC_KEY_NAME=\"${PUBLIC_KEY_NAME}\"" >> ${templatefile}
-#
-#PUBLIC_KEY_ID="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYID`"
-#/bin/sed -i '/PUBLIC_KEY_ID=/d' ${templatefile}
-#/bin/echo "export PUBLIC_KEY_ID=\"${PUBLIC_KEY_ID}\"" >> ${templatefile}
-
-
 #load the environment from the template file
 . ${templatefile}
 
@@ -101,4 +107,3 @@ templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLO
 /bin/cp ${templatefile} ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
-
