@@ -29,6 +29,7 @@ for template in ${templates}
 do
     status "###############################################################################################################"
     status "Template ID ${templateid}: ${template}"
+    status "-----------------------------------------"
     templatebasename="`/bin/echo ${template} | /bin/sed 's/\.tmpl//g'`"
     templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${templatebasename}.tmpl"
     templatedescription="`/bin/cat ${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${templatebasename}.description`"
@@ -36,6 +37,7 @@ do
     status "Template File: ${templatefile}"
     status ""
     status "Description: ${templatedescription}"
+    status ""
     status "Press the <enter> key to see the next template or enter the template ID to select the template"
     read response
 
