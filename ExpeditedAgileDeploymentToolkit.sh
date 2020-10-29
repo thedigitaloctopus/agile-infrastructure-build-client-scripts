@@ -126,8 +126,6 @@ status "Ubutnu 20.04 through the choice you make next"
 status "###################################################ATTENTION###########################################################################"
 status ""
 
-. ${BUILD_HOME}/SelectDeploymentOS.sh
-
 if ( [ "${actioned}" = "1" ] )
 then
     status "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
@@ -137,6 +135,8 @@ then
     status "############################YOU WILL ONLY NEED TO DO THIS ON THE FIRST RUN THROUGH ################################################################"
     exit
 fi
+
+. ${BUILD_HOME}/SelectDeploymentOS.sh
 
 #If this is set, the user who ran it previously, then we know that this is not our first time running the script
 if ( [ ! -f ${BUILD_HOME}/runtimedata/INSTALLUSER ] )
