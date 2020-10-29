@@ -11,7 +11,7 @@
 # aws.amazon.com. The agile infrastructure itself will make no active use of Amazon S3, but, there are
 # some helper scripts which will enable you to manipulate your Amazon backed up data should you choose to.
 ########################################################################################################################
-####RUN THIS SCRIPT MANUALLY WHENEVER YOU FEEL YOU WANT TO HAVE A SUPER SAFE BACKUP OF ONE OF A REPOSITORY REPOSITORIES
+####RUN THIS SCRIPT MANUALLY WHENEVER YOU FEEL YOU WANT TO HAVE A SUPER SAFE BACKUP OF ONE OF A REPOSITORIES
 ####RUN IT ONCE FOR EACH REPOSITORY YOU WISH TO BACKUP PASSING REPOSITORY NAME FROM THE HTTPS URL (which you can find on bitbucket)
 ####TO THE REPOSITORY YOU WISH TO BACKUP TO THIS SCRIPT
 #########################################################################################################################
@@ -109,17 +109,6 @@ then
     then
         /bin/echo "You need to configure your datastore tools. You can get your access keys by going to your AWS account at aws.amazon.com and following the instructions"
         /usr/bin/s3cmd --configure
-    fi
-
-    if ( [ "`/bin/echo ${choice} | /bin/grep '2'`" != "" ] )
-    then
-        if ( [ ! -f /root/.boto ] )
-        then
-            #/usr/bin/wget https://storage.googleapis.com/pub/gsutil.tar.gz
-            #/bin/tar xfz gsutil.tar.gz -C ${BUILD_HOME}
-            ${BUILD_HOME}/providerscripts/datastore/InstallDatastoreTools.sh 'GSUTIL' ${buildos}
-            ${BUILD_HOME}/gsutil/gsutil config
-        fi
     fi
 fi
 
