@@ -67,7 +67,7 @@ then
             secret_key="`/bin/cat ${HOME}/.cloudstack.ini | /bin/grep "^secret" | /usr/bin/awk '{print $NF}'`"
         fi
 
-        if ( ( [ "${access_key}" != "" ] && [ "${secret_key}" != "" ] ) && ( [ "${access_key}" != "${ACCESS_KEY}" ] || [ "${secret_key}" != "${SECRET_KEY}" ] ) )
+        if ( ( [ "${access_key}" != "" ] && [ "${secret_key}" != "" ] && [ "${ACCESS_KEY}" != "" ] && [ "${SECRET_KEY}" != "" ] ) && ( [ "${access_key}" != "${ACCESS_KEY}" ] || [ "${secret_key}" != "${SECRET_KEY}" ] ) )
         then
             status "KEYS MISMATCH DETECTED"
             status "The keys in your exoscale configuration file are: ${access_key} and ${secret_key}"
@@ -94,10 +94,14 @@ secret = ${SECRET_KEY}" > ${HOME}/.cloudstack.ini
 
             /bin/chown ${USER} ${HOME}/.cloudstack.ini
             /bin/chmod 400 ${HOME}/.cloudstack.ini
-        fi
-
+          else
+              status "Couldn't find the keys for ${CLOUDHOST} please update your template with you API keys for ${CLOUDHOST}"
+              status "If you don't have access keys, you can generate them through the ${CLOUDHOST} IAM section of the ${CLOUDHOST} gui system"
+              status "Press <enter> key to continue"
+              read x
+              . ${templatefile}
+          fi
         /usr/local/bin/cs listVirtualMachines 2>/dev/null
-
     done
 fi
 
