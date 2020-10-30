@@ -185,6 +185,7 @@ elif ( [ "${response}" = "2" ] )
             2)
                 BUILD_ARCHIVE_CHOICE="hourly"
                 backuprepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-hourly-${BUILD_IDENTIFIER}"
+                backupdbrepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-db-hourly-${BUILD_IDENTIFIER}"
 
                 if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backuprepository}`" = "" ] )
                 then
@@ -223,10 +224,10 @@ elif ( [ "${response}" = "2" ] )
                     backuprepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-hourly-${BUILD_IDENTIFIER}"
                 fi
 
-                if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backuprepository}`" = "" ] )
+                if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backupdbrepository}`" = "" ] )
                 then
                     status ""
-                    status "Cannot access repository: ${backuprepository}.git in your application repository"
+                    status "Cannot access the db repository: ${backupdbrepository}.git from your repository provider"
                     status "The first \"hourly\" repository will not be available to build from until"
                     status "your website has been running for at least an hourly"
                     status "For the first build, you have to build from the standard baseline (choice 1)"
@@ -260,7 +261,8 @@ elif ( [ "${response}" = "2" ] )
             3)
                 BUILD_ARCHIVE_CHOICE="daily"
                 backuprepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-daily-${BUILD_IDENTIFIER}"
-                
+                backupdbrepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-db-hourly-${BUILD_IDENTIFIER}"
+
                 if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backuprepository}`" = "" ] )
                 then
                     APPLICATION_BASELINE_SOURCECODE_REPOSITORY=""
@@ -292,10 +294,10 @@ elif ( [ "${response}" = "2" ] )
                     backuprepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-daily-${BUILD_IDENTIFIER}"
                 fi
 
-                if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backuprepository}`" = "" ] )
+                if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backupdbrepository}`" = "" ] )
                 then
                     status ""
-                    status "Cannot access repository: ${backuprepository}.git in your application repository"
+                    status "Cannot access repository: ${backupdbrepository}.git from your repository provider"
                     status "The first \"daily\" repository will not be available to build from until the first time the website has been running through"
                     status "The night and an automated hourly backup has been made and written to the repository"
                     status "For the first day, you have to build from the standard baseline"
@@ -329,6 +331,7 @@ elif ( [ "${response}" = "2" ] )
             4)
                 BUILD_ARCHIVE_CHOICE="weekly"
                 backuprepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-weekly-${BUILD_IDENTIFIER}"
+                backupdbrepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-db-hourly-${BUILD_IDENTIFIER}"
 
                 if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backuprepository}`" = "" ] )
                 then
@@ -362,10 +365,10 @@ elif ( [ "${response}" = "2" ] )
                     backuprepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-weekly-${BUILD_IDENTIFIER}"
                 fi
 
-                if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backuprepository}`" = "" ] )
+                if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backupdbrepository}`" = "" ] )
                 then
                     status ""
-                    status "Cannot access repository: ${backuprepository}.git in your application repository"
+                    status "Cannot access repository: ${backupdbrepository}.git in from your repository provider"
                     status "The first \"weekly\" repository will not be available to build from until the website has been running continuously"
                     status "for at least a week and an automated weekly backup has been made and written to the repository"
                     status "For up to a week, you will have to build from the standard baseline or possibly the daily backup  or weekly backup in your repsoitory"
@@ -399,6 +402,7 @@ elif ( [ "${response}" = "2" ] )
             5)
                 BUILD_ARCHIVE_CHOICE="monthly"
                 backuprepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-monthly-${BUILD_IDENTIFIER}"
+                backupdbrepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-db-hourly-${BUILD_IDENTIFIER}"
 
                 if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backuprepository}`" = "" ] )
                 then
@@ -437,12 +441,12 @@ elif ( [ "${response}" = "2" ] )
                     backuprepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-monthly-${BUILD_IDENTIFIER}"
                 fi
 
-                if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backuprepository}`" = "" ] )
+                if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backupdbrepository}`" = "" ] )
                 then
                     status ""
-                    status "Cannot access repository: ${backuprepository}.git in your application repository"
+                    status "Cannot access repository: ${backuprepository}.git in your repository provider"
                     status "The first \"monthly\" repository will not be available to build from until the website has been running continuously"
-                    status "for at least a month and an automated monthly backup has been made and written to the repository"
+                    status "for up to a month and an automated monthly backup has been made and written to the repository"
                     status "For up to 1 month, you will have to build from the standard baseline or possibly the daily backup, weekly backup backup in your repsoitory"
                     status ""
 
@@ -475,12 +479,13 @@ elif ( [ "${response}" = "2" ] )
             6)
                 BUILD_ARCHIVE_CHOICE="bimonthly"
                 backuprepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-bimonthly-${BUILD_IDENTIFIER}"
+                backupdbrepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-db-hourly-${BUILD_IDENTIFIER}"
 
                 if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backuprepository}`" = "" ] )
                 then
                     APPLICATION_BASELINE_SOURCECODE_REPOSITORY=""
                     status ""
-                    status "Cannot access repository: ${backuprepository}.git in your application repository"
+                    status "Cannot access repository: ${backuprepository}.git from your repository provider"
                     status "The first \"bimonthly\" repository will not be available to build from until the website has been running continuously"
                     status "for at most 2 months and an automated bi-monthly backup has been made and written to the repository"
                     status "For up to 2 months, you will have to build from the standard baseline or possibly the daily backup, weekly backup or monthly backup in your repsoitory"
@@ -513,10 +518,10 @@ elif ( [ "${response}" = "2" ] )
                     backuprepository="${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-bimonthly-${BUILD_IDENTIFIER}"
                 fi
 
-                if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backuprepository}`" = "" ] )
+                if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backupdbrepository}`" = "" ] )
                 then
                     status ""
-                    status "Cannot access repository: ${backuprepository}.git in your application repository"
+                    status "Cannot access repository: ${backupdbrepository}.git from your repository provider"
                     status "The first \"bimonthly\" repository will not be available to build from until the website has been running continuously"
                     status "for at most 2 months and an automated bi-monthly backup has been made and written to the repository"
                     status "For up to 2 months, you will have to build from the standard baseline or possibly the daily backup, weekly backup or monthly backup in your repsoitory"
