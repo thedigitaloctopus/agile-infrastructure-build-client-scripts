@@ -1,0 +1,8 @@
+
+
+
+
+To build from backup archive, this script expects there to be valid repositories available for the application code and the database code named as follows:
+application code repository: "${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-hourly-${BUILD_IDENTIFIER}"
+database code repository: 
+
