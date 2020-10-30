@@ -133,6 +133,7 @@ elif ( [ "${response}" = "2" ] )
         status "########################################################################################################################################"
 
         BUILD_CHOICE="NONE"
+        APPLICATION_BASELINE_SOURCECODE_REPOSITORY=""
         BASELINE_DB_REPOSITORY=""
 
         while ( [ "`/bin/echo "0 1 2 3 4 5 6" | /bin/grep ${BUILD_CHOICE}`" = "" ] )
@@ -147,7 +148,7 @@ elif ( [ "${response}" = "2" ] )
         done
 
         case ${BUILD_CHOICE} in
-            0)	. ${BUILD_HOME}/buildscripts/InitialiseVirginApplication.sh
+            0)  . ${BUILD_HOME}/buildscripts/InitialiseVirginApplication.sh
                 break ;;
             1)      status "#################################################################################################################"
                 status "You previously chose to build an application of type: " ${APPLICATION_NAME}
@@ -444,7 +445,7 @@ elif ( [ "${response}" = "2" ] )
                 if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${backupdbrepository}`" = "" ] )
                 then
                     status ""
-                    status "Cannot access repository: ${backuprepository}.git in your repository provider"
+                    status "Cannot access repository: ${backupdbrepository}.git in your repository provider"
                     status "The first \"monthly\" repository will not be available to build from until the website has been running continuously"
                     status "for up to a month and an automated monthly backup has been made and written to the repository"
                     status "For up to 1 month, you will have to build from the standard baseline or possibly the daily backup, weekly backup backup in your repsoitory"
@@ -546,7 +547,7 @@ elif ( [ "${response}" = "2" ] )
                     fi
                 fi
                 break ;;
-            *)     	 status "Invalid choice, please enter one of '1', '2', '3', '4', '5', '6'" ;;
+            *)           status "Invalid choice, please enter one of '1', '2', '3', '4', '5', '6'" ;;
         esac
     done
 
@@ -597,4 +598,3 @@ then
         fi
     done
 fi
-
