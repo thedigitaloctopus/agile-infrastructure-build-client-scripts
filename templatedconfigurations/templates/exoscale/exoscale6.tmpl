@@ -1,0 +1,139 @@
+######################YOU WILL NEED AN EXOSCALE ACCOUNT AND A CLOUDFLARE ACCOUNT FOR THIS TEMPLATE##############################
+######################OPTIONALLY, IF YOU WANT SYSTEM EMAILS, YOU WILL NEED AN SMTP SERVER AVAILABLE#############################
+######################CURRENTLY SUPPORTED ARE, GOOGLE, SENDPULSE AND AMAZON SES#################################################
+######################AS A MINIMUM REVIEW AND SET ALL VARIABLES MARKED "MANDATORY"##############################################
+################################################################################################################################
+###############These two variables are your exoscale IAM access and secret keys with authority to manipulate the object store###
+export APPLICATION="wordpress"
+export S3_ACCESS_KEY=""  #MANDATORY
+export S3_SECRET_KEY=""  #MANDATORY
+export S3_HOST_BASE="sos-ch-gva-2.exo.io"
+export S3_LOCATION="US" #For exoscale, this always needs to be set to "US"
+###############These two variables are your exoscale IAM access and secret keys with capability to create servers###############
+export ACCESS_KEY=""   #MANDATORY
+export SECRET_KEY=""   #MANDATORY
+###############These variables are cloudflare API key and the email address of your cloudflare account##########################
+export DNS_USERNAME=""  #MANDATORY
+export DNS_SECURITY_KEY=""   #MANDATORY
+export DNS_CHOICE="cloudflare"
+export DEFAULT_USER="debian" ####SWAP THIS FROM debian TO root IF YOU WANT TO DEPLOY TO UBUNTU
+###^^^^^^^^^^^^^^^^^^^^^^^^^^^^ESSENTIAL TO REVIEW ALL THE ABOVE PARAMETERS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#################################################################################################################################
+##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
+##########################THESE NEXT VARIABLES ARE RELATED TO THE APPLICATION FUNCTIONING########################################
+#################################################################################################################################
+export WEBSITE_DISPLAY_NAME="" #MANDATORY  
+export WEBSITE_NAME="" #MANDATORY - This is the exact value of the core of your WEBSITE_URL, for example, www.nuocial.org.uk would be nuocial  
+export WEBSITE_URL=""  #MANDATORY
+export APPLICATION_REPOSITORY_PROVIDER=""
+export APPLICATION_REPOSITORY_OWNER=""
+export APPLICATION_REPOSITORY_USERNAME=""
+export APPLICATION_REPOSITORY_PASSWORD="" #MANDATORY
+export SYSTEM_EMAIL_PROVIDER=""
+export SYSTEM_TOEMAIL_ADDRESS=""
+export SYSTEM_FROMEMAIL_ADDRESS=""
+export SYSTEM_EMAIL_USERNAME=""
+export SYSTEM_EMAIL_PASSWORD=""
+#################################################################################################################################
+###########################VARIABLES ABOVE HERE YOU WILL NEED TO SET FOR YOUR APPLICATION TO FUNCTION FULLY #####################
+#################################################################################################################################
+export BUILD_CHOICE="2"
+export BUILD_ARCHIVE_CHOICE="hourly"
+#####BUILD FROM HOURLY BACKUPS######- to build from daily, set BUILD_CHOICE=3, BUILD_ARCHIVE_CHOICE="daily" for weekly, BUILD_CHOICE="4" ...and so on
+export DIRECTORIES_TO_MOUNT="wp-content.uploads"
+export PRODUCTION="1"
+export DEVELOPMENT="0"
+export SUPERSAFE_WEBROOT="1"
+export WEBSERVER_CHOICE="NGINX"
+export NUMBER_WS="1"
+export SUPERSAFE_DB="1"
+export SERVER_TIMEZONE_CONTINENT="Europe"
+export SERVER_TIMEZONE_CITY="London"
+export DISABLE_HOURLY="0"
+export DATABASE_INSTALLATION_TYPE="Maria"
+export DB_PORT="2035"
+export SSH_PORT="1035"
+export PERSIST_ASSETS_TO_CLOUD="1"
+export BUILD_CHOICE="2"
+export BASELINE_DB_REPOSITORY=""
+export APPLICATION_BASELINE_SOURCECODE_REPOSITORY=""
+export BUILD_ARCHIVE_CHOICE="hourly"
+export APPLICATION_LANGUAGE="PHP"
+export APPLICATION_IDENTIFIER="2"
+export PHP_VERSION="7.4"
+export REGION=""
+export REGION_ID="1128bd56-b4d9-4ac6-a7b9-c715b187ce11"
+export DB_SIZE="10G"
+export DB_SERVER_TYPE="b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8"
+export WS_SIZE="10G"
+export WS_SERVER_TYPE="b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8"
+export AS_SIZE="10G"
+export AS_SERVER_TYPE="b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8"
+export CLOUDHOST="exoscale"
+export MACHINE_TYPE="EXOSCALE"
+export ALGORITHM="rsa"
+export USER="root"
+export CLOUDHOST_USERNAME="root"
+export CLOUDHOST_PASSWORD=""
+export PREVIOUS_BUILD_CONFIG="0"
+export WSIP=""
+export WSIP_PRIVATE=""
+export GIT_USER="Templated User"
+export GIT_EMAIL_ADDRESS="templateduser@dummyemailX123.com"
+export APPLICATION_REPOSITORY_TOKEN=""
+export INFRASTRUCTURE_REPOSITORY_PROVIDER="github"
+export INFRASTRUCTURE_REPOSITORY_OWNER="agile-deployer"
+export INFRASTRUCTURE_REPOSITORY_USERNAME="agile-deployer"
+export INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
+export DATASTORE_CHOICE="exoscale"
+export DBaaS_HOSTNAME=""
+export DBaaS_USERNAME=""
+export DBaaS_PASSWORD=""
+export DBaaS_DBNAME=""
+export DATABASE_DBaaS_INSTALLATION_TYPE=""
+export DEFAULT_DBaaS_OS_USER=""
+export DBaaS_REMOTE_SSH_PROXY_IP=""
+export DBaaSDBSECURITYGROUP=""
+export DBIP=""
+export DBIP_PRIVATE=""
+export DOMAIN_ADMIN_PASSWD=""
+export SITE_ADMIN_PASSWD=""
+export FIRST_USER_PASSWD=""
+export ASIP=""
+export ASIP_PRIVATE=""
+export TOKEN=""
+export DBaaS_DBNAME=""
+export APPLICATION_NAME="SIMPLE SOCIAL NETWORK"
+export DNS_REGION=""
+export DNS_EMAIL_ADDRESS=""
+export SSL_GENERATION_METHOD="AUTOMATIC"
+export SSL_GENERATION_SERVICE="LETSENCRYPT"
+export USE_DATASTORE=""
+export BYPASS_DB_LAYER="0"
+export MAPS_API_KEY=""
+export PHP_MODE=""
+export PHP_MAX_CHILDREN=""
+export PHP_START_SERVERS=""
+export PHP_MIN_SPARE_SERVERS=""
+export PHP_MAX_SPARE_SERVERS=""
+export PHP_PROCESS_IDLE_TIMEOUT=""
+export IN_MEMORY_CACHING=""
+export IN_MEMORY_CACHING_PORT=""
+export IN_MEMORY_CACHING_HOST=""
+export IN_MEMORY_CACHING_SECURITY_GROUP=""
+export ENABLE_EFS=""
+export SUBNET_ID=""
+export AUTOSCALE_FROM_SNAPSHOTS=""
+export GENERATE_SNAPSHOTS=""
+export SNAPSHOT_ID=""
+export WEBSERVER_IMAGE_ID=""
+export AUTOSCALER_IMAGE_ID=""
+export DATABASE_IMAGE_ID=""
+export ASSETS_BUCKET=""
+export JOOMLA_VERSION=""
+export DRUPAL_VERSION=""
+export PUBLIC_KEY_NAME="AGILE_TOOLKIT_PUBLIC_KEY"
+export BUILD_HOME=""
+export BUILD_CLIENT_IP=""
+export BUILD_IDENTIFIER=""
+export PUBLIC_KEY_ID=""
