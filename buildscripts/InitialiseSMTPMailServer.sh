@@ -19,18 +19,31 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #########################################################################################
 #########################################################################################
-set -x
+#set -x
 
-SYSTEM_EMAIL_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILUSERNAME.dat`"
-status "Your system email username is set to ${SYSTEM_EMAIL_USERNAME}"
-SYSTEM_EMAIL_PASSWORD="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat`"
-status "Your system email password is set to ${SYSTEM_EMAIL_PASSWORD}"
-SYSTEM_EMAIL_PROVIDER="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPROVIDER.dat`"
-status "Your system email provider is set to ${SYSTEM_EMAIL_PROVIDER}"
-SYSTEM_TOEMAIL_ADDRESS="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/TOEMAILADDRESS.dat`"
-status "Your system email to address is set to ${SYSTEM_TOEMAIL_ADDRESS}"
-SYSTEM_FROMEMAIL_ADDRESS="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/FROMEMAILADDRESS.dat`"
-status "Your system email from address is set to ${SYSTEM_FROMEMAIL_ADDRESS}"
+if ( [ "${SYSTEM_EMAIL_USERNAME}" != "" ] && [ "${SYSTEM_EMAIL_PASSWORD}" != "" ] && [ "${SYSTEM_EMAIL_PROVIDER}" != "" ] && [ "${SYSTEM_TOEMAIL_ADDRESS}" != "" ] && [ "${SYSTEM_FROMEMAIL_ADDRESS}" != "" ] )
+then
+    status "#############################################################"
+    status "Your system email username is set to ${SYSTEM_EMAIL_USERNAME}"
+    status "Your system email password is set to ${SYSTEM_EMAIL_PASSWORD}"
+    status "Your system email provider is set to ${SYSTEM_EMAIL_PROVIDER}"
+    status "Your system email to address is set to ${SYSTEM_TOEMAIL_ADDRESS}"
+    status "Your system email from address is set to ${SYSTEM_FROMEMAIL_ADDRESS}"
+    status "#############################################################"
+else
+    status "#############################################################"
+    SYSTEM_EMAIL_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILUSERNAME.dat`"
+    status "Your system email username is set to ${SYSTEM_EMAIL_USERNAME}"
+    SYSTEM_EMAIL_PASSWORD="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat`"
+    status "Your system email password is set to ${SYSTEM_EMAIL_PASSWORD}"
+    SYSTEM_EMAIL_PROVIDER="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPROVIDER.dat`"
+    status "Your system email provider is set to ${SYSTEM_EMAIL_PROVIDER}"
+    SYSTEM_TOEMAIL_ADDRESS="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/TOEMAILADDRESS.dat`"
+    status "Your system email to address is set to ${SYSTEM_TOEMAIL_ADDRESS}"
+    SYSTEM_FROMEMAIL_ADDRESS="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/FROMEMAILADDRESS.dat`"
+    status "Your system email from address is set to ${SYSTEM_FROMEMAIL_ADDRESS}"
+    status "#############################################################"
+fi
 
 update="1"
 
@@ -47,7 +60,15 @@ then
         update="0"
     fi
 else
-    update="1"
+    status "You don't seem to have an SMTP settings configured. This is fine it just means that you system emails won't be sent"
+    status "If you are happy not to set any SMTP settings, then, enter 'N' or 'n' below, anything else to to configure your SMTP settings next"
+    read response
+    if ( [ "${response}" = "N" ] || [ "${response}" = "n" ] )
+    then
+        update=0
+    else
+        update="1"
+    fi
 fi
 
 if ( [ "${update}" = "1" ] )
@@ -104,6 +125,12 @@ then
 
     status "Please enter your password for your SMTP provider"
     read SYSTEM_EMAIL_PASSWORD
+
+    export ${SYSTEM_EMAIL_USERNAME}
+    export ${SYSTEM_EMAIL_PASSWORD}
+    export ${SYSTEM_EMAIL_PROVIDER}
+    export ${SYSTEM_TOEMAIL_ADDRESS}
+    export ${SYSTEM_FROMEMAIL_ADDRESS}
 
     /bin/echo ${SYSTEM_EMAIL_USERNAME} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILUSERNAME.dat
     /bin/echo ${SYSTEM_EMAIL_PROVIDER} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPROVIDER.dat
