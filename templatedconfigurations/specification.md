@@ -105,3 +105,81 @@ It defines which of the (supported) DNS service you would like to use with your 
 When you deploy to exoscale, the default user should be set to "ubuntu" if you are deploying Ubuntu and "debian" if you are deploying to Debian.
 When you deploy to AWS, the default user should be set to "ubuntu" if you are deploying Ubuntu and "admin" if you are deploying to Debian.
 For all other cases, the DEFAULT_USER should be set to "root"
+
+-----
+
+### WEBSITE_DISPLAY_NAME
+
+This is simply the display name of your application, for example, "My Social Network", or "My Blog" and so on. It should be descriptive of your website and likely will be similar to the core part of the WEBSITE_URL described below
+
+-----
+
+### WEBSITE_NAME
+
+This HAS to be exactly the same of the core part of the URL name of your website. So, if your website is called www.nuocial.org.uk, then, this value MUST be "nuocial"
+
+-----
+
+###  WEBSITE_URL
+
+This is the URL of your website. It can be any valid URL
+
+-----
+
+### APPLICATION_REPOSITORY_PROVIDER
+
+This is the git service provider where your application repositories are hosted. It has to be one of "github", "bitbucket" or "gitlab". If you fill this variable with one of those three exact strings, then, that will tell us who your application code is hosted with. It may or may not be hosted with the same provider as the infrastructure code for the agile deployment toolkit
+
+-----
+
+### APPLICATION_REPOSITORY_OWNER
+
+This is the username of the user who owns (or created) your application repositories with your chosen git service provider
+
+-----
+
+### APPLICATION_REPOSITORY_USERNAME
+
+This is the username of the user that you are currently using to access the application repositories. For example, the repositories might be owned by userA and are kept private but, userB is granted access. In this case the APPLICATION_REPOSITORY_OWNER would be userA and the APPLICATION_REPOSITORY_USERNAME would be userB. If you are the application repository owner, then this username and the owner name above will be the same.
+
+-----
+
+### APPLICATION_REPOSITORY_PASSWORD
+
+This is the password for the APPLICATION_REPOSITORY_USERNAME or the application repository user. This is the password for your user account with your git provider. If the application repositories are public (be careful not to expose sensitive credentials if you make your application repos public), then this password can be blank.
+
+-----
+
+### SYSTEM_EMAIL_PROVIDER
+
+At the moment, there are three SMTP email service providers. Enter the number value, "1", "2" or "3" to select which provider you want to use for your SMTP service. If you leave these variables blank, you simply won't receive any system emails to give status updated on build progression, server intialisations and so on. You are free to leave these variables blank, as you choose.
+
+Enter "1" - Sendpulse (www.sendpulse.com)
+Enter "2" - Google (gmail)
+Enter "3" - AWS SES 
+
+-----
+
+### SYSTEM_TOEMAIL_ADDRESS 
+
+The email address that system emails will be sent to this can be any email address that you have access to. MAYBE, the emails get marked as spam depending on your provider. If you take them out of the spam folder, then, the system should learn they are not spam. Most likely you will want to have a dedicated email address for your system emails for your deployed application as they will likely fill up your inbox otherwise.
+
+-----
+
+### SYSTEM_FROMEMAIL_ADDRESS
+
+-----
+
+The email address that system emails will be sent from. This should be an email address that the system emails are sent from. In your SYSTEM_TOEMAIL_ADDRESS inbox, this will be the email address that the system messages are seen to be sent from or to have originated from.
+
+-----
+
+### SYSTEM_EMAIL_USERNAME
+
+This is the username of your SMTP user. For Amazon SES, for example, this will be the username generated when you enable the SES service. This is the SMTP username. 
+
+-----
+
+### SYSTEM_EMAIL_PASSWORD=""
+
+This is the password of your SMTP user. For Amazon SES, for example, this will be the password generated when you enable the SES service. This is the SMTP password. 
