@@ -180,6 +180,6 @@ This is the username of your SMTP user. For Amazon SES, for example, this will b
 
 -----
 
-### SYSTEM_EMAIL_PASSWORD=""
+### SYSTEM_EMAIL_PASSWORD
 
 This is the password of your SMTP user. For Amazon SES, for example, this will be the password generated when you enable the SES service. This is the SMTP password. 
