@@ -436,3 +436,7 @@ This is the password of the for the cloudhost, it can be set - CLOUDHOST_PASSWOR
 **THIS MUST BE SET FOR ALL LINODE DEPLOYMENTS. THE BUILD WILL FAIL FOR LINODE IF A CLOUDHOST_PASSWORD IS NOT SET**
 
 ----------
+
+### PREVIOUS_BUILD_CONFIG
+
+When you run the AgileDeploymentToolkit.sh method of building your deployment, it will guide you through questions and answers and from that build a configuration. This configutation will be located at: ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}. This file is created right at the very end of a successful build process and not before. Once this file has been created, you can either use it to craft a template as ${BUILD_HOME}/templateconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}[n].tmpl for repeated usage or you can rerun the AgileDeploymentToolkit.sh script and when promoted choose to reuse this configuration file. When a configuration from a previous build is being used, this will be set to "1" otherwise it will be set to "0". This should be set to "0" if you are building from a template using the ExpeditedAgileDeploymentToolkit process.  
