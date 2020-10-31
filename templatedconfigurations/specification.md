@@ -405,12 +405,14 @@ This is the user that the scripts is running as. It can be set, as, USER="root" 
 ### CLOUDHOST_USERNAME
 
 This is the username of the for the cloudhost, it can be set - CLOUDHOST_USERNAME="root", for example
+**THIS MUST BE SET FOR ALL LINODE DEPLOYMENTS. THE BUILD WILL FAIL FOR LINODE IF A CLOUDHOST_USERNAME IS NOT SET**
+
 
 -------- 
 
 ### CLOUDHOST_PASSWORD
 
 This is the password of the for the cloudhost, it can be set - CLOUDHOST_PASSWORD="password", for example
-THIS MUST BE SET FOR ALL LINODE DEPLOYMENTS. THE BUILD WILL FAIL FOR LINODE IF A CLOUDHOST_PASSWORD IS NOT SET
+**THIS MUST BE SET FOR ALL LINODE DEPLOYMENTS. THE BUILD WILL FAIL FOR LINODE IF A CLOUDHOST_PASSWORD IS NOT SET**
 
 ----------
