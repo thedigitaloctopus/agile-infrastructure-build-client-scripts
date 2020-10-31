@@ -339,3 +339,78 @@ If you are deploying PHP, then you can set which version of PHP you are deployin
 So, to use 7.4 you would set PHP_VERSION="7.4"
 
 -----
+
+export REGION=""
+
+---------
+
+### REGION_ID
+
+This is the region id where you wish to deploy the servers to.
+
+Available region ids to choose from for each provider are:
+
+Digital Ocean: @@@@@@@@@@@@@@@
+Exoscale: @@@@@@@@@@@@@@@@@@@@
+Linode: @@@@@@@@@@@@@@@@
+Vultr: @@@@@@@@@@@@@@@
+AWS: @@@@@@@@@@@@@@@@
+
+----------
+
+### DB_SIZE AS_SIZE WS_SIZE
+
+For the Database, the autoscaler and the webserver, you can set their individual sizes using these parameters.
+
+Available sizes to choose from are:
+
+Digital Ocean: @@@@@@@@@@@@@@@@@
+Exoscale: '@@@@@@@@@@@@@@@@@@@@@
+Linode: @@@@@@@@@@@@@@@@@
+Vultr: @@@@@@@@@@@@@@@@
+AWS: @@@@@@@@@@@@@@@@@
+
+-------
+
+### CLOUDHOST
+
+This is the cloudhost you are deploying to. The current choices are:
+
+"digitalocean", "exoscale", "linode", "vultr", "aws"
+
+You can set the cloudhost to Digital Ocean, for example by setting the CLOUDHOST variable as CLOUDHOST="digitalocean"
+
+---------
+
+### MACHINE_TYPE
+
+This is just an identifier which we can check for on our servers. It can be set to
+
+"DROPLET", "EXOSCALE", "LINODE", "VULTR", "AWS"
+
+------------
+
+### ALGORITHM
+
+This is the algorithm that the ssh uses to form connections it can be set to "rsa", or, "ecdsa"
+
+------
+
+### USER
+
+This is the user that the scripts is running as. It can be set, as, USER="root" and so on
+
+--------
+
+### CLOUDHOST_USERNAME
+
+This is the username of the for the cloudhost, it can be set - CLOUDHOST_USERNAME="root", for example
+
+-------- 
+
+### CLOUDHOST_PASSWORD
+
+This is the password of the for the cloudhost, it can be set - CLOUDHOST_PASSWORD="password", for example
+THIS MUST BE SET FOR ALL LINODE DEPLOYMENTS. THE BUILD WILL FAIL FOR LINODE IF A CLOUDHOST_PASSWORD IS NOT SET
+
+----------
