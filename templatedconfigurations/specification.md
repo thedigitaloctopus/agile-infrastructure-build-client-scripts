@@ -535,7 +535,50 @@ If you are using an SSH tunnel, you need to set this value to the IP address of 
 
 -----
 
+### TOKEN
 
+Some providers use personal access tokens rather than access keys and secret keys. In such a case, the personal access token can be stored in this variable. If the provider uses a personal access token, you can store it here, basically, othewise presume that an access key and a secret key are utilised.
 
-export TOKEN=""
+-----
+
+### APPLICATION_NAME
+
+The APPLICATION_NAME corresponds to the APPLICATION IDENTIFIER
+
+APPLICATION IDENTIFIER       |     APPLICATION NAME
+        1                    |    JOOMLA APPLICATION
+        2                    |    WORDPRESS APPLICATION
+        3                    |    DRUPAL APPLICATION
+        4                    |    MOODLE APPLICATION
+        
+-----
+
+### SSL_GENERATION_METHOD
+
+This can be set to "AUTOMATIC" or "MANUAL". If it is set to automatic, then an attempt to provision an SSL certificate from an automated authority will be made. If it is set to manual, you will have to manually obtain and present your own certificate. 
+
+-----
+
+### SSL_GENERATION_SERVICE="LETSENCRYPT"
+
+When SSL_GENERATION_METHOD="AUTOMATIC", this should be set to "LETSENCRYPT" otherwise it should be left blank
+
+------
+
+### MAPS_API_KEY
+
+This is purely a convenience. If your application wordpress, joomla or whatever uses a maps solution, you can place your maps API key here for reference and you can then access it through your server file system if you need to instead of authenticating with the provider and so on. 
+
+-----
+
+### PHP_MODE,PHP_MAX_CHILDREN, PHP_START_SERVERS, PHP_MIN_SPARE_SERVERS,PHP_MAX_SPARE_SERVERS,PHP_PROCESS_IDLE_TIMEOUT
+
+You can set these values according to the PHP spec. You can leave all of these blank in order to accept the default values that PHP ships with, but, if you want more control, then you can set these values here and your PHP system will be configured to use them. You need to know what you are doing to set these.
+
+PHP_MODE, for example can be set to, "static", "dynamic" or "on demand". When you set these modes, you need to set the other parameters appropriate to that mode.  
+
+Let me know if you think further PHP settings should be configurable like this. It's a centralised way to do it. Alter them here and all your servers will reflect your desire. 
+
+----
+
 
