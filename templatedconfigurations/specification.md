@@ -535,10 +535,7 @@ If you are using an SSH tunnel, you need to set this value to the IP address of 
 
 -----
 
-export DOMAIN_ADMIN_PASSWD=""
-export SITE_ADMIN_PASSWD=""
-export FIRST_USER_PASSWD=""
-export ASIP=""
-export ASIP_PRIVATE=""
+
+
 export TOKEN=""
-export DBaaS_DBNAME=""
+
