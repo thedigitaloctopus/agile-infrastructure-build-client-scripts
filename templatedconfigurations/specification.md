@@ -1,6 +1,6 @@
 ### S3_ACCESS_KEY and S3_SECRET_KEY
 
-These grant you access to manipulate an object store. Under the principle of least privileges, you should grant as few privileges to these keys wen you create them as possible.
+These grant you access to manipulate an object store. Under the principle of least privileges, you should grant as few privileges to these keys wen you create them as possible. The DATASTORE_CHOICE setting (see below) will determine which Object Storage you are using and you will need to generate access keys appropriate to that setting. 
 
 You can get your S3_ACCESS_KEY and S3_SECRET KEY as follows:
 
@@ -442,7 +442,7 @@ This is the password of the for the cloudhost, it can be set - CLOUDHOST_PASSWOR
 When you run the AgileDeploymentToolkit.sh method of building your deployment, it will guide you through questions and answers and from that build a configuration. This configutation will be located at: ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}. This file is created right at the very end of a successful build process and not before. Once this file has been created, you can either use it to craft a template as ${BUILD_HOME}/templateconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}[n].tmpl for repeated usage or you can rerun the AgileDeploymentToolkit.sh script and when promoted choose to reuse this configuration file. When a configuration from a previous build is being used, this will be set to "1" otherwise it will be set to "0". This should be set to "0" if you are building from a template using the ExpeditedAgileDeploymentToolkit process.  
 
 ------
-### WSIP, WSIP_PRIVATE, DBaaS_REMOTE_SSH_PROXY_IP,DBIP,DBIP_PRIVATE,ASI,ASIP_PRIVATE,BUILD_CLIENT_IP
+### WSIP, WSIP_PRIVATE,DBIP,DBIP_PRIVATE,ASI,ASIP_PRIVATE,BUILD_CLIENT_IP
 
 These are all IP addresses for the various machine types that can be used as part of the build process. None of them need to be set in the template itself. They variables are there as place holders and if a template has been used, the script will populate them with the actual values for you to review if you need to. Suffice to say, in a default template, all these values should be set to "".
 
@@ -474,3 +474,71 @@ INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
 
 -----
 
+### DATASTORE_CHOICE
+
+This value determines who your object store provider will be (very likely the same as your compute services provider, but, doesn't have to be)
+DATASTORE_CHOICE should be set to one of the following values:
+ 
+ For Amazon S3: "amazonS3"
+ For DigitalOcean spaces: "digitalocean" 
+ For Exoscale Object Store: "exoscale" 
+ For Linode Object Store: "linode"
+ For Vultr Object Store: "vultr"
+ 
+ -----
+ 
+### DBaaS_HOSTNAME
+
+If you are using a managed database this will be the hostname of your managed database, for example, tester.cdfij3fddo74b.eu-west-1.rds.amazonaws.com or of some other similar format for another provider. If there are pubic and private hostnames available, you should choose the private one.
+
+-----
+
+### DBaaS_USERNAME
+
+If you are using a managed database, this will be the username that you set for your database.
+
+------
+
+#### DBaaS_PASSWORD
+
+If you are using a managed database, this will be the password that you set for your database.
+
+------
+
+#### DBaaS_DBNAME
+
+If you are using a managed database, this will be the name that you set for your database.
+
+------
+
+### DATABASE_DBaaS_INSTALLATION_TYPE
+
+If you are using a managed database this should correspond to the type of database you are deploying and can be set to one of, "Maria", "MySQL" or "Postgres". 
+
+------
+
+### DEFAULT_DBaaS_OS_USER 
+
+If you are using an SSH tunnel to a DBaaS provider, just to complicate things, sometimes linux is deployed with a different default user other than root sometimes, it is 'ubuntu'. When we are secure shelling onto your ssh tunnel cloud server, we need to make sure we get the default user name right. So, it is probably root, but check with your provider how they set up the default user. So, please input the default user for your DBaaS cloud host, probably 'root', but please check. I have seen the default user set to "root", "debian" and "ubuntu". If you are SSH tunneling you will likely need to set the default user to one of these values.
+
+-----
+
+### DBaaSDBSECURITYGROUP
+
+If you are using an AWS managed database then the database will have a security group of the format: "sg-0fad5hf744c044361". You need to find the security group of your managed database and paste the sg- value here. It will not build with
+
+-----
+
+### DBaaS_REMOTE_SSH_PROXY_IP
+
+If you are using an SSH tunnel, you need to set this value to the IP address of the remote machine that you are proxying through.
+
+-----
+
+export DOMAIN_ADMIN_PASSWD=""
+export SITE_ADMIN_PASSWD=""
+export FIRST_USER_PASSWD=""
+export ASIP=""
+export ASIP_PRIVATE=""
+export TOKEN=""
+export DBaaS_DBNAME=""
