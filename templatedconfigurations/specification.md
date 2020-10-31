@@ -196,6 +196,8 @@ Drupal DIRECTORIES_TO_MOUNT="
 
 export DIRECTORIES_TO_MOUNT="wp-content.uploads"
 
+----- 
+
 ### PRODUCTION and DEVELOPMENT
 
 These settings are twinned. It only makes sense for them to be in one of two configurations:
@@ -205,38 +207,69 @@ Development mode : PRODUCTION="0", DEVELOPMENY="1"
 
 These settings must be altered as a pair. When in production, an autoscaler or autoscalers are deployed and you can set NUMBER_WS. On the autoscaler machine you can modify ${HOME}/config/scalingprofile/profile.cfg to set the number of webservers to deploy and also, in the crontab, you can set ScaleUp and ScaleDown script parameters to enable a time up and time down scaling. For example, you might scale up to 5 webservers at 7:30 AM each morning using the crontab in expectation of daily usage and scale back down to (not less than 2) for resilence at 11:30 in anticipation of a quiet night. 
 
+-----
+
 ### NUMBER_WS
 
 This will set the number of webservers to deploy by default. If you set this to 3, for example, then 3 webservers will be spun up by default
+
+-----
 
 ### SUPERSAFE_WEBROOT
 
 Ordinarily, backups are made to the git repository provider that your application sourcecode is hosted with. These can be HOURLY, DAILY, WEEKLY, MONTHLY, BIMONTHLY.
 Backups that can be made to repositories have a data limit, so, if your application sourcecode ever exceeds this limit in some way, then, you will need supersafe backups which makes a backup to your S3 datastore as well as your git provider. You will likely want to have this switched on for piece of mind. You know that if anything happens to your git backups, you have second backups in your datastore. Backup and backup again. If backups can't be found in git, then, the scripts look in the datastore for them and uses backups found there instead. 
 
+-----
 ### SUPERSAFE_DB
 
 This is the same as SUPERSAFE_WEBROOT, but, for your application database files. SUPERSAFE_DB AND SUPERSAFE_WEBROOT should be set together to either on or off. If one is on, they should both be on. 
+
+-----
 
 ### WEBSERVER_CHOICE
 
 You have a choice of webserver that you want to deploy to. You can set this to "NGINX, "APACHE" or "LIGHTTPD". What you set this to will determine which webserver gets installed and used. 
 
+-----
+
 ### DATABASE_INSTALLATION_TYPE
 
 If you are installing a database on a VPS system, you have three types of database you can choose from by default. Obviously, your choice here has to be supported by your CMS system. The three choices are: "Maria", "MySQL", and "Postgres"
+
+----
 
 ### DISABLE_HOURLY
 
 This is just a flag to disable hourly backups which you might want to do, if your backups were incurring you costs in some way. When this is set to "1", no hourly backups are made. When it is set to "0", hourly backups are made as usual. 
 
+-----
+
 ### SERVER_TIMEZONE_CONTINENT
 
+This is the continent where your servers are located. You can get a list of continents by issuing the following commands:
+
+pushd .
+cd /usr/share/zoneinfo/posix && /usr/bin/find * -type f -or -type l | /usr/bin/sort | /usr/bin/awk -F'/' '{print $1}' | /usr/bin/uniq | /bin/sed ':a;N;$!ba;s/\n/ /g'
+popd 
+
+-----
+
 ### SERVER_TIMEZONE_CITY
+
+This is the city where your servers are located. You can get a list of cities by issuing the following commands:
+
+pushd .
+cd /usr/share/zoneinfo/posix && /usr/bin/find * -type f -or -type l | /usr/bin/sort | /usr/bin/awk -F'/' '{print $2}' | /usr/bin/uniq | /bin/sed ':a;N;$!ba;s/\n/ /g'
+popd 
+
+-----
 
 ### DB_PORT
 
 This is the port that your Database will be listening on. BE SURE that if you are using a managed database that you set this value to be the same as the port that you set when you setup the managed DB. If it is different, obviously, the scripts will not collect and things will go south. 
+
+-----
 
 ### SSH_PORT
 
