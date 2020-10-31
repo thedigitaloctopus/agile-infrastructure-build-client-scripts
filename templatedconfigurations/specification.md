@@ -440,3 +440,37 @@ This is the password of the for the cloudhost, it can be set - CLOUDHOST_PASSWOR
 ### PREVIOUS_BUILD_CONFIG
 
 When you run the AgileDeploymentToolkit.sh method of building your deployment, it will guide you through questions and answers and from that build a configuration. This configutation will be located at: ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}. This file is created right at the very end of a successful build process and not before. Once this file has been created, you can either use it to craft a template as ${BUILD_HOME}/templateconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}[n].tmpl for repeated usage or you can rerun the AgileDeploymentToolkit.sh script and when promoted choose to reuse this configuration file. When a configuration from a previous build is being used, this will be set to "1" otherwise it will be set to "0". This should be set to "0" if you are building from a template using the ExpeditedAgileDeploymentToolkit process.  
+
+------
+### WSIP, WSIP_PRIVATE, DBaaS_REMOTE_SSH_PROXY_IP,DBIP,DBIP_PRIVATE,ASI,ASIP_PRIVATE,BUILD_CLIENT_IP
+
+These are all IP addresses for the various machine types that can be used as part of the build process. None of them need to be set in the template itself. They variables are there as place holders and if a template has been used, the script will populate them with the actual values for you to review if you need to. Suffice to say, in a default template, all these values should be set to "".
+
+------
+
+### GIT_USER, GIT_EMAIL_ADDRESS
+
+These are the values for the git user that your commits are made by. Obviously, I don't know what those will be, so they are set to some placeholder values in the templates I have provided, but, you can change them to your own values, of course. These values correspong to **git config --global user.name "Template User"** and  **git config --global user.email "templateuser@dummyemailX1.com"** 
+
+-----
+
+### APPLICATION_REPOSITORY_TOKEN
+
+This is a gitlab and github specific token. When you have a private application repository with gitlab or github, you need to generate a private auithorisation token.
+For github, you can do this by logging into your account and going to: https://github.com/settings/tokens and then generate one
+    gitlab, you can do this by logging into your account with them and clicking on Profile Settings -> Access Tokens and then generating one"
+The token that you generate can be placed here in your template instead of a password (for your application repositories)
+
+-----
+
+### INFRASTRUCTURE_REPOSITORY_PROVIDER, INFRASTRUCTURE_REPOSITORY_OWNER,INFRASTRUCTURE_REPOSITORY_USERNAME,INFRASTRUCTURE_REPOSITORY_PASSWORD
+
+Unless I move the infrastructure repositories to bitbucket or gitlab, these values will ALWAYS need to be set as follows
+
+INFRASTRUCTURE_REPOSITORY_PROVIDER="github"
+INFRASTRUCTURE_REPOSITORY_OWNER="agile-deployer"
+INFRASTRUCTURE_REPOSITORY_USERNAME="agile-deployer"
+INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
+
+-----
+
