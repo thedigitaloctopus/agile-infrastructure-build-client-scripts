@@ -285,13 +285,13 @@ This enables you to switch off the DIRECTORIES_TO_MOUNT procedure. You might wan
 
 ### BUILD_CHOICE
 
-If set to "1", this means that you are installing a virgin CMS system, for example, Joomla, Wordpress, Moodle or Drupal
-If set to "2", this means that you are deploying a baseline of an application you have customised (see BASELINE_DB_REPOSITORY and APPLICATION_BASELINE_SOURCECODE_REPOSITORY ) also, BUILD_ARCHIVE_CHOICE needs to be set to "baseline
-If set to "3"  this means that you are deploying from an hourly backup of an application (availability dependent on DISABLE_HOURLY)
-if set to "4", this means that you are deploying from a daily backup of an application
-If set to "5"  this means that you are deploying from a weekly backup of an application
-If set to "6"  this means that you are deploying from a monthly backup of an application
-If set to "7"  this means that you are deploying from a bimonthly backup of an application
+If set to "0", this means that you are installing a virgin CMS system, for example, Joomla, Wordpress, Moodle or Drupal
+If set to "1", this means that you are deploying a baseline of an application you have customised (see BASELINE_DB_REPOSITORY and APPLICATION_BASELINE_SOURCECODE_REPOSITORY ) also, BUILD_ARCHIVE_CHOICE needs to be set to "baseline
+If set to "2"  this means that you are deploying from an hourly backup of an application (availability dependent on DISABLE_HOURLY)
+if set to "3", this means that you are deploying from a daily backup of an application
+If set to "4"  this means that you are deploying from a weekly backup of an application
+If set to "5"  this means that you are deploying from a monthly backup of an application
+If set to "6"  this means that you are deploying from a bimonthly backup of an application
 
 As long as you have backups in place, you can use this setting to roll back to a backup from up to two months previously, if you had some need to. 
 
