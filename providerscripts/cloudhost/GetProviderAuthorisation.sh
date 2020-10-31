@@ -65,7 +65,7 @@ then
         status "Press <enter> to continue"
         read x
     fi
-    TOKEN="`/bin/cat ~/.config/doctl/config.yaml | /bin/grep "access-token:" | /usr/bin/awk '{print $NF}'`"
+    TOKEN="`/bin/cat ~/.config/doctl/config.yaml | /bin/grep "access-token" | /usr/bin/awk '{print $NF}'`"
     /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN
 fi
 
