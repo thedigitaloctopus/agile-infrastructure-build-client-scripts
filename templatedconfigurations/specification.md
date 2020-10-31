@@ -76,7 +76,7 @@ You can set your ${S3_HOST_BASE} parameter in your template to one of these list
 
 These grant you access to compute resources with your cloud provider. Under the principle of least privileges, you should grant as few privileges to these keys wen you create them as possible.
 
-digital ocean -    @@@@@@@@@@@@@
+digital ocean - This does not need to be set for digital ocean, instead, see TOKEN= below
 
 ##### exoscale - Login to your exoscale account and go to the IAM menu (on the right) and generate a pair of API keys which have access to compute manipulation capabilities. The first key is the ACCESS_KEY which you can paste into your template for the ACCESS_KEY variable.
 
@@ -85,6 +85,22 @@ linode -  @@@@@@@@@@@@@@@'
 vultr - @@@@@@@@@@@@@@@@@
 
 ##### AWS - Under your IAM user, create a pair of keys which have compute manipulation capabilities and paste them into your template as ACCESS_KEY and SECRET_KEY
+
+-----
+
+### TOKEN
+
+Some providers use personal access tokens rather than access keys and secret keys. In such a case, the personal access token can be stored in this variable. If the provider uses a personal access token, you can store it here, basically, othewise presume that an access key and a secret key are utilised.
+
+##### digital ocean - Login to your digital ocean account and go to the API submenu (on the left bottom) and generate a "Digital Ocean Personal Access Token". This will give you a personal access token which you can paste into your template as the value of the TOKEN variable.
+
+##### exoscale - exoscale does not need this see ACCESS_KEY and SECRET_KEY
+
+##### linode
+
+##### Vultr
+
+##### AWS
 
 -----
 
@@ -191,8 +207,6 @@ The email address that system emails will be sent to this can be any email addre
 -----
 
 ### SYSTEM_FROMEMAIL_ADDRESS
-
------
 
 The email address that system emails will be sent from. This should be an email address that the system emails are sent from. In your SYSTEM_TOEMAIL_ADDRESS inbox, this will be the email address that the system messages are seen to be sent from or to have originated from.
 
@@ -556,12 +570,6 @@ If you are using an AWS managed database then the database will have a security 
 ### DBaaS_REMOTE_SSH_PROXY_IP
 
 If you are using an SSH tunnel, you need to set this value to the IP address of the remote machine that you are proxying through.
-
------
-
-### TOKEN
-
-Some providers use personal access tokens rather than access keys and secret keys. In such a case, the personal access token can be stored in this variable. If the provider uses a personal access token, you can store it here, basically, othewise presume that an access key and a secret key are utilised.
 
 -----
 
