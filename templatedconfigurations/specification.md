@@ -321,7 +321,7 @@ As long as you have backups in place, you can use this setting to roll back to a
 
 ----- 
 
-### BASELINE_DB_REPOSITORY="nuoc-db-baseline"
+### BASELINE_DB_REPOSITORY
 
 When you baseline your application database, you will need to create a repository <unique_identifier>-db-baseline. From here your baseline will be pulled during installation. 
 If for example, your unique identifier is "nuocialboss", then, the repository would be "nuocialboss-db-baseline" and 
@@ -330,11 +330,11 @@ BASELINE_DB_REPOSITORY would be set to "nuocialboss-db-baseline"
 
 -----
 
-### APPLICATION_BASELINE_SOURCECODE_REPOSITORY="nuocialboss-webroot-sourcecode-baseline"
+### APPLICATION_BASELINE_SOURCECODE_REPOSITORY
 
 When you baseline your application sourcecode, you will need to create a repository <unique_identifier>-webroot-sourcecode-baseline. From here your baseline will be pulled during installation. 
 
-If for example, your unique identifier is "nuocialboss", then, the repository would be "nuocialboss-webroot-sourcecode-baseline" and 
+If for example, your unique identifier is "nuocialboss", then, APPLICATION_BASELINE_SOURCECODE_REPOSITORY would be "nuocialboss-webroot-sourcecode-baseline" 
 
 -----
 
