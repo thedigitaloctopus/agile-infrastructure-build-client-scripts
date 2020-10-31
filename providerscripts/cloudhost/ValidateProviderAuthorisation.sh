@@ -43,7 +43,7 @@ then
            read response
            if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
            then
-               /bin/sed -i "/access-token/c access-token : ${TOKEN}" ~/.config/doctl/config.yaml
+               /bin/sed -i "/access-token/c access-token: ${TOKEN}" ~/.config/doctl/config.yaml
            fi
         fi
     else
