@@ -477,6 +477,7 @@ status ""
 status ""
 
 . ${BUILD_HOME}/templatedconfigurations/ConfigureTemplate.sh
+. ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 
