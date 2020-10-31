@@ -1,4 +1,4 @@
-######################YOU WILL NEED AN EXOSCALE ACCOUNT AND A CLOUDFLARE ACCOUNT FOR THIS TEMPLATE##############################
+######################YOU WILL NEED AN DIGITAL OCEAN ACCOUNT AND A CLOUDFLARE ACCOUNT FOR THIS TEMPLATE##############################
 ######################OPTIONALLY, IF YOU WANT SYSTEM EMAILS, YOU WILL NEED AN SMTP SERVER AVAILABLE#############################
 ######################CURRENTLY SUPPORTED ARE, GOOGLE, SENDPULSE AND AMAZON SES#################################################
 ######################AS A MINIMUM REVIEW AND SET ALL VARIABLES MARKED "MANDATORY"##############################################
@@ -23,9 +23,9 @@ export DEFAULT_USER="root" ####This should always be 'root' on digital ocean
 ##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
 ##########################THESE NEXT VARIABLES ARE RELATED TO THE APPLICATION FUNCTIONING########################################
 #################################################################################################################################
-export WEBSITE_DISPLAY_NAME="Nuocial" #MANDATORY  
-export WEBSITE_NAME="nuocial" #MANDATORY - This is the exact value of the core of your WEBSITE_URL, for example, www.nuocial.org.uk would be nuocial  
-export WEBSITE_URL="ok7.nuocial.org.uk"  #MANDATORY
+export WEBSITE_DISPLAY_NAME="" #MANDATORY  
+export WEBSITE_NAME="" #MANDATORY - This is the exact value of the core of your WEBSITE_URL, for example, www.nuocial.org.uk would be nuocial  
+export WEBSITE_URL=""  #MANDATORY
 export APPLICATION_REPOSITORY_PROVIDER="bitbucket"
 export APPLICATION_REPOSITORY_OWNER="agiledeployer"
 export APPLICATION_REPOSITORY_USERNAME="agiledeployer"
@@ -69,7 +69,7 @@ export AS_SIZE="1gb"
 export AS_SERVER_TYPE="1gb"
 export CLOUDHOST="digitalocean"
 export MACHINE_TYPE="DROPLET"
-export ALGORITHM="rsa"
+export ALGORITHM="ecdsa"
 export USER="root"
 export CLOUDHOST_USERNAME="root"
 export CLOUDHOST_PASSWORD=""
