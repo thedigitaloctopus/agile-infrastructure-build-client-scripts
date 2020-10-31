@@ -1,3 +1,27 @@
+### APPLICATION
+
+This can be set to one of "joomla", "wordpress", "drupal", "moodle"
+
+---- 
+
+### JOOMLA_VERSION
+
+If you are deploying a virgin joomla installation, you must give the version number of joomla that you are deploying here. In such a template, you will likely want to update this version number to be the latest available.
+
+---- 
+
+### DRUPAL_VERSION
+
+If you are deploying a virgin drupal installation, you must give the version number of drupal that you are deploying here. In such a template, you will likely want to update this version number to be the latest available.
+
+---- 
+
+### APPLICATION_BASELINE_SOURCECODE_REPOSITORY
+
+If you are deploying a virgin application, you can set this to "JOOMLA:{latest_version}", "WORDPRESS", "DRUPAL:{latest_version}" or "MOODLE"
+
+-----
+
 ### S3_ACCESS_KEY and S3_SECRET_KEY
 
 These grant you access to manipulate an object store. Under the principle of least privileges, you should grant as few privileges to these keys wen you create them as possible. The DATASTORE_CHOICE setting (see below) will determine which Object Storage you are using and you will need to generate access keys appropriate to that setting. 
