@@ -371,12 +371,26 @@ For the Database, the autoscaler and the webserver, you can set their individual
 Available sizes to choose from are:
 
 Digital Ocean: @@@@@@@@@@@@@@@@@
-Exoscale: '@@@@@@@@@@@@@@@@@@@@@
+Exoscale: 10G,50G,200G,300G,400G
 Linode: @@@@@@@@@@@@@@@@@
 Vultr: @@@@@@@@@@@@@@@@
 AWS: @@@@@@@@@@@@@@@@@
 
 -------
+
+### DB_SERVER_TYPE
+
+For each machine size DB_SIZE it needs to have the appropriate machine type set. The following machine types correspond to the appropriate _SIZE parameter directly above
+
+DigitalOcean: @@@@@@@@@@@@@@@@
+Exoscale:  DB_SERVER_TYPE for each machine size. If your machine is set to 10G : "b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8"
+                                                                           50G : "b6e9d1e8-89fc-4db3-aaa4-9b4c5b1d0844"
+                                                                          100G : "c6f99499-7f59-4138-9427-a09db13af2bc"
+                                                                          200G : "350dc5ea-fe6d-42ba-b6c0-efb8b75617ad"
+                                                                          400G : "a216b0d1-370f-4e21-a0eb-3dfc6302b564"
+Linode: @@@@@@@@@@@@@@@@@@@@@@@@
+Vultr:  @@@@@@@@@@@@@@@@@@@@@@@@
+AWS  :  @@@@@@@@@@@@@@@@@@@@@@@@
 
 ### CLOUDHOST
 
