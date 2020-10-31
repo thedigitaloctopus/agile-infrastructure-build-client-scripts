@@ -275,19 +275,23 @@ do
             case  ${response}  in
                 1)       
                     CLOUDHOST="digitalocean"
-		    ${BUILD_HOME}/installscripts/InstallDoctl.sh ${BUILDOS}
+                    ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
                     ;;
                 2)
                     CLOUDHOST="exoscale"
+                    ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
                     ;;            
                 3)       
                     CLOUDHOST="linode"
+		    ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
                     ;;
                 4)       
                     CLOUDHOST="vultr"
+		    ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
                     ;;
                 5)       
                     CLOUDHOST="aws"
+		    ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
                     ;;
                 *)
            esac 
