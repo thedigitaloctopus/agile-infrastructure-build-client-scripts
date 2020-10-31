@@ -19,6 +19,7 @@ status "######################################################################"
 status "" 
 status "You can use one of these default templates or you can make your own and place it in the ${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST} directory"
 status "with the nomenclature, ${CLOUDHOST}[templatenumber].tmpl"
+status "Templating specification is available at ${BUILDHOME}/templatedconfigurations/specification.md - you might want to print it out for reference before altering any template"
 status "" 
 status "#############AVAILABLE TEMPLATES#####################"
 
