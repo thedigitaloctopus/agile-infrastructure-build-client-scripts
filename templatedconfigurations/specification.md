@@ -374,7 +374,7 @@ This is the region id where you wish to deploy the servers to.
 
 Available region ids to choose from for each provider are:
 
-Digital Ocean: @@@@@@@@@@@@@@@
+Digital Ocean: Available region IDs you can set for digital ocean are: "nyc1","sfo1","nyc2","ams2","sgp1","lon1","nyc3","ams3","fra1","tor1","sfo2","blr1","sfo3"
 Exoscale: Available region IDs you can set for exoscale are:
                                                            for region ch-gva-2 regionid = "1128bd56-b4d9-4ac6-a7b9-c715b187ce11"
                                                            for region ch-dk-2  regionid = "91e5e9e4-c9ed-4b76-bee4-427004b3baf9"
@@ -394,7 +394,7 @@ For the Database, the autoscaler and the webserver, you can set their individual
 
 Available sizes to choose from are:
 
-Digital Ocean: @@@@@@@@@@@@@@@@@
+Digital Ocean: 512mb,1gb,2gb,4gb,8gb,16gb,32gb,48gb,64gb (there are other sizes, but, restricting to these keeps in simple for most uses)
 Exoscale: 10G,50G,200G,300G,400G
 Linode: @@@@@@@@@@@@@@@@@
 Vultr: @@@@@@@@@@@@@@@@
@@ -406,7 +406,7 @@ AWS: @@@@@@@@@@@@@@@@@
 
 For each machine size DB_SIZE it needs to have the appropriate machine type set. The following machine types correspond to the appropriate _SIZE parameter directly above
 
-DigitalOcean: @@@@@@@@@@@@@@@@
+DigitalOcean: 512mb,1gb,2gb,4gb,8gb,16gb,32gb,48gb,64gb
 Exoscale:  DB_SERVER_TYPE for each machine size. If your machine is set to 10G : "b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8"
                                                                            50G : "b6e9d1e8-89fc-4db3-aaa4-9b4c5b1d0844"
                                                                           100G : "c6f99499-7f59-4138-9427-a09db13af2bc"
