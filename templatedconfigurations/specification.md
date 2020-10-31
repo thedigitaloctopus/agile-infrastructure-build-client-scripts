@@ -274,3 +274,47 @@ This is the port that your Database will be listening on. BE SURE that if you ar
 ### SSH_PORT
 
 This is the port that the SSH daemon will be listening on for connections. You can set this as you would normally set a port. Obviously, the port you set has to be free on your server. The firewall will work with whatever setting you set and allow connections to that port. 
+
+-----
+
+### PERSIST_ASSETS_TO_CLOUD
+
+This enables you to switch off the DIRECTORIES_TO_MOUNT procedure. You might want to do this if you are in development mode and you don't need to share assets between multiple webservers. If this is set to "0" it means that the assets you generate whilst you are developing are stored on the webservers local file system and not in the S3 datastore. It means that the assets can't be shared, but, there might be a performance increase if you are interested in that. 
+
+-----
+
+### BUILD_CHOICE
+
+If set to "1", this means that you are installing a virgin CMS system, for example, Joomla, Wordpress, Moodle or Drupal
+If set to "2", this means that you are deploying a baseline of an application you have customised (see BASELINE_DB_REPOSITORY and APPLICATION_BASELINE_SOURCECODE_REPOSITORY ) also, BUILD_ARCHIVE_CHOICE needs to be set to "baseline
+If set to "3"  this means that you are deploying from an hourly backup of an application (availability dependent on DISABLE_HOURLY)
+if set to "4", this means that you are deploying from a daily backup of an application
+If set to "5"  this means that you are deploying from a weekly backup of an application
+If set to "6"  this means that you are deploying from a monthly backup of an application
+If set to "7"  this means that you are deploying from a bimonthly backup of an application
+
+As long as you have backups in place, you can use this setting to roll back to a backup from up to two months previously, if you had some need to. 
+
+----- 
+
+### BASELINE_DB_REPOSITORY="nuoc-db-baseline"
+
+When you baseline your application database, you will need to create a repository <unique_identifier>-db-baseline. From here your baseline will be pulled during installation. 
+If for example, your unique identifier is "nuocialboss", then, the repository would be "nuocialboss-db-baseline" and 
+
+BASELINE_DB_REPOSITORY would be set to "nuocialboss-db-baseline"
+
+-----
+
+### APPLICATION_BASELINE_SOURCECODE_REPOSITORY="nuocialboss-webroot-sourcecode-baseline"
+
+When you baseline your application sourcecode, you will need to create a repository <unique_identifier>-webroot-sourcecode-baseline. From here your baseline will be pulled during installation. 
+
+If for example, your unique identifier is "nuocialboss", then, the repository would be "nuocialboss-webroot-sourcecode-baseline" and 
+
+-----
+
+export BUILD_ARCHIVE_CHOICE="baseline"
+export APPLICATION_LANGUAGE="PHP"
+export APPLICATION_IDENTIFIER="2"
+export PHP_VERSION="7.4"
