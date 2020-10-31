@@ -351,7 +351,13 @@ This is the region id where you wish to deploy the servers to.
 Available region ids to choose from for each provider are:
 
 Digital Ocean: @@@@@@@@@@@@@@@
-Exoscale: @@@@@@@@@@@@@@@@@@@@
+Exoscale: Available region IDs you can set for exoscale are:
+                                                           for region ch-gva-2 regionid = "1128bd56-b4d9-4ac6-a7b9-c715b187ce11"
+                                                           for region ch-dk-2  regionid = "91e5e9e4-c9ed-4b76-bee4-427004b3baf9"
+                                                           for region at-vie-1 regionid = "4da1b188-dcd6-4ff5-b7fd-bde984055548"
+                                                           for region de-fra-1 regionid = "35eb7739-d19e-45f7-a581-4687c54d6d02"
+                                                           for region bg-sof-1 regionid = "70e5f8b1-0b2c-4457-a5e0-88bcf1f3db68"
+                                                           for region de-muc-1 regionid = "85664334-0fd5-47bd-94a1-b4f40b1d2eb7"
 Linode: @@@@@@@@@@@@@@@@
 Vultr: @@@@@@@@@@@@@@@
 AWS: @@@@@@@@@@@@@@@@
