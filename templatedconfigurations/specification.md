@@ -76,7 +76,7 @@ You can set your ${S3_HOST_BASE} parameter in your template to one of these list
 
 These grant you access to compute resources with your cloud provider. Under the principle of least privileges, you should grant as few privileges to these keys wen you create them as possible.
 
-digital ocean - This does not need to be set for digital ocean, instead, see TOKEN= below
+##### digital ocean - This does not need to be set for digital ocean, instead, see TOKEN= below
 
 ##### exoscale - Login to your exoscale account and go to the IAM menu (on the right) and generate a pair of API keys which have access to compute manipulation capabilities. The first key is the ACCESS_KEY which you can paste into your template for the ACCESS_KEY variable.
 
@@ -96,11 +96,11 @@ Some providers use personal access tokens rather than access keys and secret key
 
 ##### exoscale - exoscale does not need this see ACCESS_KEY and SECRET_KEY
 
-##### linode
+##### linode - @@@@@@@@@@@@@@@
 
-##### Vultr
+##### Vultr - @@@@@@@@@@@@@@@@
 
-##### AWS
+##### AWS - @@@@@@@@@@@@@@@@@
 
 -----
 
