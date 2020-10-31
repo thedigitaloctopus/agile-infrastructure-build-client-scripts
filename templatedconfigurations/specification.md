@@ -580,5 +580,60 @@ PHP_MODE, for example can be set to, "static", "dynamic" or "on demand". When yo
 Let me know if you think further PHP settings should be configurable like this. It's a centralised way to do it. Alter them here and all your servers will reflect your desire. 
 
 ----
+ 
+### IN_MEMORY_CACHING, IN_MEMORY_CACHING_PORT,IN_MEMORY_CACHING_HOST, IN_MEMORY_CACHING_SECURITY_GROUP
 
+If you are using an IN-MEMORY caching solution such as Elasticache on AWS, then, you can set your caching relevant settings here.
 
+IN_MEMORY_CACHING can be set to "redis", or "memcache"
+IN_MEMORY_CACHING_PORT is the port that the caching service is running on
+IN_MEMORY_CACHING_HOST is the host that the caching service is running on
+IN_MEMORY_CACHING_SECURITY_GROUP is the (where appropriate) security group that the caching service is running in.
+
+-----
+
+### ENABLE_EFS
+
+If you are using AWS EFS, then, you can set this to "1" in all other cases, this should be "0"
+
+------
+
+### SUBNET_ID
+
+If you are using AWS, you must set this to the subnet ID of your servers. In all other cases it should be blank. 
+
+-----
+
+#### AUTOSCALE_FROM_SNAPSHOTS
+
+If you have built from snapshots, set this to "1" to have your webservers  built during a scaling event be built from your snapshots.
+
+-----
+
+### GENERATE_SNAPSHOTS
+
+If you are doing a build to generate snapshots ready for future builds to deploy from, you can set GENERATE SNAPSHOTS to "1" otherwise it should be "0"
+
+----
+
+### SNAPSHOT_ID
+
+The snapshot ID is the first four characters of the snapshots that you are going to build your servers from
+
+------
+
+### WEBSERVER_IMAGE_ID, AUTOSCALER_IMAGE_ID,DATABASE_IMAGE_ID
+
+These are the full IDs of the images that your servers will be built off if you build using snapshots you have generated.
+
+-----
+
+### DRUPAL_VERSION
+
+This is specific to the drupal application. You set it to be the version of drupal that you want to deploy which will likely be the latest version
+
+-----
+
+### JOOMLA_VERSION
+
+This is specific to the joomla application. You set it to be the version of joomla that you want to deploy which will likely be the latest version
