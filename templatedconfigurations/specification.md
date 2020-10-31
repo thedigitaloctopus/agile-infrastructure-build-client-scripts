@@ -314,7 +314,28 @@ If for example, your unique identifier is "nuocialboss", then, the repository wo
 
 -----
 
-export BUILD_ARCHIVE_CHOICE="baseline"
-export APPLICATION_LANGUAGE="PHP"
-export APPLICATION_IDENTIFIER="2"
-export PHP_VERSION="7.4"
+### BUILD_ARCHIVE_CHOICE
+
+You need to set BUILD_ARCHIVE_CHOICE based on where you are deploying from. The settings can be as follows for each option:
+
+ BUILD_ARCHIVE_CHOICE="baseline"
+ BUILD_ARCHIVE_CHOICE="hourly"
+ BUILD_ARCHIVE_CHOICE="daily"
+ BUILD_ARCHIVE_CHOICE="weekly"
+ BUILD_ARCHIVE_CHOICE="monthly"
+ BUILD_ARCHIVE_CHOICE="bimonthly"
+
+-----
+
+### APPLICATION_LANGUAGE
+
+You can set this to "HTML" or "PHP" based on the language you are deploying for.
+
+------
+
+### PHP_VERSION
+
+If you are deploying PHP, then you can set which version of PHP you are deploying here. Ordinarily, it should be the latest available version (currently 7.4).
+So, to use 7.4 you would set PHP_VERSION="7.4"
+
+-----
