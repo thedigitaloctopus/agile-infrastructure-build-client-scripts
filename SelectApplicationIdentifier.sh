@@ -55,7 +55,7 @@ response=""
 
 while ( [ "${response}" = "" ] || [ "`/bin/echo '0 1 2' | /bin/grep ${response}`" = "" ] )
 do
-    status "Please enter:" 
+    status "Please select one based on the application you are installing:" 
     status " 0) No Customisations (Virgin CMS installs of any type)"
     status "---------------------------------------------------------------------"
     status " 1) Customisations for the 'basic social network' joomla application"
