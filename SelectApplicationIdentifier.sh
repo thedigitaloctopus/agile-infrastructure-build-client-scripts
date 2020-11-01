@@ -56,9 +56,15 @@ response=""
 while ( [ "${response}" = "" ] || [ "`/bin/echo '0 1 2' | /bin/grep ${response}`" = "" ] )
 do
     status "Please enter:" 
-    status " 0) No Customisations"
-    status " 1) Customised for the basic Joomla Social Network"
-    status " 2) Customised for the basic Wordpress Social Network to select"
+    status " 0) No Customisations (Virgin CMS installs of any type)"
+    status "---------------------------------------------------------------------"
+    status " 1) Customisations for the 'basic social network' joomla application"
+    status "---------------------------------------------------------------------"
+    status " 2) Customisations required for the basic Wordpress 'Nuocial Boss'  application"
+    status "    Nuocial Boss baseline repositories are stored in bitbucket at the following urls:"
+    status "    Sourcecode: https://bitbucket.org/agiledeployer/nuocialboss-webroot-sourcecode-baseline"
+    status "    Database  : https://bitbucket.org/agiledeployer/nuocialboss-db-baseline"
+    status "---------------------------------------------------------------------"
     read response
 done
 
