@@ -524,6 +524,7 @@ if ( [ "${PREVIOUS_BUILD_CONFIG}" = "0" ] )
 then
     #Run through a whole sequence of steps to actually make sure we are ready to perform our build process
     . ${BUILD_HOME}/SelectApplicationIdentifier.sh
+    . ${BUILD_HOME}/SelectApplicationLanguage.sh
     . ${BUILD_HOME}/EnterDisplayName.sh
     . ${BUILD_HOME}/EnterWebsiteURL.sh
     . ${BUILD_HOME}/SelectWebserver.sh
