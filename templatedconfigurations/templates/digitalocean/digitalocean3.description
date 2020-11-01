@@ -1,0 +1,5 @@
+VIRGIN DEVELOPMENT MODE INSTALLATION OF WORDPRESS 
+-------------------------------------------------
+
+DETAIL: This template, as is, will deploy to London on Digital Ocean. It will deploy a Wordpress instance in development mode . You will need a Cloudflare account with your email address and global API key and you will also need a Digital Ocean account with a Personal Access Token and Digital Ocean Spaces keys. The first 25 export statements of the template require review and configuration and some of these are marked mandatory. You need to give the requisite API keys here so that the build can complete. 
+The database used by default is MySQL on a VPS and the webserver is Apache. 
