@@ -39,7 +39,7 @@ do
     status ""
     status "Description: ${templatedescription}"
     status ""
-    status "Press the <enter> key to see the next template or enter the template ID to select the template"
+    status "Press the <enter> key to see the next template or enter the template ID to select this template to build from"
     read response
 
     while ( [ "${response}" != "${templateid}" ]  && [ "${response}" != "" ] )
