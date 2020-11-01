@@ -1,9 +1,27 @@
-
-
-
-
-
-
+#!/bin/sh
+##################################################################################################################
+# Description: This where you set which application language you are deploying. In most cases it will likely be set
+# to PHP. The script also gives the deployer the ability to customise PHP settings ready for use within the PHP
+# server setup. Using this method, the settings can be set once at deployment time and built in to all servers 
+# that are deployed. 
+# Author : Peter C Winter
+# Date : 10/4/2017
+####################################################################################################################
+# License Agreement:
+# This file is part of The Agile Deployment Toolkit.
+# The Agile Deployment Toolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# The Agile Deployment Toolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
+#######################################################################################################
+#######################################################################################################
+#set -x
 
 #It is envisaged that in the future, more langauges will be supported. Java and so on.
 status "##################################################################"
