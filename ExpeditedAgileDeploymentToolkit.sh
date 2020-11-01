@@ -371,6 +371,7 @@ status "########################################################################
 status "Setting up and enabling the firewall to help lock down this machine"
 status "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
 status "########################################################################################################################"
+read x
 
 /usr/sbin/ufw default deny incoming
 /usr/sbin/ufw default allow outgoing
