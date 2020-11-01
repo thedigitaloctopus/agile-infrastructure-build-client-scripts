@@ -43,6 +43,7 @@ status ""
 status "##################################################################################################"
 status "We have some preconfigured applications which you may wish to deploy. If so, please select one "
 status "You can add your own custom built applications here as you require                             "
+status "Modifying this file would be part of 'installing' your application                             "
 status "##################################################################################################"
 status "Please enter one of:"
 status "0: to not install an application "
@@ -54,7 +55,10 @@ response=""
 
 while ( [ "${response}" = "" ] || [ "`/bin/echo '0 1 2' | /bin/grep ${response}`" = "" ] )
 do
-    status "Please enter 0),1) or 2) to select"
+    status "Please enter:" 
+    status " 0) No Customisations"
+    status " 1) Customised for the basic Joomla Social Network"
+    status " 2) Customised for the basic Wordpress Social Network to select"
     read response
 done
 
@@ -64,10 +68,10 @@ APPLICATION_NAME=""
 
 if ( [ "${APPLICATION_IDENTIFIER}" = "1" ] )
 then
-    APPLICATION_NAME="BASIC SOCIAL NETWORK"
+    APPLICATION_NAME="BASIC JOOMLA SOCIAL NETWORK "
 fi
 
 if ( [ "${APPLICATION_IDENTIFIER}" = "2" ] )
 then
-    APPLICATION_NAME="SIMPLE SOCIAL NETWORK"
+    APPLICATION_NAME="SIMPLE WORDPRESS SOCIAL NETWORK"
 fi
