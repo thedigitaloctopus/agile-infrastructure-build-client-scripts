@@ -1,4 +1,4 @@
-DEVELOPMENT MODE INSTALLATION OF AN HOURLY BACKED UP JOOMLA APPLICATION
+DEVELOPMENT or PRODUCTION MODE INSTALLATION OF AN HOURLY BACKED UP JOOMLA APPLICATION
 ---------------------------------------------------------------------------
 
 DETAIL: This template will spin up the a Joomla application on Digital Ocean in Amsterdam. It deploys to "1gb" machines and in production mode by default. By default you need to select debian 10 as the build OS. The database used is a Maria DB instance running on a VPS machine in the Digital Ocean cloud. The DNS provider is Cloudflare. You will need a Digital Ocean account and a Cloudflare account to be able to deploy this application.
