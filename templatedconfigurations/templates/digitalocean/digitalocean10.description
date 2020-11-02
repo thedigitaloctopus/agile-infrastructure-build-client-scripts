@@ -1,0 +1,3 @@
+THIS DEPLOYS THE NUOCIALBOSS APPLICATION USING THE DIGITAL OCEAN DNS SYSTEM
+
+This is the same as template 1, but, this time, the digital ocean DNS system is used instead of cloudflare. All of the templates so far have used cloudflare, so, this is an example of using a different DNS provider
