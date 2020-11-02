@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -x
+#set -x
 
 
 status ""
@@ -19,14 +19,16 @@ status "######################################################################"
 status "" 
 status "You can use one of these default templates or you can make your own and place it in the ${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST} directory"
 status "with the nomenclature, ${CLOUDHOST}[templatenumber].tmpl"
-status "Templating specification is available at ${BUILDHOME}/templatedconfigurations/specification.md - you might want to print it out for reference before altering any template"
 status "" 
 status "#############AVAILABLE TEMPLATES#####################"
 
-templates="`/bin/ls -l ${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST} | /bin/grep ".tmpl$" | /usr/bin/awk '{print NR  "> " $s}' | /usr/bin/awk '{print $NF}'`"
+/bin/ls -l ${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST} | /bin/grep ".tmpl$" | /usr/bin/awk '{print NR  "> " $s}' | /usr/bin/awk '{print $NF}' > /tmp/templates
+
+/usr/bin/sort -V -o /tmp/sortedtemplates /tmp/templates
+
 templateid="1"
 status "You can edit these templates directly if you wish to alter the configurations"
-for template in ${templates}
+for template in `/bin/cat /tmp/sortedtemplates`
 do
     status "###############################################################################################################"
     status "Template ID ${templateid}: ${template}"
@@ -39,7 +41,7 @@ do
     status ""
     status "Description: ${templatedescription}"
     status ""
-    status "Press the <enter> key to see the next template or enter the template ID to select this template to build from"
+    status "Press the <enter> key to see the next template or enter the template ID to select the template"
     read response
 
     while ( [ "${response}" != "${templateid}" ]  && [ "${response}" != "" ] )
@@ -58,7 +60,7 @@ do
     fi
 
     templateid="`/usr/bin/expr ${templateid} + 1`"
-done
+done 
 
 if ( [ "${chosen}" = "0" ] )
 then
