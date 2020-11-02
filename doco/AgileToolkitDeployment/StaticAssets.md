@@ -5,6 +5,7 @@ Here are your available options:
 1. Use an application level plugin to offload your assets automatically to an S3 compatible object storage system. These plugins are available for Wordpress, Joomla and so on. If you install one of these plugins into your application, then, all of your assets can be offloaded into the cloud and automatically shared between all of your webservers instantly. The limit to how many assets you can store is the limit of the S3 bucket, and obviously how deep your pockets are also. 
 
 Here is how you can offload your wordpress static assets to S3 and use a CDN:  https://www.codeinwp.com/blog/wordpress-s3-guide/
+Here is an extension you can use to offload your assets for joomla to S3 https://extensions.joomla.org/extension/ja-amazon-s3/
 
 2. At a systems level, you can set things up such that services such as Elastic File System (available on AWS) or an S3 bucket mounted as a file system using S3FS. The EFS solution is a very good solution because you can have (up to) petabytes of data and it is fast. Using S3FS should be an option of last resort, because, as someone said, S3 is not really for filesystems. S3FS will work, to an extent, but, option 1 is the preferable option even though it means more complexity in the application.
 
