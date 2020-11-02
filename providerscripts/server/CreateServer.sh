@@ -27,8 +27,7 @@ server_size="${3}"
 server_name="${4}"
 key_id="${5}"
 cloudhost="${6}"
-snapshot_id="${8}"
-
+snapshot_id="${9}"
 
 if ( [ "${cloudhost}" = "digitalocean" ] )
 then
@@ -112,7 +111,7 @@ server_plan="${3}"
 server_name="${4}"
 key_id="${5}"
 cloudhost="${6}"
-snapshot_id="${8}"
+snapshot_id="${9}"
 
 if (  [ "${cloudhost}" = "vultr" ] )
 then
