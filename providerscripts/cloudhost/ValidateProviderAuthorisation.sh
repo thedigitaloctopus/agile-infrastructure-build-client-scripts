@@ -47,7 +47,8 @@ then
            fi
         fi
     else
-        /usr/local/bin/doctl auth init
+        export DIGITALOCEAN_ACCESS_TOKEN="${TOKEN}"
+        /usr/local/bin/doctl auth init >&3
     fi
     /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
 fi
