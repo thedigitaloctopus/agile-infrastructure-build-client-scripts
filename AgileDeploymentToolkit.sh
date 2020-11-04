@@ -406,6 +406,18 @@ fi
 /bin/echo "export CLOUDHOST_USERNAME=\"${CLOUDHOST_USERNAME}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/sed -i '/CLOUDHOST_PASSWORD=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/echo "export CLOUDHOST_PASSWORD=\"${CLOUDHOST_PASSWORD}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/sed -i '/AUTOSCALE_FROM_SNAPSHOTS=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/echo "export AUTOSCALE_FROM_SNAPSHOTS=\"${AUTOSCALE_FROM_SNAPSHOTS}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/sed -i '/WEBSERVER_SNAPSHOT_NAME=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/echo "export WEBSERVER_SNAPSHOT_NAME=\"${WEBSERVER_SNAPSHOT_NAME}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/sed -i '/WEBSERVER_IMAGE_ID=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/echo "export WEBSERVER_IMAGE_ID=\"${WEBSERVER_IMAGE_ID}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/sed -i '/AUTOSCALER_IMAGE_ID=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/echo "export AUTOSCALER_IMAGE_ID=\"${AUTOSCALER_IMAGE_ID}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/sed -i '/DATABASE_IMAGE_ID=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/echo "export DATABASE_IMAGE_ID=\"${DATABASE_IMAGE_ID}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/sed -i '/GENERATE_SNAPSHOTS=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/echo "export GENERATE_SNAPSHOTS=\"${GENERATE_SNAPSHOTS}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 
 if (    [ "`${BUILD_HOME}/providerscripts/server/ListServerIDs.sh "autoscale*" ${CLOUDHOST} 2> /dev/null`" != "" ] )
 then
