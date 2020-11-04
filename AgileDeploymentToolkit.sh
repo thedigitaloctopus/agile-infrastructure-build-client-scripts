@@ -418,7 +418,8 @@ fi
 /bin/echo "export DATABASE_IMAGE_ID=\"${DATABASE_IMAGE_ID}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/sed -i '/GENERATE_SNAPSHOTS=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/echo "export GENERATE_SNAPSHOTS=\"${GENERATE_SNAPSHOTS}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
-
+/bin/sed -i '/SNAPSHOT_ID=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/echo "export SNAPSHOT_ID=\"${SNAPSHOT_ID}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 if (    [ "`${BUILD_HOME}/providerscripts/server/ListServerIDs.sh "autoscale*" ${CLOUDHOST} 2> /dev/null`" != "" ] )
 then
     status "#####################################################################################"
