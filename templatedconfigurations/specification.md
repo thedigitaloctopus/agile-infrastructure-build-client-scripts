@@ -374,13 +374,13 @@ If for example, your unique identifier is "nuocialboss", then, APPLICATION_BASEL
 
 ### BUILD_ARCHIVE_CHOICE
 
-You need to set BUILD_ARCHIVE_CHOICE based on where you are deploying from. The settings can be as follows for each option:
+You need to set BUILD_ARCHIVE_CHOICE based on where you are deploying from. The settings can be as follows for each option:  
 
- BUILD_ARCHIVE_CHOICE="baseline"
- BUILD_ARCHIVE_CHOICE="hourly"
- BUILD_ARCHIVE_CHOICE="daily"
- BUILD_ARCHIVE_CHOICE="weekly"
- BUILD_ARCHIVE_CHOICE="monthly"
+ BUILD_ARCHIVE_CHOICE="baseline"  
+ BUILD_ARCHIVE_CHOICE="hourly"  
+ BUILD_ARCHIVE_CHOICE="daily"  
+ BUILD_ARCHIVE_CHOICE="weekly"  
+ BUILD_ARCHIVE_CHOICE="monthly"  
  BUILD_ARCHIVE_CHOICE="bimonthly"
 
 -----
@@ -408,7 +408,8 @@ This is the region id where you wish to deploy the servers to.
 
 Available region ids to choose from for each provider are:
 
-Digital Ocean: Available region IDs you can set for digital ocean are: "nyc1","sfo1","nyc2","ams2","sgp1","lon1","nyc3","ams3","fra1","tor1","sfo2","blr1","sfo3"
+Digital Ocean: Available region IDs you can set for digital ocean are: "nyc1","sfo1","nyc2","ams2","sgp1","lon1","nyc3","ams3","fra1","tor1","sfo2","blr1","sfo3"  
+
 Exoscale: Available region IDs you can set for exoscale are:  
                                                            for region ch-gva-2 regionid = "1128bd56-b4d9-4ac6-a7b9-c715b187ce11"  
                                                            for region ch-dk-2  regionid = "91e5e9e4-c9ed-4b76-bee4-427004b3baf9"  
@@ -428,11 +429,16 @@ For the Database, the autoscaler and the webserver, you can set their individual
 
 Available sizes to choose from are:
 
-Digital Ocean: 512mb,1gb,2gb,4gb,8gb,16gb,32gb,48gb,64gb (there are other sizes, but, restricting to these keeps in simple for most uses)
-Exoscale: 10G,50G,200G,300G,400G
-Linode: @@@@@@@@@@@@@@@@@
-Vultr: @@@@@@@@@@@@@@@@
-AWS: @@@@@@@@@@@@@@@@@
+Digital Ocean: 512mb,1gb,2gb,4gb,8gb,16gb,32gb,48gb,64gb (there are other sizes, but, restricting to these keeps in simple for most uses)  
+
+Exoscale: 10G,50G,200G,300G,400G  
+
+Linode: @@@@@@@@@@@@@@@@@  
+
+Vultr: @@@@@@@@@@@@@@@@  
+
+AWS: @@@@@@@@@@@@@@@@@  
+
 
 -------
 
@@ -440,7 +446,8 @@ AWS: @@@@@@@@@@@@@@@@@
 
 For each machine size DB_SIZE it needs to have the appropriate machine type set. The following machine types correspond to the appropriate _SIZE parameter directly above
 
-DigitalOcean: 512mb,1gb,2gb,4gb,8gb,16gb,32gb,48gb,64gb
+DigitalOcean: 512mb,1gb,2gb,4gb,8gb,16gb,32gb,48gb,64gb  
+
 Exoscale:  DB_SERVER_TYPE for each machine size. If your machine is set to  
 
 10G : "b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8"  
@@ -449,9 +456,12 @@ Exoscale:  DB_SERVER_TYPE for each machine size. If your machine is set to
 200G : "350dc5ea-fe6d-42ba-b6c0-efb8b75617ad"  
 400G : "a216b0d1-370f-4e21-a0eb-3dfc6302b564"
 
-Linode: @@@@@@@@@@@@@@@@@@@@@@@@
-Vultr:  @@@@@@@@@@@@@@@@@@@@@@@@
-AWS  :  @@@@@@@@@@@@@@@@@@@@@@@@
+Linode: @@@@@@@@@@@@@@@@@@@@@@@@  
+
+Vultr:  @@@@@@@@@@@@@@@@@@@@@@@@  
+
+AWS  :  @@@@@@@@@@@@@@@@@@@@@@@@  
+
 
 ### CLOUDHOST
 
