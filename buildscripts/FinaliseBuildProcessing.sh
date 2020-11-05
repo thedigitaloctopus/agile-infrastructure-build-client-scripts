@@ -73,17 +73,6 @@ fi
 #When we have an autoscaling event we can configure things so that the new webserver will be deployed via a snapshot which is faster
 if ( [ "${GENERATE_SNAPSHOTS}" -eq "1" ] )
 then
-    if ( [ "${CLOUDHOST}" = "digitalocean" ] )
-    then
-        status "###########################################################################################################################"
-        status "About to take snapshots of your newly provisioned servers. I noticed that sometimes when it is required for a server to be"
-        status "In an 'off state' it seems to keep polling and never reach the off state. Dunno why, but to fix it, just power down the"
-        status "Specific server that the tool is cycling for and then power it back up again and that will be it sorted"
-        status "###########################################################################################################################"
-        status "Press <enter>"
-        read x
-    fi
-
     . ${BUILD_HOME}/providerscripts/server/SnapshotAutoscaler.sh
     . ${BUILD_HOME}/providerscripts/server/SnapshotWebserver.sh
     . ${BUILD_HOME}/providerscripts/server/SnapshotDatabase.sh
