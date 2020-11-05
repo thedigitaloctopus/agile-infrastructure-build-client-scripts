@@ -108,11 +108,21 @@ Some providers use personal access tokens rather than access keys and secret key
 
 This will be the username for your DNS service provider
 
-##### cloudflare - the emal address of your cloudflare account
+##### cloudflare - the emal address of username of your cloudflare account
 
-digital ocean - @@@@@@@@@@@@@
+##### digital ocean - not needed 
 
-rackspace - @@@@@@@@@@@@@@@@@@@
+##### rackspace -     not needed
+
+-----
+
+DNS_EMAIL_ADDRESS:
+
+##### cloudflare - not needed
+
+##### digitalocean - your digital ocean account email address
+
+##### rackspace - your rackspace account email address
 
 -----
 
@@ -122,13 +132,23 @@ This is the security key which will enable us to manipulate records as needed wi
 
 ##### cloudflare - Ths is the Global API key for your cloudflare account which you can find by clicking on your profile at the top right of the screen
 
-digital ocean - @@@@@@@@@@@@@@
+##### digital ocean - The access token for your digital ocean account, the same as TOKEN
 
-rackspace  - @@@@@@@@@@@@@@@@
+##### rackspace  - The access key for your rackspace account
 
 ------
 
-### DNS_CHOICE - 
+### DNS_REGION
+
+#### cloudflare - not needed
+
+#### digitalocean - not needed
+
+#### rackspace - one of : DFW ORD IAD LON SYD HKG
+
+-----
+
+### DNS_CHOICE  
 
 This can be set to one of three values at the time of writing (2020) - 
 
