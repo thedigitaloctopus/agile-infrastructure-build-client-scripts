@@ -116,7 +116,7 @@ This will be the username for your DNS service provider
 
 -----
 
-DNS_EMAIL_ADDRESS:
+### DNS_EMAIL_ADDRESS:
 
 ##### cloudflare - not needed
 
@@ -409,12 +409,12 @@ This is the region id where you wish to deploy the servers to.
 Available region ids to choose from for each provider are:
 
 Digital Ocean: Available region IDs you can set for digital ocean are: "nyc1","sfo1","nyc2","ams2","sgp1","lon1","nyc3","ams3","fra1","tor1","sfo2","blr1","sfo3"
-Exoscale: Available region IDs you can set for exoscale are:
-                                                           for region ch-gva-2 regionid = "1128bd56-b4d9-4ac6-a7b9-c715b187ce11"
-                                                           for region ch-dk-2  regionid = "91e5e9e4-c9ed-4b76-bee4-427004b3baf9"
-                                                           for region at-vie-1 regionid = "4da1b188-dcd6-4ff5-b7fd-bde984055548"
-                                                           for region de-fra-1 regionid = "35eb7739-d19e-45f7-a581-4687c54d6d02"
-                                                           for region bg-sof-1 regionid = "70e5f8b1-0b2c-4457-a5e0-88bcf1f3db68"
+Exoscale: Available region IDs you can set for exoscale are:  
+                                                           for region ch-gva-2 regionid = "1128bd56-b4d9-4ac6-a7b9-c715b187ce11"  
+                                                           for region ch-dk-2  regionid = "91e5e9e4-c9ed-4b76-bee4-427004b3baf9"  
+                                                           for region at-vie-1 regionid = "4da1b188-dcd6-4ff5-b7fd-bde984055548"  
+                                                           for region de-fra-1 regionid = "35eb7739-d19e-45f7-a581-4687c54d6d02"  
+                                                           for region bg-sof-1 regionid = "70e5f8b1-0b2c-4457-a5e0-88bcf1f3db68"  
                                                            for region de-muc-1 regionid = "85664334-0fd5-47bd-94a1-b4f40b1d2eb7"
 Linode: @@@@@@@@@@@@@@@@
 Vultr: @@@@@@@@@@@@@@@
@@ -441,11 +441,14 @@ AWS: @@@@@@@@@@@@@@@@@
 For each machine size DB_SIZE it needs to have the appropriate machine type set. The following machine types correspond to the appropriate _SIZE parameter directly above
 
 DigitalOcean: 512mb,1gb,2gb,4gb,8gb,16gb,32gb,48gb,64gb
-Exoscale:  DB_SERVER_TYPE for each machine size. If your machine is set to 10G : "b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8"
-                                                                           50G : "b6e9d1e8-89fc-4db3-aaa4-9b4c5b1d0844"
-                                                                          100G : "c6f99499-7f59-4138-9427-a09db13af2bc"
-                                                                          200G : "350dc5ea-fe6d-42ba-b6c0-efb8b75617ad"
-                                                                          400G : "a216b0d1-370f-4e21-a0eb-3dfc6302b564"
+Exoscale:  DB_SERVER_TYPE for each machine size. If your machine is set to  
+
+10G : "b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8"  
+50G : "b6e9d1e8-89fc-4db3-aaa4-9b4c5b1d0844"  
+100G : "c6f99499-7f59-4138-9427-a09db13af2bc"  
+200G : "350dc5ea-fe6d-42ba-b6c0-efb8b75617ad"  
+400G : "a216b0d1-370f-4e21-a0eb-3dfc6302b564"
+
 Linode: @@@@@@@@@@@@@@@@@@@@@@@@
 Vultr:  @@@@@@@@@@@@@@@@@@@@@@@@
 AWS  :  @@@@@@@@@@@@@@@@@@@@@@@@
