@@ -31,7 +31,7 @@ To use this toolkit you will need to setup accounts with the following providers
 1) For VPS services, one of - Digital Ocean, Linode, Exoscale, Vultr, AWS
 2) For Email services, one of - Amazon SES, Gmail or Sendpulse
 3) For git based services, one of - Bitbucket, Github or Gitlab
-4) For DNS services, one of - Cloudflare, Rackspace
+4) For DNS services, one of - Cloudflare, Rackspace or Digital Ocean (note, clourflare has security features which are absent from naked dns services). 
 5) For object store services, one of - Digital Ocean Spaces, Exoscale Object Store, Linode Object Store, Vultr Object Store or Amazon S3
 6) From these providers AWS and Digital Ocean currenlty support managed DB systems but other providers are projected to make offerings of managed DB solutions as well in the near future
 
