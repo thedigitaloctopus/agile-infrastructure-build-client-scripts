@@ -39,7 +39,6 @@ then
     status "################################################################################################################################################"
     status "It is recommended to expedite the process, if there is a lot of residual data, that you go to the datastore provider website (${DATASTORE_CHOICE})"
     status "And clean out (delete) all old content from the webrootsynctunnel subdirectory of the configuration bucket:"
-    status "`/bin/echo "s3://${WEBSITE_URL}" | /bin/sed "s/\.//g"`-config/webrootsynctunnel/*"
     status "#################################################################################################################################################"
     . ${BUILD_HOME}/providerscripts/datastore/PurgeTunnel.sh
 fi
