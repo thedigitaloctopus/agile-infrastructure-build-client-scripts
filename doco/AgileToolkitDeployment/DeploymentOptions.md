@@ -12,7 +12,7 @@ You need a cloudhost, a DNS provider, a git repository provider, a datastore pro
 You need to choose one of each of the following:
 
 1) So, your current choices are Cloudhost: Digital Ocean, Exoscale, Linode, Vultr
-2) DNS provider: Cloudflare, Rackspace
+2) DNS provider: Cloudflare, Rackspace, Digital Ocean
 3) Git repository provider: bitbucket, github, gitlab
 4) A datastore provider currently: amazon s3, digital ocean spaces and exoscale object storage
 
