@@ -31,8 +31,7 @@ You can reboot all the infrastructure if you like
 6)Shutdown
 
 This scripts will shutdown all your infrastructure with limited prompting. Optionally, it can actually destroy
-the machines fully as well. Please note, if you want to shutdown your infrastructure or even a webserver,
-you must do so using this script.
+the machines fully as well.
 
 7)Super Safe Backup
 
