@@ -19,8 +19,8 @@ As prompted by the script, enter the [unique-name] in order to create a baseline
 
 Once you have sudo'd, you can go to ${HOME}/providerscripts/git and there you will find a script CreateDBBaseline.sh.
 Make sure the HOME environment variable is set to "/home/${SERVER_USER} and then run the CreateDBBaseline.sh script
-As described go to your git repo provider and create a repository of the format <unique-name>-db-baseline
-As prompted by the script, enter the <unique-name> in order to create a baseline of your webroot.
+As described go to your git repo provider and create a repository of the format [unique-name]-db-baseline
+As prompted by the script, enter the [unique-name] in order to create a baseline of your webroot.
 
 4. Any cusotmisations you need done to your specific application, you can do by placing scripts in Agile-Infrastructure-Webserver-Scripts/applicationscripts/ and you will find a sample cusomisation in the socialnetwork directory, you can make a similar one for your application. The same customisation can be performed on the database server also Agile-Infrastructure-Database-Scripts/applicationscripts and again there is a socialnetwork example of how to customise your application. By customising your application, you can change the branding so that it should be possible to deploy the same application simply with different branding such as display name and so on. 
 
