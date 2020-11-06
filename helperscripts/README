@@ -42,5 +42,5 @@ another copy of your sourcecode.
 8) Reset Build Kit
 
 This removes all files/directories which are transient to the build process. If you "reset" the build kit, then you 
-know that your next build run will be fresh and clean.
+know that your next build run will be fresh and clean. This is similar to a factory reset on a piece of hardware. 
 
