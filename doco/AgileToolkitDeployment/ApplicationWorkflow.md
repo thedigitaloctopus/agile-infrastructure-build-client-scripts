@@ -12,8 +12,8 @@ You should do a "sudo su" and you can find the "SERVERUSERPASSWORD" in the direc
 
 Once you have sudo'd, you can go to ${HOME}/providerscripts/git and there you will find a script CreateWebrootBaseline.sh.
 Make sure the HOME environment variable is set to "/home/${SERVER_USER} and then run the CreateWebrootBaseline.sh script
-As described go to your git repo provider and create a repository of the format <unique-name>-webroot-sourcecode-baseline
-As prompted by the script, enter the <unique-name> in order to create a baseline of your webroot.
+As described go to your git repo provider and create a repository of the format [unique-name]-webroot-sourcecode-baseline
+As prompted by the script, enter the [unique-name] in order to create a baseline of your webroot.
 
 3. Now we have to do the same thing for the database. So, ssh onto the Database server using the helper scripts from the build client machine. You should do a "sudo su" and you can find the "SERVERUSERPASSWORD" in the directory ${HOME}/.ssh to use to authenticate when promoted by sudo.
 
