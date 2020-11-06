@@ -9,7 +9,7 @@ If you don't use these scripts, you will need to mess about passing the required
 keys and so on which these scipts find automatically. You have to know which encryption
 algorithm you are using, RSA or ECDSA to connect successfully.
 
-2) Copy script
+2) Copy scripts
 
 Just pass the path to the file you want to copy to a server and this script will copy it
 there for you. It's a convenience thing. Without it, you will need to mess about with 
@@ -17,12 +17,12 @@ encryption keys and so on for SSH
 
 3) Get Infrastructure
 
-This scripts gets copies of all the infrastructure scripts to your local machine
+This scripts gets copies of all the infrastructure scripts to your local machine from github.
 
 4) Monitor Webserver
 
 You can use this script to monitor your website. You need to put a token in the script which can be looked
-for in the websites response code. If it finds it then you know the site is functional, that's the idea.
+for in the website's response code. If it finds it then you know the site is functional, that's the idea.
 
 5)Reboot
 
