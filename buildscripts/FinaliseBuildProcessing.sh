@@ -35,10 +35,10 @@ status "========================================================="
 
 if ( [ "${ENABLE_EFS}" = "0" ] || [ "${ENABLE_EFS}" = "" ] )
 then
-    status "Cleaning out the tunnel in the datastore"
+    status "Cleaning out the sync tunnel and expired config settings in the datastore"
     status "################################################################################################################################################"
     status "It is recommended to expedite the process, if there is a lot of residual data, that you go to the datastore provider website (${DATASTORE_CHOICE})"
-    status "And clean out (delete) all old content from the webrootsynctunnel subdirectory of the configuration bucket:"
+    status "And clean out (delete) all old content from the webrootsynctunnel subdirectory of the configuration bucket"
     status "#################################################################################################################################################"
     . ${BUILD_HOME}/providerscripts/datastore/PurgeTunnel.sh
 fi
