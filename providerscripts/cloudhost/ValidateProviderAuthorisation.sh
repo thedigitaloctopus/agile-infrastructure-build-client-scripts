@@ -108,17 +108,28 @@ fi
 
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
-    if ( [ ! -f ${HOME}/.config/linode-cli ] )
+
+    if ( [ -f ${HOME}/.config/linode-cli ] )
     then
-        status ""
-            status "############################################################################################################################################"
-            status "IMPORTANT: Please only enable read/write access for Linodes, Object Storage and IPs from your linode admin console when you generate the key"    
-            status "############################################################################################################################################"
-            status ""
+        access_token="`/bin/cat ~/.config/linode-cli | /bin/grep "token" | /usr/bin/awk '{print $NF}'`"
+        if ( [ "${access_token}" != "${TOKEN}" ] )
+        then
+           status "TOKEN mismatch detected"
+           status "The token in your digital ocean configuration file is: ${access_token}"
+           status "And, the access token you are providing from your chosen template is: ${TOKEN}"
+           status "Enter Y or y to update your live configuration with your the token from your template"
+           read response
+           if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
+           then
+               /bin/sed -i "/token/c token = ${TOKEN}" ~/.config/linode-cli
+           fi
+        fi
+    else
+        #export DIGITALOCEAN_ACCESS_TOKEN="${TOKEN}"
         /usr/local/bin/linode-cli configure >&3
     fi
-    /bin/chown ${USER} ${HOME}/.config/linode-cli
-    /bin/chmod 400 ${HOME}/.config/linode-cli
+    /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
+
 fi
 if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
