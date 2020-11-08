@@ -80,7 +80,7 @@ These grant you access to compute resources with your cloud provider. Under the 
 
 ##### exoscale - Login to your exoscale account and go to the IAM menu (on the right) and generate a pair of API keys which have access to compute manipulation capabilities. The first key is the ACCESS_KEY which you can paste into your template for the ACCESS_KEY variable.
 
-linode -  @@@@@@@@@@@@@@@'
+##### linode -  This does not need to be set for linode, instead, see TOKEN= below
 
 vultr - @@@@@@@@@@@@@@@@@
 
