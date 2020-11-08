@@ -8,7 +8,7 @@ Starting from scratch, you would need to
 2. Setup an Digital Ocean account 
 3. An account with one of github,gitlab or bitbucket (for your application repositories)
 4. Register your DNS name with Cloudflare and obtain the Cloudflare "Global API Key" and you need a Personal Access token from Digital Ocean and a pair of Digital Ocean spaces keys. 
-5. Update the template file with ${BUILD_HOME}/templatedconfigurations/templates/exoscale/exoscale1.tmpl with the values obtained in 3 
+5. Update the template file with ${BUILD_HOME}/templatedconfigurations/templates/digitalocean/digitalocean1.tmpl with the values obtained in 3 
 6. run the build script (selecting Debian as the deployment OS). 
 
 You must configure the variables in the template marked "MANDATORY" and review the others in the first 4 sections. You are free to change any settings you like, but, you will need to review the template spec to understand what the settings do.
