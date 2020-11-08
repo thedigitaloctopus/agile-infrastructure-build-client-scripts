@@ -96,7 +96,7 @@ Some providers use personal access tokens rather than access keys and secret key
 
 ##### exoscale - exoscale does not need this see ACCESS_KEY and SECRET_KEY
 
-##### linode - @@@@@@@@@@@@@@@
+##### linode - Login to your Linode account, go to your account settings and select API key and from there you can generate a personal access token
 
 ##### Vultr - @@@@@@@@@@@@@@@@
 
@@ -418,7 +418,7 @@ Exoscale: Available region IDs you can set for exoscale are:
                                                            for region bg-sof-1 regionid = "70e5f8b1-0b2c-4457-a5e0-88bcf1f3db68"  
                                                            for region de-muc-1 regionid = "85664334-0fd5-47bd-94a1-b4f40b1d2eb7"
 
-Linode: Available regions you can set for linode are: "ap-westc","a-central","ap-southeast","us-central","us-west","us-east","eu-west","ap-south","eu-central","ap-northeast"
+Linode: Available regions you can set for linode are: "ap-west","a-central","ap-southeast","us-central","us-west","us-east","eu-west","ap-south","eu-central","ap-northeast"
 Vultr: @@@@@@@@@@@@@@@
 AWS: @@@@@@@@@@@@@@@@
 
