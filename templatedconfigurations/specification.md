@@ -417,7 +417,8 @@ Exoscale: Available region IDs you can set for exoscale are:
                                                            for region de-fra-1 regionid = "35eb7739-d19e-45f7-a581-4687c54d6d02"  
                                                            for region bg-sof-1 regionid = "70e5f8b1-0b2c-4457-a5e0-88bcf1f3db68"  
                                                            for region de-muc-1 regionid = "85664334-0fd5-47bd-94a1-b4f40b1d2eb7"
-Linode: @@@@@@@@@@@@@@@@
+
+Linode: Available regions you can set for linode are: "ap-westc","a-central","ap-southeast","us-central","us-west","us-east","eu-west","ap-south","eu-central","ap-northeast"
 Vultr: @@@@@@@@@@@@@@@
 AWS: @@@@@@@@@@@@@@@@
 
@@ -433,7 +434,7 @@ Digital Ocean: 512mb,1gb,2gb,4gb,8gb,16gb,32gb,48gb,64gb (there are other sizes,
 
 Exoscale: 10G,50G,200G,300G,400G  
 
-Linode: @@@@@@@@@@@@@@@@@  
+Linode: g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-standard-8,g6-standard-16,g6-standard-20,g6-standard-24,g6-standard-32
 
 Vultr: @@@@@@@@@@@@@@@@  
 
@@ -456,7 +457,7 @@ Exoscale:  DB_SERVER_TYPE for each machine size. If your machine is set to
 200G : "350dc5ea-fe6d-42ba-b6c0-efb8b75617ad"  
 400G : "a216b0d1-370f-4e21-a0eb-3dfc6302b564"
 
-Linode: @@@@@@@@@@@@@@@@@@@@@@@@  
+Linode: g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-standard-8,g6-standard-16,g6-standard-20,g6-standard-24,g6-standard-32
 
 Vultr:  @@@@@@@@@@@@@@@@@@@@@@@@  
 
