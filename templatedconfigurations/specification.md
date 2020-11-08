@@ -96,7 +96,7 @@ Some providers use personal access tokens rather than access keys and secret key
 
 ##### exoscale - exoscale does not need this see ACCESS_KEY and SECRET_KEY
 
-##### linode - Login to your Linode account, go to your account settings and select API key and from there you can generate a personal access token
+##### linode - Login to your Linode account, go to your Profile (top right) and select "API Tokens" and from there you can generate a "personal access token" to use as your TOKEN
 
 ##### Vultr - @@@@@@@@@@@@@@@@
 
