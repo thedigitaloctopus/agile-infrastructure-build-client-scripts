@@ -44,7 +44,10 @@ fi
 
 if ( [ "${cloudhost}" = "linode" ] )
 then
-    /usr/local/bin/linode-cli linodes list --text | /bin/grep -v id | /bin/grep "${instance_type}" | /usr/bin/awk '{print $1}'
+    if ( [ -f ~/.config/linode-cli ] )
+    then
+        /usr/local/bin/linode-cli linodes list --text | /bin/grep -v id | /bin/grep "${instance_type}" | /usr/bin/awk '{print $1}'
+    fi
 fi
 
 if ( [ "${cloudhost}" = "vultr" ] )
