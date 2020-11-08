@@ -48,7 +48,7 @@ This parameter is the S3 endpoint for your deployment. It should be located as n
 
 ##### exoscale - Available endpoints to choose from (2020) - sos-ch-gva-2.exo.io, sos-ch-dk-2.exo.io, sos-de-fra-1.exo.io, sos-de-muc-1.exo.io, sos-at-vie-1.exo.io, sos-bg-sof-1
 
-##### linode - Available endpoints to choose from (2020) - us-east-1.linodeobjects.com, eu-central-1.linodeobjects.com
+##### linode - Available endpoints to choose from (2020) - us-east-1.linodeobjects.com, eu-central-1.linodeobjects.com, ap-south-1.linodeobjects.com
 
 ##### vultr - Available endpints to choose from (2020) - ewr1.vultrobjects.com, 
 
