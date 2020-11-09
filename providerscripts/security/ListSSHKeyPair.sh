@@ -32,9 +32,10 @@ if ( [ "${cloudhost}" = "exoscale" ] )
 then
     /usr/local/bin/cs listSSHKeyPair | /usr/bin/jq '.sshkeypair[].name' | /bin/grep "${key_name}"
 fi
+
 if ( [ "${cloudhost}" = "linode" ] )
 then
-    :
+    /usr/local/bin/linode-cli --text sshkeys list | /bin/grep "${key_name}"
 fi
 
 if ( [ "${cloudhost}" = "vultr" ] )
