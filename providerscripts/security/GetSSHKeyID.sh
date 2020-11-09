@@ -32,10 +32,12 @@ if ( [ "${cloudhost}" = "exoscale" ] )
 then
     /bin/echo ${public_key_name}
 fi
+
 if ( [ "${cloudhost}" = "linode" ] )
 then
-    /bin/cat ${HOME}/.linodecli/config | /bin/grep api | /usr/bin/awk '{print $2}'
+    /usr/local/bin/linode-cli --text sshkeys list | /bin/grep "${public_key_name}" | /usr/bin/awk '{print $1}'
 fi
+
 if ( [ "${cloudhost}" = "vultr" ] )
 then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
