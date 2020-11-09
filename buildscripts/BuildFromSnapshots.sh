@@ -50,7 +50,7 @@ then
        status "Building autoscaler `/usr/bin/expr ${no_autoscalers} + 1` of ${NO_AUTOSCALERS} autoscalers"
 
         autoscaler_name="autoscaler-${RND}-${WEBSITE_NAME}-${BUILD_IDENTIFIER}"
-        autoscaler_name="`/bin/echo ${autoscaler_name} | /usr/bin/cut -c -32 | /bin/sed 's/-$//g'`"
+        autoscaler_name="`/bin/echo ${no_autoscalers}-${autoscaler_name} | /usr/bin/cut -c -32 | /bin/sed 's/-$//g'`"
 
         #Find out what operating system we are building for
         ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${AS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
@@ -62,7 +62,7 @@ then
 
         #Actually create the server from the snapshot. Note that the image id of the snapshot we want to build from is passed in as the
         #last parameter
-        ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${ostype}" "${REGION_ID}" "${AS_SERVER_TYPE}" "${no_autoscalers}-${autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} "${SUBNET_ID}" "${AUTOSCALER_IMAGE_ID}"
+        ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${ostype}" "${REGION_ID}" "${AS_SERVER_TYPE}" "{autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} "${SUBNET_ID}" "${AUTOSCALER_IMAGE_ID}"
     
     
         #Get the ip addresses of the server we have just built
@@ -72,8 +72,8 @@ then
         while ( ( [ "${ip}" = "" ] || [ "${private_ip}" = "" ] ) && [ "${count}" -lt "20" ] )
         do
             status "Interrogating for autoscaler ip addresses....."
-            ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${no_autoscalers}-${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-            private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${no_autoscalers}-${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
+            ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
+            private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
             /bin/sleep 30
             count="`/usr/bin/expr ${count} + 1`"
         done
