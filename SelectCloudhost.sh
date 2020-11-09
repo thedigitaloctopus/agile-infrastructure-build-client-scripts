@@ -228,6 +228,104 @@ then
         /bin/mkdir -p ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials
     fi
 
+    status ""
+    status ""
+    status "##################################################################################################"
+    status "#####This cloudhost supports snapshots.                                                      #####"
+    status "#####Would you like to make use of snapshots?                                                #####"
+    status "##################################################################################################"
+    status "Please enter, (Y/N)"
+    read response
+
+    if ( [ "${response}" = "y" ] || [ "${response}" = "Y" ] )
+    then
+        status ""
+        status ""
+        status "##############################################################################################"
+        status "OK, you have selected to make use of snapshots. This means there you have to select one of two"
+        status "Different scenarios depending on where you are in your workflow"
+        status ""
+        status "1) Perform full build and take snapshots of all servers for use in 2) - autoscaling events are"
+        status "still full builds of webservers"
+        status ""
+        status "2) Build from snapshots generated in 1) - autoscaling events use snapshot images to build from"
+        status ""
+        status "##############################################################################################"
+        status "So, please choose by entering a number, scenario 1, scenario 2"
+        status "##############################################################################################"
+        status "Enter 1 or 2"
+        read response
+
+        while (  [ "${response}" = "" ] || [ "`/bin/echo "1 2" | /bin/grep ${response}`" = "" ] )
+        do
+            status "That is illegal, please try again"
+            read response
+        done
+    fi
+
+    if ( [ "${response}" = "1" ] )
+    then
+        AUTOSCALE_FROM_SNAPSHOTS="0"
+        GENERATE_SNAPSHOTS="1"
+    fi
+
+    if ( [ "${response}" = "2" ] )
+    then
+        AUTOSCALE_FROM_SNAPSHOTS="1"
+        GENERATE_SNAPSHOTS="0"
+
+        if ( [ -d ${BUILD_HOME}/snapshots ] && [ "`/bin/ls ${BUILD_HOME}/snapshots/ | /usr/bin/wc -l`" != "0" ] )
+        then
+            status ""
+            status "########################################################################################################"
+            status "Here are the identifiers for your pre existing snapshots"
+            status "Note, the snapshots must still exist with your cloudhost if you have deleted the snapshots then, obviously"
+            status "the build will fail..."
+            status "########################################################################################################"
+            status "SNAPSHOT IDENTIFIERS"
+            status ""
+            /bin/ls -tr ${BUILD_HOME}/snapshots >&3
+            status ""
+            status "##########################################################################################################"
+            status "Please enter the ***first four characters*** from the snapshot id from this list that you want to build from"
+            status "You can review (and check that corresponding snapshots exist) with your cloudhost provider"
+            status "##########################################################################################################"
+            status "Enter your 4 shapshot id characters please:"
+            read SNAPSHOT_ID
+            status "#############################################################################################################"
+            status "INFORMATION:"
+            status "*** Make sure your snapshots are stored in the same region as you are deploying your servers to...***"
+            status "Even though we are building from a snapshot, if there is no acceptable configuration file with pre existing settings"
+            status "We will have to run through setting up the configuration even though we only need bits and pieces of it, like"
+            status "What machines sizes you are deploying to this time around and so on"
+            status "You should make sure that settings such as which repository to use are the same as they were when the snapshots"
+            status "were generated...."
+            status "#############################################################################################################"
+            status "Press <enter>, to display image identifiers, there will then be a brief pause"
+            read x
+        else
+            /bin/echo "There are no pre-existing snapshots, will have to exit"
+            exit
+        fi
+
+        WEBSERVER_IMAGE_ID="`/usr/local/bin/linode-cli images list  | /bin/grep webserver | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}'`"
+        AUTOSCALER_IMAGE_ID="`/usr/local/bin/linode-cli images list  | /bin/grep autoscaler | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}'`"
+        DATABASE_IMAGE_ID="`/usr/local/bin/linode-cli images list  | /bin/grep database | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}'`"
+
+        status ""
+        status ""
+        status "###########################################################"
+        status "The image id's that we will be using to build from are:"
+        status "If any of these do not show an identifier your build will"
+        status "will fail and you will need to investigate why"
+        status "Webserver: ${WEBSERVER_IMAGE_ID}"
+        status "Autoscaler: ${AUTOSCALER_IMAGE_ID}"
+        status "Database: ${DATABASE_IMAGE_ID}"
+        status "###########################################################"
+    else
+        SNAPSHOT_ID=""
+    fi
+
     /bin/echo "${CLOUDHOST_USERNAME}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/CLOUDHOSTUSERNAME
     /bin/echo "${CLOUDHOST_PASSWORD}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/CLOUDHOSTPASSWORD
 elif ( [ "${choice}" = "4" ] )
