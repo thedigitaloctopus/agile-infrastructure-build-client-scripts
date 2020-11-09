@@ -30,6 +30,17 @@ then
     /usr/local/bin/doctl compute droplet-action snapshot --snapshot-name "${autoscaler_name}" ${autoscaler_id}
 fi
 
+if ( [ "${CLOUDHOST}" = "linode" ] )
+then
+    autoscaler_id="`/usr/local/bin/linode-cli --text linodes list | /bin/grep autoscaler | /usr/bin/awk '{print $1}'`"
+    autoscaler_name="`/usr/local/bin/linode-cli --text linodes list | /bin/grep autoscaler | /usr/bin/awk '{print $2}'`"
+    disk_id="`/usr/local/bin/linode-cli --text linodes disks-list ${autoscaler_id} | /bin/grep -v swap | /bin/grep -v id | /usr/bin/awk '{print $1}'`"
+    status ""
+    status "########################SNAPSHOTING YOUR AUTOSCALER####################################"
+    status ""
+    /usr/local/bin/linode-cli images create --disk_id ${disk_id} --label ${autoscaler_name}
+fi
+
 if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
