@@ -1,0 +1,8 @@
+VIRGIN DEVELOPMENT MODE INSTALLATION OF JOOMLA
+----------------------------------------------
+
+DETAIL: This template, as is, will deploy to eu-central on Linode. It will deploy a Joomla instance in development mode . You will need a cloudflare account with your emai$
+The database used by default is MySQL on a VPS and the webserver is Apache. You will need an account with one of github,gitlab or bitbucket (for your application repositor$
+
+
+
