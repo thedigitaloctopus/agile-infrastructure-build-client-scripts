@@ -1,0 +1,16 @@
+DEVELOPMENT or PRODUCTION MODE INSTALLATION OF AN HOURLY BACKED UP JOOMLA APPLICATION
+---------------------------------------------------------------------------
+
+DETAIL: This template will spin up the a Joomla application on Linode in eu-central. It deploys to "nanode" machines and in production mode by default. By default you need to select debian 10 as the build OS. The database used is a Maria DB instance running on a VPS machine in the Linode cloud. The DNS provider is Cloudflare. You will need a Linode account and a Cloudflare account to be able to deploy this application.
+You must configure the variables marked "MANDATORY"
+For Development mode leave PRODUCTION="0" DEVELOPMENT="1" NUMBER_WS="1" in the template.
+For Production mode switch PRODUCATION="1" DEVELOPMENT="0" NUMBER_WS="n" in the template.
+This is an example of a backedup application. Ordinarily, it would be a live application that you have developed and baselined and backups have been made from it during ordinary usage. Most likely, you have had to take your live application offline and you need to redeploy from a backup. 
+By default this is an hourly backup which means BUILD_CHOICE=2 and BUILD_ARCHIVE_CHOICE=hourly. To build from daily backups, set BUILD_CHOICE=3 and BUILD_ARCHIVE_CHOICE=daily. If you don't have functioning application code and db code repositories as follows, then, your application will fail to deploy:
+----------------------------*******-------------------------------
+To build from an hourly backup archive, this script expects there to be valid repositories available for the application code and the database code named as follows:
+application code repository: "${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-hourly-${BUILD_IDENTIFIER}"
+database code repository: "${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-db-hourly-${BUILD_IDENTIFIER}"
+----------------------------*******-------------------------------
+Obviously, your backup repositories contain Joomla code and so on, then "APPLICATION=joomla" needs to be set. Another setting to pay attention to is "APPLICATION_IDENTIFIER" which needs to be set according to the application you are deploying. Also, DIRECTORIES_TO_MOUNT needs to be set for the CMS type you are deploying.
+You can use this as a generic way of deploying from backups as you learn more about how to set the configuration settings in each case.
