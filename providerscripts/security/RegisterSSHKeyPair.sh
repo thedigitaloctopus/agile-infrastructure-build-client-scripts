@@ -78,7 +78,7 @@ fi
 
 if ( [ "${cloudhost}" = "linode" ] )
 then
-    :
+    /usr/local/bin/linode-cli sshkeys create --label "${key_name}" --ssh_key="${key_substance}"
 fi
 
 if ( [ "${cloudhost}" = "vultr" ] )
