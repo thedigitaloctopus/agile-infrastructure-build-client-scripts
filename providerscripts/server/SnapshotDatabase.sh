@@ -30,6 +30,17 @@ then
     /usr/local/bin/doctl compute droplet-action snapshot --snapshot-name "${database_name}" ${database_id}
 fi
 
+if ( [ "${CLOUDHOST}" = "linode" ] )
+then
+    database_id="`/usr/local/bin/linode-cli --text linodes list | /bin/grep database | /usr/bin/awk '{print $1}'`"
+    database_name="`/usr/local/bin/linode-cli --text linodes list | /bin/grep database | /usr/bin/awk '{print $2}'`"
+    disk_id="`/usr/local/bin/linode-cli --text linodes disks-list ${database_id} | /bin/grep -v swap | /bin/grep -v id | /usr/bin/awk '{print $1}'`"
+    status ""
+    status "########################SNAPSHOTING YOUR DATABASE####################################"
+    status ""
+    /usr/local/bin/linode-cli images create --disk_id ${disk_id} --label ${database_name}
+fi
+
 if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
