@@ -47,10 +47,12 @@ if ( [ "${cloudhost}" = "exoscale" ] )
 then
     /usr/local/bin/cs deleteSSHKeyPair name="${key_name}"
 fi
+
 if ( [ "${cloudhost}" = "linode" ] )
 then
-    :
+    /usr/local/bin/linode-cli sshkeys delete ${key_name} 
 fi
+
 if ( [ "${cloudhost}" = "vultr" ] )
 then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
