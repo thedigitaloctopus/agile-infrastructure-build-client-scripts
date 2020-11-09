@@ -12,4 +12,4 @@ To build from an hourly backup archive, this script expects there to be valid re
 application code repository: "${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-webroot-sourcecode-hourly-${BUILD_IDENTIFIER}"
 database code repository: "${WEBSITE_SUBDOMAIN}-${WEBSITE_NAME}-db-hourly-${BUILD_IDENTIFIER}"
 ----------------------------*******-------------------------------
-Obviously, your backup repositories contain Wordpress code and so on, then "APPLICATION=wordpress" needs to be set. Another setting to pay attention to is "APPLICATION_IDENTIFIER" which needs to be set according to the application you are deploying. Also, DIRECTORIES_TO_MOUNT needs to be set for the CMS type you are deploying. 
+Obviously, your backup repositories contain Wordpress code and so on, then "APPLICATION=wordpress" needs to be set. Another setting to pay attention to is "APPLICATION_IDENTIFIER" which needs to be set according to the application you are deploying.  
