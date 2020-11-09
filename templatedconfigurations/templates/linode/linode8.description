@@ -1,0 +1,5 @@
+GENERATING SNAPSHOTS FROM THE NUOCIALBOSS BASELINE
+--------------------------------------------------
+
+This template is a deployment of the nuocialboss baseline that also generates snapshots at the end of its build run. I show how these snapshots can be used from an expedited build process in linode9.tmpl
+You run this template as for linode1.tmpl but it generates snapshots at the end which you can see in your linode console under images and which can be used to form subsequent builds. To generate the snapshots, you must set GENERATE_SNAPSHOTS="1"
