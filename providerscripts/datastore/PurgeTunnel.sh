@@ -29,7 +29,7 @@ then
         /usr/bin/s3cmd --recursive --force del s3://${config_bucket}/*
     fi
 
-    location="`/usr/bin/s3cmd info ${config_bucket} | /bin/grep "Location" | /usr/bin/awk '{print $NF}'`"
+    location="`/usr/bin/s3cmd info s3://${config_bucket} | /bin/grep "Location" | /usr/bin/awk '{print $NF}'`"
 
     if ( [ "${location}" != "" ] && [ "${S3_HOST_BASE}" != "${location}" ] )
     then
