@@ -615,13 +615,17 @@ else
     #our cloudhosts machines.
     if ( [ "${PRODUCTION}" != "0" ] && [ "${DEVELOPMENT}" != "1" ] )
     then
-        status "How many autoscalers do you want to deploy?"
-        read NO_AUTOSCALERS
-        while ! ( [ "${NO_AUTOSCALERS}" -eq "${NO_AUTOSCALERS}" ] )
-        do
-            status "Sorry, invalid input, try again"
+        NO_AUTOSCALERS=1
+	if ( [ "${GENERATE_SNAPSHOTS}" = "0" ] )
+	then
+            status "How many autoscalers do you want to deploy?"
             read NO_AUTOSCALERS
-        done
+            while ! ( [ "${NO_AUTOSCALERS}" -eq "${NO_AUTOSCALERS}" ] )
+            do
+                status "Sorry, invalid input, try again"
+                read NO_AUTOSCALERS
+            done
+	fi
         . ${BUILD_HOME}/buildscripts/BuildAutoscaler.sh
     fi
 
