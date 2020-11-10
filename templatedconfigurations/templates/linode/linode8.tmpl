@@ -4,14 +4,14 @@
 ######################CURRENTLY SUPPORTED ARE, GOOGLE, SENDPULSE AND AMAZON SES#################################################
 ######################AS A MINIMUM REVIEW AND SET ALL VARIABLES MARKED "MANDATORY"##############################################
 ################################################################################################################################
-###############These two variables are your digitalocean IAM access and secret keys with authority to manipulate the object store###
+###############These two variables are your linode access and secret keys with authority to manipulate the object store###
 export APPLICATION="wordpress"
 export S3_ACCESS_KEY=""  #MANDATORY
 export S3_SECRET_KEY=""  #MANDATORY
 export S3_HOST_BASE="eu-central-1.linodeobjects.com"
 export S3_LOCATION="US" #For linode, this always needs to be set to "US"
 ###############The personal access token to use when manipulating compute with linode###############
-export TOKEN="" #MANDATORY
+export TOKEN="" #MANDATORY - this personal token needs "account", "images", "IPs", "Linodes" and "Object Store" read and write privieges
 export ACCESS_KEY=""   #NOT REQUIRED
 export SECRET_KEY=""   #NOT REQUIRED
 ###############These variables are cloudflare API key and the email address of your cloudflare account##########################
