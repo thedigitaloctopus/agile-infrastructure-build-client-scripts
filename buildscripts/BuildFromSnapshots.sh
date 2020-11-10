@@ -62,7 +62,7 @@ then
 
         #Actually create the server from the snapshot. Note that the image id of the snapshot we want to build from is passed in as the
         #last parameter
-        ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${ostype}" "${REGION_ID}" "${AS_SERVER_TYPE}" "{autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} "${SUBNET_ID}" "${AUTOSCALER_IMAGE_ID}"
+        ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${ostype}" "${REGION_ID}" "${AS_SERVER_TYPE}" "${autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} "${SUBNET_ID}" "${AUTOSCALER_IMAGE_ID}"
     
     
         #Get the ip addresses of the server we have just built
