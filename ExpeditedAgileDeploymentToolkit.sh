@@ -616,7 +616,7 @@ else
     if ( [ "${PRODUCTION}" != "0" ] && [ "${DEVELOPMENT}" != "1" ] )
     then
         NO_AUTOSCALERS=1
-	if ( [ "${GENERATE_SNAPSHOTS}" = "0" ] )
+	if ( [ "${GENERATE_SNAPSHOTS}" != "1" ] )
 	then
             status "How many autoscalers do you want to deploy?"
             read NO_AUTOSCALERS
