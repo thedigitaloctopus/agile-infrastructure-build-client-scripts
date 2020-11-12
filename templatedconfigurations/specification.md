@@ -419,7 +419,7 @@ Exoscale: Available region IDs you can set for exoscale are:
                                                            for region de-muc-1 regionid = "85664334-0fd5-47bd-94a1-b4f40b1d2eb7"
 
 Linode: Available regions you can set for linode are: "ap-west","a-central","ap-southeast","us-central","us-west","us-east","eu-west","ap-south","eu-central","ap-northeast"
-Vultr: @@@@@@@@@@@@@@@
+Vultr: Available regions you can set for vultr are: "ICN","SGP","NRT","SYD","AMS","FRA","LHR","CDG","ATL","ORD","DFW","LAX","MIA","EWR","SEA","SJC","YTO".
 AWS: @@@@@@@@@@@@@@@@
 
 ----------
@@ -436,7 +436,7 @@ Exoscale: 10G,50G,200G,300G,400G
 
 Linode: g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-standard-8,g6-standard-16,g6-standard-20,g6-standard-24,g6-standard-32
 
-Vultr: @@@@@@@@@@@@@@@@  
+Vultr: Available sizes you can set for your machines on vultr are: "1024","2048","4096","8192","16384","32768","24576","32768","49152","65536","98304"
 
 AWS: @@@@@@@@@@@@@@@@@  
 
@@ -459,7 +459,7 @@ Exoscale:  DB_SERVER_TYPE for each machine size. If your machine is set to
 
 Linode: g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-standard-8,g6-standard-16,g6-standard-20,g6-standard-24,g6-standard-32
 
-Vultr:  @@@@@@@@@@@@@@@@@@@@@@@@  
+Vultr:  "1024","2048","4096","8192","16384","32768","24576","32768","49152","65536","98304"
 
 AWS  :  @@@@@@@@@@@@@@@@@@@@@@@@  
 
