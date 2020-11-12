@@ -443,13 +443,13 @@ AWS: @@@@@@@@@@@@@@@@@
 
 -------
 
-### DB_SERVER_TYPE
+### DB_SERVER_TYPE AS_SERVER_TYPE WS_SERVER_TYPE
 
-For each machine size DB_SIZE it needs to have the appropriate machine type set. The following machine types correspond to the appropriate _SIZE parameter directly above
+For each machine size SIZE it needs to have the appropriate machine type set. The following machine types correspond to the appropriate _SIZE parameter directly above
 
 DigitalOcean: 512mb,1gb,2gb,4gb,8gb,16gb,32gb,48gb,64gb  
 
-Exoscale:  DB_SERVER_TYPE for each machine size. If your machine is set to  
+Exoscale:  SERVER_TYPE for each machine size. If your machine is set to  
 
 10G : "b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8"  
 50G : "b6e9d1e8-89fc-4db3-aaa4-9b4c5b1d0844"  
@@ -459,7 +459,18 @@ Exoscale:  DB_SERVER_TYPE for each machine size. If your machine is set to
 
 Linode: g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-standard-8,g6-standard-16,g6-standard-20,g6-standard-24,g6-standard-32
 
-Vultr:  "1024","2048","4096","8192","16384","32768","24576","32768","49152","65536","98304"
+Vultr:  SERVER_TYPE values for each machine size on vultr
+
+1024 : 400
+2048 : 401
+4096 : 402
+8192 : 403
+16384 : 404
+24576 : 117
+32768 : 405
+49152 : 406
+65536 : 207
+98304 : 208
 
 AWS  :  @@@@@@@@@@@@@@@@@@@@@@@@  
 
