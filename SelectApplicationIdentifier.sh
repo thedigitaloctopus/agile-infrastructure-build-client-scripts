@@ -60,7 +60,7 @@ do
     status "---------------------------------------------------------------------"
     status " 1) Customisations for the 'basic social network' joomla application"
     status "---------------------------------------------------------------------"
-    status " 2) Customisations required for the basic Wordpress 'Nuocial Boss'  application"
+    status " 2) Customisations required for the Wordpress 'Nuocial Boss'  application"
     status "    Nuocial Boss baseline repositories are stored in bitbucket at the following urls:"
     status "    Sourcecode: https://bitbucket.org/agiledeployer/nuocialboss-webroot-sourcecode-baseline"
     status "    Database  : https://bitbucket.org/agiledeployer/nuocialboss-db-baseline"
@@ -79,5 +79,5 @@ fi
 
 if ( [ "${APPLICATION_IDENTIFIER}" = "2" ] )
 then
-    APPLICATION_NAME="SIMPLE WORDPRESS SOCIAL NETWORK"
+    APPLICATION_NAME="NUOCIALBOSS WORDPRESS SOCIAL NETWORK"
 fi
