@@ -419,7 +419,26 @@ Exoscale: Available region IDs you can set for exoscale are:
                                                            for region de-muc-1 regionid = "85664334-0fd5-47bd-94a1-b4f40b1d2eb7"
 
 Linode: Available regions you can set for linode are: "ap-west","a-central","ap-southeast","us-central","us-west","us-east","eu-west","ap-south","eu-central","ap-northeast"
-Vultr: Available regions you can set for vultr are: "ICN","SGP","NRT","SYD","AMS","FRA","LHR","CDG","ATL","ORD","DFW","LAX","MIA","EWR","SEA","SJC","YTO".
+Vultr: Available regions you can set for vultr are:  
+
+34 - Seoul  
+40 - Singapore  
+25 - Tokyo  
+19 - Sydney  
+7  - Amsterdam  
+9  - Frankfurt  
+8  - London  
+24 - Paris  
+6  - Atlanta  
+2  - Chicago  
+3  - Dallas  
+5  - Los Angeles  
+39 - Miami  
+1  - New Jersey  
+4  - Seattle  
+12 - Silicon Valley  
+22 - Toronto  
+
 AWS: @@@@@@@@@@@@@@@@
 
 ----------
