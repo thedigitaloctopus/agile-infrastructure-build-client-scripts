@@ -55,6 +55,12 @@ else
     exit
 fi
 
+if ( [ "${ips}" = "" ] )
+then
+    /bin/echo "There doesn't seem to be any databases running"
+    exit
+fi
+
 /bin/echo "What is the build identifier you want to connect to?"
 /bin/echo "You have these builds to choose from: "
 /bin/ls ${BUILD_HOME}/buildconfiguration/${CLOUDHOST} | /bin/grep -v 'credentials'
