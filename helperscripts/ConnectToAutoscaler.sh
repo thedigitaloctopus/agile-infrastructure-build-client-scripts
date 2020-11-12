@@ -59,6 +59,12 @@ read BUILD_IDENTIFIER
 #AUTOSCALER_IP="`/bin/ls ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASIP* | /usr/bin/awk -F':' '{print $NF}'`"
 ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh *autoscaler* ${CLOUDHOST} ${BUILD_HOME}`"
 
+if ( [ "${ips}" = "" ] )
+then
+    /bin/echo "There doesn't seem to be any autoscalers running"
+    exit
+fi
+
 /bin/echo "Which autoscaler would you like to connect to?"
 count=1
 for ip in ${ips}
