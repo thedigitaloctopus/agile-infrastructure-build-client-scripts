@@ -58,7 +58,7 @@ do
     status "Please select one based on the application you are installing:" 
     status " 0) No Customisations (Virgin CMS installs of any type)"
     status "---------------------------------------------------------------------"
-    status " 1) Customisations for the 'basic social network' joomla application"
+    status " 1) Customisations for the Joomla Demo application"
     status "---------------------------------------------------------------------"
     status " 2) Customisations required for the Wordpress 'Nuocial Boss'  application"
     status "    Nuocial Boss baseline repositories are stored in bitbucket at the following urls:"
