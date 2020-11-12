@@ -51,11 +51,17 @@ then
     status "============="
     status "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /bin/cat /home/${SERVER_USER}/config/credentials/shit"`"
     status "============="
+    /usr/bin/banner "Stop......" >&3
+    status "ONLY PRESS <ENTER> ONCE YOU HAVE INSTALLED YOUR APPLICATION THROUGH YOUR WEB BROWSER. I HAVE EXPERIENCED SOME CACHE CORRUPTION DURING TESTING"
+    status "AND, I WANT TO MAKE SURE YOUR DRUPAL CACHE IS PURGED POST INSTALL WHICH I WILL DO ONCE YOU PRESS <ENTER> HERE"
     status "#########################################################################################################################################"
     status "ONCE YOU HAVE INSTALLED THE APPLICATION THROUGH YOUR WEB BROWSER"
     status "Please press the <enter> key here to acknowledge this message and that you have made a note of the credentials and the build will be complete."
+    status "If you have experienced any error messages, try again once the build has completed" 
     status "########################################################################################################################################"
     read answer
+    status "Double check....Have you completed the install through your web browser. If yes, press <enter>, otherwise go to https://${WEBSITE_URL}/core/install.php"
+    read x
     /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "/home/${SERVER_USER}/providerscripts/application/processing/PerformPostProcessingByApplication.sh ${SERVER_USER}" >&3
 fi
 
