@@ -60,6 +60,12 @@ read BUILD_IDENTIFIER
 
 ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh webserver* ${CLOUDHOST} ${BUILD_HOME}`"
 
+if ( [ "${ips}" = "" ] )
+then
+    /bin/echo "There doesn't seem to be any webservers running"
+    exit
+fi
+
 /bin/echo "Which webserver would you like to connect to?"
 count=1
 for ip in ${ips}
