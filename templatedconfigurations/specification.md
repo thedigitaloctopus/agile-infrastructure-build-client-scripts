@@ -459,18 +459,18 @@ Exoscale:  SERVER_TYPE for each machine size. If your machine is set to
 
 Linode: g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-standard-8,g6-standard-16,g6-standard-20,g6-standard-24,g6-standard-32
 
-Vultr:  SERVER_TYPE values for each machine size on vultr
+Vultr:  SERVER_TYPE values for each machine size on vultr  
 
-1024 : 400
-2048 : 401
-4096 : 402
-8192 : 403
-16384 : 404
-24576 : 117
-32768 : 405
-49152 : 406
-65536 : 207
-98304 : 208
+1024 : 400  
+2048 : 401  
+4096 : 402  
+8192 : 403  
+16384 : 404  
+24576 : 117  
+32768 : 405  
+49152 : 406  
+65536 : 207  
+98304 : 208  
 
 AWS  :  @@@@@@@@@@@@@@@@@@@@@@@@  
 
