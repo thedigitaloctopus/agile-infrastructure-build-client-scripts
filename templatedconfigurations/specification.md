@@ -82,7 +82,7 @@ These grant you access to compute resources with your cloud provider. Under the 
 
 ##### linode -  This does not need to be set for linode, instead, see TOKEN= below
 
-vultr - @@@@@@@@@@@@@@@@@
+##### vultr - This does not need to be set for vultr, instead, see TOKEN= below
 
 ##### AWS - Under your IAM user, create a pair of keys which have compute manipulation capabilities and paste them into your template as ACCESS_KEY and SECRET_KEY
 
@@ -98,7 +98,7 @@ Some providers use personal access tokens rather than access keys and secret key
 
 ##### linode - Login to your Linode account, go to your Profile (top right) and select "API Tokens" and from there you can generate a "personal access token" to use as your TOKEN
 
-##### Vultr - @@@@@@@@@@@@@@@@
+##### Vultr - Login to your vultr account and go to your account on the top right. Then enable your personal access token and you can set it here.
 
 ##### AWS - @@@@@@@@@@@@@@@@@
 
