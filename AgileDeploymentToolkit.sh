@@ -674,15 +674,20 @@ else
     read carryon
     #Call the build scripts. These actually build and deploy the machines. Until this point, there was nothing new running on
     #our cloudhosts machines.
+    NO_AUTOSCALERS="1"
+    
     if ( [ "${PRODUCTION}" != "0" ] && [ "${DEVELOPMENT}" != "1" ] )
     then
-        status "How many autoscalers do you want to deploy?"
-        read NO_AUTOSCALERS
-        while ! ( [ "${NO_AUTOSCALERS}" -eq "${NO_AUTOSCALERS}" ] )
-        do
-            status "Sorry, invalid input, try again"
+    	if ( [ "${GENERATE_SNAPSHOTS}" != "1" ] )
+	    then
+            status "How many autoscalers do you want to deploy?"
             read NO_AUTOSCALERS
-        done
+            while ! ( [ "${NO_AUTOSCALERS}" -eq "${NO_AUTOSCALERS}" ] )
+            do
+                status "Sorry, invalid input, try again"
+                read NO_AUTOSCALERS
+            done
+        fi
         . ${BUILD_HOME}/buildscripts/BuildAutoscaler.sh
     fi
 
