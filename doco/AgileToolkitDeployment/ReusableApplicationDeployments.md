@@ -11,6 +11,6 @@ b) For your Webserver and database, modify the scripts under ${HOME}/application
 
 3. Develop your application from there until you are happy with it. 
 
-4. Once you have developed your application, you need to baseline it.
+4. Once you have developed your application, you need to baseline it. Please review ApplicationWorkflow.md which contains a description of how to baseline an application
 
 5. Once you application is baselined, anyone with access to it (make sure your code doesn't contain any senstive credentials if you are going to make it public) can deploy from that baseline. 
