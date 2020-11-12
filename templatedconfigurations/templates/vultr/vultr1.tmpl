@@ -1,24 +1,24 @@
-######################YOU WILL NEED A LINODE ACCOUNT AND A CLOUDFLARE ACCOUNT FOR THIS TEMPLATE#########################
+######################YOU WILL NEED A VULTR ACCOUNT AND A CLOUDFLARE ACCOUNT FOR THIS TEMPLATE#########################
 ######################AS WELL AS AN ACCOUNT WITH A GIT PROVIDER FOR YOUR APPLICATION REPOSITORIES###############################
 ######################OPTIONALLY, IF YOU WANT SYSTEM EMAILS, YOU WILL NEED AN SMTP SERVER AVAILABLE#############################
 ######################CURRENTLY SUPPORTED ARE, GOOGLE, SENDPULSE AND AMAZON SES#################################################
 ######################AS A MINIMUM REVIEW AND SET ALL VARIABLES MARKED "MANDATORY"##############################################
 ################################################################################################################################
-###############These two variables are your linode IAM access and secret keys with authority to manipulate the object store###
+###############These two variables are your vultr object store access and secret keys which can access and the object store ###
 export APPLICATION="wordpress"
 export S3_ACCESS_KEY=""  #MANDATORY
 export S3_SECRET_KEY=""  #MANDATORY
 export S3_HOST_BASE="ewr1.vultrobjects.com"
-export S3_LOCATION="US" #For linode, this always needs to be set to "US"
+export S3_LOCATION="US" #For vultr, this always needs to be set to "US"
 ###############The personal access token to use when manipulating compute with linode###############
-export TOKEN="" #MANDATORY this personal token needs "account", "IPs", "Linodes" and "Object Store" read and write privieges
+export TOKEN="" #MANDATORY this is your vultr personal API key
 export ACCESS_KEY=""   #NOT REQUIRED
 export SECRET_KEY=""   #NOT REQUIRED
 ###############These variables are cloudflare API key and the email address of your cloudflare account##########################
 export DNS_USERNAME=""  #MANDATORY
 export DNS_SECURITY_KEY=""   #MANDATORY
 export DNS_CHOICE="cloudflare"
-export DEFAULT_USER="root" ####This should always be 'root' on linode
+export DEFAULT_USER="root" ####This should always be 'root' on vultr
 ###^^^^^^^^^^^^^^^^^^^^^^^^^^^^ESSENTIAL TO REVIEW ALL THE ABOVE PARAMETERS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #################################################################################################################################
 ##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
@@ -27,9 +27,9 @@ export DEFAULT_USER="root" ####This should always be 'root' on linode
 export WEBSITE_DISPLAY_NAME="" #MANDATORY  
 export WEBSITE_NAME="" #MANDATORY - This is the exact value of the core of your WEBSITE_URL, for example, www.nuocial.org.uk would be nuocial  
 export WEBSITE_URL=""  #MANDATORY
-export APPLICATION_REPOSITORY_PROVIDER="" #MANDATORY
-export APPLICATION_REPOSITORY_OWNER="" #MANDATORY
-export APPLICATION_REPOSITORY_USERNAME="" #MANDATORY
+export APPLICATION_REPOSITORY_PROVIDER="bitbucket" #MANDATORY
+export APPLICATION_REPOSITORY_OWNER="agiledeployer" #MANDATORY
+export APPLICATION_REPOSITORY_USERNAME="agiledeployer" #MANDATORY
 export APPLICATION_REPOSITORY_PASSWORD="" #MANDATORY
 export SYSTEM_EMAIL_PROVIDER=""
 export SYSTEM_TOEMAIL_ADDRESS=""
@@ -61,19 +61,19 @@ export APPLICATION_LANGUAGE="PHP"
 export APPLICATION_IDENTIFIER="2"
 export PHP_VERSION="7.4"
 export REGION=""
-export REGION_ID="eu-central"
-export DB_SIZE="g6-nanode-1"
-export DB_SERVER_TYPE="g6-nanode-1"
-export WS_SIZE="g6-nanode-1"
-export WS_SERVER_TYPE="g6-nanode-1"
-export AS_SIZE="g6-nanode-1"
-export AS_SERVER_TYPE="g6-nanode-1"
-export CLOUDHOST="linode"
-export MACHINE_TYPE="LINODE"
+export REGION_ID="1"
+export DB_SIZE="1024"
+export DB_SERVER_TYPE="400"
+export WS_SIZE="1024"
+export WS_SERVER_TYPE="400"
+export AS_SIZE="1024"
+export AS_SERVER_TYPE="400"
+export CLOUDHOST="vultr"
+export MACHINE_TYPE="VULTR"
 export ALGORITHM="rsa"
 export USER="root"
 export CLOUDHOST_USERNAME="root"
-export CLOUDHOST_PASSWORD="iHjdmjUdhUsjkl" #this has to be set for linode, it is only used briefly on server creation, then root access is forbidden
+export CLOUDHOST_PASSWORD=""
 export PREVIOUS_BUILD_CONFIG="0"
 export GIT_USER="Templated User"
 export GIT_EMAIL_ADDRESS="templateduser@dummyemailX123.com"
@@ -82,11 +82,11 @@ export INFRASTRUCTURE_REPOSITORY_PROVIDER="github"
 export INFRASTRUCTURE_REPOSITORY_OWNER="agile-deployer"
 export INFRASTRUCTURE_REPOSITORY_USERNAME="agile-deployer"
 export INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
-export DATASTORE_CHOICE="linode"
+export DATASTORE_CHOICE="vultr"
 export SSL_GENERATION_METHOD="AUTOMATIC"
 export SSL_GENERATION_SERVICE="LETSENCRYPT"
 export BYPASS_DB_LAYER="0"
-export APPLICATION_NAME="SIMPLE SOCIAL NETWORK"
+export APPLICATION_NAME="NUOCIAL BOSS WORDPRESS"
 export PUBLIC_KEY_NAME="AGILE_TOOLKIT_PUBLIC_KEY"
 export DBaaS_HOSTNAME=""
 export DBaaS_USERNAME=""
