@@ -59,11 +59,14 @@ do
     status " 0) No Customisations (Virgin CMS installs of any type)"
     status "---------------------------------------------------------------------"
     status " 1) Customisations for the Joomla Demo application"
+    status "    Joom Demo baseline repositories are stored in github at the following urls:"
+    status "    Sourcecode: https://github.com/adt-demos/joomdemo-webroot-sourcecode-baseline"
+    status "    Database :  https://github.com/adt-demos/joomdemo-db-baseline"
     status "---------------------------------------------------------------------"
-    status " 2) Customisations required for the Wordpress 'Nuocial Boss'  application"
-    status "    Nuocial Boss baseline repositories are stored in bitbucket at the following urls:"
-    status "    Sourcecode: https://bitbucket.org/agiledeployer/nuocialboss-webroot-sourcecode-baseline"
-    status "    Database  : https://bitbucket.org/agiledeployer/nuocialboss-db-baseline"
+    status " 2) Customisations required for the Wordpress 'Wordy Demo'  application"
+    status "    Wordy Demo baseline repositories are stored in github at the following urls:"
+    status "    Sourcecode: https://github.com/adt-demos/wordydemo-webroot-sourcecode-baseline"
+    status "    Database  : https://github.com/adt-demos/wordydemo-db-baseline"
     status "---------------------------------------------------------------------"
     read response
 done
@@ -74,10 +77,10 @@ APPLICATION_NAME=""
 
 if ( [ "${APPLICATION_IDENTIFIER}" = "1" ] )
 then
-    APPLICATION_NAME="BASIC JOOMLA SOCIAL NETWORK "
+    APPLICATION_NAME="JOOM DEMO APPLICATION"
 fi
 
 if ( [ "${APPLICATION_IDENTIFIER}" = "2" ] )
 then
-    APPLICATION_NAME="NUOCIALBOSS WORDPRESS SOCIAL NETWORK"
+    APPLICATION_NAME="WORDY DEMO APPLICATION"
 fi
