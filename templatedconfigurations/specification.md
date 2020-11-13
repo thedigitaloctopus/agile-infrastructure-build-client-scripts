@@ -204,9 +204,9 @@ This is the username of the user that you are currently using to access the appl
 
 -----
 
-### APPLICATION_REPOSITORY_PASSWORD
+### APPLICATION_REPOSITORY_PASSWORD  
 
-This is the password for the APPLICATION_REPOSITORY_USERNAME or the application repository user. This is the password for your user account with your git provider. If the application repositories are public (be careful not to expose sensitive credentials if you make your application repos public), then this password can be blank.
+This is the password for the APPLICATION_REPOSITORY_USERNAME or the application repository user. This is the password for your user account with your git provider. If the application repositories are public (be careful not to expose sensitive credentials if you make your application repos public), then a password is not needed in which case this value must be precisely written or set to **"none"**
 
 -----
 
