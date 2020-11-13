@@ -219,6 +219,8 @@ Gitlab: www.gitlab.com/profile/personal_access_tokens
 
 Make sure these tokens have the rights to create and destroy repositories as well as to read and write from them. Most likely, you want to have a separate git provider account for your associated deployments. This will override APPLICATION_REPOSITORY_PASSWORD
 
+------
+
 ### SYSTEM_EMAIL_PROVIDER
 
 At the moment, there are three SMTP email service providers. Enter the number value, "1", "2" or "3" to select which provider you want to use for your SMTP service. If you leave these variables blank, you simply won't receive any system emails to give status updated on build progression, server intialisations and so on. You are free to leave these variables blank, as you choose.
