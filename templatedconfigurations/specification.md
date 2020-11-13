@@ -210,6 +210,15 @@ This is the password for the APPLICATION_REPOSITORY_USERNAME or the application 
 
 -----
 
+### APPLICATION_REPOSITORY_TOKEN
+
+Github and Gitlab prefer personal access tokens to passwords, so, if you wish to, you can generate personal access tokens at:
+
+Github: www.github.com/settings/tokens
+Gitlab: www.gitlab.com/profile/personal_access_tokens
+
+Make sure these tokens have the rights to create and destroy repositories as well as to read and write from them. Most likely, you want to have a separate git provider account for your associated deployments. This will override APPLICATION_REPOSITORY_PASSWORD
+
 ### SYSTEM_EMAIL_PROVIDER
 
 At the moment, there are three SMTP email service providers. Enter the number value, "1", "2" or "3" to select which provider you want to use for your SMTP service. If you leave these variables blank, you simply won't receive any system emails to give status updated on build progression, server intialisations and so on. You are free to leave these variables blank, as you choose.
@@ -541,7 +550,11 @@ This is the password of the for the cloudhost, it can be set - CLOUDHOST_PASSWOR
 
 ### PREVIOUS_BUILD_CONFIG
 
-When you run the AgileDeploymentToolkit.sh method of building your deployment, it will guide you through questions and answers and from that build a configuration. This configutation will be located at: ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}. This file is created right at the very end of a successful build process and not before. Once this file has been created, you can either use it to craft a template as ${BUILD_HOME}/templateconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}[n].tmpl for repeated usage or you can rerun the AgileDeploymentToolkit.sh script and when promoted choose to reuse this configuration file. When a configuration from a previous build is being used, this will be set to "1" otherwise it will be set to "0". This should be set to "0" if you are building from a template using the ExpeditedAgileDeploymentToolkit process.  
+When you run the AgileDeploymentToolkit.sh method of building your deployment, it will guide you through questions and answers and from that build a configuration. This configutation will be located at: ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}. This file is created right at the very end of a successful build process and not before. Once this file has been created, you can either use it to craft a template as   
+
+${BUILD_HOME}/templateconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}[n].tmpl  
+
+for repeated usage or you can rerun the AgileDeploymentToolkit.sh script and when promoted choose to reuse this configuration file. When a configuration from a previous build is being used, this will be set to "1" otherwise it will be set to "0". This should be set to "0" if you are building from a template using the ExpeditedAgileDeploymentToolkit process.  
 
 ------
 ### WSIP, WSIP_PRIVATE,DBIP,DBIP_PRIVATE,ASI,ASIP_PRIVATE,BUILD_CLIENT_IP
