@@ -131,28 +131,28 @@ then
     /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
 
 fi
+
 if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
-    while ( [ "`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`" = "" ] )
+    access_token="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
+  
+    while ( [ "${access_token}"  != "${TOKEN}" ] )
     do
-        status "Couldn't find valid authentication keys for Vultr"
-        status ""
-        status "Welcome to the Vultr build process using the Agile Deployment Toolkit"
-        status ""
-        status "You will need to set yourself up Vultr account (www.vultr.com) and obtain an API KEY"
-        status "You can find it here: https://my.vultr.com/settings/#settingsapi"
-        status "Please copy and paste it below:"
+           status "TOKEN mismatch detected"
+           status "The token in your vultr configuration file is: ${access_token}"
+           status "And, the access token you are providing from your chosen template is: ${TOKEN}"
+           status "Enter Y or y to update your live configuration with your the token from your template"
+           status "Anything else to keep it as it is"
+           read response
 
-        answer="N"
-        while ( [ "${answer}" != "Y" ] )
-        do
-            status "Please enter your API (Access) key:"
-            read API_KEY
-            status "Your Vultr API key is set to: ${API_KEY}, are you very sure that this is correct (Y or N)"
-            read answer
-        done
+           if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
+           then
+               /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
+               /bin/sed -i "/token/c token = ${TOKEN}" ~/.config/linode-cli
+           else 
+               continue
+           fi
 
-        /bin/echo "${API_KEY}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
     done
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
 fi
