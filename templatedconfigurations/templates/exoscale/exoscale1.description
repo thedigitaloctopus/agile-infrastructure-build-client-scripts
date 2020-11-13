@@ -1,4 +1,4 @@
-DEVELOPMENT MODE INSTALLATION OF THE NUOCIALBOSS WORDPRESS APPLICATION
+DEVELOPMENT MODE INSTALLATION OF THE WORDPRESS DEMO APPLICATION
 ----------------------------------------------------------------------
 
 DETAIL: This template will spin up the "nuocialboss" application on "Exoscale" in "Geneva". It deploys to "tiny" machines and in development mode rather than production. By default you need to select "Debian 10" as the build OS (review how you have set this to avoid issues). The database used is a "Maria DB" instance running on a VPS machine in the Exoscale cloud. The DNS provider is "Cloudflare". You will need an Exoscale account and a Cloudflare account to be able to deploy this application.
