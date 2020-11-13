@@ -1,7 +1,7 @@
-DEVELOPMENT MODE INSTALLATION OF THE NUOCIALBOSS WORDPRESS APPLICATION
+DEVELOPMENT MODE INSTALLATION OF THE WORDPRESS DEMO APPLICATION
 ----------------------------------------------------------------------
 
-DETAIL: This template will spin up the "nuocialboss" application on "Linode" in "EU Central". It deploys to "Nanode" machines and in Development mode rather than Production. By default you need to select "Debian 10" as the build OS (review how you have set this to avoid issues). The database used is a "Maria DB" instance running on a VPS machine in the Linode cloud. The DNS provider is "Cloudflare". You will need a Linode account and a Cloudflare account to be able to deploy this application.
+DETAIL: This template will spin up the "wordydemo" application on "Linode" in "EU Central". It deploys to "Nanode" machines and in Development mode rather than Production. By default you need to select "Debian 10" as the build OS (review how you have set this to avoid issues). The database used is a "Maria DB" instance running on a VPS machine in the Linode cloud. The DNS provider is "Cloudflare". You will need a Linode account and a Cloudflare account to be able to deploy this application.
 Starting from scratch, you would need to 
 
 1. Setup a Cloudflare account 
