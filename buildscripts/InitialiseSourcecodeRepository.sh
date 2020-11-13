@@ -95,7 +95,7 @@ then
     if ( [ "`/bin/echo ${choice} | /bin/grep '2'`" != "" ] )
     then
         APPLICATION_REPOSITORY_PROVIDER="github"
-        status "For this repository provider, we need a 'private auithorisation token' to be generated"
+        status "For this repository provider, we need a 'private authorisation token' to be generated"
         status "You can do this by logging into your account and going to: https://github.com/settings/tokens and then generating one"
         status "If you make a note of the generated token and paste it below, that will be all we need"
         read APPLICATION_REPOSITORY_TOKEN
@@ -103,7 +103,7 @@ then
     if ( [ "`/bin/echo ${choice} | /bin/grep '3'`" != "" ] )
     then
         APPLICATION_REPOSITORY_PROVIDER="gitlab"
-        status "For this repository provider, we need a 'private auithorisation token' to be generated"
+        status "For this repository provider, we need a 'private authorisation token' to be generated"
         status "You can do this by logging into your account with them and clicking on Profile Settings -> Access Tokens and then generating one"
         status "If you make a note of the generated token and paste it below, that will be all we need"
         read APPLICATION_REPOSITORY_TOKEN
