@@ -1,0 +1,133 @@
+######################YOU WILL NEED AN VULTR ACCOUNT AND A CLOUDFLARE ACCOUNT FOR THIS TEMPLATE#########################
+######################AS WELL AS AN ACCOUNT WITH A GIT PROVIDER FOR YOUR APPLICATION REPOSITORIES###############################
+######################OPTIONALLY, IF YOU WANT SYSTEM EMAILS, YOU WILL NEED AN SMTP SERVER AVAILABLE#############################
+######################CURRENTLY SUPPORTED ARE, GOOGLE, SENDPULSE AND AMAZON SES#################################################
+######################AS A MINIMUM REVIEW AND SET ALL VARIABLES MARKED "MANDATORY"##############################################
+################################################################################################################################
+###############These two variables are your Vutr access and secret keys with authority to manipulate the object store###
+export APPLICATION="wordpress"
+export S3_ACCESS_KEY=""  #MANDATORY
+export S3_SECRET_KEY=""  #MANDATORY
+export S3_HOST_BASE="ewr1.vultrobjects.com"
+export S3_LOCATION="US" #For vultr, this always needs to be set to "US"
+###############The personal access token to use when manipulating compute with vultre###############
+export TOKEN="" #MANDATORY this is your vultr personal access token
+export ACCESS_KEY=""   #NOT REQUIRED
+export SECRET_KEY=""   #NOT REQUIRED
+###############These variables are cloudflare API key and the email address of your cloudflare account##########################
+export DNS_USERNAME=""  #MANDATORY
+export DNS_SECURITY_KEY=""   #MANDATORY
+export DNS_CHOICE="cloudflare"
+export DEFAULT_USER="root" ####This should always be 'root' on vultr
+###^^^^^^^^^^^^^^^^^^^^^^^^^^^^ESSENTIAL TO REVIEW ALL THE ABOVE PARAMETERS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#################################################################################################################################
+##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
+##########################THESE NEXT VARIABLES ARE RELATED TO THE APPLICATION FUNCTIONING########################################
+#################################################################################################################################
+export WEBSITE_DISPLAY_NAME="" #MANDATORY
+export WEBSITE_NAME="" #MANDATORY - This is the exact value of the core of your WEBSITE_URL, for example, www.nuocial.org.uk would be nuocial
+export WEBSITE_URL=""  #MANDATORY
+export APPLICATION_REPOSITORY_PROVIDER="bitbucket" #MANDATORY
+export APPLICATION_REPOSITORY_OWNER="agiledeployer" #MANDATORY
+export APPLICATION_REPOSITORY_USERNAME="" #MANDATORY
+export APPLICATION_REPOSITORY_PASSWORD="" #MANDATORY
+export SYSTEM_EMAIL_PROVIDER=""
+export SYSTEM_TOEMAIL_ADDRESS=""
+export SYSTEM_FROMEMAIL_ADDRESS=""
+export SYSTEM_EMAIL_USERNAME=""
+export SYSTEM_EMAIL_PASSWORD=""
+#################################################################################################################################
+###########################VARIABLES ABOVE HERE YOU WILL NEED TO SET FOR YOUR APPLICATION TO FUNCTION FULLY #####################
+#################################################################################################################################
+export DIRECTORIES_TO_MOUNT="wp-content.uploads"
+export PRODUCTION="1"
+export DEVELOPMENT="0"
+export SUPERSAFE_WEBROOT="1"
+export WEBSERVER_CHOICE="NGINX"
+export NUMBER_WS="1"
+export SUPERSAFE_DB="1"
+export SERVER_TIMEZONE_CONTINENT="Europe"
+export SERVER_TIMEZONE_CITY="London"
+export DISABLE_HOURLY="0"
+export DATABASE_INSTALLATION_TYPE="Maria"
+export DB_PORT="2035"
+export SSH_PORT="1035"
+export PERSIST_ASSETS_TO_CLOUD="0"
+export BUILD_CHOICE="1"
+export BASELINE_DB_REPOSITORY="nuocialboss-db-baseline"
+export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="nuocialboss-webroot-sourcecode-baseline"
+export BUILD_ARCHIVE_CHOICE="baseline"
+export APPLICATION_LANGUAGE="PHP"
+export APPLICATION_IDENTIFIER="2"
+export PHP_VERSION="7.4"
+export AUTOSCALE_FROM_SNAPSHOTS="1"
+export GENERATE_SNAPSHOTS="0"
+export SNAPSHOT_ID=""  #swap for your own 4 letter code in snapshot name - you can find it from the DO console under "images"
+export WEBSERVER_IMAGE_ID="" #swap for your own /usr/bin/vultr snapshots | grep webserver | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' 
+export AUTOSCALER_IMAGE_ID="" #swap for your own /usr/bin/vultr snapshots | grep autoscaler | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}'
+export DATABASE_IMAGE_ID="" #swap for your own /usr/bin/vultr snapshots | grep database | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' 
+export REGION=""
+export REGION_ID="1"
+export DB_SIZE="1024"
+export DB_SERVER_TYPE="400"
+export WS_SIZE="1024"
+export WS_SERVER_TYPE="400"
+export AS_SIZE="1024"
+export AS_SERVER_TYPE="400"
+export CLOUDHOST="vultr"
+export MACHINE_TYPE="VULTR"
+export ALGORITHM="rsa"
+export USER="root"
+export CLOUDHOST_USERNAME="root"
+export CLOUDHOST_PASSWORD=""
+export PREVIOUS_BUILD_CONFIG="0"
+export WSIP=""
+export WSIP_PRIVATE=""
+export GIT_USER="Templated User"
+export GIT_EMAIL_ADDRESS="templateduser@dummyemailX123.com"
+export APPLICATION_REPOSITORY_TOKEN=""
+export INFRASTRUCTURE_REPOSITORY_PROVIDER="github"
+export INFRASTRUCTURE_REPOSITORY_OWNER="agile-deployer"
+export INFRASTRUCTURE_REPOSITORY_USERNAME="agile-deployer"
+export INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
+export DATASTORE_CHOICE="linode"
+export DBaaS_HOSTNAME=""
+export DBaaS_USERNAME=""
+export DBaaS_PASSWORD=""
+export DBaaS_DBNAME=""
+export DATABASE_DBaaS_INSTALLATION_TYPE=""
+export DEFAULT_DBaaS_OS_USER=""
+export DBaaS_REMOTE_SSH_PROXY_IP=""
+export DBaaSDBSECURITYGROUP=""
+export DBIP=""
+export DBIP_PRIVATE=""
+export ASIP=""
+export ASIP_PRIVATE=""
+export DBaaS_DBNAME=""
+export APPLICATION_NAME="NUOCIAL BOSS WORDPRESS"
+export DNS_REGION=""
+export DNS_EMAIL_ADDRESS=""
+export SSL_GENERATION_METHOD="AUTOMATIC"
+export SSL_GENERATION_SERVICE="LETSENCRYPT"
+export BYPASS_DB_LAYER="0"
+export MAPS_API_KEY=""
+export PHP_MODE=""
+export PHP_MAX_CHILDREN=""
+export PHP_START_SERVERS=""
+export PHP_MIN_SPARE_SERVERS=""
+export PHP_MAX_SPARE_SERVERS=""
+export PHP_PROCESS_IDLE_TIMEOUT=""
+export IN_MEMORY_CACHING=""
+export IN_MEMORY_CACHING_PORT=""
+export IN_MEMORY_CACHING_HOST=""
+export IN_MEMORY_CACHING_SECURITY_GROUP=""
+export ENABLE_EFS=""
+export SUBNET_ID=""
+export ASSETS_BUCKET=""
+export JOOMLA_VERSION=""
+export DRUPAL_VERSION=""
+export PUBLIC_KEY_NAME="AGILE_TOOLKIT_PUBLIC_KEY"
+export BUILD_HOME=""
+export BUILD_CLIENT_IP=""
+export BUILD_IDENTIFIER=""
+export PUBLIC_KEY_ID=""
