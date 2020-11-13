@@ -2,7 +2,7 @@
 ######################################################################################################################################################
 # Author: Peter Winter
 # Date  : 13/07/2016
-# Description : This script enables you to configure the scaling of your webservers and is the way it must be done if you have mutiple autoscalers running
+# Description : This script will connect you to your autoscaler via ssh
 ######################################################################################################################################################
 # License Agreement:
 # This file is part of The Agile Deployment Toolkit.
@@ -18,9 +18,9 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #######################################################################################################
 #######################################################################################################
-set -x
+#set -x
 
-if ( [ ! -f  ./ConnectToAutoscaler.sh ] )
+if ( [ ! -f  ./ModifyScaling.sh ] )
 then
     /bin/echo "Sorry, this script has to be run from the helperscripts subdirectory"
     exit
@@ -65,6 +65,7 @@ read response
 
 SSH_PORT="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} | /bin/grep SSH_PORT | /bin/sed 's/"//g' | /usr/bin/awk -F'=' '{print $NF}'`"
 SERVER_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER`"
+SERVER_USER_PASSWORD="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSERPASSWORD`"
 
 /bin/echo "How many webservers do you wish to have active?"
 
@@ -87,17 +88,17 @@ do
     then
         if ( [ "${SSH_PORT}" != "" ] )
         then
-            /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${ip} "/bin/sed -i "/^NO_WEBSERVERS=/c\NO_WEBSERVERS=${no_webservers}" /home/${SERVER_USERNAME}/config/scalingprofile/profile.cnf"
+            /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${ip} "/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "/^NO_WEBSERVERS=/c\NO_WEBSERVERS=${no_webservers}" /home/${SERVER_USERNAME}/config/scalingprofile/profile.cnf"
         else
-            /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${ip} "/bin/sed -i "/^NO_WEBSERVERS=/c\NO_WEBSERVERS=${no_webservers}" /home/${SERVER_USERNAME}/config/scalingprofile/profile.cnf"
+            /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${ip} "/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "/^NO_WEBSERVERS=/c\NO_WEBSERVERS=${no_webservers}" /home/${SERVER_USERNAME}/config/scalingprofile/profile.cnf"
 fi
     elif ( [ "${response}" = "2" ] )
     then
         if ( [ "${SSH_PORT}" != "" ] )
         then
-            /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${ip} "/bin/sed -i "/^NO_WEBSERVERS=/c\NO_WEBSERVERS=${no_webservers}" /home/${SERVER_USERNAME}/config/scalingprofile/profile.cnf" 
+            /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${ip} "/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "/^NO_WEBSERVERS=/c\NO_WEBSERVERS=${no_webservers}" /home/${SERVER_USERNAME}/config/scalingprofile/profile.cnf" 
 else
-            /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${ip} "/bin/sed -i "/^NO_WEBSERVERS=/c\NO_WEBSERVERS=${no_webservers}" /home/${SERVER_USERNAME}/config/scalingprofile/profile.cnf" 
+            /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${ip} "/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /bin/sed -i "/^NO_WEBSERVERS=/c\NO_WEBSERVERS=${no_webservers}" /home/${SERVER_USERNAME}/config/scalingprofile/profile.cnf" 
 fi
      else
         /bin/echo "Unrecognised selection, please select only 1 or 2"
