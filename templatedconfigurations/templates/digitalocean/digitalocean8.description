@@ -1,5 +1,5 @@
 GENERATING SNAPSHOTS FROM THE WORDY DEMO APPLICATION BASELINE
 -------------------------------------------------------------
 
-This template is a deployment of the nuocialboss baseline that also generates snapshots at the end of its build run. I show how these snapshots can be used from an expedited build process in digitalocean9.tmpl
+This template is a deployment of the wordy demo baseline that also generates snapshots at the end of its build run. I show how these snapshots can be used from an expedited build process in digitalocean9.tmpl
 You run this template as for digitalocean1.tmpl but it generates snapshots at the end which you can see in your digitalocean concsole under images and which can be used to form subsequent builds. To generate the snapshots, you must set GENERATE_SNAPSHOTS="1"
