@@ -1,7 +1,7 @@
 DEVELOPMENT MODE INSTALLATION OF THE WORDPRESS DEMO APPLICATION 
 ----------------------------------------------------------------------
 
-DETAIL: This template will spin up the "nuocialboss" application on "Digital Ocean" in "London". It deploys to "1GB" machines and in Development mode rather than Production. By default you need to select "Debian 10" as the build OS (review how you have set this to avoid issues). The database used is a "Maria DB" instance running on a VPS machine in the Digital Ocean cloud. The DNS provider is "Cloudflare". You will need a Digital Ocean account and a Cloudflare account to be able to deploy this application.
+DETAIL: This template will spin up the "wordydemo" application on "Digital Ocean" in "London". It deploys to "1GB" machines and in Development mode rather than Production. By default you need to select "Debian 10" as the build OS (review how you have set this to avoid issues). The database used is a "Maria DB" instance running on a VPS machine in the Digital Ocean cloud. The DNS provider is "Cloudflare". You will need a Digital Ocean account and a Cloudflare account to be able to deploy this application.
 Starting from scratch, you would need to 
 
 1. Setup a Cloudflare account 
