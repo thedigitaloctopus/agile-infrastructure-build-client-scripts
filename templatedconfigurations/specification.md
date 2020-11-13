@@ -369,9 +369,9 @@ As long as you have backups in place, you can use this setting to roll back to a
 ### BASELINE_DB_REPOSITORY
 
 When you baseline your application database, you will need to create a repository <unique_identifier>-db-baseline. From here your baseline will be pulled during installation. 
-If for example, your unique identifier is "nuocialboss", then, the repository would be "nuocialboss-db-baseline" and 
+If for example, your unique identifier is "wordydemo", then, the repository would be "wordydemo-db-baseline" and 
 
-BASELINE_DB_REPOSITORY would be set to "nuocialboss-db-baseline"
+BASELINE_DB_REPOSITORY would be set to "wordydemo-db-baseline"
 
 -----
 
@@ -379,7 +379,7 @@ BASELINE_DB_REPOSITORY would be set to "nuocialboss-db-baseline"
 
 When you baseline your application sourcecode, you will need to create a repository <unique_identifier>-webroot-sourcecode-baseline. From here your baseline will be pulled during installation. 
 
-If for example, your unique identifier is "nuocialboss", then, APPLICATION_BASELINE_SOURCECODE_REPOSITORY would be "nuocialboss-webroot-sourcecode-baseline" 
+If for example, your unique identifier is "wordydemo", then, APPLICATION_BASELINE_SOURCECODE_REPOSITORY would be "wordydemo-webroot-sourcecode-baseline" 
 
 -----
 
