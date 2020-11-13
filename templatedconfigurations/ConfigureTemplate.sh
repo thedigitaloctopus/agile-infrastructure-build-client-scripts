@@ -129,6 +129,13 @@ templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLO
 #Take care of special case when a space is input in the website display name
 export WEBSITE_DISPLAY_NAME="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /bin/sed "s/'//g" | /bin/sed 's/ /_/g'`"
 
+
+#If the application repository token is set, override any password that has been set
+if ( [ "${APPLICATION_REPOSITORY_TOKEN}" != "" ] )
+then
+    export APPLICATION_REPOSITORY_PASSWORD="${APPLICATION_REPOSITORY_TOKEN}"
+fi
+
 #Make it live
 /bin/cp ${templatefile} ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 
