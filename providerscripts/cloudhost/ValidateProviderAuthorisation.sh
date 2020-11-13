@@ -116,6 +116,8 @@ then
         if ( [ -f ${HOME}/.config/linode-cli ] )
         then
             access_token="`/bin/cat ~/.config/linode-cli | /bin/grep "token" | /usr/bin/awk '{print $NF}'`"
+        else
+            access_token=""
         fi
 
         if ( ( [ "${access_token}" != "" ] && [ "${TOKEN}" != "" ]  ) && ( [ "${access_token}" != "${TOKEN}" ] ) )
@@ -141,18 +143,26 @@ then
 1
 25
 " | /usr/local/bin/linode-cli 
-            if ( [ "$?" != "0" ] )
-            then
-                status "The token in your template seems to be invalid. Please update your template with a valid token and then press <enter>"
-                read x
-              . ${templatefile}
-            fi
+              if ( [ "$?" != "0" ] )
+              then
+                 status "The token in your template seems to be invalid. Please update your template with a valid token and then press <enter>"
+                 read x
+                 . ${templatefile}
+              fi
           else
               status "Couldn't find the token for ${CLOUDHOST} please update your template with you personal access token for ${CLOUDHOST}"
               status "If you don't have a token, you can generate them through your ${CLOUDHOST} profile of the ${CLOUDHOST} gui system"
               status "Press <enter> key to continue"
               read x
               . ${templatefile}
+          fi
+
+          if ( [ -f ${HOME}/.config/linode-cli ] && [ "`/usr/local/bin/linode-cli --text linodes list 2>&1 | /bin/grep 'Invalid Token'`" != "" ] )
+          then
+              status "The token you have provided seems to be invalid, please update your template and press <enter>"
+              /bin/rm ${HOME}/.config/linode-cli
+              . ${templatefile}
+              read x
           fi
 
          /bin/echo "${TOKEN}
