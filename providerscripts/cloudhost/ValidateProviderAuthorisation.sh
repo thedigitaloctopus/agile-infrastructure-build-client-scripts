@@ -37,7 +37,7 @@ then
         if ( [ "${access_token}" != "${TOKEN}" ] )
         then
            status "TOKEN mismatch detected"
-           status "The token in your digital ocean configuration file is: ${access_token}"
+           status "The token in your ${CLOUDHOST} configuration file is: ${access_token}"
            status "And, the access token you are providing from your chosen template is: ${TOKEN}"
            status "Enter Y or y to update your live configuration with your the token from your template"
            read response
@@ -106,16 +106,22 @@ secret = ${SECRET_KEY}" > ${HOME}/.cloudstack.ini
     done
 fi
 
+
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
+    /bin/ls /tmp/XXDDZZAASS.$$
 
-    if ( [ -f ${HOME}/.config/linode-cli ] )
-    then
-        access_token="`/bin/cat ~/.config/linode-cli | /bin/grep "token" | /usr/bin/awk '{print $NF}'`"
-        if ( [ "${access_token}" != "${TOKEN}" ] )
+    while ( [ "$?" != "0" ] )
+    do
+        if ( [ -f ${HOME}/.config/linode-cli ] )
+        then
+            access_token="`/bin/cat ~/.config/linode-cli | /bin/grep "token" | /usr/bin/awk '{print $NF}'`"
+        fi
+
+        if ( ( [ "${access_token}" != "" ] && [ "${TOKEN}" != "" ]  ) && ( [ "${access_token}" != "${TOKEN}" ] ) )
         then
            status "TOKEN mismatch detected"
-           status "The token in your digital ocean configuration file is: ${access_token}"
+           status "The token in your ${CLOUDHOST} configuration file is: ${access_token}"
            status "And, the access token you are providing from your chosen template is: ${TOKEN}"
            status "Enter Y or y to update your live configuration with your the token from your template"
            read response
@@ -123,13 +129,41 @@ then
            then
                /bin/sed -i "/token/c token = ${TOKEN}" ~/.config/linode-cli
            fi
-        fi
-    else
-        #export DIGITALOCEAN_ACCESS_TOKEN="${TOKEN}"
-        /usr/local/bin/linode-cli configure >&3
-    fi
-    /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
+        elif ( [ "${TOKEN}" != "" ] )
+        then
+            status "Using your the keys from your template for your ${CLOUDHOST} authentication"
+            /bin/mkdir -p ${BUILD_HOME}/runtimedata/${CLOUDHOST}
 
+            /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
+
+/bin/echo "${TOKEN}
+9
+1
+25
+" | /usr/local/bin/linode-cli 
+            if ( [ "$?" != "0" ] )
+            then
+                status "The token in your template seems to be invalid. Please update your template with a valid token and then press <enter>"
+                read x
+              . ${templatefile}
+            fi
+          else
+              status "Couldn't find the token for ${CLOUDHOST} please update your template with you personal access token for ${CLOUDHOST}"
+              status "If you don't have a token, you can generate them through your ${CLOUDHOST} profile of the ${CLOUDHOST} gui system"
+              status "Press <enter> key to continue"
+              read x
+              . ${templatefile}
+          fi
+
+         /bin/echo "${TOKEN}
+9
+1
+25
+" | /usr/local/bin/linode-cli 
+
+    done
+
+    /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
 fi
 
 if ( [ "${CLOUDHOST}" = "vultr" ] )
