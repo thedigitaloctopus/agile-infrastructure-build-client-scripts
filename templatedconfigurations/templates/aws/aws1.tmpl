@@ -10,7 +10,7 @@ export S3_ACCESS_KEY=""  #MANDATORY
 export S3_SECRET_KEY=""  #MANDATORY
 export S3_HOST_BASE="s3.eu-west-1.amazonaws.com"
 export S3_LOCATION="EU" #This needs to be the location of your bucket, for example, US or EU
-###############The personal access token to use when manipulating compute with linode###############
+###############The access keys to use when manipulating compute with linode###############
 export TOKEN="" #Not required
 export ACCESS_KEY=""   #MANDATORY
 export SECRET_KEY=""   #MANDATORY
@@ -18,7 +18,7 @@ export SECRET_KEY=""   #MANDATORY
 export DNS_USERNAME=""  #MANDATORY
 export DNS_SECURITY_KEY=""   #MANDATORY
 export DNS_CHOICE="cloudflare"
-export DEFAULT_USER="root" ####This should be ubuntu for ubuntu and admin for debian on AWS
+export DEFAULT_USER="admin" ####This should be "ubuntu" for ubuntu and "admin" for debian on AWS
 ###^^^^^^^^^^^^^^^^^^^^^^^^^^^^ESSENTIAL TO REVIEW ALL THE ABOVE PARAMETERS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #################################################################################################################################
 ##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
