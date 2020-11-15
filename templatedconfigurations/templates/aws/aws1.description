@@ -1,7 +1,7 @@
 DEVELOPMENT MODE INSTALLATION OF THE WORDPRESS DEMO APPLICATION
 ----------------------------------------------------------------------
 
-DETAIL: This template will spin up the "wordydemo" application on "AWS" in "London". It deploys to "Micro" machines and in Development mode rather than Production. The database used is a "Maria DB" instance running on a EC2 machine in the AWS cloud. The DNS provider is "Cloudflare". You will need a AWS account and a Cloudflare account to be able to deploy this application.
+DETAIL: This template will spin up the "wordydemo" application on "AWS" in "EU-WEST". It deploys to "Micro" machines and in Development mode rather than Production. The database used is a "Maria DB" instance running on a EC2 machine in the AWS cloud. The DNS provider is "Cloudflare". You will need a AWS account and a Cloudflare account to be able to deploy this application.
 Starting from scratch, you would need to 
 
 1. Setup a Cloudflare account 
