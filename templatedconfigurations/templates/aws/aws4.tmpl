@@ -1,4 +1,4 @@
-######################YOU WILL NEED A AWS ACCOUNT AND A CLOUDFLARE ACCOUNT FOR THIS TEMPLATE#########################
+######################YOU WILL NEED AN AWS ACCOUNT AND A CLOUDFLARE ACCOUNT FOR THIS TEMPLATE#########################
 ######################AS WELL AS AN ACCOUNT WITH A GIT PROVIDER FOR YOUR APPLICATION REPOSITORIES###############################
 ######################OPTIONALLY, IF YOU WANT SYSTEM EMAILS, YOU WILL NEED AN SMTP SERVER AVAILABLE#############################
 ######################CURRENTLY, GOOGLE, SENDPULSE AND AMAZON SES ARE SUPPORTED#################################################
@@ -9,7 +9,7 @@ export DRUPAL_VERSION="9.0.7"
 export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="DRUPAL:9.0.7"
 export S3_ACCESS_KEY=""  #MANDATORY
 export S3_SECRET_KEY=""  #MANDATORY
-export S3_HOST_BASE="ewr1.vultrobjects.com"
+export S3_HOST_BASE="s3.eu-west-1.amazonaws.com"
 export S3_LOCATION="US" #For AWS, this always needs to be set to your location, for example, "US" or "EU"
 ###############The access key and secret key to use when manipulating compute with AWS###############
 export TOKEN="" #NOT REQUIRED
@@ -19,7 +19,7 @@ export SECRET_KEY=""   #MANDATORY
 export DNS_USERNAME=""  #MANDATORY
 export DNS_SECURITY_KEY=""   #MANDATORY
 export DNS_CHOICE="cloudflare"
-export DEFAULT_USER="root" ####This should always be "ubuntu" on ubuntu and "admin" on debian for AWS
+export DEFAULT_USER="admin" ####This should always be "ubuntu" on ubuntu and "admin" on debian for AWS
 ###^^^^^^^^^^^^^^^^^^^^^^^^^^^^ESSENTIAL TO REVIEW ALL THE ABOVE PARAMETERS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #################################################################################################################################
 ##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
