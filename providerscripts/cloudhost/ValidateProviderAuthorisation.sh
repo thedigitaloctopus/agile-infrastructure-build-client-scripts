@@ -203,24 +203,65 @@ fi
 
 if ( [ "${CLOUDHOST}" = "aws" ] )
 then
-    if ( [ ! -f ${HOME}/.aws/config ] && [ ! -f ${HOME}/.aws/credentials ] )
+
+    if ( [ ! -f ${HOME}/.aws ] )
     then
-        status "About to configure the AWS CLI tool"
-        status "#####################################################"
-        status "ESSENTIAL: Leave the 'output format' option as 'None'"
-        status "#####################################################"
-        status "Press <enter>"
-        read x
-        /usr/bin/aws configure >&3
-    else
-        status "Your AWS access keys are set to:"
-        status "############################################"
-        status "${HOME}/.aws/config :"
-        status "`/bin/cat ${HOME}/.aws/config`"
-        status "${HOME}/.aws/credentials :"
-        status "`/bin/cat ${HOME}/.aws/credentials`"
-        status "Please review and if you want them altered you can manually edit the files ${HOME}/.aws/config and ${HOME}/.aws/credentials"
-        status "Press <enter> to continue"
-        read x
+        /bin/mkdir ${HOME}/.aws
     fi
+
+    /usr/bin/aws ec2 describe-instances 2>&1 > /dev/null
+    
+    while ( [ "$?" != "0" ] )
+    do
+        access_key=""
+        secret_key=""
+
+        if ( [ -f ${HOME}/.aws/credentials ] )
+        then
+            access_key="`/bin/cat ${HOME}/.aws/credentials | /bin/grep "^aws_access_key_id" | /usr/bin/awk '{print $NF}'`"
+            secret_key="`/bin/cat ${HOME}/.aws/credentials | /bin/grep "^aws_secret_access_key" | /usr/bin/awk '{print $NF}'`"
+        fi
+
+        if ( ( [ "${access_key}" != "" ] && [ "${secret_key}" != "" ] && [ "${ACCESS_KEY}" != "" ] && [ "${SECRET_KEY}" != "" ] ) && ( [ "${access_key}" != "${ACCESS_KEY}" ] || [ "${secret_key}" != "${SECRET_KEY}" ] ) )
+        then
+            status "KEYS MISMATCH DETECTED"
+            status "The keys in your exoscale configuration file are: ${access_key} and ${secret_key}"
+            status "And, the access keys you are providing from your chosen template are: ${ACCESS_KEY} and ${SECRET_KEY}"
+            status "Enter Y or y to update your live configuration with your the token from your template"
+            read response
+            if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
+            then
+               /bin/sed -i "/^aws_access_key_id/c aws_access_key_id = ${ACCESS_KEY}" ${HOME}/.aws/credentials
+               /bin/sed -i "/^aws_secret_access_key/c aws_secret_access_key = ${SECRET_KEY}" ${HOME}/.aws/credentials
+            fi
+        elif ( [ "${ACCESS_KEY}" != "" ] && [ "${SECRET_KEY}" != "" ] )
+        then
+            status "Using your the keys from your template for your ${CLOUDHOST} authentication"
+            /bin/mkdir -p ${BUILD_HOME}/runtimedata/${CLOUDHOST}
+
+            /bin/echo "${ACCESS_KEY}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/ACCESS_KEY
+            /bin/echo "${SECRET_KEY}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/SECRET_KEY
+
+            /bin/echo "[default]
+aws_access_key_id = ${ACCESS_KEY}
+aws_secret_access_key = ${SECRET_KEY}" > ${HOME}/.aws/credentials
+
+            /bin/echo "[default]
+region = eu-west-1
+output = json" > ${HOME}/.aws/config
+
+            /bin/chown ${USER} ${HOME}/.aws/credentials
+            /bin/chmod 400 ${HOME}/.aws/credentials
+            /bin/chown ${USER} ${HOME}/.aws/config
+            /bin/chmod 400 ${HOME}/.aws/config
+
+          else
+              status "Couldn't find the keys for ${CLOUDHOST} please update your template with you API keys for ${CLOUDHOST}"
+              status "If you don't have access keys, you can generate them through the ${CLOUDHOST} IAM section of the ${CLOUDHOST} gui system"
+              status "Press <enter> key to continue"
+              read x
+              . ${templatefile}
+          fi
+          /usr/bin/aws ec2 describe-instances 2>&1 > /dev/null
+    done
 fi
