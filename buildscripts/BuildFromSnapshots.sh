@@ -303,6 +303,11 @@ then
     #Add our record to the dns. Please note, proxying has to be off, but we need the ip address to be active with our DNS provider
     #provider. The reason why proxying is off is that the system we use to install SSL certificates does not work when proxying is on
 
+    if ( [ "${DNS_REGION}" = "" ] )
+    then
+        DNS_REGION="FILLER"
+    fi
+    
     ${BUILD_HOME}/providerscripts/dns/AddRecord.sh "${zoneid}" "${DNS_USERNAME}" "${DNS_SECURITY_KEY}" "${WEBSITE_URL}" "${WSIP}" "true" "${DNS_CHOICE}" "${DNS_REGION}" "${WEBSITE_URL}"
 
     /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${WSIP} "${SUDO} /sbin/shutdown -r now"
