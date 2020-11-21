@@ -125,6 +125,7 @@ templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLO
 
 #load the environment from the template file
 . ${templatefile}
+. ${BUILD_HOME}/templatedconfigurations/ValidateDefaultUser.sh
 
 #Take care of special case when a space is input in the website display name
 export WEBSITE_DISPLAY_NAME="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /bin/sed "s/'//g" | /bin/sed 's/ /_/g'`"
