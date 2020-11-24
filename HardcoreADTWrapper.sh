@@ -52,7 +52,7 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 if ( [ ! -f /usr/bin/lego ] )
 then
     ${BUILD_HOME}/installscripts/InstallLego.sh ${BUILDOS}
-fi
+fi 
 
 DOMAIN_URL="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F':' '{print $NF}' | /usr/bin/awk -F'.' '{$1="";print}' | /bin/sed 's/^ //' | /bin/sed 's/ /./g'`"
 
