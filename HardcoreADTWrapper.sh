@@ -40,27 +40,6 @@ S3_LOCATION="1" ####STACK
 TOKEN="1" ####STACK
 NO_AUTOSCALERS="1" #####STACK
 
-if ( [ ! -d /usr/local/go ] )
-then
-    ${BUILD_HOME}/installscripts/InstallGo.sh ${BUILDOS}
-fi
-
-export GOROOT=/usr/local/go
-export GOPATH=$HOME
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
-if ( [ ! -f /usr/bin/lego ] )
-then
-    ${BUILD_HOME}/installscripts/InstallLego.sh ${BUILDOS}
-fi 
-
-DOMAIN_URL="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F':' '{print $NF}' | /usr/bin/awk -F'.' '{$1="";print}' | /bin/sed 's/^ //' | /bin/sed 's/ /./g'`"
-
-if ( [ "${DNS_CHOICE}" = "cloudflare" ] )
-then
-
-    #For production
-    command="CLOUDFLARE_EMAIL="${DNS_USERNAME}" CLOUDFLARE_API_KEY="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_USERNAME}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
-fi
+export HARDCORE="1"
 
 /bin/sh HardcoreAgileDeploymentToolkit.sh
