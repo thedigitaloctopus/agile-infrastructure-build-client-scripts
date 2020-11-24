@@ -313,24 +313,8 @@ fi
 SELECTED_TEMPLATE="1" ##############STACK
 
 . ${BUILD_HOME}/templatedconfigurations/ConfigureTemplate.sh
-
-SYSTEM_EMAIL_USERNAME="1" ####STACK
-SYSTEM_EMAIL_PASSWORD="1" ####STACK
-SYSTEM_EMAIL_PROVIDER="1" ###STACK
-SYSTEM_TOEMAIL_ADDRESS="1" ####STACK
-SYSTEM_FROMEMAIL_ADDRESS="1" ####STACK
-
 . ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
-
-S3_ACCESS_KEY="1" ####STACK
-S3_SECRET_KEY="1" ####STACK
-S3_HOST_BASE="1" ####STACK
-S3_LOCATION="1" ####STACK
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
-
-TOKEN="1" ####STACK
-
-
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 
 #Set a username and password which we can set on all our servers. Once the machines are built, password authentication is
