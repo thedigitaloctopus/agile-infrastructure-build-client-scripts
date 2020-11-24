@@ -17,6 +17,8 @@ ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
     actioned="1"
 fi
 
+/bin/touch /tmp/${BUILD_IDENTIFIER}
+
 #BUILDOS="ubuntu" #########STACK
 #BUILDOS_VERSION="20.04" #########STACK
 #CLOUDHOST="linode" #############STACK
