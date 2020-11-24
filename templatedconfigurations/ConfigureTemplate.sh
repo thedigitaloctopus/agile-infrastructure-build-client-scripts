@@ -20,7 +20,7 @@
 ####################################################################################
 ####################################################################################
 
-if ( [ "${SELECTED_TEMPLATE}" = "" ] )
+if ( [ "${SELECTED_TEMPLATE}" = "" ] && [ "${HARDCORE}" != "1" ] )
 then
     status ""
     status "I have the following templates available for ${CLOUDHOST}"
@@ -111,7 +111,50 @@ then
     status "Press <enter> to continue"
     read x
 else
+    #template overrides if we are running in hardcore mode
     selectedtemplate="${SELECTED_TEMPLATE}"
+    /bin/sed -i '/BUILDOS=/d' ${templatefile}
+    /bin/echo "export BUILDOS=\"${BUILDOS}\"" >> ${templatefile}
+    /bin/sed -i '/BUILDOS_VERSION=/d' ${templatefile}
+    /bin/echo "export BUILDOS_VERSION=\"${BUILDOS_VERSION}\"" >> ${templatefile}
+    /bin/sed -i '/CLOUDHOST=/d' ${templatefile}
+    /bin/echo "export CLOUDHOST=\"${CLOUDHOST}\"" >> ${templatefile}
+    /bin/sed -i '/REGION_ID=/d' ${templatefile}
+    /bin/echo "export REGION_ID=\"${REGION_ID}\"" >> ${templatefile}
+    /bin/sed -i '/DNS_USERNAME=/d' ${templatefile}
+    /bin/echo "export DNS_USERNAME=\"${DNS_USERNAME}\"" >> ${templatefile}
+    /bin/sed -i '/DNS_SECURITY_KEY=/d' ${templatefile}
+    /bin/echo "export DNS_SECURITY_KEY=\"${DNS_SECURITY_KEY}\"" >> ${templatefile}   
+    /bin/sed -i '/DNS_CHOICE=/d' ${templatefile}
+    /bin/echo "export DNS_CHOICE=\"${DNS_CHOICE}\"" >> ${templatefile}
+    /bin/sed -i '/WEBSITE_DISPLAY_NAME=/d' ${templatefile}
+    /bin/echo "export WEBSITE_DISPLAY_NAME=\"${WEBSITE_DISPLAY_NAME}\"" >> ${templatefile}
+    /bin/sed -i '/WEBSITE_NAME=/d' ${templatefile}
+    /bin/echo "export WEBSITE_NAME=\"${WEBSITE_NAME}\"" >> ${templatefile}
+    /bin/sed -i '/WEBSITE_URL=/d' ${templatefile}
+    /bin/echo "export WEBSITE_URL=\"${WEBSITE_URL}\"" >> ${templatefile}
+    /bin/sed -i '/SYSTEM_EMAIL_USERNAME=/d' ${templatefile}
+    /bin/echo "export SYSTEM_EMAIL_USERNAME=\"${SYSTEM_EMAIL_USERNAME}\"" >> ${templatefile}
+    /bin/sed -i '/SYSTEM_EMAIL_PASSWORD=/d' ${templatefile}
+    /bin/echo "export SYSTEM_EMAIL_PASSWORD=\"${SYSTEM_EMAIL_PASSWORD}\"" >> ${templatefile}
+    /bin/sed -i '/SYSTEM_EMAIL_PROVIDER=/d' ${templatefile}
+    /bin/echo "export SYSTEM_EMAIL_PROVIDER=\"${SYSTEM_EMAIL_PROVIDER}\"" >> ${templatefile}
+    /bin/sed -i '/SYSTEM_TOEMAIL_ADDRESS=/d' ${templatefile}
+    /bin/echo "export SYSTEM_TOEMAIL_ADDRESS=\"${SYSTEM_TOEMAIL_ADDRESS}\"" >> ${templatefile}
+    /bin/sed -i '/SYSTEM_FROMEMAIL_ADDRESS=/d' ${templatefile}
+    /bin/echo "export SYSTEM_FROMEMAIL_ADDRESS=\"${SYSTEM_FROMEMAIL_ADDRESS}\"" >> ${templatefile}  
+    /bin/sed -i '/S3_ACCESS_KEY=/d' ${templatefile}
+    /bin/echo "export S3_ACCESS_KEY=\"${S3_ACCESS_KEY}\"" >> ${templatefile}  
+    /bin/sed -i '/S3_SECRET_KEY=/d' ${templatefile}
+    /bin/echo "export S3_SECRET_KEY=\"${S3_SECRET_KEY}\"" >> ${templatefile}  
+     /bin/sed -i '/S3_HOST_BASE=/d' ${templatefile}
+    /bin/echo "export S3_HOST_BASE=\"${S3_HOST_BASE}\"" >> ${templatefile}      
+    /bin/sed -i '/S3_LOCATION=/d' ${templatefile}
+    /bin/echo "export S3_LOCATION=\"${S3_LOCATION}\"" >> ${templatefile}     
+    /bin/sed -i '/TOKEN=/d' ${templatefile}
+    /bin/echo "export TOKEN=\"${TOKEN}\"" >> ${templatefile} 
+    /bin/sed -i '/NO_AUTOSCALERS=/d' ${templatefile}
+    /bin/echo "export NO_AUTOSCALERS=\"${NO_AUTOSCALERS}\"" >> ${templatefile}
 fi
 
 templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
