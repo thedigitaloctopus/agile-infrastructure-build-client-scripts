@@ -44,4 +44,6 @@ fi
 
 export HARDCORE="1"
 
+/usr/bin/env > /tmp/env
+
 /bin/sh HardcoreAgileDeploymentToolkit.sh
