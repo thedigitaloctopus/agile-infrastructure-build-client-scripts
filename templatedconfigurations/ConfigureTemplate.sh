@@ -113,6 +113,7 @@ then
 else
     #template overrides if we are running in hardcore mode
     selectedtemplate="${SELECTED_TEMPLATE}"
+    templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
     /bin/sed -i '/BUILDOS=/d' ${templatefile}
     /bin/echo "export BUILDOS=\"${BUILDOS}\"" >> ${templatefile}
     /bin/sed -i '/BUILDOS_VERSION=/d' ${templatefile}
