@@ -233,15 +233,15 @@ do
         #By using block storage, a machine can be given much higher capacity without necessarily adding on a
         #whole load more compute which is expensive and possibly not needed. You can review articles online for
         #how to add block storage to a database server in an effective way
-        status
-        status "============================================================================================================="
-        status "If your cloudhost supports it, you might like to add block storage to this Database server"
-        status "If you do, then now is the time to add it. Press <enter> when you have added it (or not) if you don't need it"
-        status "Please review the documentation from your provider about how to add block storage"
-        status "============================================================================================================="
+     #   status
+     #   status "============================================================================================================="
+     #   status "If your cloudhost supports it, you might like to add block storage to this Database server"
+     #   status "If you do, then now is the time to add it. Press <enter> when you have added it (or not) if you don't need it"
+     #   status "Please review the documentation from your provider about how to add block storage"
+     #   status "============================================================================================================="
 
 
-        read response
+     #   read response
 
         #If we are here, then we know that the machine has passed it's test to see if it is online, so, we can proceed
         status "It looks like the machine is booted and accepting connections, so, let's pass it all our configuration stuff that it needs"
