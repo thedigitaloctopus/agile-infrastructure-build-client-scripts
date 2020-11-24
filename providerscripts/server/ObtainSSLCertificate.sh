@@ -65,6 +65,9 @@ then
     #command="CLOUDFLARE_EMAIL="${DNS_USERNAME}" CLOUDFLARE_API_KEY="${DNS_SECURITY_KEY}" GCE_PROJECT="${WEBSITE_NAME}" GCE_DOMAIN="${DOMAIN_URL}" /usr/bin/lego --email="${DNS_USERNAME}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --server=https://acme-staging.api.letsencrypt.org/directory --dns-timeout=120 --accept-tos run"
     if ( [ "${HARDCORE}" = "1" ] )
     then
+        export CLOUDFLARE_EMAIL="${DNS_USERNAME}" 
+        export CLOUDFLARE_API_KEY="${DNS_SECURITY_KEY}"
+        command="/usr/bin/lego --email="${DNS_USERNAME}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
         exec ${command}
     else
         status ""
@@ -114,6 +117,9 @@ then
 
     if ( [ "${HARDCORE}" = "1" ] )
     then
+        export RACKSPACE_USER="${DNS_USERNAME}" 
+        export RACKSPACE_API_KEY="${DNS_SECURITY_KEY}"
+        command="/usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
         exec ${command}
     else
         status ""
@@ -156,6 +162,8 @@ then
 
     if ( [ "${HARDCORE}" = "1" ] )
     then
+        export DO_AUTH_TOKEN="${DNS_SECURITY_KEY}"
+        command="/usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
         exec ${command}
     else
         status ""
