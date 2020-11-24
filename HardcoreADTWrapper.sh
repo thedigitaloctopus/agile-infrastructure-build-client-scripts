@@ -17,16 +17,6 @@ ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
     actioned="1"
 fi
 
-set -e
-
-# Save stdout and stderr
-exec 6>&1
-exec 5>&2
-
-# Redirect stdout and stderr to a file
-exec > /root/StackScript.out
-exec 2>&1
-
 #BUILDOS="ubuntu" #########STACK
 #BUILDOS_VERSION="20.04" #########STACK
 #CLOUDHOST="linode" #############STACK
