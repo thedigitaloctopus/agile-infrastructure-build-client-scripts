@@ -41,6 +41,8 @@
 ###############################################################################################
 #set -x
 
+/bin/touch /tmp/${BUILD_IDENTIFIER}.1
+
 export PUBLIC_KEY_NAME="AGILE_TOOLKIT_PUBLIC_KEY"
 
 status () {
