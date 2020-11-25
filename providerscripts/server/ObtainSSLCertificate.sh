@@ -58,15 +58,33 @@ if ( [ "${DNS_CHOICE}" = "cloudflare" ] )
 then
 
     #For production
-    command="CLOUDFLARE_EMAIL="${DNS_USERNAME}" CLOUDFLARE_API_KEY="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_USERNAME}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
-
+    if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
+    then
+        command="CLOUDFLARE_EMAIL="${DNS_USERNAME}" CLOUDFLARE_API_KEY="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_USERNAME}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+    fi
     #For Testing
-    #command="CLOUDFLARE_EMAIL="${DNS_USERNAME}" CLOUDFLARE_API_KEY="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_USERNAME}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns-timeout=120 --accept-tos run"
+    if ( [ "${PRODUCTION}" = "0" ] && [ "${DEVELOPMENT}" = "1" ] )
+    then
+        command="CLOUDFLARE_EMAIL="${DNS_USERNAME}" CLOUDFLARE_API_KEY="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_USERNAME}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns-timeout=120 --accept-tos run"
+    fi
+    
     if ( [ "${HARDCORE}" = "1" ] )
     then
         export CLOUDFLARE_EMAIL="${DNS_USERNAME}" 
         export CLOUDFLARE_API_KEY="${DNS_SECURITY_KEY}"
-        command="/usr/bin/lego --email="${DNS_USERNAME}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+        
+        #Production
+        if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
+        then
+            command="/usr/bin/lego --email="${DNS_USERNAME}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+        fi
+        
+        #Testing
+        if ( [ "${PRODUCTION}" = "0" ] && [ "${DEVELOPMENT}" = "1" ] )
+        then
+            command="/usr/bin/lego --email="${DNS_USERNAME}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+        fi
+        
         eval ${command}
     else
         status ""
@@ -107,18 +125,32 @@ then
 
     #We use our git email address for rackspace because all rackspace requires is a username
     #For production
-    command="RACKSPACE_USER="${DNS_USERNAME}" RACKSPACE_API_KEY="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+    
+   if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
+   then
+       command="RACKSPACE_USER="${DNS_USERNAME}" RACKSPACE_API_KEY="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+   fi
 
-    #command="RACKSPACE_USER="${DNS_USERNAME}" RACKSPACE_API_KEY="${DNS_SECURITY_KEY}" GCE_PROJECT="${WEBSITE_NAME}" GCE_DOMAIN="${DOMAIN_URL}" /usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}"  --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns-timeout=120 --accept-tos run"
-
-    #For Testing
-    #command="RACKSPACE_USER="${DNS_USERNAME}" RACKSPACE_API_KEY="${DNS_SECURITY_KEY}" GCE_PROJECT="${WEBSITE_NAME}" GCE_DOMAIN="${DOMAIN_URL}" /usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}"  --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns-timeout=120 --accept-tos run"
-
+   if ( [ "${PRODUCTION}" = "0" ] && [ "${DEVELOPMENT}" = "1" ] )
+   then
+        command="RACKSPACE_USER="${DNS_USERNAME}" RACKSPACE_API_KEY="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}"  --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns-timeout=120 --accept-tos run"
+    fi
+    
     if ( [ "${HARDCORE}" = "1" ] )
     then
         export RACKSPACE_USER="${DNS_USERNAME}" 
         export RACKSPACE_API_KEY="${DNS_SECURITY_KEY}"
-        command="/usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+        
+        if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
+        then
+            command="/usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+        fi
+        
+        if ( [ "${PRODUCTION}" = "0" ] && [ "${DEVELOPMENT}" = "1" ] )
+        then
+            command="/usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+        fi
+        
         eval ${command}
     else
         status ""
@@ -157,12 +189,30 @@ fi
 if ( [ "${DNS_CHOICE}" = "digitalocean" ] )
 then
     #For production
-    command="DO_AUTH_TOKEN="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
-
+    if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
+    then
+        command="DO_AUTH_TOKEN="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+    fi
+    
+    if ( [ "${PRODUCTION}" = "0" ] && [ "${DEVELOPMENT}" = "1" ] )
+    then
+        command="DO_AUTH_TOKEN="${DNS_SECURITY_KEY}" /usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+    fi
+    
     if ( [ "${HARDCORE}" = "1" ] )
     then
         export DO_AUTH_TOKEN="${DNS_SECURITY_KEY}"
-        command="/usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+        
+        #For production
+        if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
+        then
+            command="/usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+        fi
+        #For testing 
+        if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
+        then
+            command="/usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
+        fi
         eval ${command}
     else
         status ""
