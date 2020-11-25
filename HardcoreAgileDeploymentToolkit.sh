@@ -5,25 +5,12 @@
 # Author Peter Winter
 # Date 22/9/2020
 ##############################################################################################
-#This is the Expedited Agile Deployment toolkit. It REQUIRES a configuration template which has ALL 
-#the necessary parameters populated within it templates for each cloudhost are stored under 
-#${BUILD_HOME}/templatedconfigurations/<yourcloudhost>/<yourcloudhost>[n].tmpl
-#You can create a new template for selection by naming it 
-#${BUILD_HOME}/templatedconfigurations/<yourcloudhost>/<yourcloudhost>[n+1].tmpl
-#ALL of the configuration parameters must be sane and correct and without errors for a build to complete correctly
-#There's a few ways you can run a build process. You can use the AgileDeploymentToolkit or the 
-# ExpeditedAgileDeploymentToolkit. Each are a little different to perform a build with using this toolkit.
-#    1: You can run the ExpeditedAgileDeploymentToolkit.sh and use one of the predefined configuration templates 
-#       that we have provided. In this case, as a minimum, you will need to modify the following configuration settings 
-#       to match your own needs within in your copy of the default template:
-#    2: You can take one of the predefined templates, make a copy and modify it to make a custom configuration template
-#    3: You can run the AgileDeploymentToolkit.sh script and at the end it will create a basic template which you can 
-#       copy make your own template out of this is a safe and easy way to create templates such that you can perform 
-#       expedited builds. You will need to modify values within your template if, for example, you are using different 
-#       credentials, if, for example you are switching to a managed database from a regular VPS hosted deployment
-#    4. Expert: You can completely hand craft your own template from scratch. This requires that you know what you are 
-#       doing in detail and is the most error prone. I'd probably even make mistakes like this, so, it's best to try
-#       and use a default template or a generated one which will involve the less chance of mistakes being made. 
+#This is the Expedited Agile Deployment toolkit with all the interaction stripped out.
+#This is to be called from provider dependent init scripts such as Stack Scripts from linode.
+#The init script can override all values set in a template based on what "UDF" values are 
+#defined in the init script. In this way, you can create an init script which will then
+#run when you spin up a VPS machine and allow the user defined values to override the settings
+#that are defined in the template. 
 ###############################################################################################
 # License Agreement:
 # This file is part of The Agile Deployment Toolkit.
