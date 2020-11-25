@@ -14,7 +14,7 @@ if ( [ "${CLOUDHOST}" = "linode" ] )
 then
     while read line
     do
-        variables="${variables} `/bin/echo ${line} | /usr/bin/awk -F'"' '{print $2}' | /bin/sed '/^$/d'`"
+        variables="${variables} `/bin/echo ${line} | /bin/grep "UDF" | /usr/bin/awk -F'"' '{print $2}' | /bin/sed '/^$/d'`"
     done < /root/StackScript
 
     for variable in ${variables}
