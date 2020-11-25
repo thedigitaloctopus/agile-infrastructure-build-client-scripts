@@ -1,4 +1,28 @@
 #!/bin/sh
+###############################################################################################
+# Description: This is the the expedited version of the top level build script for the 
+# Agile Deployment Toolkit.
+# Author Peter Winter
+# Date 22/9/2020
+##############################################################################################
+#This is just a wrapper which adjusts the SSH connection timeouts so that connections are not
+#dropped during the build. Correct me if I am wrong, but, the new SSH settings are picked up
+#when a new shell is started as in /bin/sh HardcoreAgileDeploymentToolkit.sh
+###############################################################################################
+# License Agreement:
+# This file is part of The Agile Deployment Toolkit.
+# The Agile Deployment Toolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# The Agile Deployment Toolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
+################################################################################################
+###############################################################################################
 
 actioned="0"
 if ( [ -f /etc/ssh/ssh_config ] && [ "`/bin/cat /etc/ssh/ssh_config | /bin/grep 'ServerAliveInterval 240'`" = "" ] )
@@ -17,33 +41,6 @@ ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
     actioned="1"
 fi
 
-/bin/touch /tmp/${BUILD_IDENTIFIER}
-
-#BUILDOS="ubuntu" #########STACK
-#BUILDOS_VERSION="20.04" #########STACK
-#CLOUDHOST="linode" #############STACK
-#BUILD_IDENTIFIER="nuocial" ####STACK
-#DNS_USERNAME=""  #MANDATORY
-#DNS_SECURITY_KEY=""   #MANDATORY
-#DNS_CHOICE="cloudflare"
-#WEBSITE_DISPLAY_NAME="" ###STACK
-#WEBSITE_NAME="" #STACK
-#WEBSITE_URL=""  #STACK
-#SELECTED_TEMPLATE="1" ##############STACK
-#SYSTEM_EMAIL_USERNAME="1" ####STACK
-#SYSTEM_EMAIL_PASSWORD="1" ####STACK
-#SYSTEM_EMAIL_PROVIDER="1" ###STACK
-#SYSTEM_TOEMAIL_ADDRESS="1" ####STACK
-#SYSTEM_FROMEMAIL_ADDRESS="1" ####STACK
-#S3_ACCESS_KEY="1" ####STACK
-#S3_SECRET_KEY="1" ####STACK
-#S3_HOST_BASE="1" ####STACK
-#S3_LOCATION="1" ####STACK
-#TOKEN="1" ####STACK
-#NO_AUTOSCALERS="1" #####STACK
-
 export HARDCORE="1"
-
-/usr/bin/env > /tmp/env
 
 /bin/sh HardcoreAgileDeploymentToolkit.sh
