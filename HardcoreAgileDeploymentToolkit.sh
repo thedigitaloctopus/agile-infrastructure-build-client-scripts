@@ -95,11 +95,6 @@ ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
     actioned="1"
 fi
 
-#. ${BUILD_HOME}/SelectDeploymentOS.sh
-
-BUILDOS="ubuntu" #########STACK
-BUILDOS_VERSION="20.04" #########STACK
-
 
 #If this is set, the user who ran it previously, then we know that this is not our first time running the script
 if ( [ ! -f ${BUILD_HOME}/runtimedata/INSTALLUSER ] )
@@ -190,7 +185,6 @@ then
     fi
 fi
 
-CLOUDHOST="linode" #############STACK
 ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
 
 status "Your cloudhost is set to ${CLOUDHOST}"
@@ -252,8 +246,6 @@ fi
 /usr/sbin/ufw allow ssh
 /usr/sbin/ufw enable
 
-BUILD_IDENTIFIER="nuocial" ####STACK
-
 BUILD_IDENTIFIER="`/bin/echo ${BUILD_IDENTIFIER} | /usr/bin/tr '[:upper:]' '[:lower:]' | /bin/sed 's/-//g'`"
 
 if (    [ "`${BUILD_HOME}/providerscripts/server/ListServerIDs.sh "autoscale*" ${CLOUDHOST} 2> /dev/null`" != "" ] )
@@ -309,8 +301,6 @@ if ( [ ! -d ${BUILD_HOME}/runtimedata/${CLOUDHOST}/names ] )
 then
     /bin/mkdir -p ${BUILD_HOME}/runtimedata/${CLOUDHOST}/names
 fi
-
-SELECTED_TEMPLATE="1" ##############STACK
 
 . ${BUILD_HOME}/templatedconfigurations/ConfigureTemplate.sh
 . ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
@@ -383,8 +373,6 @@ then
             status "Remote ssh proxy ip(s) of: ${DBaaS_REMOTE_SSH_PROXY_IP}"
         fi
     fi
-
-    NO_AUTOSCALERS="1" #####STACK
 
     . ${BUILD_HOME}/buildscripts/BuildFromSnapshots.sh
 
