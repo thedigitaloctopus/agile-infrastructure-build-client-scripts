@@ -5,8 +5,7 @@ This will require modifying the build client scripts and the autoscaler scripts 
 ubuntu or debian. It will also require modification/extension of the scripts in the "installscripts" directory of all machine types to install for centos (using yum rather than apt-get). There might be other issues which I am not aware of which will need to be worked through to be able to successfully deploy to centos. 
 
 2) Add new application types. There's hundreds of applications out there which as long as they follow a design pattern similar to 
-Joomla or Wordpress should be easy enough to integrate. I think it should take (as long as the application doesn't have a lot of 
-idiosyncracies a practised developer about 1 week of work to integrate a new application type).
+Joomla or Wordpress should be easy enough to integrate. NOTE: I haven't been able to get Joomla 4 beta to run properly yet, so if anyone wants to take a look at that, that would be great because it would be cool to have joomla 4 running on here. The problem I faced was being logged out of the backend all the time, I am not quite sure why, it may be that there's something simple I don't know about. 
 
 3) Inclusion of deployments to further VPS cloudhosts, perhaps rackspace, googlecloud, microsoft azure and you know, there's a lot more out there. 
 
