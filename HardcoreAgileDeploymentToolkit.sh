@@ -393,6 +393,18 @@ else
     . ${BUILD_HOME}/buildscripts/FinaliseBuildProcessing.sh
     #If we have any messages to put out to the user post build, we add them to this script
     . ${BUILD_HOME}/PostProcessingMessages.sh
+    
+    status ""
+    status "###################################################################################################################"
+    status "IMPORTANT, THE USERNAME FOR YOUR SERVERS IS: ${SERVER_USER}"
+    status "THE PASSWORD FOR YOUR SERVERS IS: ${SERVER_USER_PASSWORD}"
+    status "CONSIDER ANY COMPROMISE OF THESE CREDENTIALS AS POTENTIALLY GIVING ROOT ACCESS TO YOUR SERVERS. KEEP THEM VERY SECURE"
+    status "A COPY OF THESE CREDENTIALS IS STORED IN:"
+    status "SERVER USERNAME :  ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER"
+    status "SERVER PASSWORD :  ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSERPASSWORD"
+    status "###################################################################################################################"
+    status "That should be your application built and online."
+    status "OK, have fun with it...."
 fi
 
 #Output how long the build took
