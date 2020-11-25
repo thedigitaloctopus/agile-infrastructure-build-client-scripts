@@ -67,7 +67,7 @@ then
         export CLOUDFLARE_EMAIL="${DNS_USERNAME}" 
         export CLOUDFLARE_API_KEY="${DNS_SECURITY_KEY}"
         command="/usr/bin/lego --email="${DNS_USERNAME}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
-        exec ${command}
+        eval ${command}
     else
         status ""
         status ""
@@ -119,7 +119,7 @@ then
         export RACKSPACE_USER="${DNS_USERNAME}" 
         export RACKSPACE_API_KEY="${DNS_SECURITY_KEY}"
         command="/usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
-        exec ${command}
+        eval ${command}
     else
         status ""
         status ""
@@ -163,7 +163,7 @@ then
     then
         export DO_AUTH_TOKEN="${DNS_SECURITY_KEY}"
         command="/usr/bin/lego --email="${DNS_EMAIL_ADDRESS}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
-        exec ${command}
+        eval ${command}
     else
         status ""
         status ""
