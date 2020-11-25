@@ -2,11 +2,13 @@
 
 ###### ASSOCIATED WEBSITE: www.codeshed.uk
 
+Please review "ModusOperandi.md" under AgileDeploymentToolkit/doco/development to see the styles and options available to you when using this software.
+
 This toolkit automates the deployment of LEMP/LAMP stacks with built in scalability for various CMS systems (currently Wordpress, Joomla, Moodle, Drupal) starting with nothing and building out from there. This is close to being a PAAS solution meaning that purely through parameter configuration, you can have a fully deployed application infrastructure that can scale with consistent security practices built in. Some of the disadvantages of PAAS solutions are: a lack of operational control and features. Using this solution, you have, what is effectively a PAAS solution but, with total control of your servers and databases if you choose to or need to. For my needs this was the best of both worlds because through automation, I avoid the repeated work of server configuration and at the same time retain full control over my deployed environment. This solution is extensible and reusable meaning developers can easily extend (and share their work) for their use cases. 
 
 ### IMPORTANT: There are various configurations of deployment using this toolkit. Make sure you test what costs will be incurred depending on the scale of the deployment you are making. Different providers have different cost metrics and so, it's possible that one provider's operational costs will be different to another for a similar configuration. Costs profiles vary depending upon what configuration settings you have chosen. For example, if you chose a datastore in a different region to your VPS systems, which this toolkit does not preclude you from doing, you may unwittingly incur considerable costs. 
 
-##### Quick Start - Go to line 54 "The Build"
+##### Quick (provier independent) Start - Go to line 60 "The Build"
 
 This toolkit has the potential to be quite powerful, as with any power tool it should not be misused or used inappropriately.
 
