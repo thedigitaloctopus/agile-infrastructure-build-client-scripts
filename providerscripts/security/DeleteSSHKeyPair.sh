@@ -50,7 +50,11 @@ fi
 
 if ( [ "${cloudhost}" = "linode" ] )
 then
-    /usr/local/bin/linode-cli sshkeys delete ${key_name} 
+    /usr/local/bin/linode-cli sshkeys delete ${key_name}
+    while ( [ "$?" = "0" ] )
+    do
+        /usr/local/bin/linode-cli sshkeys delete ${key_name}
+    done
 fi
 
 if ( [ "${cloudhost}" = "vultr" ] )
