@@ -2,7 +2,7 @@
 
 ###### ASSOCIATED WEBSITE: www.codeshed.uk
 
-Please review "ModusOperandi.md" under AgileDeploymentToolkit/doco/development to see the styles and options available to you when using this software.
+Please review "ModusOperandi.md" under AgileDeploymentToolkit/doco/AgileToolkitDevelopment to see the styles and options available to you when using this software.
 
 This toolkit automates the deployment of LEMP/LAMP stacks with built in scalability for various CMS systems (currently Wordpress, Joomla, Moodle, Drupal) starting with nothing and building out from there. This is close to being a PAAS solution meaning that purely through parameter configuration, you can have a fully deployed application infrastructure that can scale with consistent security practices built in. Some of the disadvantages of PAAS solutions are: a lack of operational control and features. Using this solution, you have, what is effectively a PAAS solution but, with total control of your servers and databases if you choose to or need to. For my needs this was the best of both worlds because through automation, I avoid the repeated work of server configuration and at the same time retain full control over my deployed environment. This solution is extensible and reusable meaning developers can easily extend (and share their work) for their use cases. 
 
