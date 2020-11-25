@@ -12,4 +12,4 @@ NOTE: The templates are not validated in any way, if you don't put sane informat
 
 NOTE2: For providers that support snapshots, the most efficient way to proceed is to perform a build which generates snapshots of your autoscaler, webserver and database and then, for subsequent builds, you can build from the snapshots which will take much less time than performing a full build. If you use snapshots, you can have your sustem up and running in 10 minutes using this toolkit, without snapshots the build process takes a bit longer. Template number 8 is an example build which generates snasphots and template 9 is an example build which deploys using the snapshots generated through template 8. 
 
-** when generating snasphots, make sure that your account hasn't reached its quota limit. You will likely have to delete some existing snapshots or images if it has **
+**when generating snasphots, make sure that your account hasn't reached its quota limit. You will likely have to delete some existing snapshots or images if it has**
