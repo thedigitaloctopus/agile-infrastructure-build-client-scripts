@@ -50,10 +50,11 @@ fi
 
 if ( [ "${cloudhost}" = "linode" ] )
 then
-    /usr/local/bin/linode-cli sshkeys delete ${key_name}
-    while ( [ "$?" = "0" ] )
+    keyids="`/usr/local/bin/linode-cli --text sshkeys list | /bin/grep ${key_name} | /usr/bin/awk '{print $1}'`"
+
+    for keyid in ${keyids}
     do
-        /usr/local/bin/linode-cli sshkeys delete ${key_name}
+        /usr/local/bin/linode-cli sshkeys delete ${keyid}
     done
 fi
 
