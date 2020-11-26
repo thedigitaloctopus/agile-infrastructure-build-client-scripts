@@ -110,16 +110,6 @@ This will be the username for your DNS service provider
 
 ##### cloudflare - the emal address of username of your cloudflare account
 
-##### digital ocean - not needed 
-
-##### rackspace -     not needed
-
------
-
-### DNS_EMAIL_ADDRESS:
-
-##### cloudflare - not needed
-
 ##### digitalocean - your digital ocean account email address
 
 ##### rackspace - your rackspace account email address
