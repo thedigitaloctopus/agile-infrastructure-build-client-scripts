@@ -2,6 +2,7 @@
 
 #you can refer to the specification for the ADT templating system to review this parameters which is located at:
 
+/bin/echo "
 export SSH="" #paste your public key here
 export BUILDOS="debian" #one of ubuntu|debian
 export BUILDOS_VERSION="10" #one of 20.04|10
@@ -35,6 +36,7 @@ export NO_AUTOSCALERS="" #Number of autoscalers
 #${BUILD_HOME}/buildcompletion directory which will show you which variables need to be set for the particular configuration you desire. 
 ####ADDITIONAL OVERRIDES
 export WS_SIZE=""
+" > /root/Environment.env
 
 /bin/mkdir ~/.ssh
 /bin/echo "${SSH}" >> ~/.ssh/authorized_keys
