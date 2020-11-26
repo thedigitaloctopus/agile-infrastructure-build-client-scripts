@@ -6,11 +6,8 @@ This toolkit automates the deployment of LEMP/LAMP stacks with built in scalabil
 
 ## IMPORTANT: There are various configurations of deployment using this toolkit. Make sure you test what costs will be incurred depending on the scale of the deployment you are making. Different providers have different cost metrics and so, it's possible that one provider's operational costs will be different to another for a similar configuration. Costs profiles vary depending upon what configuration settings you have chosen. For example, if you chose a datastore in a different region to your VPS systems, which this toolkit does not preclude you from doing, you may unwittingly incur considerable costs. 
 
-##### Quick Start - to get started as quickly as possible before going into more depth, you can use one of these methods:
-
-[Template Overrides](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides.md)
-
-This toolkit has the potential to be quite powerful, as with any power tool it should not be misused or used inappropriately.
+## Quick Start  
+To get started as quickly as possible before going into more depth, you can use one of these methods: [Template Overrides](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides.md)
 
 The vision for this toolkit is to have a well tested limited scope core for deploying web properties and CMS based systems.
 The "core" currently supports Joomla, Wordpress, Moodle and Drupal. The "next" phase is to have more eyeballs on it and broader usage, it's only been me testing it so far. The idea is that other developers can easily fork the repositories for The Agile Deployment Toolkit and develop additional capabilities such as support for additional VPS service providers, additional CMS systems, email providers and so on. The vision is that these extensions will not be merged back into the core, but, rather, can be kept as separate extension repos where deployers can choose the particular fork for their deployment needs. For example, if someone were to fork this and extend it to support Google Cloud and a deployer wanted to deploy to Google Cloud, then, they would use a fork which supports Google Cloud which the core currently doesn't. In this way, the core can be kept with a small, well tested, well maintained footprint making for a reliable experience. 
