@@ -47,10 +47,12 @@ then
            fi
         fi
     else
-        id="`/usr/bin/id`"
-        /bin/touch /tmp/id:${id}
-        export DIGITALOCEAN_ACCESS_TOKEN="${TOKEN}"
-        /usr/local/bin/doctl auth init >&3
+       while ( [ ! -f ~/.config/doctl/config.yaml ] )
+       do
+           export DIGITALOCEAN_ACCESS_TOKEN="${TOKEN}"
+           /usr/local/bin/doctl auth init >&3
+           /bin/sleep 10
+       done
     fi
     /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
 fi
