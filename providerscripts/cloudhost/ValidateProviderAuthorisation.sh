@@ -184,7 +184,7 @@ if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
     access_token="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
   
-    while ( [ "${access_token}"  != "${TOKEN}" ] )
+    while ( ( [ "${access_token}" != "" ] && [ "${TOKEN}" != "" ]  ) && ( [ "${access_token}" != "${TOKEN}" ] ) )
     do
            status "TOKEN mismatch detected"
            status "The token in your vultr configuration file is: ${access_token}"
@@ -200,8 +200,8 @@ then
            else 
                continue
            fi
-
     done
+    /bin/echo ${TOKEN} > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
 fi
 
