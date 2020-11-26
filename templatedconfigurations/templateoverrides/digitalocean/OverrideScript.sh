@@ -38,6 +38,8 @@ export NO_AUTOSCALERS="" #Number of autoscalers
 export WS_SIZE=""
 " > /root/Environment.env
 
+. /root/Environment.env
+
 /bin/mkdir ~/.ssh
 /bin/echo "${SSH}" >> ~/.ssh/authorized_keys
 
