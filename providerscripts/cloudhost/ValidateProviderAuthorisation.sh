@@ -47,7 +47,8 @@ then
            fi
         fi
     else
-        /usr/bin/id
+        id="`/usr/bin/id`"
+        /bin/touch /tmp/id:${id}
         export DIGITALOCEAN_ACCESS_TOKEN="${TOKEN}"
         /usr/local/bin/doctl auth init >&3
     fi
