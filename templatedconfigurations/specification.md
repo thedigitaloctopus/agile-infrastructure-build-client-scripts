@@ -419,7 +419,8 @@ Exoscale: Available region IDs you can set for exoscale are:
                                                            for region bg-sof-1 regionid = "70e5f8b1-0b2c-4457-a5e0-88bcf1f3db68"  
                                                            for region de-muc-1 regionid = "85664334-0fd5-47bd-94a1-b4f40b1d2eb7"
 
-Linode: Available regions you can set for linode are: "ap-west","a-central","ap-southeast","us-central","us-west","us-east","eu-west","ap-south","eu-central","ap-northeast"
+Linode: Available regions you can set for linode are: "ap-west","ap-central","ap-southeast","us-central","us-west","us-east","eu-west","ap-south","eu-central","ap-northeast"  
+
 Vultr: Available regions you can set for vultr are:  
 
 34 - Seoul  
