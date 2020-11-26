@@ -6,8 +6,8 @@ if ( [ "${CLOUDHOST}" = "digitalocean" ] )
 then
     while read line
     do
-        variables="${variables} `/bin/echo ${line} | /bin/grep "^export" | /usr/bin/awk -F'"' '{print $2}' | /bin/sed '/^$/d'`"
-    done < /root/StackScript
+        variables="${variables} `/bin/echo ${line} | /bin/grep "^export" | /usr/bin/awk -F'\'' '{print $2}' | /bin/sed '/^$/d'`"
+    done < /root/Environment.env
 
     for variable in ${variables}
     do
