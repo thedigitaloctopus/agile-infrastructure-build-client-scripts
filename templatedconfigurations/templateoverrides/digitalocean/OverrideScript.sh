@@ -38,7 +38,7 @@ export NO_AUTOSCALERS="" #Number of autoscalers (1-5)
 #full AgileDeploymentToolkit script and setting the configuration you desire will give you an env dump upon successful completion in the 
 #${BUILD_HOME}/buildcompletion directory which will show you which variables need to be set for the particular configuration you desire. 
 ####ADDITIONAL OVERRIDES
-export WS_SIZE=""
+#export WS_SIZE=""
 " > /root/Environment.env
 
 . /root/Environment.env
