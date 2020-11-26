@@ -13,6 +13,12 @@ To use template overrides with digital ocean you need to:
 
 # Exoscale
 
+1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/exoscale/OverrideScript.sh)
+2. In your text editor populate the enironment variables in your copy. Override any additional variables that you want to by adding them to your copy and pay attention to the template specification [Template Specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md)
+3. Go through the process of starting up a (small) Compute instance in your chosen region, add your SSH key to it and add your script from 2 to the machine's "user data"
+4. Allow the compute instance to build and then SSH onto it (presuming you added your SSH public key to it)
+5. Go to /root/agile-infrastructure-build-client-scripts/logs and tail the logs to see how the build is progressing. 
+6. After some minutes, you website should be online.
 
 --------------------------------------------------------------
 
@@ -24,3 +30,14 @@ To use template overrides with digital ocean you need to:
 4. Allow the linode to start up and then SSH onto it
 5. Go to /root/agile-infrastructure-build-client-scripts/logs and tail the logs to see how the build is going
 6. After some minutes, if there are no problems your website should be online. 
+
+---------------------
+
+# Vultr
+
+1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/exoscale/OverrideScript.sh)
+2. In your text editor populate the enironment variables in your copy. Override any additional variables that you want to by adding them to your copy and pay attention to the template specification [Template Specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md)
+3. Go through the process of starting up a (small) Compute instance in your chosen region, add your SSH key to it and add your script from 2 to the machine as you define its configuration
+4. Allow the compute instance to build and then SSH onto it (presuming you added your SSH public key to it)
+5. Go to /root/agile-infrastructure-build-client-scripts/logs and tail the logs to see how the build is progressing. 
+6. After some minutes, you website should be online.
