@@ -4,7 +4,11 @@
 
 This toolkit automates the deployment of LEMP/LAMP stacks with built in scalability for various CMS systems (currently Wordpress, Joomla, Moodle, Drupal) starting with nothing and building out from there. This is close to being a PAAS solution meaning that purely through parameter configuration, you can have a fully deployed application infrastructure that can scale with consistent security practices built in. Some of the disadvantages of PAAS solutions are: a lack of operational control and features. Using this solution, you have, what is effectively a PAAS solution but, with total control of your servers and databases if you choose to or need to. For my needs this was the best of both worlds because through automation, I avoid the repeated work of server configuration and at the same time retain full control over my deployed environment. This solution is extensible and reusable meaning developers can easily extend (and share their work) for their use cases. 
 
+-----
+
 ## IMPORTANT: There are various configurations of deployment using this toolkit. Make sure you test what costs will be incurred depending on the scale of the deployment you are making. Different providers have different cost metrics and so, it's possible that one provider's operational costs will be different to another for a similar configuration. Costs profiles vary depending upon what configuration settings you have chosen. For example, if you chose a datastore in a different region to your VPS systems, which this toolkit does not preclude you from doing, you may unwittingly incur considerable costs. 
+
+-----
 
 ## Quick Start  
 To get started as quickly as possible before going into more depth, you can use one of these methods: [Template Overrides](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides.md)
@@ -16,6 +20,8 @@ The "core" currently supports Joomla, Wordpress, Moodle and Drupal. The "next" p
 Clearly, there's a plethora of deploymemt options out there if you want a CMS system, and, this is another one. It should fit you well if you want full access to the Linux VPS systems that your application is running on and if you don't want to necessarily be bothered with manual software installs and configurations. 
 There's many combinations of test scenarios with this software. I am one developer, I have tested it as well as I can, but, will have to rely on feedback. If you find any problems please report them using the forum on www.codeshed.uk, thanks in advance. 
 
+-----
+
 #### OBJECTIVE
 
 Personally, I like to have full control over the software on my VPS systems. Using traditional methods, this meant repeatedly manually installing and security hardening each server as evidenced by the many installation guides available online.
@@ -24,6 +30,8 @@ What it has become is essentially an automated way of deploying which is extensi
 I think I have used good software design processes in terms of encapsulation and making the code easily modifiable and extensible.
 The scripts are made out of nothing but the Linux shell. This means that everything can be understood as shell based processes. 
 The aim of this toolkit it to provide a consistent way to deploy the same customised CMS application multiple times for example to town A, town B and so on. This is the Agile Deployment Toolkit. In other words, the exact same process (although with possibly  a different configuration) should be used to deploy for town B as it is for town A.
+
+-----
 
 #### REQUIREMENTS
 
@@ -38,12 +46,16 @@ To use this toolkit you will need to setup accounts with the following providers
 
 Clearly, you will likely want to chose the same provider for your Object storage service and VPS services and so on, but, there's nothing stopping you, for example, deploying on Linode for your VPS systems and using Digital Ocan Spaces for your object store service, although you won't be wanting your object storage geographically distant from where your VPS systems are running. 
 
+-----
+
 #### MOTIVATION
 
 When you use shared hosting, for example, some php settings are under the control of the hosting provider which can be cumbersome as you have to contact them every time your application needs a configuration change. Vanilla VPS systems are great, but you still have to setup all the software and that can be error prone and not easily reproduced. Building off pre-built images is another way where the server software setup is baked into the image and all you have to do is deploy it. And then of course there is docker and things like that (which I have no experience of).
 In my case I found that all of these solutions were not quite what I wanted. If you build from a prebuilt image for example, OK, you have your server configured for that machine, but what about if you want some architectural nicities as well? So, my solution includes some architectural design as well as a way of automatically building the servers as required. It's a "low barrier to entry" solution. 
 Another way that I have tried to innovate is that you can develop an application, a social network, say, maybe in Joomla or Drupal and from that, you can baseline it when you have finished it to "stable" standard. From that baseline, if you opensource the code on github, bitbucket or gitlab, then others can easily deploy your application as their own. This can have several time saving advantages as it might not be necessary to build an application from scratch if you can find one that someone else has built that meets your requirements or maybe meets your requirements with a little more work.
 The only fly in the ointment is licensing. If an application is built with commercial extensions, then, it is possible they will only be licensed to work on one domain or only licensed to a particular person or entity that purchased it. So, people deploying applications that others have developed will have to be aware of what the licensing is for the constituent parts  or components and purchase, as necessary, their own licenses from the vendor(s) of the components. 
+
+-----
 
 #### THE SPECIFICS
 
@@ -53,6 +65,7 @@ Shared configuration files and settings are securely stored in the object store 
 
 As far as the build procedure is concerned the normal modus operandi is to have a dedicated VPS build machine in a cloudhost of your choice and to pull down the build client scripts from the git repository. 
 
+-----
 
 #### THE FULL BUILD
 
@@ -90,9 +103,13 @@ Here are two instructional or demo videos for how to set up your build server an
 
 [Sample Build Process Agile Deployment Toolkit](https://www.youtube.com/watch?v=mXpIRB_7O_M&t=80s)
 
+-----
+
 ##### THE EXPEDITED BUILD
 
 ##### ${BUILD_HOME}/ExpeditedAgileDeploymentToolkit.sh
+
+-----
 
 #### THE CONCLUSION
 
