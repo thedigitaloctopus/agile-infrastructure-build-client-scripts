@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#you can refer to the specification for the ADT templating system to review this parameters which is located at:
-
+#you can refer to the specification for the ADT templating system to review this parameters which is located at: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md
+#To make your build possible fill in all these environment variables and paste this entire (updated) file into the userdata are of your build client droplet. 
 /bin/echo "
 export SSH="" #paste your public key here
 export BUILDOS="debian" #one of ubuntu|debian
