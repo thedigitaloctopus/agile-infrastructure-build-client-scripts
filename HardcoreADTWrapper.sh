@@ -42,6 +42,5 @@ ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
 fi
 
 export HARDCORE="1"
-export HOME="/root"
 
 /bin/sh HardcoreAgileDeploymentToolkit.sh
