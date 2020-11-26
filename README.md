@@ -1,16 +1,16 @@
 # README #
 
-#### ASSOCIATED WEBSITE: www.codeshed.uk
+### ASSOCIATED WEBSITE: www.codeshed.uk
 
 This toolkit automates the deployment of LEMP/LAMP stacks with built in scalability for various CMS systems (currently Wordpress, Joomla, Moodle, Drupal) starting with nothing and building out from there. This is close to being a PAAS solution meaning that purely through parameter configuration, you can have a fully deployed application infrastructure that can scale with consistent security practices built in. Some of the disadvantages of PAAS solutions are: a lack of operational control and features. Using this solution, you have, what is effectively a PAAS solution but, with total control of your servers and databases if you choose to or need to. For my needs this was the best of both worlds because through automation, I avoid the repeated work of server configuration and at the same time retain full control over my deployed environment. This solution is extensible and reusable meaning developers can easily extend (and share their work) for their use cases. 
 
 -----
 
-## IMPORTANT: There are various configurations of deployment using this toolkit. Make sure you test what costs will be incurred depending on the scale of the deployment you are making. Different providers have different cost metrics and so, it's possible that one provider's operational costs will be different to another for a similar configuration. Costs profiles vary depending upon what configuration settings you have chosen. For example, if you chose a datastore in a different region to your VPS systems, which this toolkit does not preclude you from doing, you may unwittingly incur considerable costs. 
+### IMPORTANT: There are various configurations of deployment using this toolkit. Make sure you test what costs will be incurred depending on the scale of the deployment you are making. Different providers have different cost metrics and so, it's possible that one provider's operational costs will be different to another for a similar configuration. Costs profiles vary depending upon what configuration settings you have chosen. For example, if you chose a datastore in a different region to your VPS systems, which this toolkit does not preclude you from doing, you may unwittingly incur considerable costs. 
 
 -----
 
-## Quick Start  
+### Quick Start  
 To get started as quickly as possible before going into more depth, you can use one of these methods: [Template Overrides](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides.md)
 
 --------
@@ -22,7 +22,7 @@ There's many combinations of test scenarios with this software. I am one develop
 
 -----
 
-#### OBJECTIVE
+### OBJECTIVE
 
 Personally, I like to have full control over the software on my VPS systems. Using traditional methods, this meant repeatedly manually installing and security hardening each server as evidenced by the many installation guides available online.
 So, I decided to start scipting, with the aim of automating some of the processes and it is out of that scripting that this toolkit arose.
@@ -33,7 +33,7 @@ The aim of this toolkit it to provide a consistent way to deploy the same custom
 
 -----
 
-#### REQUIREMENTS
+### REQUIREMENTS
 
 To use this toolkit you will need to setup accounts with the following providers supported within the core:
 
@@ -48,7 +48,7 @@ Clearly, you will likely want to chose the same provider for your Object storage
 
 -----
 
-#### MOTIVATION
+### MOTIVATION
 
 When you use shared hosting, for example, some php settings are under the control of the hosting provider which can be cumbersome as you have to contact them every time your application needs a configuration change. Vanilla VPS systems are great, but you still have to setup all the software and that can be error prone and not easily reproduced. Building off pre-built images is another way where the server software setup is baked into the image and all you have to do is deploy it. And then of course there is docker and things like that (which I have no experience of).
 In my case I found that all of these solutions were not quite what I wanted. If you build from a prebuilt image for example, OK, you have your server configured for that machine, but what about if you want some architectural nicities as well? So, my solution includes some architectural design as well as a way of automatically building the servers as required. It's a "low barrier to entry" solution. 
@@ -57,7 +57,7 @@ The only fly in the ointment is licensing. If an application is built with comme
 
 -----
 
-#### THE SPECIFICS
+### THE SPECIFICS
 
 The Agile Deployment Toolkit is designed to be modifiable and extensible, for example, you can plugin which database you want to use (currently supported are mysql, mariadb and postgres) but you could extend the scripts to support Mongo DB or some other DB type also. It is also architected to use DBaaS so if you want to you can use a DBaaS in the cloud and you don't have to worry about anything then to do with DB stuff and its configuration as the service provider has got you covered. 
 One of the challenges of architecting with multiple webservers is how to share user assets between the webservers so that the new asset updates are available to all the webservers concurrently. Some people say to rsync between the servers but I chose to have cloud based asset storage which is remote  mounted to, and cached by, the each webserver.
@@ -67,7 +67,7 @@ As far as the build procedure is concerned the normal modus operandi is to have 
 
 -----
 
-#### THE FULL BUILD
+### THE FULL BUILD
 
 You must use a dedicated linux machine for your build processes as the build will add and remove software which you may not want to happen if you are using your linux machine for other purposes. 
 #### YOU MUST USE A DEDICATED BUILD MACHINE
@@ -105,13 +105,13 @@ Here are two instructional or demo videos for how to set up your build server an
 
 -----
 
-##### THE EXPEDITED BUILD
+### THE EXPEDITED BUILD
 
 ##### ${BUILD_HOME}/ExpeditedAgileDeploymentToolkit.sh
 
 -----
 
-#### THE CONCLUSION
+### THE CONCLUSION
 
 So, the idea is for people who want a CMS application or a website of some sort, their systems usually have basically the same requirements, a database, a webserver, loadbalacing and enough disk space for the assets to be stored for their application. I use the DNS systems to facilitate load balancing between the webserves which they do in a round robin fashion. I structured the scripts in such a way that they are easy to maintain and extend and that's part of what this is about. Providing a deployment framework which automates a lot of the grunt work and still gives the deployer full access to customise their servers. You don't have to learn anything except how to run the scripts so it has a lower experience threshold than some other automated solutions. At the same time, you can get in there and easily tune your servers exactly as you want them. 
 
