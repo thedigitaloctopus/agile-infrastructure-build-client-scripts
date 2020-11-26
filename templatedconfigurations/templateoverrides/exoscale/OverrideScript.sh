@@ -1,7 +1,10 @@
 #!/bin/bash
 
+###################################################################################################################################################################
+#To use this file, review every variable and set it appropriately, then copy it to your userdata area when you create your build droplet
 #you can refer to the specification for the ADT templating system to review this parameters which is located at: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md
-#To make your build possible fill in all these environment variables and paste this entire (updated) file into the userdata are of your build client droplet. 
+#To make your build possible fill in all these environment variables and paste this entire (updated) file into the userdata are of your build client machine. 
+####################################################################################################################################################################
 /bin/echo "
 export SSH="" #paste your public key here
 export BUILDOS="debian" #one of ubuntu|debian
