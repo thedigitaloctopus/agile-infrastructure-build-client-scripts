@@ -25,12 +25,12 @@ export SYSTEM_EMAIL_PASSWORD="" #optional - the SMTP password for your SMTP prov
 export SYSTEM_EMAIL_PROVIDER="" #optional - a value between 1 and 3 for your SMTP provider 1:Sendpulse 2:Gmail 3:SES
 export SYSTEM_TOEMAIL_ADDRESS="" #optional - email adddress to send system emails from
 export SYSTEM_FROMEMAIL_ADDRESS="" #optional - email address to send system emails to
-export S3_ACCESS_KEY="" #Exoscale Object Storage Access Key
-export S3_SECRET_KEY="" #Exoscale Object Storage Secret Key
+export S3_ACCESS_KEY="" #IAM Exoscale Object Storage SOS Access Key
+export S3_SECRET_KEY="" #IAM Exoscale Object Storage SOS Secret Key
 export S3_HOST_BASE=""  #Host base for your exoscale object storage  one of: sos-ch-gva-2.exo.io, sos-ch-dk-2.exo.io, sos-de-fra-1.exo.io, sos-de-muc-1.exo.io, sos-at-vie-1.exo.io, sos-bg-sof-1
 export S3_LOCATION="US" #Always set to US for exoscale
-export ACCESS_KEY=""   #IAM access key for your exoscale account
-export SECRET_KEY=""   #IAM secret key for your exoscale account
+export ACCESS_KEY=""   #IAM compute access key for your exoscale account
+export SECRET_KEY=""   #IAM compute secret key for your exoscale account
 export NO_AUTOSCALERS="" #Number of autoscalers (1-5)
 #The values above are the values that I override by default. If, for example, you wanted to override the size of your webserver machines you could 
 #simply add an export statement beneath the additional overrides section below 
