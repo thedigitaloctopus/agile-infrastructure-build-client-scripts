@@ -276,12 +276,12 @@ fi
 #switched off and you can find some ssh key based helper scripts here that will enable you to authenticate to your machines.
 SERVER_USER="X`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/bin/fold -w 18 | /usr/bin/head -n 1`X"
 SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/bin/fold -w 18 | /usr/bin/head -n 1`"
-
+status "111"
 /bin/echo "${SERVER_USER}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER
 /bin/echo "${SERVER_USER_PASSWORD}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSERPASSWORD
-
+status "222"
 . ${BUILD_HOME}/buildscripts/InitialiseSecurityKeys.sh
-
+status "333"
 PUBLIC_KEY_ID="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYID`"
 /bin/sed -i '/PUBLIC_KEY_ID=/d' ${templatefile}
 /bin/echo "export PUBLIC_KEY_ID=\"${PUBLIC_KEY_ID}\"" >> ${templatefile}
