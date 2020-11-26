@@ -9,6 +9,8 @@ This toolkit automates the deployment of LEMP/LAMP stacks with built in scalabil
 ## Quick Start  
 To get started as quickly as possible before going into more depth, you can use one of these methods: [Template Overrides](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides.md)
 
+--------
+
 The vision for this toolkit is to have a well tested limited scope core for deploying web properties and CMS based systems.
 The "core" currently supports Joomla, Wordpress, Moodle and Drupal. The "next" phase is to have more eyeballs on it and broader usage, it's only been me testing it so far. The idea is that other developers can easily fork the repositories for The Agile Deployment Toolkit and develop additional capabilities such as support for additional VPS service providers, additional CMS systems, email providers and so on. The vision is that these extensions will not be merged back into the core, but, rather, can be kept as separate extension repos where deployers can choose the particular fork for their deployment needs. For example, if someone were to fork this and extend it to support Google Cloud and a deployer wanted to deploy to Google Cloud, then, they would use a fork which supports Google Cloud which the core currently doesn't. In this way, the core can be kept with a small, well tested, well maintained footprint making for a reliable experience. 
 Clearly, there's a plethora of deploymemt options out there if you want a CMS system, and, this is another one. It should fit you well if you want full access to the Linux VPS systems that your application is running on and if you don't want to necessarily be bothered with manual software installs and configurations. 
