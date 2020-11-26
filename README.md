@@ -10,7 +10,8 @@ This toolkit automates the deployment of LEMP/LAMP stacks with built in scalabil
 
 -----
 
-### Quick Start  
+### QUICK START
+
 To get started as quickly as possible before going into more depth, you can use one of these methods: [Template Overrides](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides.md)
 
 --------
