@@ -28,10 +28,6 @@
 ###############################################################################################
 #set -x
 
-/bin/touch /tmp/${BUILD_IDENTIFIER}.1
-
-/usr/bin/env > /tmp/env2
-
 export PUBLIC_KEY_NAME="AGILE_TOOLKIT_PUBLIC_KEY"
 
 status () {
@@ -64,24 +60,6 @@ then
     status "#############################################################################################################"
     exit
 fi
-
-actioned="0"
-if ( [ -f /etc/ssh/ssh_config ] && [ "`/bin/cat /etc/ssh/ssh_config | /bin/grep 'ServerAliveInterval 240'`" = "" ] )
-then
-    /bin/echo "ServerAliveInterval 240" >> /etc/ssh/ssh_config
-    /bin/echo "ServerAliveCountMax 5" >> /etc/ssh/ssh_config
-    actioned="1"  
-fi
-
-if ( [ -f /etc/ssh/sshd_config ] && [ "`/bin/cat /etc/ssh/sshd_config | /bin/grep 'ClientAliveInterval 60'`" = "" ] )
-then
-    /bin/echo "ClientAliveInterval 60
-TCPKeepAlive yes
-ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
-    /usr/sbin/service sshd restart
-    actioned="1"
-fi
-
 
 #If this is set, the user who ran it previously, then we know that this is not our first time running the script
 if ( [ ! -f ${BUILD_HOME}/runtimedata/INSTALLUSER ] )
