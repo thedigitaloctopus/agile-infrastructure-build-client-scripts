@@ -274,8 +274,8 @@ fi
 
 #Set a username and password which we can set on all our servers. Once the machines are built, password authentication is
 #switched off and you can find some ssh key based helper scripts here that will enable you to authenticate to your machines.
-SERVER_USER="X`/usr/bin/openssl rand -base64 18`X"
-SERVER_USER_PASSWORD="`/usr/bin/openssl rand -base64 18`"
+SERVER_USER="X`/usr/bin/perl -le 'print map { (a..z,A..Z,0..9)[rand 62] } 1..18'`X"
+SERVER_USER_PASSWORD="`/usr/bin/perl -le 'print map { (a..z,A..Z,0..9)[rand 62] } 1..18'`"
 
 /bin/echo "${SERVER_USER}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER
 /bin/echo "${SERVER_USER_PASSWORD}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSERPASSWORD
