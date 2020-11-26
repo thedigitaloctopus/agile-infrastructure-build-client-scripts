@@ -40,8 +40,6 @@ export WS_SIZE=""
 
 . /root/Environment.env
 
-export HOME="/root"
-
 /bin/mkdir ~/.ssh
 /bin/echo "${SSH}" >> ~/.ssh/authorized_keys
 
