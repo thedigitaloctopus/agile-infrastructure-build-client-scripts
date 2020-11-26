@@ -16,17 +16,17 @@ export WEBSITE_DISPLAY_NAME="" #Display name for example "My Blogging Website"
 export WEBSITE_NAME=""  #The core of WEBSITE_URL, for example, if WEBSITE_URL=ok.nuocial.org.uk, WEBSITE_NAME="nuocial"
 export WEBSITE_URL=""  #the URL of the website registered with your DNS provider
 export SELECTED_TEMPLATE="" #Select a template number (1-10) to build you can review available template descriptions to decide which you want to deploy here: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/tree/master/templatedconfigurations/templates/digitalocean 
-export SYSTEM_EMAIL_USERNAME="" #optional
-export SYSTEM_EMAIL_PASSWORD="" #optional
-export SYSTEM_EMAIL_PROVIDER="" #optional
-export SYSTEM_TOEMAIL_ADDRESS="" #optional
-export SYSTEM_FROMEMAIL_ADDRESS="" #optional
+export SYSTEM_EMAIL_USERNAME="" #optional - the SMTP username for your SMTP provider
+export SYSTEM_EMAIL_PASSWORD="" #optional - the SMTP password for your SMTP provider
+export SYSTEM_EMAIL_PROVIDER="" #optional - a value between 1 and 3 for your SMTP provider 1:Sendpulse 2:Gmail 3:SES
+export SYSTEM_TOEMAIL_ADDRESS="" #optional - email adddress to send system emails from
+export SYSTEM_FROMEMAIL_ADDRESS="" #optional - email address to send system emails to
 export S3_ACCESS_KEY="" #Digital Ocean Spaces Access Key
 export S3_SECRET_KEY="" #Digital Ocean Spaces Secret Key
 export S3_HOST_BASE=""  #Host base for your digital ocean spaces
 export S3_LOCATION="US" #Always set to US for digitalocean
 export TOKEN="" #Your personal acccess token
-export NO_AUTOSCALERS="" #Number of autoscalers
+export NO_AUTOSCALERS="" #Number of autoscalers (1-5)
 
 #The values above are the values that I override by default. If, for example, you wanted to override the size of your webserver machines you could 
 #simply add an export statement beneath the additional overrides section below 
