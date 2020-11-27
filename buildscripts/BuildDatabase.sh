@@ -88,6 +88,11 @@ do
 
         #What type of OS are we building for. Currently, (April 2018) only ubuntu and debian are supported
         ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${DB_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
+        
+        if ( [ "${ostype}" = "" ] )
+        then
+            ostype="${OSTYPE}"
+        fi
 
         status "Initialising a new server machine, please wait......"
 
