@@ -89,13 +89,14 @@ do
         autoscaler_name="${no_autoscalers}-autoscaler-${RND}-${WEBSITE_NAME}-${BUILD_IDENTIFIER}"
         autoscaler_name="`/bin/echo ${autoscaler_name} | /usr/bin/cut -c -32 | /bin/sed 's/-$//g'`"
 
-        #See what os type we are building on. Currenly only Ubuntu and debian are supported
-        ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${AS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
-        
-        if ( [ "${ostype}" = "" ] )
+        #See what os type we are building on. Currently only Ubuntu and debian are supported
+        if ( [ "${OSTYPE}" = "" ] )
         then
+            ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${AS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
+        else
             ostype="${OSTYPE}"
         fi
+        
         status "Initialising a new server machine, please wait......"
 
         #Actually create the autoscaler machine. If the create fails, keep trying again - it must be a provider issue
