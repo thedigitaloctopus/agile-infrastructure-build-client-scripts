@@ -85,12 +85,12 @@ do
         RND="`/bin/echo ${SERVER_USER} | /usr/bin/fold -w 4 | /usr/bin/head -n 1`"
         database_name="database-${RND}-${WEBSITE_NAME}-${BUILD_IDENTIFIER}"
         database_name="`/bin/echo ${database_name} | /usr/bin/cut -c -32 | /bin/sed 's/-$//g'`"
-
-        #What type of OS are we building for. Currently, (April 2018) only ubuntu and debian are supported
-        ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${DB_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
         
-        if ( [ "${ostype}" = "" ] )
+        #What type of OS are we building for. Currently, (April 2018) only ubuntu and debian are supported
+        if ( [ "${OSTYPE}" = "" ] )
         then
+            ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${DB_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
+        else
             ostype="${OSTYPE}"
         fi
 
