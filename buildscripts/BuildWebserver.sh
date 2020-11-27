@@ -76,15 +76,17 @@ do
 
         webserver_name="webserver-${RND}-${WEBSITE_NAME}-${BUILD_IDENTIFIER}"
         webserver_name="`/bin/echo ${webserver_name} | /usr/bin/cut -c -32 | /bin/sed 's/-$//g'`"
-
-        #What OS type are we building for. Currently, only ubuntu is supported
-        ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${WS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
         
-        if ( [ "${ostype}" = "" ] )
+        #What OS type are we building for. Currently, only ubuntu is supported
+        
+        if ( [ "${OSTYPE}" = "" ] )
         then
+            ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${WS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
+        else
             ostype="${OSTYPE}"
         fi
 
+        
         status "Initialising a new server machine, please wait......"
 
         #Actually start the server machine. Following this, there will be an active machine instance running on your cloud provider
