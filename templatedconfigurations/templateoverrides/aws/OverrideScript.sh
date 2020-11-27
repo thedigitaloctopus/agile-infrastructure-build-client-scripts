@@ -9,9 +9,9 @@
 export SSH="" #paste your public key here
 export BUILDOS="debian" #one of ubuntu|debian
 export BUILDOS_VERSION="10" #one of 20.04|10
-export DEFAULT_USER="debian" # - this should be "ubuntu" if you are deploying ubuntu and "admin" if you are deploying debian
-export CLOUDHOST="exoscale"  #Always exoscale
-export REGION_ID=""  #The region ID for your deployment - for region 
+export DEFAULT_USER="debian" # - this should be "ubuntu" if you are deploying BUILDOS ubuntu and "admin" if you are deploying BUILDOS debian
+export CLOUDHOST="aws"  #Always exoscale
+export REGION_ID=""  #The region ID for your deployment - for region one of: eu-north-1, ap-south-1, eu-west-3, eu-west-2, eu-west-1, ap-northeast-2, ap-northeast-1, sa-east-1, ca-central-1, ap-southeast-1, ap-southeast-2, eu-central-1, us-east-1, us-east-2, us-west-1, us-west-2
 export BUILD_IDENTIFIER="" #Unique string to identify your build
 export DNS_USERNAME=""  #Your DNS provider username (for cloudflare it is the email address for your account)
 export DNS_SECURITY_KEY=""  #Your DNS API key, for example, Global API key from cloudflare
@@ -27,11 +27,14 @@ export SYSTEM_TOEMAIL_ADDRESS="" #optional - email adddress to send system email
 export SYSTEM_FROMEMAIL_ADDRESS="" #optional - email address to send system emails to
 export S3_ACCESS_KEY="" #IAM AWS S3 Access Key
 export S3_SECRET_KEY="" #IAM AWS S3 Secret Key
-export S3_HOST_BASE=""  #Host base for your exoscale object storage  one of: 
-export S3_LOCATION="US" #Always set to US for exoscale
+export S3_HOST_BASE=""  #Host base for your exoscale object storage, for example (see regions above), "s3.eu-west-1.amazonaws.com"
+export S3_LOCATION="EU" #US or EU or AP
 export ACCESS_KEY=""   #IAM compute access key for your AWS account
 export SECRET_KEY=""   #IAM compute secret key for your AWS account
 export NO_AUTOSCALERS="" #Number of autoscalers (1-5)
+export SUBNET_ID="" # The subnet id for your EC2 instances
+export OSTYPE="" # ami identifier for your build os type. If BUILDOS ubuntu, look here: https://cloud-images.ubuntu.com/locator/ec2/ for BUILDOS debian run this command: /usr/bin/aws ec2 describe-images --owners 379101102735 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep stretch | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/grep x86_64 | /bin/sed 's/"//g'
+
 #The values above are the values that I override by default. If, for example, you wanted to override the size of your webserver machines you could 
 #simply add an export statement beneath the additional overrides section below 
 # and define it for your provider based on the template specification. Similarly for any of the other variables that you find in 
