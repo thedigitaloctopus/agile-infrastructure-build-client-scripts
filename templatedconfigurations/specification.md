@@ -100,7 +100,7 @@ Some providers use personal access tokens rather than access keys and secret key
 
 ##### Vultr - Login to your vultr account and go to your account on the top right. Then enable your personal access token and you can set it here.
 
-##### AWS - @@@@@@@@@@@@@@@@@
+##### AWS - aws does not need this, see ACCESS_KEY and SECRET_KEY
 
 -----
 
@@ -441,7 +441,8 @@ Vultr: Available regions you can set for vultr are:
 12 - Silicon Valley  
 22 - Toronto  
 
-AWS: @@@@@@@@@@@@@@@@
+AWS: one of: eu-north-1, ap-south-1, eu-west-3, eu-west-2, eu-west-1, ap-northeast-2, ap-northeast-1, sa-east-1, ca-central-1, ap-southeast-1, ap-southeast-2, eu-central-1, us-east-1, us-east-2, us-west-1, us-west-2
+
 
 ----------
 
@@ -459,7 +460,7 @@ Linode: g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-s
 
 Vultr: Available sizes you can set for your machines on vultr are: "1024","2048","4096","8192","16384","32768","24576","32768","49152","65536","98304"
 
-AWS: @@@@@@@@@@@@@@@@@  
+AWS: t2.micro t2.small t2.medium t2.large t2.xlarge t2.2xlarge
 
 
 -------
@@ -493,7 +494,7 @@ Vultr:  SERVER_TYPE values for each machine size on vultr
 65536 : 207  
 98304 : 208  
 
-AWS  :  @@@@@@@@@@@@@@@@@@@@@@@@  
+AWS  :  t2.micro t2.small t2.medium t2.large t2.xlarge t2.2xlarge
 
 
 ### CLOUDHOST
