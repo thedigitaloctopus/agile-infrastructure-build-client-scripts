@@ -9,7 +9,7 @@
 export SSH="" #paste your public key here
 export BUILDOS="debian" #one of ubuntu|debian
 export BUILDOS_VERSION="10" #one of 20.04|10
-export DEFAULT_USER="debian" # - this should be "ubuntu" if you are deploying BUILDOS ubuntu and "admin" if you are deploying BUILDOS debian
+export DEFAULT_USER="admin" # - this should be "ubuntu" if you are deploying BUILDOS ubuntu and "admin" if you are deploying BUILDOS debian
 export CLOUDHOST="aws"  #Always exoscale
 export REGION_ID=""  #The region ID for your deployment - for region one of: eu-north-1, ap-south-1, eu-west-3, eu-west-2, eu-west-1, ap-northeast-2, ap-northeast-1, sa-east-1, ca-central-1, ap-southeast-1, ap-southeast-2, eu-central-1, us-east-1, us-east-2, us-west-1, us-west-2
 export BUILD_IDENTIFIER="" #Unique string to identify your build
