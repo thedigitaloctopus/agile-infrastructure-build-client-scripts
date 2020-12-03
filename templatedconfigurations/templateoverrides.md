@@ -24,6 +24,7 @@ To use template overrides with digital ocean you need to:
 
 # Linode
 
+You can find more explicit instructions for linode here: [Linode Explicit](https://www.codeshed.uk/home/agile-deployment-toolkit/demonstrations/template-override-method-demo/explicit-instructions-linode)
 1. Make a stack script by copying: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/linode/OverrideScript.sh
 2. Populate the Stack Script with values according to the [template spec](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md) and your needs. You can override any variables from the template you select from [Templates](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/linode) as you choose in your Stack Script. 
 3. Start up a linode using your Populated Stack Script
