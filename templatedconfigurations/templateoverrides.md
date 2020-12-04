@@ -1,7 +1,7 @@
 # Digital Ocean
 
 To use template overrides with digital ocean you need to:
-
+You can find more explicit instructions at: [Explicit Digital Ocean](https://www.codeshed.uk/home/agile-deployment-toolkit/demonstrations/template-override-method-demo/explicit-instructions-digital-ocean)
 1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/digitalocean/OverrideScript.sh)
 2. In your text editor populate the enironment variables in your copy. Override any additional template variables for the template you select from : [Templates](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/digitalocean) by adding them to your copy and pay attention to the template specification [Template Specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md)
 3. Go through the process of starting up a (small) droplet, add your SSH key to it and paste your script from 2 in full into the "user data" area of your droplet creation process
