@@ -7,7 +7,7 @@
 # https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md 
 # I have included a bare minimum of variables to override to keep the default script as simple as possible.
 ########################################################################################################################################################
-
+#BASE OVERRIDES
 # <UDF name="SSH" label="SSH Public Key" />
 # <UDF name="BUILDOS" label="Operating system to deploy to" oneof="ubuntu,debian" default="debian"/>
 # <UDF name="BUILDOS_VERSION" label="Operating system to deploy to" oneof="20.04,10" default="10"/>
