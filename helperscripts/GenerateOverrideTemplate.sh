@@ -2,7 +2,7 @@
 
 set -x
 
-if ( [ ! -f  ./GenerateTemplateOverride.sh ] )
+if ( [ ! -f  ./GenerateOverrideTemplate.sh ] )
 then
     /bin/echo "Sorry, this script has to be run from the helperscripts subdirectory"
     exit
@@ -63,7 +63,7 @@ do
     
     if ( [ "${variablename}" = "none" ] || [ "${variablename}" = "NONE" ] )
     then
-        continue
+        break
     fi
     
     /bin/echo "Please tell us the value of the variable you want to add, for example, testemail@test.com"
