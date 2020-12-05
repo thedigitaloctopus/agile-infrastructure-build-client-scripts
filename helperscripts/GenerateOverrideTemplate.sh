@@ -23,7 +23,9 @@ then
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
-    overridescript="../templatedconfigurations/templateoverrides/linode/OverrideScript.sh"
+    /bin/echo "Sorry, this script doesn't work for linode, you will have to edit your overrides script manually"
+    /bin/echo "You can find your overrides script at: ../templatedconfigurations/templateoverrides/exoscale/OverrideScript.sh"
+    exit
 elif ( [ "${response}" = "4" ] )
 then
     CLOUDHOST="vultr"
