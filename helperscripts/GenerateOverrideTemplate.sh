@@ -2,7 +2,7 @@
 
 set -x
 
-if ( [ ! -f  ./GenerateTemplateOverrideScript.sh ] )
+if ( [ ! -f  ./GenerateTemplateOverride.sh ] )
 then
     /bin/echo "Sorry, this script has to be run from the helperscripts subdirectory"
     exit
