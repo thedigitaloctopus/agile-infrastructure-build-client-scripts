@@ -6,6 +6,7 @@
 #To make your build possible fill in all these environment variables and paste this entire (updated) file into the userdata are of your build client droplet. 
 ####################################################################################################################################################################
 /bin/echo "
+#BASE OVERRIDES
 export SSH="" #paste your public key here
 export BUILDOS="debian" #one of ubuntu|debian
 export BUILDOS_VERSION="10" #one of 20.04|10
