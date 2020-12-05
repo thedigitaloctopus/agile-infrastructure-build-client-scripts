@@ -54,11 +54,21 @@ do
     fi
 done
 
-/bin/echo "Please tell us and set any additional variables you want to set"
-/bin/echo "Please tell us the name of the variable you want to add, for example, DNS_USERNAME"
-read variablename
-/bin/echo "Please tell us the value of the variable you want to add, for example, testemail@test.com"
-read variablevalue
+/bin/echo "Please tell us and set any additional variables you want to set, type 'none' or 'NONE' when done"
+
+while ( [ 1 ] )
+do
+    /bin/echo "Please tell us the name of the variable you want to add, for example, DNS_USERNAME, type 'none' if all set"
+    read variablename
+    
+    if ( [ "${variablename}" = "none" ] || [ "${variablename}" = "NONE" ] )
+    then
+        continue
+    fi
+    
+    /bin/echo "Please tell us the value of the variable you want to add, for example, testemail@test.com"
+    read variablevalue
+done
 
 /bin/sed -i "/${variablename}=/d" ${overridescript}.$$
 /bin/sed -i "/ADDITIONAL OVERRIDES/a export ${variablename}=\"${variablevalue}\"" ${overridescript}.$$
