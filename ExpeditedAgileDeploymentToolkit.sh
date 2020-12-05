@@ -468,16 +468,6 @@ then
     /bin/mkdir -p ${BUILD_HOME}/runtimedata/${CLOUDHOST}/names
 fi
 
-#. ${BUILD_HOME}/buildscripts/InitialiseSecurityKeys.sh
-
-#PUBLIC_KEY_NAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYNAME`"
-#/bin/sed -i '/PUBLIC_KEY_NAME=/d' ${templatefile}
-#/bin/echo "export PUBLIC_KEY_NAME=\"${PUBLIC_KEY_NAME}\"" >> ${templatefile}
-#
-#PUBLIC_KEY_ID="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYID`"
-#/bin/sed -i '/PUBLIC_KEY_ID=/d' ${templatefile}
-#/bin/echo "export PUBLIC_KEY_ID=\"${PUBLIC_KEY_ID}\"" >> ${templatefile}
-
 status ""
 status ""
 status "####################################################################################################################"
@@ -502,10 +492,6 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 
 . ${BUILD_HOME}/buildscripts/InitialiseSecurityKeys.sh
 
-#PUBLIC_KEY_NAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYNAME`"
-#/bin/sed -i '/PUBLIC_KEY_NAME=/d' ${templatefile}
-#/bin/echo "export PUBLIC_KEY_NAME=\"${PUBLIC_KEY_NAME}\"" >> ${templatefile}
-#
 PUBLIC_KEY_ID="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYID`"
 /bin/sed -i '/PUBLIC_KEY_ID=/d' ${templatefile}
 /bin/echo "export PUBLIC_KEY_ID=\"${PUBLIC_KEY_ID}\"" >> ${templatefile}
