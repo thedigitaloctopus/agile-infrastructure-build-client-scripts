@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -x
+#set -x
 
 if ( [ ! -f  ./GenerateOverrideTemplate.sh ] )
 then
@@ -68,10 +68,10 @@ do
     
     /bin/echo "Please tell us the value of the variable you want to add, for example, testemail@test.com"
     read variablevalue
-done
 
-/bin/sed -i "/${variablename}=/d" ${overridescript}.$$
-/bin/sed -i "/ADDITIONAL OVERRIDES/a export ${variablename}=\"${variablevalue}\"" ${overridescript}.$$
+    /bin/sed -i "/${variablename}=/d" ${overridescript}.$$
+    /bin/sed -i "/ADDITIONAL OVERRIDES/a export ${variablename}=\"${variablevalue}\"" ${overridescript}.$$
+done
 
 /bin/echo "I am about to display your modified template override init script which you can use on your ${CLOUDHOST} compute instance"
 /bin/echo "You should take a copy of this using copy and paste, it will not be shown again"
