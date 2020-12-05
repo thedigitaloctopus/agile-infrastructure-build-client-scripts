@@ -4,7 +4,7 @@ You can find more explicit instructions at: [Explicit Digital Ocean](https://www
 
 To use template overrides with digital ocean you need to:
 
-1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/digitalocean/OverrideScript.sh)
+1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/digitalocean/OverrideScript.sh) alternative, if you are not comfortable editing the template override script directly, you can do it interactively using the script at: [Interactive Template Override Generation](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/helperscripts/GenerateOverrideTemplate.sh)
 2. In your text editor populate the enironment variables in your copy. Override any additional template variables for the template you select from : [Templates](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/digitalocean) by adding them to your copy and pay attention to the template specification [Template Specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md)
 3. Go through the process of starting up a (small) droplet, add your SSH key to it and paste your script from 2 in full into the "user data" area of your droplet creation process
 4. Allow the droplet to start and then SSH onto the droplet
@@ -17,7 +17,7 @@ To use template overrides with digital ocean you need to:
 
 You can find more explicit instructions for Exoscale here: [Explicit Exoscale Instructions](https://www.codeshed.uk/home/agile-deployment-toolkit/demonstrations/template-override-method-demo/explicit-instructions-exoscale)
 
-1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/exoscale/OverrideScript.sh)
+1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/exoscale/OverrideScript.sh) alternative, if you are not comfortable editing the template override script directly, you can do it interactively using the script at: [Interactive Template Override Generation](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/helperscripts/GenerateOverrideTemplate.sh)
 2. In your text editor populate the enironment variables in your copy. Override any additional template variables (you can choose one of the templates located at: [Templates](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/exoscale) by adding them to your copy and pay attention to the template specification [Template Specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md)
 3. Go through the process of starting up a (small) Compute instance in your chosen region, add your SSH key to it and add your script from 2 to the machine's "user data"
 4. Allow the compute instance to start and then SSH onto it (presuming you added your SSH public key to it)
@@ -42,7 +42,7 @@ You can find more explicit instructions for linode here: [Linode Explicit](https
 
 You can find more explicit instructions for Vultr here: [Explicit Vultr Instructions](https://www.codeshed.uk/home/agile-deployment-toolkit/demonstrations/template-override-method-demo/explicit-instructions-vultr)
 
-1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/exoscale/OverrideScript.sh)
+1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/exoscale/OverrideScript.sh) alternative, if you are not comfortable editing the template override script directly, you can do it interactively using the script at: [Interactive Template Override Generation](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/helperscripts/GenerateOverrideTemplate.sh)
 2. In your text editor populate the enironment variables in your copy. Override any additional variables in the template you select from: [Templates](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/vultr) by adding them to your copy and pay attention to the template specification [Template Specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md)
 3. Go through the process of starting up a (small) Compute instance in your chosen region, add your SSH key to it and add your script from 2 to the machine as you define its configuration
 4. Allow the compute instance to start and then SSH onto it (presuming you added your SSH public key to it)
@@ -53,7 +53,7 @@ You can find more explicit instructions for Vultr here: [Explicit Vultr Instruct
 
 # AWS
 
-1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/aws/OverrideScript.sh)
+1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/aws/OverrideScript.sh) alternative, if you are not comfortable editing the template override script directly, you can do it interactively using the script at: [Interactive Template Override Generation](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/helperscripts/GenerateOverrideTemplate.sh)
 2. In your text editor populate the enironment variables in your copy. Override any additional variables that you want to from the template you select from: [Templates](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/aws) by adding them to your copy and pay attention to the template specification [Template Specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md)
 3. Go through the process of starting up a (small) EC2 Compute instance in your chosen region, add your SSH key to it and add your script from 2 to its userdata area at the bottom of the "Advanced Details" area of the "Configure instance" tab
 4. Allow the compute instance to start and then SSH onto it (presuming you added your SSH public key to it)
