@@ -43,3 +43,6 @@ another copy of your sourcecode.
 This removes all files/directories which are transient to the build process. If you "reset" the build kit, then you 
 know that your next build run will be fresh and clean. This is similar to a factory reset on a piece of hardware. 
 
+9) Generate Override Template
+
+This will generate a temmplate override script for you interactively. 
