@@ -45,7 +45,7 @@ then
     APPLICATION_LANGUAGE="PHP"
 
     status "#######################################################################################################################"
-    status "Which version of PHP do you want to install? Available versions are: 7.0,7.1,7.2,7.3,7.4"
+    status "Which version of PHP do you want to install? Available versions are: 7.0,7.1,7.2,7.3,7.4 8.0"
     status "#######################################################################################################################"
     status "Please enter one of 7.0 7.1 7.2 7.3 7.4 8.0"
 
