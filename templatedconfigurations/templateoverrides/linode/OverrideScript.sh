@@ -32,6 +32,8 @@
 # <UDF name="S3_LOCATION" label="Your object storage host base" oneof="US" default="US"/>
 # <UDF name="TOKEN" label="Your linode personal access token (must have account,images, object storage, linodes, ips,stackscript" />
 # <UDF name="NO_AUTOSCALERS" label="The number of autoscalers (if applicable)" oneof="1,2,3,4,5" default="1"/>
+# <UDF name="PHP_VERSION" label="Which PHP Version do you want to deploy to?" oneof="7.0,7.1,7.2,7.3,7.4,8.0" default="7.4"/>
+
 
 /bin/mkdir ~/.ssh
 /bin/echo "${SSH}" >> ~/.ssh/authorized_keys
