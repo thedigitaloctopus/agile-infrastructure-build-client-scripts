@@ -47,14 +47,14 @@ then
     status "#######################################################################################################################"
     status "Which version of PHP do you want to install? Available versions are: 7.0,7.1,7.2,7.3,7.4"
     status "#######################################################################################################################"
-    status "Please enter one of 7.0 7.1 7.2 7.3 7.4"
+    status "Please enter one of 7.0 7.1 7.2 7.3 7.4 8.0"
 
     read PHP_VERSION
 
-    while ( [ "`/bin/echo '7.0 7.1 7.2 7.3 7.4' | /bin/grep ${PHP_VERSION}`" = "" ] )
+    while ( [ "`/bin/echo '7.0 7.1 7.2 7.3 7.4 8.0' | /bin/grep ${PHP_VERSION}`" = "" ] )
     do
         status "Sorry, that's not a valid selection, please try again"
-        status "Please enter one of 7.0 7.1 7.2 7.3 7.4"
+        status "Please enter one of 7.0 7.1 7.2 7.3 7.4 8.0"
         read PHP_VERSION
     done
     
