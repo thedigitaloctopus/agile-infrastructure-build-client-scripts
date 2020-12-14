@@ -34,7 +34,7 @@ export ACCESS_KEY=""   #IAM compute access key for your AWS account
 export SECRET_KEY=""   #IAM compute secret key for your AWS account
 export NO_AUTOSCALERS="" #Number of autoscalers (1-5)
 export SUBNET_ID="" # The subnet id for your EC2 instances
-export OSTYPE="" # ami identifier for your build os type. If BUILDOS ubuntu, look here: https://cloud-images.ubuntu.com/locator/ec2/ for BUILDOS debian run this command: /usr/bin/aws ec2 describe-images --owners 379101102735 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep stretch | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/grep x86_64 | /bin/sed 's/"//g'
+export OSTYPE="" # ami identifier for your build os type. If BUILDOS ubuntu, look here: https://cloud-images.ubuntu.com/locator/ec2/ for BUILDOS debian run this command: /usr/bin/aws ec2 describe-images --owners 379101102735 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep stretch | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/grep x86_64 | /bin/sed 's/\"//g'
 
 #The values above are the values that I override by default. If, for example, you wanted to override the size of your webserver machines you could 
 #simply add an export statement beneath the additional overrides section below 
