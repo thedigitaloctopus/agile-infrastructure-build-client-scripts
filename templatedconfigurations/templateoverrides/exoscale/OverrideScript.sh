@@ -20,7 +20,7 @@ export DNS_CHOICE=\"cloudflare\" #Your DNS provider
 export WEBSITE_DISPLAY_NAME=\"\" #Display name for example "My Blogging Website"
 export WEBSITE_NAME=\"\"  #The core of WEBSITE_URL, for example, if WEBSITE_URL=ok.nuocial.org.uk, WEBSITE_NAME="nuocial"
 export WEBSITE_URL=\"\"  #the URL of the website registered with your DNS provider
-export SELECTED_TEMPLATE=\"\" #Select a template number (1-10) to build you can review available template descriptions to decide which you want to deploy here: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/tree/master/templatedconfigurations/templates/digitalocean 
+export SELECTED_TEMPLATE=\"\" #Select a template number (1-10) to build you can review available template descriptions to decide which you want to deploy here: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/tree/master/templatedconfigurations/templates/digitalocean/templatemenu.md 
 export SYSTEM_EMAIL_USERNAME=\"\" #optional - the SMTP username for your SMTP provider
 export SYSTEM_EMAIL_PASSWORD=\"\" #optional - the SMTP password for your SMTP provider
 export SYSTEM_EMAIL_PROVIDER=\"\" #optional - a value between 1 and 3 for your SMTP provider 1:Sendpulse 2:Gmail 3:SES
