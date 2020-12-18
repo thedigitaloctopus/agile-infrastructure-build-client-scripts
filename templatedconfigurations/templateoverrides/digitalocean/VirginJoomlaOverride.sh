@@ -34,8 +34,8 @@ export NO_AUTOSCALERS=\"1\" #Number of autoscalers (1-5)
 #${BUILD_HOME}/buildcompletion directory which will show you which variables need to be set for the particular configuration you desire. 
 ####ADDITIONAL OVERRIDES
 #export WS_SIZE=\"\"
-export JOOMLA_VERSION=\"4.0.0-beta5"
-export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="JOOMLA:4.0.0-beta5"
+export JOOMLA_VERSION=\"4.0.0-beta5\"
+export APPLICATION_BASELINE_SOURCECODE_REPOSITORY=\"JOOMLA:4.0.0-beta5\"
 
 " > /root/Environment.env
 
