@@ -23,7 +23,7 @@
 # <UDF name="WEBSITE_DISPLAY_NAME" label="The display name for your Website, for example, 'My Holiday Blog'" />
 # <UDF name="WEBSITE_NAME" label="The core of your DNS domain name, if your URL=www.nuocial.org.uk, enter 'nuocial' here" />
 # <UDF name="WEBSITE_URL" label="The Cloudflare registered URL of your website, for example, www.nuocial.org.uk" />
-# <UDF name="SELECTED_TEMPLATE" label="The ADT template number to build from" oneof="1"/ default="1">
+# <UDF name="SELECTED_TEMPLATE" label="The ADT template number to build from" oneof="4"/ default="4">
 # <UDF name="PHP_VERSION" label="Which PHP Version do you want to deploy to?" oneof="7.0,7.1,7.2,7.3,7.4,8.0" default="7.4"/>
 # <UDF name="NO_AUTOSCALERS" label="The number of autoscalers (if applicable)" oneof="1,2,3,4,5" default="1"/>
 #######################################################################################################
