@@ -38,6 +38,8 @@ export OSTYPE=\"\" # ami identifier for your build os type. If BUILDOS ubuntu, l
 #${BUILD_HOME}/buildcompletion directory which will show you which variables need to be set for the particular configuration you desire. 
 ####ADDITIONAL OVERRIDES
 #export WS_SIZE=\"\"
+export DRUPAL_VERSION=\"9.0.7\"
+export APPLICATION_BASELINE_SOURCECODE_REPOSITORY=\"DRUPAL:9.0.7\"
 " > /root/Environment.env
 
 . /root/Environment.env
