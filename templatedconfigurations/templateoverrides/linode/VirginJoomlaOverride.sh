@@ -10,9 +10,8 @@
 # <UDF name="CLOUDHOST" label="Who we are deploying with (always linode for a stack script)" oneof="linode" default="linode"/>
 # <UDF name="REGION_ID" label="The region for your linodes" oneof="ap-west,ap-central,ap-southeast,us-central,us-west,us-east,eu-west,ap-south,eu-central,ap-northeast" default="eu-west"/>
 # <UDF name="BUILD_IDENTIFIER" label="The unique name to identify this build with, for example, myblogproject if your website is www.myblog.org.uk" />
-# <UDF name="BASELINE_DB_REPOSITORY" label="Application DB repository must match with below" oneof="wordydemo-db-baseline,nuocialboss-db-baseline"/>
 # <UDF name="APPLICATION_BASELINE_SOURCECODE_REPOSITORY" label="Application Version, for example, 'JOOMLA:4.0.0-beta-5'" />
-# <UDF name="JOOMLA VERSION" label="Joomla Version, for example, '4.0.0-beta-5'" />
+# <UDF name="JOOMLA_VERSION" label="Joomla Version, for example, '4.0.0-beta-5'" />
 # <UDF name="TOKEN" label="Your linode personal access token (must have account,images, object storage, linodes, ips,stackscript" />
 # <UDF name="S3_ACCESS_KEY" label="Your linode object storage access key" />
 # <UDF name="S3_SECRET_KEY" label="Your linode object storage secret key" />
