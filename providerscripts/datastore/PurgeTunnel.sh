@@ -31,7 +31,7 @@ then
 
     location="`/usr/bin/s3cmd info s3://${config_bucket} | /bin/grep "Location" | /usr/bin/awk '{print $NF}'`"
 
-    if ( [ "${location}" != "" ] && [ "${S3_HOST_BASE}" != "${location}" ] )
+    if ( [ "${location}" != "" ] && [ "${location}" != "default" ] && [ "${S3_HOST_BASE}" != "${location}" ] )
     then
         status "#########################################################################################################################################################"
         status "WARNING, THE CONFIGURATION BUCKET IS IN A DIFFERENT REGION (${location}) TO THE LOCATION YOU HAVE SET ( ${S3_HOST_BASE} ), THIS WILL LIKELY CAUSE PROBLEMS"
