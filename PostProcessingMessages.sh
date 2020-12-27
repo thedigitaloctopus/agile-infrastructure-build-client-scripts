@@ -62,6 +62,16 @@ then
     read answer
     status "Double check....Have you completed the install through your web browser. If yes, press <enter>, otherwise go to https://${WEBSITE_URL}/core/install.php"
     read x
+    while ( [ ! -f /tmp/DRUPAL ] )
+    do
+        status "WARNING: YOUR INSTALL WILL LIKELY ERROR OUT UNTIL UNTIL THE CACHE IS CLEARED"
+        status "TO CLEAR THE CACHE, AND COMPLETE THE BUILD ***FIRST*** COMPLETE THE INSTALLATION OF DRUPAL USING THE GUI AT: https://${WEBSITE_URL}/core/install.php"
+        status "THEN ISSUE THE COMMAND '/bin/touch /tmp/DRUPAL ... THE BUILD WILL THE COMPLETE AND YOU WILL BE ABLE TO NAVIGATE TO YOUR WEBSITE WITHOUT ERROR"
+        /bin/sleep 10
+    done
+    
+    /bin/rm /tmp/DRUPAL
+    
     /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "/home/${SERVER_USER}/providerscripts/application/processing/PerformPostProcessingByApplication.sh ${SERVER_USER}" >&3
 fi
 
