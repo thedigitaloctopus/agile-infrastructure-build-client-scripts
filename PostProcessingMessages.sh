@@ -64,9 +64,11 @@ then
     read x
     while ( [ ! -f /tmp/DRUPAL ] )
     do
+        status "#######################################################################################################################################################"
         status "WARNING: YOUR INSTALL WILL LIKELY ERROR OUT UNTIL UNTIL THE CACHE IS CLEARED"
         status "TO CLEAR THE CACHE, AND COMPLETE THE BUILD ***FIRST*** COMPLETE THE INSTALLATION OF DRUPAL USING THE GUI AT: https://${WEBSITE_URL}/core/install.php"
         status "THEN ISSUE THE COMMAND '/bin/touch /tmp/DRUPAL ... THE BUILD WILL THE COMPLETE AND YOU WILL BE ABLE TO NAVIGATE TO YOUR WEBSITE WITHOUT ERROR"
+        status ""
         /bin/sleep 10
     done
     
