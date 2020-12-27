@@ -23,10 +23,10 @@
 
 if ( [ "${DATASTORE_CHOICE}" = "amazonS3" ] || [ "${DATASTORE_CHOICE}" = "digitalocean" ] || [ "${DATASTORE_CHOICE}" = "exoscale" ] || [ "${DATASTORE_CHOICE}" = "linode" ] || [ "${DATASTORE_CHOICE}" = "vultr" ] )
 then
-    config_bucket="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`-config/*"
+    config_bucket="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`-config"
     if ( [ "`/usr/bin/s3cmd ls s3://${config_bucket}`" != "" ] )
     then
-        /usr/bin/s3cmd --recursive --force del s3://${config_bucket}
+        /usr/bin/s3cmd --recursive --force del s3://${config_bucket}/webrootsynctunnel/*
     fi
 
     location="`/usr/bin/s3cmd info s3://${config_bucket} | /bin/grep "Location" | /usr/bin/awk '{print $NF}'`"
