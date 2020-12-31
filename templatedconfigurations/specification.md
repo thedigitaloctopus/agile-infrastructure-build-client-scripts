@@ -729,14 +729,3 @@ The snapshot ID is the first four characters of the snapshots that you are going
 
 These are the full IDs of the images that your servers will be built off if you build using snapshots you have generated.
 
------
-
-### DRUPAL_VERSION
-
-This is specific to the drupal application. You set it to be the version of drupal that you want to deploy which will likely be the latest version
-
------
-
-### JOOMLA_VERSION
-
-This is specific to the joomla application. You set it to be the version of joomla that you want to deploy which will likely be the latest version
