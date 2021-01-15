@@ -9,7 +9,7 @@
 ####################################################################################################################################################################
 /bin/echo "
 #BASE OVERRIDES
-export SSH=\"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCvy+aGKJicNoHiRmuSsln4f5+vTW8CC6jgKI0vU6UlGkOSbmMREbt3WkoWUDbKw4io2WhF6I7NW0IL2/7F9NymI9E5cm2U3rEy8FR9Q7KAFoYeHGptT6sshSdC01qssx+seFk9VyS+JfRfKC2YP+OMXBT8KR7YFQK34S60ACZkDYYwqb+DJvje8uBFyExr7hy9bBoVVVfTXDN3r/6a+AnKBX+Ve4jD/oTLpAUOOULdEbJi3ZkfMyqMjrj4BIFN/WuO7/KBMXQYNCf9dQ1H0edrliFrKJnW1HjPBIILz5aM2rtjt1PwmRH4qlHhx8rFZbx3sTyF3SHKffT7nNe7fhS4L386hF4FxaScJjTzX64eJ9jtFCrpl8vcZ0Lc36tWSQvBLw8JNQwRM3xXkMVw7O8zF15wWGHaaZC4jJGxw6ufEDZZ/U8BLZcQG14pB6cawpFXGM68pRqV+4pKp3w9iT6K6yfPkb3guWBOEHpHkb6APfYGhXaGwffjYH8frlwW5rAPOjVg4+iJPGM6ROH2UYdxWTqZLY4RvmKe3Un8XL9F3c+W2lVK+fqquh+vTN4VIxt0uSukwMrTjBJa24CJPCgV8BPMFJTrtxQuMFfU0NVPq5w8c+8LyCRjQft1G5aO0G2CVf/Y46NrKLT/uRoiL4lU26/SeAV/1ZMRK659C8Z/1Q== your_email@domain.com\" #paste your public key here
+export SSH=\"\" #paste your public key here
 export BUILDOS=\"debian\" #one of ubuntu|debian
 export BUILDOS_VERSION=\"10\" #one of 20.04|10
 export CLOUDHOST=\"digitalocean\"  #Always digitalocean
