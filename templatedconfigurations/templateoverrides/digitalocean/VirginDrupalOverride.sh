@@ -4,6 +4,13 @@
 #To use this file, review every variable and set it appropriately, then copy it to your userdata area when you create your build droplet
 #you can refer to the specification for the ADT templating system to review this parameters which is located at: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md
 #To make your build possible fill in all these environment variables and paste this entire (updated) file into the userdata are of your build client droplet. 
+#All of these variables need to be set correctly for the build to work. You will need to obtain these values from digital ocean and cloudflare:
+#S3_ACCESS_KEY - "Your digital ocean spaces access key"
+#S3_SECRET_KEY - "Your digital ocean spaces secret key"
+#TOKEN - "Your digital ocean personal access token"
+#DNS_USERNAME - "Your cloudflare email address"
+#DNS_SECURITY_KEY - "Your cloudflare global API key"
+#The rest you can generate or set locally yourself, but, all these variables must be set correctly before you add this script to the user data of your droplet
 ####################################################################################################################################################################
 /bin/echo "
 #BASE OVERRIDES
@@ -12,7 +19,7 @@ export BUILDOS=\"debian\" #one of ubuntu|debian
 export BUILDOS_VERSION=\"10\" #one of 20.04|10
 export CLOUDHOST=\"digitalocean\"  #Always digitalocean
 export REGION_ID=\"\"  #The region ID for your deployment - one of "nyc1","sfo1","nyc2","ams2","sgp1","lon1","nyc3","ams3","fra1","tor1","sfo2","blr1","sfo3"
-export BUILD_IDENTIFIER=\"\" #Unique string to identify your build
+export BUILD_IDENTIFIER=\"\" #Unique string to identify your build for example, 'testdrupal'
 export TOKEN=\"\" #Your personal acccess token
 export S3_ACCESS_KEY=\"\" #Digital Ocean Spaces Access Key
 export S3_SECRET_KEY=\"\" #Digital Ocean Spaces Secret Key
