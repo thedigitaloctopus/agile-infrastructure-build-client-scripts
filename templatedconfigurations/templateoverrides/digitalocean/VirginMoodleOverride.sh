@@ -32,7 +32,6 @@ export WEBSITE_DISPLAY_NAME=\"\" #Display name for example "My Blogging Website"
 export WEBSITE_NAME=\"\"  #The core of WEBSITE_URL, for example, if WEBSITE_URL=ok.nuocial.org.uk, WEBSITE_NAME="nuocial"
 export WEBSITE_URL=\"\"  #the URL of the website registered with your DNS provider
 export SELECTED_TEMPLATE=\"5\" #Select a template number (1-10) to build you can review available template descriptions to decide which you want to deploy here: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/tree/master/templatedconfigurations/templates/digitalocean/templatemenu.md 
-export NO_AUTOSCALERS=\"1\" #Number of autoscalers (1-5)
 #The values above are the values that I override by default. If, for example, you wanted to override the size of your webserver machines you could 
 #simply add an export statement beneath the additional overrides section below 
 # and define it for your provider based on the template specification. Similarly for any of the other variables that you find in 
@@ -40,7 +39,6 @@ export NO_AUTOSCALERS=\"1\" #Number of autoscalers (1-5)
 #full AgileDeploymentToolkit script and setting the configuration you desire will give you an env dump upon successful completion in the 
 #${BUILD_HOME}/buildcompletion directory which will show you which variables need to be set for the particular configuration you desire. 
 ####ADDITIONAL OVERRIDES
-#export WS_SIZE=\"\"
 " > /root/Environment.env
 
 . /root/Environment.env
