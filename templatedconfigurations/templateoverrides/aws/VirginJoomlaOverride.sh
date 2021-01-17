@@ -4,6 +4,14 @@
 #To use this file, review every variable and set it appropriately, then copy it to your userdata area when you create your build EC2 Instance
 #you can refer to the specification for the ADT templating system to review this parameters which is located at: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md
 #To make your build possible fill in all these environment variables and paste this entire (updated) file into the userdata are of your build client machine. 
+#All of these variables need to be set correctly for the build to work. You will need to obtain these values from AWS and cloudflare:
+#S3_ACCESS_KEY - "Your AWS object storage  access key"
+#S3_SECRET_KEY - "Your AWS object storage secret key"
+#ACCESS_KEY - "Your AWS compute storage access key"
+#SECRET_KEY - "Your AWS compute  secret key"
+#DNS_USERNAME - "Your cloudflare email address"
+#DNS_SECURITY_KEY - "Your cloudflare global API key"
+#The rest you can generate or set locally yourself, but, all these variables must be set correctly before you add this script to the user data of your compute instance
 ####################################################################################################################################################################
 /bin/echo "
 #BASE OVERRIDES
@@ -27,7 +35,6 @@ export WEBSITE_DISPLAY_NAME=\"\" #Display name for example "My Blogging Website"
 export WEBSITE_NAME=\"\"  #The core of WEBSITE_URL, for example, if WEBSITE_URL=ok.nuocial.org.uk, WEBSITE_NAME="nuocial"
 export WEBSITE_URL=\"\"  #the URL of the website registered with your DNS provider
 export SELECTED_TEMPLATE=\"2\" #Select a template number (1-10) to build you can review available template descriptions to decide which you want to deploy here: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/tree/master/templatedconfigurations/templates/digitalocean/templatemenu.md 
-export NO_AUTOSCALERS=\"1\" #Number of autoscalers (1-5)
 export SUBNET_ID=\"\" # The subnet id for your EC2 instances
 export OSTYPE=\"\" # ami identifier for your build os type. If BUILDOS ubuntu, look here: https://cloud-images.ubuntu.com/locator/ec2/ for BUILDOS debian run this command: /usr/bin/aws ec2 describe-images --owners 379101102735 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep stretch | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/grep x86_64 | /bin/sed 's/\"//g'
 #The values above are the values that I override by default. If, for example, you wanted to override the size of your webserver machines you could 
