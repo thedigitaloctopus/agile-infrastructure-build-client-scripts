@@ -3,7 +3,23 @@
 # These values override the default values set in the 1st template provided with the ADT repository:
 # Template: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/linode/linode1.tmpl
 # Description: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/linode/linode1.description
-############################################################################################################################
+#All of these variables need to be set correctly for the build to work. You will need to obtain these values from digital ocean and cloudflare:
+#S3_ACCESS_KEY - "Your linode object storage key"
+#S3_SECRET_KEY - "Your linode object storage secret key"
+#TOKEN - "Your linode personal access token"
+#DNS_USERNAME - "Your cloudflare email address"
+#DNS_SECURITY_KEY - "Your cloudflare global API key"
+#The rest you can generate or set locally yourself, but, all these variables must be set correctly before you add this script to the user data of your droplet
+####################################################################################################################################################################
+#****ESSENTIAL****: (sometimes) there is a caching problem when drupal is installed and so you will sometimes see an error message when you first try to access 
+# the live site. Therefore when running this script, you must tail the build output log...
+#
+#    tail -f /root/agile-deployment-toolkit/logs/build*out*
+#
+#and follow the instructions at the end of it to clear the cache AFTER you have installed drupal through the gui system. 
+#The caching problem is internmittent, so you may not see it, but, in most tests I have done it is there. The process you are asked to perform at the end of the build 
+#process will truncate the caching tables in the database and clear the error message. 
+####################################################################################################################################################################
 # <UDF name="SSH" label="SSH Public Key" />
 # <UDF name="BUILDOS" label="Operating system to deploy to" oneof="ubuntu,debian" default="debian"/>
 # <UDF name="BUILDOS_VERSION" label="Operating system to deploy to" oneof="20.04,10" default="10"/>
