@@ -27,7 +27,7 @@
 # <UDF name="REGION_ID" label="The region for your linodes" oneof="ap-west,ap-central,ap-southeast,us-central,us-west,us-east,eu-west,ap-south,eu-central,ap-northeast" default="eu-west"/>
 # <UDF name="BUILD_IDENTIFIER" label="The unique name to identify this build with, for example, myblogproject if your website is www.myblog.org.uk" />
 # <UDF name="APPLICATION_BASELINE_SOURCECODE_REPOSITORY" label="Application Version, for example, 'DRUPAL:9.0.7'" />
-# <UDF name="DRUPAL_VERSION" label="Drupal Version, for example, '9.0.7'" />
+# <UDF name="DRUPAL_VERSION" label="Drupal Version, for example, '9.1.2'" />
 # <UDF name="TOKEN" label="Your linode personal access token (must have account,images, object storage, linodes, ips,stackscript" />
 # <UDF name="S3_ACCESS_KEY" label="Your linode object storage access key" />
 # <UDF name="S3_SECRET_KEY" label="Your linode object storage secret key" />
