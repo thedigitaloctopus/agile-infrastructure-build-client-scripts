@@ -12,6 +12,15 @@
 #DNS_SECURITY_KEY - "Your cloudflare global API key"
 #The rest you can generate or set locally yourself, but, all these variables must be set correctly before you add this script to the user data of your droplet
 ####################################################################################################################################################################
+#****ESSENTIAL****: (sometimes) there is a caching problem when drupal is installed and so you will sometimes see an error message when you first try to access 
+# the live site. Therefore when running this script, you must tail the build output log...
+#
+#    tail -f /root/agile-deployment-toolkit/logs/build*out*
+#
+#and follow the instructions at the end of it to clear the cache AFTER you have installed drupal through the gui system. 
+#The caching problem is internmittent, so you may not see it, but, in most tests I have done it is there. The process you are asked to perform at the end of the build 
+#process will truncate the caching tables in the database and clear the error message. 
+####################################################################################################################################################################
 /bin/echo "
 #BASE OVERRIDES
 export SSH=\"\" #paste your public key here
