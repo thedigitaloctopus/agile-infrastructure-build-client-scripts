@@ -3,8 +3,14 @@
 # These values override the default values set in the 1st template provided with the ADT repository:
 # Template: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/linode/linode1.tmpl
 # Description: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/linode/linode1.description
-############################################################################################################################
-# <UDF name="SSH" label="SSH Public Key" />
+#All of these variables need to be set correctly for the build to work. You will need to obtain these values from linode and cloudflare:
+#S3_ACCESS_KEY - "Your linode object storage access key"
+#S3_SECRET_KEY - "Your linode object storage secret key"
+#TOKEN - "Your linode personal access token"
+#DNS_USERNAME - "Your cloudflare email address"
+#DNS_SECURITY_KEY - "Your cloudflare global API key"
+#The rest you can generate or set locally yourself, but, all these variables must be set correctly before you add this script to the user data of your linode
+##################################################################################################################################################################### <UDF name="SSH" label="SSH Public Key" />
 # <UDF name="BUILDOS" label="Operating system to deploy to" oneof="ubuntu,debian" default="debian"/>
 # <UDF name="BUILDOS_VERSION" label="Operating system to deploy to" oneof="20.04,10" default="10"/>
 # <UDF name="CLOUDHOST" label="Who we are deploying with (always linode for a stack script)" oneof="linode" default="linode"/>
@@ -25,7 +31,6 @@
 # <UDF name="WEBSITE_URL" label="The Cloudflare registered URL of your website, for example, www.nuocial.org.uk" />
 # <UDF name="SELECTED_TEMPLATE" label="The ADT template number to build from" oneof="2"/ default="2">
 # <UDF name="PHP_VERSION" label="Which PHP Version do you want to deploy to?" oneof="7.0,7.1,7.2,7.3,7.4,8.0" default="7.4"/>
-# <UDF name="NO_AUTOSCALERS" label="The number of autoscalers (if applicable)" oneof="1,2,3,4,5" default="1"/>
 #######################################################################################################
 #This is the main script. Ensure the SSH key is authorised in case it hasn't been set yet. Also disable password based authentication
 /bin/mkdir ~/.ssh
