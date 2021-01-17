@@ -4,13 +4,13 @@
 #To use this file, review every variable and set it appropriately, then copy it to your userdata area when you create your build client machine
 #you can refer to the specification for the ADT templating system to review this parameters which is located at: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md
 #To make your build possible fill in all these environment variables and paste this entire (updated) file into the userdata are of your build client machine. 
-#All of these variables need to be set correctly for the build to work. You will need to obtain these values from digital ocean and cloudflare:
+#All of these variables need to be set correctly for the build to work. You will need to obtain these values from exoscale and cloudflare:
 #S3_ACCESS_KEY - "Your exoscale object storage key"
 #S3_SECRET_KEY - "Your exoscale object storage secret key"
 #TOKEN - "Your exoscale personal access token"
 #DNS_USERNAME - "Your cloudflare email address"
 #DNS_SECURITY_KEY - "Your cloudflare global API key"
-#The rest you can generate or set locally yourself, but, all these variables must be set correctly before you add this script to the user data of your droplet
+#The rest you can generate or set locally yourself, but, all these variables must be set correctly before you add this script to the user data of your compute instance
 ####################################################################################################################################################################
 #****ESSENTIAL****: (sometimes) there is a caching problem when drupal is installed and so you will sometimes see an error message when you first try to access 
 # the live site. Therefore when running this script, you must tail the build output log...
