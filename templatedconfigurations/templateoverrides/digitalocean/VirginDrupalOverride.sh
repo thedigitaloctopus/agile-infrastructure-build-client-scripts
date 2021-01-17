@@ -48,8 +48,8 @@ export SELECTED_TEMPLATE=\"4\" #Select a template number (1-10) to build you can
 #full AgileDeploymentToolkit script and setting the configuration you desire will give you an env dump upon successful completion in the 
 #${BUILD_HOME}/buildcompletion directory which will show you which variables need to be set for the particular configuration you desire. 
 ####ADDITIONAL OVERRIDES
-export DRUPAL_VERSION=\"9.0.7\"
-export APPLICATION_BASELINE_SOURCECODE_REPOSITORY=\"DRUPAL:9.0.7\"
+export DRUPAL_VERSION=\"9.1.2\"
+export APPLICATION_BASELINE_SOURCECODE_REPOSITORY=\"DRUPAL:9.1.2\"
 " > /root/Environment.env
 
 . /root/Environment.env
