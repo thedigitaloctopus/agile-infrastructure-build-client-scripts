@@ -15,7 +15,7 @@
 #****ESSENTIAL****: (sometimes) there is a caching problem when drupal is installed and so you will sometimes see an error message when you first try to access 
 # the live site. Therefore when running this script, you must tail the build output log...
 #
-#    tail -f /root/agile-deployment-toolkit/logs/build*out*
+#    tail -f /root/agile-infrastructure-build-client-scripts/logs/build*out*
 #
 #and follow the instructions at the end of it to clear the cache AFTER you have installed drupal through the gui system. 
 #The caching problem is internmittent, so you may not see it, but, in most tests I have done it is there. The process you are asked to perform at the end of the build 
