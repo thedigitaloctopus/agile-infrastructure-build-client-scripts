@@ -7,7 +7,8 @@
 #All of these variables need to be set correctly for the build to work. You will need to obtain these values from exoscale and cloudflare:
 #S3_ACCESS_KEY - "Your exoscale object storage key"
 #S3_SECRET_KEY - "Your exoscale object storage secret key"
-#TOKEN - "Your exoscale personal access token"
+#ACCESS_KEY - "Your exoscale compute access key"
+#SECRET_KEY - "You exoscale compute secret key"
 #DNS_USERNAME - "Your cloudflare email address"
 #DNS_SECURITY_KEY - "Your cloudflare global API key"
 #The rest you can generate or set locally yourself, but, all these variables must be set correctly before you add this script to the user data of your compute instance
