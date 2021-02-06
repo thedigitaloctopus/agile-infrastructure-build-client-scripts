@@ -175,8 +175,8 @@ then
             then
                 status "Performing software update....."
                 ${BUILD_HOME}/installscripts/Update.sh "ubuntu"  >>${UPGRADE_LOG} 2>&1
-                status "Performing software upgrade....."
-                ${BUILD_HOME}/installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+             #   status "Performing software upgrade....."
+             #   ${BUILD_HOME}/installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
                 #Make Sure python PIP is at the latest version:
                 status "Updating python"
                 ${BUILD_HOME}/installscripts/PurgePython.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
