@@ -27,10 +27,10 @@ fi
 
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
-    /usr/bin/apt-get -qq -y dist-upgrade
+    /usr/bin/apt-get -qq -y dist-upgrade --allow-change-held-packages
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
-    /usr/bin/apt-get -qq -y dist-upgrade
+    /usr/bin/apt-get -qq -y dist-upgrade --allow-change-held-packages
 fi
