@@ -143,7 +143,7 @@ do
         #harden ourselves by blocking password based and root authentication and enforce the use of our ssh keys
         loop="0"
         connected="0"
-        while ( [ "${loop}" -lt "10" ] )
+        while ( [ "${loop}" -lt "3" ] )
         do
             /usr/bin/ssh ${OPTIONS} -o "PasswordAuthentication=no" ${DEFAULT_USER}@${ip} 'DEBIAN_FRONTEND=noninteractive exit'
             if ( [ "$?" = "0" ] )
