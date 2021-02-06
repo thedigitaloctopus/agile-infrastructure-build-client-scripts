@@ -27,10 +27,10 @@ fi
 
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
-    /usr/bin/apt-get install -y python
+    /usr/bin/apt-get -qq -y install -y python
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
-    /usr/bin/apt-get install -y python
+    /usr/bin/apt-get -qq -y install -y python
 fi
