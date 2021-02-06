@@ -29,12 +29,12 @@ if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
     /usr/bin/yes | /usr/bin/dpkg --configure -a
     /usr/bin/apt install -y -qq apt-utils 2&1>/dev/null
-    /usr/bin/apt-get -qq -y update
+    /usr/bin/apt-get -qq -y update --allow-change-held-packages
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
     /usr/bin/yes | /usr/bin/dpkg --configure -a
     /usr/bin/apt install -y -qq apt-utils 2&1>/dev/null
-    /usr/bin/apt-get -qq -y update
+    /usr/bin/apt-get -qq -y update --allow-change-held-packages
 fi
