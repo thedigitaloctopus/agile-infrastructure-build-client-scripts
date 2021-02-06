@@ -143,9 +143,8 @@ do
         #harden ourselves by blocking password based and root authentication and enforce the use of our ssh keys
         loop="0"
         connected="0"
-        while ( [ "${loop}" -lt "3" ] )
+        while ( [ "${loop}" -lt "10" ] )
         do
-            #If it is a debian OS, then, we can pass in our DEBIAN_FRONTEND variable which will just be ignored by any other type of OS
             /usr/bin/ssh ${OPTIONS} -o "PasswordAuthentication=no" ${DEFAULT_USER}@${ip} 'DEBIAN_FRONTEND=noninteractive exit'
             if ( [ "$?" = "0" ] )
             then
