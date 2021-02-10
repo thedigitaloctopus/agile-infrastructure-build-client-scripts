@@ -85,7 +85,12 @@ then
             command="/usr/bin/lego --email="${DNS_USERNAME}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
         fi
         
-        eval ${command}
+        while ( [ "`/usr/bin/find ${BUILD_HOME}/.lego/certificates/${WEBSITE_URL}.issuer.crt -mmin -5 2>/dev/null`" = "" ] )
+        do
+            status "Valid Certificate not found, trying to issue SSL certificate for your domain ${WEBSITE_URL}"
+            eval ${command}
+            /bin/sleep 10
+        done
     else
         status ""
         status ""
@@ -151,7 +156,12 @@ then
             command="/usr/bin/lego --email="${DNS_USERNAME}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
         fi
         
-        eval ${command}
+        while ( [ "`/usr/bin/find ${BUILD_HOME}/.lego/certificates/${WEBSITE_URL}.issuer.crt -mmin -5 2>/dev/null`" = "" ] )
+        do
+            status "Valid Certificate not found, trying to issue SSL certificate for your domain ${WEBSITE_URL}"
+            eval ${command}
+            /bin/sleep 10
+        done
     else
         status ""
         status ""
@@ -213,7 +223,13 @@ then
         then
             command="/usr/bin/lego --email="${DNS_USERNAME}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"
         fi
-        eval ${command}
+        
+        while ( [ "`/usr/bin/find ${BUILD_HOME}/.lego/certificates/${WEBSITE_URL}.issuer.crt -mmin -5 2>/dev/null`" = "" ] )
+        do
+            status "Valid Certificate not found, trying to issue SSL certificate for your domain ${WEBSITE_URL}"
+            eval ${command}
+            /bin/sleep 10
+        done
     else
         status ""
         status ""
