@@ -56,6 +56,7 @@ export DB_PORT=\"25060\" #replace with your own value
 systemctl restart sshd
 service ssh restart
 
+/usr/bin/apt -qq -y update
 /usr/bin/apt -qq -y install git
 
 cd /root
