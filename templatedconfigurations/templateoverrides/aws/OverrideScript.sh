@@ -56,6 +56,7 @@ export OSTYPE=\"\" # ami identifier for your build os type. If BUILDOS ubuntu, l
 systemctl restart sshd
 service ssh restart
 
+/usr/bin/apt -qq -y update
 /usr/bin/apt -qq -y install git
 
 cd /root
