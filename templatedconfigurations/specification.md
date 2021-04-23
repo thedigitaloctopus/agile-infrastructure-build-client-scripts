@@ -576,10 +576,14 @@ The token that you generate can be placed here in your template instead of a pas
 
 Unless I move the infrastructure repositories to bitbucket or gitlab, these values will ALWAYS need to be set as follows
 
-INFRASTRUCTURE_REPOSITORY_PROVIDER="github"
-INFRASTRUCTURE_REPOSITORY_OWNER="agile-deployer"
-INFRASTRUCTURE_REPOSITORY_USERNAME="agile-deployer"
-INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
+INFRASTRUCTURE_REPOSITORY_PROVIDER="github"  
+
+INFRASTRUCTURE_REPOSITORY_OWNER="agile-deployer"  
+
+INFRASTRUCTURE_REPOSITORY_USERNAME="agile-deployer"  
+
+INFRASTRUCTURE_REPOSITORY_PASSWORD="none"  
+
 
 -----
 
@@ -588,11 +592,16 @@ INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
 This value determines who your object store provider will be (very likely the same as your compute services provider, but, doesn't have to be)
 DATASTORE_CHOICE should be set to one of the following values:
  
- For Amazon S3: "amazonS3"
- For DigitalOcean spaces: "digitalocean" 
- For Exoscale Object Store: "exoscale" 
- For Linode Object Store: "linode"
- For Vultr Object Store: "vultr"
+ For Amazon S3: "amazonS3"  
+ 
+ For DigitalOcean spaces: "digitalocean"  
+ 
+ For Exoscale Object Store: "exoscale"  
+ 
+ For Linode Object Store: "linode"  
+ 
+ For Vultr Object Store: "vultr"  
+ 
  
  -----
  
@@ -648,11 +657,16 @@ If you are using an SSH tunnel, you need to set this value to the IP address of 
 
 The APPLICATION_NAME corresponds to the APPLICATION IDENTIFIER
 
-APPLICATION IDENTIFIER       |     APPLICATION NAME
-        1                    |    JOOMLA APPLICATION
-        2                    |    WORDPRESS APPLICATION
-        3                    |    DRUPAL APPLICATION
-        4                    |    MOODLE APPLICATION
+APPLICATION IDENTIFIER       |     APPLICATION NAME  
+
+        1                    |    JOOMLA APPLICATION  
+        
+        2                    |    WORDPRESS APPLICATION  
+        
+        3                    |    DRUPAL APPLICATION  
+        
+        4                    |    MOODLE APPLICATION  
+        
         
 -----
 
@@ -688,10 +702,14 @@ Let me know if you think further PHP settings should be configurable like this. 
 
 If you are using an IN-MEMORY caching solution such as Elasticache on AWS, then, you can set your caching relevant settings here.
 
-IN_MEMORY_CACHING can be set to "redis", or "memcache"
-IN_MEMORY_CACHING_PORT is the port that the caching service is running on
-IN_MEMORY_CACHING_HOST is the host that the caching service is running on
-IN_MEMORY_CACHING_SECURITY_GROUP is the (where appropriate) security group that the caching service is running in.
+IN_MEMORY_CACHING can be set to "redis", or "memcache"  
+
+IN_MEMORY_CACHING_PORT is the port that the caching service is running on  
+
+IN_MEMORY_CACHING_HOST is the host that the caching service is running on  
+
+IN_MEMORY_CACHING_SECURITY_GROUP is the (where appropriate) security group that the caching service is running in.  
+
 
 -----
 
