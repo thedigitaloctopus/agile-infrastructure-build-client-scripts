@@ -34,6 +34,7 @@
 systemctl restart sshd
 service ssh restart
 #Install the git software
+/usr/bin/apt -qq -y update
 /usr/bin/apt -qq -y install git
 cd /root
 #Clone the Agile Deployment Toolkit
