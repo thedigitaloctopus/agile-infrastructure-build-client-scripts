@@ -63,6 +63,7 @@ export APPLICATION_BASELINE_SOURCECODE_REPOSITORY=\"DRUPAL:9.1.2\"
 systemctl restart sshd
 service ssh restart
 
+/usr/bin/apt -qq -y update
 /usr/bin/apt -qq -y install git
 
 cd /root
