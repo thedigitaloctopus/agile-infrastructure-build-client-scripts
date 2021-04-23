@@ -55,6 +55,7 @@ export SELECTED_TEMPLATE=\"3\" #Select a template number (1-10) to build you can
 systemctl restart sshd
 service ssh restart
 
+/usr/bin/apt -qq -y update
 /usr/bin/apt -qq -y install git
 
 cd /root
