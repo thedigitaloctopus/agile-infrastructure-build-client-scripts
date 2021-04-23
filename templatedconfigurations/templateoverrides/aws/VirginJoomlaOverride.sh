@@ -59,6 +59,7 @@ export APPLICATION_BASELINE_SOURCECODE_REPOSITORY=\"JOOMLA:4.0.0-beta5\"
 systemctl restart sshd
 service ssh restart
 
+/usr/bin/apt -qq -y update
 /usr/bin/apt -qq -y install git
 
 cd /root
