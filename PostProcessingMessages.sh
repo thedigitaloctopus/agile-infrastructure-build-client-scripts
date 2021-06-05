@@ -58,45 +58,42 @@ then
         status "######################################################################################"
         status "Waiting for you to install drupal by going to: https://${WEBSITE_URL}/core/install.php"
         status "######################################################################################"
-        /bin/sleep 30
-    done
-
-    /bin/sleep 60
-
-    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
-    do
-        status "######################################################################################"
-        status "Trying to truncate drupal cache"
-        status "######################################################################################"
-    done
-    
-    status "OK, I'll be kind and show you one time your drupal application credentials."
-    status "Please make a note of them but remember to keep them safe and secret"
-    status "============="
-    status "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /bin/cat /home/${SERVER_USER}/config/credentials/shit"`"
-    status "============="
-    /usr/bin/banner "Stop......" >&3
-    status "ONLY PRESS <ENTER> ONCE YOU HAVE INSTALLED YOUR APPLICATION THROUGH YOUR WEB BROWSER. I HAVE EXPERIENCED SOME CACHE CORRUPTION DURING TESTING"
-    status "AND, I WANT TO MAKE SURE YOUR DRUPAL CACHE IS PURGED POST INSTALL WHICH I WILL DO ONCE YOU PRESS <ENTER> HERE"
-    status "#########################################################################################################################################"
-    status "ONCE YOU HAVE INSTALLED THE APPLICATION THROUGH YOUR WEB BROWSER"
-    status "Please press the <enter> key here to acknowledge this message and that you have made a note of the credentials and the build will be complete."
-    status "If you have experienced any error messages, try again once the build has completed" 
-    status "########################################################################################################################################"
-    read answer
-    status "Double check....Have you completed the install through your web browser. If yes, press <enter>, otherwise go to https://${WEBSITE_URL}/core/install.php"
-    read x
-    while ( [ ! -f /tmp/DRUPAL ] )
-    do
-        status "#######################################################################################################################################################"
-        status "WARNING: YOUR INSTALL WILL LIKELY ERROR OUT UNTIL UNTIL THE CACHE IS CLEARED"
-        status "TO CLEAR THE CACHE, AND COMPLETE THE BUILD ***FIRST*** COMPLETE THE INSTALLATION OF DRUPAL USING THE GUI AT: https://${WEBSITE_URL}/core/install.php"
-        status "THEN ISSUE THE COMMAND '/bin/touch /tmp/DRUPAL ... THE BUILD WILL THEN COMPLETE AND YOU WILL BE ABLE TO NAVIGATE TO YOUR WEBSITE WITHOUT ERROR"
-        status ""
         /bin/sleep 10
     done
     
-    /bin/rm /tmp/DRUPAL
+    status ""
+    status "################################################################################################################################"
+    status "Will shortly be attempting to truncate your cache tables which should deal with the cache pollution issue during drupal install"
+    status "################################################################################################################################"
+    status ""
+
+    /bin/sleep 90
+
+    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
+    do
+        status ""
+        status "######################################################################################"
+        status "Trying to truncate drupal cache"
+        status "######################################################################################"
+        /bin/sleep 30
+    done
+    
+    status ""
+    status "#############################################################################################################"
+    status "Successfully truncated the drupal cache. If drupal was showing an error message, it should now be resolved..."
+    status "##############################################################################################################"
+    status ""
+    
+    /bin/sleep 10
+    
+    status "###############################################################################################################################"
+    status "OK, I'll be kind and show you one time your drupal application credentials."
+    status "Please make a note of them but remember to keep them safe and secret"
+    status "============================"
+    status "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /bin/cat /home/${SERVER_USER}/config/credentials/shit"`"
+    status "============================"
+    
+    /bin/sleep 10
     
     /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "/home/${SERVER_USER}/providerscripts/application/processing/PerformPostProcessingByApplication.sh ${SERVER_USER}" >&3
 fi
