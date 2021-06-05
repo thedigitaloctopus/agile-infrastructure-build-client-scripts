@@ -36,16 +36,40 @@ then
     status "IMPORTANT: If you see an error message after you have intalled drupal go to your database tables and truncate all cache_ tables"
     status "The issue should then resolve - drupal suffers from cache pollution during install and to remedy it you need to truncate the cache tables"
     status "The tables that need to be truncated are:"
-    status "<prefix>_cache_bootstrap"
-    status "<prefix>_cache_config"
-    status "<prefix>_cache_container"
-    status "<prefix>_cache_data"
-    status "<prefix>_cache_default"
-    status "<prefix>_cache_discovery"
-    status "<prefix>_cache_entity"
-    status "<prefix>_cachetags"
+    status "<prefix>_cache_bootstrap;"
+    status "<${prefix>_cache_config;" 
+    status "<prefix>_cache_container;"
+    status "<prefix>_cache_data;"
+    status "<prefix>_cache_default;"
+    status "<prefix>_cache_discovery;"
+    status "<prefix>_cache_dynamic_page_cache;"
+    status "<prefix>_cache_entity;"
+    status "<prefix>_cache_menu;"
+    status "<prefix>_cache_page;"
+    status "<prefix>_cache_render;"
+    status "<prefix>_cache_toolbar;"
+    status "<prefix>_cachetags;"
     status "Clearly, if you don't get an error message, you don't need to do this"
     status "########################################################################################################################################"
+    
+    
+    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/CheckInstalled.sh"`" != "INSTALLED" ] )
+    do
+        status "######################################################################################"
+        status "Waiting for you to install drupal by going to: https://${WEBSITE_URL}/core/install.php"
+        status "######################################################################################"
+        /bin/sleep 30
+    done
+
+    /bin/sleep 60
+
+    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
+    do
+        status "######################################################################################"
+        status "Trying to truncate drupal cache"
+        status "######################################################################################"
+    done
+    
     status "OK, I'll be kind and show you one time your drupal application credentials."
     status "Please make a note of them but remember to keep them safe and secret"
     status "============="
