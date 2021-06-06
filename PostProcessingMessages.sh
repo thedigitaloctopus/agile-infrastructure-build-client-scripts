@@ -37,7 +37,7 @@ then
     status "The issue should then resolve - drupal suffers from cache pollution during install and to remedy it you need to truncate the cache tables"
     status "The tables that need to be truncated are:"
     status "<prefix>_cache_bootstrap;"
-    status "<${prefix>_cache_config;" 
+    status "<prefix>_cache_config;" 
     status "<prefix>_cache_container;"
     status "<prefix>_cache_data;"
     status "<prefix>_cache_default;"
