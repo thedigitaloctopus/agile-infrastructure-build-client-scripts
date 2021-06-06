@@ -53,7 +53,7 @@ then
     status "########################################################################################################################################"
     
     
-    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/CheckInstalled.sh"`" != "INSTALLED" ] )
+    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/CheckInstalled.sh"`" != "INSTALLED" ] )
     do
         status "######################################################################################"
         status "Waiting for you to install drupal by going to: https://${WEBSITE_URL}/core/install.php"
@@ -69,7 +69,7 @@ then
 
     /bin/sleep 90
 
-    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
+    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
     do
         status ""
         status "######################################################################################"
