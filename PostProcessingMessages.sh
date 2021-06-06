@@ -66,7 +66,7 @@ then
     status "################################################################################################################################"
     status ""
 
-    /bin/sleep 90
+    /bin/sleep 30
 
     while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
     do
