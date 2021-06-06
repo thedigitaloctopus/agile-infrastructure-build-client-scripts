@@ -47,7 +47,6 @@ then
     status "<prefix>_cache_menu;"
     status "<prefix>_cache_page;"
     status "<prefix>_cache_render;"
-    status "<prefix>_cache_toolbar;"
     status "<prefix>_cachetags;"
     status "Clearly, if you don't get an error message, you don't need to do this"
     status "########################################################################################################################################"
