@@ -67,19 +67,23 @@ then
     status ""
 
     /bin/sleep 30
+    
+    count="0"
 
-    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
+    while ( [ "${count}" -lt "5" ] && [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
     do
+        count="`/usr/bin/expr ${count} + 1`"
         status ""
         status "######################################################################################"
         status "Trying to truncate drupal cache"
         status "######################################################################################"
-        /bin/sleep 30
+        /bin/sleep 15
     done
     
     status ""
     status "#############################################################################################################"
     status "Successfully truncated the drupal cache. If drupal was showing an error message, it should now be resolved..."
+    status "If an error message is still showing, try waiting a couple of minutes and see if it resolves"
     status "##############################################################################################################"
     status ""
     
