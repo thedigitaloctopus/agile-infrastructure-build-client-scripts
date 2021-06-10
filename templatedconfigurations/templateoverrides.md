@@ -1,6 +1,6 @@
 # Digital Ocean
 
-You can find more explicit instructions at: [Explicit Digital Ocean](https://www.codebreakers.uk/home/agile-deployment-toolkit/demonstrations/template-override-method-demo/explicit-instructions-digital-ocean)
+You can find more explicit instructions at: [Explicit Digital Ocean](https://www.codebreakers.uk/code-for-you-to-break/agile-deployment-toolkit/demonstrations/template-override-method-demo/explicit-instructions-digital-ocean)
 
 To use template overrides with digital ocean you need to:
 
@@ -15,7 +15,7 @@ To use template overrides with digital ocean you need to:
 
 # Exoscale
 
-You can find more explicit instructions for Exoscale here: [Explicit Exoscale Instructions](https://www.codebreakers.uk/home/agile-deployment-toolkit/demonstrations/template-override-method-demo/explicit-instructions-exoscale)
+You can find more explicit instructions for Exoscale here: [Explicit Exoscale Instructions](https://www.codebreakers.uk/code-for-you-to-break/agile-deployment-toolkit/demonstrations/template-override-method-demo/explicit-instructions-exoscale)
 
 1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/exoscale/OverrideScript.sh) alternatively, if you are not comfortable editing the template override script directly, you can do it interactively using the script at: [Interactive Template Override Generation](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/helperscripts/GenerateOverrideTemplate.sh)
 2. In your text editor populate the enironment variables in your copy. Override any additional template variables (you can choose one of the templates located at: [Templates](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/exoscale) by adding them to your copy and pay attention to the template specification [Template Specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md)
@@ -28,7 +28,7 @@ You can find more explicit instructions for Exoscale here: [Explicit Exoscale In
 
 # Linode
 
-You can find more explicit instructions for linode here: [Linode Explicit](https://www.codebreakers.uk/home/agile-deployment-toolkit/demonstrations/template-override-method-demo/explicit-instructions-linode)
+You can find more explicit instructions for linode here: [Linode Explicit](https://www.codebreakers.uk/code-for-you-to-break/agile-deployment-toolkit/demonstrations/template-override-method-demo/explicit-instructions-linode)
 1. Make a stack script by copying: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/linode/OverrideScript.sh
 2. Populate the Stack Script with values according to the [template spec](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md) and your needs. You can override any variables from the template you select from [Templates](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/linode) as you choose in your Stack Script. 
 3. Start up a linode using your Populated Stack Script
@@ -40,7 +40,7 @@ You can find more explicit instructions for linode here: [Linode Explicit](https
 
 # Vultr
 
-You can find more explicit instructions for Vultr here: [Explicit Vultr Instructions](https://www.codebreakers.uk/home/agile-deployment-toolkit/demonstrations/template-override-method-demo/explicit-instructions-vultr)
+You can find more explicit instructions for Vultr here: [Explicit Vultr Instructions](https://www.codebreakers.uk/code-for-you-to-break/agile-deployment-toolkit/demonstrations/template-override-method-demo/explicit-instructions-vultr)
 
 1. Take a copy of [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/exoscale/OverrideScript.sh) alternatively, if you are not comfortable editing the template override script directly, you can do it interactively using the script at: [Interactive Template Override Generation](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/helperscripts/GenerateOverrideTemplate.sh)
 2. In your text editor populate the enironment variables in your copy. Override any additional variables in the template you select from: [Templates](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templates/vultr) by adding them to your copy and pay attention to the template specification [Template Specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md)
