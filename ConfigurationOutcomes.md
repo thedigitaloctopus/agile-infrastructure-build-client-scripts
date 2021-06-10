@@ -1,8 +1,8 @@
-#### PHP8 used in all cases, PHP 7.4 and Below not tested for
+PHP8 used in all cases, PHP 7.4 and Below not tested for
 NOTE: you can switch between building nginx from source or from repos in the file [InstallNGINX](https://github.com/agile-deployer/agile-infrastructure-webserver-scripts/blob/master/installscripts/InstallNGINX.sh)  
 
      CMS        |        WEBSERVER        |       OPERATING SYSTEM     |          DATABASE        |         STATUS     |
-----------------
+------------------------------------------------------------------------------------------------------------------------
 JOOMLA 4  &nbsp; &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;       NGINX (REPOS)    &nbsp; &nbsp; &nbsp; | &nbsp; &nbsp; &nbsp;      DEBIAN 10    &nbsp; &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;            MARIADB     &nbsp; &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;       ISSUES WITH USING NGINX FROM REPOS FOR JOOMLA 4  |
 JOOMLA 4         NGINX (SOURCE)         DEBIAN 10                MARIADB            NO KNOWN ISSUES                                   
 JOOMLA 4         NGINX (REPOS)          UBUNTU 20.04             MARIADB            ISSUES WITH USINGNGINX FROM REPOS FOR JOOMLA 4   
@@ -16,6 +16,6 @@ JOOMLA 4         APACHE (REPOS)         UBUNTU 20.04             MARIADB        
 JOOMLA 4         APACHE (REPOS)         DEBIAN 10                MySQL              NO KNOWN ISSUES                                  
 JOOMLA 4         APACHE (REPOS)         UBUNTU 20.04             MySQL              NO KNOWN ISSUES                                  
 JOOMLA 4         LIGHTTPD(REPOS)           ALL                    ALL               JOOMLA 4 DOES NOT SUPPORT LIGHTTPD               
-------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
