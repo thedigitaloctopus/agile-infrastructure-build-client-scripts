@@ -16,6 +16,8 @@ NOTE: you can switch between building nginx from source or from repos in the fil
 |   JOOMLA 4     |       APACHE (REPOS)    |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
 |   JOOMLA 4     |       APACHE (REPOS)    |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
 |   JOOMLA 4     |       LIGHTTPD(REPOS)   |            ALL             |             ALL          | JOOMLA 4 DOES NOT SUPPORT LIGHTTPD               |
+|   JOOMLA 4     |       ALL               |            ALL             |           POSTGRES       | ADT DOES NOT SUPPORT JOOMLA/POSTGRES AT PRESENT  |
+|                |                         |                            |                          |                                                  |
 |                |                         |                            |                          |                                                  |
 |   WORDPRESS    |       NGINX (REPOS)     |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
 |   WORDPRESS    |       NGINX (SOURCE)    |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
@@ -29,5 +31,7 @@ NOTE: you can switch between building nginx from source or from repos in the fil
 |   WORDPRESS    |       APACHE (REPOS)    |       UBUNTU 20.04         |           MARIADB        | NO KNOWN ISSUES                                  |
 |   WORDPRESS    |       APACHE (REPOS)    |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
 |   WORDPRESS    |       APACHE (REPOS)    |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       LIGHTTPD(REPOS)   |            ALL             |             ALL          | NO KNOWN ISSUES                                  |  
-
+|   WORDPRESS    |       LIGHTTPD (REPOS)  |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
+|   WORDPRESS    |       LIGHTTPD (REPOS)  |       UBUNTU 20.04         |           MARIADB        | NO KNOWN ISSUES                                  |
+|   WORDPRESS    |       LIGHTTPD (REPOS)  |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
+|   WORDPRESS    |       LIGHTTPD (REPOS)  |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
