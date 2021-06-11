@@ -1,5 +1,6 @@
-PHP8 used in all cases, PHP 7.4 and Below not tested for
-NOTE: you can switch between building nginx from source or from repos in the file [InstallNGINX](https://github.com/agile-deployer/agile-infrastructure-webserver-scripts/blob/master/installscripts/InstallNGINX.sh)
+PHP8 used in all cases, PHP 7.4 and below not tested for
+
+NOTE: you can switch between building NGINX from source or from repos in the file [InstallNGINX](https://github.com/agile-deployer/agile-infrastructure-webserver-scripts/blob/master/installscripts/InstallNGINX.sh)
 
 |     CMS        |        WEBSERVER        |       OPERATING SYSTEM     |          DATABASE        |                        STATUS                    |
 | -------------- | ----------------------- | -------------------------- | ------------------------ | ------------------------------------------------ |
