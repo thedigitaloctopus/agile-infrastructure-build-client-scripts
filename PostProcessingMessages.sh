@@ -33,22 +33,6 @@ then
     status
     status "########################################################################################################################################"
     status "You are installing a virgin copy of drupal. ****ESSENTIAL ACTION**** >> Please navigate to https://${WEBSITE_URL}/core/install.php"
-    status "IMPORTANT: If you see an error message after you have intalled drupal go to your database tables and truncate all cache_ tables"
-    status "The issue should then resolve - drupal suffers from cache pollution during install and to remedy it you need to truncate the cache tables"
-    status "The tables that need to be truncated are:"
-    status "<prefix>_cache_bootstrap;"
-    status "<prefix>_cache_config;" 
-    status "<prefix>_cache_container;"
-    status "<prefix>_cache_data;"
-    status "<prefix>_cache_default;"
-    status "<prefix>_cache_discovery;"
-    status "<prefix>_cache_dynamic_page_cache;"
-    status "<prefix>_cache_entity;"
-    status "<prefix>_cache_menu;"
-    status "<prefix>_cache_page;"
-    status "<prefix>_cache_render;"
-    status "<prefix>_cachetags;"
-    status "Clearly, if you don't get an error message, you don't need to do this"
     status "########################################################################################################################################"
     
     
@@ -64,7 +48,6 @@ then
 
     while ( [ ! -f /tmp/DRUPAL ] )
     do
-        count="`/usr/bin/expr ${count} + 1`"
         status ""
         status "########################################################################################################################################"
         status "It is expected that you will see an error message at the end of the drupal install procedure, this is because of a cache pollution issue"
