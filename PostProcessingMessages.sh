@@ -68,14 +68,22 @@ then
 
     /bin/sleep 15
     
-    count="0"
+    /bin/rm /tmp/DRUPAL 2>/dev/null
 
-    while ( [ "${count}" -lt "5" ] && [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
+    while ( [ ! -f /tmp/DRUPAL ] && [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
     do
         count="`/usr/bin/expr ${count} + 1`"
         status ""
         status "######################################################################################"
         status "Trying to truncate drupal cache"
+        status "######################################################################################"
+        status "ONCE YOUR APPLICATION IS LIVE, ISSUE THE FOLLOWING COMMAND" 
+        status "**********************"
+        status "/bin/touch /tmp/DRUPAL"
+        status"***********************"
+        status "TO COMPLETE THE BUILD PROCESS AND SEE YOUR CREDENTIALS"
+        status "THE BUILD PROCESS WILL NOT COMPLETE UNTIL THIS COMMAND IS ISSUED"
+        status ""
         status "######################################################################################"
         /bin/sleep 15
     done
@@ -85,7 +93,7 @@ then
         status ""
         status "#########################################################################################################################"
         status "HAVE NOT BEEN ABLE TO TRUNCATE CACHE, YOU MAY NEED TO MANUALLY TRUNCATE YOUR CACHE TABLES BY LOGGING ON TO YOUR DATABASE"
-        status" AND TRUNCATING THE FOLLOWING TABLES:"
+        status" AND TRUNCATING THE FOLLOWING TABLES IF THE EXIST:"
         status "<prefix>_cache_bootstrap;"
         status "<prefix>_cache_config;" 
         status "<prefix>_cache_container;"
