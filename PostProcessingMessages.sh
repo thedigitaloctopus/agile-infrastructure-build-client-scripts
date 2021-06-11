@@ -59,30 +59,27 @@ then
         status "######################################################################################"
         /bin/sleep 10
     done
-    
-    status ""
-    status "################################################################################################################################"
-    status "Will shortly be attempting to truncate your cache tables which should deal with the cache pollution issue during drupal install"
-    status "################################################################################################################################"
-    status ""
 
-    /bin/sleep 15
-    
-    /bin/rm /tmp/DRUPAL 2>/dev/null
+/bin/rm /tmp/DRUPAL 2>/dev/null
 
     while ( [ ! -f /tmp/DRUPAL ] )
     do
         count="`/usr/bin/expr ${count} + 1`"
         status ""
-        status "######################################################################################"
-        status "Trying to truncate drupal cache"
-        status "######################################################################################"
-        status "ONCE YOUR APPLICATION IS LIVE, ISSUE THE FOLLOWING COMMAND" 
-        status "**********************"
+        status "########################################################################################################################################"
+        status "It is expected that you will see an error message at the end of the drupal install procedure, this is because of a cache pollution issue"
+        status "that happens (at least in my case) during a DRUPAL installation"
+        status "The error you might see is: The website encountered an unexpected error. Please try again later."
+        status "And it is described here: https://www.drupal.org/project/drupal/issues/3103529"
+        status "Whether you see this error message or not, from the command line on your build server, issue the following command"
+        status "And this will automatically trigger a cache purge which will resolve the issue."
+        status ""
+        status "************************"
+        status "***ISSUE THIS COMMAND***"
+        status "************************"
         status "/bin/touch /tmp/DRUPAL"
-        status"***********************"
-        status "TO COMPLETE THE BUILD PROCESS AND SEE YOUR CREDENTIALS"
-        status "THE BUILD PROCESS WILL NOT COMPLETE UNTIL THIS COMMAND IS ISSUED"
+        status ""
+        status "... TO COMPLETE THE BUILD PROCESS AND SEE YOUR CREDENTIALS THE BUILD PROCESS WILL NOT COMPLETE UNTIL THIS COMMAND IS ISSUED"
         status ""
         status "######################################################################################"
         /bin/sleep 15
@@ -95,7 +92,7 @@ then
         status ""
         status "#########################################################################################################################"
         status "HAVE NOT BEEN ABLE TO TRUNCATE CACHE, YOU MAY NEED TO MANUALLY TRUNCATE YOUR CACHE TABLES BY LOGGING ON TO YOUR DATABASE"
-        status" AND TRUNCATING THE FOLLOWING TABLES IF THE EXIST:"
+        status" AND TRUNCATING THE FOLLOWING TABLES IF THEY EXIST:"
         status "<prefix>_cache_bootstrap;"
         status "<prefix>_cache_config;" 
         status "<prefix>_cache_container;"
