@@ -20,22 +20,22 @@ NOTE: you can switch between building NGINX from source or from repos in the fil
 |   JOOMLA 4     |       ALL               |            ALL             |           POSTGRES       | ADT DOES NOT SUPPORT JOOMLA/POSTGRES AT PRESENT  |
 |                |                         |                            |                          |                                                  |
 |                |                         |                            |                          |                                                  |
-|   WORDPRESS    |       NGINX (REPOS)     |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       NGINX (SOURCE)    |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       NGINX (REPOS)     |        UBUNTU 20.04        |           MARIADB        | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       NGINX (SOURCE)    |        UBUNTU 20.04        |           MARIADB        | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       NGINX (REPOS)     |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       NGINX (SOURCE)    |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       NGINX (REPOS)     |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       NGINX (SOURCE)    |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       APACHE (REPOS)    |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       APACHE (REPOS)    |       UBUNTU 20.04         |           MARIADB        | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       APACHE (REPOS)    |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       APACHE (REPOS)    |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       LIGHTTPD (REPOS)  |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       LIGHTTPD (REPOS)  |       UBUNTU 20.04         |           MARIADB        | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       LIGHTTPD (REPOS)  |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
-|   WORDPRESS    |       LIGHTTPD (REPOS)  |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       NGINX (REPOS)     |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       NGINX (SOURCE)    |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       NGINX (REPOS)     |        UBUNTU 20.04        |           MARIADB        | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       NGINX (SOURCE)    |        UBUNTU 20.04        |           MARIADB        | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       NGINX (REPOS)     |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       NGINX (SOURCE)    |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       NGINX (REPOS)     |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       NGINX (SOURCE)    |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       APACHE (REPOS)    |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       APACHE (REPOS)    |       UBUNTU 20.04         |           MARIADB        | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       APACHE (REPOS)    |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       APACHE (REPOS)    |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       LIGHTTPD (REPOS)  |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       LIGHTTPD (REPOS)  |       UBUNTU 20.04         |           MARIADB        | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       LIGHTTPD (REPOS)  |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
+| WORDPRESS 5.7  |       LIGHTTPD (REPOS)  |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
 |                |                         |                            |                          |                                                  |
 |   DRUPAL 9     |       NGINX (REPOS)     |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
 |   DRUPAL 9     |       NGINX (SOURCE)    |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
