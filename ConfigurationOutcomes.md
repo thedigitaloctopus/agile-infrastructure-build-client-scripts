@@ -16,6 +16,18 @@ NOTE: you can switch between building nginx from source or from repos in the fil
 |   JOOMLA 4     |       APACHE (REPOS)    |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
 |   JOOMLA 4     |       APACHE (REPOS)    |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
 |   JOOMLA 4     |       LIGHTTPD(REPOS)   |            ALL             |             ALL          | JOOMLA 4 DOES NOT SUPPORT LIGHTTPD               |
-
-
+| -------------- | ----------------------- | -------------------------- | ------------------------ | ------------------------------------------------ |
+|   WORDPRESS    |       NGINX (REPOS)     |         DEBIAN 10          |           MARIADB        | ISSUES WITH USING NGINX FROM REPOS FOR JOOMLA 4  |
+|   WORDPRESS    |       NGINX (SOURCE)    |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
+|   WORDPRESS    |       NGINX (REPOS)     |        UBUNTU 20.04        |           MARIADB        | ISSUES WITH USING NGINX FROM REPOS FOR JOOMLA 4  |
+|   WORDPRESS    |       NGINX (SOURCE)    |        UBUNTU 20.04        |           MARIADB        | NO KNOWN ISSUES                                  |
+|   WORDPRESS    |       NGINX (REPOS)     |         DEBIAN 10          |            MySQL         | ISSUES WITH USING NGINX FROM REPOS FOR JOOMLA 4  |
+|   WORDPRESS    |       NGINX (SOURCE)    |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
+|   WORDPRESS    |       NGINX (REPOS)     |       UBUNTU 20.04         |            MySQL         | ISSUES WITH USING NGINX FROM REPOS FOR JOOMLA 4  |
+|   WORDPRESS    |       NGINX (SOURCE)    |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
+|   WORDPRESS    |       APACHE (REPOS)    |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
+|   WORDPRESS    |       APACHE (REPOS)    |       UBUNTU 20.04         |           MARIADB        | NO KNOWN ISSUES                                  |
+|   WORDPRESS    |       APACHE (REPOS)    |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
+|   WORDPRESS    |       APACHE (REPOS)    |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
+|   WORDPRESS    |       LIGHTTPD(REPOS)   |            ALL             |             ALL          | JOOMLA 4 DOES NOT SUPPORT LIGHTTPD               |
 
