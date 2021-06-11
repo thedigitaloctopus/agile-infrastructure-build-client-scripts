@@ -35,3 +35,20 @@ NOTE: you can switch between building nginx from source or from repos in the fil
 |   WORDPRESS    |       LIGHTTPD (REPOS)  |       UBUNTU 20.04         |           MARIADB        | NO KNOWN ISSUES                                  |
 |   WORDPRESS    |       LIGHTTPD (REPOS)  |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
 |   WORDPRESS    |       LIGHTTPD (REPOS)  |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
+|                |                         |                            |                          |                                                  |
+|   DRUPAL 9     |       NGINX (REPOS)     |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       NGINX (SOURCE)    |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       NGINX (REPOS)     |        UBUNTU 20.04        |           MARIADB        | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       NGINX (SOURCE)    |        UBUNTU 20.04        |           MARIADB        | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       NGINX (REPOS)     |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       NGINX (SOURCE)    |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       NGINX (REPOS)     |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       NGINX (SOURCE)    |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       APACHE (REPOS)    |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       APACHE (REPOS)    |       UBUNTU 20.04         |           MARIADB        | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       APACHE (REPOS)    |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       APACHE (REPOS)    |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       LIGHTTPD (REPOS)  |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       LIGHTTPD (REPOS)  |       UBUNTU 20.04         |           MARIADB        | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       LIGHTTPD (REPOS)  |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
+|   DRUPAL 9     |       LIGHTTPD (REPOS)  |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
