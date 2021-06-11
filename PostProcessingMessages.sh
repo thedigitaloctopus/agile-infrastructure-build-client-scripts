@@ -70,7 +70,7 @@ then
     
     /bin/rm /tmp/DRUPAL 2>/dev/null
 
-    while ( [ ! -f /tmp/DRUPAL ] && [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
+    while ( [ ! -f /tmp/DRUPAL ] )
     do
         count="`/usr/bin/expr ${count} + 1`"
         status ""
@@ -88,6 +88,8 @@ then
         /bin/sleep 15
     done
     
+    /bin/rm /tmp/DRUPAL 2>/dev/null
+   
     if ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
     then
         status ""
