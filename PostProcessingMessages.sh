@@ -44,9 +44,9 @@ then
         /bin/sleep 10
     done
 
-/bin/rm /tmp/DRUPAL 2>/dev/null
+/bin/rm /tmp/DRUPAL_INSTALL_DONE 2>/dev/null
 
-    while ( [ ! -f /tmp/DRUPAL ] )
+    while ( [ ! -f /tmp/DRUPAL_INSTALL_DONE ] )
     do
         status ""
         status "########################################################################################################################################"
@@ -57,10 +57,10 @@ then
         status "Whether you see this error message or not, from the command line on your build server, issue the following command"
         status "And this will automatically trigger a cache purge which will resolve the issue."
         status ""
-        status "************************"
-        status "***ISSUE THIS COMMAND***"
-        status "************************"
-        status "/bin/touch /tmp/DRUPAL"
+        status "***************************************************************************************"
+        status "***ISSUE THIS COMMAND IN ALL CASES ONCE YOU HAVE FINISHED THE DRUPAL INSTALL PROCESS***"
+        status "***************************************************************************************"
+        status "/bin/touch /tmp/DRUPAL_INSTALL_DONE"
         status ""
         status "... TO COMPLETE THE BUILD PROCESS AND SEE YOUR CREDENTIALS THE BUILD PROCESS WILL NOT COMPLETE UNTIL THIS COMMAND IS ISSUED"
         status ""
@@ -68,7 +68,7 @@ then
         /bin/sleep 15
     done
     
-    /bin/rm /tmp/DRUPAL 2>/dev/null
+    /bin/rm /tmp/DRUPAL_INSTALL_DONE 2>/dev/null
    
     if ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
     then
