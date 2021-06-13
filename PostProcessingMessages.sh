@@ -63,37 +63,22 @@ then
         status ""
         /bin/sleep 15
     done
-      
-    if ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
-    then
-        status ""
-        status "#########################################################################################################################"
-        status "HAVE NOT BEEN ABLE TO TRUNCATE CACHE, YOU MAY NEED TO MANUALLY TRUNCATE YOUR CACHE TABLES BY LOGGING ON TO YOUR DATABASE"
-        status" AND TRUNCATING THE FOLLOWING TABLES IF THEY EXIST:"
-        status "<prefix>_cache_bootstrap;"
-        status "<prefix>_cache_config;" 
-        status "<prefix>_cache_container;"
-        status "<prefix>_cache_data;"
-        status "<prefix>_cache_default;"
-        status "<prefix>_cache_discovery;"
-        status "<prefix>_cache_dynamic_page_cache;"
-        status "<prefix>_cache_entity;"
-        status "<prefix>_cache_menu;"
-        status "<prefix>_cache_page;"
-        status "<prefix>_cache_render;"
-        status "<prefix>_cachetags;"
-        status "Clearly, if you don't get an error message, you don't need to do this"
-        status "###########################################################################################################################"
-    else
-        status ""
-        status "#############################################################################################################"
-        status "Successfully truncated the drupal cache. If drupal was showing an error message, it should now be resolved..."
-        status "If an error message is still showing, try waiting a couple of minutes and see if it resolves"
-        status "##############################################################################################################"
-        status ""
-    fi
     
-    /bin/sleep 10
+    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
+    do
+        status ""
+        status "####################################################################"
+        status "Have not been able to truncate cache, trying again...."
+        status "####################################################################"
+        /bin/sleep 15
+    done
+
+    status ""
+    status "#############################################################################################################"
+    status "Successfully truncated the drupal cache. If drupal was showing an error message, it should now be resolved..."
+    status "If an error message is still showing, try waiting a couple of minutes and see if it resolves"
+    status "##############################################################################################################"
+    status ""
     
     status "###############################################################################################################################"
     status "OK, I'll be kind and show you one time your drupal application credentials."
