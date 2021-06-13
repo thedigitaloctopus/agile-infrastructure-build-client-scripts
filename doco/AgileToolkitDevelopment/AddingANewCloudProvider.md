@@ -1,6 +1,6 @@
 You can add a new cloudhost provider quite easily (about 1/2 days work to update and test in most cases if you are familiar with the framwork). You might want to add a cloudhost provider if there is a particular provider you prefer that isn't supported yet. Each provider may have its own quirks as such, but, it should be possible to make most providers, as long as they provide and API and an access toolkit fit into this framework. You shouldn't need to worry about any of the other files in the framework when you are adding a new service provider, the only files you need to worry about are listed here. Also, the changes you make to the BUILD CLIENT should be similar in most cases to the changes you make on the autoscaler. In fact, the build client and the autoscaler do more or less the same job, launch servers, interrogate and query servers.
 
-1) Add the cloud provider to the ${BUILD_HOME}/SelectCloudhost.sh file
+1) Add the cloud provider to the ${BUILD_HOME}/SelectCloudhost.sh and ${BUILD_HOME}/SelectCloudhostExpedited.sh
 
 2) On the BUILD CLIENT update all the files in these directories for your new cloudhost following the examples which are already there.
        
