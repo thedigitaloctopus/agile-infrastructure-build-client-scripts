@@ -43,33 +43,27 @@ then
         status "######################################################################################"
         /bin/sleep 10
     done
+    
+    status ""
+    status "########################################################################################################################################"
+    status "It is expected that you will see an error message at the end of the drupal install procedure, this is because of a cache pollution issue"
+    status "that happens (at least in my case) during a DRUPAL installation"
+    status "The error you might see is: The website encountered an unexpected error. Please try again later."
+    status "And it is described here: https://www.drupal.org/project/drupal/issues/3103529"
+    status "If you complete the install up until you see the error message, wait 15 second (at least) and try again, you should have access to your new drupal site"
+    status "I will try and clear the cache every 15 seconds"
+    status "#########################################################################################################################################"
 
-/bin/rm /tmp/DRUPAL_INSTALL_DONE 2>/dev/null
-
-    while ( [ ! -f /tmp/DRUPAL_INSTALL_DONE ] )
+    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/CheckSessions.sh"`" != "INSTALLED" ] )
     do
         status ""
-        status "########################################################################################################################################"
-        status "It is expected that you will see an error message at the end of the drupal install procedure, this is because of a cache pollution issue"
-        status "that happens (at least in my case) during a DRUPAL installation"
-        status "The error you might see is: The website encountered an unexpected error. Please try again later."
-        status "And it is described here: https://www.drupal.org/project/drupal/issues/3103529"
-        status "Whether you see this error message or not, from the command line on your build server, issue the following command"
-        status "And this will automatically trigger a cache purge which will resolve the issue."
+        status "####################################################################"
+        status "Checking for the application install having been completed at: https://${WEBSITE_URL}/core/install.php"
+        status "Before attempting cache purge in the database"
         status ""
-        status "***************************************************************************************"
-        status "***ISSUE THIS COMMAND IN ALL CASES ONCE YOU HAVE FINISHED THE DRUPAL INSTALL PROCESS***"
-        status "***************************************************************************************"
-        status "/bin/touch /tmp/DRUPAL_INSTALL_DONE"
-        status ""
-        status "... TO COMPLETE THE BUILD PROCESS AND SEE YOUR CREDENTIALS THE BUILD PROCESS WILL NOT COMPLETE UNTIL THIS COMMAND IS ISSUED"
-        status ""
-        status "######################################################################################"
         /bin/sleep 15
     done
-    
-    /bin/rm /tmp/DRUPAL_INSTALL_DONE 2>/dev/null
-   
+      
     if ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/TruncateCache.sh"`" != "TRUNCATED" ] )
     then
         status ""
