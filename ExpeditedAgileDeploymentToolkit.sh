@@ -249,6 +249,8 @@ then
     fi
 fi
 
+. ${BUILD_HOME}/SelectCloudhostExpedited.sh
+
 status "####################################################################################"
 status "Please tell me which of the supported cloudhosts you are deploying to"
 status " 1. Digital Ocean (www.digitalocean.com)"
