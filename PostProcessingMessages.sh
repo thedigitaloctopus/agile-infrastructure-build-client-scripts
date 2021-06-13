@@ -54,7 +54,7 @@ then
     status "I will try and clear the cache every 15 seconds"
     status "#########################################################################################################################################"
 
-    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/CheckSessions.sh"`" != "INSTALLED" ] )
+    while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/application/processing/drupal/CheckSessions.sh"`" != "SESSION" ] )
     do
         status ""
         status "####################################################################"
