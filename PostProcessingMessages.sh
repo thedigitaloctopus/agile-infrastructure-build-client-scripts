@@ -59,7 +59,7 @@ then
         status ""
         status "####################################################################"
         status "Checking for the application install having been completed at: https://${WEBSITE_URL}/core/install.php"
-        status "Before attempting cache purge in the database"
+        status "Before attempting cache purge in the database cache to resolve cache pollution problem"
         status ""
         /bin/sleep 15
     done
