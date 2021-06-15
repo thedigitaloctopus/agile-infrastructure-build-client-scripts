@@ -28,6 +28,22 @@
 OPTIONS="-o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
 SUDO="DEBIAN_FRONTEND=noninteractive /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E "
 
+if ( [ "${APPLICATION}" = "joomla" ] && [ "${BASELINE_DB_REPOSITORY}" = "VIRGIN" ] )
+then
+    username="${BUILD_IDENTIFIER}-webmaster"
+    password="${SERVER_USER}"
+    
+    status ""
+    status "################################################################"
+    status "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    status "YOUR DEFAULT JOOMLA ADMINISTRATOR USERNAME AND PASSWORD ARE SET TO:"
+    status "USERNAME: ${username}"
+    status "PASSWORD: ${password}"
+    status "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    status "################################################################"
+    status ""
+fi
+
 if ( [ "${APPLICATION}" = "drupal" ] && [ "${BASELINE_DB_REPOSITORY}" = "VIRGIN" ] )
 then
     status
@@ -119,10 +135,19 @@ then
     status "============="
     status "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /bin/cat /home/${SERVER_USER}/config/credentials/shit"`"
     status "============="
-    status "By default, the administrator credentials of your moodle installation are: username: admin password: test1234  ****ESSENTIAL ACTION**** Change these"
-    status
-    status "If you ever see an error message, 'Coding error detected, it must be fixed by a programmer' the way to do this is to clear your browser cache"
-    status
+    
+    username="${BUILD_IDENTIFIER}-webmaster"
+    password="${SERVER_USER}"
+    
+    status ""
+    status "################################################################"
+    status "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    status "YOUR DEFAULT ADMINISTRATOR MOODLE USERNAME AND PASSWORD ARE SET TO:"
+    status "USERNAME: ${username}"
+    status "PASSWORD: ${password}"
+    status "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    status "################################################################"
+    status ""
     status "Please press the <enter> key to acknowledge this message and that you have made a note of the credentials and the build will be complete."
     status "###########################################################################################################################################"
     read answer
