@@ -494,7 +494,7 @@ start=`/bin/date +%s`
 
 ##Added
 
-. ${BUILD_HOME}/providerscript/server/DumpParameterConfiguration.sh
+. ${BUILD_HOME}/providerscripts/server/DumpParameterConfiguration.sh
 
 ##Added
 
