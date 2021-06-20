@@ -272,6 +272,13 @@ do
 
         command="${command} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1"
         eval ${command}
+        
+        ####Added
+        
+        /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/database_configuration_settings.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1
+        
+
+        ##########Added
 
         #Despite what I just said above, there is one case where using files as a way of passing configuration details over
         #which is that sometimes, if you have a credential which has a slash embedded in it, then you can't have a file name
