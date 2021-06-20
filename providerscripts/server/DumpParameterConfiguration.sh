@@ -1,38 +1,37 @@
-        #########Added 
-        
         /bin/cp /dev/null ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/autoscaler_configuration_settings.dat
         
-        while read scpparam
+        while read param
         do
-             scpparam1="`eval /bin/echo ${scpparam}`"
-             if ( [ "${scpparam1}" != "" ] )
+             param1="`eval /bin/echo ${param}`"
+             if ( [ "${param1}" != "" ] )
              then
-                 /bin/echo ${scpparam1} >> ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/autoscaler_configuration_settings.dat
+                 /bin/echo ${param1} >> ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/autoscaler_configuration_settings.dat
              fi
-        done < ${BUILD_HOME}/builddescriptors/webserverscp.dat
+        done < ${BUILD_HOME}/builddescriptors/autoscalerscp.dat
+        
+        ##########
         
         /bin/cp /dev/null ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat
         
-        while read scpparam
+        while read param
         do
-             scpparam1="`eval /bin/echo ${scpparam}`"
-             if ( [ "${scpparam1}" != "" ] )
+             param1="`eval /bin/echo ${param}`"
+             if ( [ "${param1}" != "" ] )
              then
-                 /bin/echo ${scpparam1} >> ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat
+                 /bin/echo ${param1} >> ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat
              fi
         done < ${BUILD_HOME}/builddescriptors/webserverscp.dat
+        
+        #############
        
         
         /bin/cp /dev/null ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/database_configuration_settings.dat
         
-        while read scpparam
+        while read param
         do
-             scpparam1="`eval /bin/echo ${scpparam}`"
-             if ( [ "${scpparam1}" != "" ] )
+             param1="`eval /bin/echo ${param}`"
+             if ( [ "${param1}" != "" ] )
              then
-                 /bin/echo ${scpparam1} >> ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/database_configuration_settings.dat
+                 /bin/echo ${param1} >> ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/database_configuration_settings.dat
              fi
-        done < ${BUILD_HOME}/builddescriptors/webserverscp.dat
-        
-
-        ##########Added
+        done < ${BUILD_HOME}/builddescriptors/databasescp.dat
