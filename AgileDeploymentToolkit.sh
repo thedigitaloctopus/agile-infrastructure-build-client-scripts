@@ -662,8 +662,6 @@ then
         read x
     fi
     
-    . ${BUILD_HOME}/providerscripts/server/DumpParameterConfiguration.sh
-
     status "How many autoscalers do you want to deploy?"
     read NO_AUTOSCALERS
     while ! ( [ "${NO_AUTOSCALERS}" -eq "${NO_AUTOSCALERS}" ] )
