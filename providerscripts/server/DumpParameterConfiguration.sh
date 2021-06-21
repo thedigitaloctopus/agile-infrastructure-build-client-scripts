@@ -1,4 +1,7 @@
-        /bin/cp /dev/null ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/autoscaler_configuration_settings.dat
+  
+  if ( [ "${1}" = "autoscaler" ] )
+  then
+      /bin/cp /dev/null ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/autoscaler_configuration_settings.dat
         
         while read param
         do
@@ -8,9 +11,10 @@
                  /bin/echo ${param1} >> ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/autoscaler_configuration_settings.dat
              fi
         done < ${BUILD_HOME}/builddescriptors/autoscalerscp.dat
-        
+  fi  
         ##########
-        
+  if ( [ "${1}" = "webserver" ] )
+  then
         /bin/cp /dev/null ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat
         
         while read param
@@ -21,10 +25,11 @@
                  /bin/echo ${param1} >> ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat
              fi
         done < ${BUILD_HOME}/builddescriptors/webserverscp.dat
-        
+  fi  
         #############
-       
         
+  if ( [ "${1}" = "database" ] )
+  then
         /bin/cp /dev/null ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/database_configuration_settings.dat
         
         while read param
@@ -35,3 +40,4 @@
                  /bin/echo ${param1} >> ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/database_configuration_settings.dat
              fi
         done < ${BUILD_HOME}/builddescriptors/databasescp.dat
+fi
