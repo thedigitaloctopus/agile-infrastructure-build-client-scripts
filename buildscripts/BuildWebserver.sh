@@ -266,6 +266,17 @@ do
         
         ####Added
         
+        /bin/cp /dev/null ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat
+        
+        while read param
+        do
+             param1="`eval /bin/echo ${param}`"
+             if ( [ "${param1}" != "" ] )
+             then
+                 /bin/echo ${param1} >> ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat
+             fi
+        done < ${BUILD_HOME}/builddescriptors/webserverscp.dat
+        
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1
         
 
