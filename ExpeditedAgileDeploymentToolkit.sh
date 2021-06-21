@@ -492,12 +492,6 @@ start=`/bin/date +%s`
 /bin/chmod 400 ~/.ssh/${SERVER_USER}.key
 /bin/mv ~/.ssh/config ~/.ssh/config.${SERVER_USER}
 
-##Added
-
-. ${BUILD_HOME}/providerscripts/server/DumpParameterConfiguration.sh
-
-##Added
-
 
 if ( [ "${AUTOSCALE_FROM_SNAPSHOTS}" = "1" ] )
 then
