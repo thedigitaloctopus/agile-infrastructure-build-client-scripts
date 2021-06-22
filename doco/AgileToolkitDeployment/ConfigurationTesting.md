@@ -66,10 +66,18 @@ NOTE: you can switch between building NGINX from source or from repos in the fil
 |   MOODLE 3.11  |       NGINX (SOURCE)    |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
 |   MOODLE 3.11  |       NGINX (REPOS)     |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
 |   MOODLE 3.11  |       NGINX (SOURCE)    |       UBUNTU 20.04         |            MySQL         | NO KNOWN ISSUES                                  |
-|   MOODLE 3.11  |       APACHE (REPOS)    |         DEBIAN 10          |           MARIADB        | DISPLAY ISSUES WITH PHP8 NO KNOWN ISSUES PHP7.4  |
-|   MOODLE 3.11  |       APACHE (REPOS)    |       UBUNTU 20.04         |           MARIADB        | DISPLAY ISSUES WITH PHP8 NO KNOWN ISSUES PHP7.4  |
-|   MOODLE 3.11  |       APACHE (REPOS)    |         DEBIAN 10          |            MySQL         | DISPLAY ISSUES WITH PHP8 NO KNOWN ISSUES PHP7.4  |
-|   MOODLE 3.11  |       APACHE (REPOS)    |       UBUNTU 20.04         |            MySQL         | DISPLAY ISSUES WITH PHP8 NO KNOWN ISSUES PHP7.4  |
+|   MOODLE 3.11  |       APACHE (REPOS)    |         DEBIAN 10          |           MARIADB        | DISPLAY ISSUES WITH PHP8 NO KNOWN ISSUES PHP7.4  |  
+|                |                         |                            |                          | CAN ADD $CFG->slasharguments = false; to         |
+|                |                         |                            |                          | config.php to fix display on php8                |
+|   MOODLE 3.11  |       APACHE (REPOS)    |       UBUNTU 20.04         |           MARIADB        | DISPLAY ISSUES WITH PHP8 NO KNOWN ISSUES PHP7.4  |  
+|                |                         |                            |                          | CAN ADD $CFG->slasharguments = false; to         |
+|                |                         |                            |                          | config.php to fix display on php8                |
+|   MOODLE 3.11  |       APACHE (REPOS)    |         DEBIAN 10          |            MySQL         | DISPLAY ISSUES WITH PHP8 NO KNOWN ISSUES PHP7.4  |  
+|                |                         |                            |                          | CAN ADD $CFG->slasharguments = false; to         |
+|                |                         |                            |                          | config.php to fix display on php8                |
+|   MOODLE 3.11  |       APACHE (REPOS)    |       UBUNTU 20.04         |            MySQL         | DISPLAY ISSUES WITH PHP8 NO KNOWN ISSUES PHP7.4  |  
+|                |                         |                            |                          | CAN ADD $CFG->slasharguments = false; to         |
+|                |                         |                            |                          | config.php to fix display on php8                |
 |   MOODLE 3.11  |       LIGHTTPD (REPOS)  |         DEBIAN 10          |           MARIADB        | NO KNOWN ISSUES                                  |
 |   MOODLE 3.11  |       LIGHTTPD (REPOS)  |       UBUNTU 20.04         |           MARIADB        | NO KNOWN ISSUES                                  |
 |   MOODLE 3.11  |       LIGHTTPD (REPOS)  |         DEBIAN 10          |            MySQL         | NO KNOWN ISSUES                                  |
