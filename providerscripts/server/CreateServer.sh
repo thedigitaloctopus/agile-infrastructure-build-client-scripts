@@ -62,16 +62,16 @@ then
         a216b0d1-370f-4e21-a0eb-3dfc6302b564 ) disksize="400"
             break ;;
     esac
-    /usr/local/bin/cs deployVirtualMachine templateid="${template_id}" zoneid="${zone_id}" serviceofferingid="${service_offering_id}" name="${server_name}" keyPair="${key_pair}" rootdisksize="${disksize}" 2>/dev/null
-#networkids="`cs listNetworks | jq '.network[].id' | /bin/sed 's/"//g'`"
-#virtualmachineids="`cs listVirtualMachines | jq '.virtualmachine[].id' | /bin/sed 's/"//g'`"
+    #/usr/local/bin/cs deployVirtualMachine templateid="${template_id}" zoneid="${zone_id}" serviceofferingid="${service_offering_id}" name="${server_name}" keyPair="${key_pair}" rootdisksize="${disksize}" 2>/dev/null
+    vmid="`/usr/local/bin/cs deployVirtualMachine templateid="${template_id}" zoneid="${zone_id}" serviceofferingid="${service_offering_id}" name="${server_name}" keyPair="${key_pair}" rootdisksize="${disksize}" | jq '.virtualmachine.id' | /bin/sed 's/"//g'`"
+    networkids="`/usr/local/bin/cs listNetworks | jq '.network[].id' | /bin/sed 's/"//g'`"
+     #virtualmachineids="`cs listVirtualMachines | jq '.virtualmachine[].id' | /bin/sed 's/"//g'`"
 #for vmid in ${virtualmachineids}
 #do
-
- #  for networkid in ${networkids}
- #  do
- #      cs addNicToVirtualMachine virtualmachineid=${vmid} networkid=${networkid}
- #  done
+    for networkid in ${networkids}
+    do
+       /usr/local/bin/cs addNicToVirtualMachine virtualmachineid=${vmid} networkid=${networkid}
+   done
 #done
 fi
 
