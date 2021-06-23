@@ -311,16 +311,16 @@ do
         #It's not mandated to have this switched on, but it is highly recommended unless I can get it to the point where our
         #git repo backups are 100% solid and reliable. I am sure it is something I am doing, but I will look into it in a bit.
 
-        if ( [ "${SUPERSAFE_WEBROOT}" = "1" ] )
-        then
-            status "Supersafe is set on"
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:1
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:1 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEWEBROOT:1
-        else
-            status "Supersafe is set off"
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:0
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:0 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEWEBROOT:0
-        fi
+     #   if ( [ "${SUPERSAFE_WEBROOT}" = "1" ] )
+     #   then
+     #       status "Supersafe is set on"
+     #       /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:1
+     #       /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:1 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEWEBROOT:1
+     #   else
+     #       status "Supersafe is set off"
+     #       /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:0
+     #       /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:0 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEWEBROOT:0
+     #   fi
 
 
         #Our sourcecode which actually defines what a webserver will do and how it will function is held in a git repo. So, if
