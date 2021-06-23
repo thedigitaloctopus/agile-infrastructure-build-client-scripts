@@ -306,18 +306,18 @@ do
         # be one of our cloud storage systems giving us a secondary backup.
         #It's not mandated to have this switched on, but it is highly recommended.
 
-        if ( [ "${SUPERSAFE_WEBROOT}" = "1" ] )
-        then
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:1
-
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:1 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEWEBROOT:1
-
-        else
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:0
-
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:0 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEWEBROOT:0
-
-        fi
+      #  if ( [ "${SUPERSAFE_WEBROOT}" = "1" ] )
+      #  then
+      #      /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:1#
+#
+#            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:1 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEWEBROOT:1
+#
+ #       else
+  #          /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:0
+#
+ #           /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:0 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEWEBROOT:0
+#
+ #       fi
 
         #Here we are configuring our datastore provider. Earlier, when we we inputting all out config details at the beginning of
         #the scripts, we got all the credential information for our datastore provider. So, we can safely assume that this is OK
