@@ -302,16 +302,16 @@ do
         #If super safe backups are switched on, then during operational usage, backups are made to the code repository (github, for example)
         #and they are also made to the datastore (amazon S3, for example). In this way, we have solid backups.
         #Individual backups occur hourly, daily, weekly, monthly and bimonthly
-        if ( [ "${SUPERSAFE_DB}" = "1" ] )
-        then
-            status "Supersafe is set on"
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEDB:1
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEDB:1 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEDB:1
-        else
-            status "Supersafe is set off"
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEDB:0
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEDB:0 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEDB:0
-        fi
+     #   if ( [ "${SUPERSAFE_DB}" = "1" ] )
+     #   then
+     #       status "Supersafe is set on"
+     #       /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEDB:1
+     #       /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEDB:1 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEDB:1
+     #   else
+     #       status "Supersafe is set off"
+     #       /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEDB:0
+     #       /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEDB:0 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEDB:0
+     #   fi
 
         #If we want to get our scripts out of the git repo, we better have git installed, so let's do it
         /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '${CUSTOM_USER_SUDO} /usr/bin/apt-get install -qq git ; /usr/bin/git init ; /bin/mkdir -p /home/${SERVER_USER}/bootstrap'"
