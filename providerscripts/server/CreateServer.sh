@@ -45,6 +45,7 @@ zone_id="${2}"
 service_offering_id="${3}"
 server_name="${4}"
 key_pair="${5}"
+zone_name="ch-dk-2"
 
 if ( [ "${cloudhost}" = "exoscale" ] )
 then
@@ -65,7 +66,7 @@ then
     
     #private_network_id="`/usr/local/bin/cs listNetworks | jq '(.network[] | select(.zonename == "ch-dk-2" and .name == "adt" and .zoneid == "${zone_id}" ) | .id)' | /bin/sed 's/"//g'`"
     
-    private_network_id="`/usr/local/bin/cs listNetworks | jq --arg tmp_zone_id "${zone_id}" '(.network[] | select(.zonename == "ch-dk-2" and .name == "adt" and .zoneid == $tmp_zone_id ) | .id)' | /bin/sed 's/"//g'`"
+    private_network_id="`/usr/local/bin/cs listNetworks | jq --arg tmp_zone_id "${zone_id}" --arg tmp_zonename "${zone_name}" '(.network[] | select(.zonename == $tmp_zonename and .name == "adt" and .zoneid == $tmp_zone_id ) | .id)' | /bin/sed 's/"//g'`"
     
     if ( [ "${private_network_id}" = "" ] )
     then
