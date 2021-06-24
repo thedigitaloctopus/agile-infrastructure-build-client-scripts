@@ -67,7 +67,7 @@ then
     if ( [ "${private_network_id}" = "" ] )
     then
         network_offering_id="`/usr/local/bin/cs listNetworkOfferings | jq '(.networkoffering[] | select(.name == "PrivNet" and .state == "Enabled" and .guestiptype == "Isolated" )  | .id)' | /bin/sed 's/"//g'`"
-        private_network_id="`/usr/local/bin/cs createNetwork displaytext="AgileDeploymentToolkit" name="adt" networkofferingid="${network_offering_id}" zoneid="${zone_id}" | jq '.network.id' | /bin/sed 's/"//g'`"
+        private_network_id="`/usr/local/bin/cs createNetwork displaytext="AgileDeploymentToolkit" name="adt" networkofferingid="${network_offering_id}" zoneid="${zone_id}" startip="10.0.0.10" endip="10.0.0.40" netmask="255.255.255.0" | jq '.network.id' | /bin/sed 's/"//g'`"
     fi
 
     vmid="`/usr/local/bin/cs deployVirtualMachine templateid="${template_id}" zoneid="${zone_id}" serviceofferingid="${service_offering_id}" name="${server_name}" keyPair="${key_pair}" rootdisksize="${disksize}" | jq '.virtualmachine.id' | /bin/sed 's/"//g'`"
