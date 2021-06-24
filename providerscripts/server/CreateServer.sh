@@ -62,16 +62,27 @@ then
         a216b0d1-370f-4e21-a0eb-3dfc6302b564 ) disksize="400"
             break ;;
     esac
-    #/usr/local/bin/cs deployVirtualMachine templateid="${template_id}" zoneid="${zone_id}" serviceofferingid="${service_offering_id}" name="${server_name}" keyPair="${key_pair}" rootdisksize="${disksize}" 2>/dev/null
+    
+    private_network_id="`/usr/local/bin/cs listNetworks | jq '(.network[] | select(.zonename == "ch-dk-2" and .name == "adt" and .zoneid == "91e5e9e4-c9ed-4b76-bee4-427004b3baf9" ) | .id)' | /bin/sed 's/"//g'`"
+    if ( [ "${private_network_id}" = "" ] )
+    then
+        network_offering_id="`/usr/local/bin/cs listNetworkOfferings | jq '(.networkoffering[] | select(.name == "PrivNet" and .state == "Enabled" )  | .id)'`"
+        private_network_id="`/usr/local/bin/cs createNetwork displaytext="AgileDeploymentToolkit" name="adt" networkofferingid="${network_offering_id}" zoneid="${zone_id}" | jq '.network.id' | /bin/sed 's/"//g'`"
+    fi
+
     vmid="`/usr/local/bin/cs deployVirtualMachine templateid="${template_id}" zoneid="${zone_id}" serviceofferingid="${service_offering_id}" name="${server_name}" keyPair="${key_pair}" rootdisksize="${disksize}" | jq '.virtualmachine.id' | /bin/sed 's/"//g'`"
-    networkids="`/usr/local/bin/cs listNetworks type=Isolated | jq '.network[].id' | /bin/sed 's/"//g'`"
-     #virtualmachineids="`cs listVirtualMachines | jq '.virtualmachine[].id' | /bin/sed 's/"//g'`"
+    /usr/local/bin/cs addNicToVirtualMachine networkid="${private_network_id}" virtualmachineid="${vmid}"
+
+    #/usr/local/bin/cs deployVirtualMachine templateid="${template_id}" zoneid="${zone_id}" serviceofferingid="${service_offering_id}" name="${server_name}" keyPair="${key_pair}" rootdisksize="${disksize}" 2>/dev/null
+#    vmid="`/usr/local/bin/cs deployVirtualMachine templateid="${template_id}" zoneid="${zone_id}" serviceofferingid="${service_offering_id}" name="${server_name}" keyPair="${key_pair}" rootdisksize="${disksize}" | jq '.virtualmachine.id' | /bin/sed 's/"//g'`"
+#    networkids="`/usr/local/bin/cs listNetworks type=Isolated | jq '.network[].id' | /bin/sed 's/"//g'`"
+#     #virtualmachineids="`cs listVirtualMachines | jq '.virtualmachine[].id' | /bin/sed 's/"//g'`"
 #for vmid in ${virtualmachineids}
 #do
-    for networkid in ${networkids}
-    do
-       /usr/local/bin/cs addNicToVirtualMachine virtualmachineid=${vmid} networkid=${networkid}
-   done
+ #   for networkid in ${networkids}
+  #  do
+   #    /usr/local/bin/cs addNicToVirtualMachine virtualmachineid=${vmid} networkid=${networkid}
+   #done
 #done
 fi
 
