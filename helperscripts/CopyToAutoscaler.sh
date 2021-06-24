@@ -42,23 +42,32 @@ read response
 if ( [ "${response}" = "1" ] )
 then
     CLOUDHOST="digitalocean"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"*autoscaler*\" \"digitalocean\"`"
+    token_to_match="*autoscaler*"
 elif ( [ "${response}" = "2" ] )
 then
-    CLOUDHOST="exoscale"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"*autoscaler*\" \"exoscale\"`"
+    CLOUDHOST="exoscale"    
+    token_to_match="*autoscaler*"
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"*autoscaler*\" \"linode\"`"
+    token_to_match="*autoscaler*"
 elif ( [ "${response}" = "4" ] )
 then
     CLOUDHOST="vultr"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"*autoscaler*\" \"vultr\"`"
+    token_to_match="*autoscaler*"
 elif ( [ "${response}" = "5" ] )
 then
     CLOUDHOST="aws"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"*autoscaler*\" \"aws\"`"
+    token_to_match="*autoscaler*"
+fi
+
+/bin/echo "What is the build identifier you want to connect to?"
+/bin/echo "You have these builds to choose from: "
+/bin/ls ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}
+/bin/echo "Please enter the name of the build of the server you wish to connect with"
+read BUILD_IDENTIFIER
+
+ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh  ${token_to_match} ${CLOUDHOST}`"
 fi
 
 if ( [ "${ips}" = "" ] )
@@ -67,11 +76,6 @@ then
     exit
 fi
 
-/bin/echo "What is the build identifier you want to connect to?"
-/bin/echo "You have these builds to choose from: "
-/bin/ls ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}
-/bin/echo "Please enter the name of the build of the server you wish to connect with"
-read BUILD_IDENTIFIER
 
 /bin/echo "Which autoscaler would you like to connect to?"
 count=1
