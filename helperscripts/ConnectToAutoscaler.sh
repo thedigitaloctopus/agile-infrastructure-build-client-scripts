@@ -33,18 +33,23 @@ read response
 if ( [ "${response}" = "1" ] )
 then
     CLOUDHOST="digitalocean"
+    token_to_match="*autoscaler*"
 elif ( [ "${response}" = "2" ] )
 then
     CLOUDHOST="exoscale"
+    token_to_match="*autoscaler*"
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
+    token_to_match="*autoscaler*"
 elif ( [ "${response}" = "4" ] )
 then
     CLOUDHOST="vultr"
+    token_to_match="*autoscaler*"
 elif ( [ "${response}" = "5" ] )
 then
     CLOUDHOST="aws"
+    token_to_match="*autoscaler*"
 else
     /bin/echo "Unrecognised  cloudhost. Exiting ...."
     exit
@@ -57,7 +62,7 @@ fi
 read BUILD_IDENTIFIER
 
 #AUTOSCALER_IP="`/bin/ls ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASIP* | /usr/bin/awk -F':' '{print $NF}'`"
-ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh *autoscaler* ${CLOUDHOST} ${BUILD_HOME}`"
+ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh ${token_to_match} ${CLOUDHOST} ${BUILD_HOME}`"
 
 if ( [ "${ips}" = "" ] )
 then
