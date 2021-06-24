@@ -63,7 +63,10 @@ then
             break ;;
     esac
     
-    private_network_id="`/usr/local/bin/cs listNetworks | jq '(.network[] | select(.zonename == "ch-dk-2" and .name == "adt" and .zoneid == "${zone_id}" ) | .id)' | /bin/sed 's/"//g'`"
+    #private_network_id="`/usr/local/bin/cs listNetworks | jq '(.network[] | select(.zonename == "ch-dk-2" and .name == "adt" and .zoneid == "${zone_id}" ) | .id)' | /bin/sed 's/"//g'`"
+    
+    private_network_id="`/usr/local/bin/cs listNetworks | jq --arg tmp_zone_id "${zone_id}" '(.network[] | select(.zonename == "ch-dk-2" and .name == "adt" and .zoneid == $tmp_zone_id ) | .id)' | /bin/sed 's/"//g'`"
+    
     if ( [ "${private_network_id}" = "" ] )
     then
         network_offering_id="`/usr/local/bin/cs listNetworkOfferings | jq '(.networkoffering[] | select(.name == "PrivNet" and .state == "Enabled" and .guestiptype == "Isolated" )  | .id)' | /bin/sed 's/"//g'`"
