@@ -66,7 +66,7 @@ then
     private_network_id="`/usr/local/bin/cs listNetworks | jq '(.network[] | select(.zonename == "ch-dk-2" and .name == "adt" and .zoneid == "91e5e9e4-c9ed-4b76-bee4-427004b3baf9" ) | .id)' | /bin/sed 's/"//g'`"
     if ( [ "${private_network_id}" = "" ] )
     then
-        network_offering_id="`/usr/local/bin/cs listNetworkOfferings | jq '(.networkoffering[] | select(.name == "PrivNet" and .state == "Enabled" )  | .id)'`"
+        network_offering_id="`/usr/local/bin/cs listNetworkOfferings | jq '(.networkoffering[] | select(.name == "PrivNet" and .state == "Enabled" and .guestiptype == "Isolated" )  | .id)'`"
         private_network_id="`/usr/local/bin/cs createNetwork displaytext="AgileDeploymentToolkit" name="adt" networkofferingid="${network_offering_id}" zoneid="${zone_id}" | jq '.network.id' | /bin/sed 's/"//g'`"
     fi
 
