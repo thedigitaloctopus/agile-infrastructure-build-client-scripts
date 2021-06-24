@@ -33,39 +33,43 @@ read response
 if ( [ "${response}" = "1" ] )
 then
     CLOUDHOST="digitalocean"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh database.* digitalocean`"
+    token_to_match="database.*"
 elif ( [ "${response}" = "2" ] )
 then
     CLOUDHOST="exoscale"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh database.* exoscale`"
+    token_to_match="database.*"
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh database linode`"
+    token_to_match="database"
 elif ( [ "${response}" = "4" ] )
 then
     CLOUDHOST="vultr"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh database vultr`"
+    token_to_match="database"
 elif ( [ "${response}" = "5" ] )
 then
     CLOUDHOST="aws"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh *database* aws`"
+    token_to_match="*database*"
 else
     /bin/echo "Unrecognised  cloudhost. Exiting ...."
     exit
 fi
 
-if ( [ "${ips}" = "" ] )
-then
-    /bin/echo "There doesn't seem to be any databases running"
-    exit
-fi
+
 
 /bin/echo "What is the build identifier you want to connect to?"
 /bin/echo "You have these builds to choose from: "
 /bin/ls ${BUILD_HOME}/buildconfiguration/${CLOUDHOST} | /bin/grep -v 'credentials'
 /bin/echo "Please enter the name of the build of the server you wish to connect with"
 read BUILD_IDENTIFIER
+
+ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh ${token_to_match} ${CLOUDHOST}`"
+
+if ( [ "${ips}" = "" ] )
+then
+    /bin/echo "There doesn't seem to be any databases running"
+    exit
+fi
 
 DIR="`/bin/pwd`"
 
