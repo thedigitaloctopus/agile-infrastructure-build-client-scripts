@@ -42,24 +42,26 @@ read response
 if ( [ "${response}" = "1" ] )
 then
     CLOUDHOST="digitalocean"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"webserver*\" \"digitalocean\"`"
+    token_to_match="webserver*"
 elif ( [ "${response}" = "2" ] )
 then
     CLOUDHOST="exoscale"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"webserver*\" \"exoscale\"`"
+    token_to_match="webserver*"
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"webserver*\" \"linode\"`"
+    token_to_match="webserver*"
 elif ( [ "${response}" = "4" ] )
 then
     CLOUDHOST="vultr"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"webserver*\" \"vultr\"`"
+    token_to_match="webserver*"
 elif ( [ "${response}" = "5" ] )
 then
     CLOUDHOST="aws"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"webserver*\" \"aws\"`"
+    token_to_match="webserver*"
 fi
+
+ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh  ${token_to_match} ${CLOUDHOST}`"
 
 if ( [ "${ips}" = "" ] )
 then
