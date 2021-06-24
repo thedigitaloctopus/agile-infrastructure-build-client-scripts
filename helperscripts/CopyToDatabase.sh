@@ -37,24 +37,27 @@ read response
 if ( [ "${response}" = "1" ] )
 then
     CLOUDHOST="digitalocean"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"database\" \"digitalocean\"`"
+    token_to_match="*database*"
 elif ( [ "${response}" = "2" ] )
 then
     CLOUDHOST="exoscale"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"database\" \"exoscale\"`"
+    token_to_match="database"
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"database\" \"linode\"`"
+    token_to_match="database"
 elif ( [ "${response}" = "4" ] )
 then
     CLOUDHOST="vultr"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"database\" \"vultr\"`"
+    token_to_match="database"
 elif ( [ "${response}" = "5" ] )
 then
     CLOUDHOST="aws"
-    ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh \"*database*\" \"aws\"`"
+    token_to_match="*database*"
 fi
+
+
+ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh  ${token_to_match} ${CLOUDHOST}`"
 
 if ( [ "${ips}" = "" ] )
 then
