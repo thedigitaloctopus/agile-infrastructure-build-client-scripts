@@ -34,18 +34,33 @@ read response
 if ( [ "${response}" = "1" ] )
 then
     CLOUDHOST="digitalocean"
+    autoscaler_token_to_match="*autoscaler*"
+    webserver_token_to_match="*webserver*"
+    database_token_to_match="*database*"
 elif ( [ "${response}" = "2" ] )
 then
     CLOUDHOST="exoscale"
+    autoscaler_token_to_match="*autoscaler*"
+    webserver_token_to_match="*webserver*"
+    database_token_to_match="*database*"
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
+    autoscaler_token_to_match="*autoscaler*"
+    webserver_token_to_match="*webserver*"
+    database_token_to_match="*database*"
 elif ( [ "${response}" = "4" ] )
 then
     CLOUDHOST="vultr"
+    autoscaler_token_to_match="*autoscaler*"
+    webserver_token_to_match="*webserver*"
+    database_token_to_match="*database*"
 elif ( [ "${response}" = "5" ] )
 then
     CLOUDHOST="aws"
+    autoscaler_token_to_match="*autoscaler*"
+    webserver_token_to_match="*webserver*"
+    database_token_to_match="*database*"
 else
     /bin/echo "Unrecognised  cloudhost. Exiting ...."
     exit
@@ -57,9 +72,9 @@ fi
 /bin/echo "Please enter the name of the build of the server you wish to connect with"
 read BUILD_IDENTIFIER
 
-autoscalerips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST}`"
-webserverips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "webserver*" ${CLOUDHOST}`"
-databaseips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "database*" ${CLOUDHOST}`"
+autoscalerips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${autoscaler_token_to_match}" ${CLOUDHOST}`"
+webserverips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${webserver_token_to_match}" ${CLOUDHOST}`"
+databaseips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${database_token_to_match}" ${CLOUDHOST}`"
 
 
 /bin/echo "Do your servers use Elliptic Curve Digital Signature Algorithm or the Rivest Shamir Adleman Algorithm for authenitcation?"
