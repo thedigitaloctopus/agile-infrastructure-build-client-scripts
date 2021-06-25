@@ -33,23 +33,23 @@ export INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
 
 If you are running a full build process (not via templating) and setting all your parameters at build time, then, you can set your infrastructure repositories owner and name to, for example, "adt-demos" or whatever your username when you are prompted with the following questions:
 
-#################################################################################################
-##### So, please enter the provider with which the agile deployment toolkit is currently kept#####
-##### We currently support: 1)BITBUCKET 2)GITHUB 3)GITLAB                                    #####
-##################################################################################################
-<enter 3 for github>
-
-##########################################################################################
-##### Please enter the username of the person who owns the Agile Infrastructure repos#####
-##########################################################################################
-INFRASRUCTURE REPOSITORIES OWNER USERNAME:"
-<enter your github username for the owner of your forked repositories, in my case, "adt-demos">
-
-
-"###############################################################################################################"
-"##### Please enter **YOUR** credentials for the repo provider where the Agile Deployment Toolkit is stored#####"
-"###############################################################################################################"
-<enter your github username as the username of the account in my case: "adt-demos"> 
+##################################################################################################  
+##### So, please enter the provider with which the agile deployment toolkit is currently kept#####  
+##### We currently support: 1)BITBUCKET 2)GITHUB 3)GITLAB                                    #####  
+##################################################################################################  
+<enter 3 for github>  
+  
+##########################################################################################  
+##### Please enter the username of the person who owns the Agile Infrastructure repos#####  
+##########################################################################################  
+INFRASRUCTURE REPOSITORIES OWNER USERNAME:"  
+<enter your github username for the owner of your forked repositories, in my case, "adt-demos">  
+  
+  
+###############################################################################################################  
+##### Please enter **YOUR** credentials for the repo provider where the Agile Deployment Toolkit is stored#####  
+###############################################################################################################  
+<enter your github username as the username of the account in my case: "adt-demos">   
  
-status "YOUR github PASSWORD (leave blank for no password if the infrastructure repos are public):"
-<enter your github password or blank if the repos are public (should be)>
+status "YOUR github PASSWORD (leave blank for no password if the infrastructure repos are public):"  
+<enter your github password or blank if the repos are public (should be)>  
