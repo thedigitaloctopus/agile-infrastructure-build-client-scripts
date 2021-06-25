@@ -46,7 +46,7 @@ then
 elif ( [ "${response}" = "2" ] )
 then
     CLOUDHOST="exoscale"    
-    token_to_match="*autoscaler*"
+    token_to_match="autoscaler"
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
