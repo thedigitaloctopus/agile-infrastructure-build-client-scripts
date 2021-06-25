@@ -17,19 +17,19 @@ The infrastructure repositories are located on github and so, to fork them, you 
 
 from
 
-#export APPLICATION_REPOSITORY_TOKEN=""
-#export INFRASTRUCTURE_REPOSITORY_PROVIDER="github"
-export INFRASTRUCTURE_REPOSITORY_OWNER="agile-deployer"
-export INFRASTRUCTURE_REPOSITORY_USERNAME="agile-deployer"
-#export INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
+#export APPLICATION_REPOSITORY_TOKEN=""  
+#export INFRASTRUCTURE_REPOSITORY_PROVIDER="github"  
+export INFRASTRUCTURE_REPOSITORY_OWNER="agile-deployer"  
+export INFRASTRUCTURE_REPOSITORY_USERNAME="agile-deployer"  
+#export INFRASTRUCTURE_REPOSITORY_PASSWORD="none"  
 
 and change them to:
 
-#export APPLICATION_REPOSITORY_TOKEN=""
-#export INFRASTRUCTURE_REPOSITORY_PROVIDER="github"
-export INFRASTRUCTURE_REPOSITORY_OWNER="adt-demos"
-export INFRASTRUCTURE_REPOSITORY_USERNAME="adt-demos"
-#export INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
+#export APPLICATION_REPOSITORY_TOKEN=""  
+#export INFRASTRUCTURE_REPOSITORY_PROVIDER="github"  
+export INFRASTRUCTURE_REPOSITORY_OWNER="adt-demos"  
+export INFRASTRUCTURE_REPOSITORY_USERNAME="adt-demos"  
+#export INFRASTRUCTURE_REPOSITORY_PASSWORD="none"  
 
 If you are running a full build process (not via templating) and setting all your parameters at build time, then, you can set your infrastructure repositories owner and name to, for example, "adt-demos" or whatever your username when you are prompted with the following questions:
 
