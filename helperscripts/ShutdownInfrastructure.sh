@@ -40,9 +40,9 @@ then
 elif ( [ "${response}" = "2" ] )
 then
     CLOUDHOST="exoscale"
-    autoscaler_token_to_match="*autoscaler*"
-    webserver_token_to_match="*webserver*"
-    database_token_to_match="*database*"
+    autoscaler_token_to_match="autoscaler"
+    webserver_token_to_match="webserver"
+    database_token_to_match="database"
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
