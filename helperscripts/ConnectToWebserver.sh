@@ -39,7 +39,7 @@ then
 elif ( [ "${response}" = "2" ] )
 then
     CLOUDHOST="exoscale"
-    token_to_match="webserver*"
+    token_to_match="webserver"
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
