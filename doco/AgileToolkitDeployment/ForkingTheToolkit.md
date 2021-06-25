@@ -49,8 +49,10 @@ INFRASRUCTURE REPOSITORIES OWNER USERNAME:"
 ------------------
   
 ##### Please enter **YOUR** credentials for the repo provider where the Agile Deployment Toolkit is stored
+##### YOUR github USERNAME  
 
 <enter your github username as the username of the account in my case: "adt-demos">   
  
-status "YOUR github PASSWORD (leave blank for no password if the infrastructure repos are public):"  
+##### YOUR github PASSWORD (leave blank for no password if the infrastructure repos are public):  
+
 <enter your github password or blank if the repos are public (should be)>  
