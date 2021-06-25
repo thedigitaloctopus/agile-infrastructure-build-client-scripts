@@ -37,7 +37,7 @@ then
 elif ( [ "${response}" = "2" ] )
 then
     CLOUDHOST="exoscale"
-    token_to_match="database.*"
+    token_to_match="database"
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
