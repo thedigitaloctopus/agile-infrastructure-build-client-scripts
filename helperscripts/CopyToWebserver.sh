@@ -50,7 +50,7 @@ then
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
-    token_to_match="webserver*"
+    token_to_match="webserver"
 elif ( [ "${response}" = "4" ] )
 then
     CLOUDHOST="vultr"
