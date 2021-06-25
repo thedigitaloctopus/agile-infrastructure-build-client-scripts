@@ -3,6 +3,8 @@ IMPORTANT: If you fork these repositories, and have them as public repositories,
 
 [Override](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides.md)
 
+I keep a copy of the override script I am using on my laptop setup for the provider I am using and use it for userdata on my build client as required. It is important to keep your bespoke override script secure because it will have access credentials to your infrastrucuture within it. Similarly, the VM which you are using as your build machine must also be kept secured because it also will have sensitive data on it. 
+
 #### Forking the Agile Deployment Toolkit
 
 You can build your deployments direct from the home account of the Agile Deployment toolkit in other words, the "agile-deployer" user name.
