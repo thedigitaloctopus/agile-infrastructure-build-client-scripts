@@ -228,10 +228,10 @@ do
         #initiates the build of a new webserver as part of an autoscaling event, the webserver needs to know the key for the SSH tunnel
         # if we are using DBaaS over an ssh tunnel and so the autoscaler can then pass this key to the newly built webserver which it
         # then uses as part of the ssh tunnel which it sets up to the DBaaS running in the cloud somewhere.
-        if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS-secured" ] )
-        then
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/ssl/${WEBSITE_URL}/dbaas_server_key.pem ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/dbaas_server_key.pem
-        fi
+     #   if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS-secured" ] )
+     #   then
+     #       /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/ssl/${WEBSITE_URL}/dbaas_server_key.pem ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/dbaas_server_key.pem
+     #   fi
         #Now we prep our server properly by hardening it a bit and so on
         #This command will 1) Make sure we are up to date on our new server
         #                  2) Add a new user according to the username and password that we have generated and recorded
