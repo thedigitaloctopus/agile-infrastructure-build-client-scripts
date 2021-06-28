@@ -107,7 +107,7 @@ elif ( [ "${response}" = "2" ] )
         status ""
         #We don't want to deploy virgin installations to the cloud, we should use a local server for our development in all cases, baseline what
         #we have done and then move it to the cloud if we want to
-        if ( [ "${DATABASE_INSTALLATION_TYPE}" != "DBaaS" ] && [ "${DATABASE_INSTALLATION_TYPE}" != "DBaaS-secured" ]  && [ "${AUTOSCALE_FROM_SNAPSHOTS}" != "1" ] && [ "${GENERATE_SNAPSHOTS}" != "1" ])
+        if ( [ "${DATABASE_INSTALLATION_TYPE}" != "DBaaS" ] && [ "${AUTOSCALE_FROM_SNAPSHOTS}" != "1" ] && [ "${GENERATE_SNAPSHOTS}" != "1" ])
         then
             status "0) Virgin Build (If you want a fresh (virgin) install of an Application, select this option)"
             status ""
