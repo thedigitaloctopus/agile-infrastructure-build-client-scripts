@@ -221,10 +221,10 @@ do
 
         #This key is the key that was generated when we wish to use DBaaS over an SSH tunnel. This key gets us access to the remote end
         #of our ssh tunnel and from there we are port forwarded to our database which is running as a service.
-        if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS-secured" ] )
-        then
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/ssl/${WEBSITE_URL}/dbaas_server_key.pem ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/dbaas_server_key.pem
-        fi
+        #if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS-secured" ] )
+        #then
+        #    /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/ssl/${WEBSITE_URL}/dbaas_server_key.pem ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/dbaas_server_key.pem
+        #fi
 
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY
 
