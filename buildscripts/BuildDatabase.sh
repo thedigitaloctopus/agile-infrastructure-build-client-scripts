@@ -257,21 +257,21 @@ do
         #This is the way I decided to pass all the configuration over. This creates files with bits of information and configuration
         #Encoded in the file name. I could have passed it all over as a config file but that isn't the choice I made and probably
         #this is as good a method as any.
-        command="/usr/bin/scp ${OPTIONS}"
+      #  command="/usr/bin/scp ${OPTIONS}"
 
-        while read scpparam
-        do
-            scpparam1="`eval /bin/echo ${scpparam}`"
+     #   while read scpparam
+     #   do
+     #       scpparam1="`eval /bin/echo ${scpparam}`"#
+#
+ #           if ( [ "${scpparam1}" != "" ] )
+  #          then
+  #              /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/"${scpparam1}"
+   #             command="${command} \"${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/${scpparam1}\""
+   #         fi
+   #     done < ${BUILD_HOME}/builddescriptors/databasescp.dat
 
-            if ( [ "${scpparam1}" != "" ] )
-            then
-                /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/"${scpparam1}"
-                command="${command} \"${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/${scpparam1}\""
-            fi
-        done < ${BUILD_HOME}/builddescriptors/databasescp.dat
-
-        command="${command} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1"
-        eval ${command}
+     #   command="${command} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1"
+     #   eval ${command}
         
         ####Added
         
