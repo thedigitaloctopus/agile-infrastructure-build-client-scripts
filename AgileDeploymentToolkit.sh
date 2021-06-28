@@ -638,7 +638,7 @@ then
     status "###############################################################################################################################################"
     read carryon
 
-    if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS-secured" ] || [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
+    if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
     then
         status "##############################################################################################################"
         status "You have selected to use a 3rd party DBaaS for your database solution"
@@ -651,11 +651,6 @@ then
         status "A Database with password: ${DBaaS_PASSWORD}"
         status "A Database with the name: ${DBaaS_DBNAME}"
         status "A Database at Endpoint: ${DBaaS_HOSTNAME}"
-        if ( [ "${DEFAULT_DBaaS_OS_USER}" != "" ] && [ "${DBaaS_REMOTE_SSH_PROXY_IP}" != "" ] )
-        then
-            status "A default remote proxy os user set to: ${DEFAULT_DBaaS_OS_USER}"
-            status "Remote ssh proxy ip(s) of: ${DBaaS_REMOTE_SSH_PROXY_IP}"
-        fi
         status "##############################################################################################################"
         status "If all these things are configured and set, then it is OK to :"
         status "Press the <enter> key to continue"
