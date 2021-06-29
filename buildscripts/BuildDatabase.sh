@@ -122,8 +122,8 @@ do
         DBIP_PRIVATE="${private_ip}"
         #We create an ip mask for our server this is used when we set access privileges and so on within the database
         #and we want to allow access from machines on our private network
-        IPMASK="`/bin/echo ${DBIP_PRIVATE} | /bin/grep -oE '[0-9]{1,3}\.[0-9]{1,3}' | /usr/bin/head -1`"
-        IPMASK=${IPMASK}".%.%"
+        IP_MASK="`/bin/echo ${DBIP_PRIVATE} | /bin/grep -oE '[0-9]{1,3}\.[0-9]{1,3}' | /usr/bin/head -1`"
+        IP_MASK=${IP_MASK}".%.%"
 
         status "Have got the ip addresses for your database"
         status "Public IP address: ${DBIP}"
