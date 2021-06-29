@@ -635,21 +635,9 @@ If you are using a managed database this should correspond to the type of databa
 
 ------
 
-### DEFAULT_DBaaS_OS_USER 
-
-If you are using an SSH tunnel to a DBaaS provider, just to complicate things, sometimes linux is deployed with a different default user other than root sometimes, it is 'ubuntu'. When we are secure shelling onto your ssh tunnel cloud server, we need to make sure we get the default user name right. So, it is probably root, but check with your provider how they set up the default user. So, please input the default user for your DBaaS cloud host, probably 'root', but please check. I have seen the default user set to "root", "debian" and "ubuntu". If you are SSH tunneling you will likely need to set the default user to one of these values.
-
------
-
 ### DBaaSDBSECURITYGROUP
 
 If you are using an AWS managed database then the database will have a security group of the format: "sg-0fad5hf744c044361". You need to find the security group of your managed database and paste the sg- value here. It will not build with
-
------
-
-### DBaaS_REMOTE_SSH_PROXY_IP
-
-If you are using an SSH tunnel, you need to set this value to the IP address of the remote machine that you are proxying through.
 
 -----
 
