@@ -98,7 +98,7 @@ then
 	    status "##################################################################################################"
 	    status "I am about to make software changes on this machine. If you are OK with that, please press <enter>"
 	    status "##################################################################################################"
-	    status read x
+	    read x
 
             status "##################################################################################################################################################"
             status "Checking that the build software is up to date on this machine. Please wait .....This might take a few minutes the first time you run this script"
