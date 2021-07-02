@@ -67,8 +67,12 @@ do
         read S3_HOST_BASE
 
         status ""
-        status "If necessary, please enter a location for your S3 bucket"
+        status "Please enter a location for your S3 bucket, for example, US or EU"
         read S3_LOCATION
+        if ( [ "${S3_LOCATION}" = "" ] )
+        then
+            S3_LOCATION="US"
+        fi
     fi
 
     /usr/bin/s3cmd --configure --access_key=${S3_ACCESS_KEY} --secret_key=${S3_SECRET_KEY} --dump-config 2>&1 | /usr/bin/tee /root/.s3cfg
