@@ -340,8 +340,9 @@ do
 
         if ( [ "${BASELINE_DB_REPOSITORY}" != "" ] )
         then
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BASELINEDBREPOSITORY:${BASELINE_DB_REPOSITORY}
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BASELINEDBREPOSITORY:${BASELINE_DB_REPOSITORY} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BASELINEDBREPOSITORY:${BASELINE_DB_REPOSITORY}
+            #/bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BASELINEDBREPOSITORY:${BASELINE_DB_REPOSITORY}
+            #/usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BASELINEDBREPOSITORY:${BASELINE_DB_REPOSITORY} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BASELINEDBREPOSITORY:${BASELINE_DB_REPOSITORY}
+            /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BASELINEDBREPOSITORY' ${BASELINE_DB_REPOSITORY}" 
         fi
 
         status "We are about to run the build script to actually build the machine into a database server"
