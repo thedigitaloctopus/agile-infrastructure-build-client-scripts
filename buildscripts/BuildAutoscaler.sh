@@ -341,40 +341,50 @@ do
         if ( [ "${BUILD_CHOICE}" = "0" ] )
         then
             #This is a virgin build so this is something like a vanilla version of a CMS system
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:virgin
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:virgin ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:virgin
+            #/bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:virgin
+            #/usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:virgin ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:virgin
+            /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'virgin'" 
+    
+    
     elif ( [ "${BUILD_CHOICE}" = "1" ] )
         then
             #This is a virgin build from the baseline of our application. When we developed our application, the last thing we should
             #have done is made a final baseline which can then be used to take our application live. Once it is live we will start
             #makeing periodic backups and we can build off those backups if we want to
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:baseline
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:baseline ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:baseline
+           # /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:baseline
+           # /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:baseline ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:baseline
+            /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'baseline'" 
+
     elif ( [ "${BUILD_CHOICE}" = "2" ] )
         then
             #This builds from a backup which is one hour old
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:hourly
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:hourly ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:hourly
+            #/bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:hourly
+            #/usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:hourly ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:hourly
+            /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'hourly'" 
     elif ( [ "${BUILD_CHOICE}" = "3" ] )
         then
             #This builds from a backup which is one day old
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:daily
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:daily ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:daily
+          #  /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:daily
+          #  /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:daily ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:daily
+          /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'daily'" 
     elif ( [ "${BUILD_CHOICE}" = "4" ] )
         then
             #This builds from a backup which is one week old
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:weekly
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:weekly ${SERVER_USER}${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:weekly
+        #    /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:weekly
+        #    /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:weekly ${SERVER_USER}${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:weekly
+            /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'weekly'" 
     elif ( [ "${BUILD_CHOICE}" = "5" ] )
         then
             #This builds from a backup which is one month old
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:monthly
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:monthly ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:monthly
+        #    /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:monthly
+        #    /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:monthly ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:monthly
+            /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'monthly'" 
     elif ( [ "${BUILD_CHOICE}" = "6" ] )
         then
             #This builds from a backup which is two months old
-            /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:bimonthly
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:bimonthly ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:bimonthly
+        #    /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:bimonthly
+        #    /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:bimonthly ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:bimonthly
+            /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'bimonthly'" 
         fi
 
         /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '${CUSTOM_USER_SUDO} /bin/cat /home/${SERVER_USER}/.ssh/authorized_keys.tmp >> /home/${SERVER_USER}/.ssh/authorized_keys ; ${CUSTOM_USER_SUDO} /bin/rm /home/${SERVER_USER}/.ssh/authorized_keys.tmp ; ${CUSTOM_USER_SUDO} /bin/chmod 400 /home/${SERVER_USER}/.ssh/authorized_keys ; ${CUSTOM_USER_SUDO} /bin/chmod 400 /home/${SERVER_USER}/.ssh/id_rsa'"
