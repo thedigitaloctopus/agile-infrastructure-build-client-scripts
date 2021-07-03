@@ -61,7 +61,7 @@ then
     
     if ( [ "${ENABLE_EFS}" = "1" ] )
     then
-        aws_region="`/bin/cat ~/.aws/config | /bin/grep region | /usr/bin/awk '{print $NF}'`"
+        aws_region="`/bin/grep region ~/.aws/config | /usr/bin/awk '{print $NF}'`"
 
         DIRECTORIES_TO_MOUNT="${DIRECTORIES_TO_MOUNT}:config"
     
