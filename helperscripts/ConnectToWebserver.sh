@@ -92,7 +92,7 @@ done
 read response
 
 SERVER_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER`"
-SSH_PORT="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} | /bin/grep SSH_PORT | /bin/sed 's/"//g' | /usr/bin/awk -F'=' '{print $NF}'`"
+SSH_PORT="`/bin/grep SSH_PORT ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} | /bin/sed 's/"//g' | /usr/bin/awk -F'=' '{print $NF}'`"
 
 /usr/bin/ssh-keygen -f "${HOME}/.ssh/known_hosts" -R [${WEB_IP}]:${SSH_PORT}
 
