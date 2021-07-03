@@ -62,7 +62,7 @@ fi
 
 /bin/cp ${overridescript} ${overridescript}.$$
 
-variables="`/bin/cat ${overridescript}.$$ | /bin/grep '^export ' | /usr/bin/awk -F'=' '{print $1}'`"
+variables="`/bin/grep '^export ' ${overridescript}.$$ | /usr/bin/awk -F'=' '{print $1}'`"
 
 for variable in ${variables}
 do
