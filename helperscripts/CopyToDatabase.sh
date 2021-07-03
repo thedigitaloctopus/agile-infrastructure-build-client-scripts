@@ -93,7 +93,7 @@ SERVER_USER="`/bin/ls ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/echo "Please select (1) RSA (2) ECDSA"
 read response
 
-SSH_PORT="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} | /bin/grep SSH_PORT | /bin/sed 's/"//g' | /usr/bin/awk -F'=' '{print $NF}'`"
+SSH_PORT="`/bin/grep SSH_PORT ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} | /bin/sed 's/"//g' | /usr/bin/awk -F'=' '{print $NF}'`"
 
 /bin/echo "Please enter the full path to the directory you would like to copy the file to on the remove machine"
 read remotedir
