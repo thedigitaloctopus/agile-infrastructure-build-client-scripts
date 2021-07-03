@@ -25,14 +25,14 @@
 ###############################################################################################
 
 actioned="0"
-if ( [ -f /etc/ssh/ssh_config ] && [ "`/bin/cat /etc/ssh/ssh_config | /bin/grep 'ServerAliveInterval 240'`" = "" ] )
+if ( [ -f /etc/ssh/ssh_config ] && [ "`/bin/grep 'ServerAliveInterval 240' /etc/ssh/ssh_config`" = "" ] )
 then
     /bin/echo "ServerAliveInterval 240" >> /etc/ssh/ssh_config
     /bin/echo "ServerAliveCountMax 5" >> /etc/ssh/ssh_config
     actioned="1"  
 fi
 
-if ( [ -f /etc/ssh/sshd_config ] && [ "`/bin/cat /etc/ssh/sshd_config | /bin/grep 'ClientAliveInterval 60'`" = "" ] )
+if ( [ -f /etc/ssh/sshd_config ] && [ "`/bin/grep 'ClientAliveInterval 60' /etc/ssh/sshd_config`" = "" ] )
 then
     /bin/echo "ClientAliveInterval 60
 TCPKeepAlive yes
