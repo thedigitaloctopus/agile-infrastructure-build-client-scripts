@@ -33,7 +33,7 @@ then
 
     if ( [ -f ~/.config/doctl/config.yaml ] )
     then
-        access_token="`/bin/cat ~/.config/doctl/config.yaml | /bin/grep "access-token" | /usr/bin/awk '{print $NF}'`"
+        access_token="`/bin/grep "access-token" ~/.config/doctl/config.yaml | /usr/bin/awk '{print $NF}'`"
         if ( [ "${access_token}" != "${TOKEN}" ] )
         then
            status "TOKEN mismatch detected"
@@ -68,8 +68,8 @@ then
 
         if ( [ -f ${HOME}/.cloudstack.ini ] )
         then
-            access_key="`/bin/cat ${HOME}/.cloudstack.ini | /bin/grep "^key" | /usr/bin/awk '{print $NF}'`"
-            secret_key="`/bin/cat ${HOME}/.cloudstack.ini | /bin/grep "^secret" | /usr/bin/awk '{print $NF}'`"
+            access_key="`/bin/grep "^key" ${HOME}/.cloudstack.ini | /usr/bin/awk '{print $NF}'`"
+            secret_key="`/bin/grep "^secret" ${HOME}/.cloudstack.ini | /usr/bin/awk '{print $NF}'`"
         fi
 
         if ( ( [ "${access_key}" != "" ] && [ "${secret_key}" != "" ] && [ "${ACCESS_KEY}" != "" ] && [ "${SECRET_KEY}" != "" ] ) && ( [ "${access_key}" != "${ACCESS_KEY}" ] || [ "${secret_key}" != "${SECRET_KEY}" ] ) )
@@ -119,7 +119,7 @@ then
     do
         if ( [ -f ${HOME}/.config/linode-cli ] )
         then
-            access_token="`/bin/cat ~/.config/linode-cli | /bin/grep "token" | /usr/bin/awk '{print $NF}'`"
+            access_token="`/bin/grep "token" ~/.config/linode-cli | /usr/bin/awk '{print $NF}'`"
         else
             access_token=""
         fi
@@ -222,8 +222,8 @@ then
 
         if ( [ -f ${HOME}/.aws/credentials ] )
         then
-            access_key="`/bin/cat ${HOME}/.aws/credentials | /bin/grep "^aws_access_key_id" | /usr/bin/awk '{print $NF}'`"
-            secret_key="`/bin/cat ${HOME}/.aws/credentials | /bin/grep "^aws_secret_access_key" | /usr/bin/awk '{print $NF}'`"
+            access_key="`/bin/grep "^aws_access_key_id" ${HOME}/.aws/credentials | /usr/bin/awk '{print $NF}'`"
+            secret_key="`/bin/grep "^aws_secret_access_key" ${HOME}/.aws/credentials | /usr/bin/awk '{print $NF}'`"
         fi
 
         if ( ( [ "${access_key}" != "" ] && [ "${secret_key}" != "" ] && [ "${ACCESS_KEY}" != "" ] && [ "${SECRET_KEY}" != "" ] ) && ( [ "${access_key}" != "${ACCESS_KEY}" ] || [ "${secret_key}" != "${SECRET_KEY}" ] ) )
