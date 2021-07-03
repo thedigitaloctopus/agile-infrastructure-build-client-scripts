@@ -58,14 +58,14 @@ then
             /usr/local/bin/doctl auth init >&3
         done
     else
-        status "`/bin/cat ~/.config/doctl/config.yaml | /bin/grep "access-token"`"
+        status "`/bin/grep "access-token" ~/.config/doctl/config.yaml`"
         status "############################################"
         status "Above is your Digital Ocean access key"
         status "Please review and if you want it altered you can manually edit the file at ~/.config/doctl/config.yaml"
         status "Press <enter> to continue"
         read x
     fi
-    TOKEN="`/bin/cat ~/.config/doctl/config.yaml | /bin/grep "access-token" | /usr/bin/awk '{print $NF}'`"
+    TOKEN="`/bin/grep "access-token" ~/.config/doctl/config.yaml | /usr/bin/awk '{print $NF}'`"
     /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN
 fi
 
