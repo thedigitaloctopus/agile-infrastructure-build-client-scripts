@@ -141,7 +141,7 @@ then
 fi
 
 actioned="0"
-if ( [ -f /etc/ssh/ssh_config ] && [ "`/bin/cat /etc/ssh/ssh_config | /bin/grep 'ServerAliveInterval 240'`" = "" ] )
+if ( [ -f /etc/ssh/ssh_config ] && [ "`/bin/grep 'ServerAliveInterval 240' /etc/ssh/ssh_config`" = "" ] )
 then
     status ""
     status ""
@@ -155,7 +155,7 @@ then
     actioned="1"  
 fi
 
-if ( [ -f /etc/ssh/sshd_config ] && [ "`/bin/cat /etc/ssh/sshd_config | /bin/grep 'ClientAliveInterval 60'`" = "" ] )
+if ( [ -f /etc/ssh/sshd_config ] && [ "`/bin/grep 'ClientAliveInterval 60' /etc/ssh/sshd_config`" = "" ] )
 then
     status ""
     status ""
@@ -500,7 +500,7 @@ fi
 PREVIOUS_BUILD_CONFIG="0"
 
 #Check if we have persisted the configuration from a previous build. We can reuse it if we desire or setup a new configuration
-if ( [ "`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} | /bin/grep 'GIT_EMAIL_ADDRESS'`" != "" ] )
+if ( [ "`/bin/grep 'GIT_EMAIL_ADDRESS' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}`" != "" ] )
 then
     status ""
     status ""
