@@ -46,7 +46,7 @@ then
     status "############################################################################################################"
     status ""
 
-    export SUBNET_ID="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} | /bin/grep "SUBNET_ID" | /usr/bin/awk -F'=' '{print $NF}' | /usr/bin/tr -d '"'`"
+    export SUBNET_ID="`/bin/grep "SUBNET_ID" ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} | /usr/bin/awk -F'=' '{print $NF}' | /usr/bin/tr -d '"'`"
     if ( [ "${SUBNET_ID}" != "" ] )
     then
         status "Found a Subnet ID which is set to : ${SUBNET_ID}"
