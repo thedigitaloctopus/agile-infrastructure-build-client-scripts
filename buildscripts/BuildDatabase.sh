@@ -291,14 +291,14 @@ do
 
         ##########Added
 
-        #Despite what I just said above, there is one case where using files as a way of passing configuration details over
-        #which is that sometimes, if you have a credential which has a slash embedded in it, then you can't have a file name
-        #with a slash in it. The only place I have seen this is in some generated passwords for email authentication which
-        #cannot be changed. So, in this case, there is an exception and I bundle the credential in a file.
-        if ( [ -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat ] )
-        then
-            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SYSTEMEMAILPASSWORD.dat
-        fi
+   #     #Despite what I just said above, there is one case where using files as a way of passing configuration details over
+   #     #which is that sometimes, if you have a credential which has a slash embedded in it, then you can't have a file name
+   #     #with a slash in it. The only place I have seen this is in some generated passwords for email authentication which
+   #     #cannot be changed. So, in this case, there is an exception and I bundle the credential in a file.
+   #     if ( [ -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat ] )
+   #     then
+   #         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SYSTEMEMAILPASSWORD.dat
+   #     fi
 
 
         #Run our configuration for this provider so that it has it's necessary access keys and so on
