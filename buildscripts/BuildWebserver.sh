@@ -79,14 +79,13 @@ do
         
         #What OS type are we building for. Currently, only ubuntu is supported
         
-        if ( [ "${OSTYPE}" = "" ] )
+        if ( [ "${OS_TYPE}" = "" ] )
         then
             ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${WS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
         else
-            ostype="${OSTYPE}"
+            ostype="${OS_TYPE}"
         fi
 
-        
         status "Initialising a new server machine, please wait......"
 
         #Actually start the server machine. Following this, there will be an active machine instance running on your cloud provider
