@@ -87,11 +87,11 @@ do
         database_name="`/bin/echo ${database_name} | /usr/bin/cut -c -32 | /bin/sed 's/-$//g'`"
         
         #What type of OS are we building for. Currently, (April 2018) only ubuntu and debian are supported
-        if ( [ "${OSTYPE}" = "" ] )
+        if ( [ "${OS_TYPE}" = "" ] )
         then
             ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${DB_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
         else
-            ostype="${OSTYPE}"
+            ostype="${OS_TYPE}"
         fi
 
         status "Initialising a new server machine, please wait......"
