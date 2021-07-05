@@ -36,7 +36,7 @@ export WEBSITE_NAME=\"\"  #The core of WEBSITE_URL, for example, if WEBSITE_URL=
 export WEBSITE_URL=\"\"  #the URL of the website registered with your DNS provider
 export SELECTED_TEMPLATE=\"2\" #Select a template number (1-10) to build you can review available template descriptions to decide which you want to deploy here: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/tree/master/templatedconfigurations/templates/digitalocean/templatemenu.md 
 export SUBNET_ID=\"\" # The subnet id for your EC2 instances
-export OSTYPE=\"\" # ami identifier for your build os type. If BUILDOS ubuntu, look here: https://cloud-images.ubuntu.com/locator/ec2/ for BUILDOS debian run this command: /usr/bin/aws ec2 describe-images --owners 379101102735 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep stretch | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/grep x86_64 | /bin/sed 's/\"//g'
+export OS_TYPE=\"\" # ami identifier for your build os type. If BUILDOS ubuntu, look here: https://cloud-images.ubuntu.com/locator/ec2/ for BUILDOS debian run this command: /usr/bin/aws ec2 describe-images --owners 379101102735 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep stretch | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/grep x86_64 | /bin/sed 's/\"//g'
 #The values above are the values that I override by default. If, for example, you wanted to override the size of your webserver machines you could 
 #simply add an export statement beneath the additional overrides section below 
 # and define it for your provider based on the template specification. Similarly for any of the other variables that you find in 
