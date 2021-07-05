@@ -2,16 +2,6 @@
 
 What I have done to facilitate a CDN system is centralise asset storage for each application in their S3 compatible object storage service, for example, for digital ocean this would be the Digital Ocean Spaces service. What this means is that for n webservers as soon as a new asset is uploaded by a user of an application (for example, a new profile picture), the asset is written to the centralied S3 compatible storage service. This means that all webservers "see" the same files as soon as they are created or uploaded. So, webservers 1 to n are all writing to the same bucket in S3. Now, what we don't want to do for every read of that image file to have to go to the origin server and retreive the asset from object storage and then return it to the client, so, what we want to do is at an application level set up a CDN which uses the bucket we are uploading our assets to from the webservers as an origin. So, for your application, for example, Joomla, Wordpress, Drupal or Moodle if you install a CDN system plugin using the S3 bucket that your webservers are writing to, then, the CDN will read the assets from the bucket and serve them directly to the client, caching them where possible. This is much more efficient and reduces the load on the origin webservers.  
 
-So, 
-  
-webserver 1---------------|  
-  
-webserver 2---------------|     =====> Asset upload to S3     ---------------------------------------------------  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------|S3 Bucket Source for your CDN SYSTEM TO READ FROM |  
-webserver 3---------------|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------  
-  
-webserver 4---------------|  
-
 Each application has different directories which receive user uploads, for example, for joomla it is the $WEBROOT/images  and $WEBROOT/media directories  
   
 To define which directories you want the system to use for your assets uploads, you need to go to your template override script and set the following override parameters:  
