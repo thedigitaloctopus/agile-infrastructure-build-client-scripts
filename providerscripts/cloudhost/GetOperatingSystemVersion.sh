@@ -74,9 +74,9 @@ fi
 
 if ( [ "${cloudhost}" = "aws" ] )
 then
-    if ( [ "${OSTYPE}" != "" ] )
+    if ( [ "${OS_TYPE}" != "" ] )
     then
-        /bin/echo "${OSTYPE}"
+        /bin/echo "${OS_TYPE}"
 elif ( [ "${buildos}" = "ubuntu" ] )
     then
         /bin/echo "################################################################################################################" >&3
