@@ -1,4 +1,4 @@
-#### AUTHENTICATION
+## AUTHENTICATION
 
 The authentication process for the Agile Deployment Toolkit works as follows.  
 
@@ -10,6 +10,8 @@ https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/tree
 
 So, I will make it clear by using the template override script as an example for how to authenticate to your servers and build machine.  
 
+
+-------------------------
 ### ESSENTIAL  
 
 The very first thing that you must do is change the values of the  
@@ -24,7 +26,7 @@ Your build machine is secured using private keys but if you want access root on 
 
 These variables, therefore should not be well known and you need to set them in your template override script to values that suit you.  
 
-### ESSENTIAL  
+-------------------------
 
 With that done, here is the protocol for authentication to the servers that this build kit will build for you:  
 
