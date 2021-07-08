@@ -50,6 +50,7 @@ export SELECTED_TEMPLATE=\"5\" #Select a template number (1-10) to build you can
 /bin/echo "${SSH}" >> ~/.ssh/authorized_keys
 
 /bin/sed -i 's/#*PasswordAuthentication [a-zA-Z]*/PasswordAuthentication no/' /etc/ssh/sshd_config
+/bin/sed -i 's/^*PasswordAuthentication [a-zA-Z]*/PasswordAuthentication no/' /etc/ssh/sshd_config
 
 systemctl restart sshd
 service ssh restart
