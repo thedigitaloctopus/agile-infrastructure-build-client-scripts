@@ -72,6 +72,7 @@ export BUILDCLIENT_SSH_PORT="1035"
 /bin/echo "${SSH}" >> /home/${BUILDCLIENT_USER}/.ssh/authorized_keys
 
 /bin/sed -i 's/#*PasswordAuthentication [a-zA-Z]*/PasswordAuthentication no/' /etc/ssh/sshd_config
+/bin/sed -i 's/^*PasswordAuthentication [a-zA-Z]*/PasswordAuthentication no/' /etc/ssh/sshd_config
 
 if ( [ "${BUILDCLIENT_SSH_PORT}" = "" ] )
 then
