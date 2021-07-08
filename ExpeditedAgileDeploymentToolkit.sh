@@ -518,7 +518,7 @@ then
         status "Press the <enter> key to continue"
         read x
     fi
-
+    NO_AUTOSCALERS="1"
     status "How many autoscalers do you want to deploy?"
     read NO_AUTOSCALERS
     while ! ( [ "${NO_AUTOSCALERS}" -eq "${NO_AUTOSCALERS}" ] )
