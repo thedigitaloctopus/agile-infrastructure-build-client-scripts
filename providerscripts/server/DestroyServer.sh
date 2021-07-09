@@ -42,7 +42,7 @@ then
    # ip_index="`/bin/cat -n /tmp/listofVMIPs | /bin/grep ${server_ip} | /usr/bin/awk '{print $1}'`"
    # server_id="`/bin/sed "${ip_index}q;d" /tmp/listofVMIDs`"
     
-    server_id="`/usr/local/bin/cs listVirtualMachines | jq --arg tmp_ip_address "${server_ip}" '(.virtualmachine[] | select(.nic[].ipaddress == $tmp_ip_address) | .id)' | /bin/sed 's/"//g'`"
+    server_id="`/usr/local/bin/cs listVirtualMachines | jq --arg tmp_ip_address "${server_ip}" '(.virtualmachine[] | select(.nic[].ipaddress == $tmp_ip_address) | .id)' | /bin/sed 's/\"//g'`"
     /usr/local/bin/cs destroyVirtualMachine id="${server_id}"
     status "Destroyed a server with ip address ${server_ip}"
 fi
