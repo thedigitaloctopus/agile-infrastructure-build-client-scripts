@@ -225,7 +225,7 @@ do
         #    /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/ssl/${WEBSITE_URL}/dbaas_server_key.pem ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/dbaas_server_key.pem
         #fi
 
-        /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY
+        /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY
 
         #Now we prep our server properly by hardening it a bit and so on
         #This command will 1) Make sure we are up to date on our new server
