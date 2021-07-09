@@ -46,6 +46,9 @@ then
     /usr/bin/ssh-keygen -t ecdsa -b 521 -N "" -f ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}
 fi
 
+/bin/chmod 700 ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}
+/bin/chmod 700 ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub
+
 #Use a varaible for easy access to the build key
 
 if ( [ "${GENERATE_SNAPSHOTS}" = "1" ] )
