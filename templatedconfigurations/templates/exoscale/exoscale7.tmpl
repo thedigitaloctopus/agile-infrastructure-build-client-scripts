@@ -6,17 +6,16 @@
 export APPLICATION="joomla"
 export S3_ACCESS_KEY=""  #MANDATORY
 export S3_SECRET_KEY=""  #MANDATORY
-export S3_HOST_BASE="s3.eu-west-1.amazonaws.com"
-export S3_LOCATION="EU" #For AWS, this always needs to be set to your location for example,  "US" or "EU"
+export S3_HOST_BASE="sos-ch-gva-2.exo.io"
+export S3_LOCATION="US" #For AWS, this always needs to be set to your location for example,  "US" or "EU"
 ###############The access key and secret key to use when manipulating compute with AWS###############
-export TOKEN="" #NOT REQUIRED
 export ACCESS_KEY=""   #MANDATORY
 export SECRET_KEY=""   #MANDATORY
 ###############These variables are cloudflare API key and the email address of your cloudflare account##########################
 export DNS_USERNAME=""  #MANDATORY
 export DNS_SECURITY_KEY=""   #MANDATORY
 export DNS_CHOICE="cloudflare"
-export DEFAULT_USER="admin" ####This should always be 'ubuntu' on ubuntu and 'admin' for debian on AWS
+export DEFAULT_USER="ubuntu" ####SWAP THIS from ubuntu to debian IF YOU WANT TO DEPLOY TO debian rather than ubuntu
 ###^^^^^^^^^^^^^^^^^^^^^^^^^^^^ESSENTIAL TO REVIEW ALL THE ABOVE PARAMETERS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #################################################################################################################################
 ##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
@@ -62,17 +61,17 @@ export APPLICATION_BASELINE_SOURCECODE_REPOSITORY=""
 export BUILD_ARCHIVE_CHOICE="hourly"
 export APPLICATION_LANGUAGE="PHP"
 export APPLICATION_IDENTIFIER="1"
-export PHP_VERSION="7.4"
+export PHP_VERSION="8.0"
 export REGION=""
-export REGION_ID="eu-west-1"
-export DB_SIZE="t2.micro"
-export DB_SERVER_TYPE="t2.micro"
-export WS_SIZE="t2.micro"
-export WS_SERVER_TYPE="t2.micro"
-export AS_SIZE="t2.micro"
-export AS_SERVER_TYPE="t2.micro"
-export CLOUDHOST="aws"
-export MACHINE_TYPE="AWS"
+export REGION_ID="1128bd56-b4d9-4ac6-a7b9-c715b187ce11"
+export DB_SIZE="10G"
+export DB_SERVER_TYPE="b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8"
+export WS_SIZE="10G"
+export WS_SERVER_TYPE="b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8"
+export AS_SIZE="10G"
+export AS_SERVER_TYPE="b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8"
+export CLOUDHOST="exoscale"
+export MACHINE_TYPE="EXOSCALE"
 export ALGORITHM="rsa"
 export USER="root"
 export CLOUDHOST_USERNAME=""
@@ -87,7 +86,7 @@ export INFRASTRUCTURE_REPOSITORY_PROVIDER="github"
 export INFRASTRUCTURE_REPOSITORY_OWNER="agile-deployer"
 export INFRASTRUCTURE_REPOSITORY_USERNAME="agile-deployer"
 export INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
-export DATASTORE_CHOICE="amazonS3"
+export DATASTORE_CHOICE="exoscale"
 export DBaaS_HOSTNAME=""
 export DBaaS_USERNAME=""
 export DBaaS_PASSWORD=""
