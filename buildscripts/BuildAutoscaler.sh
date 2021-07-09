@@ -254,7 +254,7 @@ do
         #Make a copy of our private key on our server also. The reason for having a copy of the private key on the server also is that
         #the server may wish to authenticate itself to one of the other machines in the setup and so the private key will be needed
         #All machines in a given deployment use the same public/private keys for their authentication. It's a one key fits all machines setup.
-        # /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY
+        /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY
 
         status "It looks like the machine is booted and accepting connections, so, let's pass it all our configuration stuff that it needs"
 
