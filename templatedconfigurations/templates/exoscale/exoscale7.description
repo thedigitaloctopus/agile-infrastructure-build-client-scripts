@@ -1,7 +1,7 @@
 DEVELOPMENT or PRODUCTION MODE INSTALLATION OF AN HOURLY BACKED UP JOOMLA APPLICATION
 ---------------------------------------------------------------------------
 
-DETAIL: This template will spin up the a Joomla application on AWS in EU-WEST. It deploys to "tiny" machines and in production mode by default. The database used is a Maria DB instance running on a VPS machine in the AWS cloud. The DNS provider is Cloudflare. You will need a AWS account and a Cloudflare account to be able to deploy this application.
+DETAIL: This template will spin up the a Joomla application on Exoscale in CH-DK-2. It deploys to "tiny" machines and in production mode by default. The database used is a Maria DB instance running on a VPS machine in the AWS cloud. The DNS provider is Cloudflare. You will need a AWS account and a Cloudflare account to be able to deploy this application.
 You must configure the variables marked "MANDATORY"
 For Development mode leave PRODUCTION="0" DEVELOPMENT="1" NUMBER_WS="1" in the template.
 For Production mode switch PRODUCATION="1" DEVELOPMENT="0" NUMBER_WS="n" in the template.
