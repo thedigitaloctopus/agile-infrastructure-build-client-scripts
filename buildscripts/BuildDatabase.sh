@@ -250,6 +250,8 @@ do
 
             read response
         fi
+        
+        /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY
 
         #If we are here, then we know that the machine has passed it's test to see if it is online, so, we can proceed
         status "It looks like the machine is booted and accepting connections, so, let's pass it all our configuration stuff that it needs"
