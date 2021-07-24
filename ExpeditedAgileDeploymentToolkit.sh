@@ -323,7 +323,6 @@ read x
 
 /usr/sbin/ufw default deny incoming
 /usr/sbin/ufw default allow outgoing
-/usr/sbin/ufw allow ssh
 /usr/sbin/ufw enable
 
 status ""
@@ -416,6 +415,7 @@ status ""
 status ""
 
 . ${BUILD_HOME}/templatedconfigurations/ConfigureTemplate.sh
+. ${BUILD_HOME}/TightenBuildMachineFirewall.sh
 . ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
