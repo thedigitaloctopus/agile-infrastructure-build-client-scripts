@@ -150,6 +150,7 @@ then
     fi
 fi
 
+. ${BUILD_HOME}/TightenBuildMachineFirewall.sh
 ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
 
 status "Your cloudhost is set to ${CLOUDHOST}"
