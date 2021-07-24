@@ -1,3 +1,5 @@
+set -x
+
 /usr/bin/s3cmd --force get s3://adt/authorised-ips.dat
 
 if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] )
