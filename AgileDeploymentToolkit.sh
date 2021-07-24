@@ -372,7 +372,7 @@ status "########################################################################
 
 /usr/sbin/ufw default deny incoming
 /usr/sbin/ufw default allow outgoing
-/usr/sbin/ufw allow ssh
+/usr/sbin/ufw allow ${SSH_PORT}
 /usr/sbin/ufw enable
 
 
