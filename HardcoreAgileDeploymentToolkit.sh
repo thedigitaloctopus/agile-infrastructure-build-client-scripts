@@ -206,9 +206,9 @@ then
     ${BUILD_HOME}/installscripts/InstallUFW.sh "${BUILDOS}"
 fi
 
-/usr/sbin/ufw default deny incoming
-/usr/sbin/ufw default allow outgoing
-/usr/sbin/ufw enable
+#/usr/sbin/ufw default deny incoming
+#/usr/sbin/ufw default allow outgoing
+#/usr/sbin/ufw enable
 
 BUILD_IDENTIFIER="`/bin/echo ${BUILD_IDENTIFIER} | /usr/bin/tr '[:upper:]' '[:lower:]' | /bin/sed 's/-//g'`"
 
