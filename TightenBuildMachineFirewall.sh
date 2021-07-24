@@ -3,7 +3,7 @@
 if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] )
 then
 
-    /usr/sbin/ufw reset
+    /usr/sbin/ufw --force reset
 
     while read ip
     do
