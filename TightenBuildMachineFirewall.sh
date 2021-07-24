@@ -29,5 +29,7 @@ else
         done < ${BUILD_HOME}/authorised-ips.dat
     
         /bin/echo "y" | /usr/sbin/ufw enable
+    else
+        /usr/sbin/ufw allow ${SSH_PORT}
     fi
 fi
