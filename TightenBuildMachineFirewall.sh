@@ -2,7 +2,7 @@
 
 if ( [ "`/usr/bin/crontab -l | /bin/grep Tighten`" = "" ] )
 then
-    /bin/echo "*/1 * * * * export HOME="${BUILD_HOME}" && ${BUILD_HOME}/TightenBuildMachineFirewall.sh" >> /var/spool/cron/crontabs/root
+    /bin/echo "*/1 * * * * ${BUILD_HOME}/TightenBuildMachineFirewall.sh" >> /var/spool/cron/crontabs/root
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
