@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if ( [ "`/usr/bin/crontab -l | /bin/grep Tighten`" = "" ] )
+then
+    /bin/echo "*/1 * * * * export HOME="${BUILD_HOME}" && ${BUILD_HOME}/TightenBuildMachineFirewall.sh" >> /var/spool/cron/crontabs/root
+    /usr/bin/crontab -u root /var/spool/cron/crontabs/root
+fi
+
 /bin/mv authorised-ips.dat authorised-ips.dat.$$
 
 /usr/bin/s3cmd --force get s3://adt/authorised-ips.dat
