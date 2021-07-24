@@ -321,9 +321,10 @@ status "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
 status "########################################################################################################################"
 read x
 
-/usr/sbin/ufw default deny incoming
-/usr/sbin/ufw default allow outgoing
-/usr/sbin/ufw enable
+#/usr/sbin/ufw default deny incoming
+#/usr/sbin/ufw default allow outgoing
+#/usr/sbin/ufw allow ${SSH_PORT}
+#/usr/sbin/ufw enable
 
 status ""
 status ""
