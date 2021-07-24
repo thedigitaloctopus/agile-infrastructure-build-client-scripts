@@ -249,6 +249,7 @@ then
     fi
 fi
 
+. ${BUILD_HOME}/TightenBuildMachineFirewall.sh
 . ${BUILD_HOME}/SelectCloudhostExpedited.sh
 
 #Check that we are 64 bit
