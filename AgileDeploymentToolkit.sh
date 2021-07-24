@@ -570,6 +570,7 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 . ${BUILD_HOME}/buildscripts/InitialiseSecurityKeys.sh
 . ${BUILD_HOME}/buildscripts/InitialiseCaching.sh
 . ${BUILD_HOME}/buildscripts/InitialiseDatabase.sh
+. ${BUILD_HOME}/TightenBuildMachineFirewall.sh
 . ${BUILD_HOME}/buildscripts/InitialiseBuildParams.sh
 . ${BUILD_HOME}/buildscripts/InitialiseDatastore.sh
 . ${BUILD_HOME}/buildscripts/InitialiseBuildChoice.sh
