@@ -11,5 +11,7 @@ then
         /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
 
     done < ${BUILD_HOME}/authorised-ips.dat
+    
+    /usr/sbin/ufw enable
 
 fi
