@@ -30,6 +30,10 @@ else
     
         /bin/echo "y" | /usr/sbin/ufw enable
     else
-        /usr/sbin/ufw allow ${SSH_PORT}
+        if ( [ "`/usr/sbin/ufw status 2>/dev/null | /bin/grep inactive`" = "" ] )
+        then
+            /usr/sbin/ufw allow ${SSH_PORT}
+            /bin/echo "y" | /usr/sbin/ufw enable
+        fi
     fi
 fi
