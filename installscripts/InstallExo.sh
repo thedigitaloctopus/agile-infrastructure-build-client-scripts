@@ -29,20 +29,18 @@ fi
 
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
-    exoscale_cli_archive="`/usr/bin/curl https://github.com/exoscale/cli/releases/ | /bin/grep tar.gz | /bin/grep amd | /bin/grep download | /bin/grep linux | /usr/bin/head -1 | /bin/sed 's/.*exoscale-cli/exoscale-cli/g' | /usr/bin/awk -F'"' '{print $1}'`"
-    version="`/bin/echo ${exoscale_cli_archive} | /bin/sed 's/.*exoscale-cli_//g' | /bin/sed 's/_linux.*//g'`"
-    /usr/bin/wget https://github.com/exoscale/cli/releases/download/v${version}/${exoscale_cli_archive}
-    /usr/bin/tar xvfz ${exoscale_cli_archive} -C ./exo_unpack
+    exo_version="`/usr/bin/curl https://github.com/exoscale/cli/releases | /bin/grep releases | /bin/grep exoscale-cli | /usr/bin/tac | /usr/bin/head -1 | /bin/sed "s/.*exoscale-cli_//g" | /usr/bin/awk -F'_' '{print $1}'`"
+    /usr/bin/wget https://github.com/exoscale/cli/releases/download/v${exo_version}/exoscale-cli_${exo_version}_linux_amd64.tar.gz
+    /usr/bin/tar xvfz exoscale-cli*tar.gz -C ./exo_unpack
     /bin/mv ./exo_unpack/exo /usr/bin
-    /bin/rm -r exo_unpack
+    /bin/rm -r ./exo_unpack
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
-    exoscale_cli_archive="`/usr/bin/curl https://github.com/exoscale/cli/releases/ | /bin/grep tar.gz | /bin/grep amd | /bin/grep download | /bin/grep linux | /usr/bin/head -1 | /bin/sed 's/.*exoscale-cli/exoscale-cli/g' | /usr/bin/awk -F'"' '{print $1}'`"
-    version="`/bin/echo ${exoscale_cli_archive} | /bin/sed 's/.*exoscale-cli_//g' | /bin/sed 's/_linux.*//g'`"
-    /usr/bin/wget https://github.com/exoscale/cli/releases/download/v${version}/${exoscale_cli_archive}
-    /usr/bin/tar xvfz ${exoscale_cli_archive} -C ./exo_unpack
+    exo_version="`/usr/bin/curl https://github.com/exoscale/cli/releases | /bin/grep releases | /bin/grep exoscale-cli | /usr/bin/tac | /usr/bin/head -1 | /bin/sed "s/.*exoscale-cli_//g" | /usr/bin/awk -F'_' '{print $1}'`"
+    /usr/bin/wget https://github.com/exoscale/cli/releases/download/v${exo_version}/exoscale-cli_${exo_version}_linux_amd64.tar.gz
+    /usr/bin/tar xvfz exoscale-cli*tar.gz -C ./exo_unpack
     /bin/mv ./exo_unpack/exo /usr/bin
-    /bin/rm -r exo_unpack
+    /bin/rm -r ./exo_unpack
 fi
