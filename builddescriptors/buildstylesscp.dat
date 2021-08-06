@@ -1,4 +1,4 @@
 NGINX:source
 APACHE:source
-LIGHTTPD:repo
+LIGHTTPD:source
 POSTGRES:source
