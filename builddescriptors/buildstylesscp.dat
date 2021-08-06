@@ -1,3 +1,4 @@
 NGINX:source
 APACHE:source
+LIGHTTPD:source
 POSTGRES:source
