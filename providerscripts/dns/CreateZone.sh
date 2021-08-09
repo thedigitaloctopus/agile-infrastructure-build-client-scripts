@@ -30,15 +30,21 @@ if ( [ "${dns}" = "" ] )
 then
     /bin/echo "-1"
 else
-    if ( [ "${dns}" = "cloudflare" ] )
-    then
-        /usr/bin/curl -X POST "https://api.cloudflare.com/client/v4/zones" -H "X-Auth-Email: ${email}" -H "X-Auth-Key: ${apikey}" -H "Content-Type: application/json" --data "{\"name\":\"${websiteurl}\"}" > /dev/null 2>&1
-    fi
-    
-    if ( [ "${dns}" = "exoscale" ] )
-    then
-        /usr/bin/curl -H 'X-DNS-Token: <token>' -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"domain":{"name":"example.com"}}' -X POST https://api.exoscale.com/dns/v1/domains
-    fi
+
+if ( [ "${dns}" = "cloudflare" ] )
+then
+    /usr/bin/curl -X POST "https://api.cloudflare.com/client/v4/zones" -H "X-Auth-Email: ${email}" -H "X-Auth-Key: ${apikey}" -H "Content-Type: application/json" --data "{\"name\":\"${websiteurl}\"}" > /dev/null 2>&1
+fi
+
+email="${1}"
+apikey="${2}"
+websiteurl="`/bin/echo ${3} | /usr/bin/cut -d'.' -f2-`"
+dns="${4}"
+
+if ( [ "${dns}" = "exoscale" ] )
+then
+    /usr/bin/curl -H "X-DNS-Token: ${apikey}" -H 'Accept: application/json' -H 'Content-Type: application/json' -d "{\"domain\":{\"name\":\"${websiteurl}\"}}" -X POST https://api.exoscale.com/dns/v1/domains
+fi
     
     
     username="${1}"
