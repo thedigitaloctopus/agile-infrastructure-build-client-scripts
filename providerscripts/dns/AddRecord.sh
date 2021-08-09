@@ -46,14 +46,11 @@ then
     /usr/bin/curl -X POST "https://api.cloudflare.com/client/v4/zones/${zoneid}/dns_records" -H "X-Auth-Email: ${email}" -H "X-Auth-Key: ${authkey}" -H "Content-Type: application/json" --data "{\"type\":\"A\",\"name\":\"${websiteurl}\",\"content\":\"${ip}\",\"ttl\":120,\"proxiable\":true,\"proxied\":${proxied},\"ttl\":120}"
 fi
 
-authkey="${2}"
-subdomain="`/bin/echo ${3} | /usr/bin/awk -F'.' '{print $1}'`"
-domainurl="`/bin/echo ${3} | /usr/bin/cut -d'.' -f2-`"
-ip="${4}"
-dns="${6}"
-
-/bin/echo "1:$1 2:$2 3:$3 4:$4 5:$5 6:$6 7:$7" > /tmp/Add.log
-
+authkey="${3}"
+subdomain="`/bin/echo ${4} | /usr/bin/awk -F'.' '{print $1}'`"
+domainurl="`/bin/echo ${4} | /usr/bin/cut -d'.' -f2-`"
+ip="${5}"
+dns="${7}"
 
 if ( [ "${dns}" = "exoscale" ] )
 then
