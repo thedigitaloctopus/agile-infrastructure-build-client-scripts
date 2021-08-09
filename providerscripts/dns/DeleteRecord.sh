@@ -18,7 +18,7 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 ####################################################################################
 ####################################################################################
-#set -x
+set -x
 
 domain="${7}"
 domainurl="`/bin/echo ${domain} | /usr/bin/cut -d'.' -f2-`"
