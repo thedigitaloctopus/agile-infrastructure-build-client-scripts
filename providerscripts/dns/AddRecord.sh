@@ -51,7 +51,7 @@ email="${2}"
 authkey="${3}"
 websiteurl="${4}"
 ip="${5}"
-dns="${6}"
+dns="${7}"
 
 /bin/echo "zoneid:${zoneid} email:${email} authkey:${authkey} websiteurl:${websiteurl} ip:${ip} dns:${dns}" >> /tmp/addrecord.log
 
