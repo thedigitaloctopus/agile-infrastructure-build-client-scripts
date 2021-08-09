@@ -241,27 +241,26 @@ then
        fi
    fi
 
-    if ( [ ! -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSUSERNAME ] )
-        then
-            status "Please input your digital ocean Email Address"
-            read DNS_USERNAME
-            /bin/echo ${DNS_USERNAME} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSUSERNAME
-            DNS_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSUSERNAME`"
-        else
-            DNS_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSUSERNAME`"
-            status "Have found an email address stored from a previous build for your digital ocean account"
-            status "It is set to: ${DNS_USERNAME}"
-            status "Please enter Y/y if this is a correct email address"
-            read answer
-            if ( [ "`/bin/echo "${answer}" | /bin/grep 'y'`" = "" ]  && [ "`/bin/echo "${answer}" | /bin/grep 'Y'`" = "" ] )
-            then
-                status "So, please input the access email address of your digital ocean account"
-                read DNS_USERNAME
-                /bin/echo "${DNS_USERNAME}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSUSERNAME
-            fi
-        fi
-
-fi
+   if ( [ ! -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSUSERNAME ] )
+   then
+       status "Please input your digital ocean Email Address"
+       read DNS_USERNAME
+       /bin/echo ${DNS_USERNAME} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSUSERNAME
+       DNS_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSUSERNAME`"
+   else
+       DNS_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSUSERNAME`"
+       status "Have found an email address stored from a previous build for your digital ocean account"
+       status "It is set to: ${DNS_USERNAME}"
+       status "Please enter Y/y if this is a correct email address"
+       read answer
+            
+       if ( [ "`/bin/echo "${answer}" | /bin/grep 'y'`" = "" ]  && [ "`/bin/echo "${answer}" | /bin/grep 'Y'`" = "" ] )
+       then
+           status "So, please input the access email address of your digital ocean account"
+           read DNS_USERNAME
+           /bin/echo "${DNS_USERNAME}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-digitalocean-credentials/DNSUSERNAME
+       fi
+   fi
 elif ( [ "${choice}" = "4" ] )
 then
     DNS_CHOICE="exoscale"
@@ -296,23 +295,22 @@ then
    fi
 
     if ( [ ! -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-exoscale-credentials/DNSUSERNAME ] )
+    then
+        status "Please input your Exoscale Email Address"
+        read DNS_USERNAME
+        /bin/echo ${DNS_USERNAME} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-exoscale-credentials/DNSUSERNAME
+        DNS_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-exoscale-credentials/DNSUSERNAME`"
+    else
+        DNS_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-exoscale-credentials/DNSUSERNAME`"
+        status "Have found an email address stored from a previous build for your exoscale account"
+        status "It is set to: ${DNS_USERNAME}"
+        status "Please enter Y/y if this is a correct email address"
+        read answer
+        if ( [ "`/bin/echo "${answer}" | /bin/grep 'y'`" = "" ]  && [ "`/bin/echo "${answer}" | /bin/grep 'Y'`" = "" ] )
         then
-            status "Please input your Exoscale Email Address"
+            status "So, please input the access email address of your Exoscale account"
             read DNS_USERNAME
-            /bin/echo ${DNS_USERNAME} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-exoscale-credentials/DNSUSERNAME
-            DNS_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-exoscale-credentials/DNSUSERNAME`"
-        else
-            DNS_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-exoscale-credentials/DNSUSERNAME`"
-            status "Have found an email address stored from a previous build for your exoscale account"
-            status "It is set to: ${DNS_USERNAME}"
-            status "Please enter Y/y if this is a correct email address"
-            read answer
-            if ( [ "`/bin/echo "${answer}" | /bin/grep 'y'`" = "" ]  && [ "`/bin/echo "${answer}" | /bin/grep 'Y'`" = "" ] )
-            then
-                status "So, please input the access email address of your Exoscale account"
-                read DNS_USERNAME
-                /bin/echo "${DNS_USERNAME}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-exoscale-credentials/DNSUSERNAME
-            fi
+            /bin/echo "${DNS_USERNAME}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-exoscale-credentials/DNSUSERNAME
         fi
-
+    fi
 fi
