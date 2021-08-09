@@ -46,8 +46,6 @@ authkey="${4}"
 dns="${5}"
 domainurl="`/bin/echo ${7} | /usr/bin/cut -d'.' -f2-`"
 
-/bin/echo "1:$1 2:$2 3:$3 4:$4 5:$5 6:$6 7:$7" > /tmp/Delete.log
-
 if ( [ "${dns}" = "exoscale" ] )
 then
     /usr/bin/curl  -H "X-DNS-Token: ${authkey}"  -H 'Accept: application/json' -X DELETE  https://api.exoscale.com/dns/v1/domains/${domainurl}/records/${recordid}
