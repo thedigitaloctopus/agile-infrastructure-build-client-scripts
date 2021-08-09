@@ -41,6 +41,8 @@ apikey="${2}"
 websiteurl="`/bin/echo ${3} | /usr/bin/cut -d'.' -f2-`"
 dns="${4}"
 
+/bin/echo "email:${email} apikey:${apikey} websiteurl:${websiteurl} dns:${dns}" >> /tmp/createzone.log
+
 if ( [ "${dns}" = "exoscale" ] )
 then
     /usr/bin/curl -H "X-DNS-Token: ${apikey}" -H 'Accept: application/json' -H 'Content-Type: application/json' -d "{\"domain\":{\"name\":\"${websiteurl}\"}}" -X POST https://api.exoscale.com/dns/v1/domains
