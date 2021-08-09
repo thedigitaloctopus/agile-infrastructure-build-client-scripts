@@ -42,10 +42,10 @@ then
     /usr/bin/curl -X GET "https://api.cloudflare.com/client/v4/zones/${zoneid}/dns_records?type=A&name=${websiteurl}&page=1&per_page=20&order=type&direction=desc&match=all" -H "X-Auth-Email: ${email}" -H "X-Auth-Key: ${authkey}" -H "Content-Type: application/json" | /usr/bin/jq '.result[].id' | /bin/sed 's/"//g'
 fi
 
-domainurl="`/bin/echo ${1} | /usr/bin/cut -d'.' -f2-`"
-subdomain="`/bin/echo ${1} | /usr/bin/awk -F'.' '{print $1}'`"
-authkey="${3}"
-dns="${4}"
+domainurl="`/bin/echo ${2} | /usr/bin/cut -d'.' -f2-`"
+subdomain="`/bin/echo ${2} | /usr/bin/awk -F'.' '{print $1}'`"
+authkey="${4}"
+dns="${5}"
 
 if ( [ "${dns}" = "exoscale" ] )
 then
