@@ -53,6 +53,9 @@ websiteurl="${4}"
 ip="${5}"
 dns="${6}"
 
+/bin/echo "zoneid:${zoneid} email:${email} authkey:${authkey} websiteurl:${websiteurl} ip:${ip} dns:${dns}" >> /tmp/addrecord.log
+
+
 if ( [ "${dns}" = "exoscale" ] )
 then
     /usr/bin/curl  -H "X-DNS-Token: ${authkey}" -H 'Accept: application/json' -H 'Content-Type: application/json' -X POST -d "{\"record\":{\"name\": \"web\",\"record_type\": \"A\",\"content\": \"${ip}\",\"ttl\": 3600}}" https://api.exoscale.com/dns/v1/domains/example.com/records
