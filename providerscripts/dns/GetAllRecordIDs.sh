@@ -53,7 +53,7 @@ dns="${5}"
 
 if ( [ "${dns}" = "exoscale" ] )
 then
-    /usr/bin/curl  -H "X-DNS-Domain-Token: ${authkey}" -H 'Accept: application/json' https://api.exoscale.com/dns/v1/domains/${websiteurl}/records
+    /usr/bin/curl  -H "X-DNS-Token: ${authkey}" -H 'Accept: application/json' https://api.exoscale.com/dns/v1/domains/${websiteurl}/records
 fi
 
 domainurl="`/bin/echo ${2} | /usr/bin/cut -d'.' -f2-`"
