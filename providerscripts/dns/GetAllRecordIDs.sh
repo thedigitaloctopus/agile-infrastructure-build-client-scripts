@@ -43,7 +43,7 @@ then
 fi
 
 zoneid="${1}"
-websiteurl="${2}"
+websiteurl="`/bin/echo ${2} | /usr/bin/cut -d'.' -f2-`"
 email="${3}"
 authkey="${4}"
 dns="${5}"
