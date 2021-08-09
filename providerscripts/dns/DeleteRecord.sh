@@ -41,12 +41,12 @@ then
     /usr/bin/curl -X DELETE "https://api.cloudflare.com/client/v4/zones/${zoneid}/dns_records/${recordid}" -H "X-Auth-Email: ${email}"  -H "X-Auth-Key: ${authkey}" -H "Content-Type: application/json"
 fi
 
-recordid="${1}"
-authkey="${3}"
-dns="${4}"
-domainurl="`/bin/echo ${5} | /usr/bin/cut -d'.' -f2-`"
+recordid="${2}"
+authkey="${4}"
+dns="${5}"
+domainurl="`/bin/echo ${7} | /usr/bin/cut -d'.' -f2-`"
 
-/bin/echo "1:$1 2:$2 3:$3 4:$4 5:$5 6:$6" > /tmp/Delete.log
+/bin/echo "1:$1 2:$2 3:$3 4:$4 5:$5 6:$6 7:$7" > /tmp/Delete.log
 
 if ( [ "${dns}" = "exoscale" ] )
 then
