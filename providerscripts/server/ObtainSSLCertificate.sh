@@ -266,8 +266,8 @@ fi
 
 if ( [ "${DNS_CHOICE}" = "exoscale" ] )
 then
-    EXOSCALE_API_KEY="`/bin/echo ${DNSSECURITYKEY} | /usr/bin/awk -F':' '{print $2}'`"
-    EXOSCALE_API_SECRET="`/bin/echo ${DNSSECURITYKEY} | /usr/bin/awk -F':' '{print $3}'`"
+    EXOSCALE_API_KEY="`/bin/echo ${DNS_SECURITY_KEY} | /usr/bin/awk -F':' '{print $2}'`"
+    EXOSCALE_API_SECRET="`/bin/echo ${DNS_SECURITY_KEY} | /usr/bin/awk -F':' '{print $3}'`"
 
     #For production
     if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
