@@ -37,9 +37,6 @@ email="${3}"
 authkey="${4}"
 dns="${5}"
 
-/bin/echo "zoneid:${zoneid} email:${email} authkey:${authkey} websiteurl:${websiteurl} dns:${dns}" >> /tmp/getallrecords.log
-
-
 if ( [ "${dns}" = "cloudflare" ] )
 then
     /usr/bin/curl -X GET "https://api.cloudflare.com/client/v4/zones/${zoneid}/dns_records?type=A&name=${websiteurl}&page=1&per_page=20&order=type&direction=desc&match=all" -H "X-Auth-Email: ${email}" -H "X-Auth-Key: ${authkey}" -H "Content-Type: application/json" | /usr/bin/jq '.result[].id' | /bin/sed 's/"//g'
