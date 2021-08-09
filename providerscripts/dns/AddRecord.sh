@@ -46,19 +46,16 @@ then
     /usr/bin/curl -X POST "https://api.cloudflare.com/client/v4/zones/${zoneid}/dns_records" -H "X-Auth-Email: ${email}" -H "X-Auth-Key: ${authkey}" -H "Content-Type: application/json" --data "{\"type\":\"A\",\"name\":\"${websiteurl}\",\"content\":\"${ip}\",\"ttl\":120,\"proxiable\":true,\"proxied\":${proxied},\"ttl\":120}"
 fi
 
-zoneid="${1}"
-email="${2}"
-authkey="${3}"
-websiteurl="${4}"
-ip="${5}"
-dns="${7}"
-
-/bin/echo "zoneid:${zoneid} email:${email} authkey:${authkey} websiteurl:${websiteurl} ip:${ip} dns:${dns}" >> /tmp/addrecord.log
-
+email="${1}"
+authkey="${2}"
+subdomain="`/bin/echo ${3} | /usr/bin/awk -F'.' '{print $1}'`"
+domainurl="`/bin/echo ${3} | /usr/bin/cut -d'.' -f2-`"
+ip="${4}"
+dns="${6}"
 
 if ( [ "${dns}" = "exoscale" ] )
 then
-    /usr/bin/curl  -H "X-DNS-Token: ${authkey}" -H 'Accept: application/json' -H 'Content-Type: application/json' -X POST -d "{\"record\":{\"name\": \"web\",\"record_type\": \"A\",\"content\": \"${ip}\",\"ttl\": 3600}}" https://api.exoscale.com/dns/v1/domains/example.com/records
+    /usr/bin/curl  -H "X-DNS-Token: ${authkey}" -H 'Accept: application/json' -H 'Content-Type: application/json' -X POST -d "{\"record\":{\"name\": \"${subdomain}\",\"record_type\": \"A\",\"content\": \"${ip}\",\"ttl\": 3600}}" https://api.exoscale.com/dns/v1/domains/${domainurl}/records
 fi
 
 rootdomain="${1}"
