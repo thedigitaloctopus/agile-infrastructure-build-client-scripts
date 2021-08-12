@@ -682,7 +682,7 @@ else
     #our cloudhosts machines.
     NO_AUTOSCALERS="1"
     
-    if ( [ "${PRODUCTION}" != "0" ] && [ "${DEVELOPMENT}" != "1" ] )
+    if ( [ "${PRODUCTION}" != "0" ] && [ "${DEVELOPMENT}" != "1" ] && [ "${BASELINE_DB_REPOSITORY}" != "VIRGIN" ] )
     then
     	if ( [ "${GENERATE_SNAPSHOTS}" != "1" ] )
 	    then
