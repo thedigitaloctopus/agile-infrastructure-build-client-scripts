@@ -39,11 +39,12 @@ else
     email="${1}"
     apikey="${2}"
     websiteurl="`/bin/echo ${3} | /usr/bin/cut -d'.' -f2-`"
+    domainurl="`/bin/echo ${3} | /usr/bin/cut -d'.' -f2-`"
     dns="${4}"
 
     if ( [ "${dns}" = "exoscale" ] )
     then
-        /usr/bin/curl -H "X-DNS-Token: ${apikey}" -H 'Accept: application/json' -X DELETE https://api.exoscale.com/dns/v1/domains/example.com/zone
+        /usr/bin/curl -H "X-DNS-Token: ${apikey}" -H 'Accept: application/json' -X DELETE https://api.exoscale.com/dns/v1/domains/${domainurl}/zone
         /usr/bin/curl -H "X-DNS-Token: ${apikey}" -H 'Accept: application/json' -H 'Content-Type: application/json' -d "{\"domain\":{\"name\":\"${websiteurl}\"}}" -X POST https://api.exoscale.com/dns/v1/domains
     fi
     
