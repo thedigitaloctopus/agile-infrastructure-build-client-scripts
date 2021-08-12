@@ -342,7 +342,7 @@ then
     status "Means that there is something wrong and you should start to investigate"
     status "##########################################################################################################"
 else
-    if ( [ "${PRODUCTION}" != "0" ] && [ "${DEVELOPMENT}" != "1" ] )
+    if ( [ "${PRODUCTION}" != "0" ] && [ "${DEVELOPMENT}" != "1" ] && [ "${BASELINE_DB_REPOSITORY}" != "VIRGIN" ] )
     then
         . ${BUILD_HOME}/buildscripts/BuildAutoscaler.sh
     fi
