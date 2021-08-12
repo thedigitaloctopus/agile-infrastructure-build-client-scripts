@@ -1,4 +1,4 @@
-You will need to obtain your domain name registrar such as [fasthosts](www.fasthosts.co.uk)
+You will need to obtain your domain name registrar such as [fasthosts](https://www.fasthosts.co.uk)
 
 That done, you will need to point the nameservers to the service you are using for your DNS resolving.
 
