@@ -543,7 +543,7 @@ else
     read carryon
     #Call the build scripts. These actually build and deploy the machines. Until this point, there was nothing new running on
     #our cloudhosts machines.
-    if ( [ "${PRODUCTION}" != "0" ] && [ "${DEVELOPMENT}" != "1" ] )
+    if ( [ "${PRODUCTION}" != "0" ] && [ "${DEVELOPMENT}" != "1" ] && [ "${BASELINE_DB_REPOSITORY}" != "VIRGIN" ] )
     then
         NO_AUTOSCALERS=1
 	if ( [ "${GENERATE_SNAPSHOTS}" != "1" ] )
