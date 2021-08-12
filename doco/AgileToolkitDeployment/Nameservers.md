@@ -1,4 +1,4 @@
-You will need to obtain your domain name from a provider such as fasthosts.co.uk.
+You will need to obtain your domain name registrar such as [fasthosts](fasthosts.co.uk)
 
 That done, you will need to point the nameservers to the service you are using for your DNS resolving.
 
@@ -6,7 +6,7 @@ For example:
 
 Digital Ocean: ns1.digitalocean.com ns2.digitalocean.com ns3.digitalocean.com  
 
-Exoscale: ns1.exoscale.ch ns1.exoscale.com ns1.exoscale.io ns1.exoscale.net  
+Exoscale: ns1.exoscale.ch ns1.exoscale.com ns1.exoscale.io ns1.exoscale.net  (be sure to include all of these)
 
 Vultr: ns1.vultr.com ns2.vultr.com  
 
