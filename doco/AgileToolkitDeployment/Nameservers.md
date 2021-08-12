@@ -10,4 +10,4 @@ Vultr: ns1.vultr.com ns2.vultr.com
 Linode: NS1.LINODE.COM NS2.LINODE.COM NS3.LINODE.COM NS4.LINODE.COM
 
 
-You will have some extra steps for Cloudflare which you can read about (here:)[https://support.cloudflare.com/hc/en-us/articles/200169006-Setting-up-Custom-Nameservers-at-Cloudflare]
+You will have some extra steps for Cloudflare which you can read about [here:](https://support.cloudflare.com/hc/en-us/articles/200169006-Setting-up-Custom-Nameservers-at-Cloudflare)
