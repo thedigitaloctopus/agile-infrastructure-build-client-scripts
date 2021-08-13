@@ -22,7 +22,7 @@
 
 WEB_IP=""
 
-if ( [ ! -f  ./ConnectToWebserver.sh ] )
+if ( [ ! -f  ./PerformWebsiteBaseline.sh ] )
 then
     /bin/echo "Sorry, this script has to be run from the helperscripts subdirectory"
     exit
