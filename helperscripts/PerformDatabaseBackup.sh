@@ -20,7 +20,7 @@
 #######################################################################################################
 #set -x
 
-if ( [ ! -f  ./ConnectToDB.sh ] )
+if ( [ ! -f  ./PerformDatabaseBackup.sh ] )
 then
     /bin/echo "Sorry, this script has to be run from the helperscripts subdirectory"
     exit
