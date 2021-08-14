@@ -95,7 +95,8 @@ read response
 
 SERVER_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER`"
 SSH_PORT="`/bin/grep SSH_PORT ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} | /bin/sed 's/"//g' | /usr/bin/awk -F'=' '{print $NF}'`"
-/usr/bin/ssh-keygen -f "${HOME}/.ssh/known_hosts" -R [${DB_IP}]:${SSH_PORT}
+
+/usr/bin/ssh-keygen -f "${HOME}/.ssh/known_hosts" -R [${DB_IP}]:${SSH_PORT} 2>/dev/null
 
 if ( [ "${response}" = "1" ] )
 then
