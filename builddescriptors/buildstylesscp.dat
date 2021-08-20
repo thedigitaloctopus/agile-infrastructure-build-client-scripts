@@ -1,4 +1,4 @@
 NGINX:source:modsecurity
-APACHE:source
+APACHE:repos:modsecurity
 LIGHTTPD:source
 POSTGRES:source
