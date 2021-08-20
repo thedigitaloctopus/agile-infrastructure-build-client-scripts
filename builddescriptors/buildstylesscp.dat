@@ -1,3 +1,48 @@
+###############################################################################################
+# Description: This .dat file allows you to configure what type of build you want to perform for a selection of
+# the software that is used. It doesn't support this for MySQL or MariaDB, because they take too long to build
+# and most likely you will want to use a managed DB in production and only a bespoke instance during testing or
+# development. Postgres is supported here. 
+# In the cases where "modsecurity" is present, this means build with modsecurity enabled
+# The word "source" means build from source and the word "repo" means build from standard repositories
+# The advantage to building from source is that you can easily fork the repositories and modify the configuration
+# parameters in the script if your configuration requirements are different to what I have set by default.
+# The disadvantage to building from source is that the machines take longer to build and configure. 
+# Author Peter Winter
+# Date 07/06/2016
+##############################################################################################
+# The set of possible configurations you could have are as follows:
+# If you are building for NGINX you can select one of:
+# NGINX:source
+# NGINX:repo
+# NGINX:source:modsecurity
+# NGINX:repo:modsecurity
+# If you are building for APACHE you can select one of:
+# APACHE:source
+# APACHE:repo
+# APACHE:source:modsecurity
+# APACHE:repo:modsecurity
+# If you are building for lighttpd you can select one of:
+# LIGHTTPD:source
+# LIGHTTPD:repo
+# If you are building for postgres, you can select one of:
+# POSTGRES:source
+# POSTGRES:repo
+###############################################################################################
+# License Agreement:
+# This file is part of The Agile Deployment Toolkit.
+# The Agile Deployment Toolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# The Agile Deployment Toolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
+################################################################################################
+###############################################################################################
 NGINX:source
 APACHE:repo:modsecurity
 LIGHTTPD:source
