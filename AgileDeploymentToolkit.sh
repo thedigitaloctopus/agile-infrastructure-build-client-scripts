@@ -415,6 +415,8 @@ fi
 /bin/sed -i '/CLOUDHOST_USERNAME=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/echo "export CLOUDHOST_USERNAME=\"${CLOUDHOST_USERNAME}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/sed -i '/CLOUDHOST_PASSWORD=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/echo "export CLOUDHOST_EMAIL_ADDRESS=\"${CLOUDHOST_EMAIL_ADDRESS}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/sed -i '/CLOUDHOST_EMAIL_ADDRESS=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/echo "export CLOUDHOST_PASSWORD=\"${CLOUDHOST_PASSWORD}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/sed -i '/AUTOSCALE_FROM_SNAPSHOTS=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/echo "export AUTOSCALE_FROM_SNAPSHOTS=\"${AUTOSCALE_FROM_SNAPSHOTS}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
