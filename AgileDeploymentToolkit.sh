@@ -576,7 +576,6 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 . ${BUILD_HOME}/buildscripts/InitialiseBuildParams.sh
 . ${BUILD_HOME}/buildscripts/InitialiseDatastore.sh
 . ${BUILD_HOME}/buildscripts/InitialiseBuildChoice.sh
-#. ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
 /bin/rm ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/* 2>/dev/null
 
 #Get the ip address of our build machine
