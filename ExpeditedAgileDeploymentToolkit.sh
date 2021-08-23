@@ -349,9 +349,6 @@ done
 
 BUILD_IDENTIFIER="`/bin/echo ${BUILD_IDENTIFIER} | /usr/bin/tr '[:upper:]' '[:lower:]' | /bin/sed 's/-//g'`"
 
-#. ${BUILD_HOME}/SelectCloudhost.sh
-#. ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
-
 if (    [ "`${BUILD_HOME}/providerscripts/server/ListServerIDs.sh "autoscale*" ${CLOUDHOST} 2> /dev/null`" != "" ] )
 then
     status "#####################################################################################"
