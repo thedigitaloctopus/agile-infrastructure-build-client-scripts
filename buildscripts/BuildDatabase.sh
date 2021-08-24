@@ -223,14 +223,6 @@ do
         /bin/cat ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub | /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "${SUDO} /bin/chmod 777 /home/${DEFAULT_USER}/.ssh ; /bin/cat - >> /home/${DEFAULT_USER}/.ssh/authorized_keys ; ${SUDO} /bin/chmod 700 /home/${DEFAULT_USER}/.ssh"
         /bin/cat ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub | /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "${SUDO} /bin/chmod 777 /home/${SERVER_USER}/.ssh ; /bin/cat - >> /home/${SERVER_USER}/.ssh/authorized_keys ; ${SUDO} /bin/chmod 700 /home/${SERVER_USER}/.ssh"
 
-        #This key is the key that was generated when we wish to use DBaaS over an SSH tunnel. This key gets us access to the remote end
-        #of our ssh tunnel and from there we are port forwarded to our database which is running as a service.
-
-      #  if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS-secured" ] )
-      #  then
-      #      /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/ssl/${WEBSITE_URL}/dbaas_server_key.pem ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/dbaas_server_key.pem
-      #  fi
-
         #Harden ourselves by switching off root based authentication. After this, we cannot remotely access this machine as root, even if we want to
         /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get update ; /usr/bin/apt-get install sudo ; /bin/sh -c '${SUDO} /bin/chown -R ${SERVER_USER}.${SERVER_USER} /home/${SERVER_USER}/ ; ${SUDO} /bin/chmod 700 /home/${SERVER_USER}/.ssh ; ${SUDO} /bin/chmod 400 /home/${SERVER_USER}/.ssh/authorized_keys' ; ${SUDO} /bin/sed -i '$ a\ ClientAliveInterval 60\nTCPKeepAlive yes\nClientAliveCountMax 10000' /etc/ssh/sshd_config ; ${SUDO} /bin/sed -i 's/.*PermitRootLogin.*$/PermitRootLogin no/g' /etc/ssh/sshd_config ;  ${SUDO} /usr/sbin/service sshd restart"
 
@@ -255,28 +247,7 @@ do
 
         #If we are here, then we know that the machine has passed it's test to see if it is online, so, we can proceed
         status "It looks like the machine is booted and accepting connections, so, let's pass it all our configuration stuff that it needs"
-
-        #This is the way I decided to pass all the configuration over. This creates files with bits of information and configuration
-        #Encoded in the file name. I could have passed it all over as a config file but that isn't the choice I made and probably
-        #this is as good a method as any.
-      #  command="/usr/bin/scp ${OPTIONS}"
-
-     #   while read scpparam
-     #   do
-     #       scpparam1="`eval /bin/echo ${scpparam}`"#
-#
- #           if ( [ "${scpparam1}" != "" ] )
-  #          then
-  #              /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/"${scpparam1}"
-   #             command="${command} \"${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/${scpparam1}\""
-   #         fi
-   #     done < ${BUILD_HOME}/builddescriptors/databasescp.dat
-
-     #   command="${command} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1"
-     #   eval ${command}
-        
-        ####Added
-        
+      
         /bin/cp /dev/null ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/database_configuration_settings.dat
         
         while read param
@@ -291,18 +262,6 @@ do
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/database_configuration_settings.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/builddescriptors/buildstylesscp.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/buildstyles.dat >/dev/null 2>&1
 
-        ##########Added
-
-   #     #Despite what I just said above, there is one case where using files as a way of passing configuration details over
-   #     #which is that sometimes, if you have a credential which has a slash embedded in it, then you can't have a file name
-   #     #with a slash in it. The only place I have seen this is in some generated passwords for email authentication which
-   #     #cannot be changed. So, in this case, there is an exception and I bundle the credential in a file.
-   #     if ( [ -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat ] )
-   #     then
-   #         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SYSTEMEMAILPASSWORD.dat
-   #     fi
-
-
         #Run our configuration for this provider so that it has it's necessary access keys and so on
         ${BUILD_HOME}/providerscripts/cloudhost/ConfigureProvider.sh ${BUILD_HOME} ${CLOUDHOST} ${BUILD_IDENTIFIER} ${ALGORITHM} ${ip} ${SERVER_USER}
 
@@ -310,21 +269,6 @@ do
 
         # Configure our datastore provider
         ${BUILD_HOME}/providerscripts/datastore/ConfigureDatastoreProvider.sh ${DATASTORE_CHOICE} ${ip} ${CLOUDHOST} ${BUILD_IDENTIFIER} ${ALGORITHM} ${BUILD_HOME} ${SERVER_USER} ${SERVER_USER_PASSWORD}
-
-        #Check if we are switching on super safe for our backups (recommended)
-        #If super safe backups are switched on, then during operational usage, backups are made to the code repository (github, for example)
-        #and they are also made to the datastore (amazon S3, for example). In this way, we have solid backups.
-        #Individual backups occur hourly, daily, weekly, monthly and bimonthly
-     #   if ( [ "${SUPERSAFE_DB}" = "1" ] )
-     #   then
-     #       status "Supersafe is set on"
-     #       /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEDB:1
-     #       /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEDB:1 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEDB:1
-     #   else
-     #       status "Supersafe is set off"
-     #       /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEDB:0
-     #       /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEDB:0 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEDB:0
-     #   fi
 
         #If we want to get our scripts out of the git repo, we better have git installed, so let's do it
         /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '${CUSTOM_USER_SUDO} /usr/bin/apt-get install -qq git ; /usr/bin/git init ; /bin/mkdir -p /home/${SERVER_USER}/bootstrap'"
@@ -342,8 +286,6 @@ do
 
         if ( [ "${BASELINE_DB_REPOSITORY}" != "" ] )
         then
-            #/bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BASELINEDBREPOSITORY:${BASELINE_DB_REPOSITORY}
-            #/usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BASELINEDBREPOSITORY:${BASELINE_DB_REPOSITORY} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BASELINEDBREPOSITORY:${BASELINE_DB_REPOSITORY}
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BASELINEDBREPOSITORY' ${BASELINE_DB_REPOSITORY}" 
         fi
 
