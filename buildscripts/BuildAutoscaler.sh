@@ -212,26 +212,13 @@ do
             /usr/bin/sshpass -p ${CLOUDHOST_PASSWORD} /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub ${CLOUDHOST_USERNAME}@${ip}:/home/${SERVER_USER}/.ssh/authorized_keys
         else
             #Do the same thing as we would do for password based authentication, but authenticate with our keys instead.
-            #            /usr/bin/ssh ${OPTIONS} -o "PasswordAuthentication=no" ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '/bin/mkdir -p /home/${SERVER_USER}/.ssh ; /bin/mkdir -p /root/.ssh ; /bin/chmod 700 /home/${SERVER_USER}/.ssh ; /bin/chmod 700 /root/.ssh'"
             /usr/bin/ssh ${OPTIONS} -o "PasswordAuthentication=no" ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive ${SUDO} /bin/sh -c '/bin/mkdir -p /home/${SERVER_USER}/.ssh ; /bin/chmod 700 /home/${SERVER_USER}/.ssh ; /bin/chmod 700 /root/.ssh ; /bin/chown -R ${SERVER_USER}:${SERVER_USER} /home/${SERVER_USER}'"
-            #            /usr/bin/scp ${OPTIONS} ${HOME}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub ${DEFAULT_USER}@${ip}:/root/.ssh/authorized_keys
-            #            /usr/bin/scp ${OPTIONS} ${HOME}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/authorized_keys
         fi
 
         /bin/cat ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub | /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "${SUDO} /bin/cat - >> /root/.ssh/authorized_keys"
         /bin/cat ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub | /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "${SUDO} /bin/chmod 777 /home/${DEFAULT_USER}/.ssh ; /bin/cat - >> /home/${DEFAULT_USER}/.ssh/authorized_keys ; ${SUDO} /bin/chmod 700 /home/${DEFAULT_USER}/.ssh"
         /bin/cat ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub | /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "${SUDO} /bin/chmod 777 /home/${SERVER_USER}/.ssh ; /bin/cat - >> /home/${SERVER_USER}/.ssh/authorized_keys ; ${SUDO} /bin/chmod 700 /home/${SERVER_USER}/.ssh"
 
-        #This key is the key that was generated when we wish to use DBaaS over an SSH tunnel. This key gets us access to the remote end
-        #of our ssh tunnel and from there we are port forwarded to our database which is running as a service. The reason why we need to
-        #have a copy of this key on the autoscaler when the autoscaler doesn't talk to the databases at all is that when the autoscaler
-        #initiates the build of a new webserver as part of an autoscaling event, the webserver needs to know the key for the SSH tunnel
-        # if we are using DBaaS over an ssh tunnel and so the autoscaler can then pass this key to the newly built webserver which it
-        # then uses as part of the ssh tunnel which it sets up to the DBaaS running in the cloud somewhere.
-     #   if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS-secured" ] )
-     #   then
-     #       /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/ssl/${WEBSITE_URL}/dbaas_server_key.pem ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/dbaas_server_key.pem
-     #   fi
         #Now we prep our server properly by hardening it a bit and so on
         #This command will 1) Make sure we are up to date on our new server
         #                  2) Add a new user according to the username and password that we have generated and recorded
@@ -247,10 +234,6 @@ do
         
         /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '${SUDO} /usr/sbin/adduser --disabled-password --force-badname --gecos \"\" ${SERVER_USER} ; /bin/echo ${SERVER_USER}:${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/chpasswd ; ${SUDO} /usr/bin/gpasswd -a ${SERVER_USER} sudo ; ${SUDO} /bin/mkdir -p /home/${SERVER_USER}/.ssh ; ${SUDO} /bin/chown -R ${SERVER_USER}.${SERVER_USER} /home/${SERVER_USER}/ ; ${SUDO} /bin/chmod 700 /home/${SERVER_USER}/.ssh ; ${SUDO} /bin/chmod 400 /home/${SERVER_USER}/.ssh/authorized_keys' ; ${SUDO} /bin/sed -i '$ a\ ClientAliveInterval 60\nTCPKeepAlive yes\nClientAliveCountMax 10000' /etc/ssh/sshd_config ; ${SUDO} /bin/sed -i 's/.*PermitRootLogin.*$/PermitRootLogin no/g' /etc/ssh/sshd_config ;  ${SUDO} /usr/sbin/service sshd restart"
 
-        #Here, we add our public key which matches with our private key to our list of authorised keys. The matching private key
-        #Will then be accepted as a method of authentication
-        # /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/authorized_keys
-
         #Make a copy of our private key on our server also. The reason for having a copy of the private key on the server also is that
         #the server may wish to authenticate itself to one of the other machines in the setup and so the private key will be needed
         #All machines in a given deployment use the same public/private keys for their authentication. It's a one key fits all machines setup.
@@ -259,28 +242,6 @@ do
         status "It looks like the machine is booted and accepting connections, so, let's pass it all our configuration stuff that it needs"
 
         WEBSITE_DISPLAY_NAME_FILE="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /bin/sed 's/ /_/g'`"
-
-        #This is the way I decided to pass all the configuration over. This creates files with bits of information and configuration
-        #Encoded in the file name. I could have passed it all over as a config file but that isn't the choice I made and probably
-        #this is as good a method as any.
-     #   command="/usr/bin/scp ${OPTIONS}"
-     #   while read scpparam
-     #   do
-     #       scpparam1="`eval /bin/echo ${scpparam}`"
-
-     #       if ( [ "${scpparam1}" != "" ] )
-     #       then
-     #           /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/"${scpparam1}"
-     #           command="${command} \"${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/${scpparam1}\""
-     #       fi
-
-      #  done < ${BUILD_HOME}/builddescriptors/autoscalerscp.dat
-
-      #  command="${command} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1"
-
-      #  eval ${command}
-        
-        ####Added
         
         /bin/cp /dev/null ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/autoscaler_configuration_settings.dat
         
@@ -296,39 +257,9 @@ do
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/autoscaler_configuration_settings.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/builddescriptors/buildstylesscp.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/buildstyles.dat >/dev/null 2>&1
 
-        ##########Added
-
- #       #Despite what I just said above, there is one case where using files as a way of passing configuration details over
- #       #which is that sometimes, if you have a credential which has a slash embedded in it, then you can't have a file name
- #       #with a slash in it. The only place I have seen this is in some generated passwords for email authentication which
- #       #cannot be changed. So, in this case, there is an exception and I bundle the credential in a file.
- #       if ( [ -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat ] )
- #       then#
-#
-#            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat #${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SYSTEMEMAILPASSWORD.dat
-#
- #       fi
 
         #This is a call to our script to configure out provider. Have a look in the script to see what it's up to
         ${BUILD_HOME}/providerscripts/cloudhost/ConfigureProvider.sh ${BUILD_HOME} ${CLOUDHOST} ${BUILD_IDENTIFIER} ${ALGORITHM} ${ip} ${SERVER_USER} ${SERVER_USER_PASSWORD}
-
-        #The way our backups work is that we write our sourcecode to a git repository on a periodic basis.
-        #Super safe backups mean that we store our sourcecode (and db dump actually) in our datastore which will
-        # be one of our cloud storage systems giving us a secondary backup.
-        #It's not mandated to have this switched on, but it is highly recommended.
-
-      #  if ( [ "${SUPERSAFE_WEBROOT}" = "1" ] )
-      #  then
-      #      /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:1#
-#
-#            /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:1 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEWEBROOT:1
-#
- #       else
-  #          /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:0
-#
- #           /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:0 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEWEBROOT:0
-#
- #       fi
 
         #Here we are configuring our datastore provider. Earlier, when we we inputting all out config details at the beginning of
         #the scripts, we got all the credential information for our datastore provider. So, we can safely assume that this is OK
@@ -377,39 +308,27 @@ do
             #This is a virgin build from the baseline of our application. When we developed our application, the last thing we should
             #have done is made a final baseline which can then be used to take our application live. Once it is live we will start
             #makeing periodic backups and we can build off those backups if we want to
-           # /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:baseline
-           # /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:baseline ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:baseline
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'baseline'" 
 
         elif ( [ "${BUILD_CHOICE}" = "2" ] )
         then
             #This builds from a backup which is one hour old
-            #/bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:hourly
-            #/usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:hourly ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:hourly
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'hourly'" 
         elif ( [ "${BUILD_CHOICE}" = "3" ] )
         then
             #This builds from a backup which is one day old
-          #  /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:daily
-          #  /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:daily ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:daily
-          /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'daily'" 
+            /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'daily'" 
         elif ( [ "${BUILD_CHOICE}" = "4" ] )
         then
             #This builds from a backup which is one week old
-        #    /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:weekly
-        #    /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:weekly ${SERVER_USER}${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:weekly
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'weekly'" 
         elif ( [ "${BUILD_CHOICE}" = "5" ] )
         then
             #This builds from a backup which is one month old
-        #    /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:monthly
-        #    /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:monthly ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:monthly
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'monthly'" 
         elif ( [ "${BUILD_CHOICE}" = "6" ] )
         then
             #This builds from a backup which is two months old
-        #    /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:bimonthly
-        #    /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:bimonthly ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:bimonthly
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'bimonthly'" 
         fi
 
