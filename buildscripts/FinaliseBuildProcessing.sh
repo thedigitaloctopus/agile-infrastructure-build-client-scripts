@@ -90,12 +90,7 @@ then
     /bin/cp -r ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials ${BUILD_HOME}/snapshots/${SERVER_USER}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials
 fi
 
-#If we are not building for production (an autoscaler is not present) and we are persisting assets to the datastore, then we need to force a
-#clean out of the datastore before we go any further
-#if ( [ "${PRODUCTION}" = "0" ] && [ "${PERSIST_ASSETS_TO_CLOUD}" = "1" ] )
-#then
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/datastore/SetupConfig.sh forcepurge"
-#fi
 
 #Do some checks to find out if the build has completed correctly, before we say we are finished
 /bin/mkdir -p ${BUILD_HOME}/runtimedata/${CLOUDHOST}/
