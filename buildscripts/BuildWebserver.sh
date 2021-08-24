@@ -211,20 +211,10 @@ do
             #If we are here, then, we are using our ssh keys for authentication. Do the same thing as we did for the password based authentication
             #so that our server knows our keys implicitly.
             /usr/bin/ssh ${OPTIONS} -o "PasswordAuthentication=no" ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive ${SUDO} /bin/sh -c '/bin/mkdir -p /home/${SERVER_USER}/.ssh ; /bin/chmod 700 /home/${SERVER_USER}/.ssh ; /bin/chmod 700 /root/.ssh ; /bin/chown -R ${SERVER_USER}:${SERVER_USER} /home/${SERVER_USER}'"
-            #            /usr/bin/scp ${OPTIONS} ${HOME}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub ${DEFAULT_USER}@${ip}:/root/.ssh/authorized_keys
-            #            /usr/bin/scp ${OPTIONS} ${HOME}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/authorized_keys
             /bin/cat ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub | /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "${SUDO} /bin/cat - >> /root/.ssh/authorized_keys"
             /bin/cat ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub | /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "${SUDO} /bin/chmod 777 /home/${DEFAULT_USER}/.ssh ; /bin/cat - >> /home/${DEFAULT_USER}/.ssh/authorized_keys ; ${SUDO} /bin/chmod 700 /home/${DEFAULT_USER}/.ssh"
             /bin/cat ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub | /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "${SUDO} /bin/chmod 777 /home/${SERVER_USER}/.ssh ; /bin/cat - >> /home/${SERVER_USER}/.ssh/authorized_keys ; ${SUDO} /bin/chmod 700 /home/${SERVER_USER}/.ssh"
         fi
-
-        #This key is the key that was generated when we wish to use DBaaS over an SSH tunnel. This key gets us access to the remote end
-        #of our ssh tunnel and from there we are port forwarded to our database which is running as a service.
-        #if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS-secured" ] )
-        #then
-        #    /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/ssl/${WEBSITE_URL}/dbaas_server_key.pem ${DEFAULT_USER}@${ip}:/home/${SERVER_USER}/.ssh/dbaas_server_key.pem
-        #fi
-
 
         #Now we prep our server properly by hardening it a bit and so on
         #This command will 1) Make sure we are up to date on our new server
@@ -244,28 +234,7 @@ do
         status "It looks like the machine is booted and accepting connections, so, let's pass it all our configuration stuff that it needs"
 
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY
-
-        #This is the way I decided to pass all the configuration over. This creates files with bits of information and configuration
-        #Encoded in the file name. I could have passed it all over as a config file but that isn't the choice I made and probably
-        #this is as good a method as any.
-
-      #  command="/usr/bin/scp ${OPTIONS}"
-      #  while read scpparam
-      #  do
-      #      scpparam1="`eval /bin/echo ${scpparam}`"
-#
-#            if ( [ "${scpparam1}" != "" ] )
-#            then
-#                /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/"${scpparam1}"
-#                command="${command} \"${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/${scpparam1}\""
-#            fi
-#        done < ${BUILD_HOME}/builddescriptors/webserverscp.dat#
-#
-#        command="${command} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1"
- #       eval ${command}
-        
-        ####Added
-        
+                
         /bin/cp /dev/null ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat
         
         while read param
@@ -282,22 +251,8 @@ do
                 /usr/bin/scp ${OPTIONS} -P ${SSH_PORT} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat ${SERVER_USER}@${ASIP}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1
         fi        
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1
-        /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/builddescriptors/buildstylesscp.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/buildstyles.dat >/dev/null 2>&1
-
-        ##########Added
-
- #       #Despite what I just said above, there is one case where using files as a way of passing configuration details over
- #       #which is that sometimes, if you have a credential which has a slash embedded in it, then you can't have a file name
- #       #with a slash in it. The only place I have seen this is in some generated passwords for email authentication which
- #       #cannot be changed. So, in this case, there is an exception and I bundle the credential in a file.
-#
- #       if ( [ -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat ] )
- #       then
- #           /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SYSTEMEMAILPASSWORD.dat
- #       fi
-#
- #       /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SYSTEMEMAILPASSWORD
-
+        /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/builddescriptors/buildstylesscp.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/buildstyles.dat >/dev/null 2>&1    
+     
         #configure for the cloudhost provider we are using
         ${BUILD_HOME}/providerscripts/cloudhost/ConfigureProvider.sh ${BUILD_HOME} ${CLOUDHOST} ${BUILD_IDENTIFIER} ${ALGORITHM} ${ip} ${SERVER_USER}
 
@@ -308,24 +263,6 @@ do
         #place where we authenticated for our datastore and then we simply reuse those credentials multiple times and in multiple places
 
         ${BUILD_HOME}/providerscripts/datastore/ConfigureDatastoreProvider.sh ${DATASTORE_CHOICE} ${ip} ${CLOUDHOST} ${BUILD_IDENTIFIER} ${ALGORITHM} ${BUILD_HOME} ${SERVER_USER} ${SERVER_USER_PASSWORD}
-
-        #The way our backups work is that we write our sourcecode to a git repository on a periodic basis.
-        #Right now, sometimes this fails and I am not sure why yet, but, super safe backups mean that we store our sourcecode
-        #(and db dump actually) in our datastore which will be one of our cloud storage systems giving us a secondary backup
-        #It's not mandated to have this switched on, but it is highly recommended unless I can get it to the point where our
-        #git repo backups are 100% solid and reliable. I am sure it is something I am doing, but I will look into it in a bit.
-
-     #   if ( [ "${SUPERSAFE_WEBROOT}" = "1" ] )
-     #   then
-     #       status "Supersafe is set on"
-     #       /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:1
-     #       /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:1 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEWEBROOT:1
-     #   else
-     #       status "Supersafe is set off"
-     #       /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:0
-     #       /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SUPERSAFEWEBROOT:0 ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/SUPERSAFEWEBROOT:0
-     #   fi
-
 
         #Our sourcecode which actually defines what a webserver will do and how it will function is held in a git repo. So, if
         #We are to have any chance of getting a working autoscaler, then we must install git on our machine as it is not bundled
