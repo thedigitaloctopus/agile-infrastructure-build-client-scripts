@@ -30,19 +30,6 @@ then
     status "Your system email to address is set to ${SYSTEM_TOEMAIL_ADDRESS}"
     status "Your system email from address is set to ${SYSTEM_FROMEMAIL_ADDRESS}"
     status "#############################################################"
-#else
-#    status "#############################################################"
-#    SYSTEM_EMAIL_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILUSERNAME.dat`"
-#    status "Your system email username is set to ${SYSTEM_EMAIL_USERNAME}"
-#    SYSTEM_EMAIL_PASSWORD="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPASSWORD.dat`"
-#    status "Your system email password is set to ${SYSTEM_EMAIL_PASSWORD}"
-#    SYSTEM_EMAIL_PROVIDER="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SYSTEMEMAILPROVIDER.dat`"
-#    status "Your system email provider is set to ${SYSTEM_EMAIL_PROVIDER}"
-#    SYSTEM_TOEMAIL_ADDRESS="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/TOEMAILADDRESS.dat`"
-#    status "Your system email to address is set to ${SYSTEM_TOEMAIL_ADDRESS}"
-#    SYSTEM_FROMEMAIL_ADDRESS="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/FROMEMAILADDRESS.dat`"
-#    status "Your system email from address is set to ${SYSTEM_FROMEMAIL_ADDRESS}"
- #   status "#############################################################"
 fi
 
 update="1"
