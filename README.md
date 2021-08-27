@@ -57,8 +57,10 @@ As far as the build procedure is concerned the normal modus operandi is to have 
 
 ### THE FULL BUILD
 
-##### AGAIN, IMPORTANT: you must use a dedicated linux machine for your build processes as the build will add and remove software which you may not want to happen if you are using your linux machine for other purposes.  
-## YOU MUST USE A DEDICATED BUILD MACHINE  
+#### YOU MUST USE A DEDICATED BUILD MACHINE 
+
+AGAIN, IMPORTANT: you must use a dedicated linux machine for your build processes as the build will add and remove software which you may not want to happen if you are using your linux machine for other purposes.  
+ 
 
 So, to run this build kit, you need a vanilla (but secured) Ubuntu server 20.04 or later or a (vanilla but secured) debian 10 server or up. 
 Maybe more flavours of linux will be supported later but at the moment it is just Debian and Ubuntu. So, spin up a vanilla instance of Ubuntu or Debian with your favourite cloudhost and then, having made sure it is secure, ssh onto it (if you are on windows, using putty - making sure putty is not set to drop long lasting connections) and start the build process for your deployment.  
