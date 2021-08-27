@@ -34,9 +34,6 @@ then
     ./aws/install --update
     /bin/rm /usr/bin/aws
     /bin/ln -s /usr/local/bin/aws /usr/bin/aws
-    #/usr/bin/apt-get -qq -y install awscli
-    #/usr/bin/unlink /usr/local/bin/aws
-    #/usr/bin/ln -s /usr/bin/aws /usr/local/bin/aws
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
@@ -48,8 +45,5 @@ then
     ./aws/install --update
     /bin/rm /usr/bin/aws
     /bin/ln -s /usr/local/bin/aws /usr/bin/aws
-    #/usr/bin/apt-get -qq -y install awscli
-    #/usr/bin/unlink /usr/local/bin/aws
-    #/usr/bin/ln -s /usr/bin/aws /usr/local/bin/aws
 fi
 
