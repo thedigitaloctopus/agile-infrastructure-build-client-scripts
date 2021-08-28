@@ -31,16 +31,6 @@ then
     /usr/bin/curl -X GET "https://api.cloudflare.com/client/v4/zones?name=${zonename}&status=active&page=1&per_page=20&order=status&direction=desc&match=all" -H "X-Auth-Email: ${email}" -H "X-Auth-Key: ${authkey}" -H "Content-Type: application/json" | /usr/bin/jq '.result[].id' | /bin/sed 's/"//g'
 fi
 
-#zonename="${1}"
-#email="${2}"
-#authkey="${3}"
-#dns="${4}"
-
-#if ( [ "${dns}" = "exoscale" ] )
-#then
-#    /usr/bin/curl  -H "X-DNS-Token: ${authkey}" -H 'Accept: application/json' https://api.exoscale.com/dns/v1/domains/${zonename}/zone
-#fi
-
 rootdomain="${1}"
 username="${2}"
 apikey="${3}"
