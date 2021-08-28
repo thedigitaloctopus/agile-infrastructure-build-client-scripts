@@ -48,7 +48,6 @@ cd ${INTERROGATION_HOME}
 
 interrogated="0"
 
-#if ( [ "${backuprepository}" = "" ] )
 if ( [ "${BUILD_ARCHIVE_CHOICE}" = "baseline" ] )
 then
     if ( [ "`${BUILD_HOME}/providerscripts/git/GitLSRemote.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${APPLICATION_BASELINE_SOURCECODE_REPOSITORY} 2>/dev/null`" = "" ] )
