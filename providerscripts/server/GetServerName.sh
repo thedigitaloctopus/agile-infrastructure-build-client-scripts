@@ -31,7 +31,6 @@ fi
 if ( [ "${cloudhost}" = "exoscale" ] )
 then
     /usr/local/bin/cs listVirtualMachines | jq --arg tmp_ip_address "${server_ip}" '(.virtualmachine[] | select(.nic[].ipaddress == $tmp_ip_address) | .displayname)' | /bin/sed 's/"//g'
-  #  /usr/local/bin/cs listVirtualMachines | /usr/bin/jq '.virtualmachine[] | .nic[].ipaddress + " " + .displayname' | /bin/grep ".*${server_ip}" | /bin/sed 's/"//g' | /usr/bin/awk '{print $NF}'
 fi
 
 if ( [ "${cloudhost}" = "linode" ] )
