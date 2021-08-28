@@ -59,16 +59,17 @@ then
     status "Discovered you are deploying moodle"
     status "Press the <enter> key to accept as true"
     read x
-    #################MOODLE################
+fi
+#################MOODLE################
+#################DRUPAL################
+if ( [ -f ${INTERROGATION_HOME}/tmp/backup/core/misc/drupal.js ] )
+then
+    /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/APPLICATION:drupal
+    APPLICATION="drupal"
+    interrogated="1"
+    DIRECTORIES_TO_MOUNT="sites.default.files.pictures:sites.default.files.styles:sites.default.files.inline-images"
+    status "Discovered you are deploying drupal"
+    status "Press the <enter> key to accept as true"
+    read x
     #################DRUPAL################
-    if ( [ -f ${INTERROGATION_HOME}/tmp/backup/core/misc/drupal.js ] )
-    then
-        /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/APPLICATION:drupal
-        APPLICATION="drupal"
-        interrogated="1"
-        DIRECTORIES_TO_MOUNT="sites.default.files.pictures:sites.default.files.styles:sites.default.files.inline-images"
-        status "Discovered you are deploying drupal"
-        status "Press the <enter> key to accept as true"
-        read x
-        #################DRUPAL################
-    fi
+fi
