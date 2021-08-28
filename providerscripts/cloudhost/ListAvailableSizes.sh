@@ -33,11 +33,9 @@ if ( [ "${cloudhost}" = "exoscale" ] )
 then
     if ( [ "${buildos}" = "ubuntu" ] )
     then
-        #/usr/local/bin/cs listTemplates templatefilter=featured | /usr/bin/jq '.template[].displaytext' | /bin/sed 's/LTS//' | /bin/grep Ubuntu | /bin/grep ${buildosversion} | /usr/bin/uniq | /bin/sed 's/"//g' | /usr/bin/awk '{print $5}' | /usr/bin/sort | /usr/bin/uniq
         /bin/echo "10G 50G 200G 300G 400G"
 elif ( [ "${buildos}" = "debian" ] )
     then
-        #/usr/local/bin/cs listTemplates templatefilter=featured | /usr/bin/jq '.template[].displaytext' | /bin/grep Debian | /bin/grep ${buildosversion} | /usr/bin/uniq | /bin/sed 's/"//g' | /usr/bin/awk '{print $5}' | /usr/bin/sort | /usr/bin/uniq
         /bin/echo "10G 50G 200G 300G 400G"
     fi
 fi
