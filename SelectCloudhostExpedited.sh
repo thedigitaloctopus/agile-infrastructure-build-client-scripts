@@ -58,22 +58,28 @@ do
                 1)       
                     CLOUDHOST="digitalocean"
                     ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
+		    . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
+
                     ;;
                 2)
                     CLOUDHOST="exoscale"
                     ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
+		    . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
                     ;;            
                 3)       
                     CLOUDHOST="linode"
 		    ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
+		    . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
                     ;;
                 4)       
                     CLOUDHOST="vultr"
 		    ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
+		    . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
                     ;;
                 5)       
                     CLOUDHOST="aws"
 		    ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
+		    . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
                     ;;
                 *)
            esac 
