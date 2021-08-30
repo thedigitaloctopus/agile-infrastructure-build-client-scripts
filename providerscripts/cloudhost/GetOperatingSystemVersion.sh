@@ -47,6 +47,7 @@ elif ( [ "${buildos}" = "debian" ] )
     then
         /usr/local/bin/cs listTemplates templatefilter=featured | jq ".template[] | select( .displaytext | contains(\"Debian ${buildosversion} 64-bit\")) | .id" | /bin/sed 's/\"//g' | /usr/bin/tail -n -1
         /usr/local/bin/cs listTemplates templatefilter=featured | jq ".template[] | select( .displaytext | contains(\"Debian ${buildosversion} (Buster) 64-bit\")) | .id" | /bin/sed 's/\"//g' | /usr/bin/tail -n -1
+        /usr/local/bin/cs listTemplates templatefilter=featured | jq ".template[] | select( .displaytext | contains(\"Debian ${buildosversion} (Bullseye) 64-bit\")) | .id" | /bin/sed 's/\"//g' | /usr/bin/tail -n -1
     fi
 fi
 
