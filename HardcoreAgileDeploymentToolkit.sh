@@ -375,3 +375,6 @@ fi
 end=`/bin/date +%s`
 runtime="`/usr/bin/expr ${end} - ${start}`"
 status "This script took `/bin/date -u -d @${runtime} +\"%T\"` to complete"
+
+#Might be needed for the updates we applied at the start. The user can ssh onto the machie again and tail the logs to see what happened. 
+/usr/sbin/shutdown -r now
