@@ -42,6 +42,9 @@ if ( [ "${CLOUDHOST}" = "exoscale" ] )
 then
     /usr/bin/scp ${OPTIONS} ${HOME}/.cloudstack.ini ${SERVER_USER}@${IP}:/home/${SERVER_USER}/.cloudstack.ini  >/dev/null 2>&1
     /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${IP} "/bin/chmod 400 /home/${SERVER_USER}/.cloudstack.ini"  >/dev/null 2>&1
+     /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${IP} "/bin/mkdir -p /home/${SERVER_USER}/.config/exoscale"  >/dev/null 2>&1
+    /usr/bin/scp ${OPTIONS} ${HOME}/.config/exoscale/exoscale.toml ${SERVER_USER}@${IP}:/home/${SERVER_USER}/.config/exoscale  >/dev/null 2>&1
+    /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${IP} "/bin/chmod 400 /home/${SERVER_USER}/.config/exoscale/exoscale.toml"  >/dev/null 2>&1
 fi
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
