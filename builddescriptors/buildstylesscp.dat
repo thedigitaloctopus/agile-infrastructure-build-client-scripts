@@ -45,5 +45,5 @@
 ###############################################################################################
 NGINX:source:modsecurity
 APACHE:source:modsecurity
-LIGHTTPD:source
+LIGHTTPD:repo
 POSTGRES:repo
