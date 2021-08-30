@@ -90,7 +90,9 @@ then
                 ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
                 status "Updating the CS tool"
                 ${BUILD_HOME}/installscripts/InstallCS.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
-                status "Updating curl"
+                status "Updating the Exo tool"
+                ${BUILD_HOME}/installscripts/InstallExo.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
+                status "Updating curl"              
                 ${BUILD_HOME}/installscripts/InstallCurl.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
                 status "Updating go"
                 ${BUILD_HOME}/installscripts/InstallGo.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
@@ -124,6 +126,8 @@ then
                 ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "debian" >>${UPGRADE_LOG} 2>&1
                 status "Updating the CS tool"
                 ${BUILD_HOME}/installscripts/InstallCS.sh "debian" >>${UPGRADE_LOG} 2>&1
+                status "Updating the Exo tool"
+                ${BUILD_HOME}/installscripts/InstallExo.sh "debian" >>${UPGRADE_LOG} 2>&1
                 status "Updating curl"
                 ${BUILD_HOME}/installscripts/InstallCurl.sh "debian" >>${UPGRADE_LOG} 2>&1
                 status "Updating go"
