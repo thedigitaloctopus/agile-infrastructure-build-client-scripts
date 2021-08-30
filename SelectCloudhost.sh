@@ -54,6 +54,8 @@ then
     fi
     ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
     ${BUILD_HOME}/providerscripts/cloudhost/GetProviderAuthorisation.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION} ${SSH_PORT}
+    . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
+
 
     #Digital ocean supports snapshots, so we offer that as a choice. With autoscaling using snapshots, new webservers
     #will be built using a snapshot rather than a fresh build using repositories and so on. It's probably faster like
@@ -182,21 +184,8 @@ then
     status "Exoscale account email address:"
     read CLOUDHOST_EMAIL_ADDRESS
     
-    #This is a bit messy, but it sets up the exo tool credentials and authorisations.    
-    /bin/mkdir -p /root/.config/exoscale
-
-    ACCESS_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/ACCESS_KEY`"
-    SECRET_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/SECRET_KEY`"
-
-    /bin/echo "defaultaccount = \"${CLOUDHOST_EMAIL_ADDRESS}\"
-[[accounts]]
-  account = \"${CLOUDHOST_EMAIL_ADDRESS}\"
-  endpoint = \"https://api.exoscale.com/v1\"
-  environment = \"\"
-  key = \"${ACCESS_KEY}\"
-  name = \"${CLOUDHOST_EMAIL_ADDRESS}\"
-  secret = \"${SECRET_KEY}\""> /root/.config/exoscale/exoscale.toml
-
+    . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
+    
     status "This provider has a firewalling system. Before going on with the build, please make sure that you have set the following rules for the firewall"
     status "By going to the GUI for Exoscale and selecting Compute -> Firewall and entering all the following rules"
     status "INGRESS TCP CIDR 0.0.0.0/0 TCP 22 - 22"
@@ -232,6 +221,7 @@ then
 
     ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
     ${BUILD_HOME}/providerscripts/cloudhost/GetProviderAuthorisation.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION} ${SSH_PORT}
+    . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
 
     status "#####################################################################################################"
     status "##### This provider requires a root password to your account to be able to proceed. This will   #####"
@@ -363,6 +353,8 @@ then
 
     ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
     ${BUILD_HOME}/providerscripts/cloudhost/GetProviderAuthorisation.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION} ${SSH_PORT}
+    . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
+
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
     status "#########################################################################################################################"
     status "OK, your cloudhost is set to vultr"
@@ -486,6 +478,8 @@ then
 
     ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
     ${BUILD_HOME}/providerscripts/cloudhost/GetProviderAuthorisation.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION} ${SSH_PORT}
+    . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
+
     export AWS_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
     status "#########################################################################################################################"
     status "OK, your cloudhost is set to aws"
