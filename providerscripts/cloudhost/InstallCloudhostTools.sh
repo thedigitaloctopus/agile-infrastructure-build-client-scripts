@@ -55,6 +55,7 @@ then
     then
         ${BUILD_HOME}/installscripts/Update.sh "${buildos}"
         ${BUILD_HOME}/installscripts/InstallCS.sh "${buildos}"
+        ${BUILD_HOME}/installscripts/InstallExo.sh "${buildos}"
     fi
 fi
 if ( [ "${cloudhost}" = "linode" ] )
