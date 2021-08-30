@@ -46,4 +46,4 @@
 NGINX:repo:modsecurity
 APACHE:repo
 LIGHTTPD:source
-POSTGRES:source
+POSTGRES:repo
