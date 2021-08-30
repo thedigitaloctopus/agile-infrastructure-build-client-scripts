@@ -155,8 +155,6 @@ then
 fi
 
 ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
-. ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
-
 
 status "Your cloudhost is set to ${CLOUDHOST}"
 
@@ -277,6 +275,7 @@ fi
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
 . ${BUILD_HOME}/TightenBuildMachineFirewall.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
+. ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
 
 #Set a username and password which we can set on all our servers. Once the machines are built, password authentication is
 #switched off and you can find some ssh key based helper scripts here that will enable you to authenticate to your machines.
