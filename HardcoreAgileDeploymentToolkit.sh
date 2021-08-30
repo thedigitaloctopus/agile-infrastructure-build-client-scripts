@@ -155,6 +155,8 @@ then
 fi
 
 ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
+. ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
+
 
 status "Your cloudhost is set to ${CLOUDHOST}"
 
