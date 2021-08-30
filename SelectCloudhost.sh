@@ -181,6 +181,21 @@ then
     status "#####################################################################################################"
     status "Exoscale account email address:"
     read CLOUDHOST_EMAIL_ADDRESS
+    
+    #This is a bit messy, but it sets up the exo tool credentials and authorisations.    
+    /bin/mkdir -p /root/.config/exoscale
+
+    ACCESS_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/ACCESS_KEY`"
+    SECRET_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/SECRET_KEY`"
+
+    /bin/echo "defaultaccount = \"${CLOUDHOST_EMAIL_ADDRESS}\"
+[[accounts]]
+  account = \"${CLOUDHOST_EMAIL_ADDRESS}\"
+  endpoint = \"https://api.exoscale.com/v1\"
+  environment = \"\"
+  key = \"${ACCESS_KEY}\"
+  name = \"${CLOUDHOST_EMAIL_ADDRESS}\"
+  secret = \"${SECRET_KEY}\""> /root/.config/exoscale/exoscale.toml
 
     status "This provider has a firewalling system. Before going on with the build, please make sure that you have set the following rules for the firewall"
     status "By going to the GUI for Exoscale and selecting Compute -> Firewall and entering all the following rules"
