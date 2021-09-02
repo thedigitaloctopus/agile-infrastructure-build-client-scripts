@@ -1,0 +1,31 @@
+    display_name="webserver"
+    webserver_id="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${display_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .id)' | /bin/sed 's/"//g'`"
+    /usr/bin/exo vm snapshot create ${webserver_id}
+
+instance_name="webserver"
+snapshot_id="`/usr/bin/exo -O json  vm snapshot list  | /usr/bin/jq --arg tmp_instance_name "${instance_name}" '(.[] | select (.instance | contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
+
+/usr/bin/exo vm snapshot export ${snapshot_id}
+
+. ./Reg*
+
+
+loop="0"
+for value in "`/usr/bin/exo -O json vm snapshot export ${snapshot_id} | /usr/bin/jq '.url , .checksum' | /bin/sed 's/\"//g' |  paste - - | /usr/bin/awk '{print $1,"\n",$2}' | /bin/sed 's/ //g'`"
+do
+    if ( [ "${loop}" = "0" ] )
+    then
+        url="${value}"
+        loop="`/usr/bin/expr ${loop} + 1`"
+    else
+        checksum="${value}"
+    fi
+done 
+
+echo "url= ${url}"
+echo
+echo "Checksum= ${checksum}"
+
+exit
+
+exo vm template register --name test --boot-mode $BOOTMODE --url   --username debian --zone ch-gva-2 --checksum --description "test Webserver"
