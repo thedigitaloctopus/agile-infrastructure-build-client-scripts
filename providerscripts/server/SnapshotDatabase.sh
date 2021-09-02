@@ -30,6 +30,22 @@ then
     /usr/local/bin/doctl compute droplet-action snapshot --snapshot-name "${database_name}" ${database_id}
 fi
 
+if ( [ "${CLOUDHOST}" = "exoscale" ] )
+then
+    database_id="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${database_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .id)' | /bin/sed 's/"//g'`"
+        /usr/bin/exo vm snapshot create ${database_id}
+    snapshot_id="`/usr/bin/exo -O json  vm snapshot list  | /usr/bin/jq --arg tmp_instance_name "${database_name}" '(.[] | select (.instance | contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
+    /usr/bin/exo vm snapshot export ${snapshot_id}
+    . ./RegisterTemplateFromSnapshot.sh
+    url_and_checksum="`/usr/bin/exo -O json vm snapshot export ${snapshot_id} | /usr/bin/jq '.url , .checksum' | /bin/sed 's/\"//g' |  paste - - | /usr/bin/awk '{print $1,"XXYYZZ",$2}' | /bin/sed 's/ //g'`"
+
+    url="`/bin/echo ${url_and_checksum} | /usr/bin/awk -F'XXYYZZ' '{print $1}'`"
+    checksum="`/bin/echo ${url_and_checksum} | /usr/bin/awk -F'XXYYZZ' '{print $2}'`"
+
+    /usr/bin/exo vm template register ${database_name} --boot-mode $BOOTMODE --url ${url} --username debian --zone ${region} --checksum ${checksum} --description "Snapshot of an ADT database"
+
+fi
+
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
     database_id="`/usr/local/bin/linode-cli --text linodes list | /bin/grep database | /usr/bin/awk '{print $1}'`"
