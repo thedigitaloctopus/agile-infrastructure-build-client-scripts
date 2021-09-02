@@ -268,7 +268,7 @@ do
         #We are to have any chance of getting a working autoscaler, then we must install git on our machine as it is not bundled
         #or available be default, so, lets do that
 
-        /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '/bin/touch /home/${SERVER_USER}/${MACHINETYPE} ; ${CUSTOM_USER_SUDO} /usr/bin/apt-get install -qq git ; cd /home/${SERVER_USER} ; /usr/bin/git init ; /bin/mkdir /home/${SERVER_USER}/bootstrap'"
+        /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '/bin/touch /home/${SERVER_USER}/${MACHINETYPE} ; ${CUSTOM_USER_SUDO} /usr/bin/apt-get install -qq git ; cd /home/${SERVER_USER} ; /usr/bin/git init ; /bin/mkdir /home/${SERVER_USER}/bootstrap ; ${CUSTOM_USER_SUDO}  /usr/bin/git config --global init.defaultBranch master ; ${CUSTOM_USER_SUDO} /usr/bin/git config --global pull.rebase false'"
 
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/providerscripts/git/GitPull.sh ${BUILD_HOME}/providerscripts/git/GitFetch.sh ${BUILD_HOME}/providerscripts/git/GitCheckout.sh ${SERVER_USER}@${ip}:/home/${SERVER_USER}/bootstrap
 
