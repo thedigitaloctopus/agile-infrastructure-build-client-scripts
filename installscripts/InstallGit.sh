@@ -28,9 +28,13 @@ fi
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
     /usr/bin/apt-get -qq install git
+    /usr/bin/git config --global init.defaultBranch master
+    /usr/bin/git config --global pull.rebase false 
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
     /usr/bin/apt-get -qq install git
+    /usr/bin/git config --global init.defaultBranch master
+    /usr/bin/git config --global pull.rebase false 
 fi
