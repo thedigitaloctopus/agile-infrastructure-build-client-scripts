@@ -36,7 +36,7 @@ then
         /usr/bin/exo vm snapshot create ${autoscaler_id}
     snapshot_id="`/usr/bin/exo -O json  vm snapshot list  | /usr/bin/jq --arg tmp_instance_name "${autoscaler_name}" '(.[] | select (.instance | contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
     /usr/bin/exo vm snapshot export ${snapshot_id}
-    . ./RegisterTemplateFromSnapshot.sh
+    . ${BUILD_HOME}/providerscripts/server/RegisterTemplateFromSnapshot.sh
     url_and_checksum="`/usr/bin/exo -O json vm snapshot export ${snapshot_id} | /usr/bin/jq '.url , .checksum' | /bin/sed 's/\"//g' |  paste - - | /usr/bin/awk '{print $1,"XXYYZZ",$2}' | /bin/sed 's/ //g'`"
 
     url="`/bin/echo ${url_and_checksum} | /usr/bin/awk -F'XXYYZZ' '{print $1}'`"
