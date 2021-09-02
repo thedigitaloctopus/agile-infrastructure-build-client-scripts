@@ -49,7 +49,7 @@ then
     if ( [ "${REGION_ID}" = "70e5f8b1-0b2c-4457-a5e0-88bcf1f3db68" ] ) then region_id="bg-sof-1" fi 
     if ( [ "${REGION_ID}" = "85664334-0fd5-47bd-94a1-b4f40b1d2eb7" ] ) then region_id="de-muc-1" fi 
    
-    /usr/bin/exo vm template register ${autoscaler_name} --boot-mode $BOOTMODE --url ${url} --username debian --zone ${region_id} --checksum ${checksum} --description "Snapshot of an ADT autoscaler"
+    /usr/bin/exo vm template register ${autoscaler_name} --boot-mode $BOOTMODE --url ${url} --username ${DEFAULT_USER} --zone ${region_id} --checksum ${checksum} --description "Snapshot of an ADT autoscaler"
 
 fi
 
