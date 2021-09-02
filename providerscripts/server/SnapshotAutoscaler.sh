@@ -18,7 +18,7 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #####################################################################################
 #####################################################################################
-set -x
+#set -x
 
 if ( [ "${CLOUDHOST}" = "digitalocean" ] )
 then
@@ -33,7 +33,7 @@ fi
 if ( [ "${CLOUDHOST}" = "exoscale" ] )
 then
     autoscaler_id="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${autoscaler_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .id)' | /bin/sed 's/"//g'`"
-        /usr/bin/exo vm snapshot create ${autoscaler_id}
+    /usr/bin/exo vm snapshot create ${autoscaler_id}
     snapshot_id="`/usr/bin/exo -O json  vm snapshot list  | /usr/bin/jq --arg tmp_instance_name "${autoscaler_name}" '(.[] | select (.instance | contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
     /usr/bin/exo vm snapshot export ${snapshot_id}
     . ${BUILD_HOME}/providerscripts/server/RegisterTemplateFromSnapshot.sh
