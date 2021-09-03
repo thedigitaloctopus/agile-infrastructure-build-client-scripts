@@ -47,9 +47,15 @@ server_name="${4}"
 key_pair="${5}"
 cloudhost="${6}"
 snapshot_id="${7}"
+
 if ( [ "${cloudhost}" = "exoscale" ] )
 then
     template_id="`/bin/echo "${template_id}" | /bin/sed "s/'//g"`"
+    
+    if ( [ "${snapshot_id}" != "" ] )
+    then
+        template_id="${snapshot_id}"
+    fi
 
     case ${service_offering_id} in
         b6cd1ff5-3a2f-4e9d-a4d1-8988c1191fe8 ) disksize="10"
