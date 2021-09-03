@@ -30,7 +30,7 @@ fi
 
 if ( [ "${cloudhost}" = "exoscale" ] )
 then
-    display_name="${server_type}"
+    display_name="`/bin/echo ${server_type} | /bin/sed 's/\*//g'`"
 
     ip="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${display_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .publicip)' | /bin/sed 's/"//g'`"
 
