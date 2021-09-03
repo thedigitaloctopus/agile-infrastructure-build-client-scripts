@@ -27,7 +27,7 @@ status ""
 status "#####################################################################################################"
 status "#####Which DNS provider tech would you like to use for you website/application                  #####"
 status "#####We currently support 0: None 1: Cloudflare 2: Rackspace 3: Digital Ocean                   #####"
-status "#####                     4: Exoscale
+status "#####                     4: Exoscale                                                           #####"
 status "#####################################################################################################"
 status "Please select a DNS provider (0|1|2)"
 read choice
