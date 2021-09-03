@@ -318,6 +318,8 @@ then
         status "Autoscaler: ${AUTOSCALER_IMAGE_ID}"
         status "Database: ${DATABASE_IMAGE_ID}"
         status "###########################################################"
+        status "Press <enter> to accept ctrl-c to exit"
+        read x
     else
         SNAPSHOT_ID=""
     fi
