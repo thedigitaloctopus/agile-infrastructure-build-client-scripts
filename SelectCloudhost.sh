@@ -293,7 +293,7 @@ then
             exit
         fi
 
-       zones="`/usr/bin/exo -O json zone list | jq '(.[]) | .name' | /bin/sed 's/\"//g'`"
+       zones="`/usr/bin/exo -O json zone list | /usr/bin/jq '(.[]) | .name' | /bin/sed 's/\"//g'`"
        status "Please select which zone your snapshot template is in"
        status "Please enter one of: ${zones}"
        read zone
