@@ -67,7 +67,7 @@ then
         region_id="de-muc-1" 
     fi 
    
-    /usr/bin/exo vm template register ${autoscaler_name} --boot-mode $BOOTMODE --url ${url} --username ${DEFAULT_USER} --zone ${region_id} --checksum ${checksum} --description "Snapshot of an ADT autoscaler"
+    /usr/bin/exo vm template register ${autoscaler_name} --disable-password --boot-mode $BOOTMODE --url ${url} --username ${DEFAULT_USER} --zone ${region_id} --checksum ${checksum} --description "Snapshot of an ADT autoscaler"
 
 fi
 
