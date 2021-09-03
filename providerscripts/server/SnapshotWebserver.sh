@@ -67,7 +67,7 @@ then
         region_id="de-muc-1" 
     fi 
 
-    /usr/bin/exo vm template register ${webserver_name} --boot-mode $BOOTMODE --url ${url} --username debian --zone ${region} --checksum ${checksum} --description "Snapshot of an ADT webserver"
+    /usr/bin/exo vm template register ${webserver_name} --boot-mode $BOOTMODE --url ${url} --username debian --zone ${region_id} --checksum ${checksum} --description "Snapshot of an ADT webserver"
 
 fi
 
