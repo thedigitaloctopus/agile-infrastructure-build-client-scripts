@@ -34,6 +34,7 @@ then
     /usr/bin/tar xvfz exoscale-cli*tar.gz -C ./exo_unpack
     /bin/mv ./exo_unpack/exo /usr/bin
     /bin/rm -r ./exo_unpack
+    /bin/rm exoscale-cli*
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
@@ -43,4 +44,5 @@ then
     /usr/bin/tar xvfz exoscale-cli*tar.gz -C ./exo_unpack
     /bin/mv ./exo_unpack/exo /usr/bin
     /bin/rm -r ./exo_unpack
+    /bin/rm exoscale-cli*
 fi
