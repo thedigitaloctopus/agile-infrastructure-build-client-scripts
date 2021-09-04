@@ -410,7 +410,7 @@ do
                 # Give a copy of the ssl certificate generated to the autoscaler for use when building new webservers when autoscaling
                 #ASIP="`/bin/ls ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASIP:* | /usr/bin/awk -F':' '{print $2}'`"
 
-                ASIPS_CLEANED="`/bin/echo ${ASIPS} | /bin/sed 's/\:/ /g`"
+                ASIPS_CLEANED="`/bin/echo ${ASIPS} | /bin/sed 's/\:/ /g'`"
                 for ASIP in ${ASIPS_CLEANED}
                 do
                     /usr/bin/scp -P ${SSH_PORT} ${OPTIONS} ${BUILD_HOME}/ssl/${WEBSITE_URL}/fullchain.pem ${SERVER_USER}@${ASIP}:/home/${SERVER_USER}/.ssh/fullchain.pem
