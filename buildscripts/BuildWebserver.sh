@@ -58,7 +58,7 @@ status "Logging for this server build is located at ${BUILD_HOME}/logs/${OUT_FIL
 status "The error stream for this server build is located at ${BUILD_HOME}/logs/${ERR_FILE}"
 status "========================================================="
 
-ASIPS="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
+ASIPS="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST} | /bin/grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | /bin/tr '\n' ':' | /bin/sed 's/\:$//g'`"
 
 #If "done" is set to 1, then we know that a webserver has been successfully built and is running.
 #Try up to 5 times if the webserver is failing to complete its build
@@ -410,9 +410,8 @@ do
                 # Give a copy of the ssl certificate generated to the autoscaler for use when building new webservers when autoscaling
                 #ASIP="`/bin/ls ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASIP:* | /usr/bin/awk -F':' '{print $2}'`"
 
-                #ASIPS="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-
-                for ASIP in ${ASIPS}
+                ASIPS_CLEANED="`/bin/echo ${ASIPS} | /bin/sed 's/\:/ /g`"
+                for ASIP in ${ASIPS_CLEANED}
                 do
                     /usr/bin/scp -P ${SSH_PORT} ${OPTIONS} ${BUILD_HOME}/ssl/${WEBSITE_URL}/fullchain.pem ${SERVER_USER}@${ASIP}:/home/${SERVER_USER}/.ssh/fullchain.pem
 
