@@ -88,6 +88,7 @@ then
     /bin/cp ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub ${BUILD_HOME}/snapshots/${SERVER_USER}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/
     /bin/mkdir -p ${BUILD_HOME}/snapshots/${SERVER_USER}/buildconfiguration/${CLOUDHOST}/
     /bin/cp -r ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials ${BUILD_HOME}/snapshots/${SERVER_USER}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials
+    . ${BUILD_HOME}/providerscripts/datastore/PersistSnapshotData.sh
 fi
 
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/datastore/SetupConfig.sh forcepurge"
