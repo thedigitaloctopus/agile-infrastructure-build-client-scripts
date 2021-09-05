@@ -377,6 +377,7 @@ status "########################################################################
 
 #Configure the datastore (s3cmd tool)
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
+. ${BUILD_HOME}/providerscripts/datastore/ObtainSnapshotData.sh
 . ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
 
 #These have to be persisted here for later use (necessary in case we decide to use the .dat file from a previous build, in which case these
