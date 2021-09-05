@@ -22,10 +22,10 @@
 
 if ( [ "${DATASTORE_CHOICE}" = "amazonS3" ] || [ "${DATASTORE_CHOICE}" = "digitalocean" ] || [ "${DATASTORE_CHOICE}" = "exoscale" ] || [ "${DATASTORE_CHOICE}" = "linode" ] || [ "${DATASTORE_CHOICE}" = "vultr" ] )
 then
-    snapshot_bucket="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`-snaps/*"
-    if ( [ "`/usr/bin/s3cmd ls s3://${snapshot_bucket}`" != "" ] )
+    snapshots_bucket="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`-snaps/*"
+    if ( [ "`/usr/bin/s3cmd ls s3://${snapshots_bucket}`" != "" ] )
     then
-        /usr/bin/s3cmd get s3://${snapshot_bucket}/snapshots.tar.gz
+        /usr/bin/s3cmd get s3://${snapshots_bucket}/snapshots.tar.gz
     fi
 
     if ( [ ! -d ${BUILD_HOME}/snapshots ] )
@@ -40,12 +40,12 @@ then
 
     /bin/tar cvfz ./snapshots.tar.gz ${BUILD_HOME}/snapshots/*
 
-    if ( [ "`/usr/bin/s3cmd ls s3://${snapshot_bucket}`" = "" ] )
+    if ( [ "`/usr/bin/s3cmd ls s3://${snapshots_bucket}`" = "" ] )
     then
-        /usr/bin/s3cmd mb s3://${snapshot_bucket}/
+        /usr/bin/s3cmd mb s3://${snapshots_bucket}/
     fi
     
-    /usr/bin/s3cmd put snapshots.tar.gz s3://${snapshot_bucket}/
+    /usr/bin/s3cmd put snapshots.tar.gz s3://${snapshots_bucket}/
 
     if ( [ -f ./snapshots.tar.gz ] )
     then
