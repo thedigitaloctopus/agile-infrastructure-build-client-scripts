@@ -42,8 +42,10 @@ then
 
     if ( [ "`/usr/bin/s3cmd ls s3://${snapshot_bucket}`" = "" ] )
     then
-        /usr/bin/s3cmd put snapshots.tar.gz s3://${snapshot_bucket}/
+        /usr/bin/s3cmd mb s3://${snapshot_bucket}/
     fi
+    
+    /usr/bin/s3cmd put snapshots.tar.gz s3://${snapshot_bucket}/
 
     if ( [ -f ./snapshots.tar.gz ] )
     then
