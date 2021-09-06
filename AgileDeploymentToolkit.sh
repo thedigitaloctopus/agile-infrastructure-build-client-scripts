@@ -370,8 +370,6 @@ status "########################################################################
 /usr/sbin/ufw allow ${SSH_PORT}
 /usr/sbin/ufw enable
 
-
-
 #Ask the user what cloudhost (has to be a supported cloudhost) they want to deploy to this time
 . ${BUILD_HOME}/SelectCloudhost.sh
 
@@ -467,6 +465,9 @@ if ( [ ! -d ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-cr
 then
     /bin/mkdir -p ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials
 fi
+
+#Get the ip address of our build machine
+BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
 
 #Initialise required software for the build process
 . ${BUILD_HOME}/buildscripts/InitialiseBuild.sh
@@ -572,10 +573,8 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 . ${BUILD_HOME}/buildscripts/InitialiseBuildParams.sh
 . ${BUILD_HOME}/buildscripts/InitialiseDatastore.sh
 . ${BUILD_HOME}/buildscripts/InitialiseBuildChoice.sh
+. ${BUILD_HOME}/providerscripts/datastore/PersistBuildClientIP.sh
 /bin/rm ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/* 2>/dev/null
-
-#Get the ip address of our build machine
-BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
 
 /bin/mkdir -p ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/touch ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/${BUILD_CLIENT_IP}
