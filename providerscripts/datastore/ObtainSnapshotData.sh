@@ -42,4 +42,14 @@ then
     then
         /bin/rm ./snapshots.tar.gz
     fi
+     
+    FULL_SNAPSHOT_ID="`/bin/ls ${BUILD_HOME}/snapshots | /bin/grep ${SNAPSHOT_ID}`"
+    snapshotids="`/bin/cat ${BUILD_HOME}/snapshots/${FULL_SNAPSHOT_ID}/snapshotIDs.dat`"
+    
+    if ( [ "${snapshotids}" != "" ] )
+    then
+        AUTOSCALER_IMAGE_ID="`/usr/bin/awk -F':' '{print $1}'`"
+        WEBSERVER_IMAGE_ID="`/usr/bin/awk -F':' '{print $2}'`"
+        DATABASE_IMAGE_ID="`/usr/bin/awk -F':' '{print $3}'`"
+    fi
 fi
