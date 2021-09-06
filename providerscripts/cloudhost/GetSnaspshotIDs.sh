@@ -1,6 +1,6 @@
 #!/bin/sh
 ######################################################################################################################
-# Description: This is the script which asks which of the supported cloud host providers the user wishes to deploy to.
+# Description: This is the script will get the snapshot IDs that we can build from 
 # Author: Peter Winter
 # Date: 17/01/2017
 ######################################################################################################################
