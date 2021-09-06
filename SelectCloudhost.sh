@@ -144,11 +144,8 @@ then
             status "There are no pre-existing snapshots, will have to exit"
             exit
         fi
-
-        WEBSERVER_SNAPSHOT_NAME="`/usr/local/bin/doctl compute snapshot list | /bin/grep webserver | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}'`"
-        WEBSERVER_IMAGE_ID="`/usr/local/bin/doctl compute snapshot list | /bin/grep webserver | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $1}'`"
-        AUTOSCALER_IMAGE_ID="`/usr/local/bin/doctl compute snapshot list | /bin/grep autoscaler | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $1}'`"
-        DATABASE_IMAGE_ID="`/usr/local/bin/doctl compute snapshot list | /bin/grep database | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $1}'`"
+        
+        . ${HOME}/providerscripts/cloudhost/GetSnaspshotIDs.sh
 
         status ""
         status ""
@@ -303,10 +300,7 @@ then
            read zone
        done
 
-        WEBSERVER_SNAPSHOT_NAME="`/usr/bin/exo -O json vm template list --mine --zone ${zone} | /usr/bin/jq --arg tmp_instance_name "${INSTANCE_ID}" '(.[] | select (.name | contains("webserver")  and  contains($tmp_instance_name)) | .name)' | /bin/sed 's/"//g'`"
-        AUTOSCALER_IMAGE_ID="`/usr/bin/exo -O json vm template list --mine --zone ${zone} | /usr/bin/jq --arg tmp_instance_name "${INSTANCE_ID}" '(.[] | select (.name | contains("autoscaler")  and  contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
-        WEBSERVER_IMAGE_ID="`/usr/bin/exo -O json vm template list --mine --zone ${zone} | /usr/bin/jq --arg tmp_instance_name "${INSTANCE_ID}" '(.[] | select (.name | contains("webserver")  and  contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
-        DATABASE_IMAGE_ID="`/usr/bin/exo -O json vm template list --mine --zone ${zone} | /usr/bin/jq --arg tmp_instance_name "${INSTANCE_ID}" '(.[] | select (.name | contains("database")  and  contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
+        . ${HOME}/providerscripts/cloudhost/GetSnaspshotIDs.sh
 
         status ""
         status ""
@@ -435,10 +429,8 @@ then
             /bin/echo "There are no pre-existing snapshots, will have to exit"
             exit
         fi
-
-        WEBSERVER_IMAGE_ID="`/usr/local/bin/linode-cli --text images list  | /bin/grep webserver | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $1}'`"
-        AUTOSCALER_IMAGE_ID="`/usr/local/bin/linode-cli --text images list  | /bin/grep autoscaler | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $1}'`"
-        DATABASE_IMAGE_ID="`/usr/local/bin/linode-cli --text images list  | /bin/grep database | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $1}'`"
+        
+        . ${HOME}/providerscripts/cloudhost/GetSnaspshotIDs.sh
 
         status ""
         status ""
@@ -564,9 +556,7 @@ then
             exit
         fi
 
-        WEBSERVER_IMAGE_ID="`/usr/bin/vultr snapshots | /bin/grep webserver | /bin/grep ${SNAPSHOT_ID}  | /usr/bin/awk '{print $1}'`"
-        AUTOSCALER_IMAGE_ID="`/usr/bin/vultr snapshots | /bin/grep autoscaler | /bin/grep ${SNAPSHOT_ID}  | /usr/bin/awk '{print $1}'`"
-        DATABASE_IMAGE_ID="`/usr/bin/vultr snapshots | /bin/grep database | /bin/grep ${SNAPSHOT_ID}  | /usr/bin/awk '{print $1}'`"
+        . ${HOME}/providerscripts/cloudhost/GetSnaspshotIDs.sh
 
         status ""
         status ""
@@ -695,10 +685,8 @@ elif ( [ "${BUILDOS}" = "debian" ] )
             exit
         fi
         
-        WEBSERVER_IMAGE_ID="`/usr/bin/aws ec2 describe-images --owners self --filters \"Name=name,Values=webserver-${SNAPSHOT_ID}*\"  | /usr/bin/jq \".Images[].ImageId\" | /bin/sed 's/\"//g'`"
-        AUTOSCALER_IMAGE_ID="`/usr/bin/aws ec2 describe-images --owners self --filters \"Name=name,Values=autoscaler-${SNAPSHOT_ID}*\"  | /usr/bin/jq \".Images[].ImageId\" | /bin/sed 's/\"//g'`"
-        DATABASE_IMAGE_ID="`/usr/bin/aws ec2 describe-images --owners self --filters \"Name=name,Values=database-${SNAPSHOT_ID}*\"  | /usr/bin/jq \".Images[].ImageId\" | /bin/sed 's/\"//g'`"
-        
+        . ${HOME}/providerscripts/cloudhost/GetSnaspshotIDs.sh
+   
         status ""
         status ""
         status "###########################################################"
