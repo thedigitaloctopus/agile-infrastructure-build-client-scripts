@@ -270,6 +270,9 @@ then
     /bin/mkdir -p ${BUILD_HOME}/runtimedata/${CLOUDHOST}/names
 fi
 
+#Get the ip address of our build machine
+export BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
+
 . ${BUILD_HOME}/templatedconfigurations/ConfigureTemplate.sh
 . ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
@@ -277,6 +280,7 @@ fi
 . ${BUILD_HOME}/TightenBuildMachineFirewall.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
+. ${BUILD_HOME}/providerscripts/datastore/PersistBuildClientIP.sh
 
 #Set a username and password which we can set on all our servers. Once the machines are built, password authentication is
 #switched off and you can find some ssh key based helper scripts here that will enable you to authenticate to your machines.
@@ -291,9 +295,6 @@ SERVER_USER_PASSWORD="`/usr/bin/perl -le 'print map { (a..z,A..Z,0..9)[rand 62] 
 PUBLIC_KEY_ID="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYID`"
 /bin/sed -i '/PUBLIC_KEY_ID=/d' ${templatefile}
 /bin/echo "export PUBLIC_KEY_ID=\"${PUBLIC_KEY_ID}\"" >> ${templatefile}
-#
-#Get the ip address of our build machine
-export BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
 
 /bin/rm ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/*
 
