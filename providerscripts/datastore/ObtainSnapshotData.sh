@@ -59,4 +59,6 @@ then
             fi
         fi
     fi
+    /bin/cp -r ${BUILD_HOME}/snapshots/${FULL_SNAPSHOT_ID}/sshkeys/* /root/.ssh
+    /bin/chmod 400 /root/.ssh/*
 fi
