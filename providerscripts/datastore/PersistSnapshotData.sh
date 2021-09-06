@@ -45,7 +45,8 @@ then
         /usr/bin/s3cmd mb s3://${snapshots_bucket}
     fi
     
-    /usr/bin/s3cmd put snapshots.tar.gz s3://${snapshots_bucket}/
+    /usr/bin/s3cmd mv s3://${snapshots_bucket}/snapshots.tar.gz s3://${snapshots_bucket}/snapshots.tar.gz.$$
+    /usr/bin/s3cmd put ./snapshots.tar.gz s3://${snapshots_bucket}/
 
     if ( [ -f ./snapshots.tar.gz ] )
     then
