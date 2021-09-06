@@ -38,7 +38,11 @@ then
         /bin/tar xvfz ./snapshots.tar.gz -C ${BUILD_HOME}/snapshots
     fi
 
-    /bin/tar cvfz ./snapshots.tar.gz ${BUILD_HOME}/snapshots/*
+    path="`/usr/bin/pwd`"
+
+    cd ${BUILD_HOME}/snapshots
+
+    /bin/tar cvfz ./snapshots.tar.gz *
 
     if ( [ "`/usr/bin/s3cmd ls s3://${snapshots_bucket}`" = "" ] )
     then
@@ -52,4 +56,6 @@ then
     then
         /bin/rm ./snapshots.tar.gz
     fi
+
+    cd ${path}
 fi
