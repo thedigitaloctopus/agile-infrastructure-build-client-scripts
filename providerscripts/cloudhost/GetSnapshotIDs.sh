@@ -18,7 +18,8 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #######################################################################################################
 ######################################################################################################
-set -x
+#set -x
+
 if ( [ "${SNAPSHOT_ID}" = "" ] )
 then
     if ( [ "${autoscaler_name}" != "" ] )
@@ -66,10 +67,10 @@ then
     
         zone=${region_id}
     
-        WEBSERVER_SNAPSHOT_NAME="`/usr/bin/exo -O json vm template list --mine --zone ${zone} | /usr/bin/jq --arg tmp_instance_name "${SNAPSHOT_ID}" '(.[] | select (.name | contains("webserver")  and  contains($tmp_instance_name)) | .name)' | /bin/sed 's/"//g'`"
-        AUTOSCALER_IMAGE_ID="`/usr/bin/exo -O json vm template list --mine --zone ${zone} | /usr/bin/jq --arg tmp_instance_name "${SNAPSHOT_ID}" '(.[] | select (.name | contains("autoscaler")  and  contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
-        WEBSERVER_IMAGE_ID="`/usr/bin/exo -O json vm template list --mine --zone ${zone} | /usr/bin/jq --arg tmp_instance_name "${SNAPSHOT_ID}" '(.[] | select (.name | contains("webserver")  and  contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
-        DATABASE_IMAGE_ID="`/usr/bin/exo -O json vm template list --mine --zone ${zone} | /usr/bin/jq --arg tmp_instance_name "${SNAPSHOT_ID}" '(.[] | select (.name | contains("database")  and  contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
+        WEBSERVER_SNAPSHOT_NAME="`/usr/bin/exo -O json vm template list --mine --zone ${zone} | /usr/bin/jq --arg tmp_instance_name "${webserver_name}" '(.[] | select (.name | contains("webserver")  and  contains($tmp_instance_name)) | .name)' | /bin/sed 's/"//g'`"
+        AUTOSCALER_IMAGE_ID="`/usr/bin/exo -O json vm template list --mine --zone ${zone} | /usr/bin/jq --arg tmp_instance_name "${autoscaler_name}" '(.[] | select (.name | contains("autoscaler")  and  contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
+        WEBSERVER_IMAGE_ID="`/usr/bin/exo -O json vm template list --mine --zone ${zone} | /usr/bin/jq --arg tmp_instance_name "${webserver_name}" '(.[] | select (.name | contains("webserver")  and  contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
+        DATABASE_IMAGE_ID="`/usr/bin/exo -O json vm template list --mine --zone ${zone} | /usr/bin/jq --arg tmp_instance_name "${database_name}" '(.[] | select (.name | contains("database")  and  contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
 fi
 
     if ( [ "${CLOUDHOST}" = "linode" ] )
