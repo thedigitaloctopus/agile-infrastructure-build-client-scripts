@@ -82,7 +82,7 @@ then
     . ${BUILD_HOME}/providerscripts/server/SnapshotWebserver.sh
     . ${BUILD_HOME}/providerscripts/server/SnapshotDatabase.sh
     
-    . ${HOME}/providerscripts/cloudhost/GetSnaspshotIDs.sh
+    . ${BUILD_HOME}/providerscripts/cloudhost/GetSnaspshotIDs.sh
 
     /bin/mkdir -p ${BUILD_HOME}/snapshots/${SERVER_USER}
     /bin/mkdir -p ${BUILD_HOME}/snapshots/${SERVER_USER}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/
