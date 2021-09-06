@@ -20,6 +20,7 @@
 ######################################################################################################
 #set -x
 
+SNAPSHOT_ID="`/bin/echo ${autoscaler_name} | grep -aoE -e '[A-Z]{4}'`"
 
 if ( [ "${CLOUDHOST}" = "digitalocean" ] )
 then
