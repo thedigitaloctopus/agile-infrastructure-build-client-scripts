@@ -174,12 +174,15 @@ then
     ${BUILD_HOME}/providerscripts/cloudhost/InstallCloudhostTools.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}
     ${BUILD_HOME}/providerscripts/cloudhost/GetProviderAuthorisation.sh ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION} ${SSH_PORT}
     
-    status "#####################################################################################################"
-    status "##### This provider needs your account email address to be supplied. You can find it from your  #####"
-    status "##### console, it is the email address that you use to log in to your account.                  #####"
-    status "#####################################################################################################"
-    status "Exoscale account email address:"
-    read CLOUDHOST_EMAIL_ADDRESS
+    if ( [ "${CLOUDHOST_EMAIL_ADDRESS}" = "" ] )
+    then
+        status "#####################################################################################################"
+        status "##### This provider needs your account email address to be supplied. You can find it from your  #####"
+        status "##### console, it is the email address that you use to log in to your account.                  #####"
+        status "#####################################################################################################"
+        status "Exoscale account email address:"
+        read CLOUDHOST_EMAIL_ADDRESS
+    fi
     
     . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
     
