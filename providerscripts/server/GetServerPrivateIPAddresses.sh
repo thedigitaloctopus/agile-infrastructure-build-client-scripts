@@ -32,13 +32,15 @@ if ( [ "${cloudhost}" = "exoscale" ] )
 then
     display_name="`/bin/echo ${server_type} | /bin/sed 's/\*//g'`"
 
-    ip="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${display_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .publicip)' | /bin/sed 's/"//g'`"
+    ips="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${display_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .publicip)' | /bin/sed 's/"//g'`"
 
-    vmid="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_ip_address "${ip}" '(.virtualmachine[].nic[] | select(.ipaddress == $tmp_ip_address) | .id)' | /bin/sed 's/"//g'`"
-    vmid2="`/usr/local/bin/cs listNics | jq --arg tmp_virtual_machine_id "${vmid}" '(.nic[] | select(.id == $tmp_virtual_machine_id) | .virtualmachineid)' | /bin/sed 's/"//g'`"
-    private_ipaddress="`/usr/local/bin/cs listNics | jq --arg tmp_virtual_machine_id "${vmid2}" '(.nic[] | select(.isdefault == false and .virtualmachineid == $tmp_virtual_machine_id) | .ipaddress)' | /bin/sed 's/"//g'`"
-
-    /bin/echo ${private_ipaddress}
+    for ip in ${ips}
+    do
+        vmid="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_ip_address "${ip}" '(.virtualmachine[].nic[] | select(.ipaddress == $tmp_ip_address) | .id)' | /bin/sed 's/"//g'`"
+        vmid2="`/usr/local/bin/cs listNics | jq --arg tmp_virtual_machine_id "${vmid}" '(.nic[] | select(.id == $tmp_virtual_machine_id) | .virtualmachineid)' | /bin/sed 's/"//g'`"
+        private_ipaddress="`/usr/local/bin/cs listNics | jq --arg tmp_virtual_machine_id "${vmid2}" '(.nic[] | select(.isdefault == false and .virtualmachineid == $tmp_virtual_machine_id) | .ipaddress)' | /bin/sed 's/"//g'`"
+        /bin/echo ${private_ipaddress}
+    done
 fi
 
 if ( [ "${cloudhost}" = "linode" ] )
