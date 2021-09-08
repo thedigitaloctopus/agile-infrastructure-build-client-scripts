@@ -217,7 +217,8 @@ then
     
     for ASIP in ${ASIPS_CLEANED}
     do
-
+        ASIP_PRIVATE="`${HOME}/providerscripts/GetServerPrivateIPAddressByIP.sh ${ASIP} ${CLOUDHOST}`"
+        
         #Wait until the autoscaler has been fully provisioned from its snapshot
 
         status "Trying to connect to the autoscaler to perform initialisation...."
