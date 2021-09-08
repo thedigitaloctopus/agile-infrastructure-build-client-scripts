@@ -217,8 +217,8 @@ then
     
     for ASIP in ${ASIPS_CLEANED}
     do
-        ASIP_PRIVATE="`${HOME}/providerscripts/server/GetServerPrivateIPAddressByIP.sh ${ASIP} ${CLOUDHOST}`"
-        ASIP_PRIVATES="${ASIP_PRIVATES}:${ASIP_PRIVATE}"
+        ASIP_PRIVATE_HOLDER="`${HOME}/providerscripts/server/GetServerPrivateIPAddressByIP.sh ${ASIP} ${CLOUDHOST}`"
+        ASIP_PRIVATES="${ASIP_PRIVATES}:${ASIP_PRIVATE_HOLDER}"
        
         #Wait until the autoscaler has been fully provisioned from its snapshot
 
