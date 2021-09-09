@@ -102,6 +102,10 @@ then
         no_autoscalers="`/usr/bin/expr ${no_autoscalers} + 1`"
     done
     
+    ASIPS="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST} | /bin/grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | /bin/tr '\n' ':' | /bin/sed 's/\:$//g'`"
+    ASIP_PRIVATES="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "*autoscaler*" ${CLOUDHOST} | /bin/grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | /bin/tr '\n' ':' | /bin/sed 's/\:$//g'`"
+    ASIPS_CLEANED="`/bin/echo ${ASIPS} | /bin/sed 's/\:/ /g'`"
+    
     status "#########################################################################################################"
 
     #Generate the webserver snapshot. Again, we use the username to create the identifier of the machine as this will remain
@@ -209,13 +213,7 @@ then
     SUDO="DEBIAN_FRONTEND=noninteractive /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E "
 
     ########AUTOSCALER config#################
-    
-   # ASIPS="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-
-    ASIPS="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST} | /bin/grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | /bin/tr '\n' ':' | /bin/sed 's/\:$//g'`"
-    ASIP_PRIVATES="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "*autoscaler*" ${CLOUDHOST} | /bin/grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | /bin/tr '\n' ':' | /bin/sed 's/\:$//g'`"
-    ASIPS_CLEANED="`/bin/echo ${ASIPS} | /bin/sed 's/\:/ /g'`"
-    
+        
     for ASIP in ${ASIPS_CLEANED}
     do
        
@@ -252,7 +250,7 @@ then
 
         /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/rm -rf /home/${FULL_SNAPSHOT_ID}/config/INSTALLEDSUCCESSFULLY /home/${FULL_SNAPSHOT_ID}/runtime/INITIALCONFIGSET /home/${FULL_SNAPSHOT_ID}/runtime/NETCONFIGURED /home/${FULL_SNAPSHOT_ID}/config/APPLICATION_DB_CONFIGURED /home/${FULL_SNAPSHOT_ID}/runtime/*lock*"
 
-        /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDARCHIVE\" \"${BUILD_ARCHIVE_CHOICE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"AUTOSCALE\" \"${WEBSERVER_SNAPSHOT_NAME}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"SNAPSHOTID\" \"${WEBSERVER_IMAGE_ID}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"SNAPAUTOSCALE\" \"1\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"KEYID\" \"${PUBLIC_KEY_ID}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDCLIENTIP\" \"${BUILD_CLIENT_IP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"MYPUBLICIP\" \"${ASIP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"MYIP\" \"${ASIP_PRIVATE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIPS\" \"${ASIPS}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIP_PRIVATES\" \"${ASIP_PRIVATES}\""
+        /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDARCHIVE\" \"${BUILD_ARCHIVE_CHOICE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"AUTOSCALE\" \"${WEBSERVER_SNAPSHOT_NAME}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"SNAPSHOTID\" \"${WEBSERVER_IMAGE_ID}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"SNAPAUTOSCALE\" \"1\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"KEYID\" \"${PUBLIC_KEY_ID}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDCLIENTIP\" \"${BUILD_CLIENT_IP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"MYPUBLICIP\" \"${ASIP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"MYIP\" \"${ASIP_PRIVATE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIPS\" \"${ASIPS}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIP_PRIVATES\" \"${ASIP_PRIVATES}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASPUBLICIP\" \"${ASIP}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIP\" \"${ASIP_PRIVATE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBPUBLICIP\" \"${DBIP}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBIP\" \"${DB_PRIVATE}\""
 
     /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/RefreshNetworking.sh"
 
