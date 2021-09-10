@@ -38,7 +38,7 @@ then
     status "#########################BUILD FROM SNAPSHOTS#######################"
     status ""
     
-    . ${BUILD_HOME}/providerscripts/datastore/PurgeDatastore.sh
+    . ${BUILD_HOME}/providerscripts/datastore/PurgeDatastore.sh "reset"
 
     #Generate the snapshot of the autoscaler. We use the username as the identifier as that will remain constant between
     #the original machine and the generated snapshot
