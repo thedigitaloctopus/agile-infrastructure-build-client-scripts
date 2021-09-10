@@ -27,7 +27,7 @@ then
     if ( [ "`/usr/bin/s3cmd ls s3://${config_bucket}`" != "" ] )
     then
         status "Purging bucket ${config_bucket}... feel free to purge it manually through the GUI if you want to"
-        /usr/bin/s3cmd --recursive --force del s3://${config_bucket}/*
+        /usr/bin/s3cmd --recursive --force del s3://${config_bucket}
     fi
 
     location="`/usr/bin/s3cmd info s3://${config_bucket} | /bin/grep "Location" | /usr/bin/awk '{print $NF}'`"
