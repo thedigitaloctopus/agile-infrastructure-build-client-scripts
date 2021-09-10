@@ -40,7 +40,7 @@ then
     status "It is recommended to expedite the process, if there is a lot of residual data, that you go to the datastore provider website (${DATASTORE_CHOICE})"
     status "And clean out (delete) all old content from the webrootsynctunnel subdirectory of the configuration bucket"
     status "#################################################################################################################################################"
-    . ${BUILD_HOME}/providerscripts/datastore/PurgeTunnel.sh
+    . ${BUILD_HOME}/providerscripts/datastore/PurgeDatastore.sh
 fi
 
 OPTIONS="-o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "
