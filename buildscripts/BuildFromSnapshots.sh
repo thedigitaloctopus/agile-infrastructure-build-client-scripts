@@ -37,6 +37,9 @@ if ( [ "${AUTOSCALER_IMAGE_ID}" != "" ] && [ "${WEBSERVER_IMAGE_ID}" != "" ] && 
 then
     status "#########################BUILD FROM SNAPSHOTS#######################"
     status ""
+    
+    . ${BUILD_HOME}/providerscripts/datastore/PurgeDatastore.sh
+    /bin/sleep 300
 
     #Generate the snapshot of the autoscaler. We use the username as the identifier as that will remain constant between
     #the original machine and the generated snapshot
