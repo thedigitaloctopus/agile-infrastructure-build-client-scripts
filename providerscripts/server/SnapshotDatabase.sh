@@ -67,8 +67,8 @@ then
         region_id="de-muc-1" 
     fi 
 
-    /usr/bin/exo vm template register ${database_name} --disable-password --boot-mode $BOOTMODE --url ${url} --username debian --zone ${region_id} --checksum ${checksum} --description "Snapshot of an ADT database"
-
+    #/usr/bin/exo vm template register ${database_name} --disable-password --boot-mode $BOOTMODE --url ${url} --username debian --zone ${region_id} --checksum ${checksum} --description "Snapshot of an ADT database"
+    /usr/bin/exo vm template register ${database_name} --boot-mode $BOOTMODE --url ${url} --username debian --zone ${region_id} --checksum ${checksum} --description "Snapshot of an ADT database"
 fi
 
 if ( [ "${CLOUDHOST}" = "linode" ] )
