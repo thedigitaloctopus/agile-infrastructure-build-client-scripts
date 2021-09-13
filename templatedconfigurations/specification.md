@@ -112,7 +112,7 @@ This will be the username for your DNS service provider
 
 ##### digitalocean - your digital ocean account email address
 
-##### rackspace - your rackspace account email address
+##### exoscale - your exoscale account email address
 
 -----
 
@@ -124,7 +124,7 @@ This is the security key which will enable us to manipulate records as needed wi
 
 ##### digital ocean - The access token for your digital ocean account, the same as TOKEN
 
-##### rackspace  - The access key for your rackspace account
+##### exoscale  - The access key for your exoscale account
 
 ------
 
@@ -134,7 +134,7 @@ This is the security key which will enable us to manipulate records as needed wi
 
 #### digitalocean - not needed
 
-#### rackspace - one of : DFW ORD IAD LON SYD HKG
+#### exoscale - not needed
 
 -----
 
@@ -144,7 +144,7 @@ This can be set to one of three values at the time of writing (2020) -
 
 ##### 1. "cloudflare" 
 ##### 2. "digitalocean" 
-##### 3. "rackspace". 
+##### 3. "exoscale". 
 
 It defines which of the (supported) DNS service you would like to use with your deployment.
 
