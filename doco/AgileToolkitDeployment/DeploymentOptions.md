@@ -12,7 +12,7 @@ You need a cloudhost, a DNS provider, a git repository provider, a datastore pro
 You need to choose one of each of the following:
 
 1) So, your current choices are Cloudhost: Digital Ocean, Exoscale, Linode, Vultr
-2) DNS provider: Cloudflare, Rackspace, Digital Ocean
+2) DNS provider: Cloudflare, Digital Ocean, Exoscale, Linode, Vultr
 3) Git repository provider: bitbucket, github, gitlab
 4) A datastore provider currently: amazon s3, digital ocean spaces and exoscale object storage
 
@@ -159,24 +159,22 @@ Select which webserver you are deploying to:
 14) 
 #####################################################################################################
 #####WHICH WEB DNS PROVIDERTECHNOLOGY WOULD YOU LIKE TO USE?                                    #####
-#####WE CURRENTLY SUPPORT 1: Cloudflare 2: Rackspace                                            #####
+#####WE CURRENTLY SUPPORT 1: Cloudflare 2: Digital Ocean                                        #####
 #####################################################################################################
 
 Select which DNS Service you will be using
 
-2
+1
 
 15) 
-Please enter your Rackspace username
+Please enter your Cloudflare username
 petercw123
-We also need the API key for your rackspace account. You can either request this from the domain owner or if you are the domain owner
-You can find it by authenticating to your rackspace account, clicking on your name at the top right and then clicking on 'Account Settings'
+We also need the API key for your Cloudflare account. You can either request this from the domain owner or if you are the domain owner
+You can find it by authenticating to your cloudflare account, clicking on your name at the top right and then clicking on 'Account Settings'
 And you should find the API key there and copy and paste it below
-Please input your rackspace API key
+Please input your cloudflare API key
 1hgd7ehdfh3738dhe73ndehyehwjru4jd
-Please enter the three letter identifier for the region you wish to deploy to from the following list
-Dallas - DFW, Chicago - ORD, Virginia IAD, London LON, Sydney SYD, Hong Kon HKG
-LON
+
 Plese input the username that you use for your git application repository
 Peter Winter
 Plese input the email that you use for your git application repository
