@@ -30,10 +30,7 @@ fi
 
 BUILD_HOME="`/bin/cat ../buildconfiguration/buildhome`"
 
-if ( [ "${sourcefile}" = "" ] )
-then
-    sourcefile="${1}"
-fi
+sourcefile="${1}"
 
 if ( [ "${sourcefile}" = "" ] )
 then
