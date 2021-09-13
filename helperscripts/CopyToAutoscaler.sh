@@ -35,6 +35,18 @@ then
     sourcefile="${1}"
 fi
 
+if ( [ "${sourcefile}" = "" ] )
+then
+    /bin/echo "Please tell me the full path to the location of the file you wish to copy to the Autoscaler for example, '/tmp/file.dat'"
+    read sourcefile
+    while ( [ "`/bin/ls ${sourcefile}`" = "" ] )
+    do
+        /bin/echo "Sorry, can't find that file please tell me again"
+        /bin/echo "Please tell me the full path to the location of the file you wish to copy to the Autoscaler for example, '/tmp/file.dat'"
+        read sourcefile
+    done
+fi
+
 /bin/echo "Which Cloudhost are you using for this server?"
 /bin/echo "(1) Digital Ocean (2) Exoscale (3) Linode (4) Vultr (5) AWS"
 read response
@@ -63,12 +75,11 @@ fi
 
 /bin/echo "What is the build identifier you want to connect to?"
 /bin/echo "You have these builds to choose from: "
-/bin/ls ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}
+/bin/ls ${BUILD_HOME}/buildconfiguration/${CLOUDHOST} | /bin/grep -v credentials
 /bin/echo "Please enter the name of the build of the server you wish to connect with"
 read BUILD_IDENTIFIER
 
 ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh  ${token_to_match} ${CLOUDHOST}`"
-fi
 
 if ( [ "${ips}" = "" ] )
 then
@@ -92,37 +103,22 @@ do
     count="`/usr/bin/expr ${count} + 1`"
 done
 
-SERVER_USER="`/bin/ls ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/SERVERUSER:* | /usr/bin/awk -F':' '{print $NF}'`"
-
 /bin/echo "Does your server use Elliptic Curve Digital Signature Algorithm or the Rivest Shamir Adleman Algorithm for authenitcation?"
 /bin/echo "If you are not sure, please try one and then the other. If you are prompted for a password, it is the wrong one"
 /bin/echo "Please select (1) RSA (2) ECDSA"
 read response
 
 SSH_PORT="`/bin/grep SSH_PORT ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} | /bin/sed 's/"//g' | /usr/bin/awk -F'=' '{print $NF}'`"
+SERVER_USER="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER`"
 
-if ( [ "${sourcefile}" = "SSL" ] )
+/bin/echo "Please enter the full path to the directory you would like to copy the file to on the remote machine. The user ${SERVER_USER} must have write permission"
+read remotedir
+if ( [ "${response}" = "1" ] )
 then
-    if ( [ "${response}" = "1" ] )
-    then
-        /usr/bin/scp -o ConnectTimeout=5 -o ConnectionAttempts=2 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -P ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${BUILD_HOME}/ssl/${WEBSITE_URL}/fullchain.pem ${BUILD_HOME}/ssl/${WEBSITE_URL}/privkey.pem ${SERVER_USER}@${AS_IP}:/home/${SERVER_USER}/.ssh
-    elif ( [ "${response}" = "2" ] )
-    then
-        /usr/bin/scp -o ConnectTimeout=5 -o ConnectionAttempts=2 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -P ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${BUILD_HOME}/ssl/${WEBSITE_URL}/fullchain.pem ${BUILD_HOME}/ssl/${WEBSITE_URL}/privkey.pem ${SERVER_USER}@${AS_IP}:/home/${SERVER_USER}/.ssh
-    else
-        /bin/echo "Unrecognised selection, please select only 1 or 2"
-    fi
+    /usr/bin/scp -o ConnectTimeout=5 -o ConnectionAttempts=2 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -P ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${sourcefile} ${SERVER_USER}@${AS_IP}:${remotedir}
+elif ( [ "${response}" = "2" ] )
+then
+    /usr/bin/scp -o ConnectTimeout=5 -o ConnectionAttempts=2 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -P ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${sourcefile} ${SERVER_USER}@${AS_IP}:${remotedir}
 else
-    /bin/echo "Please enter the full path to the directory you would like to copy the file to on the remote machine. The user ${SERVER_USER} must have write permission"
-    read remotedir
-    if ( [ "${response}" = "1" ] )
-    then
-        /usr/bin/scp -o ConnectTimeout=5 -o ConnectionAttempts=2 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -P ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${sourcefile} ${SERVER_USER}@${AS_IP}:${remotedir}
-    elif ( [ "${response}" = "2" ] )
-    then
-        /usr/bin/scp -o ConnectTimeout=5 -o ConnectionAttempts=2 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -P ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${sourcefile} ${SERVER_USER}@${AS_IP}:${remotedir}
-    else
-        /bin/echo "Unrecognised selection, please select only 1 or 2"
-    fi
+    /bin/echo "Unrecognised selection, please select only 1 or 2"
 fi
-
