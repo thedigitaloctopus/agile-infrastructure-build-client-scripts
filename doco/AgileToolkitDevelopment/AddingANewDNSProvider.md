@@ -1,4 +1,4 @@
-1) To add a new DNS provider, first of all, research the provider, they must support round robin DNS loadbalancing. If they do, then you can think about adding them as a provider with this toolkit as long as they have a suitable API or CLI toolkit to programmatically access their DNS service. You could look into Route 53 for example at the time of writing I have implemented for cloudflare and rackspance DNS services. Cloudflare has lots of additional security services you can add with free and more extensive payed plans. 
+1) To add a new DNS provider, first of all, research the provider, they must support round robin DNS loadbalancing. If they do, then you can think about adding them as a provider with this toolkit as long as they have a suitable API or CLI toolkit to programmatically access their DNS service. Cloudflare has lots of additional security services you can add with free and more extensive payed plans. 
 
 2) Add your new DNS provider to the ${BUILDHOME}/SelectDNSProvider.sh script, following the example methodologies.
 
