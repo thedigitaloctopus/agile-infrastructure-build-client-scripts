@@ -52,26 +52,4 @@ then
     /usr/bin/curl  -H "X-DNS-Token: ${authkey}" -H 'Accept: application/json' https://api.exoscale.com/dns/v1/domains/${domainurl}/records | /usr/bin/jq --arg tmp_subdomain "${subdomain}" '.[].record | select (.name == $tmp_subdomain) | .id'
 fi
 
-domainurl="`/bin/echo ${2} | /usr/bin/cut -d'.' -f2-`"
-websiteurl="${2}"
-username="${3}"
-apikey="${4}"
-dns="${5}"
-region=${6}
 
-if ( [ "${dns}" = "rackspace" ] )
-then
-    token="`/usr/bin/curl -s -X POST https://identity.api.rackspacecloud.com/v2.0/tokens -H "Content-Type: application/json" -d '{ "auth": { "RAX-KSKEY:apiKeyCredentials": { "username": "'${username}'", "apiKey": "'${apikey}'" } } }' | /usr/bin/python -m json.tool | /usr/bin/jq ".access.token.id" | /bin/sed 's/"//g'`"
-    endpoint="`/usr/bin/curl -s -X POST https://identity.api.rackspacecloud.com/v2.0/tokens -H "Content-Type: application/json" -d '{ "auth": { "RAX-KSKEY:apiKeyCredentials": { "username": "'${username}'", "apiKey": "'${apikey}'" } } }' | /usr/bin/python -m json.tool | /usr/bin/jq ".access.serviceCatalog[].endpoints[].publicURL" | /bin/sed 's/"//g' | /bin/grep ${region} | /bin/grep dns`"
-    domainid="`/usr/bin/curl -X GET -H "X-Auth-Token:${token}" -H "Accept:application/json" "${endpoint}/domains" | /usr/bin/python -m json.tool | /usr/bin/jq '.domains[] | select(.name=="'${domainurl}'") | .id'`"
-    ids="`/usr/bin/curl -X GET -H "X-Auth-Token: ${token}" -H "Content-Type:application/json" "${endpoint}/domains/${domainid}/records" | /usr/bin/python -m json.tool | /usr/bin/jq '.records[] | select(.name=="'${websiteurl}'") | .id' | /bin/sed 's/"//g'`"
-    idslist=""
-    for id in $ids
-    do
-        if ( [ "`/bin/echo ${id} | /bin/grep "^A-"`" != "" ] )
-        then
-            idlist="${idlist} ${id}"
-        fi
-    done
-    /bin/echo ${idlist}
-fi
