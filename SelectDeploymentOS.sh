@@ -57,13 +57,13 @@ then
 elif ( [ "${response}" = "2" ] )
 then
     BUILDOS="debian"
-    status "OK, thanks for that. Please now tell me what version of Debian you would like to deploy. Currently you can choose version 9, version 10 or version 11"
-    status "Please type one of '9', '10' or '11' to accept debian for your deployment OS"
+    status "OK, thanks for that. Please now tell me what version of Debian you would like to deploy. Currently you can choose  version 10 or version 11"
+    status "Please type one of '10' or '11' to accept debian for your deployment OS"
     read response
 
-    if (  [ "${response}" = "" ] || [ "`/bin/echo '9 10 11' | /bin/grep ${response}`" = "" ] )
+    if (  [ "${response}" = "" ] || [ "`/bin/echo '10 11' | /bin/grep ${response}`" = "" ] )
     then
-        status "Sorry mate, that's not a valid choice, please enter one of  9, 10 or 11"
+        status "Sorry mate, that's not a valid choice, please enter one of  10 or 11"
         read response
     fi
 
