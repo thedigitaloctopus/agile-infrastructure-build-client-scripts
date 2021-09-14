@@ -1,59 +1,60 @@
 # README #
 
-### ASSOCIATED WEBSITE: www.codebreakers.uk
+### INTRODUCTION
 
-This toolkit automates the deployment of LEMP/LAMP stacks with built in scalability for various CMS systems (currently Wordpress, Joomla, Moodle, Drupal) starting with nothing and building out from there. This is close to being a PAAS solution meaning that purely through parameter configuration, you can have a fully deployed application infrastructure that can scale with consistent security practices built in. A disadvantage of fully PAAS solutions is a lack of operational control and features. Using this solution, you have, what is effectively a PAAS solution but, with total control of your servers and databases if you choose to have  or need to have. For my needs this was the best of both worlds because through automation, I avoid the repeated work of server configuration and at the same time retain full control over my deployed environment. This solution is extensible and reusable meaning developers can easily extend (and share their work) for their use cases. As examples of how it is extensible, if you wanted to extend the toolkit to support another cloudhost, for example, Rackspace or Google Cloud, you are free to do that in a manner which is easy to follow. The scripts can look quite involved at their core, but, you shouldn't need to touch any of that and the parts of the code you need to work with are abstracted out. Clearly, there's a plethora of deploymemt options out there if you want a CMS system, and, this is another one. It should fit you well if you want full access to the Linux VPS systems that your application is running on and if you don't want to necessarily be bothered with manual software installs and configurations. An advantage of this approach is that it can have strong and consistent security practices baked in. 
-There's many combinations of test scenarios with this software. I am one developer, I have tested it as well as I can, but, will have to rely on feedback. If you find any problems please report them using the forum on www.codebreakers.uk, thanks in advance.
-The aim of this toolkit it to provide a consistent way to deploy the same customised CMS application multiple times for example to town A, town B and so on. The exact same process (although with possibly a different configuration) should be used to deploy for town B as it is for town A.
+##### ASSOCIATED WEBSITE: [Code Breakers](www.codebreakers.uk)
 
------
+This toolkit automates the deployment of LEMP/LAMP stacks with built in scalability for various CMS systems (currently Wordpress, Joomla, Moodle, Drupal) starting with nothing and building out from there. This is close to being a PAAS solution meaning that purely through parameter configuration, you can have a fully deployed application infrastructure that can scale with consistent security practices built in. A disadvantage of fully PAAS solutions is a lack of operational control and features. Using this solution, you have, what is effectively a PAAS solution but, with total control of your servers and databases if you choose to have or need to have. For my needs this was the best of both worlds because through automation, I avoid the repeated work of server configuration and at the same time retain full control over my deployed environment. This solution is extensible and reusable meaning developers can easily extend (and share their work) for their use cases. As examples of how it is extensible, if you wanted to extend the toolkit to support another cloudhost, for example, Rackspace or Google Cloud, you are free to do that in a manner which is easy to follow. The scripts can look quite involved at their core, but, you shouldn't need to touch any of that and the parts of the code you need to work with are abstracted out. Clearly, there's a plethora of deploymemt options out there if you want a CMS system, and, this is another one. It should fit you well if you want full access to the Linux VPS systems that your application is running on and if you don't want to necessarily be bothered with manual software installs and configurations. An advantage of this approach is that it can have strong and consistent security practices baked in. There's many combinations of test scenarios with this software. I am one developer, I have tested it as well as I can, but, will have to rely on feedback. If you find any problems please report them using the forum on www.codebreakers.uk, thanks in advance. The aim of this toolkit it to provide a consistent way to deploy the same customised CMS application multiple times for example to town A, town B and so on. The exact same process (although with possibly a different configuration) should be used to deploy for town B as it is for town A.
 
-### IMPORTANT 
+-----------------------
 
-There are various configurations of deployment using this toolkit. Make sure you test what costs will be incurred depending on the scale of the deployment you are making. Different providers have different cost metrics and so, it's possible that one provider's operational costs will be different to another for a similar configuration. Costs profiles vary depending upon what configuration settings you have chosen. For example, if you chose a (S3 compatible) datastore in a different region to your VPS systems, which this toolkit does not preclude you from doing, you may unwittingly incur considerable network bandwidth costs for some providers. 
+### OBJECTIVE:
 
------
+To provide a way of deploying server systems using nothing but parameterised scripting, from scratch, in such a way that a customer can either use the servers for development or production whilst retaining full access to their server systems and in particular anybody wanting to learn how to deploy CMS systems on VPS server machines can have a sample configuration to work with. 
+
+------------------------
+
+### THE CORE:
+
+With the core of the Agile Deployment Toolkit, it will make use of a core set of services and providers. I elected to use Digital Ocean, Exoscale, Linode, Vultr and AWS to deploy on, but, the toolkit can be forked and extended to support other providers also, such as say Google Cloud or Rackspace. The system is fully configurable by you and if you wish to change default configurations for, for example, Apache, NGINX or MariaDB, then you will need to fork the respoitories, alter your copy of the scripts and have them deplouy according to your configuration requirements. A useful thing to be aware of if you are changing these scripts is you can check them syntactically with using /bin/sed -n <script.sh> before you redeploy only to find you had a syntax error during deployment. 
+
+The full set of services that are supported by the core of the toolkit and which you can extend in your forks is:
+
+1. For VPS services, one of - Digital Ocean, Linode, Exoscale, Vultr, AWS
+2. For Email services, one of - Amazon SES, Gmail or Sendpulse
+3. For Git based services, one of - Bitbucket, Github or Gitlab
+4. For DNS services, one of - Cloudflare, Digital Ocean, Exoscale, Linode, Vult, or AWS Route 53 (note, Cloudflare has additional security features which are absent from naked dns services which is why it is probably best practice to use CLoudflare even if there is some extra hassle to set it up which you can find out about here: [Cloudflare DNS](https://community.cloudflare.com/t/step-1-adding-your-domain-to-cloudflare/64309)
+5. For object store services, one of - Digital Ocean Spaces, Exoscale Object Store, Linode Object Store, Vultr Object Store or Amazon S3
+6. These providers AWS, Exoscale and Digital Ocean currently support managed DB systems but other providers are projected to make offerings of managed DB solutions as well in the near future. If you can't use a managed database solution with your chosen provider, you might want to look into "Several Nines" which supports (for example, Vultr and Linode). I haven't tried "Several Nines", but, if you try it and it works OK, I would like to hear about it.
+
+
+------------------------------
+
+### ULTIMATE MOTIVATION
+
+My ultimate motivation is to have developers "develop" applications as a kind of extenstion to this toolkit in the same way that in, for example, people who use Joomla develop extensions for Joomla. My ultimate aim is to be able to have multiple deployers point this toolkit at a public - (beware of sensitive credentials if you make your application baseline public) full featured and functional CMS application code base and have the toolkit deploy that application into the live without having to do anything other than the configuration of parameters for this scipts (and of course setting up accounts with a VPS provider and so on). In this way, a consistent way of deploying a baselined application (you can find out more about how to create a baselined application in the tutorials and/or documentation) multiple times. In other words, there is intended to be an applications directory in the same way as in, Wordpress or Joomla you have a plugins or an extensions directory. Ultimate ultimate aim would be to have a library of applications with various function which can be reviewed and described such that someone new to the toolkit could come along and have, for example, a fully functioing social network (developed by someone else) up and running with 10s of minutes. Having full featured reusable application deployment like this would be an accelerator and because there is no lock in, for example, you are not tied to "Vendor B's social networking service" to run your application on, you can take your application codebase away with you and deploy it somewhere else. That's the value add which I am aiming for by developing this toolkit. 
+
+--------------------------------
+
+### BUILD METHODS
+
+There are three types of build method you can employ to get a functioning application. These are the quick (hardcore) build, the expedited build and the full build. There's pluses and minuses to all of them. The Quick build you need to understand how the toolkit is working by studying the spec to find out what each parameter of your startup script is doing. The Expedited build shortcuts the build process such that you have to deploy (and secure) a build machine VPS **NEVER DEPLOY THIS TOOLKIT ON YOUR OWN LAPTOP RUNNING LINUX AS IT WILL MAKE CHANGES TO YOUR GLOBAL CONFIGURATION SETTINGS** and then, clone the toolkit and provide a limited set of parameters to the running script. The final way is the full build where you will need to understand the toolkit the least but it means that you will be prompted for every parameter that the toolkit needs. For me I tend to use the hardcore method, but to begin with you might want to fire up (and secure) a dedicated build machine with your VPS provider and run the full build with an eye to the specification of course. 
+
+-----------------------------
 
 ### QUICK START
 
 To get started as quickly as possible before going into more depth, you can use one of these methods: [Template Overrides](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides.md)
- 
------
-
-### REQUIREMENTS
-
-To use this toolkit you will need to setup accounts with the following providers supported within the core:
-
-1) For VPS services, one of - Digital Ocean, Linode, Exoscale, Vultr, AWS
-2) For Email services, one of - Amazon SES, Gmail or Sendpulse
-3) For git based services, one of - Bitbucket, Github or Gitlab
-4) For DNS services, one of - Cloudflare, Digital Ocean, Exoscale, Linode, Vult, or AWS Route 53 (note, clourflare has additional security features which are absent from naked dns services and why it is recommended in tutorials and by default even though it adds complexity). 
-5) For object store services, one of - Digital Ocean Spaces, Exoscale Object Store, Linode Object Store, Vultr Object Store or Amazon S3
-6) These providers AWS, Exoscale and Digital Ocean currently support managed DB systems but other providers are projected to make offerings of managed DB solutions as well in the near future. If you can't use a managed database solution with your chosen provider, you might want to look into [Several Nines](www.severalnines.com) which supports (for example, Vultr and Linode)
-
-Clearly, you will likely want to chose the same provider for your Object storage service and VPS services and so on, but, there's nothing stopping you, for example, deploying on Linode for your VPS systems and using Digital Ocean Spaces for your object store service, although you won't be wanting your object storage geographically distant from where your VPS systems are running. 
 
 -----
 
-### MOTIVATION
+### THE EXPEDITED BUILD
 
-When you use shared hosting, for example, some PHP settings are under the control of the hosting provider which can be cumbersome as you have to contact them every time your application needs a configuration change. Vanilla VPS systems are great, but you still have to setup all the software and that can be error prone and not easily reproduced. Building off pre-built images is another way where the server software setup is baked into the image and all you have to do is deploy it. And then of course there is docker and things like that (which I have no experience of).
-In my case I found that all of these solutions were not quite what I wanted. If you build from a prebuilt image for example, OK, you have your server configured for that machine, but what about if you want some architectural nicities as well? So, my solution includes some architectural design as well as a way of automatically building the servers as required. It's a "low barrier to entry" solution. I appreciate that there are infrastructure as code solutions, but, again, this is the way I chose to crack the same nut. 
-Another way that I have tried to innovate is that you can develop an application, a social network, say, maybe in Joomla or Drupal and from that, you can baseline it when you have finished it to "stable" standard. From that baseline, if you opensource the code on Github, Bitbucket or Gitlab, then others can easily deploy your (full fledged, production ready) application as their own. This can have several time saving advantages as it might not be necessary to build an application from scratch if you can find one that someone else has built that meets your requirements or maybe meets your requirements with a little more work.
-The only fly in the ointment is licensing. If an application is built with commercial extensions, then, it is possible they will only be licensed to work on one domain or only licensed to a particular person or entity that purchased it. So, people deploying applications that others have developed will have to be aware of what the licensing is for the constituent parts  or components and purchase, as necessary, their own licenses from the vendor(s) of the components. 
-The ideal vision would be to have a library of production ready applications that can be deployed multiple times and made as good as they can be. That way, if someone wants a social network, they don't have to install Wordpress or Joomla and start from scatch, they can use an application that has already been used in the live and has had realworld feed back and possibly ratings and reviews and so on. 
+If you feel confident with what is needed you can run the Expedited Build Process on your build machine. This can be done by running this script:  
 
------
+##### ${BUILD_HOME}/ExpeditedAgileDeploymentToolkit.sh
 
-### THE SPECIFICS
-
-The Agile Deployment Toolkit is designed to be modifiable and extensible, for example, you can plugin which database you want to use (currently supported are mysql, mariadb and postgres) but you could extend the scripts to support Mongo DB or some other DB type also. It is also architected to use DBaaS so if you want to you can use a DBaaS in the cloud and you don't have to worry about anything then to do with DB stuff and its configuration as the service provider has got you covered. 
-One of the challenges of architecting with multiple webservers is how to share user assets between the webservers so that the new asset updates are available to all the webservers concurrently. Some people say to rsync between the servers but I chose to have cloud based asset storage which is remote  mounted to, and cached by, the each webserver. In most cases I use S3FS, but, there are other solutions which could be made optional and its only for asset uploads as it is recommended that the application itself uses a CDN directly from the S3 bucket which is mounted for your application assets. That way, updates to the file system are uploaded to the S3 bucket through the filesystem and are read by your application (from the same bucket) using the application's CDN. If you use AWS, you have the option of using the Elastic Filesystem (EFS) instead of the S3FS based solution. 
-Shared configuration files and settings are securely stored in the object store and mounted using a tool (s3fs) to each of our servers are are shared between the machines with resilence built in should there be networking issues. Again, configuration settings that are shared between machines can be shared using the EFS if you are using AWS. 
-
-As far as the build procedure is concerned the normal modus operandi is to have a dedicated VPS build machine in a cloudhost of your choice and to pull down the build client scripts from the git repository to that file system and execute the scripts from there. If you set up your own build machine manually, IT IS NOT RECOMMEND YOU USE YOUR OWN LINUX LAPTOP OR DESKTOP MACHINE TO PERFORM A BUILD, then you need to make very very sure that the build machine is properly secured as it will have the essential credentials for your build process and therefore you cloudhost stored on its file system. 
-
------
+----------------------------
 
 ### THE FULL BUILD
 
@@ -92,14 +93,6 @@ Here are two instructional or demo videos for how to set up your build server an
 [Agile Deployment Toolkit Build Server Setup Example](https://www.youtube.com/watch?v=ONp_QuPxcsc)  
 
 [Sample Build Process Agile Deployment Toolkit](https://www.youtube.com/watch?v=mXpIRB_7O_M&t=80s)  
-
------
-
-### THE EXPEDITED BUILD
-
-If you feel confident with what is needed you can run the Expedited Build Process on your build machine. This can be done by running this script:  
-
-##### ${BUILD_HOME}/ExpeditedAgileDeploymentToolkit.sh
 
 -----
 
