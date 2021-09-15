@@ -52,15 +52,10 @@ domainurl="`/bin/echo ${4} | /usr/bin/cut -d'.' -f2-`"
 ip="${5}"
 dns="${7}"
 
-#email="${1}"
-#authkey="${2}"
-#subdomain="`/bin/echo ${3} | /usr/bin/awk -F'.' '{print $1}'`"
-#domainurl="`/bin/echo ${3} | /usr/bin/cut -d'.' -f2-`"
-#ip="${4}"
-#dns="${6}"
-
 if ( [ "${dns}" = "exoscale" ] )
 then
-    /usr/bin/curl  -H "X-DNS-Token: ${authkey}" -H 'Accept: application/json' -H 'Content-Type: application/json' -X POST -d "{\"record\":{\"name\": \"${subdomain}\",\"record_type\": \"A\",\"content\": \"${ip}\",\"ttl\": 120}}" https://api.exoscale.com/dns/v1/domains/${domainurl}/records 1>/dev/null 2>/dev/null
+    /usr/bin/exo dns add A ${domainurl} -a ${ip}
+    #Alternatively:
+   # /usr/bin/curl  -H "X-DNS-Token: ${authkey}" -H 'Accept: application/json' -H 'Content-Type: application/json' -X POST -d "{\"record\":{\"name\": \"${subdomain}\",\"record_type\": \"A\",\"content\": \"${ip}\",\"ttl\": 120}}" https://api.exoscale.com/dns/v1/domains/${domainurl}/records 1>/dev/null 2>/dev/null
 fi
 
