@@ -48,7 +48,7 @@ domainurl="`/bin/echo ${7} | /usr/bin/cut -d'.' -f2-`"
 
 if ( [ "${dns}" = "exoscale" ] )
 then
-    /usr/bin/exo dns remove ${domainurl} ${recordid} -q
+    /usr/bin/exo dns remove ${domainurl} ${recordid} -Q -f
     #Alternative
     #/usr/bin/curl  -H "X-DNS-Token: ${authkey}"  -H 'Accept: application/json' -X DELETE  https://api.exoscale.com/dns/v1/domains/${domainurl}/records/${recordid} 1>/dev/null 2>/dev/null
 fi
