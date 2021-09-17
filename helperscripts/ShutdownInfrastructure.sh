@@ -76,6 +76,13 @@ autoscalerips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${
 webserverips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${webserver_token_to_match}" ${CLOUDHOST}`"
 databaseips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${database_token_to_match}" ${CLOUDHOST}`"
 
+/bin/echo "autoscaler ips: ${autoscalerips}"
+/bin/echo "webserver ips: ${webserverips}"
+/bin/echo "database ips: ${databaseips}"
+
+/bin/echo "Press <enter> to accept"
+read x
+
 
 /bin/echo "Do your servers use Elliptic Curve Digital Signature Algorithm or the Rivest Shamir Adleman Algorithm for authenitcation?"
 /bin/echo "If you are not sure, please try one and then the other. If you are prompted for a password, it is the wrong one"
@@ -110,7 +117,7 @@ SUDO="DEBIAN_FRONTEND=noninteractive /bin/echo ${SERVER_USER_PASSWORD} | /usr/bi
 
 for ip in ${autoscalerips}
 do
-    /usr/bin/ssh -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=5 -o ConnectionAttempts=6 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${ip} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/utilities/ShutdownThisAutoscaler.sh 'backup'" 2>/dev/null
+    /usr/bin/ssh -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=5 -o ConnectionAttempts=6 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${ip} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/utilities/ShutdownThisAutoscaler.sh" 2>/dev/null
 done
 
 first="1"
