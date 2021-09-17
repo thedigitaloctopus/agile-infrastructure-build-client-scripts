@@ -402,8 +402,8 @@ fi
 /bin/echo "export BUILDOS_VERSION=\"${BUILDOS_VERSION}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/sed -i '/CLOUDHOST=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/echo "export CLOUDHOST=\"${CLOUDHOST}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
-/bin/sed -i '/MACHINETYPE=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
-/bin/echo "export MACHINETYPE=\"${MACHINETYPE}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/sed -i '/MACHINE_TYPE=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+/bin/echo "export MACHINE_TYPE=\"${MACHINE_TYPE}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/sed -i '/ALGORITHM=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/echo "export ALGORITHM=\"${ALGORITHM}\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
 /bin/sed -i '/CLOUDHOST_USERNAME=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
