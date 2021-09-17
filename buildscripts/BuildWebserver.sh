@@ -58,7 +58,10 @@ status "Logging for this server build is located at ${BUILD_HOME}/logs/${OUT_FIL
 status "The error stream for this server build is located at ${BUILD_HOME}/logs/${ERR_FILE}"
 status "========================================================="
 
-ASIPS="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST} | /bin/grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | /bin/tr '\n' ':' | /bin/sed 's/\:$//g'`"
+#ASIPS="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST} | /bin/grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | /bin/tr '\n' ':' | /bin/sed 's/\:$//g'`"
+
+ASIPS="`/bin/echo "${ASIPS}" | /bin/sed 's/:/ /g' | /bin/sed 's/ $//g'`"
+ASIP_PRIVATES="`/bin/echo "${ASIP_PRIVATES}" | /bin/sed 's/:/ /g' | /bin/sed 's/ $//g'`"
 
 #If "done" is set to 1, then we know that a webserver has been successfully built and is running.
 #Try up to 5 times if the webserver is failing to complete its build
@@ -247,12 +250,11 @@ do
              fi
         done < ${BUILD_HOME}/builddescriptors/webserverscp.dat
         
-        if ( [ "${ASIP}" != "" ] )
-        then
-                /usr/bin/scp ${OPTIONS} -P ${SSH_PORT} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat ${SERVER_USER}@${ASIP}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1
-        fi        
-        /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1
-        /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/builddescriptors/buildstylesscp.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/buildstyles.dat >/dev/null 2>&1    
+        for ASIP in ${ASIPS}
+        do
+            /usr/bin/scp ${OPTIONS} -P ${SSH_PORT} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat ${SERVER_USER}@${ASIP}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1        
+            /usr/bin/scp ${OPTIONS} -P ${SSH_PORT} ${BUILD_HOME}/builddescriptors/buildstylesscp.dat ${SERVER_USER}@${ASIP}:/home/${SERVER_USER}/.ssh/buildstyles.dat >/dev/null 2>&1    
+        done
      
         #configure for the cloudhost provider we are using
         ${BUILD_HOME}/providerscripts/cloudhost/ConfigureProvider.sh ${BUILD_HOME} ${CLOUDHOST} ${BUILD_IDENTIFIER} ${ALGORITHM} ${ip} ${SERVER_USER}
