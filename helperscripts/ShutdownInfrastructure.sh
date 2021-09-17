@@ -148,17 +148,17 @@ fi
 
 for autoscalerip in ${autoscalerips}
 do
-    ${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${autoscalerip} ${CLOUDHOST}
+    ${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${autoscalerip} ${CLOUDHOST} 1>/dev/null 2>/dev/null
 done
 
 for webserverip in ${webserverips}
 do
-    ${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${webserverip} ${CLOUDHOST}
+    ${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${webserverip} ${CLOUDHOST} 1>/dev/null 2>/dev/null
 done
 
 for databaseip in ${databaseips}
 do
-    ${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${databaseip} ${CLOUDHOST}
+    ${BUILD_HOME}/providerscripts/server/DestroyServer.sh ${databaseip} ${CLOUDHOST} 1>/dev/null 2>/dev/null
 done
 
 /bin/echo "#######################################################################################################################################"
