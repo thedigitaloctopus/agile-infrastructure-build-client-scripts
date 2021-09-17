@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ####################################################################################################
 # Author : Peter Winter
 # Date   : 13/07/2016
@@ -18,7 +18,7 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #######################################################################################################
 #######################################################################################################
-#set -x
+set -x
 
 if ( [ ! -f  ./MonitorWebserver.sh ] )
 then
@@ -48,9 +48,6 @@ case ${periodicity} in
     *) /bin/echo "OK, starting monitoring" ;;
 esac
 
-/bin/echo "Please enter a token to look for in the page"
-read token
-
 if ( [ ! -f ${BUILD_HOME}/helperscripts/logs ] )
 then
     /bin/mkdir ${BUILD_HOME}/helperscripts/logs 2>/dev/null
@@ -58,12 +55,12 @@ fi
 
 while ( [ 1 ] )
 do
-    /usr/bin/wget -qO /dev/null --timeout=10 http://${1}
-    if ( [ $? -ne 0 ] )
+
+    if ( [ "`/usr/bin/curl -m 3 --insecure -I "https://${1}:443" 2>&1 | /bin/grep \"HTTP\" | /bin/grep -w \"200\|301\"`" ] )
     then
-        /bin/echo "${0} `/bin/date`: IT's DEAD" `/bin/date` >> ${BUILD_HOME}/helperscripts/logs/MonitoringLog.dat
-    else
         /bin/echo "${0} `/bin/date`: IT's ALIVE" `/bin/date` >> ${BUILD_HOME}/helperscripts/logs/MonitoringLog.dat
+    else
+        /bin/echo "${0} `/bin/date`: IT's DEAD" `/bin/date` >> ${BUILD_HOME}/helperscripts/logs/MonitoringLog.dat
     fi
 
     /bin/sleep ${periodicity}
