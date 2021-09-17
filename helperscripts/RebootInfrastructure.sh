@@ -58,13 +58,13 @@ fi
 
 /bin/echo "What is the build identifier you want to connect to?"
 /bin/echo "You have these builds to choose from: "
-/bin/ls ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}
+/bin/ls ${BUILD_HOME}/buildconfiguration/${CLOUDHOST} | /bin/grep -v credentials
 /bin/echo "Please enter the name of the build of the server you wish to connect with"
 read BUILD_IDENTIFIER
 
-autoscalerips="`./providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST}`"
-webserverips="`./providerscripts/server/GetServerIPAddresses.sh "webserver*" ${CLOUDHOST}`"
-databaseips="`./providerscripts/server/GetServerIPAddresses.sh "database*" ${CLOUDHOST}`"
+autoscalerips="`../providerscripts/server/GetServerIPAddresses.sh "*autoscaler*" ${CLOUDHOST}`"
+webserverips="`../providerscripts/server/GetServerIPAddresses.sh "webserver*" ${CLOUDHOST}`"
+databaseips="`../providerscripts/server/GetServerIPAddresses.sh "database*" ${CLOUDHOST}`"
 
 /bin/echo "Do your servers use Elliptic Curve Digital Signature Algorithm or the Rivest Shamir Adleman Algorithm for authenitcation?"
 /bin/echo "If you are not sure, please try one and then the other. If you are prompted for a password, it is the wrong one"
@@ -90,23 +90,30 @@ then
     exit
 fi
 
+SERVER_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER`"
+SERVER_USER_PASSWORD="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSERPASSWORD`"
 SSH_PORT="`/bin/grep SSH_PORT ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} | /bin/sed 's/"//g' | /usr/bin/awk -F'=' '{print $NF}'`"
+SUDO="DEBIAN_FRONTEND=noninteractive /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E "
 
 /bin/echo "OK, rebooting your infrastructure"
 
 for ip in ${autoscalerips}
 do
-    /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ./keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} root@${ip} "/sbin/shutdown -r now" 2>/dev/null
+    /bin/echo "Rebooting autoscaler....."
+    /bin/sleep 5
+    /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ../keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${ip} "${SUDO} /usr/sbin/shutdown -r now" 2>/dev/null
 done
 
 for ip in ${webserverips}
 do
-    /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ./keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} root@${ip} "/sbin/shutdown -r now" 2>/dev/null
+    /bin/echo "Rebooting webserver....."
+    /bin/sleep 5
+    /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ../keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${ip} "${SUDO} /usr/sbin/shutdown -r now" 2>/dev/null
 done
 
 for ip in ${databaseips}
 do
-    /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ./keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} root@${databaseips} '/sbin/shutdown -r now' 2>/dev/null
+    /bin/echo "Rebooting database....."
+    /bin/sleep 5
+    /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ../keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${databaseips} '${SUDO} /usr/sbin/shutdown -r now' 2>/dev/null
 done
-
-/usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/liveimageserverkeys/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} root@${ip} '/sbin/shutdown -r now' 2>/dev/null
