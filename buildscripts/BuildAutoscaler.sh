@@ -127,8 +127,8 @@ do
         ASIP=${ip}
         ASIP_PRIVATE=${private_ip}
         
-        ASIPS="${ASIPS}:"
-        ASIP_PRIVATES="${ASIP_PRIVATES}:"
+        ASIPS="${ASIPS}${ASIP}:"
+        ASIP_PRIVATES="${ASIP_PRIVATES}${ASIP_PRIVATE}:"
 
         status "Have got the ip addresses for your autoscaler"
         status "Public IP address: ${ASIP}"
