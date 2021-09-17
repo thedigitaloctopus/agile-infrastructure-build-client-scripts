@@ -455,6 +455,12 @@ Available sizes to choose from are:
 Digital Ocean: 512mb,1gb,2gb,4gb,8gb,16gb,32gb,48gb,64gb (there are other sizes, but, restricting to these keeps in simple for most uses)  
 
 Exoscale: 10G,50G,200G,300G,400G  
+      
+      if you select 10G that will deploy a machine of type: "Tiny 1024mb 1cpu"
+      if you select 50G that will deploy a machine of type: "Medium 4096mb 2cpu"
+      if you select 200G that will deploy a machine of type: "Large 8192mb 4cpu"
+      if you select 300G that will deploy a machine of type: "Extra-large 16384mb 4cpu"
+      if you select 400G that will deploy a machine of type: "Huge 32768mb 8cpu"
 
 Linode: g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-standard-8,g6-standard-16,g6-standard-20,g6-standard-24,g6-standard-32
 
