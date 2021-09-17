@@ -45,7 +45,7 @@ done
 if ( [ "${choice}" = "1" ] )
 then
     CLOUDHOST="digitalocean"
-    MACHINETYPE="DROPLET"
+    MACHINE_TYPE="DROPLET"
     ALGORITHM="ecdsa"
 
     if ( [ ! -d ${BUILD_HOME}/runtimedata/digitalocean ] )
@@ -163,7 +163,7 @@ then
 elif ( [ "${choice}" = "2" ] )
 then
     CLOUDHOST="exoscale"
-    MACHINETYPE="EXOSCALE"
+    MACHINE_TYPE="EXOSCALE"
     ALGORITHM="rsa"
 
     if ( [ ! -d ${BUILD_HOME}/runtimedata/exoscale ] )
@@ -324,7 +324,7 @@ then
 elif ( [ "${choice}" = "3" ] )
 then
     CLOUDHOST="linode"
-    MACHINETYPE="LINODE"
+    MACHINE_TYPE="LINODE"
     ALGORITHM="rsa"
 
     if ( [ ! -d ${BUILD_HOME}/runtimedata/linode ] )
@@ -454,7 +454,7 @@ then
 elif ( [ "${choice}" = "4" ] )
 then
     CLOUDHOST="vultr"
-    MACHINETYPE="VULTR"
+    MACHINE_TYPE="VULTR"
     ALGORITHM="rsa"
 
     if ( [ ! -d ${BUILD_HOME}/runtimedata/vultr ] )
@@ -577,7 +577,7 @@ then
 elif ( [ "${choice}" = "5" ] )
 then
     CLOUDHOST="aws"
-    MACHINETYPE="AWS"
+    MACHINE_TYPE="AWS"
     ALGORITHM="rsa"
 
     if ( [ ! -d ${BUILD_HOME}/runtimedata/aws ] )
