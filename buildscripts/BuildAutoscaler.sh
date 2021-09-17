@@ -65,7 +65,8 @@ status "========================================================="
 status "Logging for this server build is located at ${BUILD_HOME}/logs/${OUT_FILE}"
 status "The error stream for this server build is located at ${BUILD_HOME}/logs/${ERR_FILE}"
 status "========================================================="
-
+ASIPS=""
+ASIP_PRIVATES=""
 
 # If done=1, then we know that the autoscaler has been successfully built. We try up to 5 times before we give up if it fails
 while ( [ "${done}" != "1" ] && [ "${counter}" -lt "5" ] )
@@ -125,6 +126,9 @@ do
         status "It looks like the machine has booted OK"
         ASIP=${ip}
         ASIP_PRIVATE=${private_ip}
+        
+        ASIPS="${ASIPS}:"
+        ASIP_PRIVATES="${ASIP_PRIVATES}:"
 
         status "Have got the ip addresses for your autoscaler"
         status "Public IP address: ${ASIP}"
