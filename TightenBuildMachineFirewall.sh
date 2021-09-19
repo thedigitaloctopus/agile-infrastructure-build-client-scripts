@@ -44,7 +44,7 @@ fi
 
 /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
 
-if ( [ -f ${BUILD_HOME}.authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" = "" ] )
+if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" = "" ] )
 then
     /bin/mv ${BUILD_HOME}/authorised-ips.dat.$$ ${BUILD_HOME}/authorised-ips.dat
     exit
