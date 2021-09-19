@@ -28,13 +28,18 @@
 
 if ( [ "`/usr/bin/crontab -l | /bin/grep Tighten`" = "" ] )
 then
-    /bin/echo "*/1 * * * * ${BUILD_HOME}/TightenBuildMachineFirewall.sh ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
+    /bin/echo "*/1 * * * * ${BUILD_HOME}/TightenBuildMachineFirewall.sh ${BUILD_IDENTIFIER} ${BUILD_HOME}" >> /var/spool/cron/crontabs/root
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
 if ( [ "${1}" != "" ] )
 then
     BUILD_IDENTIFIER="${1}"
+fi
+
+if ( [ "${2}" != "" ] )
+then
+    BUILD_HOME="${2}"
 fi
 
 /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
