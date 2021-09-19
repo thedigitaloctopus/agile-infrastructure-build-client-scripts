@@ -29,7 +29,7 @@ then
 fi
 
 BACKUP_DATE="`/usr/bin/date '+%B%d%Y'`"
-RND="`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-8};echo;`"
+RND="`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-3};echo;`"
 
 if ( [ "${1}" != "" ] )
 then
@@ -40,6 +40,8 @@ if ( [ "${2}" != "" ] )
 then
     BACKUP_PASSWORD="${2}"
 fi
+
+/usr/bin/s3cmd mb s3://backup-${BACKUP_DATE}-${RND} 1>/dev/null 2>/dev/null
 
 backupno="`/usr/bin/s3cmd ls s3://backup-${BACKUP_DATE}-${RND} | /usr/bin/wc -l`"
 
