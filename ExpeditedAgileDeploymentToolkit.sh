@@ -317,6 +317,17 @@ then
     ${BUILD_HOME}/installscripts/InstallUFW.sh "${BUILDOS}"
 fi
 
+
+status ""
+status ""
+
+BACKUP_PASSWORD="`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-8};echo;`"
+status "###############################################################################################"
+status "YOUR BACKUP PASSWORD IS SET TO: ${BACKUP_PASSWORD} FOR THIS BUILD, PLEASE MAKE A NOTE OF IT"
+status "###############################################################################################"
+status "Press <enter> to continue"
+read x
+
 status ""
 status ""
 status "##################################################################################################"
