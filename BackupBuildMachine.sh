@@ -24,7 +24,7 @@
 
 if ( [ "`/usr/bin/crontab -l | /bin/grep BackupBuildMachine`" = "" ] )
 then
-    /bin/echo "@daily ${BUILD_HOME}/BackupBuildMachine.sh ${BUILD_IDENTIFIER} ${BUILD_HOME}" >> /var/spool/cron/crontabs/root
+    /bin/echo "@daily ${BUILD_HOME}/BackupBuildMachine.sh ${BUILD_IDENTIFIER} ${BUILD_HOME} ${BACKUP_PASSWORD}" >> /var/spool/cron/crontabs/root
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
@@ -38,9 +38,14 @@ then
     BUILD_HOME="${2}"
 fi
 
+if ( [ "${2}" != "" ] )
+then
+    BACKUP_PASSWORD="${3}"
+fi
+
 backupno="`/usr/bin/s3cmd ls s3://backup-${BUILD_IDENTIFIER} | /usr/bin/wc -l`"
 
-/bin/tar -cfvz /tmp/backup-${BUILD_IDENTIFIER}-${backupno}.tar.gz ${BUILD_HOME}/*
+/bin/tar -cvzf - ${BUILD_HOME}/* | /usr/bin/gpg -c --passphrase ${BACKUP_PASSWORD} > /tmp/backup-${BUILD_IDENTIFIER}-${backupno}.tar.gz
 
 /usr/bin/s3cmd put /tmp/backup-${BUILD_IDENTIFIER}.tar.gz s3://backup-${BUILD_IDENTIFIER}
 
