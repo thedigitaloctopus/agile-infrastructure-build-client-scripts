@@ -1,7 +1,9 @@
 #!/bin/sh
 ######################################################################################################
 # Description: By creating a file: s3://backup-${BUILD_IDENTIFIER}/authorised-ips.dat this will backup your
-# build machine on a daily basis
+# build machine on a daily basis. This means if disaster strikes and your buildmachine fails for some reason
+# you still have a backup of your configuration that you can recover from. OBVIOUSLY keep these backups very
+# secure because anyone gaining access to them could potentially have access to your whole server suite. 
 # Author: Peter Winter
 # Date: 17/01/2021
 #######################################################################################################
@@ -22,13 +24,18 @@
 
 if ( [ "`/usr/bin/crontab -l | /bin/grep BackupBuildMachine`" = "" ] )
 then
-    /bin/echo "@daily ${BUILD_HOME}/BackupBuildMachine.sh ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
+    /bin/echo "@daily ${BUILD_HOME}/BackupBuildMachine.sh ${BUILD_IDENTIFIER} ${BUILD_HOME}" >> /var/spool/cron/crontabs/root
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
 if ( [ "${1}" != "" ] )
 then
     BUILD_IDENTIFIER="${1}"
+fi
+
+if ( [ "${2}" != "" ] )
+then
+    BUILD_HOME="${2}"
 fi
 
 backupno="`/usr/bin/s3cmd ls s3://backup-${BUILD_IDENTIFIER} | /usr/bin/wc -l`"
