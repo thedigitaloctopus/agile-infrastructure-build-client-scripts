@@ -301,6 +301,8 @@ BACKUP_PASSWORD="`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-8};echo;"
 status "###############################################################################################"
 status "YOUR BACKUP PASSWORD IS SET TO: ${BACKUP_PASSWORD} FOR THIS BUILD, PLEASE MAKE A NOTE OF IT"
 status "###############################################################################################"
+status "Press <enter> to continue"
+read x
 
 #Let the user set the timezone they are in. This will be used on the deployed servers also.
 #So, be aware, if you are in a different timezone to where you are making your deployment,
