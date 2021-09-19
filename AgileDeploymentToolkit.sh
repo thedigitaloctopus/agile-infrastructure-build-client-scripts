@@ -358,18 +358,6 @@ then
     ${BUILD_HOME}/installscripts/InstallUFW.sh "${BUILDOS}"
 fi
 
-status ""
-status ""
-status "########################################################################################################################"
-status "Setting up and enabling the firewall to help lock down this machine"
-status "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
-status "########################################################################################################################"
-
-/usr/sbin/ufw default deny incoming
-/usr/sbin/ufw default allow outgoing
-/usr/sbin/ufw allow ${SSH_PORT}
-/usr/sbin/ufw enable
-
 ##Ask the user what cloudhost (has to be a supported cloudhost) they want to deploy to this time
 #. ${BUILD_HOME}/SelectCloudhost.sh
 #
