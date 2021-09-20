@@ -31,7 +31,7 @@ set -x
 
 if ( [ "`/usr/bin/crontab -l | /bin/grep BackupBuildMachine`" = "" ] )
 then
-    /bin/echo "@weekly ${BUILD_HOME}/BackupBuildMachine.sh ${BUILD_HOME} ${BACKUP_PASSWORD}" >> /var/spool/cron/crontabs/root
+    /bin/echo "@weekly ${BUILD_HOME}/BackupBuildMachine.sh ${BUILD_IDENTIFIER} ${BUILD_HOME} 'fromcron' ${BACKUP_PASSWORD}" >> /var/spool/cron/crontabs/root
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
@@ -40,33 +40,36 @@ UNIQUE="`/usr/bin/date +%s | /usr/bin/sha256sum | /usr/bin/base64 | /usr/bin/hea
 
 if ( [ "${1}" != "" ] )
 then
-    BUILD_HOME="${1}"
+    BUILD_IDENTIFIER="${1}"
 fi
 
 if ( [ "${2}" != "" ] )
 then
-    BACKUP_PASSWORD="${2}"
+    BUILD_HOME="${2}"
 fi
 
-if ( [ "${BACKUP_PASSWORD}" = "" ] )
+if ( [ "${4}" != "" ] )
 then
-    exit
+    BACKUP_PASSWORD="${4}"
 fi
 
-bucket_name="`/bin/echo backup-${BACKUP_DATE}-${UNIQUE} | /usr/bin/tr '[:upper:]' '[:lower:]'`"
-
-/usr/bin/s3cmd mb s3://${bucket_name}
-
-backupno="`/usr/bin/s3cmd ls s3://${bucket_name} | /usr/bin/wc -l`"
-
-if ( [ "${backupno}" = "" ] )
+if ( [ "${BACKUP_PASSWORD}" != "" ] && [ "${3}" = "fromcron" ] )
 then
-    backupno="1"
+    bucket_name="`/bin/echo backup-${BUILD_IDENTIFIER}-${BACKUP_DATE}-${UNIQUE} | /usr/bin/tr '[:upper:]' '[:lower:]'`"
+
+    /usr/bin/s3cmd mb s3://${bucket_name}
+
+    backupno="`/usr/bin/s3cmd ls s3://${bucket_name} | /usr/bin/wc -l`"
+
+    if ( [ "${backupno}" = "" ] )
+    then
+        backupno="1"
+    fi
+
+    /bin/tar -cO ${BUILD_HOME} | openssl enc -pbkdf2  -md md5 -pass pass:${BACKUP_PASSWORD} > /tmp/backup-${BACKUP_DATE}-${backupno}.tar.gz
+
+    /usr/bin/s3cmd put /tmp/backup-${BACKUP_DATE}-${backupno}.tar.gz s3://${bucket_name}
+
+    /bin/rm /tmp/backup-${BACKUP_DATE}-${backupno}.tar.gz
 fi
-
-/bin/tar -cO ${BUILD_HOME} | openssl enc -pbkdf2  -md md5 -pass pass:${BACKUP_PASSWORD} > /tmp/backup-${BACKUP_DATE}-${backupno}.tar.gz
-
-/usr/bin/s3cmd put /tmp/backup-${BACKUP_DATE}-${backupno}.tar.gz s3://${bucket_name}
-
-/bin/rm /tmp/backup-${BACKUP_DATE}-${backupno}.tar.gz
 
