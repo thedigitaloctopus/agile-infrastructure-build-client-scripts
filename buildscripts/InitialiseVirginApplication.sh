@@ -76,7 +76,7 @@ then
         BASELINE_DB_REPOSITORY="VIRGIN"
         /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/APPLICATION:joomla
         APPLICATION="joomla"
-        DIRECTORIES_TO_MOUNT="images:media"
+        DIRECTORIES_TO_MOUNT="images"
 elif ( [ "${APPLICATION}" = "2" ] )
     then
         APPLICATION_BASELINE_SOURCECODE_REPOSITORY="WORDPRESS"
