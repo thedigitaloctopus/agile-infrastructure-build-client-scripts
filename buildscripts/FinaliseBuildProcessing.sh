@@ -113,7 +113,7 @@ do
 done
 
 #This enables the application to have any post processing done that it needs. There is pre and post processing either side of the build process
-status "Performing any post processing that is needed for your application ...."
+status "Performing any post processing that is needed for your application. This may take a little while depending on your application, Please wait...."
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "/home/${SERVER_USER}/providerscripts/application/processing/PerformPostProcessingByApplication.sh ${SERVER_USER}" >&3
 
 #We are satisfied that all is well, so let's try and see if the application is actually online and active
