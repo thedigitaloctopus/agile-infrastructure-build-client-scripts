@@ -42,39 +42,36 @@ then
     BUILD_HOME="${2}"
 fi
 
-
-
 /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
+
+if ( [ -f /root/authorised-ips.dat ] )
+then
+    /bin/mv /root/authorised-ips.dat ${BUILD_HOME}
+fi
 
 if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] )
 then
-    /bin/mv ${BUILD_HOME}/authorised-ips.dat ${BUILD_HOME}/authorised-ips.dat.$$
-fi
-
-if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" = "" ] )
-then
-    /bin/mv ${BUILD_HOME}/authorised-ips.dat.$$ ${BUILD_HOME}/authorised-ips.dat
-    exit
-else
-    if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] )
-    then
-        /usr/sbin/ufw --force reset
-        /usr/sbin/ufw default deny incoming
-        /usr/sbin/ufw default allow outgoing
-        while read ip
-        do
-            /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-        done < ${BUILD_HOME}/authorised-ips.dat
+    /usr/sbin/ufw --force reset
+    /usr/sbin/ufw default deny incoming
+    /usr/sbin/ufw default allow outgoing
+    while read ip
+    do
+        /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
+    done < ${BUILD_HOME}/authorised-ips.dat
     
+    /bin/echo "y" | /usr/sbin/ufw enable
+else        
+    /usr/sbin/ufw --force reset
+    /usr/sbin/ufw default deny incoming
+    /usr/sbin/ufw default allow outgoing
+    if ( [ "`/usr/sbin/ufw status 2>/dev/null | /bin/grep inactive`" != "" ] )
+    then
+        /usr/sbin/ufw allow ${SSH_PORT}
         /bin/echo "y" | /usr/sbin/ufw enable
-    else        
-        /usr/sbin/ufw --force reset
-        /usr/sbin/ufw default deny incoming
-        /usr/sbin/ufw default allow outgoing
-        if ( [ "`/usr/sbin/ufw status 2>/dev/null | /bin/grep inactive`" != "" ] )
-        then
-            /usr/sbin/ufw allow ${SSH_PORT}
-            /bin/echo "y" | /usr/sbin/ufw enable
-        fi
     fi
 fi
+
+if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" != "" ] )
+then
+    /bin/mv ${BUILD_HOME}/authorised-ips.dat ${BUILD_HOME}/authorised-ips.dat.$$
+else
