@@ -1,9 +1,14 @@
 #!/bin/sh
-######################################################################################################
+########################################################################################################
 # Description: By creating a file: s3://backup-${BUILD_IDENTIFIER}/authorised-ips.dat this will backup your
 # build machine on a daily basis. This means if disaster strikes and your buildmachine fails for some reason
 # you still have a backup of your configuration that you can recover from. OBVIOUSLY keep these backups very
 # secure because anyone gaining access to them could potentially have access to your whole server suite. 
+# Note: to decrypt your backup:
+########################################################################################################
+# Get the backup you want from s3 using s3cmd 
+# openssl enc -d -pbkdf2  -md md5 -pass pass:${BACKUP_PASSWORD} -in ./backup-${BACKUP_DATE}-${backupno}.tar.gz  | /bin/tar -xv
+########################################################################################################
 # Author: Peter Winter
 # Date: 17/01/2021
 #######################################################################################################
@@ -22,14 +27,16 @@
 #######################################################################################################
 #######################################################################################################
 
+set -x
+
 if ( [ "`/usr/bin/crontab -l | /bin/grep BackupBuildMachine`" = "" ] )
 then
-    /bin/echo "@daily ${BUILD_HOME}/BackupBuildMachine.sh ${BUILD_HOME} ${BACKUP_PASSWORD}" >> /var/spool/cron/crontabs/root
+    /bin/echo "@weekly ${BUILD_HOME}/BackupBuildMachine.sh ${BUILD_HOME} ${BACKUP_PASSWORD}" >> /var/spool/cron/crontabs/root
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
 BACKUP_DATE="`/usr/bin/date '+%B%d%Y'`"
-RND="`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-3};echo;`"
+UNIQUE="`/usr/bin/date +%s | /usr/bin/sha256sum | /usr/bin/base64 | /usr/bin/head -c 4 ; echo`"
 
 if ( [ "${1}" != "" ] )
 then
@@ -41,13 +48,25 @@ then
     BACKUP_PASSWORD="${2}"
 fi
 
-/usr/bin/s3cmd mb s3://backup-${BACKUP_DATE}-${RND} 1>/dev/null 2>/dev/null
+if ( [ "${BACKUP_PASSWORD}" = "" ] )
+then
+    exit
+fi
 
-backupno="`/usr/bin/s3cmd ls s3://backup-${BACKUP_DATE}-${RND} | /usr/bin/wc -l`"
+bucket_name="`/bin/echo backup-${BACKUP_DATE}-${UNIQUE} | /usr/bin/tr '[:upper:]' '[:lower:]'`"
 
-/bin/tar -cvzf - ${BUILD_HOME}/* | /usr/bin/gpg -c --passphrase ${BACKUP_PASSWORD} > /tmp/backup-${BUILD_IDENTIFIER}-${backupno}.tar.gz
+/usr/bin/s3cmd mb s3://${bucket_name}
 
-/usr/bin/s3cmd put /tmp/backup-${BUILD_IDENTIFIER}.tar.gz s3://backup-${BACKUP_DATE}-${RND}
+backupno="`/usr/bin/s3cmd ls s3://${bucket_name} | /usr/bin/wc -l`"
 
-/bin/rm /tmp/backup-${BUILD_IDENTIFIER}-${backupno}.tar.gz
+if ( [ "${backupno}" = "" ] )
+then
+    backupno="1"
+fi
+
+/bin/tar -cO ${BUILD_HOME} | openssl enc -pbkdf2  -md md5 -pass pass:${BACKUP_PASSWORD} > /tmp/backup-${BACKUP_DATE}-${backupno}.tar.gz
+
+/usr/bin/s3cmd put /tmp/backup-${BACKUP_DATE}-${backupno}.tar.gz s3://${bucket_name}
+
+/bin/rm /tmp/backup-${BACKUP_DATE}-${backupno}.tar.gz
 
