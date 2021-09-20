@@ -36,3 +36,7 @@ configure how many webservers are running for different times of day and you can
 
 13. If you make multiple builds and have, for example, "testbuild-1", "testbuild-2" and so on, you need to name them (the BUILD_IDENTIFIER), "1-testbuild", "2-testbuild" rather than "testbuild-1" and "testbuild-2", this is because in some places the "BUILD_IDENTIFIER" might get truncated and you would lose the distinction. 
 
+14. Don't destroy servers using your provider's gui, use the script ${BUILD_HOME}/helperscripts/ShutdownInfrastructure.sh on the build machine. This will cleanly shutdown your machines and help prevent potential data loss. 
+
+15. 
+
