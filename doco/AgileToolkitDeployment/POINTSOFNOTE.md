@@ -38,5 +38,5 @@ configure how many webservers are running for different times of day and you can
 
 14. Don't destroy servers using your provider's gui, use the script ${BUILD_HOME}/helperscripts/ShutdownInfrastructure.sh on the build machine. This will cleanly shutdown your machines and help prevent potential data loss. 
 
-15. 
+15. You should only set PERSIST_ASSETS_TO_CLOUD to 0 if you are very sure that your application will have very few assets generated at runtime in most cases, you will have to set PERSIST_ASSETS_TO_CLOUD to 1. 
 
