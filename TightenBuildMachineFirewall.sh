@@ -25,10 +25,11 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #######################################################################################################
 #######################################################################################################
+#set -x
 
 if ( [ "`/usr/bin/crontab -l | /bin/grep Tighten`" = "" ] )
 then
-    /bin/echo "*/1 * * * * ${BUILD_HOME}/TightenBuildMachineFirewall.sh ${BUILD_IDENTIFIER} ${BUILD_HOME}" >> /var/spool/cron/crontabs/root
+    /bin/echo "*/1 * * * * ${BUILD_HOME}/TightenBuildMachineFirewall.sh ${BUILD_IDENTIFIER} ${BUILD_HOME} ${SSH_PORT}" >> /var/spool/cron/crontabs/root
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
@@ -40,6 +41,10 @@ fi
 if ( [ "${2}" != "" ] )
 then
     BUILD_HOME="${2}"
+fi
+if ( [ "${3}" != "" ] )
+then
+   SSH_PORT="${3}"
 fi
 
 /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
