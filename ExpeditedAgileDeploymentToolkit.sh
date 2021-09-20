@@ -422,6 +422,7 @@ status ""
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
 . ${BUILD_HOME}/providerscripts/datastore/ObtainSnapshotData.sh
 . ${BUILD_HOME}/TightenBuildMachineFirewall.sh
+. ${BUILD_HOME}/BackupBuildMachine.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 . ${BUILD_HOME}/providerscripts/datastore/PersistBuildClientIP.sh
 
