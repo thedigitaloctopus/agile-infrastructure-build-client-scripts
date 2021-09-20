@@ -8,7 +8,7 @@ To define which directories you want the system to use for your assets uploads, 
   
 So, for joomla, for example you would set something like:  
 
-##### export DIRECTORIES_TO_MOUNT="images:media"  
+##### export DIRECTORIES_TO_MOUNT="images"  
 
 For drupal you might set:  
 
