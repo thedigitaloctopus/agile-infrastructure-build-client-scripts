@@ -31,7 +31,7 @@ then
     /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/APPLICATION:joomla
     APPLICATION="joomla"
     interrogated="1"
-    DIRECTORIES_TO_MOUNT="images:media"
+    DIRECTORIES_TO_MOUNT="images"
     status "Discovered you are deploying joomla"
     status "Press the <enter> key to accept as true"
     read x
