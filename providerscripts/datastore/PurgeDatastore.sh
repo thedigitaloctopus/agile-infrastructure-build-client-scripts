@@ -30,6 +30,10 @@ then
         status "Purging bucket ${config_bucket}... feel free to purge it manually through the GUI if you want to"
         /usr/bin/s3cmd --recursive --force del s3://${config_bucket}
     fi
+    
+    /bin/touch /tmp/REFRESH_MOUNT
+    
+    /usr/bin/s3cmd put /tmp/REFRESH_MOUNT s3://${config_bucket}
   
     location="`/usr/bin/s3cmd info s3://${config_bucket} | /bin/grep "Location" | /usr/bin/awk '{print $NF}'`"
 
