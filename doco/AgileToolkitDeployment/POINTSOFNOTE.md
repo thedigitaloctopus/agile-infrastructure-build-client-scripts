@@ -34,3 +34,5 @@ configure how many webservers are running for different times of day and you can
 
 12. If you are using s3fs for your shared storage, then, if you delete the buckets using the cloudhost provider's gui system or the s3cmd tool there tends to be a period of time with some providers when buckets of the same name cannot be created again. If you run the scripts during this period and they require the same bucket name as a bucket that you have recently deleted for shared storage, you will get unpredictable behaviour. If you wait till the grace period expires, then, you will be able to complete the execution of the scripts successfully.  
 
+13. If you make multiple builds and have, for example, "testbuild-1", "testbuild-2" and so on, you need to name them (the BUILD_IDENTIFIER), "1-testbuild", "2-testbuild" rather than "testbuild-1" and "testbuild-2", this is because in some places the "BUILD_IDENTIFIER" might get truncated and you would lose the distinction. 
+
