@@ -31,7 +31,7 @@ set -x
 
 if ( [ "`/usr/bin/crontab -l | /bin/grep BackupBuildMachine`" = "" ] )
 then
-    /bin/echo "@weekly ${BUILD_HOME}/BackupBuildMachine.sh ${BUILD_IDENTIFIER} ${BUILD_HOME} 'fromcron' ${BACKUP_PASSWORD}" >> /var/spool/cron/crontabs/root
+    /bin/echo "@daily ${BUILD_HOME}/BackupBuildMachine.sh ${BUILD_IDENTIFIER} ${BUILD_HOME} 'fromcron' ${BACKUP_PASSWORD}" >> /var/spool/cron/crontabs/root
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
