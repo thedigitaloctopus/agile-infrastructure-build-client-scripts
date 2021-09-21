@@ -113,8 +113,8 @@ then
 else
     #template overrides if we are running in hardcore mode
     selectedtemplate="${SELECTED_TEMPLATE}"
-  ###  templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
-  ###  . ${BUILD_HOME}/templatedconfigurations/OverrideTemplate.sh
+    templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
+    . ${BUILD_HOME}/templatedconfigurations/OverrideTemplate.sh
     
   #  /bin/sed -i '/BUILDOS=/d' ${templatefile}
   #  /bin/echo "export BUILDOS=\"${BUILDOS}\"" >> ${templatefile}
@@ -176,9 +176,6 @@ templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLO
 #load the environment from the template file
 . ${templatefile}
 . ${BUILD_HOME}/templatedconfigurations/ValidateDefaultUser.sh
-#Override settings in the template file if we have set them in our 'user-data' build machine script when in hardcore mode
-. ${BUILD_HOME}/templatedconfigurations/OverrideTemplate.sh
-
 
 #Take care of special case when a space is input in the website display name
 export WEBSITE_DISPLAY_NAME="`/bin/echo ${WEBSITE_DISPLAY_NAME} | /bin/sed "s/'//g" | /bin/sed 's/ /_/g'`"
