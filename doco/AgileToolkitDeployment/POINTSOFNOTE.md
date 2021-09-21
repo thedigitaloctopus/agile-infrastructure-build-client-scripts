@@ -40,3 +40,5 @@ configure how many webservers are running for different times of day and you can
 
 15. You should only set PERSIST_ASSETS_TO_CLOUD to 0 if you are very sure that your application will have very few assets generated at runtime in most cases, you will have to set PERSIST_ASSETS_TO_CLOUD to 1. 
 
+16. It is advised that if you are installing upgrades to your CMS for extensions and plugins and so on when the application is live with multiple webservers running that it is advisable to do the install at night. The upgrade will pick an adhoc webserver based on load balancing, within 5 minutes the system will pick up the changes on that machine and sync them to the other webservers. The syncing process runs every 5 minutes so, if you have to update a live system if you apply the update at 02:34 for example, the time period for which the servers are out of sync with the database will be short but it is possible on a heavily used site that a few error messages will be seen on occasion.
+
