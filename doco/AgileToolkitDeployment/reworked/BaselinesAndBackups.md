@@ -20,7 +20,7 @@ To baseline an application follow these steps
 
    ##### sudo su  
    	
-   and enter the password BUILD_CLIENT_PASSWORD for your user to assume root privilege  
+   and enter the password **BUILD_CLIENT_PASSWORD** for your user to assume root privilege  
 	
 4. Generate a baseline by manually creating repositories with your (application) git provider with the following nomenclature
 
@@ -33,7 +33,7 @@ To baseline an application follow these steps
 	 
     ##### sh PerformWebsiteBaseline.sh
 	 
-	 enter <baseline_name> for the identifier, all other question should be self explanatory
+	 enter **<baseline_name>** for the identifier, all other question should be self explanatory
 	 
 	 the system will then create the baselined sourcecode for your website in your git provider's repository. 
 	 
@@ -41,7 +41,7 @@ To baseline an application follow these steps
 	 
     ##### sh PerformDatabaseBaseine
 	 
-	 enter <baseline_name> for the identifier, all other questions should be self explanatory
+	 enter **<baseline_name>** for the identifier, all other questions should be self explanatory
 	 
 	 the system will then create a baseline of your database in the git provider's repository
 	 
