@@ -1,4 +1,6 @@
-Backup and Baseline processes
+## BACKUP AND BASSELINE PROCESSES:  
+
+#### Baseline processes
 
 To baseline an application follow these steps
 
