@@ -8,31 +8,30 @@ To baseline an application follow these steps
 
 2. SSH onto the build machine that you deployed your virgin CMS application from originally
 
-   ssh -p <ssh_port> <user_name>@<build_machine_ip>
+   ##### ssh -p <ssh_port> <user_name>@<build_machine_ip>
 	
    You need to the following variables from your userdata override script that you used to deploy your virgin CMS to be able to ssh onto your build machine:
 	
-	export BUILDCLIENT_USER="user_name"
-   export BUILDCLIENT_PASSWORD="password"
-   export BUILDCLIENT_SSH_PORT="ssh_port"
-	
+	##### export BUILDCLIENT_USER="user_name"  
+	##### export BUILDCLIENT_PASSWORD="password"  
+	##### export BUILDCLIENT_SSH_PORT="ssh_port"  
 	
 3. You will have been authenticated by using the SSH keys associated with your build machine and then issue the command
 
-   sudo su
-	
-   and enter the password BUILD_CLIENT_PASSWORD for your user to assume root privilege
+   ##### sudo su  
+   	
+   and enter the password BUILD_CLIENT_PASSWORD for your user to assume root privilege  
 	
 4. Generate a baseline by manually creating repositories with your (application) git provider with the following nomenclature
 
-    <baseline_name>-webroot-sourcecode-baseline
-	 <baseline_name>-db-baseline
+  #####  <baseline_name>-webroot-sourcecode-baseline  
+  #####  <baseline_name>-db-baseline  
 	
 5. Once your repositories are created in step 4 above, 
 
-    cd ${BUILD_HOME/helperscripts
+    ##### cd ${BUILD_HOME/helperscripts
 	 
-	 sh PerformWebsiteBaseline.sh
+    ##### sh PerformWebsiteBaseline.sh
 	 
 	 enter <baseline_name> for the identifier, all other question should be self explanatory
 	 
@@ -40,7 +39,7 @@ To baseline an application follow these steps
 	 
 	 check in your git repository that your baselined sourcecode has been generated correctly
 	 
-	 sh PerformDatabaseBaseine
+    ##### sh PerformDatabaseBaseine
 	 
 	 enter <baseline_name> for the identifier, all other questions should be self explanatory
 	 
