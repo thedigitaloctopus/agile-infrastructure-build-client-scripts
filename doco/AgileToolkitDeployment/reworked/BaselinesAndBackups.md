@@ -39,7 +39,7 @@ To baseline an application follow these steps
 	 
 	 check in your git repository that your baselined sourcecode has been generated correctly
 	 
-    ##### sh PerformDatabaseBaseine
+    ##### sh PerformDatabaseBaseine.sh
 	 
 	 enter **<baseline_name>** for the identifier, all other questions should be self explanatory
 	 
