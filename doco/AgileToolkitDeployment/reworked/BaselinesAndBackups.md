@@ -49,18 +49,52 @@ To baseline an application follow these steps
 	 
 -----------------------------------------------------------------------------------------------------
 
-DEPLOYING FROM A BASELINE
+##### DEPLOYING FROM A BASELINE
 
-EXPLAINING BACKUP PERIODICITY
+------------------------------------------------------------------------------------------------------
 
-EXPLAIN CALL BACKUPS FROM CRON
+##### EXPLAINING BACKUP PERIODICITY
 
-EXPLAIN SHUTDOWN BACKUPS
+The backup periodicity is as follows:
 
-EXPLAIN SWITCH OFF HOURLY BACKUPS
+##### hourly, daily, weekly, monthly, bimonthly and shutdown
 
-DEPLOYING FROM A BACKUP
+What this means is that backups of the webroot and your database will be automatically taken at these different periodicities.
 
-EXPLAIN HOW THE ASSETS ARE STORED IN THE CLOUD AND ARE THEREFORE NOT PART OF THE BACKUPS BUT ARE PART OF THE BASELINES
+---------------------------------------------------------------------------------------------------------
 
-EXPLAIN SUPERSAFE BACKUPS
+##### EXPLANATION OF HOW BACKUPS ARE MADE FROM CRON
+
+The backups are created by calling the script
+
+${HOME}/git/Backup.sh from cron. You pass in the build periodicity "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "BIMONTHLY" and the BUILD_IDENTIFIER and that will then create a backup (including the necessary repository) with your git provider. Similarly for the database machine as well. 
+
+---------------------------------------------------------------------------------------------------------
+
+##### EXPLAIN MANUAL and SHUTDOWN BACKUPS
+
+There are two special periodicities, "manual and shutdown".
+
+The manual periodicity is such that you can use it if you were ever to need to generate an adhoc manual backup of your webroot and database from the command line. This gives you a way of creating an adhoc backup at any time you need without overwriting any of your standard time based periodicities. 
+
+The shutdown periodicity is a special case such that if a webserver is being shutdown either through an autoscaling event or as part of a manual shutdown of the webservers, a backup is taken of the webroot of the webserver and labelled as the latest shutdown backup. This is just so there is a record of the state of that webserver at the time it was shutdown. 
+
+-----------------------------------------------------------------------------------------------------------
+
+##### EXPLAIN SWITCH OFF HOURLY BACKUPS
+
+When I was using AWS I noticed I was racking up quite a bill due to my writing of hourly backups to an external git provider. It wasn't cripplingly high cost, although I am very poor, so I had to take note. So, what I did was to provide an option to switch off hourly backups. Now I don't know whether I was getting a bill because of how things were configured or whether it was just considered "data out" and therefore billable. With all the other providers I didn't have this problem, but, this is there just to let you know that there is a configuration switch such that you can switch off hourly backups if you need to and save a few quid. Your base periodicity will then be daily or once every 24 hours which should be 24 times less expensive. 
+
+------------------------------------------------------------------------------------------------------------
+
+##### DEPLOYING FROM A BACKUP
+
+-------------------------------------------------------------------------------------------------------------
+
+##### EXPLAIN HOW THE ASSETS ARE STORED IN THE CLOUD AND ARE THEREFORE NOT PART OF THE BACKUPS BUT ARE PART OF THE BASELINES
+
+-------------------------------------------------------------------------------------------------------------
+
+###### EXPLAIN SUPERSAFE BACKUPS
+
+The authoritative backups that are made for your application are stored in git repositories. However, if you switch on "super safe backups", then, a copy of your backups will also be written to your datastore. This gives you two sets of backups one in your git repositories and one in your datastore. This is common advise, backup and backup again. In other words, under normal operation within a week of running your website, you will have 2 hourly backups, one with your git provider and one in your datastore, you will have 2 daily backups, one with your git provider and one with your datastore and you will have 2 weekly backups, one with your git provider and one with your datastore. This is quite a few backups which you can fall back on and, of course, the weekly backups will be a week old but losing a weeks worth is better than losing it entirely. 
