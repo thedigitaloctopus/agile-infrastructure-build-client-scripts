@@ -15,8 +15,8 @@ where the build identifier is the build identifier that you gave to the particul
 
 3. Edit a file (authorisedips.dat) on your laptop and on separate lines put the ip addresses of each machine you want to grant access rights to your build machine to. So, if your laptop ip address is 111.111.111.111 and your colleagues laptop ip address is 222.222.222.222 then your file will look like:  
    
-  ##### 111.111.111.111  
-  ##### 222.222.222.222  
+  #####      111.111.111.111  
+  #####      222.222.222.222  
    
 4. Upload this file to your s3 
 
