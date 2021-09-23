@@ -13,12 +13,12 @@ So, it will work fine by default, but, if you want to go the extra mile you can 
 
 where the build identifier is the build identifier that you gave to the particular build you want to access (you will need to create a bucket for each build you want to protect if you have multiple builds on the same machine).  
 
-5. Edit a file (authorisedips.dat) on your laptop and on separate lines put the ip addresses of each machine you want to grant access rights to your build machine to. So, if your laptop ip address is 111.111.111.111 and your colleagues laptop ip address is 222.222.222.222 then your file will look like:  
+4. Edit a file (authorisedips.dat) on your laptop and on separate lines put the ip addresses of each machine you want to grant access rights to your build machine to. So, if your laptop ip address is 111.111.111.111 and your colleagues laptop ip address is 222.222.222.222 then your file will look like:  
    
   ##### 111.111.111.111  
   ##### 222.222.222.222  
    
-4. Upload this file to your s3 
+5. Upload this file to your s3 
 
    ##### /usr/bin/s3cmd put authorised-ips.dat s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat. 
    
