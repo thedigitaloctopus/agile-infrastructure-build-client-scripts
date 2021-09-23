@@ -9,17 +9,17 @@ So, it will work fine by default, but, if you want to go the extra mile you can 
   
 2. Create a bucket on your datastore called  
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s3://authip-${BUILD_IDENTIFIER) 
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  s3://authip-${BUILD_IDENTIFIER) 
 
 where the build identifier is the build identifier that you gave to the particular build you want to access (you will need to create a bucket for each build you want to protect if you have multiple builds on the same machine).  
 
 3. Edit a file (authorisedips.dat) on your laptop and on separate lines put the ip addresses of each machine you want to grant access rights to your build machine to. So, if your laptop ip address is 111.111.111.111 and your colleagues laptop ip address is 222.222.222.222 then your file will look like:  
    
-  ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 111.111.111.111  
-  ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;222.222.222.222  
+  ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   111.111.111.111  
+  ##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   222.222.222.222  
    
 4. Upload this file to your s3 
 
-   ##### /usr/bin/s3cmd put authorised-ips.dat s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat. 
+   ##### &nbsp;&nbsp;&nbsp; /usr/bin/s3cmd put authorised-ips.dat s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat. 
    
 The file must be named that precisely for the build machine to pick it up and reconfigure or tighten the firewall. You can grant and revoke access to different ip adresses by reuploading or uploading a different authorised-ips.dat file to the correct S3 bucket. This means your build machine can't be accessed from any ip address except for the ones that you authorise. A bit of a process, but, once its done you are all set. 
