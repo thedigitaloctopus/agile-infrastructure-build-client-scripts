@@ -88,11 +88,7 @@ service ssh restart
 /usr/sbin/ufw enable
 /usr/sbin/ufw default deny incoming
 /usr/sbin/ufw default allow outgoing
-####################################################################################################################################################
-#It is possible to lock down ssh connections to only from a specific ip address which is more secure, but, if the IP address of your machine changes,
-#for example, if you connect your laptop to a different network, then, you will have to connect to the build client machine through the console of
-#your VPS system provider and allow your new IP address through the firewall. This might be more of a hassle than its worth
-#####################################################################################################################################################
+
 /usr/sbin/ufw allow ${BUILDCLIENT_SSH_PORT}/tcp 
 
 cd /home/${BUILDCLIENT_USER}
