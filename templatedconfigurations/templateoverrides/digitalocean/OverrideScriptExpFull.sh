@@ -1,3 +1,10 @@
+######################################################################################################################
+# 1. Paste you ssh key into the SSH= variable
+# 2. Set the "INFRASTRUCTURE_" variables if you are deploying from a forked set of repositories
+# 3. Set BUILDCLIENT_USER="" BUILDCLIENT_PASSWORD="" BUILDCLIENT_SSH_PORT="" BACKUP_PASSWORD="" to your liking
+# 4. Paste the entire contents of this updated file into the user_data of a new VPS you are provisioning.
+# 5. ssh onto your buildmachine and issue sudo su. Enter BUILD_CLIENT_PASSWORD and then cd agile*
+#######################################################################################################################
 #!/bin/bash
 
 /bin/mkdir /root/logs
