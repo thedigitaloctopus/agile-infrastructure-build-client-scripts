@@ -53,7 +53,7 @@ and for **Drupal**, alter:
 
 to 
 
-**/bin/echo "    <Directory /var/www/html/core>**
+**/bin/echo "    <Directory /var/www/html>**
 
 ----------------
 ### For NGINX:  
