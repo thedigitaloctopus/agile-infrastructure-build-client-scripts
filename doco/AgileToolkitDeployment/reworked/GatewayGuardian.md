@@ -19,8 +19,9 @@ You could however set up basic auth so that users can't access your application 
 You can do this by altering the directories that the basic auth is active for in these files in your fork of the build kit:
 
 -----------
-For APACHE:
-${HOME}/providerscripts/webserver/configuration/CustomiseApacheByApplication.sh
+### For APACHE:  
+
+##### ${HOME}/providerscripts/webserver/configuration/CustomiseApacheByApplication.sh
 
 and for **Joomla**, alter:
 
@@ -55,16 +56,21 @@ to
 **/bin/echo "    <Directory /var/www/html/core>**
 
 ----------------
-For NGINX:
-providerscripts/webserver/configuration/CustomiseNginxByApplication.sh
+### For NGINX:  
+
+##### providerscripts/webserver/configuration/CustomiseNginxByApplication.sh
 
 and follow a similar process as described above for apache
 
 -----------------
-For LIGHTTPD:
-${HOME}/providerscripts/webserver/configuration/CustomiseLighttpdByApplication.sh
+
+### For LIGHTTPD:
+
+##### ${HOME}/providerscripts/webserver/configuration/CustomiseLighttpdByApplication.sh
 
 and follow a similar process as described above for apache
+
+----------------
 
 
 ##### NOTE: If you protect your root directory using basic auth, then, clearly your users won't be able to register at your site. So, there's a couple of ways to deal with this. 
