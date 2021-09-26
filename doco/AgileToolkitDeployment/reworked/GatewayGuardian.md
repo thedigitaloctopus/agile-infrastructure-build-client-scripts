@@ -58,7 +58,7 @@ to
 ----------------
 ### For NGINX:  
 
-##### providerscripts/webserver/configuration/CustomiseNginxByApplication.sh
+##### ${HOME}/providerscripts/webserver/configuration/CustomiseNginxByApplication.sh
 
 and follow a similar process as described above for apache
 
