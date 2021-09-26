@@ -55,7 +55,7 @@ to
 
 and for **Moodle**, alter:
 
-**/bin/echo "    <Directory /var/www/html/moodle>**
+**/bin/echo "    <Directory /var/www/html/moodle/admin>**
 
 to 
 
@@ -63,7 +63,7 @@ to
 
 and for **Drupal**, alter:
 
-**/bin/echo "    <Directory /var/www/html/core>**
+**/bin/echo "    <Directory /var/www/html/admin>**
 
 to 
 
