@@ -63,7 +63,7 @@ to
 
 and for **Drupal**, alter:
 
-**/bin/echo "    <Directory /var/www/html/admin>**
+**/bin/echo "    <Directory /var/www/html/core>**
 
 to 
 
