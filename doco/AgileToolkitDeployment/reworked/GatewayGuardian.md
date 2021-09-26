@@ -12,6 +12,20 @@ As the technical person using this toolkit you will find a commented out option 
 
 You can uncoment this and vary the periodicity if you want to and what this will do is generate new passwords for the basic auth mechanism (and email them to the email your users have registered with) and the next time they come to your site they will need to enter their new username and password to get passed the basic auth mechanism. You don't have to have this switched on you can set the user's password when they first registered and forget about it then but if you want to be very secure about it setting new passwords periodically is the advisory from security specialists.
 
+-------------------------------
+
+You can find the "live" passwords for the users of the Gateway Guardian mechanism in two places:
+
+1. On your database server you can find your live passwords in the following file:
+
+##### ${HOME}/runtime/credentials/htpasswd_plaintext_history
+
+2. In your datastore in a bucket called:
+
+#####  s3://gatewayguardian-${BUILD_IDENTIFIER}
+
+----------------------------------
+
 By default, when you enable "Gateway Guardian", it protects the administation directories so, for joomla that would be, "/administrator" and for wordpress that would be "/wp-admin" and so anyone wanting to access those directories will need to pass basic auth.
 
 You could however set up basic auth so that users can't access your application at all by configuring it to use the protect the webroot directory "/var/www/html".
