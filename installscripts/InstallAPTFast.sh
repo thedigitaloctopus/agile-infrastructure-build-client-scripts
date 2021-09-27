@@ -33,8 +33,13 @@ then
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
-then
-    /usr/bin/add-apt-repository -y ppa:apt-fast/stable 
-    /usr/bin/apt-get -qq -y update
-    /usr/bin/apt-get -qq -y install apt-fast  
+then 
+    /usr/bin/apt-get -qq -y install axel
+    /usr/bin/apt-get -qq -y install aria2
+    /usr/bin/wget https://raw.githubusercontent.com/ilikenwf/apt-fast/master/apt-fast -O /usr/local/sbin/apt-fast
+    /bin/chmod +x /usr/local/sbin/apt-fast
+    if ( [ ! -f /etc/apt-fast.conf ] )
+    then
+        /usr/bin/wget https://raw.githubusercontent.com/ilikenwf/apt-fast/master/apt-fast.conf -O /etc/apt-fast.conf
+    fi  
 fi
