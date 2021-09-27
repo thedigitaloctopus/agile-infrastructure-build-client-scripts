@@ -148,7 +148,13 @@ This can be set to one of three values at the time of writing (2020) -
 
 It defines which of the (supported) DNS service you would like to use with your deployment.
 
------
+---------------
+
+### GATEWAY_GUARDIAN
+
+This can be set to "1" to enable and "0" to disable. When enabled, the browsers "basic auth" mechanism is placed in front of your web application which is an extra layer of protection for your application. If you review the documentation you can get a better idea of how it works behind the scenes. In short, when I new user is added to the database for your application, an email is generated (because they have to supply their email address, right) with a password (and the same username as the application) to use with the basic auth system. According to configuration, the basic auth mechanism can front up access to the admin area or to the whole web property.
+
+------------------
 
 ### DEFAULT_USER
 
