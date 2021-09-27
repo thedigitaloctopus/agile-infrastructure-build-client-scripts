@@ -4,7 +4,23 @@ The guardian gateway part of the toolkit enables you to configure your deploymen
 
 What this means is that to access protected directories a user will need a username and a password before they can even get to the CMS application itself. 
 
-The way I have set this up is I use the same username for the gateway guardian as the user has for the CMS application they are trying to access. So, for example, if your username is, "Ethel123" for, say, Joomla, Wordpress, Drupal or Moodle that you are trying to access, then, your username for "basic auth" will be "Ethel123" also. The way the system works is it is set up to generate a random password for you when you first register with the site you are trying to access and it sends you your password by email. It doesn't have to be massively secure, it is only the first line of defence and it should cause at least some problems for bad actors. 
+The way I have set this up is I use the same username for the gateway guardian as the user has for the CMS application they are trying to access. So, for example, if your username is, "Ethel123" for, say, Joomla, Wordpress, Drupal or Moodle that you are trying to access, then, your username for "basic auth" will be "Ethel123" also. The way the system works is it is set up to generate a random password for you when you first register with the site you are trying to access and it sends you your password by email. It doesn't have to be massively secure, it is only the first line of defence and it should cause at least some problems for bad actors.
+
+----------------------
+
+#### IMPORTANT NOTE FOR DEVELOPERS:
+
+I generate the gateway guardian credentials from the application database and the problem with this is that some applications have empty user tables by default. To get round this, I create a "bootstrap_user" which you can use to get passed the "gateway guardian" when you are installing the CMS. To find out the username and password of the cases where its needed during a fresh installation, you can ssh onto your build machine and issue the following command
+
+##### /usr/bin/s3cmd get s3://gatewayguardian-${BUILD_IDENTIFIER}/htpasswd_plaintext_history
+
+this will create a file **./htpasswd_plaintext_history** which you can look for the  bootstrap_user in. The format will be something like:
+
+**LIVE:   bootstrap_user:ek+60uLrksm2Aw==:bootstrap@dummyemail.com**
+
+In this case, the username you want to put into the guardian gateway dialogue is: **bootstrap_user** and the password is: **ek+60uLrksm2Aw==**
+
+---------------------------------
 
 Ordinarily, then, when you are prompted with a "basic auth" dialog, you would use your application username and the password which has been sent to you by email.
 
