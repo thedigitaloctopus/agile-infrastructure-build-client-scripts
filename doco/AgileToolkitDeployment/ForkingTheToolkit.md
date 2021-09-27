@@ -39,7 +39,7 @@ If you are running a full build process (not via templating) and setting all you
 ##### So, please enter the provider with which the agile deployment toolkit is currently kept  
  We currently support: 1)BITBUCKET 2)GITHUB 3)GITLAB                                    
   
-<enter 3 for github>  
+<enter 2 for GitHub>  
 
 ---------------
   
@@ -47,15 +47,15 @@ If you are running a full build process (not via templating) and setting all you
 
 INFRASRUCTURE REPOSITORIES OWNER USERNAME:"  
 
-<enter your github username for the owner of your forked repositories, in my case, "adt-demos">  
+<enter your GitHub username for the owner of your forked repositories, in my case, "adt-demos">  
   
 ------------------
   
 ##### Please enter **YOUR** credentials for the repo provider where the Agile Deployment Toolkit is stored
 ##### YOUR github USERNAME  
 
-<enter your github username as the username of the account in my case: "adt-demos">   
+<enter your GitHub username as the username of the account in my case: "adt-demos">   
  
 ##### YOUR github PASSWORD (leave blank for no password if the infrastructure repos are public):  
 
-<enter your github password or blank if the repos are public (should be)>  
+<enter your GitHub password or blank if the repos are public (should be)>  
