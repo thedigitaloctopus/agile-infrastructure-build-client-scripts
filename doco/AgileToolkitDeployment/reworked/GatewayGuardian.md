@@ -63,11 +63,13 @@ to
 
 and for **Drupal**, alter:
 
-**/bin/echo "    <Directory /var/www/html/core>**
+**/bin/echo "    <Directory /var/www/html/>**
 
 to 
 
 **/bin/echo "    <Directory /var/www/html>**
+
+NOTE: Because of the way drupal works I couldn't get this mechanism to work satisfactorily with drupal admin. The only solution is to gateway the whole of drupal but it means your users won't be able to register if you switch it on and you will need to implement a solution like I have described below.
 
 ----------------
 ### For NGINX:  
@@ -87,7 +89,7 @@ and follow a similar process as described above for apache
 ----------------
 
 
-##### NOTE: If you protect your root directory using basic auth, then, clearly your users won't be able to register at your site. So, there's a couple of ways to deal with this. 
+##### NOTE: If you protect your top level webroot directory using basic auth, then, clearly your users won't be able to register at your site. So, there's a couple of ways to deal with this. 
 
 1. If your social network is for a local community, have people in your local community, for example, you might want to vet that they live in a particular postcode area, for example, apply to you offline and then have an adminstrator create accounts for them who alread has access through the basic auth system.  
 
