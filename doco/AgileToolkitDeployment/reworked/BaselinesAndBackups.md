@@ -67,7 +67,10 @@ What this means is that backups of the webroot and your database will be automat
 
 The backups are created by calling the script
 
-${HOME}/git/Backup.sh from cron. You pass in the build periodicity "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "BIMONTHLY" and the BUILD_IDENTIFIER and that will then create a backup (including the necessary repository) with your git provider. Similarly for the database machine as well. 
+**${HOME}/git/Backup.sh** from cron.  
+
+You pass in the build periodicity **"HOURLY", "DAILY", "WEEKLY", "MONTHLY", "BIMONTHLY", "SHUTDOWN" or "MANUAL"** and the **BUILD_IDENTIFIER** and that will then create a backup (including the necessary repository) with your git provider.  
+Similarly for the database machine as well. 
 
 ---------------------------------------------------------------------------------------------------------
 
