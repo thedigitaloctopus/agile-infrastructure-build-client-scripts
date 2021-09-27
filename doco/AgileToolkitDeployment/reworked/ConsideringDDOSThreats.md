@@ -7,5 +7,7 @@ All you have to do is switch on "GATEWAY_GUARDIAN" at build time for the basic a
 
 You can read more about what I have done to setup the basic auth mechanism here:
 
+[Gateway Guardian](GatewayGuardian.md)
+
 
 
