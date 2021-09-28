@@ -1,4 +1,0 @@
-If you deploy using a desktop version of MX linux, for example, if you take your laptop to a different place or your IP address changes for some reason, then, your new build client IP will not be known by your servers and the firewall will block it. So, if you try and connect from a different IP your connection attempt will time out. 
-You will have to use your providers console to access your servers and allow the new client IP address, or alternatively if you know the new IP address you will be connecting from you can update it from an your allowed IP address before you switch to your new IP address. If you want to you can change the firewall configurations of your servers so that SSH connections are allowed from anywhere, but, this would be less secure. To do this, you can fork the repositories and change
-
-${HOME}/security/SetupFirewall.sh
