@@ -17,11 +17,11 @@ Under this method, you have to manually edit the template and for each method, y
 2. **Build using snapshots**  To use this method, you need to set the following values in your template:
 
 **AUTOSCALE_FROM_SNAPSHOTS="1"**  
-**GENERATE_SNAPSHOTS="0"** 
+**GENERATE_SNAPSHOTS="0"**  
 **SNAPSHOT_ID="XXXX"** #swap for your own 4 letter code in snapshot name - you can find in the console 
 **WEBSERVER_IMAGE_ID="XXXXXXXX"** #swap for your own  
-**AUTOSCALER_IMAGE_ID="XXXXXXXX"** #swap for your own 
-**DATABASE_IMAGE_ID="XXXXXXXX"** #swap for your own
+**AUTOSCALER_IMAGE_ID="XXXXXXXX"** #swap for your own  
+**DATABASE_IMAGE_ID="XXXXXXXX"** #swap for your own  
 
 If you have snapshots generated and ready and you set these values, assuming that the rest of your template is set up correctly, you will be able to build from snapshots. If you use an hourly, daily etc backup, then, the build will sync to the latest repository.
 
@@ -34,11 +34,11 @@ The hardcore method involves using an Override script, for example: [OverrideScr
 2. **Build using snapshots**  To use this method, you need to set the following values in your override script:
 
 **AUTOSCALE_FROM_SNAPSHOTS="1"**  
-**GENERATE_SNAPSHOTS="0"** 
+**GENERATE_SNAPSHOTS="0"**  
 **SNAPSHOT_ID="XXXX"** #swap for your own 4 letter code in snapshot name - you can find in the console 
 **WEBSERVER_IMAGE_ID="XXXXXXXX"** #swap for your own  
-**AUTOSCALER_IMAGE_ID="XXXXXXXX"** #swap for your own 
-**DATABASE_IMAGE_ID="XXXXXXXX"** #swap for your own
+**AUTOSCALER_IMAGE_ID="XXXXXXXX"** #swap for your own  
+**DATABASE_IMAGE_ID="XXXXXXXX"** #swap for your own  
 
 Once you are satisfied that all the necessary variables are set in your override script, paste your override script into your user-data area of your VPS system and Bob's your uncle. 
 
