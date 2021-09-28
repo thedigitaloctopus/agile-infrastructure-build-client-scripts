@@ -57,9 +57,17 @@ To baseline an application follow these steps
 
 The backup periodicity is as follows:
 
-##### hourly, daily, weekly, monthly, bimonthly and shutdown
+##### hourly, daily, weekly, monthly, bimonthly, shutdown, manual and all
 
 What this means is that backups of the webroot and your database will be automatically taken at these different periodicities.
+
+You can make a backup on from the build machine by runining the backup scripts from the build machine: 
+
+**${BUILD_HOME}/helperscripts/PerformWebsiteBackup.sh**
+
+**${BUILD_HOME}/helperscripts/PerformDatabaseBackup.sh**
+
+There is a special periodicity available on the build machine which is "all" and when you select this, it will make a backup for all time based periodicities. 
 
 ---------------------------------------------------------------------------------------------------------
 
