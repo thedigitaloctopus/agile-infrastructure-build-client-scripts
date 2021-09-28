@@ -95,10 +95,10 @@ read response
 
 
 /bin/echo "Which periodicity of backup do you want to make, 1) HOURLY 2)DAILY 3) WEEKLY 4)MONTHLY 5)BIMONTHLY"
-/bin/echo "Please enter one of 1,2,3,4,5"
+/bin/echo "Please enter one of 1,2,3,4,5,6,7"
 read periodicity
 
-while ( [ "`/bin/echo '1 2 3 4 5' | /bin/grep ${periodicity}`" = "" ] )
+while ( [ "`/bin/echo '1 2 3 4 5 6 7' | /bin/grep ${periodicity}`" = "" ] )
 do
     /bin/echo "Sorry, that's not a valid selection, please try again"
     read periodicity
@@ -129,6 +129,15 @@ then
     periodicity="BIMONTHLY"
 fi
 
+if ( [ "${periodicity}" = "6" ] )
+then
+    periodicity="MANUAL"
+fi
+if ( [ "${periodicity}" = "7" ] )
+then
+    periodicity="HOURLY DAILY WEEKLY MONTHLY BIMONTHLY"
+fi
+
 SERVER_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER`"
 SERVER_USER_PASSWORD="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSERPASSWORD`"
 SUDO="DEBIAN_FRONTEND=noninteractive /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E "
@@ -154,11 +163,16 @@ then
     /bin/echo "Build identifier is set to: ${build_identifier}"
     /bin/echo "OK, ready to create backup - press enter to confirm"
     read x
-    /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${DB_IP} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/git/Backup.sh ${periodicity} ${build_identifier}" 2>/dev/null
-    if ( [ "$?" != "0" ] )
-    then
-        /bin/echo "Failed to make a backup of your database, sorry... exiting"
-    fi
+    for period in ${periodicity}
+    do
+        /bin/echo "Making database backup for ${period} backup"
+        /bin/sleep 5
+        /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${DB_IP} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/git/Backup.sh ${periodicity} ${build_identifier}" 2>/dev/null
+        if ( [ "$?" != "0" ] )
+        then
+            /bin/echo "Failed to make a backup of your database, sorry..."
+        fi
+    done
 elif ( [ "${response}" = "2" ] )
 then
     /bin/echo ""
@@ -176,11 +190,16 @@ then
     build_identifier="`/usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${DB_IP} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'" 2>/dev/null`"
     /bin/echo "Build identifier is set to: ${build_identifier}"
     /bin/echo "OK, ready to create backup - press enter to confirm"
-    /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${DB_IP} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/git/Backup.sh ${periodicity} ${build_identifier}" 2>/dev/null
-    if ( [ "$?" != "0" ] )
-    then
-        /bin/echo "Failed to make a backup of your database, sorry... exiting"
-    fi
+    for period in ${periodicity}
+    do
+        /bin/echo "Making database backup for ${period} backup"
+        /bin/sleep 5
+        /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${DB_IP} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/git/Backup.sh ${periodicity} ${build_identifier}" 2>/dev/null
+        if ( [ "$?" != "0" ] )
+        then
+            /bin/echo "Failed to make a backup of your database, sorry..."
+        fi
+    done
 else
     /bin/echo "Unrecognised selection, please select only 1 or 2"
 fi
