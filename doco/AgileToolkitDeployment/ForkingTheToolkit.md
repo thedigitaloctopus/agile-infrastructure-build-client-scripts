@@ -1,11 +1,10 @@
-You might want to fork the toolkit at deployment time because, for example, you might want to have values set for the buildstyles.dat file directly in your fork of the repository when you are using template overrides method to deploy with. Just be open to the idea that there are scenarios where you will likely want to deploy from a fork rather than from the toolkit directly. 
+You might want to fork the toolkit at deployment time because, for example, you might want to have values set for the buildstyles.dat file directly in your fork of the repository when you are using template overrides method to deploy with. Just be open to the idea that there are scenarios where you will likely want to deploy from a fork rather than from the toolkit directly. In fact it is recommended best practice to deploy from your own fork.
 
-IMPORTANT: If you fork these repositories, and have them as public repositories, do not enter sensitive parameters into the templating configruation files. Instead override them using the user data init script of your build server. To see how to override using the user data init script of your webserver (or stack script if you are on linode) plese refer to:
-
+**IMPORTANT: If you fork these repositories, and have them as public repositories, do not enter sensitive parameters into the templating configruation files without first making them private. Instead override them using the user data init script of your build server. To see how to override using the user data init script of your webserver (or stack script if you are on linode) plese refer to:**
 
 [Override](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides.md)
 
-I keep a copy of the override script I am using on my laptop setup for the provider I am using and use it for userdata on my build client as required. It is important to keep your bespoke override script secure because it will have access credentials to your infrastrucuture within it. Similarly, the VM which you are using as your build machine must also be kept secured because it also will have sensitive data on it. 
+I keep a copy of the override script I am using on my laptop setup for the provider I am using and use it for userdata on my build machine as required. It is important to keep your bespoke override script secure because it will have access credentials to your infrastrucuture within it. Similarly, the VM which you are using as your build machine must also be kept secured because it also will have sensitive data on it. 
 
 #### Forking the Agile Deployment Toolkit
 
@@ -15,7 +14,7 @@ The infrastructure repositories are located on github and so, to fork them, you 
 
 1. Login as the "adt-demos" user on github
 2. Find the build-client, autoscaler, webserver and database repositories of the agile-deployer account and fork them.
-3. I would then edit (or override in my build server init script) the following template parameters:
+3. I would then edit (or override in my build machine user-data script) the following template parameters:
 
 from
 
