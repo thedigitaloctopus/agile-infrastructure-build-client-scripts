@@ -23,3 +23,5 @@ where the build identifier is the build identifier that you gave to the particul
    ##### &nbsp;&nbsp;&nbsp; /usr/bin/s3cmd put authorised-ips.dat s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat. 
    
 The file must be named that precisely for the build machine to pick it up and reconfigure or tighten the firewall. You can grant and revoke access to different ip adresses by reuploading or uploading a different authorised-ips.dat file to the correct S3 bucket. This means your build machine can't be accessed from any ip address except for the ones that you authorise. A bit of a process, but, once its done you are all set. 
+
+When you deploy using one of our sample user_data scripts, for example: (OverrideScript)
