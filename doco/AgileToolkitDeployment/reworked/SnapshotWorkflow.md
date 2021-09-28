@@ -26,3 +26,20 @@ Under this method, you have to manually edit the template and for each method, y
 If you have snapshots generated and ready and you set these values, assuming that the rest of your template is set up correctly, you will be able to build from snapshots. If you use an hourly, daily etc backup, then, the build will sync to the latest repository.
 
 ### Hardcore method
+
+The hardcore method involves using an Override script, for example: [OverrideScript](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/digitalocean/OverrideScript.sh) by taking a copy of it and filling in the necessary variables in the override script and overriding any addiction ones you might wish to override for this particular deployment such as DB_SIZE or WS_SIZE and so on accoring to the specification. Once you have the script populated up, you paste it into the user data of a virgin VPS machine with your cloud provider, as documented elsewhere. So, you need to pay close attention to all of your variables in your override script and particularly pertinent to the snapshot workflow is the addition of the following variables:
+
+1. **Generate Snapshots** Under this method, you need to set GENERATE_SNAPSHOT="1" in your override script. This will prompt the build process to take a snapshot of your machines at build time as it did for the AgileDeployment.sh and the expedited method. 
+
+2. **Build using snapshots**  To use this method, you need to set the following values in your override script:
+
+**AUTOSCALE_FROM_SNAPSHOTS="1"**  
+**GENERATE_SNAPSHOTS="0"** 
+**SNAPSHOT_ID="XXXX"** #swap for your own 4 letter code in snapshot name - you can find in the console 
+**WEBSERVER_IMAGE_ID="XXXXXXXX"** #swap for your own  
+**AUTOSCALER_IMAGE_ID="XXXXXXXX"** #swap for your own 
+**DATABASE_IMAGE_ID="XXXXXXXX"** #swap for your own
+
+Once you are satisfied that all the necessary variables are set in your override script, paste your override script into your user-data area of your VPS system and Bob's your uncle. 
+
+
