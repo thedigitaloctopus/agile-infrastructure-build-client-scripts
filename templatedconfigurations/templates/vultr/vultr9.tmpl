@@ -31,11 +31,15 @@ export APPLICATION_REPOSITORY_PROVIDER="" #MANDATORY
 export APPLICATION_REPOSITORY_OWNER="" #MANDATORY
 export APPLICATION_REPOSITORY_USERNAME="" #MANDATORY
 export APPLICATION_REPOSITORY_PASSWORD="" #MANDATORY (if using github or gitlab you need to set APPLICATION_REPOSITORY_TOKEN instead)
-export SYSTEM_EMAIL_PROVIDER=""
-export SYSTEM_TOEMAIL_ADDRESS=""
-export SYSTEM_FROMEMAIL_ADDRESS=""
-export SYSTEM_EMAIL_USERNAME=""
-export SYSTEM_EMAIL_PASSWORD=""
+export SYSTEM_EMAIL_PROVIDER="" #MANDATORY
+export SYSTEM_TOEMAIL_ADDRESS="" #MANDATORY
+export SYSTEM_FROMEMAIL_ADDRESS="" #MANDATORY
+export SYSTEM_EMAIL_USERNAME="" #MANDATORY
+export SYSTEM_EMAIL_PASSWORD="" #MANDATORY
+export SNAPSHOT_ID=""  #MANDATORY swap for your own 4 letter code in snapshot name - you can find it from the DO console under "images"
+export WEBSERVER_IMAGE_ID="" #MANDATORY swap for your own /usr/bin/vultr snapshots | grep webserver | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' 
+export AUTOSCALER_IMAGE_ID="" #MANDATORY swap for your own /usr/bin/vultr snapshots | grep autoscaler | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}'
+export DATABASE_IMAGE_ID="" #MANDATORY swap for your own /usr/bin/vultr snapshots | grep database | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' 
 #################################################################################################################################
 ###########################VARIABLES ABOVE HERE YOU WILL NEED TO SET FOR YOUR APPLICATION TO FUNCTION FULLY #####################
 #################################################################################################################################
@@ -65,10 +69,6 @@ export APPLICATION_IDENTIFIER="2"
 export PHP_VERSION="8.0"
 export AUTOSCALE_FROM_SNAPSHOTS="1"
 export GENERATE_SNAPSHOTS="0"
-export SNAPSHOT_ID=""  #swap for your own 4 letter code in snapshot name - you can find it from the DO console under "images"
-export WEBSERVER_IMAGE_ID="" #swap for your own /usr/bin/vultr snapshots | grep webserver | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' 
-export AUTOSCALER_IMAGE_ID="" #swap for your own /usr/bin/vultr snapshots | grep autoscaler | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}'
-export DATABASE_IMAGE_ID="" #swap for your own /usr/bin/vultr snapshots | grep database | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' 
 export REGION=""
 export REGION_ID="1"
 export DB_SIZE="1024"
