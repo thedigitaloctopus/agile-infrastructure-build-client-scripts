@@ -77,9 +77,11 @@ else
 fi
 overridescript="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}${template}.tmpl"
 
-/bin/cp ${overridescript} ${overridescript}.$$
+newoverridescript="/tmp/${CLOUDHOST}${template}"
 
-variables="`/bin/grep 'export ' ${overridescript}.$$ | /usr/bin/awk -F'=' '{print $1}' | /bin/sed 's/export//g'`"
+/bin/cp ${overridescript} ${newoverridescript}
+
+variables="`/bin/grep 'export ' ${newoverridescript} | /usr/bin/awk -F'=' '{print $1}' | /bin/sed 's/export//g'`"
 
 essential="1"
 /bin/echo "Do you want to review every single variable it is possible to set or do you only want to review the essential variables (recommended)"
@@ -107,36 +109,23 @@ do
         /bin/echo "OK, thanks..."
         if ( [ "${setting}" != "" ] )
         then
-            /bin/sed -i "s/${livevariable}=.*/${livevariable}=\"$setting\"/g" ${overridescript}.$$
+            /bin/sed -i "s/${livevariable}=.*/${livevariable}=\"$setting\"/g" ${newoverridescriptt}
 
-            #/bin/sed -i "/${livevariable}=/d" ${overridescript}.$$
-            #/bin/sed -i "/BASE OVERRIDES/a export ${livevariable}=\"${setting}\"" ${overridescript}.$$
+            #/bin/sed -i "/${livevariable}=/d" ${newoverridescript}
+            #/bin/sed -i "/BASE OVERRIDES/a export ${livevariable}=\"${setting}\"" ${newoverridescript}
         fi
     fi
 done
 
-if ( [ ! -f /usr/bin/sysvbanner ] )
+/bin/echo "/bin/sh ${BUILD_HOME}/HardcoreADTWrapper.sh" >> ${newoverridescript}
+
+if ( [ ! -d ${BUILD_HOME}/overridescripts ] )
 then
-    /usr/bin/apt-get -qq -y install sysvbanner 1>/dev/null 2>/dev/null
+    /bin/mkdir ${BUILD_HOME}/overridescripts
 fi
 
-/bin/echo
-/bin/echo
-
-/usr/bin/sysvbanner STOP!!
-
-/bin/sleep 5
-
-/bin/echo "I am about to display your modified template override init script which you can use on your ${CLOUDHOST} compute instance"
-/bin/echo "Press <enter> if you want it to be displayed on the screen for you to copy and paste or if you want it to be output to a file"
-/bin/echo "then enter the path to the file that you want it to be written to, for example /home/agile-deployer/templateoveride.sh"
-/bin/echo "################################################################################################################################"
-read outputstyle
-
-if ( [ "${outputstyle}" = "" ] )
+if ( [ -f ${BUILD_HOME}/overridescripts/${newoverridescript} ] )
 then
-    /bin/cat ${overridescript}.$$
-    /bin/rm ${overridescript}.$$
-else
-    /bin/mv ${overridescript}.$$ ${outputstyle}
+    /bin/mv ${newoverridescript} ${BUILD_HOME}/overridescripts
 fi
+
