@@ -1,5 +1,3 @@
-### template number             template description
------
 1.                   DEVELOPMENT MODE INSTALLATION OF THE WORDPRESS DEMO APPLICATION 
 2.                   VIRGIN DEVELOPMENT MODE INSTALLATION OF JOOMLA 
 3.                   VIRGIN DEVELOPMENT MODE INSTALLATION OF WORDPRESS
