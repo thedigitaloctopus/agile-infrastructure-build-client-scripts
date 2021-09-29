@@ -1,3 +1,21 @@
+### SSH
+
+This variable should be set to your public key for your build machine. This will enable you to access the machine from a private key that you have generated and stored on your laptop
+
+------
+
+### BUILDOS
+
+This is the BUILDOS you wish to use for your servers, it can be one of "ubutnu" or "debian"
+
+-----
+
+### BUILDOS_VERSION
+
+This is the BUILDOS_VERSION you are deploying for this can be "20.04" or "22.04" if BUILDOS is "ubuntu" and "10" or "11" if BUILDOS is "debian"
+
+-----
+
 ### APPLICATION
 
 This can be set to one of "joomla", "wordpress", "drupal", "moodle"
