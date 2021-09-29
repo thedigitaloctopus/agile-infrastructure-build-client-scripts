@@ -36,6 +36,10 @@ export SYSTEM_TOEMAIL_ADDRESS="" #MANDATORY
 export SYSTEM_FROMEMAIL_ADDRESS="" #MANDATORY
 export SYSTEM_EMAIL_USERNAME="" #MANDATORY
 export SYSTEM_EMAIL_PASSWORD="" #MANDATORY
+export SNAPSHOT_ID=""  #MANDATORY swap for your own 4 letter code in snapshot name - you can find it from the DO console under "images"
+export WEBSERVER_IMAGE_ID="" #MANDATORY swap for your own linode-cli images list | grep webserver | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' | /bin/sed 's/private\///g'
+export AUTOSCALER_IMAGE_ID="" #MANDATORY swap for your own linode-cli images list | grep autoscaler | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' | /bin/sed 's/private\///g'
+export DATABASE_IMAGE_ID="" #MANDATORY swap for your own linode-cli images list | grep database | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' | /bin/sed 's/private\///g' 
 #################################################################################################################################
 ###########################VARIABLES ABOVE HERE YOU WILL NEED TO SET FOR YOUR APPLICATION TO FUNCTION FULLY #####################
 #################################################################################################################################
@@ -65,10 +69,6 @@ export APPLICATION_IDENTIFIER="2"
 export PHP_VERSION="8.0"
 export AUTOSCALE_FROM_SNAPSHOTS="1"
 export GENERATE_SNAPSHOTS="0"
-export SNAPSHOT_ID=""  #swap for your own 4 letter code in snapshot name - you can find it from the DO console under "images"
-export WEBSERVER_IMAGE_ID="" #swap for your own linode-cli images list | grep webserver | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' | /bin/sed 's/private\///g'
-export AUTOSCALER_IMAGE_ID="" #swap for your own linode-cli images list | grep autoscaler | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' | /bin/sed 's/private\///g'
-export DATABASE_IMAGE_ID="" #swap for your own linode-cli images list | grep database | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' | /bin/sed 's/private\///g' 
 export REGION=""
 export REGION_ID="eu-central"
 export DB_SIZE="g6-nanode-1"
