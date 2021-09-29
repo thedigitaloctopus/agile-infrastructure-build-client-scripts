@@ -109,27 +109,25 @@ do
         /bin/echo "OK, thanks..."
         if ( [ "${setting}" != "" ] )
         then
-            /bin/sed -i "s/${livevariable}=.*/${livevariable}=\"$setting\"/g" ${newoverridescriptt}
+            /bin/sed -i "s/${livevariable}=.*/${livevariable}=\"$setting\"/g" ${newoverridescript}
         fi
     fi
 done
 
-/bin/echo "/bin/sh ${BUILD_HOME}/HardcoreADTWrapper.sh" >> ${newoverridescript}
+/bin/echo "/bin/sh HardcoreADTWrapper.sh" >> ${newoverridescript}
 
 if ( [ ! -d ${BUILD_HOME}/overridescripts ] )
 then
     /bin/mkdir ${BUILD_HOME}/overridescripts
 fi
 
-if ( [ -f ${BUILD_HOME}/overridescripts/${newoverridescript} ] )
+if ( [ -f ${BUILD_HOME}/overridescripts/${CLOUDHOST}${template}override.tmpl ] )
 then
-    /bin/mv ${BUILD_HOME}/overridescripts/${newoverridescript} ${BUILD_HOME}/overridescripts/${newoverridescript}.$$
+    /bin/mv ${BUILD_HOME}/overridescripts/${CLOUDHOST}${template}override.tmpl  ${BUILD_HOME}/overridescripts/${CLOUDHOST}${template}override.tmpl.$$
 fi
 
-/bin/mv ${newoverridescript} ${BUILD_HOME}/overridescripts/${newoverridescript}override.tmpl
+/bin/mv ${newoverridescript} ${BUILD_HOME}/overridescripts/${CLOUDHOST}${template}override.tmpl
 
 /bin/echo "######################################################################################################################"
-/bin/echo "Cheers. Your configuration has been written to: ${BUILD_HOME}/overridescripts/${newoverridescript}override.tmpl"
+/bin/echo "Cheers. Your configuration has been written to: ${BUILD_HOME}/overridescripts/${CLOUDHOST}${template}override.tmpl"
 /bin/echo "######################################################################################################################"
-
-
