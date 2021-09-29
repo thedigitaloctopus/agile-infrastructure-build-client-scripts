@@ -16,6 +16,13 @@ This is the BUILDOS_VERSION you are deploying for this can be "20.04" or "22.04"
 
 -----
 
+
+### BUILD_IDENTIFIER
+
+This is a unique string to describe your build. If you have multiple builds that you want to give similar names you should call them, for example, "1-testbuild" or "2-testbuild" or "3-testbuild$
+
+-----
+
 ### APPLICATION
 
 This can be set to one of "joomla", "wordpress", "drupal", "moodle"
