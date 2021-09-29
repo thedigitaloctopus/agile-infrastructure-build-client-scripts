@@ -23,83 +23,120 @@
 #######################################################################################################
 #set -x
 
-if ( [ ! -f  ./GenerateOverrideTemplate.sh ] )
+if ( [ ! -f  ./helperscripts/GenerateOverrideTemplate.sh ] )
 then
-    /bin/echo "Sorry, this script has to be run from the helperscripts subdirectory"
+    /bin/echo "Sorry, this script has to be run as ./helperscripts/GenerateOverrideTemplate.sh"
     exit
 fi
 
-export BUILD_HOME="`/bin/cat ../buildconfiguration/buildhome`"
+/bin/echo "############################################################################################################"
+/bin/echo "WARNING: THERE IS NO SANITY CHECKING IF YOU USE THIS SCRIPT WHICH MEANS THAT IF YOU ENTER ANYTHING INCORRECT"
+/bin/echo "YOU WON'T FIND OUT ABOUT IT UNTIL YOU CONFIGURE A BUILD USING THE OUTPUT FROM THIS SCRIPT AND THE BUILD FAILS"
+/bin/echo "AT THE END, THIS SCRIPT WILL OUTPUT ITS CONFIGURATION AND YOU CAN TAKE A COPY OF THE OUTPUT AND STORE IT ON YOUR LAPTOP OR DESKTOP"
+/bin/echo "FOR USE IN CURRENT AND FUTURE DEPLOYMENTS"
+/bin/echo "BE AWARE THAT THE OUTPUT GENERATED WILL CONTAIN SENSITIVE INFORMATION WHICH YOU NEED TO KEEP SECURE"
+/bin/echo "############################################################################################################"
+/bin/echo "Press <enter> to continue"
+read x
+ 
+BUILD_HOME="`/bin/pwd`"
 
 /bin/echo "Which Cloudhost are you using? 1) Digital Ocean 2) Exoscale 3) Linode 4) Vultr 5)AWS. Please Enter the number for your cloudhost"
 read response
 if ( [ "${response}" = "1" ] )
 then
     CLOUDHOST="digitalocean"
-    overridescript="../templatedconfigurations/templateoverrides/digitalocean/OverrideScript.sh"
 elif ( [ "${response}" = "2" ] )
 then
     CLOUDHOST="exoscale"
-    overridescript="../templatedconfigurations/templateoverrides/exoscale/OverrideScript.sh"
 elif ( [ "${response}" = "3" ] )
 then
     CLOUDHOST="linode"
-    /bin/echo "Sorry, this script doesn't work for linode, you will have to edit your overrides script manually"
-    /bin/echo "You can find your overrides script at: ../templatedconfigurations/templateoverrides/exoscale/OverrideScript.sh"
-    exit
 elif ( [ "${response}" = "4" ] )
 then
     CLOUDHOST="vultr"
-    overridescript="../templatedconfigurations/templateoverrides/vultr/OverrideScript.sh"
 elif ( [ "${response}" = "5" ] )
 then
     CLOUDHOST="aws"
-    overridescript="../templatedconfigurations/templateoverrides/aws/OverrideScript.sh"
 else
     /bin/echo "Unrecognised  cloudhost. Exiting ...."
     exit
 fi
 
+/bin/echo "Please tell us which template you wish to override"
+no_templates="`/usr/bin/wc -l ${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/templatemenu.md | /usr/bin/awk '{print $1}'`"
+/bin/cat ${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/templatemenu.md
+/bin/echo "Please input a number between 1 and ${no_templates} to select a template to override"
+read choice
+if ( [ "${choice}" -gt "0" ] && [ "${choice}" -le "${no_templates}" ] )
+then 
+   template="${choice}"
+else
+    /bin/echo "Invalid input...exiting"
+    exit
+fi
+overridescript="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}${template}.tmpl"
+
 /bin/cp ${overridescript} ${overridescript}.$$
 
-variables="`/bin/grep '^export ' ${overridescript}.$$ | /usr/bin/awk -F'=' '{print $1}'`"
+variables="`/bin/grep 'export ' ${overridescript}.$$ | /usr/bin/awk -F'=' '{print $1}' | /bin/sed 's/export//g'`"
 
-for variable in ${variables}
+essential="1"
+/bin/echo "Do you want to review every single variable it is possible to set or do you only want to review the essential variables (recommended)"
+/bin/echo "Enter 'Y' or 'y' to review every variable. Press <enter> to only review the essential ones"
+read response
+if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
+then
+   essential="0"
+fi
+
+for livevariable in ${variables}
 do
-    livevariable="`/bin/echo ${variable} | /bin/grep -v export  | /bin/sed '/^$/d'`"
-    if ( [ "${livevariable}" != "" ] )
+    value="`/bin/grep "${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
+
+    if ( ( [ "${essential}" = "0" ] ) || ( [ "`/bin/grep 'MANDATORY' ${overridescript} | /bin/grep "export ${livevariable}="`" != "" ] || [ "${value}" != "" ] ) )
     then
+        /bin/echo "############################################################################################"
+        /bin/echo "Explanation from the specification regarding this variable:"
+        /bin/echo "############################################################################################"
+        /bin/sed "/### ${livevariable}/,/----/!d;/----/q" ${BUILD_HOME}/templatedconfigurations/specification.md
         /bin/echo "Found a variable ${livevariable} what do you want to set it to?"
+        value="`/bin/grep "${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
+        /bin/echo "Its current value is \"${value}\" press <enter> to retain, anything else to override"
         read setting
         /bin/echo "OK, thanks..."
-        /bin/sed -i "/${livevariable}=/d" ${overridescript}.$$
-        /bin/sed -i "/BASE OVERRIDES/a export ${livevariable}=\"${setting}\"" ${overridescript}.$$
+        if ( [ "${setting}" != "" ] )
+        then
+            /bin/sed -i "s/${livevariable}=.*/${livevariable}=\"$setting\"/g" ${overridescript}.$$
+
+            #/bin/sed -i "/${livevariable}=/d" ${overridescript}.$$
+            #/bin/sed -i "/BASE OVERRIDES/a export ${livevariable}=\"${setting}\"" ${overridescript}.$$
+        fi
     fi
 done
 
-/bin/echo "Please tell us and set any additional variables you want to set, type 'none' or 'NONE' when done"
+if ( [ ! -f /usr/bin/sysvbanner ] )
+then
+    /usr/bin/apt-get -qq -y install sysvbanner 1>/dev/null 2>/dev/null
+fi
 
-while ( [ 1 ] )
-do
-    /bin/echo "Please tell us the name of the variable you want to add, for example, DNS_USERNAME, type 'none' if all set"
-    read variablename
-    
-    if ( [ "${variablename}" = "none" ] || [ "${variablename}" = "NONE" ] )
-    then
-        break
-    fi
-    
-    /bin/echo "Please tell us the value of the variable you want to add, for example, testemail@test.com"
-    read variablevalue
+/bin/echo
+/bin/echo
 
-    /bin/sed -i "/${variablename}=/d" ${overridescript}.$$
-    /bin/sed -i "/ADDITIONAL OVERRIDES/a export ${variablename}=\"${variablevalue}\"" ${overridescript}.$$
-done
+/usr/bin/sysvbanner STOP!!
+
+/bin/sleep 5
 
 /bin/echo "I am about to display your modified template override init script which you can use on your ${CLOUDHOST} compute instance"
-/bin/echo "You should take a copy of this using copy and paste, it will not be shown again"
-/bin/echo "Press <enter> when you are ready for it to be displayed"
-/bin/echo"################################################################################################################################"
-read x
-/bin/cat ${overridescript}.$$
-/bin/rm ${overridescript}.$$
+/bin/echo "Press <enter> if you want it to be displayed on the screen for you to copy and paste or if you want it to be output to a file"
+/bin/echo "then enter the path to the file that you want it to be written to, for example /home/agile-deployer/templateoveride.sh"
+/bin/echo "################################################################################################################################"
+read outputstyle
+
+if ( [ "${outputstyle}" = "" ] )
+then
+    /bin/cat ${overridescript}.$$
+    /bin/rm ${overridescript}.$$
+else
+    /bin/mv ${overridescript}.$$ ${outputstyle}
+fi
