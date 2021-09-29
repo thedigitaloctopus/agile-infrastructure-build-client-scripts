@@ -201,7 +201,7 @@ This HAS to be exactly the same of the core part of the URL name of your website
 
 -----
 
-###  WEBSITE_URL
+### WEBSITE_URL
 
 This is the URL of your website. It can be any valid URL
 
@@ -771,4 +771,10 @@ The snapshot ID is the first four characters of the snapshots that you are going
 ### WEBSERVER_IMAGE_ID, AUTOSCALER_IMAGE_ID,DATABASE_IMAGE_ID
 
 These are the full IDs of the images that your servers will be built off if you build using snapshots you have generated.
+
+------
+
+### SELECTED_TEMPLATE
+
+The number of the template you are generating a script for for example, "1", "2", "3"
 
