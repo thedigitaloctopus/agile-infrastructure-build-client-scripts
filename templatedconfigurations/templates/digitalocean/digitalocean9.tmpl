@@ -36,6 +36,10 @@ export SYSTEM_TOEMAIL_ADDRESS="" #MANDATORY
 export SYSTEM_FROMEMAIL_ADDRESS="" #MANDATORY
 export SYSTEM_EMAIL_USERNAME="" #MANDATORY
 export SYSTEM_EMAIL_PASSWORD="" #MANDATORY
+export SNAPSHOT_ID=""  #MANDATORY swap for your own 4 letter code in snapshot name - you can find it from the DO console under "images"
+export WEBSERVER_IMAGE_ID="" #MANDATORY swap for your own /usr/local/bin/doctl compute snapshot list | /bin/grep webserver | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $1}'
+export AUTOSCALER_IMAGE_ID="" #MANDATORY swap for your own /usr/local/bin/doctl compute snapshot list | /bin/grep autoscaler | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $1}'
+export DATABASE_IMAGE_ID=""  #MANDATORY swap for your own /usr/local/bin/doctl compute snapshot list | /bin/grep database | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $1}'
 #################################################################################################################################
 ###########################VARIABLES ABOVE HERE YOU WILL NEED TO SET FOR YOUR APPLICATION TO FUNCTION FULLY #####################
 #################################################################################################################################
@@ -119,10 +123,6 @@ export ENABLE_EFS=""
 export SUBNET_ID=""
 export AUTOSCALE_FROM_SNAPSHOTS="1"
 export GENERATE_SNAPSHOTS="0"
-export SNAPSHOT_ID=""  #swap for your own 4 letter code in snapshot name - you can find it from the DO console under "images"
-export WEBSERVER_IMAGE_ID="" #swap for your own /usr/local/bin/doctl compute snapshot list | /bin/grep webserver | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $1}'
-export AUTOSCALER_IMAGE_ID="" #swap for your own /usr/local/bin/doctl compute snapshot list | /bin/grep autoscaler | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $1}'
-export DATABASE_IMAGE_ID=""  #swap for your own /usr/local/bin/doctl compute snapshot list | /bin/grep database | /bin/grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $1}'
 export ASSETS_BUCKET=""
 export JOOMLA_VERSION=""
 export DRUPAL_VERSION=""
