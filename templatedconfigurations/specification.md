@@ -47,7 +47,8 @@ If you are deploying a virgin application, you can set this to "JOOMLA:{latest_v
 
 -----
 
-### S3_ACCESS_KEY and S3_SECRET_KEY
+### S3_ACCESS_KEY 
+### S3_SECRET_KEY
 
 These grant you access to manipulate an object store. Under the principle of least privileges, you should grant as few privileges to these keys wen you create them as possible. The DATASTORE_CHOICE setting (see below) will determine which Object Storage you are using and you will need to generate access keys appropriate to that setting. 
 
@@ -94,22 +95,6 @@ You can set your ${S3_HOST_BASE} parameter in your template to one of these list
 ##### vultr - the location should always be set to "US" no matter where you are in the world
 
 ##### amazon - I have only used "US" and "EU" depending on whether I am deploying to the EU or the US, I am not sure what this setting would be for other parts of the world
-
------
-
-### ACCESS_KEY and SECRET_KEY 
-
-These grant you access to compute resources with your cloud provider. Under the principle of least privileges, you should grant as few privileges to these keys wen you create them as possible.
-
-##### digital ocean - This does not need to be set for digital ocean, instead, see TOKEN= below
-
-##### exoscale - Login to your exoscale account and go to the IAM menu (on the right) and generate a pair of API keys which have access to compute manipulation capabilities. The first key is the ACCESS_KEY which you can paste into your template for the ACCESS_KEY variable.
-
-##### linode -  This does not need to be set for linode, instead, see TOKEN= below
-
-##### vultr - This does not need to be set for vultr, instead, see TOKEN= below
-
-##### AWS - Under your IAM user, create a pair of keys which have compute manipulation capabilities and paste them into your template as ACCESS_KEY and SECRET_KEY
 
 -----
 
@@ -288,7 +273,8 @@ export DIRECTORIES_TO_MOUNT="wp-content.uploads"
 
 ----- 
 
-### PRODUCTION and DEVELOPMENT
+### PRODUCTION 
+### DEVELOPMENT
 
 These settings are twinned. It only makes sense for them to be in one of two configurations:
 
@@ -428,10 +414,6 @@ You can set this to "HTML" or "PHP" based on the language you are deploying for.
 If you are deploying PHP, then you can set which version of PHP you are deploying here. Ordinarily, it should be the latest available version (currently 7.4).
 So, to use 7.4 you would set PHP_VERSION="7.4"
 
------
-
-export REGION=""
-
 ---------
 
 ### REGION_ID
@@ -477,7 +459,9 @@ AWS: one of: eu-north-1, ap-south-1, eu-west-3, eu-west-2, eu-west-1, ap-northea
 
 ----------
 
-### DB_SIZE AS_SIZE WS_SIZE
+### DB_SIZE 
+### AS_SIZE 
+### WS_SIZE
 
 For the Database, the autoscaler and the webserver, you can set their individual sizes using these parameters.
 
@@ -502,7 +486,9 @@ AWS: t2.micro t2.small t2.medium t2.large t2.xlarge t2.2xlarge
 
 -------
 
-### DB_SERVER_TYPE AS_SERVER_TYPE WS_SERVER_TYPE
+### DB_SERVER_TYPE 
+### AS_SERVER_TYPE 
+### WS_SERVER_TYPE
 
 For each machine size SIZE it needs to have the appropriate machine type set. The following machine types correspond to the appropriate _SIZE parameter directly above
 
@@ -594,7 +580,8 @@ These are all IP addresses for the various machine types that can be used as par
 
 ------
 
-### GIT_USER, GIT_EMAIL_ADDRESS
+### GIT_USER 
+### GIT_EMAIL_ADDRESS
 
 These are the values for the git user that your commits are made by. Obviously, I don't know what those will be, so they are set to some placeholder values in the templates I have provided, but, you can change them to your own values, of course. These values correspong to **git config --global user.name "Template User"** and  **git config --global user.email "templateuser@dummyemailX1.com"** 
 
@@ -609,7 +596,10 @@ The token that you generate can be placed here in your template instead of a pas
 
 -----
 
-### INFRASTRUCTURE_REPOSITORY_PROVIDER, INFRASTRUCTURE_REPOSITORY_OWNER,INFRASTRUCTURE_REPOSITORY_USERNAME,INFRASTRUCTURE_REPOSITORY_PASSWORD
+### INFRASTRUCTURE_REPOSITORY_PROVIDER
+### INFRASTRUCTURE_REPOSITORY_OWNER
+### INFRASTRUCTURE_REPOSITORY_USERNAME
+### INFRASTRUCTURE_REPOSITORY_PASSWORD
 
 Unless I move the infrastructure repositories to bitbucket or gitlab, these values will ALWAYS need to be set as follows
 
@@ -713,7 +703,11 @@ This is purely a convenience. If your application wordpress, joomla or whatever 
 
 -----
 
-### PHP_MODE,PHP_MAX_CHILDREN, PHP_START_SERVERS, PHP_MIN_SPARE_SERVERS,PHP_MAX_SPARE_SERVERS,PHP_PROCESS_IDLE_TIMEOUT
+### PHP_MODE,PHP_MAX_CHILDREN
+### PHP_START_SERVERS
+### PHP_MIN_SPARE_SERVERS
+### PHP_MAX_SPARE_SERVERS
+### PHP_PROCESS_IDLE_TIMEOUT
 
 You can set these values according to the PHP spec. You can leave all of these blank in order to accept the default values that PHP ships with, but, if you want more control, then you can set these values here and your PHP system will be configured to use them. You need to know what you are doing to set these.
 
@@ -723,7 +717,10 @@ Let me know if you think further PHP settings should be configurable like this. 
 
 ----
  
-### IN_MEMORY_CACHING, IN_MEMORY_CACHING_PORT,IN_MEMORY_CACHING_HOST, IN_MEMORY_CACHING_SECURITY_GROUP
+### IN_MEMORY_CACHING
+### IN_MEMORY_CACHING_PORT
+### IN_MEMORY_CACHING_HOST
+### IN_MEMORY_CACHING_SECURITY_GROUP
 
 If you are using an IN-MEMORY caching solution such as Elasticache on AWS, then, you can set your caching relevant settings here.
 
@@ -768,7 +765,9 @@ The snapshot ID is the first four characters of the snapshots that you are going
 
 ------
 
-### WEBSERVER_IMAGE_ID, AUTOSCALER_IMAGE_ID,DATABASE_IMAGE_ID
+### WEBSERVER_IMAGE_ID
+### AUTOSCALER_IMAGE_ID
+### DATABASE_IMAGE_ID
 
 These are the full IDs of the images that your servers will be built off if you build using snapshots you have generated.
 
