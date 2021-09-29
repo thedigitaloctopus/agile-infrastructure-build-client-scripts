@@ -10,13 +10,12 @@ I keep a copy of the override script I am using on my laptop setup for the provi
 
 You can build your deployments direct from the home account of the Agile Deployment toolkit in other words, the "agile-deployer" user name.
 However, you are most likely going to want to fork the repositories to your own account so that you can (for example) set template configuration parameters in the build client scripts.
-The infrastructure repositories are located on github and so, to fork them, you will need a github account. I have a second github account called "adt-demos" where I keep my application sourcecode, for example, wordpress, that I deploy with the ADT. If I wanted to use this account as a 3rd party developer, I would do it as follows.
+
+The infrastructure repositories are located on github and so, to fork them, you will need a github account. I have a second github account called "adt-demos" where I keep my application sourcecode, for example, wordpress, that I deploy with the ADT. If I wanted to use this account as a 3rd party developer, I would do it as follows from my own github account.
 
 1. Login as the "adt-demos" user on github
-2. Find the build-client, autoscaler, webserver and database repositories of the agile-deployer account and fork them.
-3. I would then edit (or override in my build machine user-data script) the following template parameters:
-
-from
+2. Find the original build-client, autoscaler, webserver and database repositories of the agile-deployer account and fork them in turn.
+3. I would need to make sure that whatever my build method, Full, Expedited or Hardcore I need to make sure that the following environment variables are set or updated:
 
 export APPLICATION_REPOSITORY_TOKEN=""  
 export INFRASTRUCTURE_REPOSITORY_PROVIDER="github"  
@@ -26,11 +25,11 @@ export INFRASTRUCTURE_REPOSITORY_PASSWORD="none"
 
 and change them to:
 
-export APPLICATION_REPOSITORY_TOKEN=""  
+export APPLICATION_REPOSITORY_TOKEN="" (provided if needed)  
 export INFRASTRUCTURE_REPOSITORY_PROVIDER="github"  
 export INFRASTRUCTURE_REPOSITORY_OWNER="adt-demos"  
 export INFRASTRUCTURE_REPOSITORY_USERNAME="adt-demos"  
-export INFRASTRUCTURE_REPOSITORY_PASSWORD="none"  
+export INFRASTRUCTURE_REPOSITORY_PASSWORD="none" (provided if needed) 
 
 If you are running a full build process (not via templating) and setting all your parameters at build time, then, you can set your infrastructure repositories owner and name to, for example, "adt-demos" or whatever your username when you are prompted with the following questions:
 
@@ -58,3 +57,5 @@ INFRASRUCTURE REPOSITORIES OWNER USERNAME:"
 ##### YOUR github PASSWORD (leave blank for no password if the infrastructure repos are public):  
 
 <enter your GitHub password or blank if the repos are public (should be)>  
+
+Once you have forked the repositories and updated your build script accordingly, you will be building and deploying off the fork (which you can modify to your hearts desire) rather than the original repositories (which you can't modify, obviously). 
