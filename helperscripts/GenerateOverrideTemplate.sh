@@ -110,9 +110,6 @@ do
         if ( [ "${setting}" != "" ] )
         then
             /bin/sed -i "s/${livevariable}=.*/${livevariable}=\"$setting\"/g" ${newoverridescriptt}
-
-            #/bin/sed -i "/${livevariable}=/d" ${newoverridescript}
-            #/bin/sed -i "/BASE OVERRIDES/a export ${livevariable}=\"${setting}\"" ${newoverridescript}
         fi
     fi
 done
@@ -126,6 +123,9 @@ fi
 
 if ( [ -f ${BUILD_HOME}/overridescripts/${newoverridescript} ] )
 then
-    /bin/mv ${newoverridescript} ${BUILD_HOME}/overridescripts
+    /bin/mv ${BUILD_HOME}/overridescripts/${newoverridescript} ${BUILD_HOME}/overridescripts/${newoverridescript}.$$
 fi
+
+/bin/mv ${newoverridescript} ${BUILD_HOME}/overridescripts
+
 
