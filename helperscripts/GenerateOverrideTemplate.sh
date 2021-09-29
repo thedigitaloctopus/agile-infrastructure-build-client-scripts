@@ -126,6 +126,10 @@ then
     /bin/mv ${BUILD_HOME}/overridescripts/${newoverridescript} ${BUILD_HOME}/overridescripts/${newoverridescript}.$$
 fi
 
-/bin/mv ${newoverridescript} ${BUILD_HOME}/overridescripts
+/bin/mv ${newoverridescript} ${BUILD_HOME}/overridescripts/${newoverridescript}override.tmpl
+
+/bin/echo "######################################################################################################################"
+/bin/echo "Cheers. Your configuration has been written to: ${BUILD_HOME}/overridescripts/${newoverridescript}override.tmpl"
+/bin/echo "######################################################################################################################"
 
 
