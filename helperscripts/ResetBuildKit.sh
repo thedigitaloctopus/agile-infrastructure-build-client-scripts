@@ -74,6 +74,11 @@ then
     /bin/rm -r ${BUILD_HOME}/.git
 fi
 
+if ( [ -d ${BUILD_HOME}/overridescripts ] )
+then
+    /bin/rm -rf ${BUILD_HOME}/overridescripts/
+fi
+
 /bin/rm -r ${BUILD_HOME}/.lego*
 /bin/rm ${BUILD_HOME}/.s3cfg*
 
