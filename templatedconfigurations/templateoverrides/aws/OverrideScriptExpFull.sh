@@ -50,8 +50,8 @@ export SSH=\"\" #paste your public key here
 #####################################################################################
 #ADDITIONAL OVERRIDES, ANYTHING NOT OVERRIDEN WILL TAKE IT'S VALUE FROM THE SELECTED_TEMPLATE VALUE
 #THE TEMPLATES CAN BE FOUND at ${BUILD_HOME}/templatedconfiguration/templates/aws
-export SELECTED_TEMPLATE="1"
-#export WS_SIZE=""
+export SELECTED_TEMPLATE=\"1\"
+#export WS_SIZE=\"t2.small\"
 #####################################################################################
 
 " > /root/Environment.env
