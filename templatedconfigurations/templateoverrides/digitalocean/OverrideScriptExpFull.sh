@@ -48,6 +48,7 @@ export SSH=\"\" #paste your public key here
 #Alter the value SELECTED_TEMPLATE below to change which template the build will be based on
 #####################################################################################
 #ADDITIONAL OVERRIDES, ANYTHING NOT OVERRIDEN WILL TAKE IT'S VALUE FROM THE SELECTED_TEMPLATE VALUE
+#THE TEMPLATES CAN BE FOUND at ${BUILD_HOME}/templatedconfiguration/templates/digitalocean
 export SELECTED_TEMPLATE="1"
 #export WS_SIZE=""
 #####################################################################################
