@@ -41,6 +41,18 @@ export SSH=\"\" #paste your public key here
 ####################################################################################
 #**********************************************************************************#
 ####################################################################################
+####################################################################################
+#If you understand the way this toolkit works you can set the template you are using
+#below and override any of the variables in it. For example, you can override
+#the WS_SIZE default by entering:
+#export WS_SIZE="t2.small" to override the "export WS_SIZE="t2.micro" of the selected template.
+#Alter the value SELECTED_TEMPLATE below to change which template the build will be based on
+#####################################################################################
+#ADDITIONAL OVERRIDES, ANYTHING NOT OVERRIDEN WILL TAKE IT'S VALUE FROM THE SELECTED_TEMPLATE VALUE
+#THE TEMPLATES CAN BE FOUND at ${BUILD_HOME}/templatedconfiguration/templates/aws
+export SELECTED_TEMPLATE="1"
+#export WS_SIZE=""
+#####################################################################################
 
 " > /root/Environment.env
 
