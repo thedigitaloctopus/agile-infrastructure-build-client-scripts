@@ -114,6 +114,23 @@ Some providers use personal access tokens rather than access keys and secret key
 
 -----
 
+### ACCESS_KEY
+### SECRET_KEY
+
+Some providers use an access key and a secret key to control access to their compute resources. You need to generate an access and secret key for your provider and use them here as ACCESS_KEY and SECRET_KEY respectively
+
+##### digital ocean - Does not use access keys and secret keys, see TOKEN
+
+##### exoscale - You can generate access keys and secret keys to control access to your compute resources. Note, this is distinct from the object storage access keys
+
+##### linode - Does not use access keys and secret keys, see TOKEN
+
+##### Vultr - Does not use access keys and secret keys, see TOKEN
+
+##### AWS - You can generate access keys and secret keys to control access to your compute resources. Note, this is distinct from the object storage access keys
+
+-----
+
 ### DNS_USERNAME
 
 This will be the username for your DNS service provider
