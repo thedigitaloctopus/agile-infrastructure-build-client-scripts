@@ -21,9 +21,9 @@ exec 2>>/root/logs/${ERR_FILE}
 ####################################################################################
 #**********************************************************************************#
 ####################################################################################
-export BUILDCLIENT_USER="agile-user"
-export BUILDCLIENT_PASSWORD="Hjdhfb34hd£"
-export BUILDCLIENT_SSH_PORT="1035"
+export BUILDMACHINE_USER="agile-user"
+export BUILDMACHINE_PASSWORD="Hjdhfb34hd£"
+export BUILDMACHINE_SSH_PORT="1035"
 export LAPTOP_IP=""
 
 /bin/echo "
@@ -59,24 +59,24 @@ export SELECTED_TEMPLATE=\"1\"
 . /root/Environment.env
 
 
-/usr/sbin/adduser --disabled-password --gecos \"\" ${BUILDCLIENT_USER} 
+/usr/sbin/adduser --disabled-password --gecos \"\" ${BUILDMACHINE_USER} 
 /bin/sed -i '$ a\ ClientAliveInterval 60\nTCPKeepAlive yes\nClientAliveCountMax 10000' /etc/ssh/sshd_config
 /bin/sed -i 's/.*PermitRootLogin.*$/PermitRootLogin no/g' /etc/ssh/sshd_config
-/bin/echo ${BUILDCLIENT_USER}:${BUILDCLIENT_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/chpasswd 
- /usr/bin/gpasswd -a ${BUILDCLIENT_USER} sudo 
+/bin/echo ${BUILDMACHINE_USER}:${BUILDMACHINE_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/chpasswd 
+ /usr/bin/gpasswd -a ${BUILDMACHINE_USER} sudo 
 
-/bin/mkdir -p /home/${BUILDCLIENT_USER}/.ssh
-/bin/echo "${SSH}" >> /home/${BUILDCLIENT_USER}/.ssh/authorized_keys
+/bin/mkdir -p /home/${BUILDMACHINE_USER}/.ssh
+/bin/echo "${SSH}" >> /home/${BUILDMACHINE_USER}/.ssh/authorized_keys
 
 /bin/sed -i 's/#*PasswordAuthentication [a-zA-Z]*/PasswordAuthentication no/' /etc/ssh/sshd_config
 
-if ( [ "${BUILDCLIENT_SSH_PORT}" = "" ] )
+if ( [ "${BUILDMACHINE_SSH_PORT}" = "" ] )
 then
     BUILDCLIENT_SSH_PORT="22"
 fi
 
-/bin/sed -i "s/^Port.*$/Port ${BUILDCLIENT_SSH_PORT}/g" /etc/ssh/sshd_config
-/bin/sed -i "s/^#Port.*$/Port ${BUILDCLIENT_SSH_PORT}/g" /etc/ssh/sshd_config
+/bin/sed -i "s/^Port.*$/Port ${BUILDMACHINE_SSH_PORT}/g" /etc/ssh/sshd_config
+/bin/sed -i "s/^#Port.*$/Port ${BUILDMACHINE_SSH_PORT}/g" /etc/ssh/sshd_config
 
 systemctl restart sshd
 service ssh restart
@@ -94,9 +94,9 @@ service ssh restart
 #for example, if you connect your laptop to a different network, then, you will have to connect to the build client machine through the console of
 #your VPS system provider and allow your new IP address through the firewall. This might be more of a hassle than its worth
 #####################################################################################################################################################
-/usr/sbin/ufw allow ${BUILDCLIENT_SSH_PORT}/tcp 
+/usr/sbin/ufw allow ${BUILDMACHINE_SSH_PORT}/tcp 
 
-cd /home/${BUILDCLIENT_USER}
+cd /home/${BUILDMACHINE_USER}
 
 if ( [ "${INFRASTRUCTURE_REPOSITORY_OWNER}" != "" ] )
 then
