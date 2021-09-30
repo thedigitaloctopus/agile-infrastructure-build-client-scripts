@@ -83,20 +83,17 @@ newoverridescript="/tmp/${CLOUDHOST}${template}"
 
 variables="`/bin/grep 'export ' ${newoverridescript} | /usr/bin/awk -F'=' '{print $1}' | /bin/sed 's/export//g'`"
 
-essential="1"
-/bin/echo "Do you want to review every single variable it is possible to set or do you only want to review the essential variables (recommended)"
-/bin/echo "Enter 'Y' or 'y' to review every variable. Press <enter> to only review the essential ones"
-read response
-if ( [ "${response}" = "Y" ] || [ "${response}" = "y" ] )
-then
-   essential="0"
-fi
+/bin/echo "###############################################################################"
+/bin/echo "YOU NEED TO SET ALL OF THESE VARIABLES TO SANE VALUES FOR THE BUILD TO FUNCTION"
+/bin/echo "###############################################################################"
+/bin/echo "Press <enter to begin>"
+read x
 
 for livevariable in ${variables}
 do
     value="`/bin/grep "${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
 
-    if ( ( [ "${essential}" = "0" ] ) || ( [ "`/bin/grep 'MANDATORY' ${overridescript} | /bin/grep "export ${livevariable}="`" != "" ] || [ "${value}" != "" ] ) )
+    if ( [ "`/bin/grep 'MANDATORY' ${overridescript} | /bin/grep "export ${livevariable}="`" != "" ] ) 
     then
         /bin/echo "############################################################################################"
         /bin/echo "Explanation from the specification regarding this variable:"
@@ -114,6 +111,38 @@ do
     fi
 done
 
+/bin/echo "###################################################################################################################################"
+/bin/echo "Do you want to review the rest of the variables that are being used or do you want to accept the default template values"
+/bin/echo "If you want to change machine sizes or regions for example, you need to change them here so that they override the templated values"
+/bin/echo "###################################################################################################################################"
+/bin/echo "Enter 'y' or 'Y' if you wish to review/override the rest of the variables used by this template, 'N' or 'n' will use the default settings"
+read response
+
+if ( [ "${response}" = "y" ] || [ "${response}" = "Y" ] )
+then
+    for livevariable in ${variables}
+    do
+        value="`/bin/grep "${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
+
+        if (  [ "${value}" != "" ] )
+        then
+            /bin/echo "############################################################################################"
+            /bin/echo "Explanation from the specification regarding this variable:"
+            /bin/echo "############################################################################################"
+            /bin/sed "/### ${livevariable}/,/----/!d;/----/q" ${BUILD_HOME}/templatedconfigurations/specification.md
+            /bin/echo "Found a variable ${livevariable} what do you want to set it to?"
+            value="`/bin/grep "${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
+            /bin/echo "Its current value is \"${value}\" press <enter> to retain, anything else to override"
+            read setting
+            /bin/echo "OK, thanks..."
+            if ( [ "${setting}" != "" ] )
+            then
+                /bin/sed -i "s/${livevariable}=.*/${livevariable}=\"$setting\"/g" ${newoverridescript}
+            fi
+        fi
+    done
+fi
+
 /bin/echo "/bin/sh HardcoreADTWrapper.sh" >> ${newoverridescript}
 
 if ( [ ! -d ${BUILD_HOME}/overridescripts ] )
@@ -130,4 +159,7 @@ fi
 
 /bin/echo "######################################################################################################################"
 /bin/echo "Cheers. Your configuration has been written to: ${BUILD_HOME}/overridescripts/${CLOUDHOST}${template}override.tmpl"
+/bin/echo "You should meticulously review this configuration file before deploying, in particular, make sure the DEFAULT_USER"
+/bin/echo "value is set correctly for the OS you have chosen to deploy your servers on"
+/bin/echo "You can edit and make changes to this configuration file as you desire but keep it with the same filename to deploy it"
 /bin/echo "######################################################################################################################"
