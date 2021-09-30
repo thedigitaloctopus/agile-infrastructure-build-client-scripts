@@ -49,8 +49,8 @@ export SSH=\"\" #paste your public key here
 #####################################################################################
 #ADDITIONAL OVERRIDES, ANYTHING NOT OVERRIDEN WILL TAKE IT'S VALUE FROM THE SELECTED_TEMPLATE VALUE
 #THE TEMPLATES CAN BE FOUND at ${BUILD_HOME}/templatedconfiguration/templates/digitalocean
-export SELECTED_TEMPLATE="1"
-#export WS_SIZE="g6-standard-1"
+export SELECTED_TEMPLATE=\"1\"
+#export WS_SIZE=\"g6-standard-1\"
 #####################################################################################
 
 " > /root/Environment.env
