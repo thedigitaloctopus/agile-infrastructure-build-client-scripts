@@ -87,12 +87,6 @@ Currently, these repos are private, but, will be made public. Whilst they are pr
 
 Edit: (They have now been made public)
 
-Here are two instructional or demo videos for how to set up your build server and how to run an example build process. I think you will definitely want to watch these videos before you run a build of your own.  
-
-[Agile Deployment Toolkit Build Machine Setup Example](https://www.youtube.com/watch?v=ONp_QuPxcsc)  
-
-[Sample Build Process Agile Deployment Toolkit](https://www.youtube.com/watch?v=mXpIRB_7O_M&t=80s)  
-
 -----
 
 ### THE CONCLUSION
