@@ -56,6 +56,10 @@ export SELECTED_TEMPLATE=\"1\"
 
 " > /root/Environment.env
 
+#XXXECHOZZZ
+#XXXYYYZZZ
+#XXXROOTENVZZZ
+
 . /root/Environment.env
 
 
