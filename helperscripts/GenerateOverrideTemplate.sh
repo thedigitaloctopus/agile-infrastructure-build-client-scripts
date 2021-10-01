@@ -124,7 +124,7 @@ then
     do
         value="`/bin/grep "${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
 
-        if (  [ "${value}" != "" ] )
+        if ( [ "`/bin/grep 'NOT REQUIRED' ${overridescript} | /bin/grep "export ${livevariable}="`" = "" ] && [ "${value}" != "" ] ) 
         then
             /bin/echo "############################################################################################"
             /bin/echo "Explanation from the specification regarding this variable:"
@@ -163,3 +163,13 @@ fi
 /bin/echo "value is set correctly for the OS you have chosen to deploy your servers on"
 /bin/echo "You can edit and make changes to this configuration file as you desire but keep it with the same filename to deploy it"
 /bin/echo "######################################################################################################################"
+
+/bin/echo "Now, there is one last step to get your servers up"
+/bin/echo "##################################################"
+/bin/echo "To deploy your configuration. Do the following"
+/bin/echo "Take a copy of the following script ${BUILD_HOME}/templatedconfigurations/"
+/bin/echo "Edit it and populate the variables that it requests at the top of the script making a note of what you set these variables to"
+/bin/echo "Start a VPS machine with your cloudhost and paste the full script you have just edited into the user-data area of the machine"
+/bin/echo "Once the build process has completed use the script ${BUILD_HOME}/helperscripts/CommenceBuild.sh"
+/bin/echo "Use the variable values your remember from above and pass in ${BUILD_HOME}/overridescripts/${CLOUDHOST}${template}override.tmpl for the name of the override script"
+/bin/echo "This will start the build process on your newly deployed VPS machine using your newly generated template"
