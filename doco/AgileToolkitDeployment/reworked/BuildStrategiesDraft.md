@@ -90,7 +90,7 @@ This can be a useful method if you are not too sure about how the scripts work b
 **BUILDMACHINE_PASSWORD**  
 **BUILDMACHINE_SSH_PORT**  
 **LAPTOP_IP**  
-**SSH**
+**SSH**  
 **SELECTED_TEMPLATE**
   
   8. Once you are happy that all the variables are correct copy it in its entirety and paste it into the user-data of a new VPS machine with your cloud provider
