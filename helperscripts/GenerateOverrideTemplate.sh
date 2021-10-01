@@ -167,7 +167,7 @@ fi
 /bin/echo "Now, there is one last step to get your servers up"
 /bin/echo "##################################################"
 /bin/echo "To deploy your configuration. Do the following"
-/bin/echo "Take a copy of the following script ${BUILD_HOME}/templatedconfigurations/"
+/bin/echo "Take a copy of the following script ${BUILD_HOME}/templatedconfigurations/templateoverrides/OverrideScript.sh"
 /bin/echo "Edit it and populate the variables that it requests at the top of the script making a note of what you set these variables to"
 /bin/echo "Start a VPS machine with your cloudhost and paste the full script you have just edited into the user-data area of the machine"
 /bin/echo "Once the build process has completed use the script ${BUILD_HOME}/helperscripts/CommenceBuild.sh"
