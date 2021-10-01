@@ -1,10 +1,10 @@
 There are three basic ways you can build a deployment from the Agile Deployment Toolkit:
 
-##### 1. The Full Build
-##### 2. The Expedited Buikd
-##### 3. The Hardcore Build
+# 1. The Full Build
+# 2. The Expedited Buikd
+# 3. The Hardcore Build
 
-#### THE FULL BUILD
+## THE FULL BUILD
 
 To perform a full build, you need to spin up a secured build machine on your cloudhosting provider. You can do this by using the script: [OverrideScript](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/OverrideScript.sh) and pasting it into the user data area of the VPS machine you are provisioning through your hosting provider's gui system. You need to set the variables:
 
@@ -29,7 +29,7 @@ To perform the full build you need to run:
   
   **${BUILD_HOME}/AgileDeploymentToolkit.sh** on your build machine and then answer the questions.
   
-#### THE EXPEDITED BUILD
+## THE EXPEDITED BUILD
  
   To perform a full build, you need to spin up a secured build machine on your cloudhosting provider. You can do this by using the script: [OverrideScript](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/OverrideScript.sh) and pasting it into the user data area of the VPS machine you are provisioning through your hosting provider's gui system. You need to set the variables:
 
@@ -48,7 +48,7 @@ Once the machine has provisioned, you can ssh onto it from your latop using the 
   
 The Expedited Build involves manually editing a template of your choosing and manually running a shell script to deploy from that template.
 
-#### THE HARDCORE BUILD
+## THE HARDCORE BUILD
   
   1. On your laptop clone the build client scripts for example (or from your fork):
   
