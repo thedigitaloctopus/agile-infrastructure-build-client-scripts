@@ -17,7 +17,7 @@ before pasting it into the user data area of your VPS machine.
 
 Once the machine has provisioned, you can ssh onto it from your latop using the command:
 
-ssh -p ${BUILD_MACHINE_SSH_PORT} ${BUILDMACHINE_USER}@<build-machine-ip>
+**ssh -p ${BUILD_MACHINE_SSH_PORT} ${BUILDMACHINE_USER}@<build-machine-ip>**
 <enter> ${BUILDMACHINE_PASSWORD}
   
 The Full Build involves manually running a script and entering values at the command line. The inputs you give have limited saniy checking on them and is good if you really don't understand how this toolkit works.  Its also good if you want to see what configuration of variables is produced for a particular build configuration which you can review by looking in the ${BUILD_HOME}/buildconfiguration directory of your deployed buildmachine.
