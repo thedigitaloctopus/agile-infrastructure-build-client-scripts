@@ -59,4 +59,4 @@ The Expedited Build involves manually editing a template of your choosing and ma
   
   10. **cd agile-infrastructure-build-client-scripts/logs**
   
-  11. **tail -f build*out* ** to get the build progress
+  11. **tail -f build*out** to get the build progress
