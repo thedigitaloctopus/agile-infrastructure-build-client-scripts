@@ -1,8 +1,8 @@
 There are three basic ways you can build a deployment from the Agile Deployment Toolkit:
 
-1. The Full Build
-2. The Expedited Buikd
-3. The Hardcore Build
+##### 1. The Full Build
+##### 2. The Expedited Buikd
+##### 3. The Hardcore Build
 
 #### THE FULL BUILD
 
