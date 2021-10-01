@@ -10,11 +10,9 @@ export S3_ACCESS_KEY=""  #MANDATORY
 export S3_SECRET_KEY=""  #MANDATORY
 export S3_HOST_BASE="s3.eu-west-1.amazonaws.com"
 export S3_LOCATION="EU" #For AWS, this always needs to be set to your location, for example, "US" or "EU"
-###############The access keys to use when manipulating compute with AWS###############
 export TOKEN="" #NOT REQUIRED
 export ACCESS_KEY=""   #MANDATORY
 export SECRET_KEY=""   #MANDATORY
-###############These variables are cloudflare API key and the email address of your cloudflare account##########################
 export DNS_USERNAME=""  #MANDATORY
 export DNS_SECURITY_KEY=""   #MANDATORY
 export DNS_CHOICE="cloudflare" #MANDATORY
@@ -22,11 +20,7 @@ export CLOUDHOST_EMAIL_ADDRESS="" #MANDATORY
 export BUILDOS="" #MANDATORY one of ubuntu|debian
 export BUILDOS_VERSION="" #MANDATORY one of 20.04|10
 export DEFAULT_USER="" #MANDATORY - this should be "ubuntu" if you are deploying ubuntu and "admin" if you are deploying debian
-###^^^^^^^^^^^^^^^^^^^^^^^^^^^^ESSENTIAL TO REVIEW ALL THE ABOVE PARAMETERS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#################################################################################################################################
-##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
-##########################THESE NEXT VARIABLES ARE RELATED TO THE APPLICATION FUNCTIONING########################################
-#################################################################################################################################
+export BUILD_IDENTIFIER="" #MANDATORY
 export WEBSITE_DISPLAY_NAME="" #MANDATORY
 export WEBSITE_NAME="" #MANDATORY - This is the exact value of the core of your WEBSITE_URL, for example, www.nuocial.org.uk would be nuocial
 export WEBSITE_URL=""  #MANDATORY
@@ -53,9 +47,6 @@ export PRODUCTION="0"
 export DEVELOPMENT="1"
 export BUILD_CHOICE="0"
 export DISABLE_HOURLY="0"
-#################################################################################################################################
-###########################VARIABLES ABOVE HERE YOU WILL NEED TO SET FOR YOUR APPLICATION TO FUNCTION FULLY #####################
-#################################################################################################################################
 export SERVER_TIMEZONE_CONTINENT="Europe"
 export SERVER_TIMEZONE_CITY="London"
 export CLOUDHOST="aws"
@@ -127,5 +118,4 @@ export DRUPAL_VERSION=""
 export JOOMLA_VERSION=""
 export BUILD_HOME=""
 export BUILD_CLIENT_IP=""
-export BUILD_IDENTIFIER=""
 export PUBLIC_KEY_ID=""
