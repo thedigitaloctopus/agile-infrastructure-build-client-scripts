@@ -37,21 +37,22 @@ The Expedited Build involves manually editing a template of your choosing and ma
   
   2. **git clone https://github.com/agile-deployer/agile-infrastructure-build-client-scripts.git**
   
-  3. ** cd agile-infrastructure-build-client-scripts**
+  3. **cd agile-infrastructure-build-client-scripts**
   
-  4. ** /bin/sh ./helperscripts/GenerateOverrideTemplate.sh ** and answer the questions as it asks them 
+  4. **/bin/sh ./helperscripts/GenerateOverrideTemplate.sh** and answer the questions as it asks them 
   
-  5. ** /bin/sh ./helperscripts/GenerateHardcoreUserDataScript.sh ** and answer the questions as it asks them
+  5. **/bin/sh ./helperscripts/GenerateHardcoreUserDataScript.sh** and answer the questions as it asks them
   
-  6. ** cd ${BUILD_HOME}/userdatascripts ** and find the script that you have just generated
+  6. **cd ${BUILD_HOME}/userdatascripts** and find the script that you have just generated
   
   7. Review the script and update the variables at the top of the script:
   
-  **BUILDMACHINE_USER  
-BUILDMACHINE_PASSWORD  
-BUILDMACHINE_SSH_PORT  
-LAPTOP_IP  
-SSH  **
+  **BUILDMACHINE_USER**  
+**BUILDMACHINE_PASSWORD**  
+**BUILDMACHINE_SSH_PORT**  
+**LAPTOP_IP**  
+**SSH**
+  
   8. Once you are happy that all the variables are correct copy it in its entirety and paste it into the user-data of a new VPS machine with your cloud provider
   
   9. **ssh** onto the build machine that you spun up in 8. and do as **"sudo su"** and give your **BUILDMACHINE_PASSWORD**
