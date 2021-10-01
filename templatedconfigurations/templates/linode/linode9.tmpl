@@ -1,20 +1,11 @@
-######################YOU WILL NEED AN LINODE ACCOUNT AND A CLOUDFLARE ACCOUNT FOR THIS TEMPLATE#########################
-######################AS WELL AS AN ACCOUNT WITH A GIT PROVIDER FOR YOUR APPLICATION REPOSITORIES###############################
-######################OPTIONALLY, IF YOU WANT SYSTEM EMAILS, YOU WILL NEED AN SMTP SERVER AVAILABLE#############################
-######################CURRENTLY SUPPORTED ARE, GOOGLE, SENDPULSE AND AMAZON SES#################################################
-######################AS A MINIMUM REVIEW AND SET ALL VARIABLES MARKED "MANDATORY"##############################################
-################################################################################################################################
-###############These two variables are your Linode access and secret keys with authority to manipulate the object store###
 export APPLICATION="wordpress"
 export S3_ACCESS_KEY=""  #MANDATORY
 export S3_SECRET_KEY=""  #MANDATORY
 export S3_HOST_BASE="eu-central-1.linodeobjects.com"
 export S3_LOCATION="US" #For linode, this always needs to be set to "US"
-###############The personal access token to use when manipulating compute with linode###############
 export TOKEN="" #MANDATORY - this personal token needs "account", "images", "IPs", "Linodes" and "Object Store" read and write privieges
 export ACCESS_KEY=""   #NOT REQUIRED
 export SECRET_KEY=""   #NOT REQUIRED
-###############These variables are cloudflare API key and the email address of your cloudflare account##########################
 export DNS_USERNAME=""  #MANDATORY
 export DNS_SECURITY_KEY=""   #MANDATORY
 export DNS_CHOICE="cloudflare" #MANDATORY
@@ -22,11 +13,7 @@ export CLOUDHOST_EMAIL_ADDRESS="" #MANDATORY
 export BUILDOS="" #MANDATORY one of ubuntu|debian
 export BUILDOS_VERSION="" #MANDATORY one of 20.04|10
 export DEFAULT_USER="" #MANDATORY - This should always be 'root' on linode
-###^^^^^^^^^^^^^^^^^^^^^^^^^^^^ESSENTIAL TO REVIEW ALL THE ABOVE PARAMETERS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#################################################################################################################################
-##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
-##########################THESE NEXT VARIABLES ARE RELATED TO THE APPLICATION FUNCTIONING########################################
-#################################################################################################################################
+export BUILD_IDENTIFIER="" #MANDATORY
 export WEBSITE_DISPLAY_NAME="" #MANDATORY
 export WEBSITE_NAME="" #MANDATORY - This is the exact value of the core of your WEBSITE_URL, for example, www.nuocial.org.uk would be nuocial
 export WEBSITE_URL=""  #MANDATORY
@@ -44,9 +31,6 @@ export SNAPSHOT_ID=""  #MANDATORY swap for your own 4 letter code in snapshot na
 export WEBSERVER_IMAGE_ID="" #MANDATORY swap for your own linode-cli images list | grep webserver | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' | /bin/sed 's/private\///g'
 export AUTOSCALER_IMAGE_ID="" #MANDATORY swap for your own linode-cli images list | grep autoscaler | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' | /bin/sed 's/private\///g'
 export DATABASE_IMAGE_ID="" #MANDATORY swap for your own linode-cli images list | grep database | grep ${SNAPSHOT_ID} | /usr/bin/awk '{print $2}' | /bin/sed 's/private\///g' 
-#################################################################################################################################
-###########################VARIABLES ABOVE HERE YOU WILL NEED TO SET FOR YOUR APPLICATION TO FUNCTION FULLY #####################
-#################################################################################################################################
 export SERVER_TIMEZONE_CONTINENT="Europe"
 export SERVER_TIMEZONE_CITY="London"
 export DIRECTORIES_TO_MOUNT="wp-content.uploads"
@@ -132,5 +116,4 @@ export DRUPAL_VERSION=""
 export PUBLIC_KEY_NAME="AGILE_TOOLKIT_PUBLIC_KEY"
 export BUILD_HOME=""
 export BUILD_CLIENT_IP=""
-export BUILD_IDENTIFIER=""
 export PUBLIC_KEY_ID=""
