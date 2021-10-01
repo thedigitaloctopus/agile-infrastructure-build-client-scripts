@@ -35,7 +35,7 @@ The Expedited Build involves manually editing a template of your choosing and ma
   
   1. On your laptop clone the build client scripts for example (or from your fork):
   
-  2. ** git clone https://github.com/agile-deployer/agile-infrastructure-build-client-scripts.git **
+  2. **git clone https://github.com/agile-deployer/agile-infrastructure-build-client-scripts.git**
   
   3. ** cd agile-infrastructure-build-client-scripts**
   
