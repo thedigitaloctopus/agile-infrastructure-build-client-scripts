@@ -19,11 +19,17 @@ Once the machine has provisioned, you can ssh onto it from your latop using the 
   
 The Full Build involves manually running a script and entering values at the command line. The inputs you give have limited saniy checking on them and is good if you really don't understand how this toolkit works.  Its also good if you want to see what configuration of variables is produced for a particular build configuration which you can review by looking in the 
   
-  **${BUILD_HOME}/buildconfiguration**  directory of your deployed buildmachine.
-
+  **${BUILD_HOME}/buildconfiguration**  directory of your deployed buildmachine. This is useful if you wanted to create templates for a particular build configuration which I haven't generated a template for and you need to see what variables are set for use time and again in your hardcore builds. 
+  
+  if you look in **${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}** on your build machine once the build is complete you will see how the variables have been set and use that as a model for how you configure a new template. 
+  
 To perform the full build you need to run:
+
+  **cd agile-infrastructure-build-client-scripts**
   
   **${BUILD_HOME}/AgileDeploymentToolkit.sh** on your build machine and then answer the questions.
+  
+  --------------------------
   
 ## THE EXPEDITED BUILD
  
@@ -42,9 +48,29 @@ Once the machine has provisioned, you can ssh onto it from your latop using the 
 **ssh -p ${BUILD_MACHINE_SSH_PORT} ${BUILDMACHINE_USER}@<build-machine-ip>**
 <enter> ${BUILDMACHINE_PASSWORD}
   
-The Expedited Build involves manually editing a template of your choosing and manually running a shell script to deploy from that template.
+ Its also good if you want to see what configuration of variables is produced for a particular build configuration which you can review by looking in the 
+  
+ **${BUILD_HOME}/buildconfiguration**  directory of your deployed buildmachine. This is useful if you wanted to create templates for a particular build configuration which I haven't generated a template for and you need to see what variables are set for use time and again in your hardcore builds. 
+  
+ if you look in **${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}** on your build machine once the build is complete you will see how the variables have been set and use that as a model for how you configure a new template. 
+  
+**cd agile-infrastructure-build-client-scripts**
+  
+**${BUILD_HOME}/ExpeditedAgileDeploymentToolkit.sh** on your build machine and then answer the questions.
+  
+The expedited build will build directly from the template you select by number in the directory  
+  
+  **${BUILD_HOME}/templatedconfigurations/templates/${cloudhost}**
+  
+With the expedited method, there is no override process what you can do edit the template as it is in your repository **(making sure not to expose any sensitive credentials if your fork is public)** and then your team will simply be able to clone the repository and build off your taylored template as many times as they chose without having to worry about overrides. The Expedited build script will prompt for inputs when needed and there is some sanity checking built in.
+  
+This can be a useful method if you are not too sure about how the scripts work because there is a lot of built in explanation as the script runs, but, it is more involved or slower to use than the hardcore method. 
 
+  ------------------
+  
 ## THE HARDCORE BUILD
+  
+  The hardcore method provides no interaction with you once you start it running. So, you have to set everything up preflight unlike the other two methods. This is by far the quickest way and it may even be the most easy to understand, I am not sure. Below is described the steps you need to go through to launch a hardcore build using the Agile Deployment Toolkit build process. 
   
   1. On your laptop clone the build client scripts for example (or from your fork):
   
