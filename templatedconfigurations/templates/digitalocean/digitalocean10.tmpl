@@ -19,7 +19,9 @@ export DNS_USERNAME="" #MANDATORY - this is your digital ocean email address
 export DNS_SECURITY_KEY=""   #MANDATORY - this is the same value as the TOKEN variable
 export DNS_CHOICE="digitalocean" #MANDATORY
 export CLOUDHOST_EMAIL_ADDRESS="" #MANDATORY
-export DEFAULT_USER="root" ####This should always be 'root' on digital ocean
+export BUILDOS="" #MANDATORY one of ubuntu|debian
+export BUILDOS_VERSION="" #MANDATORY one of 20.04|10
+export DEFAULT_USER="" #MANDATORY - this should be "root"
 ###^^^^^^^^^^^^^^^^^^^^^^^^^^^^ESSENTIAL TO REVIEW ALL THE ABOVE PARAMETERS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #################################################################################################################################
 ##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
