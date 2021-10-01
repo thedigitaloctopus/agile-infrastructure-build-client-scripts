@@ -12,6 +12,7 @@ To perform a full build, you need to spin up a secured build machine on your clo
 **BUILDMACHINE_PASSWORD**  
 **BUILDMACHINE_SSH_PORT**  
 **LAPTOP_IP**
+**SSH**
 
 before pasting it into the user data area of your VPS machine.
 
@@ -30,6 +31,20 @@ To perform the full build you need to run:
   
 #### THE EXPEDITED BUILD
  
+  To perform a full build, you need to spin up a secured build machine on your cloudhosting provider. You can do this by using the script: [OverrideScript](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/OverrideScript.sh) and pasting it into the user data area of the VPS machine you are provisioning through your hosting provider's gui system. You need to set the variables:
+
+**BUILDMACHINE_USER**   
+**BUILDMACHINE_PASSWORD**  
+**BUILDMACHINE_SSH_PORT**  
+**LAPTOP_IP**
+**SSH**
+
+before pasting it into the user data area of your VPS machine.
+
+Once the machine has provisioned, you can ssh onto it from your latop using the command:
+
+**ssh -p ${BUILD_MACHINE_SSH_PORT} ${BUILDMACHINE_USER}@<build-machine-ip>**
+<enter> ${BUILDMACHINE_PASSWORD}
   
 The Expedited Build involves manually editing a template of your choosing and manually running a shell script to deploy from that template.
 
