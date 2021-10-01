@@ -19,7 +19,9 @@ export DNS_USERNAME=""  #MANDATORY
 export DNS_SECURITY_KEY=""   #MANDATORY
 export DNS_CHOICE="cloudflare" #MANDATORY
 export CLOUDHOST_EMAIL_ADDRESS="" #MANDATORY
-export DEFAULT_USER="admin" ####This should always be "ubuntu" for ubuntu and "admin" for debian on AWS
+export BUILDOS="" #MANDATORY one of ubuntu|debian
+export BUILDOS_VERSION="" #MANDATORY one of 20.04|10
+export DEFAULT_USER="" #MANDATORY - this should be "ubuntu" if you are deploying ubuntu and "admin" if you are deploying debian
 ###^^^^^^^^^^^^^^^^^^^^^^^^^^^^ESSENTIAL TO REVIEW ALL THE ABOVE PARAMETERS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #################################################################################################################################
 ##########################VARIABLES ABOVE HERE ARE SYSTEM VARIABLES AND MUST BE SET MANUALLY BEFORE BUILD########################
