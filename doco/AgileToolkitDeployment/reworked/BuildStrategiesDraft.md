@@ -65,6 +65,7 @@ The Expedited Build involves manually editing a template of your choosing and ma
 **BUILDMACHINE_SSH_PORT**  
 **LAPTOP_IP**  
 **SSH**
+**SELECTED_TEMPLATE**
   
   8. Once you are happy that all the variables are correct copy it in its entirety and paste it into the user-data of a new VPS machine with your cloud provider
   
