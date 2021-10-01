@@ -29,8 +29,6 @@ export LAPTOP_IP=""
 /bin/echo "
 #BASE OVERRIDES
 export SSH=\"\" #paste your public key here
-export BUILDOS=\"debian\" #one of ubuntu|debian
-export BUILDOS_VERSION=\"11\" #one of 20.04 22.04|10 11
 
 #################################################################
 #MODIFY THESE VALUES IF YOU ARE DEPLOYING FROM A FORKED REPOSITORY
