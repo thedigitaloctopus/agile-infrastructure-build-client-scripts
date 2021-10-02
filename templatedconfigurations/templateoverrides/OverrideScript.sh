@@ -29,7 +29,7 @@ export LAPTOP_IP=""
 /bin/echo "
 #BASE OVERRIDES
 export SSH=\"\" #paste your public key here
-export SELECTED_TEMPLATE=\"\"
+#export SELECTED_TEMPLATE=\"\" #set if using hardcore build
 #################################################################
 #MODIFY THESE VALUES IF YOU ARE DEPLOYING FROM A FORKED REPOSITORY
 #################################################################
