@@ -1,10 +1,6 @@
 ## AUTHENTICATION
 
-The authentication process for the Agile Deployment Toolkit works as follows.  
-
-First of all, there's one of two options, you will either be following a build process where you provision and secure your own build machine and use, for example, the AgileDeploymentToolkit.sh script to build your servers.  
-
-Or, you might be using the template override script method in which case the script that you pass to the user data part of your build machine will define username password and port for your build client machine as well as the SSH public key. You can find the template override scripts here:  
+The authentication process for the Agile Deployment Toolkit works as follows. You can use the templare override script to get your machine up. 
   
 **https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/tree/master/templatedconfigurations/templateoverrides**  
 
@@ -19,6 +15,7 @@ The very first thing that you must do is change the values of the
 ##### BUILDMACHINE_USER  
 ##### BUILDMACHINE_PASSWORD  
 ##### BUILDMACHINE_SSH_PORT  
+##### LAPTOP_IP
 
 in your template override script which you are going to populate and pass to your build machines userdata.  
 
@@ -30,10 +27,9 @@ These variables, therefore should not be well known and you need to set them in 
 
 With that done, here is the protocol for authentication to the servers that this build kit will build for you:  
 
-1. Change the three variables above to suit you in your template override script (make sure you paste an up to date ssh public key into the first variable (export SSH="") as well).  
+1. Change the variables above to suit you in your template override script (make sure you paste an up to date ssh public key into the first variable (export SSH="") as well).  
 
 2. Paste the whole of your fully populated template override script into the user data of a VPS machine that you have provisioned with your provider and spin it up.  
-
 3. After a couple of minutes, you will be able to SSH onto your build machine using a command such as:  
 
 **ssh -p 1035 agile-deployer@<ip-address-of-build-machine>**
@@ -44,7 +40,7 @@ With that done, here is the protocol for authentication to the servers that this
 
 5. You will then be root  
 
-6. cd /home/${BUILDMACHINE_USER}/agile-deployment*  
+6. **cd /home/${BUILDMACHINE_USER}/agile-deployment** 
 
 7. When you do an /bin/ls from here, you will see a directory helperscripts which you can cd into  
 
