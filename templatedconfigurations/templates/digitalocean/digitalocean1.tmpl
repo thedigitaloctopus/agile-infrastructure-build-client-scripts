@@ -1,5 +1,3 @@
-######################YOU WILL NEED AN DIGITAL OCEAN ACCOUNT AND A CLOUDFLARE ACCOUNT FOR THIS TEMPLATE#########################
-######################AS WELL AS AN ACCOUNT WITH A GIT PROVIDER FOR YOUR APPLICATION REPOSITORIES###############################
 export APPLICATION="wordpress"
 export S3_ACCESS_KEY=""  #MANDATORY
 export S3_SECRET_KEY=""  #MANDATORY
@@ -47,11 +45,11 @@ export SSH_PORT="1035"
 export GATEWAY_GUARDIAN="0"
 export PERSIST_ASSETS_TO_CLOUD="1" #This should only be 0 if your application has a very small number of assets
 export BUILD_CHOICE="1"
-export BASELINE_DB_REPOSITORY="wordydemo-db-baseline"
-export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="wordydemo-webroot-sourcecode-baseline"
-export BUILD_ARCHIVE_CHOICE="baseline"
+export BASELINE_DB_REPOSITORY="wordydemo-db-baseline" #MANDATORY
+export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="wordydemo-webroot-sourcecode-baseline" #MANDATORY
+export BUILD_ARCHIVE_CHOICE="baseline" #MANDATORY
 export APPLICATION_LANGUAGE="PHP"
-export APPLICATION_IDENTIFIER="2"
+export APPLICATION_IDENTIFIER="2" #MANDATORY
 export PHP_VERSION="8.0"
 export REGION=""
 export REGION_ID="lon1"
