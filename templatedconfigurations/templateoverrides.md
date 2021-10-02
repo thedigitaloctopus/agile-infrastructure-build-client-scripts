@@ -22,7 +22,7 @@ and also:
 
 5. Allow you build machine to start and then SSH onto it from your laptop. Assuming you have the private key available that you set the public key to in the SSH variable in 2., you can ssh onto your build machine with a command similar to:
 
-ssh -p ${BUILDMACHINE_SSH_PORT} ${BUILDMACHINE_USER}@<ip address of your VPS machine - obtained from your cloudhosts gui when you started it up>
+**ssh -p ${BUILDMACHINE_SSH_PORT} ${BUILDMACHINE_USER}@<ip address of your VPS machine - obtained from your cloudhosts gui when you started it up>**
 
 5. Issue a command "sudo su" and enter your ${BUILDMACHINE_PASSWORD}
 5. Go to agile-infrastructure-build-client-scripts/logs and tail the logs to see how the build is progressing. 
@@ -30,7 +30,7 @@ ssh -p ${BUILDMACHINE_SSH_PORT} ${BUILDMACHINE_USER}@<ip address of your VPS mac
   
   -----------------------------------
 
-## Method 2 (recommended)
+## Method 2 - Automated Generation (recommended)
 
 1. On your laptop clone the build client scripts for example (or from your fork):
 
@@ -56,6 +56,9 @@ ssh -p ${BUILDMACHINE_SSH_PORT} ${BUILDMACHINE_USER}@<ip address of your VPS mac
 8. Once you are happy that all the variables are correct copy it in its entirety and paste it into the user-data of a new VPS machine with your cloud provider
 
 9. ssh onto the build machine that you spun up in 8. and do as "sudo su" and give your BUILDMACHINE_PASSWORD
+  
+ **ssh -p ${BUILDMACHINE_SSH_PORT} ${BUILDMACHINE_USER}@<ip address of your VPS machine - obtained from your cloudhosts gui when you started it up>**
+
 
 10. cd agile-infrastructure-build-client-scripts/logs
 
