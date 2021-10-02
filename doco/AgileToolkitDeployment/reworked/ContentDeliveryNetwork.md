@@ -28,10 +28,9 @@ If you use cloudflare, you don't need to install a CDN at an application level. 
   
 So, for joomla, you would setup two page rules for the following paths with the cache everything setting set to on for each location:  
 
-So, if you are running a joomla website which has a URL, www.nuocial.org.uk, your images will be located at www.nuocial.org.uk/images and your media at www.nuocial.org.uk/media. So, these are the two locations we are interested in.  
+So, if you are running a joomla website which has a URL, www.nuocial.org.uk, your images will be located at www.nuocial.org.uk/images. So, these are the two locations we are interested in.  
 So, we need to set a page rule for each of these locations with the cache everything value set.  
   
-www.nuocial.org.uk/images  ---- CACHE EVERYTHING  
-www.nuocial.org.uk/media   ---- CACHE EVERYTHING  
+www.nuocial.org.uk/images  ---- CACHE EVERYTHING   
   
 This way, the first time an asset is loaded, it will go all the way to the origin server but from then on it will be cached in Cloudflare cache and retrieved from there which will greatly reduce the load on our webservers and so on. If you clear your cache, then, obviously everything will be reloaded from the origin server fresh.   
