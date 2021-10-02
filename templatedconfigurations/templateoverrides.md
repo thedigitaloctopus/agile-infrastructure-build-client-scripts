@@ -46,12 +46,15 @@ and also:
 
 7 Review the script and update the variables at the top of the script:
 
-#### BUILDMACHINE_USER  
-#### BUILDMACHINE_PASSWORD  
-#### BUILDMACHINE_SSH_PORT  
-#### LAPTOP_IP  
-#### SSH  
-#### SELECTED_TEMPLATE  
+#### BUILDMACHINE_USER  (a user name that will determine the user account on your build machine)
+#### BUILDMACHINE_PASSWORD  (a strong password that will determine a password for your user account on your build machine)
+#### BUILDMACHINE_SSH_PORT  (a port number that will determine the SSH port you will connect to)
+#### LAPTOP_IP    (the ip address of your laptop so that the toolkit can allow your laptop's ip through the firewall)
+
+and also:  
+
+#### SSH  (a public key that matches a private key that you have on your laptop)
+#### SELECTED_TEMPLATE  (the template number that you are overriding) 
 
 8. Once you are happy that all the variables are correct copy it in its entirety and paste it into the user-data of a new VPS machine with your cloud provider
 
