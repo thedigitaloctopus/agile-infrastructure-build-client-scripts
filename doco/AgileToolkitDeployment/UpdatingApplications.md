@@ -5,3 +5,5 @@ If you are in production mode with multiple webservers running, then, when you u
 ESSENTIAL NOTE: application plugins and extensions should not be updated during scaling events. Make sure you have a stable server set before updating your plugins as there's a slight chance of inconsistency if a update is made to the application during a scaling event. 
 
 All active webservers should have been online and resposive for 20 minutes before any application plugins or extensions are updated. 
+
+It is preferable to make your application plugin and extension updates during a lean time for your application, ie, at night. 
