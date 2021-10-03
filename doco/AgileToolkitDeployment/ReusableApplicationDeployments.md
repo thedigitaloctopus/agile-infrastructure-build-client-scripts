@@ -4,13 +4,14 @@ So, if we want to create a reusable application, how do we do it?
 
 1. Make your application reusable by editing or writing the following scripts:
 
-a) On the Buildclient, register your application identifier by modifying the "ApplicationIdentifier.sh" script following the pattern as for the example applications.
-b) For your Webserver and database, modify the scripts under ${HOME}/applicationscripts following the examples that have been given. You can add any additional customisations for your application here also. 
+a) You will need to do some development in your fork of the Agile Deployment Toolkit. If your application type isn't supported then you need to provide an application identifier for that class of application. So, register your application identifier by modifying the **"ApplicationIdentifier.sh"** script following the pattern as for the example applications.
+
+b) For your webserver and database, modify the scripts under **${HOME}/applicationscripts** following the examples that have been given. You can add any additional customisations for your application here also. 
 
 2. Assuming that we want to create a reusable wordpress application, deploy a virgin wordpress instance using the Agile Deployment Toolkit in development mode. Select the APPLICATION_IDENTIFIER, when prompted that you setup in step 1.
 
 3. Develop your application from there until you are happy with it. 
 
-4. Once you have developed your application, you need to baseline it. Please review ApplicationWorkflow.md which contains a description of how to baseline an application
+4. Once you have developed your application, you need to baseline it. Please review **ApplicationWorkflow.md** which contains a description of how to baseline an application
 
-5. Once you application is baselined, anyone with access to it (make sure your code doesn't contain any senstive credentials if you are going to make it public) can deploy from that baseline. 
+5. Once you application is baselined, anyone with access to it (make sure your code doesn't contain any senstive credentials if you are going to make it public) can deploy from that baseline and use the application identifier you have developed for it to adjust the code to make it reusable across deployments. 
