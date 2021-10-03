@@ -58,15 +58,13 @@ do
     status "Please select one based on the application you are installing:" 
     status " 0) No Customisations (Virgin CMS installs of any type)"
     status "---------------------------------------------------------------------"
-    status " 1) Customisations for the Joomla Demo application"
-    status "    Joom Demo baseline repositories are stored in github at the following urls:"
-    status "    Sourcecode: https://github.com/adt-demos/joomdemo-webroot-sourcecode-baseline"
-    status "    Database :  https://github.com/adt-demos/joomdemo-db-baseline"
+    status " 1) Customisations if your application baseline is Joomla based"
     status "---------------------------------------------------------------------"
-    status " 2) Customisations required for the Wordpress 'Wordy Demo'  application"
-    status "    Wordy Demo baseline repositories are stored in github at the following urls:"
-    status "    Sourcecode: https://github.com/adt-demos/wordydemo-webroot-sourcecode-baseline"
-    status "    Database  : https://github.com/adt-demos/wordydemo-db-baseline"
+    status " 2) Customisations if your application baseline is Wordpress based"
+    status "---------------------------------------------------------------------"
+    status " 3) Customisations if your application baseline is Drupal based"
+    status "---------------------------------------------------------------------"
+    status " 4) Customisations if your application baseline is Moodle based"
     status "---------------------------------------------------------------------"
     read response
 done
@@ -77,10 +75,20 @@ APPLICATION_NAME=""
 
 if ( [ "${APPLICATION_IDENTIFIER}" = "1" ] )
 then
-    APPLICATION_NAME="JOOM DEMO APPLICATION"
+    APPLICATION_NAME="JOOMLA BASED APPLICATION"
 fi
 
 if ( [ "${APPLICATION_IDENTIFIER}" = "2" ] )
 then
-    APPLICATION_NAME="WORDY DEMO APPLICATION"
+    APPLICATION_NAME="WORDPRESS BASED APPLICATION"
+fi
+
+if ( [ "${APPLICATION_IDENTIFIER}" = "3" ] )
+then
+    APPLICATION_NAME="DRUPAL BASED APPLICATION"
+fi
+
+if ( [ "${APPLICATION_IDENTIFIER}" = "4" ] )
+then
+    APPLICATION_NAME="MOODLE BASED APPLICATION"
 fi
