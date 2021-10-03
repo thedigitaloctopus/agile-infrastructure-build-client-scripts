@@ -47,6 +47,12 @@ If you are deploying a virgin application, you can set this to "JOOMLA:{latest_v
 
 -----
 
+### APPLICATION_ID
+
+Currently this is 1 for Joomla, 2 for Wordpress, 3 for Drupal and 4 for Moodle
+
+-----
+
 ### S3_ACCESS_KEY 
 ### S3_SECRET_KEY
 
