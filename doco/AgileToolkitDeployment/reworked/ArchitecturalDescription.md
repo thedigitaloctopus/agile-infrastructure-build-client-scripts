@@ -1,4 +1,4 @@
-#### DEVELOPMENT MODE
+### DEVELOPMENT MODE
 
 In development mode, there are three machine types a single webserver and a single database server and a build machine upon which the server build is started.
 The webserver and the database share a configuration directory using s3fs. 
