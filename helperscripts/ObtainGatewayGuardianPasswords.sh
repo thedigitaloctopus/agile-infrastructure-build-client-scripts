@@ -2,7 +2,7 @@
 ######################################################################################################################################################
 # Author: Peter Winter
 # Date  : 13/07/2016
-# Description : This script will connect you to your database(s) via ssh
+# Description : This script will get your gateway guardian passwords
 ######################################################################################################################################################
 # License Agreement:
 # This file is part of The Agile Deployment Toolkit.
@@ -26,4 +26,4 @@ then
     exit
 fi
 
-/bin/sh ./ExecuteOnDatabase.sh "/bin/cat /home/${SERVER_USERNAME}/runtime/credentials/htpasswd_plaintext_history"
+/bin/sh ./ExecuteOnDatabase.sh "/bin/cat /home/\${SERVER_USERNAME}/runtime/credentials/htpasswd_plaintext_history"
