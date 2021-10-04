@@ -13,7 +13,7 @@ and
 and  
     **${BUILD_HOME}/helperscripts/PerformDatabaseBackup.sh**  
     
-    You will need to chose "ALL" as your selection for the periodicities for which you are making backups. This will create backups for the periodicities: HOURLY DAILY WEEKLY MONTHLY BIMONTHLY and it will take quite some time, but, you can be sure then that you can build from any periodicity without a problem. 
+    You will need to chose "ALL" as your selection for the periodicities for which you are making backups. This will create backups for the periodicities: **HOURLY DAILY WEEKLY MONTHLY BIMONTHLY** and it will take quite some time, but, you can be sure then that you can build from any periodicity without a problem. 
     
 4. Once your backups are made in 3, take the site off line (as most likely you built it from a baseline) by shutting down your development mode servers and redeploy from one of the backups you have made in full production mode. The system will then take backups at each periodicity. If you need to update plugins and extensions in your "live" application, the recommendation is to perform the upgrades at night as there is a period of (up to) 5 minutes when the websevers will be out of sync, also, you don't want to update your application during scaling events and so on. 
 
