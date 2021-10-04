@@ -137,6 +137,7 @@ then
         read x
         /bin/echo "You must have a repository of name '${BUILD_IDENTIFIER}-db-baseline' available"
         /bin/echo "Press <enter> when you are sure"
+        identifier="${BUILD_IDENTIFIER}"
         read x
         /bin/echo "OK, ready to create baseline - press enter to confirm"
         read x
