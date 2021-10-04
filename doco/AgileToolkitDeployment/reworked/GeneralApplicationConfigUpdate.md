@@ -4,17 +4,17 @@ Say you are running joomla on 6 webservers.
 
 You can ssh onto one of your webservers and go to 
 
-**${HOME}/runtime**
+**${HOME}/runtime**  
 
 you can then 
 
-**/bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php.updating**
-**vi ${HOME}/runtime/joomla_configuration.php.updating**
+**/bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php.updating**  
+**vi ${HOME}/runtime/joomla_configuration.php.updating**  
 
 Make sure that the configuration is correct or it will take your application offline when you push it.
 
 Then, save the file you have edited and IMMEDIATELY ISSUE BOTH OF THE FOLLOWING COMMANDS TO PUSH IT TO ALL YOUR WEBSERVERS:
 
-**/bin/cp ${HOME}/runtime/joomla_configuration.php.updating ${HOME}/config/joomla_configuration.php**
-**/bin/touch ${HOME}/config/GLOBAL_CONFIG_UPDATE**
-**/bin/rm ${HOME}/runtime/joomla_configuration.php.updating**
+**/bin/cp ${HOME}/runtime/joomla_configuration.php.updating ${HOME}/config/joomla_configuration.php**  
+**/bin/touch ${HOME}/config/GLOBAL_CONFIG_UPDATE**  
+**/bin/rm ${HOME}/runtime/joomla_configuration.php.updating**  
