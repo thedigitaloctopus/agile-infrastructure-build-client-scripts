@@ -106,6 +106,8 @@ SSH_PORT="`/bin/grep SSH_PORT ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BU
 
 /usr/bin/ssh-keygen -f "${HOME}/.ssh/known_hosts" -R [${DB_IP}]:${SSH_PORT} 2>/dev/null
 
+command="`/bin/echo ${command} | /bin/sed "s/\\${SERVER_USERNAME}/${SERVER_USERNAME}/g"`"
+
 if ( [ "${response}" = "1" ] )
 then
     /usr/bin/ssh -o ConnectTimeout=5 -o ConnectionAttempts=2 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${DB_IP} "${command}"
