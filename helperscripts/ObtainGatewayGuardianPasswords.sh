@@ -26,6 +26,4 @@ then
     exit
 fi
 
-export BUILD_HOME="`/bin/cat ../buildconfiguration/buildhome`"
-
-/bin/sh ./ExecuteOnDatabase.sh "/bin/cat /home/XrNLty94sYDQ2G0xkSQX/runtime/credentials/htpasswd_plaintext_history"
+/bin/sh ./ExecuteOnDatabase.sh "/bin/cat /home/${SERVER_USERNAME}/runtime/credentials/htpasswd_plaintext_history"
