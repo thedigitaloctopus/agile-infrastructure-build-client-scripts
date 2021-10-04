@@ -63,6 +63,10 @@ fi
 /bin/echo "Please enter the name of the build of the server you wish to connect with"
 read BUILD_IDENTIFIER
 
+/bin/echo "Please insure you have an empty repository called: ${BUILD_IDENTIFIER}-db-baseline available with your git provider"
+/bin/echo "Press <enter> when you are sure"
+read x
+
 ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh ${token_to_match} ${CLOUDHOST}`"
 
 if ( [ "${ips}" = "" ] )
