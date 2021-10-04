@@ -17,4 +17,4 @@ and
     
 4. Once your backups are made in 3, take the site off line (as most likely you built it from a baseline) by shutting down your development mode servers and redeploy from one of the backups you have made in full production mode. The system will then take backups at each periodicity. If you need to update plugins and extensions in your "live" application, the recommendation is to perform the upgrades at night as there is a period of (up to) 5 minutes when the websevers will be out of sync, also, you don't want to update your application during scaling events and so on. 
 
-Note, you can also make special "manual" backups which means you can take a backup at any time and it will be stored in a repository marked, "manual". 
+**NOTE:** you can also make special "manual" backups which means you can take a backup at any time and it will be stored in a repository marked, "manual". 
