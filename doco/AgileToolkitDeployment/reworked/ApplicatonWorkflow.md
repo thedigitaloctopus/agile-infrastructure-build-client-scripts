@@ -7,7 +7,7 @@
 and  
     **${BUILD_HOME}/helperscripts/PerformDatabaseBaseline.sh** 
     
-    NOTE: It is essential that your APPLICATION_IDENTIFIER is set to 0 when you are making a baseline. You can modify it by executing the following scripts on your webserver machine and the database machine from the build machine:
+    **NOTE:** It is essential that your APPLICATION_IDENTIFIER is set to 0 when you are making a baseline. You can modify it by executing the following scripts on your webserver machine and the database machine from the build machine:
     
     **cd ${BUILD_HOME}/helperscripts/** 
     **./ExecuteOnWebserver.sh "/home/${SERVER_USERNAME}/providerscripts/utilities/StoreConfigValue.sh \"APPLICATIONIDENTIFIER\" \"0\""**
@@ -38,9 +38,9 @@ and
     You can modify it by executing the following scripts on your webserver machine and the database machine from the build machine:
     
     **cd ${BUILD_HOME}/helperscripts/** 
-    **./ExecuteOnWebserver.sh "/home/${SERVER_USERNAME}/providerscripts/utilities/StoreConfigValue.sh \"APPLICATIONIDENTIFIER\" \"0\""**
+    **./ExecuteOnWebserver.sh "/home/${SERVER_USERNAME}/providerscripts/utilities/StoreConfigValue.sh \"APPLICATIONIDENTIFIER\" \"(1|2|3|4)\""**
     
-    Alternatively, you can simply use "ConnectToWebserver.sh" and "ConnectToDatabase.sh" and change the value of "APPLICATIONIDENTIFIER" to "0" in the files:
+    Alternatively, you can simply use "ConnectToWebserver.sh" and "ConnectToDatabase.sh" and change the value of "APPLICATIONIDENTIFIER" to "(1|2|3|4)" in the files:
     
     **/home/${SERVER_USERNAME}/.ssh/webserver_configuration_settings.dat**
     
