@@ -1,6 +1,20 @@
-The normal process for deploying an application would be as follows:
+### APPLICATION DEVELOPMENT WORKFLOW
 
-1. Choose your cloudhost and deploy a virgin copy of your chosen CMS, Wordpress, Joomla, Moodle or Drupal.
-2. Once your virgin CMS is deployed, build your application using the CMS taking baselines of your application as needed to ensure you have backups of it. Once your application is ready, take a final baseline of it. Occasionally redeploy this baseline and update the plugins/extensions it is using and generate a new baseline from the updated code. Take your servers offline and then proceed to step 3. 
-3. Deploy your baseline as a "live site" and run the build machine process to create backups of the baseline, this will create HOURLY,DAILY,WEEKLY,MONTHLY,BIMONTHLY backups of your application as a starting position. Once the backups are complete, take your servers offline.
-4. Redeploy from one of the backups made in 3 as a "full deployment" to enable access to autoscaling features and so on. The sytem will then make periodic backups as your users interact with your website. 
+1. Choose your cloudhost and use the toolkit to deploy a virgin copy of your chosen CMS, Joomla, Wordpress, Moodle or Drupal. 
+2. You can now build your application. Whilst you are building it you will want to create baselines of it. You can create (as per your desire), baselines of your application webroot and application database using the scripts 
+
+    **${BUILD_HOME}/helperscripts/PerformWebsiteBaseline.sh**
+and
+    **${BUILD_HOME}/helperscripts/PerformDatabaseBaseline.sh**
+    
+ 3. Once you get to the point were your application is ready, you can make a final baseline and also make the initial backups which is how you will deploy the "live" sites. To create the backups that are used to deploy the live site, run the scripts:
+
+    **${BUILD_HOME}/helperscripts/PerformWebsiteBackup.sh**
+and
+    **${BUILD_HOME}/helperscripts/PerformDatabaseBackup.sh**
+    
+    You will need to chose "ALL" as your selection for the periodicities for which you are making backups. This will create backups for the periodicities: HOURLY DAILY WEEKLY MONTHLY BIMONTHLY and it will take quite some time, but, you can be sure then that you can build from any periodicity without a problem. 
+    
+4. Once your backups are made in 3, take the site off line (as most likely you built it from a baseline) by shutting down your development mode servers and redeploy from one of the backups you have made in full production mode. The system will then take backups at each periodicity. If you need to update plugins and extensions in your "live" application, the recommendation is to perform the upgrades at night as there is a period of (up to) 5 minutes when the websevers will be out of sync, also, you don't want to update your application during scaling events and so on. 
+
+Note, you can also make special "manual" backups which means you can take a backup at any time and it will be stored in a repository marked, "manual". 
