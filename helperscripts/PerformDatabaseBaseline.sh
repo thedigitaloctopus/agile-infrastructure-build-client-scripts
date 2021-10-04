@@ -20,7 +20,7 @@
 #######################################################################################################
 #set -x
 
-if ( [ ! -f  ./PerformDatabaseBasline.sh ] )
+if ( [ ! -f  ./PerformDatabaseBaseline.sh ] )
 then
     /bin/echo "Sorry, this script has to be run from the helperscripts subdirectory"
     exit
@@ -54,18 +54,11 @@ else
     /bin/echo "Unrecognised  cloudhost. Exiting ...."
     exit
 fi
-
-
-
 /bin/echo "What is the build identifier you want to connect to?"
 /bin/echo "You have these builds to choose from: "
 /bin/ls ${BUILD_HOME}/buildconfiguration/${CLOUDHOST} | /bin/grep -v 'credentials'
 /bin/echo "Please enter the name of the build of the server you wish to connect with"
 read BUILD_IDENTIFIER
-
-/bin/echo "Please insure you have an empty repository called: ${BUILD_IDENTIFIER}-db-baseline available with your git provider"
-/bin/echo "Press <enter> when you are sure"
-read x
 
 ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh ${token_to_match} ${CLOUDHOST}`"
 
@@ -118,7 +111,7 @@ then
         /bin/echo "PRESS THE ENTER KEY IF YOU ARE HAPPY"
         /bin/echo "#############################################"
         read x
-        /bin/echo "You must have a repository of name '<identifier>-db-baseline' available"
+        /bin/echo "You MUST have a repository of name '<identifier>-db-baseline' available"
         /bin/echo "If you haven't got one please create one and then tell me the <identifier> part by entering it below:"
         read identifier
         /bin/echo "OK, ready to create baseline - press enter to confirm"
