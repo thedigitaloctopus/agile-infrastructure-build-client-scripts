@@ -118,10 +118,13 @@ else
     then
         /bin/mkdir -p  ${BUILD_HOME}/hardcoretemplates/${CLOUDHOST}
     fi
-    if ( [ ! -f ${BUILD_HOME}/hardcoretemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl ] )
+    if ( [ -f ${BUILD_HOME}/hardcoretemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl ] )
     then
-        /bin/cp ${templatefile} ${BUILD_HOME}/hardcoretemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl
+        /bin/mv ${BUILD_HOME}/hardcoretemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl ${BUILD_HOME}/hardcoretemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl.$$
     fi
+    
+    /bin/cp ${templatefile} ${BUILD_HOME}/hardcoretemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl
+   
     templatefile="${BUILD_HOME}/hardcoretemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
     
     . ${BUILD_HOME}/templatedconfigurations/OverrideTemplate.sh
