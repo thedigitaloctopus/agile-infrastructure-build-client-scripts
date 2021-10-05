@@ -65,7 +65,7 @@ then
     status "I am defaulting to mariadb. Press <enter> to acknowledge"
     status "################################################################"
     read x
-   # DATABASE_INSTALLATION_TYPE="Maria"
+    DATABASE_INSTALLATION_TYPE="Maria"
 fi
 
 if ( [ "${DATABASE_INSTALLATION_TYPE}" = "Postgres" ] && [ "${APPLICATION}" = "joomla" ] )
