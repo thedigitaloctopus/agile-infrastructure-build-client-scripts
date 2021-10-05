@@ -46,9 +46,9 @@ configure how many webservers are running for different times of day and you can
 18. The Agile Deployment Toolkit supports the following application database:
 
 ##### Joomla 4 using MySQL, MariaDB or Postgresql is supported  
-##### Wordpress using MySQL or MariaDB is supported   
+##### Wordpress using MySQL or MariaDB is supported (Postgres needs some faff with wordpress,but you are welcome to modify the toolkit)   
 ##### Drupal using MySQL, MariaDB or Postgres is supported  
-##### Moodle using MySQL or MariaDB is supported
+##### Moodle using MySQL, MariaDB or Postgres is supported
 
 If you wish to extend the toolkit so that, for example, Moodle is supported using Postgresql, you are more than welcome.
 
