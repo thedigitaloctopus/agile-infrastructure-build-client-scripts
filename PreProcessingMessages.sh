@@ -68,6 +68,16 @@ then
     DATABASE_INSTALLATION_TYPE="Maria"
 fi
 
+if ( [ "${DATABASE_INSTALLATION_TYPE}" = "Postgres" ] && [ "${APPLICATION}" = "moodle" ] )
+then
+    status "################################################################"
+    status "Apologies, but, Wordpress doesn't support the Postgres Database."
+    status "I am defaulting to mariadb. Press <enter> to acknowledge"
+    status "################################################################"
+    read x
+    DATABASE_INSTALLATION_TYPE="Maria"
+fi
+
 if ( [ "${DATABASE_INSTALLATION_TYPE}" = "Postgres" ] && [ "${APPLICATION}" = "joomla" ] )
 then
     status "################################################################"
