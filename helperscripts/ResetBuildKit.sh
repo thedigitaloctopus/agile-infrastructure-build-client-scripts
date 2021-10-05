@@ -56,9 +56,9 @@ then
     /bin/rm -rf ${BUILD_HOME}/keys
 fi
 
-if ( [ -d ${BUILD_HOME}/livetemplates ] )
+if ( [ -d ${BUILD_HOME}/hardcoretemplates ] )
 then
-    /bin/rm -rf ${BUILD_HOME}/livetemplates
+    /bin/rm -rf ${BUILD_HOME}/hardcoretemplates
 fi
 
 if ( [ -d ${BUILD_HOME}/interrogation ] )
