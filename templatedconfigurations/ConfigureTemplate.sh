@@ -170,7 +170,7 @@ else
    # /bin/echo "export NO_AUTOSCALERS=\"${NO_AUTOSCALERS}\"" >> ${templatefile}
 fi
 
-templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
+#templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
 
 /bin/sed -i '/^$/d' ${templatefile}
 
