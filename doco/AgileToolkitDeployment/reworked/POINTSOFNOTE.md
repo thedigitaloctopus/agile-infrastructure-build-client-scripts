@@ -45,3 +45,12 @@ configure how many webservers are running for different times of day and you can
 
 17. When you are setting credentials for your application db during the **DBaaS** deployment process, make sure that the names/values you choose do not appear within you applications sourcecode. For example, a DB username like "admin" will likely appear in your application's sourcecode and when we do our credential switch for you during application redeployment, you will likely get unexpected substitutions going on within you application. This only applies to DBaaS installations when it is up to you to define credentials in most cases. For regular DB installs, we generate DB credentials for you, as you know. During regular database deployments the credentials are automatically generated and so, I have control of that and can make them distinct or random, but, with a DBaaS deployment it is up to you to make the credentials you use unique or non-existent strings with the source code. 
 
+18. The Agile Deployment Toolkit supports the following application database:
+
+##### Joomla 4 using MySQL, MariaDB or Postgresql is supported  
+##### Wordpress using MySQL or MariaDB is supported   
+##### Drupal using MySQL, MariaDB or Postgres is supported  
+##### Moodle using MySQL or MariaDB is supported
+
+If you wish to extend the toolkit so that, for example, Moodle is supported using Postgresql, you are more than welcome.
+
