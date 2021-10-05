@@ -56,6 +56,11 @@ then
     /bin/rm -rf ${BUILD_HOME}/keys
 fi
 
+if ( [ -d ${BUILD_HOME}/livetemplates ] )
+then
+    /bin/rm -rf ${BUILD_HOME}/livetemplates
+fi
+
 if ( [ -d ${BUILD_HOME}/interrogation ] )
 then
     /bin/rm -rf ${BUILD_HOME}/interrogation
