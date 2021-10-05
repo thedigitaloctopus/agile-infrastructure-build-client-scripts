@@ -50,5 +50,3 @@ configure how many webservers are running for different times of day and you can
 ##### Drupal using MySQL, MariaDB or Postgres is supported  
 ##### Moodle using MySQL, MariaDB or Postgres is supported
 
-If you wish to extend the toolkit so that, for example, Moodle is supported using Postgresql, you are more than welcome.
-
