@@ -54,15 +54,6 @@ then
         status "-----------------------------------------"
         templatebasename="`/bin/echo ${template} | /bin/sed 's/\.tmpl//g'`"
         templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${templatebasename}.tmpl"
-        if ( [ ! -d ${BUILD_HOME}/livetemplates/${CLOUDHOST} ] )
-        then
-            /bin/mkdir -p ${BUILD_HOME}/livetemplates/${CLOUDHOST}
-        fi
-        if ( [ ! -f ${BUILD_HOME}/livetemplates/${CLOUDHOST}/${templatebasename}.tmpl ] )
-        then
-            /bin/cp ${templatefile} ${BUILD_HOME}/livetemplates/${CLOUDHOST}/${templatebasename}.tmpl
-        fi
-        templatefile="${BUILD_HOME}/livetemplates/${CLOUDHOST}/${templatebasename}.tmpl"
         templatedescription="`/bin/cat ${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${templatebasename}.description`"
         status ""
         status "Template File: ${templatefile}"
@@ -129,9 +120,9 @@ else
     fi
     if ( [ ! -f ${BUILD_HOME}/livetemplates/${CLOUDHOST}/${templatebasename}.tmpl ] )
     then
-        /bin/cp ${templatefile} ${BUILD_HOME}/livetemplates/${CLOUDHOST}/${templatebasename}.tmpl
+        /bin/cp ${templatefile} ${BUILD_HOME}/livetemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl
     fi
-    templatefile="${BUILD_HOME}/livetemplates/${CLOUDHOST}/${templatebasename}.tmpl"
+    templatefile="${BUILD_HOME}/livetemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
     . ${BUILD_HOME}/templatedconfigurations/OverrideTemplate.sh
     
   #  /bin/sed -i '/BUILDOS=/d' ${templatefile}
