@@ -114,15 +114,15 @@ else
     #template overrides if we are running in hardcore mode
     selectedtemplate="${SELECTED_TEMPLATE}"
     templatefile="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
-    if ( [ ! -d ${BUILD_HOME}/livetemplates/${CLOUDHOST} ] )
+    if ( [ ! -d ${BUILD_HOME}/hardcoretemplates/${CLOUDHOST} ] )
     then
-        /bin/mkdir -p  ${BUILD_HOME}/livetemplates/${CLOUDHOST}
+        /bin/mkdir -p  ${BUILD_HOME}/hardcoretemplates/${CLOUDHOST}
     fi
-    if ( [ ! -f ${BUILD_HOME}/livetemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl ] )
+    if ( [ ! -f ${BUILD_HOME}/hardcoretemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl ] )
     then
-        /bin/cp ${templatefile} ${BUILD_HOME}/livetemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl
+        /bin/cp ${templatefile} ${BUILD_HOME}/hardcoretemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl
     fi
-    templatefile="${BUILD_HOME}/livetemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
+    templatefile="${BUILD_HOME}/hardcoretemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
     
     . ${BUILD_HOME}/templatedconfigurations/OverrideTemplate.sh
     
