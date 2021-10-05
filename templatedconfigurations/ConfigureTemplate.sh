@@ -118,11 +118,12 @@ else
     then
         /bin/mkdir -p  ${BUILD_HOME}/livetemplates/${CLOUDHOST}
     fi
-    if ( [ ! -f ${BUILD_HOME}/livetemplates/${CLOUDHOST}/${templatebasename}.tmpl ] )
+    if ( [ ! -f ${BUILD_HOME}/livetemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl ] )
     then
         /bin/cp ${templatefile} ${BUILD_HOME}/livetemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl
     fi
     templatefile="${BUILD_HOME}/livetemplates/${CLOUDHOST}/${CLOUDHOST}${selectedtemplate}.tmpl"
+    
     . ${BUILD_HOME}/templatedconfigurations/OverrideTemplate.sh
     
   #  /bin/sed -i '/BUILDOS=/d' ${templatefile}
