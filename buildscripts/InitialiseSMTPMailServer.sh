@@ -77,8 +77,6 @@ then
     status "We also need to set up an SMTP provider to send the system status emails through"
     status "If you don't have an account with one of the supported smtp server providers, please set one up first"
     status "Which SMTP provider are you registered with?"
-    status "There's a little trick of aesthetics here. Gmail is free, but mails will be sent with an email address like fred@gmail.com"
-    status "SMTP pulse, for example is not free, but you can register your postmaster@yourdomain.com from your postfix deployment and mails will be personalised to your domain then"
     status "##################################################################################################################################"
     status "Currently, we support 1) SMTP Pulse (www.sendpulse.com) 2) Mailjet (mailjet.com) 3) Amazon (SES)"
     read SYSTEM_EMAIL_PROVIDER
