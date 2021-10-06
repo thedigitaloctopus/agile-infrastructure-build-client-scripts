@@ -1,5 +1,7 @@
 # README #
 
+If you find any issues with this toolkit, please open an issue under "issues" on this repository I would be keen to investigate as there's quite a broad set of test cases for this toolkit and possibly scenarios or combinations which I haven't even thought about that you want to use. 
+
 ### INTRODUCTION
 
 ##### ASSOCIATED WEBSITE: [Code Breakers](www.codebreakers.uk)
