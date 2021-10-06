@@ -21,7 +21,7 @@ With the core of the Agile Deployment Toolkit, it will make use of a set of serv
 The full set of services that are supported by the core of the toolkit and which you can extend in your forks is:
 
 1. For VPS services, one of - Digital Ocean, Linode, Exoscale, Vultr, AWS
-2. For Email services, one of - Amazon SES, Gmail or Sendpulse
+2. For Email services, one of - Amazon SES, Mailjet or Sendpulse
 3. For Git based services, one of - Bitbucket, Github or Gitlab
 4. For DNS services, one of - Cloudflare, Digital Ocean, Exoscale, Linode, Vult, or AWS Route 53 (note, Cloudflare has additional security features which are absent from naked dns services which is why it is probably best practice to use CLoudflare even if there is some extra hassle to set it up which you can find out about here: [Cloudflare DNS](https://community.cloudflare.com/t/step-1-adding-your-domain-to-cloudflare/64309)
 5. For object store services, one of - Digital Ocean Spaces, Exoscale Object Store, Linode Object Store, Vultr Object Store or Amazon S3
