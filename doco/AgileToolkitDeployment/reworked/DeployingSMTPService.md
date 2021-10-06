@@ -6,9 +6,9 @@ For Drupal: /var/www/drupalsmtp
 For Joomla: /var/www/html/configuration.php  
 
 The SMTP service is used to send emails from the deployed applications and also system messages from the deployment infrastructure itself. 
-At the time of writing, I have added 3 SMTP services for a deployer to choose from when making a build. One is www.sendpulse.com and the other is the trusty old gmail www.gmail.com and the 3rd one is Amazon SES
+At the time of writing, I have added 3 SMTP services for a deployer to choose from when making a build. One is www.sendpulse.com and the other mailjet (mailjet.com) and the 3rd one is Amazon SES
 
-To send SMTP mail, the first thing you will need to do is set yourself up an account with your provider of choice. With sendpulse, you have to use an existing email address that you already own. With gmail, you will get a brand new gmail address, if you don't have one already which you can use. 
+To send SMTP mail, the first thing you will need to do is set yourself up an account with your provider of choice. With sendpulse, you have to use an existing email address that you already own. Similarly you will have to sign up for mailjet to use it as your relay. 
 
 Note: If you have deployed a domain specific email server which you can do using iRedmail, so, if your domain is "darren's social network", www.darrensnet.com with emails from mail.darrensnet.com. then with Send Pulse and possibly other providers, if you register with them using your domain specific emails then the source email address will be set to your own domain name. If you use darren@yahoo.com. then that is the address your emails will be sent from telling little about the originator.
 
@@ -36,9 +36,8 @@ If you don't have an account with one of the supported smtp server providers, pl
 
 Which SMTP provider are you registered with?
 
-Currently, we support 1) SMTP Pulse (www.sendpulse.com) 2) Google (gmail) 3) Amazon SES
+Currently, we support 1) SMTP Pulse (www.sendpulse.com) 2) Mailjet (mailjet.com) 3) Amazon SES
 
-There's a little trick of aesthetics here. Gmail is free, but mails will be sent with an email address like fred@gmail.com
 SMTP pulse, for example is not free, but you can register your postmaster@yourdomain.com from your postfix deployment and mails will be personalised to your domain then
 
 1
@@ -52,7 +51,6 @@ notifications@darrensnet.com
 
 Please enter your email address for your SMTP provider
 darren@yahoo.com 
-(This is the email address you used when you registered with your SMTP service provider of choice. If this were gmail, then it would have to be an @gmail address)
 
 Please enter your password for your SMTP provider
 sfhbfr8rxh (This is the password you set for you SMTP provider account)
