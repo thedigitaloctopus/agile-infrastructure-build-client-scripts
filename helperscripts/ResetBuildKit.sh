@@ -51,19 +51,10 @@ if ( [ -d ${BUILD_HOME}/buildconfiguration ] )
 then
     /bin/rm -rf ${BUILD_HOME}/buildconfiguration
 fi
+
 if ( [ -d ${BUILD_HOME}/keys ] )
 then
     /bin/rm -rf ${BUILD_HOME}/keys
-fi
-
-if ( [ -d ${BUILD_HOME}/hardcoretemplates ] )
-then
-    /bin/rm -rf ${BUILD_HOME}/hardcoretemplates
-fi
-
-if ( [ -d ${BUILD_HOME}/interrogation ] )
-then
-    /bin/rm -rf ${BUILD_HOME}/interrogation
 fi
 
 if ( [ -d ${BUILD_HOME}/snapshots ] )
