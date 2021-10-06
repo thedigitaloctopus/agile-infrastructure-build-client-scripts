@@ -80,7 +80,7 @@ then
     status "There's a little trick of aesthetics here. Gmail is free, but mails will be sent with an email address like fred@gmail.com"
     status "SMTP pulse, for example is not free, but you can register your postmaster@yourdomain.com from your postfix deployment and mails will be personalised to your domain then"
     status "##################################################################################################################################"
-    status "Currently, we support 1) SMTP Pulse (www.sendpulse.com) 2) Google (gmail) 3) Amazon (SES)"
+    status "Currently, we support 1) SMTP Pulse (www.sendpulse.com) 2) Mailjet (mailjet.com) 3) Amazon (SES)"
     read SYSTEM_EMAIL_PROVIDER
 
     while ( [ "${SYSTEM_EMAIL_PROVIDER}" = "" ] || [ "`/bin/echo '1 2 3' | /bin/grep ${SYSTEM_EMAIL_PROVIDER}`" = "" ] )
@@ -98,7 +98,7 @@ then
         read SYSTEM_FROMEMAIL_ADDRESS
     done
 
-    status "Please enter your email address or username for your SMTP provider"
+    status "Please enter your email address or username (api key for some providers) for your SMTP provider"
     read SYSTEM_EMAIL_USERNAME
     
     if ( [ "${SYSTEM_EMAIL_PROVIDER}" != "3" ] )
@@ -110,7 +110,7 @@ then
         done
     fi
 
-    status "Please enter your password for your SMTP provider"
+    status "Please enter your password (secret key for some providers) for your SMTP provider"
     read SYSTEM_EMAIL_PASSWORD
 
     export SYSTEM_EMAIL_USERNAME="${SYSTEM_EMAIL_USERNAME}"
