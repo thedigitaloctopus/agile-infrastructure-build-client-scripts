@@ -77,8 +77,8 @@ then
     do
         /bin/rm -r ${BUILD_HOME}/runtimedata/${cloudhost}
         /bin/mkdir ${BUILD_HOME}/runtimedata/${cloudhost}
-        /bin/rm ${BUILD_HOME}/runtimedata/${cloudhost}/ACCESS_KEY 2>/dev/null
-        /bin/rm ${BUILD_HOME}/runtimedata/${cloudhost}/SECRET_KEY 2>/dev/null
+        #/bin/rm ${BUILD_HOME}/runtimedata/${cloudhost}/ACCESS_KEY 2>/dev/null
+       # /bin/rm ${BUILD_HOME}/runtimedata/${cloudhost}/SECRET_KEY 2>/dev/null
         /bin/rm ${HOME}/.cloudstack.ini 2>/dev/null
         status "Couldn't find valid authentication keys for Exoscale"
         status ""
@@ -103,16 +103,20 @@ then
         done
 
         /bin/mkdir -p ${BUILD_HOME}/runtimedata/${cloudhost}
-
-        /bin/echo "${ACCESS_KEY}" > ${BUILD_HOME}/runtimedata/${cloudhost}/ACCESS_KEY
-        /bin/echo "${SECRET_KEY}" > ${BUILD_HOME}/runtimedata/${cloudhost}/SECRET_KEY
-        /bin/echo "[cloudstack]
+	
+        if ( [ "${ACCESS_KEY}" != "" ] && [ "${SECRET_KEY}" != "" ] )
+	then
+            /bin/echo "${ACCESS_KEY}" > ${BUILD_HOME}/runtimedata/${cloudhost}/ACCESS_KEY
+            /bin/echo "${SECRET_KEY}" > ${BUILD_HOME}/runtimedata/${cloudhost}/SECRET_KEY
+            /bin/echo "[cloudstack]
 endpoint = https://api.exoscale.ch/compute
 key = ${ACCESS_KEY}
 secret = ${SECRET_KEY}" > ${HOME}/.cloudstack.ini
-        /bin/chown ${USER} ${HOME}/.cloudstack.ini
-        /bin/chmod 400 ${HOME}/.cloudstack.ini
-        /usr/local/bin/cs listVirtualMachines
+            /bin/chown ${USER} ${HOME}/.cloudstack.ini
+            /bin/chmod 400 ${HOME}/.cloudstack.ini
+        fi
+	
+	/usr/local/bin/cs listVirtualMachines
     done
 fi
 if ( [ "${cloudhost}" = "linode" ] )
