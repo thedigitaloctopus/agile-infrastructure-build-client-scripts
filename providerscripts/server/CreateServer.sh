@@ -73,6 +73,12 @@ then
    zone_name="`/usr/local/bin/cs listZones | jq --arg tmp_zone_id "${zone_id}" '(.zone[] | select(.id == $tmp_zone_id ) | .name)' | /bin/sed 's/"//g'`"
    private_network_id="`/usr/local/bin/cs listNetworks | jq --arg tmp_zone_id "${zone_id}" --arg tmp_zonename "${zone_name}" '(.network[] | select(.zonename == $tmp_zonename and .name == "adt" and .zoneid == $tmp_zone_id ) | .id)' | /bin/sed 's/"//g'`"
     
+   while ( [ "${private_network_id}" = "" ] )
+   do
+       private_network_id="`/usr/local/bin/cs listNetworks | jq --arg tmp_zone_id "${zone_id}" --arg tmp_zonename "${zone_name}" '(.network[] | select(.zonename == $tmp_zonename and .name == "adt" and .zoneid == $tmp_zone_id ) | .id)' | /bin/sed 's/"//g'`"
+       /bin/sleep 5
+   done
+   
     if ( [ "${private_network_id}" = "" ] )
     then
         network_offering_id="`/usr/local/bin/cs listNetworkOfferings | jq '(.networkoffering[] | select(.name == "PrivNet" and .state == "Enabled" and .guestiptype == "Isolated" )  | .id)' | /bin/sed 's/"//g'`"
