@@ -39,7 +39,7 @@ To baseline an application follow these steps
 	 
 	 check in your git repository that your baselined sourcecode has been generated correctly
 	 
-    ##### sh PerformDatabaseBaseine.sh
+    ##### sh PerformDatabaseBaseline.sh
 	 
 	 enter **<baseline_name>** for the identifier, all other questions should be self explanatory
 	 
@@ -51,9 +51,25 @@ To baseline an application follow these steps
 
 ##### DEPLOYING FROM A BASELINE
 
+Obviously to deploy from a baseline you need a pair of baselined repositories as described above. Presuming that:
+
+When youi are deploying from a baseline using the Expedited or the Full Build just answering the questions should keep you on track.
+
+If you are deploying from a baseline using the hardcore build method, then, you need to be interested in the following parameters:
+
+**BUILD_CHOICE="1"** Setting this to 1 informs the toolkit that you are using a baseline  
+**BUILD_ARCHIVE_CHOICE="baseline"** This also needs to be set (for different reasons) to "baseline"
+**export BASELINE_DB_REPOSITORY="<identifier>-db-baseline"** This needs to be set to the name of your database baseline repository
+**export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="<identifier>-webroot-sourcecode-baseline"** This needs to be set to the name of your website baseline repository
+**export DIRECTORIES_TO_MOUNT="wp-content.uploads"** You need to mention which assets directory need to be mounted from the object store (the example here is wordpress)
+**export APPLICATION_IDENTIFIER="2"**  This needs to be set to 1 for joomla, 2 for wordpress, 3 for drupal or 4 for moodle
+**export SELECTED_TEMPLATE=\"3\"** This need to be set to 2 for joomla 3 for wordpress 4 for drupal and 5 for moodle
+	
+You can refer to the specification for more detail.
+
 ------------------------------------------------------------------------------------------------------
 
-##### EXPLAINING BACKUP PERIODICITY
+##### BACKUP PERIODICITY
 
 The backup periodicity is as follows:
 
@@ -71,7 +87,7 @@ There is a special periodicity available on the build machine which is "all" and
 
 ---------------------------------------------------------------------------------------------------------
 
-##### EXPLANATION OF HOW BACKUPS ARE MADE FROM CRON
+##### HOW BACKUPS ARE MADE FROM CRON
 
 The backups are created by calling the script
 
@@ -82,7 +98,7 @@ Similarly for the database machine as well.
 
 ---------------------------------------------------------------------------------------------------------
 
-##### EXPLAIN MANUAL and SHUTDOWN BACKUPS
+##### MANUAL and SHUTDOWN BACKUPS
 
 There are two special periodicities, "manual and shutdown".
 
@@ -92,7 +108,7 @@ The shutdown periodicity is a special case such that if a webserver is being shu
 
 -----------------------------------------------------------------------------------------------------------
 
-##### EXPLAIN SWITCH OFF HOURLY BACKUPS
+##### SWITCH OFF HOURLY BACKUPS
 
 When I was using AWS I noticed I was racking up quite a bill due to my writing of hourly backups to an external git provider. It wasn't cripplingly high cost, although I am very poor, so I had to take note. So, what I did was to provide an option to switch off hourly backups. Now I don't know whether I was getting a bill because of how things were configured or whether it was just considered "data out" and therefore billable. With all the other providers I didn't have this problem, but, this is there just to let you know that there is a configuration switch such that you can switch off hourly backups if you need to and save a few quid. Your base periodicity will then be daily or once every 24 hours which should be 24 times less expensive. 
 
