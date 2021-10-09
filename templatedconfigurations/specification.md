@@ -47,7 +47,7 @@ If you are deploying a virgin application, you can set this to "JOOMLA:{latest_v
 
 -----
 
-### APPLICATION_ID
+### APPLICATION_IDENTIFIER
 
 Currently this is 1 for Joomla, 2 for Wordpress, 3 for Drupal and 4 for Moodle
 
