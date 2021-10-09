@@ -138,6 +138,6 @@ So ordinarily if your application users are going to be generating assets you wa
 
 -------------------------------------------------------------------------------------------------------------
 
-###### EXPLAIN SUPERSAFE BACKUPS
+###### SUPERSAFE BACKUPS
 
 The authoritative backups that are made for your application are stored in git repositories. However, if you switch on "super safe backups", then, a copy of your backups will also be written to your datastore. This gives you two sets of backups one in your git repositories and one in your datastore. This is common advise, backup and backup again. In other words, under normal operation within a week of running your website, you will have 2 hourly backups, one with your git provider and one in your datastore, you will have 2 daily backups, one with your git provider and one with your datastore and you will have 2 weekly backups, one with your git provider and one with your datastore. This is quite a few backups which you can fall back on and, of course, the weekly backups will be a week old but losing a weeks worth is better than losing it entirely. 
