@@ -58,12 +58,12 @@ When youi are deploying from a baseline using the Expedited or the Full Build ju
 If you are deploying from a baseline using the hardcore build method, then, you need to be interested in the following parameters:
 
 **BUILD_CHOICE="1"** Setting this to 1 informs the toolkit that you are using a baseline  
-**BUILD_ARCHIVE_CHOICE="baseline"** This also needs to be set (for different reasons) to "baseline"
-**export BASELINE_DB_REPOSITORY="<identifier>-db-baseline"** This needs to be set to the name of your database baseline repository
-**export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="<identifier>-webroot-sourcecode-baseline"** This needs to be set to the name of your website baseline repository
-**export DIRECTORIES_TO_MOUNT="wp-content.uploads"** You need to mention which assets directory need to be mounted from the object store (the example here is wordpress)
-**export APPLICATION_IDENTIFIER="2"**  This needs to be set to 1 for joomla, 2 for wordpress, 3 for drupal or 4 for moodle
-**export SELECTED_TEMPLATE="3"** This need to be set to 2 for joomla 3 for wordpress 4 for drupal and 5 for moodle
+**BUILD_ARCHIVE_CHOICE="baseline"** This also needs to be set (for different reasons) to "baseline"  
+**export BASELINE_DB_REPOSITORY="<identifier>-db-baseline"** This needs to be set to the name of your database baseline repository  
+**export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="<identifier>-webroot-sourcecode-baseline"** This needs to be set to the name of your website baseline repository  
+**export DIRECTORIES_TO_MOUNT="wp-content.uploads"** You need to mention which assets directory need to be mounted from the object store (the example here is wordpress)  
+**export APPLICATION_IDENTIFIER="2"**  This needs to be set to 1 for joomla, 2 for wordpress, 3 for drupal or 4 for moodle  
+**export SELECTED_TEMPLATE="3"** This need to be set to 2 for joomla 3 for wordpress 4 for drupal and 5 for moodle  
 	
 You can refer to the specification for more detail.
 
@@ -118,16 +118,16 @@ When I was using AWS I noticed I was racking up quite a bill due to my writing o
 	
 	To deploy from a backup, you can answer the questions appropriately during an expedited or full build, but, if you are using an hardcore build, then, you need to set the following parameters:
 
-**APPLICATION="wordpress"** - This needs to be either joomla, wordpress, drupal or moodle
-**BUILD_CHOICE="3"** - set this to 2 for hourly, 3 for daily, 4 for weekly, 5 for monthly, 6 for bimonthly
-**BUILD_ARCHIVE_CHOICE="daily"** this can be "hourly", "daily", "weekly", "monthly", or  "bimonthly"
-**DIRECTORIES_TO_MOUNT="wp-content.uploads"** Set here which directories to mount (this example is wordpress)
-**PRODUCTION="1"** set this to 1 for production 0 for development
-**DEVELOPMENT="0"** set this to 1 for development and 0 for production
-**NUMBER_WS="1"** This says how many webservers you want to build to start off with. Once built the autoscaling mechanism will kick in if you are in production and will adjust the number of webservers accordingly. 
-**APPLICATION_IDENTIFIER="2"** 1 for joomla, 2 for wordpress, 3 for drupal, 4 for moodle
-**SELECTED_TEMPLATE="3"** the template number available for your cloudhost that you are basing your build on and overriding with these values. 
-**NO_AUTOSCALERS="2"** The numnber of autoscalers to deploy. This means faster upscaling and downscaling and is also more resilient in case of failures. 
+**APPLICATION="wordpress"** - This needs to be either joomla, wordpress, drupal or moodle  
+**BUILD_CHOICE="3"** - set this to 2 for hourly, 3 for daily, 4 for weekly, 5 for monthly, 6 for bimonthly  
+**BUILD_ARCHIVE_CHOICE="daily"** this can be "hourly", "daily", "weekly", "monthly", or  "bimonthly"  
+**DIRECTORIES_TO_MOUNT="wp-content.uploads"** Set here which directories to mount (this example is wordpress)  
+**PRODUCTION="1"** set this to 1 for production 0 for development  
+**DEVELOPMENT="0"** set this to 1 for development and 0 for production  
+**NUMBER_WS="1"** This says how many webservers you want to build to start off with. Once built the autoscaling mechanism will kick in if you are in production and will adjust the number of webservers accordingly.  
+**APPLICATION_IDENTIFIER="2"** 1 for joomla, 2 for wordpress, 3 for drupal, 4 for moodle  
+**SELECTED_TEMPLATE="3"** the template number available for your cloudhost that you are basing your build on and overriding with these values.  
+**NO_AUTOSCALERS="2"** The numnber of autoscalers to deploy. This means faster upscaling and downscaling and is also more resilient in case of failures.  
 
 -------------------------------------------------------------------------------------------------------------
 
