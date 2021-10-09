@@ -94,7 +94,7 @@ done
 read response
 
 
-/bin/echo "Which periodicity of backup do you want to make, 1) HOURLY 2)DAILY 3) WEEKLY 4)MONTHLY 5)BIMONTHLY"
+/bin/echo "Which periodicity of backup do you want to make, 1) HOURLY 2)DAILY 3) WEEKLY 4)MONTHLY 5)BIMONTHLY 6)MANUAL 7)ALL"
 /bin/echo "Please enter one of 1,2,3,4,5,6,7"
 read periodicity
 
