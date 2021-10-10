@@ -1,5 +1,5 @@
 You have the choice to build certain compoenents of the toolkit from source or from the regular repositories. 
-The advantage of building from source is that it gives you more control, the disadvantage is that it is more complex and there is more that might go wrong. 
+The advantage of building from source is that it gives you more control and you can use the very latest versions of software that the repos haven't caught up with yet which can be more secure. The disadvantage is that it is more complex and there is more that might go wrong. 
 
 In order to configure how you want each eligible component to be built you need to edit the file ${BUILD_HOME}/buiddescriptors/buildstyles.dat in your fork.
 
