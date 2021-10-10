@@ -140,6 +140,9 @@ status "Just giving the servers a little bit of time to complete their internal 
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /bin/touch /home/${SERVER_USER}/config/INSTALLEDSUCCESSFULLY"
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /bin/touch /home/${SERVER_USER}/runtime/INSTALLEDSUCCESSFULLY"
 
+#Switch on the sync tunnel
+/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /bin/touch /home/${SERVER_USER}/config/ENABLESYNCTUNNEL"
+
 status "Build process fully complete"
 
 ############################################################################################
