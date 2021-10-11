@@ -297,7 +297,7 @@ fi
 status ""
 status ""
 
-BACKUP_PASSWORD="`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-8};echo;`"
+BACKUP_PASSWORD="`/bin/cat /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-8};echo;`"
 status "###############################################################################################"
 status "YOUR BACKUP PASSWORD IS SET TO: ${BACKUP_PASSWORD} FOR THIS BUILD, PLEASE MAKE A NOTE OF IT"
 status "###############################################################################################"
