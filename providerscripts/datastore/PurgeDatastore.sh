@@ -31,9 +31,9 @@ then
         /usr/bin/s3cmd --recursive --force del s3://${config_bucket}
     fi
     
-    /bin/touch /tmp/REFRESH_MOUNT
+   # /bin/touch /tmp/REFRESH_MOUNT
     
-    /usr/bin/s3cmd put /tmp/REFRESH_MOUNT s3://${config_bucket}
+   # /usr/bin/s3cmd put /tmp/REFRESH_MOUNT s3://${config_bucket}
   
     location="`/usr/bin/s3cmd info s3://${config_bucket} | /bin/grep "Location" | /usr/bin/awk '{print $NF}'`"
 
