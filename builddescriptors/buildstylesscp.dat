@@ -21,6 +21,7 @@
 # APACHE:source
 # APACHE:repo
 # APACHE:source:modsecurity
+# APACHE:source:modsecurity:modevasive
 # APACHE:repo:modsecurity
 # If you are building for lighttpd you can select one of:
 # LIGHTTPD:source
