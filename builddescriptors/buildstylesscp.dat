@@ -17,6 +17,7 @@
 # NGINX:repo
 # NGINX:source:modsecurity
 # NGINX:repo:modsecurity
+#(NGINX is configured to have similar functionality to mod_evasive of apache by default)
 # If you are building for APACHE you can select one of:
 # APACHE:source
 # APACHE:repo
@@ -44,7 +45,7 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################################
 ###############################################################################################
-NGINX:source:modsecurity
+NGINX:repo:modsecurity
 APACHE:source:modsecurity:modevasive
 LIGHTTPD:source
 POSTGRES:repo
