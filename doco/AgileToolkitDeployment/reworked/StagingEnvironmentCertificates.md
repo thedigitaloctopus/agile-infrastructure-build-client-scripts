@@ -7,7 +7,7 @@ So, if you are in development mode and you are rebuilding several times, if you 
 won't be able to issue new ones for a set time. By default, therefore, when in development mode, this toolkit uses staging certificates with the associated error message.
 If you want to change this so that you get full certificates for the development builds as well as the production builds, you can modify the file:
 
-${BUILD_HOME}/providerscripts/server/ObtainSSLCertificate.sh
+**${BUILD_HOME}/providerscripts/server/ObtainSSLCertificate.sh**
 
 and modify the lines:
 
