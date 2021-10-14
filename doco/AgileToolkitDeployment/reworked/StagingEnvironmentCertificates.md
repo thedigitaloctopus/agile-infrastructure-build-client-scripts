@@ -7,5 +7,14 @@ So, if you are in development mode and you are rebuilding several times, if you 
 won't be able to issue new ones for a set time. By default, therefore, when in development mode, this toolkit uses staging certificates with the associated error message.
 If you want to change this so that you get full certificates for the development builds as well as the production builds, you can modify the file:
 
+${BUILD_HOME}/providerscripts/server/ObtainSSLCertificate.sh
 
-in your fork. 
+and modify the lines:
+
+**command="/usr/bin/lego --email="${DNS_USERNAME}" --server=https://acme-staging-v02.api.letsencrypt.org/directory --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"**
+
+to be
+
+**command="/usr/bin/lego --email="${DNS_USERNAME}" --domains="${WEBSITE_URL}" --dns="${DNS_CHOICE}" --dns-timeout=120 --accept-tos run"**
+
+in your fork. This will stop the certificate being issued from the staging server. 
