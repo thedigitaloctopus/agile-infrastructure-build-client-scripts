@@ -201,5 +201,50 @@ then
 elif ( [ "${choice}" = "4" ] )
 then
     DNS_CHOICE="linode"
+    
+    /bin/mkdir -p ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials > /dev/null
+
+    if ( [ ! -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials/DNSSECURITYKEY ] )
+    then
+       status "#####################################################################################################"
+       status "NOTE: Your DNS access key is the same a personal acccess token for linode with domain manipulation rights"
+       status "#####################################################################################################"
+       status "Please input your linode access token"
+       read DNS_SECURITY_KEY
+       /bin/echo ${DNS_SECURITY_KEY} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials/DNSSECURITYKEY
+       DNS_SECURITY_KEY="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials/DNSSECURITYKEY`"
+    else
+       DNS_SECURITY_KEY="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials/DNSSECURITYKEY`"
+       status "Have found an access token stored from a previous build for your linode account"
+       status "It is set to: ${DNS_SECURITY_KEY}"
+       status "Please enter Y/y if this is a correct access key"
+       read answer
+       if ( [ "`/bin/echo "${answer}" | /bin/grep 'y'`" = "" ]  && [ "`/bin/echo "${answer}" | /bin/grep 'Y'`" = "" ] )
+       then
+           status "So, please input the access token of your linode account"
+           read DNS_SECURITY_KEY
+           /bin/echo "${DNS_SECURITY_KEY}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials/DNSSECURITYKEY
+       fi
+   fi
+
+    if ( [ ! -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials/DNSUSERNAME ] )
+    then
+        status "Please input your Linode Account Email Address"
+        read DNS_USERNAME
+        /bin/echo ${DNS_USERNAME} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials/DNSUSERNAME
+        DNS_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials/DNSUSERNAME`"
+    else
+        DNS_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials/DNSUSERNAME`"
+        status "Have found an email address stored from a previous build for your linode account"
+        status "It is set to: ${DNS_USERNAME}"
+        status "Please enter Y/y if this is a correct email address"
+        read answer
+        if ( [ "`/bin/echo "${answer}" | /bin/grep 'y'`" = "" ]  && [ "`/bin/echo "${answer}" | /bin/grep 'Y'`" = "" ] )
+        then
+            status "So, please input the access email address of your Linode account"
+            read DNS_USERNAME
+            /bin/echo "${DNS_USERNAME}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials/DNSUSERNAME
+        fi
+    fi
 fi
 fi
