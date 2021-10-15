@@ -51,5 +51,13 @@ else
        # /usr/bin/curl -H "X-DNS-Token: ${apikey}" -H 'Accept: application/json' -H 'Content-Type: application/json' -d "{\"domain\":{\"name\":\"${websiteurl}\"}}" -X POST https://api.exoscale.com/dns/v1/domains 1>/dev/null 2>/dev/null
     fi
     
-
+    email="${1}"
+    domainurl="`/bin/echo ${3} | /usr/bin/cut -d'.' -f2-`"
+    dns="${4}"
+    
+    if ( [ "${dns}" = "linode" ] )
+    then
+        /usr/local/bin/linode-cli domains create --type master --domain ${domainurl} --soa_email ${email}
+    fi
+    
 fi
