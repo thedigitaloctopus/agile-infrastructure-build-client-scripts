@@ -18,18 +18,7 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 ################################################################################
-set -x
-
-websiteurl="${4}"
-domainurl="`/bin/echo ${4} | /usr/bin/cut -d'.' -f2-`"
-subdomain="`/bin/echo ${4} | /usr/bin/awk -F'.' '{print $1}'`"
-ip="${5}"
-dns="${7}"
-
-if ( [ "${dns}" = "digitalocean" ] )
-then
-    /usr/local/bin/doctl compute domain records create --record-type A --record-name ${subdomain} --record-data ${ip}  --record-ttl 120 ${domainurl}
-fi
+#set -x
 
 zoneid="${1}"
 email="${2}"
@@ -44,6 +33,17 @@ if ( [ "${dns}" = "cloudflare" ] )
 then
     #This is the raw command to add a DNS record the the cloudflare dns
     /usr/bin/curl -X POST "https://api.cloudflare.com/client/v4/zones/${zoneid}/dns_records" -H "X-Auth-Email: ${email}" -H "X-Auth-Key: ${authkey}" -H "Content-Type: application/json" --data "{\"type\":\"A\",\"name\":\"${websiteurl}\",\"content\":\"${ip}\",\"ttl\":120,\"proxiable\":true,\"proxied\":${proxied},\"ttl\":120}"
+fi
+
+websiteurl="${4}"
+domainurl="`/bin/echo ${4} | /usr/bin/cut -d'.' -f2-`"
+subdomain="`/bin/echo ${4} | /usr/bin/awk -F'.' '{print $1}'`"
+ip="${5}"
+dns="${7}"
+
+if ( [ "${dns}" = "digitalocean" ] )
+then
+    /usr/local/bin/doctl compute domain records create --record-type A --record-name ${subdomain} --record-data ${ip}  --record-ttl 120 ${domainurl}
 fi
 
 authkey="${3}"
