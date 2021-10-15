@@ -27,7 +27,7 @@ status ""
 status "#####################################################################################################"
 status "#####Which DNS provider tech would you like to use for you website/application                  #####"
 status "#####We currently support 0: None 1: Cloudflare 2: Digital Ocean                                #####"
-status "#####                     3: Exoscale                                                           #####"
+status "#####                     3: Exoscale 4:Linode                                                  #####"
 status "#####################################################################################################"
 status "Please select a DNS provider (0|1|2|3|4)"
 read choice
@@ -158,10 +158,6 @@ then
     if ( [ ! -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-exoscale-credentials/DNSSECURITYKEY ] )
     then
        status "#####################################################################################################"
-       status "We also need the access key for your exoscale account. You can either request this from the domain owner"
-       status "or if you are the domain owner, you can find it by authenticating to your digitalocean account, clicking "
-       status "on your name at the top right and then clicking on 'Account Settings and you should find the access key "
-       status "there and copy and paste it below"
        status "NOTE: Your DNS access key is a composite of your two exoscale keys with dns access, the access key and the secret key"
        status "Please enter these keys here as follows <exoscale dns access key>:<exoscale dns secret key>"
        status "#####################################################################################################"
@@ -202,4 +198,8 @@ then
             /bin/echo "${DNS_USERNAME}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-exoscale-credentials/DNSUSERNAME
         fi
     fi
+elif ( [ "${choice}" = "4" ] )
+then
+    DNS_CHOICE="linode"
+fi
 fi
