@@ -24,12 +24,15 @@
 #If you have any pre-processing messages to add, you can add them here. These messages will be displayed before the build
 #truly gets going.
 
-status "############################################################################################################################################"
-status "If your DNS service provider uses any kind of DOS or DDOS detection, then, if you want system monitoring to work correctly, you will have to"
-status "Whitelist your Autoscaler's IP address with your DNS service provider"
-status "Press <enter> to acknowledge this"
-status "############################################################################################################################################"
-read response
+if ( [ "${DEVELOPMENT}" = "0" ] )
+then
+    status "############################################################################################################################################"
+    status "If your DNS service provider uses any kind of DOS or DDOS detection, then, if you want system monitoring to work correctly, you will have to"
+    status "Whitelist your Autoscaler's IP address with your DNS service provider"
+    status "Press <enter> to acknowledge this"
+    status "############################################################################################################################################"
+    read response
+fi
 
 if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
