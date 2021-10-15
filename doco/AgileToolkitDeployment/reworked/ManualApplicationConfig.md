@@ -1,8 +1,12 @@
-If you want to globally update your applications configuration settings when it is deployed with multiple webservers in production mode, you can ssh onto any webserver using the helperscripts on the build client and update the configuration file that you find in the config directory on the webserver, for example in the case of wordpress:
+If you want to globally update your applications configuration settings when it is deployed with multiple webservers in production mode, you can ssh onto any webserver using the helperscripts on the build client and update the configuration file that you find in the config directory on the webserver, for example in the case of wordpress you can update the machine you are on by editing one of the following files and waiting for a minute:
 
-${HOME}/config/wordpress_config.php
+**${HOME}/runtime/wordpress_config.php**
+**/var/www/html/configuration.php**
 
-Once you have updated your configuration, you need to tell the toolkit to push the changes out to the configuration files of each webserver. 
-You can do that with precisely the following command:
+To update the configuration for your application on all of your webservers, VERY CAREFULLY, if your configuration settings are wrong it will hose your whole site,
 
-/bin/touch ${HOME}/config/GLOBAL_CONFIG_UPDATE
+Edit: **${HOME}/config/wordpress_config.php** and make your changes
+
+then issue the command: 
+
+**/bin/touch ${HOME}/config/GLOBAL_CONFIG_UPDATE**
