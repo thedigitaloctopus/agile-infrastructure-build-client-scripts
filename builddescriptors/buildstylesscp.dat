@@ -45,7 +45,7 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################################
 ###############################################################################################
-NGINX:repo:modsecurity
-APACHE:source:modsecurity:modevasive
-LIGHTTPD:source
-POSTGRES:source
+NGINX:repo
+APACHE:repo
+LIGHTTPD:repo
+POSTGRES:repo
