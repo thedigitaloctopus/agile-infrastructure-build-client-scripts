@@ -268,17 +268,17 @@ fi
 
 if ( [ "${DNS_CHOICE}" = "linode" ] )
 then
-    LINODE_API_KEY="`/bin/echo ${DNS_SECURITY_KEY} | /usr/bin/awk -F':' '{print $1}'`"
+    LINODE_TOKEN="`/bin/echo ${DNS_SECURITY_KEY} | /usr/bin/awk -F':' '{print $1}'`"
 
     #For production
     if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
     then
-        command="LINODE_API_KEY=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
+        command="LINODE_TOKEN=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
     fi
     
     if ( [ "${PRODUCTION}" = "0" ] && [ "${DEVELOPMENT}" = "1" ] )
     then
-        command="LINODE_API_KEY=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
+        command="LINODE_TOKEN=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
     fi
     
     if ( [ "${HARDCORE}" = "1" ] )
@@ -287,16 +287,16 @@ then
         ###############UNCOMMENT THIS, COMMENTING OUT IS TEMPORARY
       #  if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
       #  then
-      #      command="LINODE_API_KEY=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
+      #      command="LINODE_TOKEN=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
       #  fi
       #  #For testing 
       #  if ( [ "${PRODUCTION}" = "0" ] && [ "${DEVELOPMENT}" = "1" ] )
       #  then
-      #      command="LINODE_API_KEY=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
+      #      command="LINODE_TOKEN=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
       #  fi
         
         ########################REMOVE THIS#####################
-        command="LINODE_API_KEY=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
+        command="LINODE_TOKEN=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
 
         while ( [ "`/usr/bin/find ${BUILD_HOME}/.lego/certificates/${WEBSITE_URL}.issuer.crt -mmin -5 2>/dev/null`" = "" ] )
         do
