@@ -56,6 +56,7 @@ then
 fi
 
 domain_url="`/bin/echo ${2} | /usr/bin/cut -d'.' -f2-`"
+subdomain="`/bin/echo ${2} | /usr/bin/awk -F'.' '{print $1}'`"
 dns="${5}"
 
 if ( [ "${dns}" = "linode" ] )
