@@ -265,3 +265,75 @@ then
         read x
     fi
 fi
+
+if ( [ "${DNS_CHOICE}" = "linode" ] )
+then
+    LINODE_TOKEN="`/bin/echo ${DNS_SECURITY_KEY} | /usr/bin/awk -F':' '{print $1}'`"
+
+    #For production
+    if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
+    then
+        command="LINODE_TOKEN=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
+    fi
+    
+    if ( [ "${PRODUCTION}" = "0" ] && [ "${DEVELOPMENT}" = "1" ] )
+    then
+        command="LINODE_TOKEN=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
+    fi
+    
+    if ( [ "${HARDCORE}" = "1" ] )
+    then
+        #For production
+        ###############UNCOMMENT THIS, COMMENTING OUT IS TEMPORARY
+      #  if ( [ "${PRODUCTION}" = "1" ] && [ "${DEVELOPMENT}" = "0" ] )
+      #  then
+      #      command="LINODE_TOKEN=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
+      #  fi
+      #  #For testing 
+      #  if ( [ "${PRODUCTION}" = "0" ] && [ "${DEVELOPMENT}" = "1" ] )
+      #  then
+      #      command="LINODE_TOKEN=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
+      #  fi
+        
+        ########################REMOVE THIS#####################
+        command="LINODE_TOKEN=${LINODE_TOKEN} /usr/bin/lego --email ${DNS_USERNAME} --server=https://acme-staging-v02.api.letsencrypt.org/directory --dns ${DNS_CHOICE} --domains ${WEBSITE_URL} --dns-timeout=120 --accept-tos run"
+
+        while ( [ "`/usr/bin/find ${BUILD_HOME}/.lego/certificates/${WEBSITE_URL}.issuer.crt -mmin -5 2>/dev/null`" = "" ] )
+        do
+            status "Valid Certificate not found, trying to issue SSL certificate for your domain ${WEBSITE_URL}"
+            eval ${command}
+            /bin/sleep 10
+        done
+    else
+        status ""
+        status ""
+        status "##################################################################################################"
+        status ""
+        status "WE NEED A NEW SSL CERTRIFICATE. FOLLOW THESE STEPS EXACLTY AND THINGS WILL BE FINE..."
+        status ""
+        status " 1) Open up a new terminal on your build client machine - something like:"
+        status "------------COMMAND-----------------"
+        status "    /usr/bin/ssh ${BUILD_CLIENT_IP}"
+        status "------------COMMAND-----------------"
+        status ""
+        status " 2) Precisely and carefully change working directory to your build home directory, precisely like:"
+        status "-----------------COMMAND--------------------------"
+        status "    cd ${BUILD_HOME}"
+        status "-----------------COMMAND--------------------------"
+        status ""
+        status " 3) Issue the following command (you can copy and paste it all onto the command line of your new terminal window) "
+        status "     ------------------------------------------COMMAND-------------------------------------------"
+        status "       ${command} "
+        status "     ------------------------------------------COMMAND-------------------------------------------"
+        status ""
+        status " 4) Check that there is a directory ${BUILD_HOME}/.lego that has up to date (check the timestamp) certificates in it"
+        status ""
+        status "   Also, when you issue the command it should say whether a certificate was successfully generated or not"
+        status ""
+        status "###################################################################################################"
+        status "Once you have done all that, you can press the <enter> key to continue with the build"
+        status ""
+        status ""
+        read x
+    fi
+fi
