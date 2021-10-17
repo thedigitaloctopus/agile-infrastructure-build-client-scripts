@@ -195,10 +195,6 @@ then
         /bin/echo "Making database backup for ${period} backup"
         /bin/sleep 5
         /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${DB_IP} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/git/Backup.sh ${period} ${build_identifier}" 2>/dev/null
-        if ( [ "$?" != "0" ] )
-        then
-            /bin/echo "Failed to make a backup of your database, sorry..."
-        fi
     done
 else
     /bin/echo "Unrecognised selection, please select only 1 or 2"
