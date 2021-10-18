@@ -36,7 +36,7 @@ then
 fi
 if ( [ "${cloudhost}" = "vultr" ] )
 then
-    export VULTR_API_KEY="`/bin/ls ${HOME}/.config/VULTRAPIKEY:* | /usr/bin/awk -F':' '{print $NF}'`"
+    export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
     /bin/sleep 1
     /usr/bin/vultr regions | /usr/bin/awk '{print $NF}' | /bin/sed 's/CODE//g'
 fi
