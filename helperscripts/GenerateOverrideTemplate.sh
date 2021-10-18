@@ -25,7 +25,7 @@
 
 if ( [ ! -f  ./GenerateOverrideTemplate.sh ] )
 then
-    /bin/echo "Sorry, this script has to be run as ./helperscripts/GenerateOverrideTemplate.sh"
+    /bin/echo "This script is expected to run from the helperscripts directory"
     exit
 fi
 
