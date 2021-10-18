@@ -71,4 +71,18 @@ then
     /usr/local/bin/linode-cli domains records-create $domain_id --type A --name ${subdomain} --target ${ip} --ttl_sec 120
 fi
 
+authkey="${3}"
+subdomain="`/bin/echo ${4} | /usr/bin/awk -F'.' '{print $1}'`"
+domainurl="`/bin/echo ${4} | /usr/bin/cut -d'.' -f2-`"
+ip="${5}"
+dns="${7}"
+
+if ( [ "${dns}" = "vultr" ] )
+then
+   # BUILD_HOME="`/usr/bin/pwd | sed 's/agile-infrastructure.*//g'`agile-infrastructure-build-client-scripts"
+   # export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/vultr/TOKEN`"
+    export VULTR_API_KEY="${authkey}"
+    /usr/bin/vultr dns record create -d ${domainurl} -n ${subdomain} -t A -D ${ip}
+fi
+
 
