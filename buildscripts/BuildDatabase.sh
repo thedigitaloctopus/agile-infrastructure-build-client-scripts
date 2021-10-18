@@ -272,6 +272,13 @@ do
 
         #If we want to get our scripts out of the git repo, we better have git installed, so let's do it
         /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '${CUSTOM_USER_SUDO} /usr/bin/apt-get install -qq git ; /usr/bin/git init ; /bin/mkdir -p /home/${SERVER_USER}/bootstrap ; ${CUSTOM_USER_SUDO}  /usr/bin/git config --global init.defaultBranch master ; ${CUSTOM_USER_SUDO} /usr/bin/git config --global pull.rebase false'"
+        
+        while ( [ "$?" != "0" ] )
+        do
+            /bin/sleep 10
+            /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '${CUSTOM_USER_SUDO} /usr/bin/apt-get install -qq git ; /usr/bin/git init ; /bin/mkdir -p /home/${SERVER_USER}/bootstrap ; ${CUSTOM_USER_SUDO}  /usr/bin/git config --global init.defaultBranch master ; ${CUSTOM_USER_SUDO} /usr/bin/git config --global pull.rebase false'"
+        done 
+        
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/providerscripts/git/GitPull.sh ${BUILD_HOME}/providerscripts/git/GitFetch.sh ${BUILD_HOME}/providerscripts/git/GitCheckout.sh ${SERVER_USER}@${ip}:/home/${SERVER_USER}/bootstrap
 
         #Actually get our scripts from git repo
