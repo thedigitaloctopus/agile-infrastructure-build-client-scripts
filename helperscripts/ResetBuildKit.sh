@@ -30,6 +30,8 @@ then
     exit
 fi
 
+export BUILD_HOME="`/usr/bin/pwd | /bin/sed 's/\/helper.*//g'`"
+
 /bin/rm .* 2>/dev/null
 
 if ( [ -d ${BUILD_HOME}/logs ] )
