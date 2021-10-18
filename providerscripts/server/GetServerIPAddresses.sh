@@ -46,7 +46,7 @@ then
     then
         BUILD_HOME="`/bin/pwd`"
     fi
-    export VULTR_API_KEY="`/bin/ls ${HOME}/.config/VULTRAPIKEY:* | /usr/bin/awk -F':' '{print $NF}'`"
+    export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
     /bin/sleep 1
     server_type="`/bin/echo ${server_type} | /usr/bin/cut -c -25`"
     ip="`/usr/bin/vultr server list | /bin/grep ".*${server_type}" | /usr/bin/awk '{print $3}' | /bin/sed 's/IP//g' | /bin/sed '/^$/d'`"
