@@ -22,8 +22,7 @@
 
 if ( [ ! -f ./AdjustScaling.sh ] )
 then
-    /bin/echo "This script is expected to run from the same directory as the Build Home"
-    /bin/echo "You can run it as ./helperscripts/AdjustScaling.sh"
+    /bin/echo "This script is expected to run from the helperscripts directory"
     exit
 fi
 
