@@ -63,4 +63,14 @@ then
     /usr/local/bin/linode-cli domains records-delete ${domain_id} ${record_id}
 fi
 
+recordid="${2}"
+authkey="${4}"
+dns="${5}"
+domainurl="`/bin/echo ${7} | /usr/bin/cut -d'.' -f2-`"
+
+if ( [ "${dns}" = "vultr" ] )
+then
+    /usr/bin/vultr dns record delete -r ${recordid}
+fi
+
 
