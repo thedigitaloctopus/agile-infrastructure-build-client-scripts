@@ -54,7 +54,8 @@ then
 fi
 if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
-    /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${IP} "/usr/bin/touch /home/${SERVER_USER}/.ssh/VULTRAPIKEY:${VULTR_API_KEY}"  >/dev/null 2>&1
+    /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${IP} "/bin/mkdir -p /home/${SERVER_USER}/.config"  >/dev/null 2>&1
+    /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${IP} "/usr/bin/touch /home/${SERVER_USER}/.config/VULTRAPIKEY:${VULTR_API_KEY}"  >/dev/null 2>&1
 fi
 if ( [ "${CLOUDHOST}" = "aws" ] )
 then
