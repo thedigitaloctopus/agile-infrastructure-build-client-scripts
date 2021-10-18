@@ -71,7 +71,7 @@ domainurl="`/bin/echo ${7} | /usr/bin/cut -d'.' -f2-`"
 if ( [ "${dns}" = "vultr" ] )
 then
     export VULTR_API_KEY="${authkey}"
-    /usr/bin/vultr dns record delete -r ${recordid}
+    /usr/bin/vultr dns record delete -d ${domainurl} -r ${recordid}
 fi
 
 
