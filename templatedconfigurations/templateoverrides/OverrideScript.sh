@@ -17,7 +17,7 @@ exec 2>>/root/logs/${ERR_FILE}
 # cd agile-infrastructure-build-client-scripts/logs
 #################################################################################################
 export BUILDMACHINE_USER="agile-user"
-export BUILDMACHINE_PASSWORD="Hjdhfb34hd£"
+export BUILDMACHINE_PASSWORD="Hjdhfb34hd£" #Make sure any password you choose is strong enough to pass any strength enforcement rules of your OS
 export BUILDMACHINE_SSH_PORT="1035"
 export LAPTOP_IP=""
 
