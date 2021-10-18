@@ -1,6 +1,6 @@
 if ( [ ! -f ./GenerateHardcoreUserDataScript.sh ] )
 then
-    /bin/echo "This script needs to be run as ./helperscripts/GenerateHardcoreUserDataScript.sh"
+    /bin/echo "This script is expected to run from the helperscripts directory"
     exit
 fi
 
