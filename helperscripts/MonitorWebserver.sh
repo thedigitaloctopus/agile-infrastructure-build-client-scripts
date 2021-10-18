@@ -32,7 +32,7 @@ then
     exit
 fi
 
-BUILD_HOME="`/bin/cat ../buildconfiguration/buildhome`"
+export BUILD_HOME="`/usr/bin/pwd | /bin/sed 's/\/helper.*//g'`"
 
 if ( [ ! -d ${BUILD_HOME}/helperscripts/logs ] )
 then
