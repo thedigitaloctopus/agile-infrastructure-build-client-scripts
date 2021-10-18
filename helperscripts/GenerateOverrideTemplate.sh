@@ -23,7 +23,7 @@
 #######################################################################################################
 #set -x
 
-if ( [ ! -f  ./helperscripts/GenerateOverrideTemplate.sh ] )
+if ( [ ! -f  ./GenerateOverrideTemplate.sh ] )
 then
     /bin/echo "Sorry, this script has to be run as ./helperscripts/GenerateOverrideTemplate.sh"
     exit
@@ -39,7 +39,7 @@ fi
 /bin/echo "Press <enter> to continue"
 read x
  
-BUILD_HOME="`/bin/pwd`"
+export BUILD_HOME="`/usr/bin/pwd | /bin/sed 's/\/helper.*//g'`"
 
 /bin/echo "Which Cloudhost are you using? 1) Digital Ocean 2) Exoscale 3) Linode 4) Vultr 5)AWS. Please Enter the number for your cloudhost"
 read response
