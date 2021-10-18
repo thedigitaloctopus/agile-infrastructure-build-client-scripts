@@ -60,4 +60,12 @@ else
         /usr/local/bin/linode-cli domains create --type master --domain ${domainurl} --soa_email ${email}
     fi
     
+    email="${1}"
+    domainurl="`/bin/echo ${3} | /usr/bin/cut -d'.' -f2-`"
+    dns="${4}"
+    
+    if ( [ "${dns}" = "vultr" ] )
+    then
+        /usr/bin/vultr dns domain create -d ${domainurl} -s "111.111.111.111"
+    fi
 fi
