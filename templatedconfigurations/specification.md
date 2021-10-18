@@ -173,11 +173,13 @@ This is the security key which will enable us to manipulate records as needed wi
 
 ### DNS_CHOICE  
 
-This can be set to one of three values at the time of writing (2020) - 
+This can be set to one of these values 
 
-##### 1. "cloudflare" 
-##### 2. "digitalocean" 
-##### 3. "exoscale". 
+##### "cloudflare" 
+##### "digitalocean" 
+##### "exoscale"
+##### "linode"
+##### "vultr"
 
 It defines which of the (supported) DNS service you would like to use with your deployment.
 
