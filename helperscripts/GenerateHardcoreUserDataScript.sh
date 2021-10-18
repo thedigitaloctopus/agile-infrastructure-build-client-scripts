@@ -1,10 +1,10 @@
-if ( [ ! -f ./helperscripts/GenerateHardcoreUserDataScript.sh ] )
+if ( [ ! -f ./GenerateHardcoreUserDataScript.sh ] )
 then
     /bin/echo "This script needs to be run as ./helperscripts/GenerateHardcoreUserDataScript.sh"
     exit
 fi
 
-BUILD_HOME="`/bin/pwd`"
+export BUILD_HOME="`/usr/bin/pwd | /bin/sed 's/\/helper.*//g'`"
 
 baseoverridescript="${BUILD_HOME}/templatedconfigurations/templateoverrides/OverrideScript.sh"
 
