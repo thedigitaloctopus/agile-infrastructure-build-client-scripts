@@ -142,7 +142,7 @@ snapshot_id="${9}"
 
 if (  [ "${cloudhost}" = "vultr" ] )
 then
-    export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
+    export VULTR_API_KEY="`/bin/ls ${HOME}/.config/VULTRAPIKEY:* | /usr/bin/awk -F':' '{print $NF}'`"
     /bin/sleep 1
     os_choice="`/bin/echo "${os_choice}" | /bin/sed "s/'//g"`"
     os_choice="`/usr/bin/vultr os | /bin/grep "${os_choice}" | /usr/bin/awk '{print $1}'`"
