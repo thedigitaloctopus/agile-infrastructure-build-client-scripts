@@ -93,11 +93,11 @@ fi
 /bin/systemctl restart sshd
 /usr/sbin/service ssh restart
 
-/bin/echo "y" | /usr/bin/apt-get -qq -y update
+/usr/bin/apt-get -qq -y update
 /usr/bin/apt-get -qq -y install git
 /usr/bin/apt-get -qq -y install ufw
 
-/usr/sbin/ufw enable
+/bin/echo "y" | /usr/sbin/ufw enable
 /usr/sbin/ufw default deny incoming
 /usr/sbin/ufw default allow outgoing
 /usr/sbin/ufw allow from ${LAPTOP_IP}
