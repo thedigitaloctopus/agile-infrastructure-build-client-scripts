@@ -65,3 +65,12 @@ then
     /usr/local/bin/linode-cli --json domains records-list ${domain_id}  | /usr/bin/jq --arg tmp_subdomain "${subdomain}" '(.[] | select(.name | contains($tmp_subdomain)) | .id)'
 fi
 
+domainurl="`/bin/echo ${2} | /usr/bin/cut -d'.' -f2-`"
+subdomain="`/bin/echo ${2} | /usr/bin/awk -F'.' '{print $1}'`"
+authkey="${4}"
+dns="${5}"
+
+if ( [ "${dns}" = "vultr" ] )
+then
+    /usr/bin/vultr dns record list -d ${domainurl} | /bin/grep  ${subdomain} | /usr/bin/awk '{print $1}'
+fi
