@@ -20,14 +20,13 @@
 #######################################################################################################
 #set -x
 
-if ( [ ! -f ./helperscripts/ShutdownInfrastructure.sh ] )
+if ( [ ! -f ./ShutdownInfrastructure.sh ] )
 then
-    /bin/echo "This script is expected to run from the same directory as the Build Home"
-    /bin/echo "You can run it as \${BUILD_HOME}/helperscripts/ShutdownInfrastructure.sh"
+    /bin/echo "This script is expected to run from the helperscripts directory"
     exit
 fi
 
-BUILD_HOME="`/bin/pwd`"
+export BUILD_HOME="`/usr/bin/pwd | /bin/sed 's/\/helper.*//g'`"
 
 /bin/echo "Which Cloudhost are you using? 1) Digital Ocean 2) Exoscale 3) Linode 4)Vultr 5)AWS. Please Enter the number for your cloudhost"
 read response
