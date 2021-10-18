@@ -27,12 +27,12 @@ status ""
 status "#####################################################################################################"
 status "#####Which DNS provider tech would you like to use for you website/application                  #####"
 status "#####We currently support 0: None 1: Cloudflare 2: Digital Ocean                                #####"
-status "#####                     3: Exoscale 4:Linode                                                  #####"
+status "#####                     3: Exoscale 4:Linode 5:Vultr                                                 #####"
 status "#####################################################################################################"
-status "Please select a DNS provider (0|1|2|3|4)"
+status "Please select a DNS provider (0|1|2|3|4|5)"
 read choice
 
-while ( [ "${choice}" = "" ] || [ "`/bin/echo "0 1 2 3 4" | /bin/grep ${choice}`" = "" ] )
+while ( [ "${choice}" = "" ] || [ "`/bin/echo "0 1 2 3 4 5" | /bin/grep ${choice}`" = "" ] )
 do
     status "Invalid choice, please try again..."
     read choice
@@ -244,6 +244,55 @@ then
             status "So, please input the access email address of your Linode account"
             read DNS_USERNAME
             /bin/echo "${DNS_USERNAME}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials/DNSUSERNAME
+        fi
+    fi
+fi
+elif ( [ "${choice}" = "5" ] )
+then
+    DNS_CHOICE="vultr"
+    
+    /bin/mkdir -p ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-vultr-credentials > /dev/null
+
+    if ( [ ! -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-vultr-credentials/DNSSECURITYKEY ] )
+    then
+       status "#####################################################################################################"
+       status "NOTE: Your DNS access key is the same a personal acccess token for vultr with domain manipulation rights"
+       status "#####################################################################################################"
+       status "Please input your vultr access token"
+       read DNS_SECURITY_KEY
+       /bin/echo ${DNS_SECURITY_KEY} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-vultr-credentials/DNSSECURITYKEY
+       DNS_SECURITY_KEY="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-vultr-credentials/DNSSECURITYKEY`"
+    else
+       DNS_SECURITY_KEY="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-vultr-credentials/DNSSECURITYKEY`"
+       status "Have found an access token stored from a previous build for your vultr account"
+       status "It is set to: ${DNS_SECURITY_KEY}"
+       status "Please enter Y/y if this is a correct access key"
+       read answer
+       if ( [ "`/bin/echo "${answer}" | /bin/grep 'y'`" = "" ]  && [ "`/bin/echo "${answer}" | /bin/grep 'Y'`" = "" ] )
+       then
+           status "So, please input the access token of your vultr account"
+           read DNS_SECURITY_KEY
+           /bin/echo "${DNS_SECURITY_KEY}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-vultr-credentials/DNSSECURITYKEY
+       fi
+   fi
+
+    if ( [ ! -f ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-vultr-credentials/DNSUSERNAME ] )
+    then
+        status "Please input your Vultr Account Email Address"
+        read DNS_USERNAME
+        /bin/echo ${DNS_USERNAME} > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-vultr-credentials/DNSUSERNAME
+        DNS_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-vultr-credentials/DNSUSERNAME`"
+    else
+        DNS_USERNAME="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-vultr-credentials/DNSUSERNAME`"
+        status "Have found an email address stored from a previous build for your vultr account"
+        status "It is set to: ${DNS_USERNAME}"
+        status "Please enter Y/y if this is a correct email address"
+        read answer
+        if ( [ "`/bin/echo "${answer}" | /bin/grep 'y'`" = "" ]  && [ "`/bin/echo "${answer}" | /bin/grep 'Y'`" = "" ] )
+        then
+            status "So, please input the access email address of your Vultr account"
+            read DNS_USERNAME
+            /bin/echo "${DNS_USERNAME}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-vultr-credentials/DNSUSERNAME
         fi
     fi
 fi
