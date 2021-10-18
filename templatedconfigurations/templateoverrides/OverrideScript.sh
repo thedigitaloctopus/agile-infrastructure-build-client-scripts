@@ -93,7 +93,7 @@ fi
 systemctl restart sshd
 service ssh restart
 
-/usr/bin/apt-get -qq -y update
+/bin/echo "y" | /usr/bin/apt-get -qq -y update
 /usr/bin/apt-get -qq -y install git
 /usr/bin/apt-get -qq -y install ufw
 
