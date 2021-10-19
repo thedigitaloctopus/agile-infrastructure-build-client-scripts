@@ -1,3 +1,5 @@
+**NOTE:** If you use the backup service from your cloudhost as well as regular and supersafe backups from this toolkit, you will have application backups in 3 places, your git provider, your datastore and your backup with your cloudhost. This should be pretty solid as a backup strategy. You don't have to use your cloudhost's backup service, it might cost £, but, if you want to go to the extreme with your backups, you can.
+
 ## BACKUP AND BASELINE PROCESSES:  
 
 #### Baseline processes
