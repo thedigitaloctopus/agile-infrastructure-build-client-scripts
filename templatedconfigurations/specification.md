@@ -149,6 +149,10 @@ This will be the username for your DNS service provider
 
 ##### exoscale - your exoscale account email address
 
+##### linode - your linode account email address
+
+##### vultr - your vultr account email address
+
 -----
 
 ### DNS_SECURITY_KEY 
@@ -157,9 +161,13 @@ This is the security key which will enable us to manipulate records as needed wi
 
 ##### cloudflare - Ths is the Global API key for your cloudflare account which you can find by clicking on your profile at the top right of the screen
 
-##### digital ocean - The access token for your digital ocean account, the same as TOKEN
+##### digital ocean - The access token for your digital ocean account, (can be the same as TOKEN)
 
-##### exoscale  - The access key for your exoscale account
+##### exoscale  - The access key and secret key for your exoscale account. You need to enter this as ${ACCESS_KEY}:${SECRET_KEY}. You can use the same access key and secret key as your main account or you can create separate ones with only DNS manipulation rights. 
+
+##### linode - A personal access token with DNS manipulation rights (can be the same value as TOKEN)
+
+##### Vultr - A personal access token with DNS manipulation rights (can be the same as TOKEN)
 
 ------
 
@@ -170,6 +178,10 @@ This is the security key which will enable us to manipulate records as needed wi
 #### digitalocean - not needed
 
 #### exoscale - not needed
+
+#### linode - not needed
+
+#### vultr - not needed
 
 -----
 
