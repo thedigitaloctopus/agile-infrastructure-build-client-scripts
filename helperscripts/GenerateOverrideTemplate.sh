@@ -112,6 +112,10 @@ do
         /bin/echo "Its current value is \"${value}\" press <enter> to retain, anything else to override"
         read setting
         /bin/echo "OK, thanks..."
+        /bin/echo
+        /bin/echo
+        /bin/echo
+        /bin/echo
         if ( [ "${setting}" != "" ] )
         then
             /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"${setting}\"/g" ${newoverridescript}
