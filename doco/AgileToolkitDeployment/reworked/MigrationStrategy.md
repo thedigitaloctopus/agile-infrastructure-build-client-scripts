@@ -31,7 +31,6 @@ Then copy the tar archive to your laptop
         /bin/echo "CREATE TABLE public.zzzz ( idxx serial PRIMARY KEY );" >> applicationDB.sql
         /bin/sed -i -- 's/http:\/\//https:\/\//g' applicationDB.sql
         /bin/sed -i "s/${DB_U}/XXXXXXXXXX/g" applicationDB.sql
-        IP_MASK="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'IPMASK'`"
         /bin/sed -i "s/${IP_MASK}/YYYYYYYYYY/g" applicationDB.sql
         /bin/tar cvfz ${websiteDB} applicationDB.sql  
   
