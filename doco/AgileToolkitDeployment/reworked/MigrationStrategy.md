@@ -4,7 +4,7 @@ You can do the migration as follows:
 
 1. Build a tar archive of your webroot using the command:  
 
-**/bin/tar cvfz website_archive.tar.gz /var/www/html ** 
+**/bin/tar cvfz website_archive.tar.gz /var/www/html** 
 
 Then copy the tar archive to your laptop
 
@@ -21,6 +21,14 @@ Then copy the tar archive to your laptop
        /bin/tar cvfz ${websiteDB} applicationDB.sql
   
   PSQL:
+  
+        export PGPASSWORD="${DB_P}" && /usr/bin/pg_dump -U ${DB_U} -h ${HOST} -p ${DB_PORT} -d ${DB_N} > applicationDB.sql
+        /bin/echo "CREATE TABLE public.zzzz ( idxx serial PRIMARY KEY );" >> applicationDB.sql
+        /bin/sed -i -- 's/http:\/\//https:\/\//g' applicationDB.sql
+        /bin/sed -i "s/${DB_U}/XXXXXXXXXX/g" applicationDB.sql
+        IP_MASK="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'IPMASK'`"
+        /bin/sed -i "s/${IP_MASK}/YYYYYYYYYY/g" applicationDB.sql
+        /bin/tar cvfz websiteDB.tar.gz applicationDB.sql
   
   
    
