@@ -35,7 +35,7 @@ Then copy the tar archive to your laptop
         /bin/tar cvfz ${websiteDB} applicationDB.sql  
   
   
-   3. On your laptop extract the website_archive.tar.gz into a directory. Create a repository with your git provider with nomenclature: <identifier>-website-sourcecode-baseline and push the extracted website_archive.tar.gz into your empty repository.  
+   3. On your laptop extract the website_archive.tar.gz into a directory. Create a repository with your git provider with nomenclature: <identifier>-webroot-sourcecode-baseline and push the extracted website_archive.tar.gz into your empty repository.  
    
    4. Create a repository with your git provider with nomenclature: <identifier>-db-baseline and push the unextracted ${websiteDB} into the new empty repository.  
    
