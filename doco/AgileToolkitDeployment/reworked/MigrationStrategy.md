@@ -1,5 +1,10 @@
 If you have an existing site hosted with a different provider, you need to be able to generate a tar archive of your webroot and a database dump of your database in order to migrate it.
 
+Note:
+
+WEBSITE_NAME="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $2}'`"
+websiteDB="`${WEBSITE_NAME}-DB-backup".tar.gz`"
+
 You can do the migration as follows:
 
 1. Build a tar archive of your webroot using the command:  
@@ -28,8 +33,12 @@ Then copy the tar archive to your laptop
         /bin/sed -i "s/${DB_U}/XXXXXXXXXX/g" applicationDB.sql
         IP_MASK="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'IPMASK'`"
         /bin/sed -i "s/${IP_MASK}/YYYYYYYYYY/g" applicationDB.sql
-        /bin/tar cvfz websiteDB.tar.gz applicationDB.sql
+        /bin/tar cvfz ${websiteDB} applicationDB.sql  
   
   
+   3. On your laptop extract the website_archive.tar.gz into a directory. Create a repository with your git provider with nomenclature: <identifier>-website-sourcecode-baseline and push the extracted website_archive.tar.gz into your empty repository.  
    
+   4. Create a repository with your git provider with nomenclature: <identifier>-db-baseline and push the unextracted ${websiteDB} into the new empty repository.  
+   
+   With these two repositories on with your git provider, you should be able to deploy your website as you would any other baseline. 
    
