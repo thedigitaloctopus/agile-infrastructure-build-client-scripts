@@ -2,7 +2,7 @@ If you have an existing site hosted with a different provider, you need to be ab
 
 Note:
 
-WEBSITE_NAME="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $2}'`"
+WEBSITE_NAME="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $2}'`"  
 websiteDB="`${WEBSITE_NAME}-DB-backup".tar.gz`"
 
 You can do the migration as follows:
