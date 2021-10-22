@@ -50,11 +50,11 @@ then
     if ( [ "${DEVELOPMENT}" = "1" ] )
     then
         status "***************************************************TOTALLY ESSENTIAL MAN*************************************************************"
-        status "Once the build process has provisioned your autoscaler, you can add the ip address of your autoscaler to your whitelist using the vultr dashboard"
+        status "Once the build process has provisioned your autoscaler(s), you can add the ip address of your autoscaler(s) to your whitelist using the vultr dashboard"
         status "It is necessary to be right on it and whitelist the IP as soon as it is provisioned by the build process. FAILURE TO ACTION THIS LEADS TO OPERATIONAL FAILURE"
         status "**********************************************************TOTALLY ESSENTIAL MAN*************************************************************"
         status "NOTE:"
-        status "If you can't be bothered with this, then, simply whitelist all IPs in the dashboard although, understand, this is considerably less secure"
+        status "If you can't be bothered with this, then, simply whitelist all IPs in the dashboard although this will be less secure"
         status "############################################################################################################################################"
     fi
     status "Press <enter> to acknowledge"
