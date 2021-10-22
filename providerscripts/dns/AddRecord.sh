@@ -80,7 +80,7 @@ dns="${7}"
 if ( [ "${dns}" = "vultr" ] )
 then
     export VULTR_API_KEY="${authkey}"
-    /usr/bin/vultr dns record create -d ${domainurl} -n ${subdomain} -t A -D ${ip}
+    /usr/bin/vultr dns record create -d ${domainurl} -n ${subdomain} -t A -D ${ip} --priority=10 --ttl=120
 fi
 
 
