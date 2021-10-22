@@ -27,26 +27,37 @@ fi
 
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
-    latest="`/usr/bin/curl https://github.com/JamesClonk/vultr/releases/latest | /bin/sed 's/.*tag\///g' | /bin/sed 's/\".*//g' | /bin/sed 's/v//g'`"
-    /usr/bin/wget https://github.com/JamesClonk/vultr/releases/download/v${latest}/vultr_${latest}_Linux-64bit.tar.gz
-    if ( [ ! -d ${BUILD_HOME}/vultr ] )
-    then
-        /bin/mkdir ${BUILD_HOME}/vultr
-    fi
-    /bin/tar xvfz ${BUILD_HOME}/vultr_${latest}_Linux-64bit.tar.gz  -C ${BUILD_HOME}/vultr
-    /bin/mv ${BUILD_HOME}/vultr/vultr /usr/bin
-    /bin/rm -r ${BUILD_HOME}/vultr
+    /usr/local/go/bin/go get -u github.com/vultr/vultr-cli
+
+    vultr=`/usr/bin/find / -name "vultr-cli" -print | /bin/grep -v github`
+
+    /usr/bin/ln ${vultr} /usr/bin/vultr
+    #latest="`/usr/bin/curl https://github.com/JamesClonk/vultr/releases/latest | /bin/sed 's/.*tag\///g' | /bin/sed 's/\".*//g' | /bin/sed 's/v//g'`"
+    #/usr/bin/wget https://github.com/JamesClonk/vultr/releases/download/v${latest}/vultr_${latest}_Linux-64bit.tar.gz
+    #if ( [ ! -d ${BUILD_HOME}/vultr ] )
+    #then
+    #    /bin/mkdir ${BUILD_HOME}/vultr
+    #fi
+    #/bin/tar xvfz ${BUILD_HOME}/vultr_${latest}_Linux-64bit.tar.gz  -C ${BUILD_HOME}/vultr
+    #/bin/mv ${BUILD_HOME}/vultr/vultr /usr/bin
+    #/bin/rm -r ${BUILD_HOME}/vultr
 fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
-    latest="`/usr/bin/curl https://github.com/JamesClonk/vultr/releases/latest | /bin/sed 's/.*tag\///g' | /bin/sed 's/\".*//g' | /bin/sed 's/v//g'`"
-    /usr/bin/wget https://github.com/JamesClonk/vultr/releases/download/v${latest}/vultr_${latest}_Linux-64bit.tar.gz
-    if ( [ ! -d ${BUILD_HOME}/vultr ] )
-    then
-        /bin/mkdir ${BUILD_HOME}/vultr
-    fi
-    /bin/tar xvfz ${BUILD_HOME}/vultr_${latest}_Linux-64bit.tar.gz  -C ${BUILD_HOME}/vultr
-    /bin/mv ${BUILD_HOME}/vultr/vultr /usr/bin
-    /bin/mv ${BUILD_HOME}/vultr /usr/bin
+    /usr/local/go/bin/go get -u github.com/vultr/vultr-cli
+
+    vultr=`/usr/bin/find / -name "vultr-cli" -print | /bin/grep -v github`
+
+    /usr/bin/ln ${vultr} /usr/bin/vultr
+    
+    #latest="`/usr/bin/curl https://github.com/JamesClonk/vultr/releases/latest | /bin/sed 's/.*tag\///g' | /bin/sed 's/\".*//g' | /bin/sed 's/v//g'`"
+    #/usr/bin/wget https://github.com/JamesClonk/vultr/releases/download/v${latest}/vultr_${latest}_Linux-64bit.tar.gz
+    #if ( [ ! -d ${BUILD_HOME}/vultr ] )
+    #then
+    #    /bin/mkdir ${BUILD_HOME}/vultr
+    #fi
+    #/bin/tar xvfz ${BUILD_HOME}/vultr_${latest}_Linux-64bit.tar.gz  -C ${BUILD_HOME}/vultr
+    #/bin/mv ${BUILD_HOME}/vultr/vultr /usr/bin
+    #/bin/mv ${BUILD_HOME}/vultr /usr/bin
 fi
