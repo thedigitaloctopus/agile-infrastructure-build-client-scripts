@@ -59,9 +59,16 @@ if ( [ "${cloudhost}" = "vultr" ] )
 then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
     /bin/sleep 1
-    server_id="`/usr/bin/vultr server list | /bin/grep ${server_ip} | /usr/bin/awk '{print $1}'`"
+    #Clonk
+    #server_id="`/usr/bin/vultr server list | /bin/grep ${server_ip} | /usr/bin/awk '{print $1}'`"
+    #Official
+    server_id="`/usr/bin/vultr instance list | /bin/grep ${server_ip} | /usr/bin/awk '{print $1}'`"
     /bin/sleep 1
-    /usr/bin/vultr server delete ${server_id} --force=true
+    #Clonk
+    #/usr/bin/vultr server delete ${server_id} --force=true
+    #Official   
+    /usr/bin/vultr instance delete ${server_id}
+
     status "Destroyed a server with ip address ${server_ip}"
 fi
 
