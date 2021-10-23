@@ -229,12 +229,19 @@ do
         #                  3) Switch off root login on our new server
         #                  4) Set up sshd to keep alive ssh connections on this server and restart sshd
 
-        /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c ' ${SUDO} /usr/bin/apt-get -qq -y update'"
-        while ( [ "$?" != "0" ] )
+        while ( [ "`/usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c ' ${SUDO} /usr/bin/apt-get -qq -y update | /bin/grep \"All packages are up to date.\"'"`" = "" ] )
         do
             /bin/sleep 10
-            /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c ' ${SUDO} /usr/bin/apt-get -qq -y update'"
         done
+        
+        /bin/sleep 10
+        
+       # /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c ' ${SUDO} /usr/bin/apt-get -qq -y update'"
+       # while ( [ "$?" != "0" ] )
+       # do
+       #     /bin/sleep 10
+       #     /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c ' ${SUDO} /usr/bin/apt-get -qq -y update'"
+       # done
         
         /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '${SUDO} /usr/sbin/adduser --disabled-password --force-badname --gecos \"\" ${SERVER_USER} ; /bin/echo ${SERVER_USER}:${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/chpasswd ; ${SUDO} /usr/bin/gpasswd -a ${SERVER_USER} sudo ; ${SUDO} /bin/mkdir -p /home/${SERVER_USER}/.ssh ; ${SUDO} /bin/chown -R ${SERVER_USER}.${SERVER_USER} /home/${SERVER_USER}/ ; ${SUDO} /bin/chmod 700 /home/${SERVER_USER}/.ssh ; ${SUDO} /bin/chmod 400 /home/${SERVER_USER}/.ssh/authorized_keys' ; ${SUDO} /bin/sed -i '$ a\ ClientAliveInterval 60\nTCPKeepAlive yes\nClientAliveCountMax 10000' /etc/ssh/sshd_config ; ${SUDO} /bin/sed -i 's/.*PermitRootLogin.*$/PermitRootLogin no/g' /etc/ssh/sshd_config ;  ${SUDO} /usr/sbin/service sshd restart"
 
