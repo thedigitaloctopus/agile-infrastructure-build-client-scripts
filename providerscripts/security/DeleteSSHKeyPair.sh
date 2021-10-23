@@ -62,10 +62,16 @@ if ( [ "${cloudhost}" = "vultr" ] )
 then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
     /bin/sleep 1
-    for key_id in `/usr/bin/vultr sshkeys | /usr/bin/awk '{print $1}'`
+    #Clonk
+    #for key_id in `/usr/bin/vultr sshkeys | /usr/bin/awk '{print $1}'`
+    #do
+    #    /bin/sleep 1
+    #    /usr/bin/vultr sshkey delete ${key_id}
+    #done
+    #Official
+    for key_id in `/usr/bin/vultr ssh-key list | /bin/grep ".*-.*-" | /usr/bin/awk '{print $1}'`
     do
-        /bin/sleep 1
-        /usr/bin/vultr sshkey delete ${key_id}
+        /usr/bin/vultr ssh-key delete ${key_id}
     done
 fi
 
