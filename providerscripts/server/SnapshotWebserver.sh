@@ -84,14 +84,23 @@ fi
 if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
-    SUBID="`/usr/bin/vultr servers | /bin/grep 'webserver' | /usr/bin/awk '{print $1}'`"
-
+  #Clonk
+  # SUBID="`/usr/bin/vultr servers | /bin/grep 'webserver' | /usr/bin/awk '{print $1}'`"
+  #
+  # status ""
+  # status "########################SNAPSHOTING YOUR WEBSERVER IN THE BACKGROUND####################################"
+  # status ""
+  #
+  #   /usr/bin/vultr snapshot create "${SUBID}" -d "webserver-${SERVER_USER}"
+  #  /bin/touch ${HOME}/.ssh/SNAPSHOT:${SUBID}
+  #Official 
+    SUBID="`/usr/bin/vultr instance list | /bin/grep webserver | /usr/bin/awk '{print $1}'`"
     status ""
     status "########################SNAPSHOTING YOUR WEBSERVER IN THE BACKGROUND####################################"
     status ""
-
-    /usr/bin/vultr snapshot create "${SUBID}" -d "webserver-${SERVER_USER}"
+    /usr/bin/vultr snapshot create -i ${SUBID} -d "webserver-${SERVER_USER}"
     /bin/touch ${HOME}/.ssh/SNAPSHOT:${SUBID}
+    
 fi
 if ( [ "${CLOUDHOST}" = "aws" ] )
 then
