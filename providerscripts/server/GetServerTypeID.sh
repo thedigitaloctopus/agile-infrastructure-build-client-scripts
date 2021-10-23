@@ -81,7 +81,10 @@ if ( [ "${cloudhost}" = "vultr" ] )
 then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
     /bin/sleep 1
-    /usr/bin/vultr plans | grep "${server_size}" | /bin/grep SSD | /usr/bin/awk '{print $1}' | /usr/bin/sort | /usr/bin/tail -1
+    #Clonk
+    #/usr/bin/vultr plans | grep "${server_size}" | /bin/grep SSD | /usr/bin/awk '{print $1}' | /usr/bin/sort | /usr/bin/tail -1
+    #Official
+    /usr/bin/vultr plans list | /bin/grep "${server_size}" | /usr/bin/awk '{print $1}'
 fi
 
 if ( [ "${cloudhost}" = "aws" ] )
