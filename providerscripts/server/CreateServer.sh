@@ -151,10 +151,18 @@ then
     os_choice="`/usr/bin/vultr os list | /bin/grep "${os_choice}" | /usr/bin/awk '{print $1}'`"
     if ( [ "${snapshot_id}" != "" ] )
     then
-        /usr/bin/vultr server create --name="${server_name}" --region="${region}" --plan="${server_plan}" --os="164" --private-networking=true --ipv6=false -k ${key_id} --snapshot="${snapshot_id}"
+       #Clonk
+       # /usr/bin/vultr server create --name="${server_name}" --region="${region}" --plan="${server_plan}" --os="164" --private-networking=true --ipv6=false -k ${key_id} --snapshot="${snapshot_id}"
+       #Official
+       /usr/bin/vultr instance create --label="${server_name}" --region="${region}" --plan="${server_plan}" --os="164" --private-network=true --ipv6=false -s ${key_id} --snapshot="${snapshot_id}"
+
     else
-        /usr/bin/vultr server create --name="${server_name}"  --region=${region} --plan=${server_plan} --os=${os_choice} --private-networking=true --ipv6=false -k ${key_id}
-    fi
+        #Clonk
+        #/usr/bin/vultr server create --name="${server_name}"  --region=${region} --plan=${server_plan} --os=${os_choice} --private-networking=true --ipv6=false -k ${key_id}
+        #Official
+        /usr/bin/vultr instance create --label="${server_name}" --region="${region}" --plan="${server_plan}" --os="${os_choice}" --private-network=true --ipv6=false -s ${key_id}
+
+  fi
 fi
 
 os_choice="`/bin/echo ${1} | tr -d \'`"
