@@ -50,7 +50,10 @@ if ( [ "${cloudhost}" = "vultr" ] )
 then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
     /bin/sleep 1
-    /usr/bin/vultr plans | /usr/bin/awk '{print $2}' | /bin/sed 's/NAME//g'
+    #Clonk
+    #/usr/bin/vultr plans | /usr/bin/awk '{print $2}' | /bin/sed 's/NAME//g'
+    #Official
+    /usr/bin/vultr plans list | /bin/grep vc2 | /usr/bin/awk '{print $1}'
 fi
 if ( [ "${cloudhost}" = "aws" ] )
 then
