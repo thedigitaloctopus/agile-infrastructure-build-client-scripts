@@ -27,11 +27,14 @@ fi
 
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
+    #Official
     /usr/local/go/bin/go install github.com/vultr/vultr-cli@latest
 
     vultr=`/usr/bin/find / -name "vultr-cli" -print | /bin/grep -v github`
 
     /usr/bin/ln ${vultr} /usr/bin/vultr
+   
+   #Clonk
     #latest="`/usr/bin/curl https://github.com/JamesClonk/vultr/releases/latest | /bin/sed 's/.*tag\///g' | /bin/sed 's/\".*//g' | /bin/sed 's/v//g'`"
     #/usr/bin/wget https://github.com/JamesClonk/vultr/releases/download/v${latest}/vultr_${latest}_Linux-64bit.tar.gz
     #if ( [ ! -d ${BUILD_HOME}/vultr ] )
@@ -45,12 +48,14 @@ fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
-    /usr/local/go/bin/go get -u github.com/vultr/vultr-cli
+    #Official
+    /usr/local/go/bin/go install github.com/vultr/vultr-cli@latest
 
     vultr=`/usr/bin/find / -name "vultr-cli" -print | /bin/grep -v github`
 
     /usr/bin/ln ${vultr} /usr/bin/vultr
     
+    #Clonk
     #latest="`/usr/bin/curl https://github.com/JamesClonk/vultr/releases/latest | /bin/sed 's/.*tag\///g' | /bin/sed 's/\".*//g' | /bin/sed 's/v//g'`"
     #/usr/bin/wget https://github.com/JamesClonk/vultr/releases/download/v${latest}/vultr_${latest}_Linux-64bit.tar.gz
     #if ( [ ! -d ${BUILD_HOME}/vultr ] )
