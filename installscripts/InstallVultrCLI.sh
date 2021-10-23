@@ -27,7 +27,7 @@ fi
 
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
-    /usr/local/go/bin/go get -u github.com/vultr/vultr-cli
+    /usr/local/go/bin/go install github.com/vultr/vultr-cli@latest
 
     vultr=`/usr/bin/find / -name "vultr-cli" -print | /bin/grep -v github`
 
