@@ -56,8 +56,10 @@ then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
     region="`/bin/echo ${region} | /usr/bin/tr '[:lower:]' '[:upper:]'`"
     /bin/sleep 1
-    regionid="`/usr/bin/vultr regions | /bin/grep ${region} | /usr/bin/awk '{print $1}'`"
-
+    #Clonk
+    #regionid="`/usr/bin/vultr regions | /bin/grep ${region} | /usr/bin/awk '{print $1}'`"
+    #Official
+    regionid="`/usr/bin/vultr regions list | /bin/grep ${region} | /usr/bin/awk '{print $1}'`"
     if ( [ "${regionid}" != "" ] )
     then
         /bin/echo ${regionid}
