@@ -145,7 +145,10 @@ then
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
     /bin/sleep 1
     os_choice="`/bin/echo "${os_choice}" | /bin/sed "s/'//g"`"
-    os_choice="`/usr/bin/vultr os | /bin/grep "${os_choice}" | /usr/bin/awk '{print $1}'`"
+    #Clonk
+    #os_choice="`/usr/bin/vultr os | /bin/grep "${os_choice}" | /usr/bin/awk '{print $1}'`"
+    #Official
+    os_choice="`/usr/bin/vultr os list | /bin/grep "${os_choice}" | /usr/bin/awk '{print $1}'`"
     if ( [ "${snapshot_id}" != "" ] )
     then
         /usr/bin/vultr server create --name="${server_name}" --region="${region}" --plan="${server_plan}" --os="164" --private-networking=true --ipv6=false -k ${key_id} --snapshot="${snapshot_id}"
