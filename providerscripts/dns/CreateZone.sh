@@ -68,6 +68,9 @@ else
     if ( [ "${dns}" = "vultr" ] )
     then
         export VULTR_API_KEY="${authkey}"
-        /usr/bin/vultr dns domain create -d ${domainurl} -s "111.111.111.111"
+        #Clonk
+        #/usr/bin/vultr dns domain create -d ${domainurl} -s "111.111.111.111"
+        #Official
+        /usr/bin/vultr dns domain create -d ${domainurl}
     fi
 fi
