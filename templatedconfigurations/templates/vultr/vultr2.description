@@ -1,5 +1,5 @@
-DEPLOY A BASELINED JOOMLA, WORDPRESS,DRUPAL or MOODLE APPLICATION
------------------------------------------------------------------
+DEPLOY A BASELINED JOOMLA, WORDPRESS,DRUPAL or MOODLE APPLICATION IN DEVELOPMENT MODE
+-------------------------------------------------------------------------------------
 
 For this you will need to have a baselined application stored with your git provider. This means two repositories, one for the webroot and one for the database.
 You can review in the ${BUILD_HOME}/doco/ directory how to baseline an application (in other words, create these two repositories).
