@@ -1,3 +1,19 @@
 DEPLOY A VIRGIN JOOMLA,WORDPRESS,DRUPAL or MOODLE INSTANCE IN DEVELOPMENT MODE
 ------------------------------------------------------------------------------
+To use this template in expedited mode, review and set all variables marked mandatory and optionally reconfigure other variables such as WS_SIZE (for webserver size) and so on according to your needs.
 
+For a Joomla install, you will need to set:  
+
+export APPLICATION="joomla"
+export JOOMLA_VERSION="<joomla_version>" #Where joomla version is the version number of joomla that you want to install, for example 4.0.3
+export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="JOOMLA:<joomla_version>" #Where joomla version is the version number of joomla that you want to install, for example 4.0.3
+
+For a Wordpress intall, you will need to set:
+
+
+
+For a Drupal install, you will need to set:
+
+
+
+For a Moodle install, you will need to set:
