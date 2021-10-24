@@ -30,21 +30,4 @@ then
         status "Purging bucket ${config_bucket}... feel free to purge it manually through the GUI if you want to"
         /usr/bin/s3cmd --recursive --force del s3://${config_bucket}
     fi
-    
-   # /bin/touch /tmp/REFRESH_MOUNT
-    
-   # /usr/bin/s3cmd put /tmp/REFRESH_MOUNT s3://${config_bucket}
-  
-    location="`/usr/bin/s3cmd info s3://${config_bucket} | /bin/grep "Location" | /usr/bin/awk '{print $NF}'`"
-
-    if ( [ "${location}" != "" ] && [ "`/bin/echo ${S3_HOST_BASE} | /bin/grep ${location}`" = "" ] )
-    then
-        status "###############################################################################################################################################"
-        status "WARNING: it appears (and it might only be an appearance) that your config bucket already exists in a different region. This might cause problem"
-        status "This might happen if you are deploying a website with the same url and you deployed it previously in a different region"
-        status "###############################################################################################################################################"
-        status "Press <enter> to accept this, although you are advised to remove the bucket if it exists in another region to avoid region conflict"
-        read x
-    fi
-
 fi
