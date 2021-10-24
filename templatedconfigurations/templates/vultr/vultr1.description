@@ -8,12 +8,19 @@ export APPLICATION="joomla"
 export JOOMLA_VERSION="<joomla_version>" #Where joomla version is the version number of joomla that you want to install, for example 4.0.3
 export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="JOOMLA:<joomla_version>" #Where joomla version is the version number of joomla that you want to install, for example 4.0.3
 
-For a Wordpress intall, you will need to set:
+For a Wordpress intall, you will need to set:  
 
-
+export APPLICATION="wordpress"
+export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="WORDPRESS"
 
 For a Drupal install, you will need to set:
 
+export APPLICATION="drupal"
+export JOOMLA_VERSION="<drupal_version>" #Where drupal version is the version number of joomla that you want to install, for example 9.2.1
+export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="DRUPAL:<drupal_version>" #Where drupal version is the version number of joomla that you want to install, for example 9.2.1
 
 
 For a Moodle install, you will need to set:
+
+export APPLICATION="moodle"
+export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="MOODLE"
