@@ -1,6 +1,6 @@
 **CONTENT DELIVERY NETWORK**
 
-What I have done to facilitate a CDN system is centralise asset storage for each application in their S3 compatible object storage service, for example, for digital ocean this would be the Digital Ocean Spaces service. What this means is that for n webservers as soon as a new asset is uploaded by a user of an application (for example, a new profile picture), the asset is written to the centralied S3 compatible storage service. This means that all webservers "see" the same files as soon as they are created or uploaded. So, webservers 1 to n are all writing to the same bucket in S3. Now, what we don't want to do for every read of that image file to have to go to the origin server and retreive the asset from object storage and then return it to the client, so, what we want to do is at an application level set up a CDN which uses the bucket we are uploading our assets to from the webservers as an origin. So, for your application, for example, Joomla, Wordpress, Drupal or Moodle if you install a CDN system plugin using the S3 bucket that your webservers are writing to, then, the CDN will read the assets from the bucket and serve them directly to the client, caching them where possible. This is much more efficient and reduces the load on the origin webservers.
+What I have done to facilitate a CDN system is centralise asset storage for each application in their S3 compatible object storage service using s3fs (or if you are using AWS, the EFS service), so, for example, for Digital Ocean this would be the Digital Ocean Spaces service. What this means is that for n webservers as soon as a new asset is uploaded by a user of an application (for example, a new profile picture), the asset is written to the centralied S3 compatible storage service. This means that all webservers "see" the same files as soon as they are created or uploaded. So, webservers 1 to n are all writing to the same bucket in S3. Now, what we don't want to do for every read of that image file to have to go to the origin server and retreive the asset from object storage and then return it to the client, so, what we want to do is at an application level set up a CDN which uses the bucket we are uploading our assets to using s3fs from the webservers as an origin. So, for your application, for example, Joomla, Wordpress, Drupal or Moodle if you install a CDN system plugin using the S3 bucket that your webservers are writing to, then, the CDN will read the assets from the bucket and serve them directly to the client, caching them where possible. This is much more efficient and reduces the load on the origin webservers.
 
 Most modern applications generate static assets during usage. In a horizontally scaled architecture, these assets need to be shared immediately amongst all the webservers and not just the webserver that they were generated through or uploaded to. I have adopted a flexible approach to how to make this so and you can choose which technique you would like to use.
 
@@ -21,16 +21,20 @@ To define which directories you want the system to use for your assets uploads, 
 
 So, for joomla, for example you would set something like:
 
+export PERSIST_ASSETS_TO_CLOUD="1"
 export DIRECTORIES_TO_MOUNT="images"
 
 For drupal you might set:
 
+export PERSIST_ASSETS_TO_CLOUD="1"
 export DIRECTORIES_TO_MOUNT="sites.default.files.pictures:sites.default.files.styles:sites.default.files.inline-images"  
 
 And for wordpress you might set:
 
+export PERSIST_ASSETS_TO_CLOUD="1"
 export DIRECTORIES_TO_MOUNT="wp-content.uploads"
-The DIRECTORIES_TO_MOUNT environment variable is set to sensible defaults for each application.
+
+The DIRECTORIES_TO_MOUNT environment variable is set to sensible defaults for each application but you can override it.
 
 **CLOUDFLARE CDN**
 
@@ -47,3 +51,9 @@ www.nuocial.org.uk/images ---- CACHE EVERYTHING
 This way, the first time an asset is loaded, it will go all the way to the origin server but from then on it will be cached in the Cloudflare cache and retrieved from there which will greatly reduce the load on our webservers and so on. If you clear your Cloudflare cache, then, obviously everything will be reloaded from the origin server fresh.
 
 **NOTE:** Of course, if you are in development mode and you don't need to guarantee uptime and you only use one webserver, then, you can just use the filesystem on your webserver to store any assets you generate as you develop your application. In fact, this is necessary because these assets will be included in the baseline of your application when you make one. When you offload your assets to S3 or EFS, they are not included in backups and in the case of S3, the S3 bucket itself becomes the storage place for your assets and in the case of EFS it is the EFS file system. In such a case, you should look into what services your provider has, or, roll your own solution for backing up your static assets to ensure their safety. 
+
+To understand the different scenarios you are likely to want to deploy to consider this:  
+
+1. **VIRGIN deployment in development mode** - no assets persisted to cloud (most cases when you have a virgin deployment you are not going to have a lot of assets)
+2. **BASELINE deployment in development mode** - when you are building your baseline, you shouldn't have many assets so there is no point mounting them from S3
+3. **TEMPORAL deployment in production mode** - You should offload all your user generated assets to S3 buckets as described. There is a bucket for each directory that you offload, and, this is important because a git repository has a limit of 1GB of data in it, so, if you don't offload your assets they will be backed up to your git repo as part of the temporal backup processsing and it will eventually fail if the size of the repository becomes greater than the size limit for your provider. **Its important to note that when you assets are offloaded to S3, that will be the only copy of them. Depending on your provider you might want to setup a way of backing up your assets through a process your provider facilitates or you may want to have some manual procedure for making the backups**
