@@ -4,37 +4,37 @@ What I have done to facilitate a CDN system is centralise asset storage for each
 
 Most modern applications generate static assets during usage. In a horizontally scaled architecture, these assets need to be shared immediately amongst all the webservers and not just the webserver that they were generated through or uploaded to. I have adopted a flexible approach to how to make this so and you can choose which technique you would like to use.
 
-Here are your available options:
+Here are your available options:  
 
-1. Use an application level plugin to offload your assets automatically to an S3 compatible object storage system. These plugins are available for Wordpress, Joomla and so on. If you install one of these plugins into your application, then, all of your assets can be offloaded into the cloud (S3 compatible storage) and automatically shared between all of your webservers instantly. The limit to how many assets you can store is the limit of the S3 bucket, and obviously how deep your pockets are also. 
+1. Use an application level plugin to offload your assets automatically to an S3 compatible object storage system. These plugins are available for Wordpress, Joomla and so on. If you install one of these plugins into your application, then, all of your assets can be offloaded into the cloud (S3 compatible storage) and automatically shared between all of your webservers instantly. The limit to how many assets you can store is the limit of the S3 bucket, and obviously how deep your pockets are also.   
 
-Here is how you can offload your wordpress static assets to S3 and use a CDN:  https://www.codeinwp.com/blog/wordpress-s3-guide/
-Here is an extension you can use to offload your assets for joomla to S3 https://extensions.joomla.org/extension/ja-amazon-s3/
+Here is how you can offload your wordpress static assets to S3 and use a CDN:  https://www.codeinwp.com/blog/wordpress-s3-guide/  
+Here is an extension you can use to offload your assets for joomla to S3 https://extensions.joomla.org/extension/ja-amazon-s3/  
 
-2. At a systems level, you can set things up such that services such as Elastic File System (available on AWS) or an S3 bucket mounted as a file system using S3FS. The EFS solution is a very good solution because you can have (up to) petabytes of data and it is fast. Using S3FS should be an option of last resort, because, as someone said, S3 is not really for filesystems. S3FS will work, to an extent, but, option 1 is the preferable option even though it means more complexity in the application. If you are using S3FS, when applications are requested by a user interacting with your application it means that the sytem has to read through S3FS to get the assets which is slow. If you use an application level plugin, then, the application will read the assets direct from the bucket which can be cached at the edge through some systems.
+2. At a systems level, you can set things up such that services such as Elastic File System (available on AWS) or an S3 bucket mounted as a file system using S3FS. The EFS solution is a very good solution because you can have (up to) petabytes of data and it is fast. Using S3FS should be an option of last resort, because, as someone said, S3 is not really for filesystems. S3FS will work, to an extent, but, option 1 is the preferable option even though it means more complexity in the application. If you are using S3FS, when applications are requested by a user interacting with your application it means that the sytem has to read through S3FS to get the assets which is slow. If you use an application level plugin, then, the application will read the assets direct from the bucket which can be cached at the edge through some systems.  
 
-**CONFIGURING FOR YOUR APPLICATION**
+**CONFIGURING FOR YOUR APPLICATION**  
 
-Each application has different directories which receive user uploads, for example, for Joomla it is the $WEBROOT/images directory for Wordpress it is $WEBROOT/wp-content/uploads
+Each application has different directories which receive user uploads, for example, for Joomla it is the /var/www/html/images directory for Wordpress it is /var/www/html/wp-content/uploads  
 
-To define which directories you want the system to use for your assets uploads, you need to go either set the value at buid time if you are using a full build or to your template override script and set the following override parameters:
+To define which directories you want the system to use for your assets uploads, you need to go either set the value at buid time if you are using a full build or to your template override script and set the following override parameters:  
 
-So, for joomla, for example you would set something like:
+So, for joomla, for example you would set something like:  
 
-export PERSIST_ASSETS_TO_CLOUD="1"
-export DIRECTORIES_TO_MOUNT="images"
+export PERSIST_ASSETS_TO_CLOUD="1"  
+export DIRECTORIES_TO_MOUNT="images"  
 
 For drupal you might set:
 
-export PERSIST_ASSETS_TO_CLOUD="1"
+export PERSIST_ASSETS_TO_CLOUD="1"  
 export DIRECTORIES_TO_MOUNT="sites.default.files.pictures:sites.default.files.styles:sites.default.files.inline-images"  
 
 And for wordpress you might set:
 
-export PERSIST_ASSETS_TO_CLOUD="1"
-export DIRECTORIES_TO_MOUNT="wp-content.uploads"
+export PERSIST_ASSETS_TO_CLOUD="1"  
+export DIRECTORIES_TO_MOUNT="wp-content.uploads"  
 
-The DIRECTORIES_TO_MOUNT environment variable is set to sensible defaults for each application but you can override it.
+The **DIRECTORIES_TO_MOUNT** environment variable is set to sensible defaults for each application but you can override it.
 
 **CLOUDFLARE CDN**
 
@@ -54,6 +54,8 @@ This way, the first time an asset is loaded, it will go all the way to the origi
 
 To understand the different scenarios you are likely to want to deploy to consider this:  
 
-1. **VIRGIN deployment in development mode** - no assets persisted to cloud (most cases when you have a virgin deployment you are not going to have a lot of assets)
-2. **BASELINE deployment in development mode** - when you are building your baseline, you shouldn't have many assets so there is no point mounting them from S3
-3. **TEMPORAL deployment in production mode** - You should offload all your user generated assets to S3 buckets as described. There is a bucket for each directory that you offload, and, this is important because a git repository has a limit of 1GB of data in it, so, if you don't offload your assets they will be backed up to your git repo as part of the temporal backup processsing and it will eventually fail if the size of the repository becomes greater than the size limit for your provider. **Its important to note that when you assets are offloaded to S3, that will be the only copy of them. Depending on your provider you might want to setup a way of backing up your assets through a process your provider facilitates or you may want to have some manual procedure for making the backups**
+1. **VIRGIN deployment in development mode** - no assets persisted to cloud (most cases when you have a virgin deployment you are not going to have a lot of assets - export PERSIST_ASSETS_TO_CLOUD="0"  
+2. **BASELINE deployment in development mode** - when you are building your baseline, you shouldn't have many assets so there is no point mounting them from S3 - export PERSIST_ASSETS_TO_CLOUD="0" 
+3. **TEMPORAL deployment in production mode** - You should offload all your user generated assets to S3 buckets as described - export PERSIST_ASSETS_TO_CLOUD="1". There is a bucket for each directory that you offload, and, this is important because a git repository has a limit of 1GB of data in it, so, if you don't offload your assets they will be backed up to your git repo as part of the temporal backup processsing and it will eventually fail if the size of the repository becomes greater than the size limit for your provider.  
+
+**Its important to note that when you assets are offloaded to S3, that will be the only copy of them. Depending on your provider you might want to setup a way of backing up your assets through a process your provider facilitates or you may want to have some manual procedure for making the backups**
