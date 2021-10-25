@@ -22,18 +22,18 @@ To define which directories you want the system to use for your assets uploads, 
 
 So, for joomla, for example you would set something like:  
 
-export PERSIST_ASSETS_TO_CLOUD="1"  
-export DIRECTORIES_TO_MOUNT="images"  
+**export PERSIST_ASSETS_TO_CLOUD="1"  
+export DIRECTORIES_TO_MOUNT="images"**  
 
 For drupal you might set:
 
-export PERSIST_ASSETS_TO_CLOUD="1"  
-export DIRECTORIES_TO_MOUNT="sites.default.files.pictures:sites.default.files.styles:sites.default.files.inline-images"  
+**export PERSIST_ASSETS_TO_CLOUD="1"  
+export DIRECTORIES_TO_MOUNT="sites.default.files.pictures:sites.default.files.styles:sites.default.files.inline-images"**  
 
 And for wordpress you might set:
 
-export PERSIST_ASSETS_TO_CLOUD="1"  
-export DIRECTORIES_TO_MOUNT="wp-content.uploads"  
+**export PERSIST_ASSETS_TO_CLOUD="1"  
+export DIRECTORIES_TO_MOUNT="wp-content.uploads"**  
 
 The **DIRECTORIES_TO_MOUNT** environment variable is set to sensible defaults for each application but you can override it.
 
