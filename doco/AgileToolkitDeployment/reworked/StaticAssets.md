@@ -38,7 +38,7 @@ export DIRECTORIES_TO_MOUNT="wp-content.uploads"**
 
 The **DIRECTORIES_TO_MOUNT** environment variable is set to sensible defaults for each application but you can override it.
 
-#### CLOUDFLARE CDN  
+**CLOUDFLARE CDN**  
 ---------------------
 
 If you use cloudflare, you don't need to install a CDN at an application level or as a plugin. What you can do instead is set some page rules with the setting "cache everything" for the assets directory of your application.
