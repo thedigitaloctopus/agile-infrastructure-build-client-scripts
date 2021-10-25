@@ -14,7 +14,8 @@ Here is an extension you can use to offload your assets for joomla to S3 https:/
 
 2. At a systems level, you can set things up such that services such as Elastic File System (available on AWS) or an S3 bucket mounted as a file system using S3FS. The EFS solution is a very good solution because you can have (up to) petabytes of data and it is fast. Using S3FS should be an option of last resort, because, as someone said, S3 is not really for filesystems. S3FS will work, to an extent, but, option 1 is the preferable option even though it means more complexity in the application. If you are using S3FS, when applications are requested by a user interacting with your application it means that the sytem has to read through S3FS to get the assets which is slow. If you use an application level plugin, then, the application will read the assets direct from the bucket which can be cached at the edge through some systems.  
 
-**CONFIGURING FOR YOUR APPLICATION**  
+**CONFIGURING FOR YOUR APPLICATION** 
+------------------------
 
 Each application has different directories which receive user uploads, for example, for Joomla it is the /var/www/html/images directory for Wordpress it is /var/www/html/wp-content/uploads  
 
@@ -38,6 +39,7 @@ export DIRECTORIES_TO_MOUNT="wp-content.uploads"**
 The **DIRECTORIES_TO_MOUNT** environment variable is set to sensible defaults for each application but you can override it.
 
 #### CLOUDFLARE CDN  
+---------------------
 
 If you use cloudflare, you don't need to install a CDN at an application level or as a plugin. What you can do instead is set some page rules with the setting "cache everything" for the assets directory of your application.
 
