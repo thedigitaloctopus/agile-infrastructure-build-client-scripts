@@ -30,6 +30,9 @@
 # If you are building for postgres, you can select one of:
 # POSTGRES:source
 # POSTGRES:repo
+# You can define what extensions PHP will be built with by modifying the line starting PHP: as shown below
+# PHP:<extension1>:<extension2>
+# This will perform something like, "apt install php8.0-fpm" if you put "fpm" in here for "extension1"
 ###############################################################################################
 # License Agreement:
 # This file is part of The Agile Deployment Toolkit.
