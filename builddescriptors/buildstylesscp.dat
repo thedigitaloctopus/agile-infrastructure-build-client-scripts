@@ -49,3 +49,5 @@ NGINX:repo
 APACHE:repo
 LIGHTTPD:repo
 POSTGRES:repo
+PHP:fpm:cli:gmp:xmlrpc:soap:dev:mysqli:phpdbg:mbstring:gd:imap:ldap:pgsql:pspell:tidy:intl:gd:curl:zip:xml:imagick:ssh2:sqlite3
+
