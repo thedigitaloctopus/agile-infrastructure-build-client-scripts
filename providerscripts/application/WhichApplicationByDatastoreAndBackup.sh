@@ -25,6 +25,13 @@ status () {
     /bin/echo "$1" | /usr/bin/tee /dev/fd/3
 }
 
+
+database_engine="`/bin/cat ${INTERROGATION_HOME}/tmp/backup/dbe.dat`"
+if ( [ "${database_engine}" != "" ] && [ "${database_engine}" != "${DATABASE_INSTALLATION_TYPE}" ] )
+then 
+    export DATABASE_INSTALLATION_TYPE="${database_engine}"
+fi
+
 #################JOOMLA################
 if ( [ -f ${INTERROGATION_HOME}/tmp/backup/configuration.php ] )
 then
