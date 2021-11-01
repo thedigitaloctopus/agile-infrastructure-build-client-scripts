@@ -25,17 +25,6 @@ status () {
     /bin/echo "$1" | /usr/bin/tee /dev/fd/3
 }
 
-
-database_engine="`/bin/cat ${INTERROGATION_HOME}/${backuprepository}/dbe.dat`"
-if ( [ "${database_engine}" != "" ] && [ "${database_engine}" != "${DATABASE_INSTALLATION_TYPE}" ] )
-then 
-    if ( [ "${database_engine}" = "MySQL" ] && [ "${DATABASE_INSTALLATION_TYPE}" = "Maria" ] )
-    then
-        database_engine="Maria"
-    fi
-    export DATABASE_INSTALLATION_TYPE="${database_engine}"
-fi
-
 #################JOOMLA################
 if ( [ -d ${INTERROGATION_HOME}/${backuprepository}/administrator ] && [ -d ${INTERROGATION_HOME}/${backuprepository}/modules ] && [ -d ${INTERROGATION_HOME}/${backuprepository}/plugins ] )
 then
