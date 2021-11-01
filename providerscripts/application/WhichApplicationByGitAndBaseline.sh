@@ -25,6 +25,12 @@ status () {
     /bin/echo "$1" | /usr/bin/tee /dev/fd/3
 }
 
+database_engine="`/bin/cat ${INTERROGATION_HOME}/${APPLICATION_BASELINE_SOURCECODE_REPOSITORY}/dbe.dat`"
+if ( [ "${database_engine}" != "" ] && [ "${database_engine}" != "${DATABASE_INSTALLATION_TYPE}" ] )
+then 
+    export DATABASE_INSTALLATION_TYPE="${database_engine}"
+fi
+
 #################JOOMLA################
 if ( [ -d ${INTERROGATION_HOME}/${APPLICATION_BASELINE_SOURCECODE_REPOSITORY}/administrator ] && [ -d ${INTERROGATION_HOME}/${APPLICATION_BASELINE_SOURCECODE_REPOSITORY}/modules ] && [ -d ${INTERROGATION_HOME}/${APPLICATION_BASELINE_SOURCECODE_REPOSITORY}/plugins ] )
 then
