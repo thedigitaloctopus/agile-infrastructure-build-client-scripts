@@ -96,6 +96,7 @@ then
     status "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
     status "########################################################################################################################"
     read response
+    /bin/echo "" >> /etc/ssh/ssh_config
     /bin/echo "ServerAliveInterval 240" >> /etc/ssh/ssh_config
     /bin/echo "ServerAliveCountMax 5" >> /etc/ssh/ssh_config
     actioned="1"  
@@ -110,6 +111,7 @@ then
     status "If this is OK, press the <enter> key, if not, then ctrl-c to exit"
     status "########################################################################################################################"
     read response
+    /bin/echo "" >> /etc/ssh/sshd_config
     /bin/echo "ClientAliveInterval 60
 TCPKeepAlive yes
 ClientAliveCountMax 10000" >> /etc/ssh/sshd_config
