@@ -53,9 +53,12 @@ then
     
             if ( [ "${snapshotids}" != "" ] )
             then
-                AUTOSCALER_IMAGE_ID="`/bin/echo ${snapshotids} | /usr/bin/awk -F':' '{print $1}'`"
-                WEBSERVER_IMAGE_ID="`/bin/echo ${snapshotids} | /usr/bin/awk -F':' '{print $2}'`"
-                DATABASE_IMAGE_ID="`/bin/echo ${snapshotids} | /usr/bin/awk -F':' '{print $3}'`"
+                if ( [ "${AUTOSCALER_IMAGE_ID}" = "" ] && [ "${WEBSERVER_IMAGE_ID}" = "" ] && [ "${DATABASE_IMAGE_ID}" = "" ] )
+                then
+                    AUTOSCALER_IMAGE_ID="`/bin/echo ${snapshotids} | /usr/bin/awk -F':' '{print $1}'`"
+                    WEBSERVER_IMAGE_ID="`/bin/echo ${snapshotids} | /usr/bin/awk -F':' '{print $2}'`"
+                    DATABASE_IMAGE_ID="`/bin/echo ${snapshotids} | /usr/bin/awk -F':' '{print $3}'`"
+                fi
             fi
         fi
     fi
