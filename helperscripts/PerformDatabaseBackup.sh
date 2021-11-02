@@ -55,8 +55,6 @@ else
     exit
 fi
 
-
-
 /bin/echo "What is the build identifier you want to connect to?"
 /bin/echo "You have these builds to choose from: "
 /bin/ls ${BUILD_HOME}/buildconfiguration/${CLOUDHOST} | /bin/grep -v 'credentials'
@@ -72,7 +70,6 @@ then
 fi
 
 DIR="`/bin/pwd`"
-
 
 /bin/echo "Which Database server would you like to connect to?"
 count=1
