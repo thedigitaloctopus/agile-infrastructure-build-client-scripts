@@ -132,6 +132,10 @@ fi
 if ( [ "${periodicity}" = "6" ] )
 then
     periodicity="MANUAL"
+    if ( [ ! -d ${BUILD_HOME}/manualbackups ] )
+    then
+        /bin/mkdir ${BUILD_HOME}/manualbackups
+    fi
 fi
 if ( [ "${periodicity}" = "7" ] )
 then
