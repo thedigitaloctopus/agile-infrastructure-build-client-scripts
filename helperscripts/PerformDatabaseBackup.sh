@@ -131,7 +131,8 @@ then
     periodicity="MANUAL"
     if ( [ ! -d ${BUILD_HOME}/manualbackups ] )
     then
-        /bin/mkdir ${BUILD_HOME}/manualbackups
+        /bin/mkdir -p ${BUILD_HOME}/manualbackups/backup.$$
+        /bin/mv ${BUILD_HOME}/manualbackups/* ${BUILD_HOME}/manualbackups/backup.$$
     fi
 fi
 if ( [ "${periodicity}" = "7" ] )
