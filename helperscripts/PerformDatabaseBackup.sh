@@ -168,11 +168,12 @@ then
         /bin/echo "Making database backup for ${period} backup"
         /bin/sleep 5
         /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${DB_IP} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/git/Backup.sh ${period} ${build_identifier}" 2>/dev/null
-        if ( [ "$?" != "0" ] )
-        then
-            /bin/echo "Failed to make a backup of your database, sorry..."
-        fi
     done
+    
+    if ( [ "${periodicity}" = "MANUAL" ] )
+    then
+        /usr/bin/scp -o ConnectTimeout=5 -o ConnectionAttempts=2 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -P ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} "${SERVER_USERNAME}@${DB_IP}:/tmp/backup_archive/*.tar.gz" ${BUILD_HOME}/manualbackups
+    fi
 elif ( [ "${response}" = "2" ] )
 then
     /bin/echo ""
@@ -190,12 +191,18 @@ then
     build_identifier="`/usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${DB_IP} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'" 2>/dev/null`"
     /bin/echo "Build identifier is set to: ${build_identifier}"
     /bin/echo "OK, ready to create backup - press enter to confirm"
+    
     for period in ${periodicity}
     do
         /bin/echo "Making database backup for ${period} backup"
         /bin/sleep 5
         /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${DB_IP} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/git/Backup.sh ${period} ${build_identifier}" 2>/dev/null
     done
+    
+    if ( [ "${periodicity}" = "MANUAL" ] )
+    then
+        /usr/bin/scp -o ConnectTimeout=5 -o ConnectionAttempts=2 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -P ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_ecdsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} "${SERVER_USERNAME}@${DB_IP}:/tmp/backup_archive/*.tar.gz" ${BUILD_HOME}/manualbackups
+    fi
 else
     /bin/echo "Unrecognised selection, please select only 1 or 2"
 fi
