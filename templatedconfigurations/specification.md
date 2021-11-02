@@ -475,23 +475,25 @@ Linode: Available regions you can set for linode are: "ap-west","ap-central","ap
 
 Vultr: Available regions you can set for vultr are:  
 
-34 - Seoul  
-40 - Singapore  
-25 - Tokyo  
-19 - Sydney  
-7  - Amsterdam  
-9  - Frankfurt  
-8  - London  
-24 - Paris  
-6  - Atlanta  
-2  - Chicago  
-3  - Dallas  
-5  - Los Angeles  
-39 - Miami  
-1  - New Jersey  
-4  - Seattle  
-12 - Silicon Valley  
-22 - Toronto  
+ams     Amsterdam     
+atl     Atlanta        
+cdg     Paris          
+dfw     Dallas         
+ewr     New Jersey     
+fra     Frankfurt       
+icn     Seoul          
+lax     Los Angeles   
+lhr     London         
+mex     Mexico City    
+mia     Miami           
+nrt     Tokyo         
+ord     Chicago        
+sea     Seattle         
+sgp     Singapore      
+sjc     Silicon Valley 
+sto     Stockholm       
+syd     Sydney         
+yto     Toronto
 
 AWS: one of: eu-north-1, ap-south-1, eu-west-3, eu-west-2, eu-west-1, ap-northeast-2, ap-northeast-1, sa-east-1, ca-central-1, ap-southeast-1, ap-southeast-2, eu-central-1, us-east-1, us-east-2, us-west-1, us-west-2
 
