@@ -520,7 +520,7 @@ Exoscale: 10G,50G,200G,300G,400G
 
 Linode: g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-standard-8,g6-standard-16,g6-standard-20,g6-standard-24,g6-standard-32
 
-Vultr: Available sizes you can set for your machines on vultr are: "1024","2048","4096","8192","16384","32768","24576","32768","49152","65536","98304"
+Vultr: Available sizes you can set for your machines on vultr are: vc2-1c-1gb, vc2-1c-2gb, vc2-2c-4gb, vc2-4c-8gb, vc2-6c-16gb, vc2-8c-32gb
 
 AWS: t2.micro t2.small t2.medium t2.large t2.xlarge t2.2xlarge
 
@@ -545,18 +545,7 @@ Exoscale:  SERVER_TYPE for each machine size. If your machine is set to
 
 Linode: g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-standard-8,g6-standard-16,g6-standard-20,g6-standard-24,g6-standard-32
 
-Vultr:  SERVER_TYPE values for each machine size on vultr  
-
-1024 : 400  
-2048 : 401  
-4096 : 402  
-8192 : 403  
-16384 : 404  
-24576 : 117  
-32768 : 405  
-49152 : 406  
-65536 : 207  
-98304 : 208  
+Vultr:  SERVER_TYPE values for each machine size on vultr  vc2-1c-1gb, vc2-1c-2gb, vc2-2c-4gb, vc2-4c-8gb, vc2-6c-16gb, vc2-8c-32gb
 
 AWS  :  t2.micro t2.small t2.medium t2.large t2.xlarge t2.2xlarge
 
