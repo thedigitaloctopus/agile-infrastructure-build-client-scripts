@@ -26,7 +26,7 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################################
 ###############################################################################################
-set -x
+#set -x
 
 export PUBLIC_KEY_NAME="AGILE_TOOLKIT_PUBLIC_KEY"
 
