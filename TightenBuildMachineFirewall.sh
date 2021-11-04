@@ -69,11 +69,8 @@ else
     /usr/sbin/ufw --force reset
     /usr/sbin/ufw default deny incoming
     /usr/sbin/ufw default allow outgoing
-    if ( [ "`/usr/sbin/ufw status 2>/dev/null | /bin/grep inactive`" != "" ] )
-    then
-        /usr/sbin/ufw allow ${SSH_PORT}
-        /bin/echo "y" | /usr/sbin/ufw enable
-    fi
+    /usr/sbin/ufw allow ${SSH_PORT}
+    /bin/echo "y" | /usr/sbin/ufw enable
 fi
 
 if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" != "" ] )
