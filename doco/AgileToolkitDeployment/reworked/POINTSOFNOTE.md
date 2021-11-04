@@ -50,3 +50,5 @@ configure how many webservers are running for different times of day and you can
 ##### Drupal using MySQL, MariaDB or Postgres is supported  
 ##### Moodle using MySQL, MariaDB or Postgres is supported
 
+19. About 2% of builds fail because of some sort of service problem. For example, I just tried a build and the pcre.org site which the build depends on was down so the build didn't complete. In these scenarios it might be possible to try a different build configuration which bypasses a down service or you just have to wait until the service comes back online. 
+
