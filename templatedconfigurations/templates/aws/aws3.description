@@ -14,22 +14,22 @@ The temporal repositories will need to be of the nomenclature:
 <subdomain>-<website-name>-webroot-sourcecode-${BUILD_ARCHIVE_CHOICE}-${BUILD_IDENTIFIER}
 <subdomain>-<website-name>-db-${BUILD_ARCHIVE_CHOICE}-${BUILD_IDENTIFIER}
 
-For a Joomla application, you will need to set:
+For a Joomla application, in your template ( ${BUILD_HOME}/templatedconfigurations/templates/aws/aws3.tmpl ) you will need to set:
 
 export APPLICATION="joomla"
 export APPLICATION_IDENTIFIER="1" #This is set to 1 for Joomla
 
-For a Wordpress application you will need to set:
+For a Wordpress application, in your template ( ${BUILD_HOME}/templatedconfigurations/templates/aws/aws3.tmpl )  you will need to set:
 
 export APPLICATION="wordpress"
 export APPLICATION_IDENTIFIER="2" #This is set to 2 for Wordpress
 
-For a Drupal application, you will need to set:
+For a Drupal application, in your template ( ${BUILD_HOME}/templatedconfigurations/templates/aws/aws3.tmpl )  you will need to set:
 
 export APPLICATION="drupal"
 export APPLICATION_IDENTIFIER="3" #This is set to 3 for Drupal
 
-For a Moodle application, you will need to set:
+For a Moodle application, in your template ( ${BUILD_HOME}/templatedconfigurations/templates/aws/aws3.tmpl )  you will need to set:
 
 export APPLICATION="moodle"
 export APPLICATION_IDENTIFIER="4" #This is set to 4 for Moodle
