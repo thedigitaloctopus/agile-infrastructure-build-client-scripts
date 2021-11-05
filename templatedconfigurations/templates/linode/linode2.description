@@ -4,25 +4,25 @@ DEPLOY A BASELINED JOOMLA, WORDPRESS,DRUPAL or MOODLE APPLICATION IN DEVELOPMENT
 For this you will need to have a baselined application stored with your git provider. This means two repositories, one for the webroot and one for the database.
 You can review in the ${BUILD_HOME}/doco/ directory how to baseline an application (in other words, create these two repositories).
 
-For a Joomla application, you will need to set:
+For a Joomla application, in your template ( ${BUILD_HOME}/templatedconfigurations/templates/linode/linode2.tmpl ) you will need to set:
 
 export BASELINE_DB_REPOSITORY="<identifier>-db-baseline" #The repository with your application's database
 export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="<identifier>-webroot-sourcecode-baseline" #The repository with your application's webroot
 export APPLICATION_IDENTIFIER="1" #This is set to 1 for Joomla
 
-For a Wordpress application you will need to set:
+For a Wordpress application, in your template ( ${BUILD_HOME}/templatedconfigurations/templates/linode/linode2.tmpl ) you will need to set:
 
 export BASELINE_DB_REPOSITORY="<identifier>-db-baseline" #The repository with your application's database
 export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="<identifier>-webroot-sourcecode-baseline" #The repository with your application's webroot
 export APPLICATION_IDENTIFIER="2" #This is set to 2 for Wordpress
 
-For a Drupal application, you will need to set:
+For a Drupal application, in your template ( ${BUILD_HOME}/templatedconfigurations/templates/linode/linode2.tmpl ) you will need to set:
 
 export BASELINE_DB_REPOSITORY="<identifier>-db-baseline" #The repository with your application's database
 export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="<identifier>-webroot-sourcecode-baseline" #The repository with your application's webroot
 export APPLICATION_IDENTIFIER="3" #This is set to 3 for Drupal
 
-For a Moodle application, you will need to set:
+For a Moodle application, in your template ( ${BUILD_HOME}/templatedconfigurations/templates/linode/linode2.tmpl ) you will need to set:
 
 export BASELINE_DB_REPOSITORY="<identifier>-db-baseline" #The repository with your application's database
 export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="<identifier>-webroot-sourcecode-baseline" #The repository with your application's webroot
