@@ -52,3 +52,4 @@ configure how many webservers are running for different times of day and you can
 
 19. About 2% of builds fail because of some sort of service problem. For example, I just tried a build and the pcre.org site which the build depends on was down so the build didn't complete. In these scenarios it might be possible to try a different build configuration which bypasses a down service or you just have to wait until the service comes back online. 
 
+20. I haven't been able to figure out why, but, sometimes the ubuntu machine's networking availability freezes for about 10 minutes during the build. For this reason its recommended to only use debian on vultr unless you can use ubuntu and figure out why that is happening, I couldn't. 
