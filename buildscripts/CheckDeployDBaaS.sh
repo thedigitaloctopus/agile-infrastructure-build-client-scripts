@@ -76,4 +76,5 @@ then
     export DBaaS_USERNAME="`/usr/local/bin/doctl databases user list ${cluster_id} | /usr/bin/awk '{print $1}' | /usr/bin/tail -1`"
     export DBaaS_PASSWORD="`/usr/local/bin/doctl databases user list ${cluster_id} | /usr/bin/awk '{print $3}' | /usr/bin/tail -1`"
     export DBaaS_DBNAME="${DATABASE_NAME}"
+    export DB_PORT="25060"
 fi
