@@ -17,21 +17,39 @@ then
         DATABASE_NAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $7}'`"
     fi
 
-    /usr/local/bin/doctl databases create ${CLUSTER_NAME} --engine ${CLUSTER_ENGINE} --region ${CLUSTER_REGION}  --num-nodes ${CLUSTER_NODES} --size ${CLUSTER_SIZE} --version ${CLUSTER_VERSION} 
-
     cluster_id="`/usr/local/bin/doctl databases list | /bin/grep ${CLUSTER_NAME} | /usr/bin/awk '{print $1}'`"
+    
+    if ( [ "${cluster_id}" = "" ] )
+    then
+        status "Creating the database cluster ${CLUSTER_NAME}, this could take a few minutes...."
+        
+        /usr/local/bin/doctl databases create ${CLUSTER_NAME} --engine ${CLUSTER_ENGINE} --region ${CLUSTER_REGION}  --num-nodes ${CLUSTER_NODES} --size ${CLUSTER_SIZE} --version ${CLUSTER_VERSION} 
+        if ( [ "$?" != "0" ] )
+        then
+            status "I had trouble creating the database cluster will have to exit....."
+            exit
+        fi
+    fi
 
     while ( [ "${cluster_id}" = "" ] )
     do
+        status "Trying to obtain cluster id for the ${CLUSTER_NAME} cluster..."
         cluster_id="`/usr/local/bin/doctl databases list | /bin/grep ${CLUSTER_NAME} | /usr/bin/awk '{print $1}'`"
-        /bin/sleep 10
+        /bin/sleep 30
     done
 
     /usr/local/bin/doctl databases db create ${cluster_id} ${DATABASE_NAME}
+    
+    while ( [ "$?" != "0" ] )
+    do
+        /usr/local/bin/doctl databases db create ${cluster_id} ${DATABASE_NAME}
+        /bin/sleep 30
+    done
 
 
     while ( [ "`/usr/local/bin/doctl databases db list ${cluster_id} ${DATABASE_NAME} | /bin/grep ${DATABASE_NAME}`" = "" ] )
     do
+        status "Probing for a database called ${DATABASE_NAME} in the cluster called ${CLUSTER_NAME}"
         /bin/sleep 10
     done
 
