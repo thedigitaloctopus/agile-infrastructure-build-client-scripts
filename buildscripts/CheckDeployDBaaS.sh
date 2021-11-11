@@ -35,7 +35,14 @@ then
         /bin/sleep 10
     done
 
-    export DATABASE_DBaaS_INSTALLATION_TYPE="DBaaS" 
+    if ( [ "${CLUSTER_ENGINE}" = "mysql" ] )
+    then
+        export DATABASE_DBaaS_INSTALLATION_TYPE="MySQL"
+    elif ( [ "${CLUSTER_ENGINE}" = "postgres" ] )
+    then
+        export DATABASE_DBaaS_INSTALLATION_TYPE="Postgres"
+    fi
+   
     export DBaaS_HOSTNAME="`/usr/local/bin/doctl databases connection ${cluster_id} | /usr/bin/awk '{print $3}' | /usr/bin/tail -1`"
     export DBaaS_USERNAME="`/usr/local/bin/doctl databases user list ${cluster_id} | /usr/bin/awk '{print $1}' | /usr/bin/tail -1`"
     export DBaaS_PASSWORD="`/usr/local/bin/doctl databases user list ${cluster_id} | /usr/bin/awk '{print $3}' | /usr/bin/tail -1`"
