@@ -35,6 +35,14 @@ else
     then
         /usr/bin/curl -X POST "https://api.cloudflare.com/client/v4/zones" -H "X-Auth-Email: ${email}" -H "X-Auth-Key: ${apikey}" -H "Content-Type: application/json" --data "{\"name\":\"${websiteurl}\"}" > /dev/null 2>&1
     fi
+    
+    domainurl="`/bin/echo ${3} | /usr/bin/cut -d'.' -f2-`"
+    dns="${4}"
+    
+    if ( [ "${dns}" = "digitalocean" ] )
+    then
+        /usr/local/bin/doctl compute domain create ${domainurl}
+    fi
 
     email="${1}"
     apikey="${2}"
