@@ -211,11 +211,6 @@ then
                 /bin/touch ${BUILD_HOME}/runtimedata/EXUPDATEDSOFTWARE
             elif ( [ "`/usr/bin/awk -F= '/^NAME/{print $2}' /etc/os-release | /bin/grep "Debian"`" != "" ] )
             then
-	    	status "##################################################################################################"
-	        status "I am about to make software changes on this machine. If you are OK with that, please press <enter>"
-	        status "##################################################################################################"
-	        status read x
-                
 		status "Performing software update....."
                 ${BUILD_HOME}/installscripts/Update.sh "debian"  >>${UPGRADE_LOG} 2>&1
                 status "Performing software upgrade....."
