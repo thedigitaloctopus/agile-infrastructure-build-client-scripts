@@ -52,6 +52,11 @@ then
         status "Probing for a database called ${DATABASE_NAME} in the cluster called ${CLUSTER_NAME}"
         /bin/sleep 10
     done
+    status "######################################################################################################################################################"
+    status "You might want to check that a database cluster called ${CLUSTER_NAME} with a database ${DATABASE_NAME} is present using your Digital Ocean gui system"
+    status "######################################################################################################################################################"
+    status "Press <enter> when you are satisfied"
+    read x
 
     if ( [ "${CLUSTER_ENGINE}" = "mysql" ] )
     then
