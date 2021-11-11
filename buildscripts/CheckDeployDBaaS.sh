@@ -5,6 +5,8 @@
 
 if ( [ "${CLOUDHOST}" = "digitalocean" ] )
 then
+    
+        
     if ( [ "`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/grep DBAAS`" != "" ] )
     then
         database_details="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/sed 's/^DBAAS://g'`"
@@ -16,6 +18,8 @@ then
         CLUSTER_NAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $6}'`"
         DATABASE_NAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $7}'`"
     fi
+    
+    status "Configuring database cluster ${CLUSTER_NAME}, please wait..."
 
     cluster_id="`/usr/local/bin/doctl databases list | /bin/grep ${CLUSTER_NAME} | /usr/bin/awk '{print $1}'`"
     
@@ -52,6 +56,7 @@ then
         status "Probing for a database called ${DATABASE_NAME} in the cluster called ${CLUSTER_NAME}"
         /bin/sleep 10
     done
+    
     status "######################################################################################################################################################"
     status "You might want to check that a database cluster called ${CLUSTER_NAME} with a database ${DATABASE_NAME} is present using your Digital Ocean gui system"
     status "######################################################################################################################################################"
@@ -65,7 +70,8 @@ then
     then
         export DATABASE_DBaaS_INSTALLATION_TYPE="Postgres"
     fi
-   
+    
+    export DATABASE_INSTALLATION_TYPE="DBaaS"
     export DBaaS_HOSTNAME="`/usr/local/bin/doctl databases connection ${cluster_id} | /usr/bin/awk '{print $3}' | /usr/bin/tail -1`"
     export DBaaS_USERNAME="`/usr/local/bin/doctl databases user list ${cluster_id} | /usr/bin/awk '{print $1}' | /usr/bin/tail -1`"
     export DBaaS_PASSWORD="`/usr/local/bin/doctl databases user list ${cluster_id} | /usr/bin/awk '{print $3}' | /usr/bin/tail -1`"
