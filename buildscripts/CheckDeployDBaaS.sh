@@ -51,7 +51,7 @@ then
         /usr/local/bin/doctl databases firewalls remove ${uuid}
     done
     
-    /usr/local/bin/doctl databases firewalls append ${cluster_id} --rule ip_addr:${BUILD_CLIENT_IP}    
+ #   /usr/local/bin/doctl databases firewalls append ${cluster_id} --rule ip_addr:${BUILD_CLIENT_IP}    
    
     status "Creating a database neame ${DATABASE_NAME} in cluster: ${cluster_id}"
     
