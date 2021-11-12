@@ -565,8 +565,9 @@ else
     fi
 
     . ${BUILD_HOME}/buildscripts/BuildWebserver.sh
-    . ${BUILD_HOME}/buildscripts/TightenDBaaSFirewall.sh
     . ${BUILD_HOME}/buildscripts/BuildDatabase.sh
+    . ${BUILD_HOME}/buildscripts/TightenDBaaSFirewall.sh
+
     ##Do the build finalisation procedures
     . ${BUILD_HOME}/buildscripts/FinaliseBuildProcessing.sh
 
