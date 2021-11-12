@@ -23,7 +23,7 @@ then
     
     if ( [ "${cluster_id}" = "" ] )
     then
-        status "Creating the database cluster ${CLUSTER_NAME}, this could take a few minutes...."
+        status "Creating the database cluster ${CLUSTER_NAME}"
         
         /usr/local/bin/doctl databases create ${CLUSTER_NAME} --engine ${CLUSTER_ENGINE} --region ${CLUSTER_REGION}  --num-nodes ${CLUSTER_NODES} --size ${CLUSTER_SIZE} --version ${CLUSTER_VERSION} 
         if ( [ "$?" != "0" ] )
@@ -57,7 +57,7 @@ then
 
     while ( [ "`/usr/local/bin/doctl databases db list ${cluster_id} ${DATABASE_NAME} | /bin/grep ${DATABASE_NAME}`" = "" ] )
     do
-        status "Probing for a database called ${DATABASE_NAME} in the cluster called ${CLUSTER_NAME}"
+        status "Probing for a database called ${DATABASE_NAME} in the cluster called ${CLUSTER_NAME} - Please Wait...."
         /bin/sleep 10
     done
     
