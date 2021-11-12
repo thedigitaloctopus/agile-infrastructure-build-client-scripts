@@ -5,8 +5,6 @@
 
 if ( [ "${CLOUDHOST}" = "digitalocean" ] )
 then
-    
-        
     if ( [ "`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/grep DBAAS`" != "" ] )
     then
         database_details="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/sed 's/^DBAAS://g'`"
