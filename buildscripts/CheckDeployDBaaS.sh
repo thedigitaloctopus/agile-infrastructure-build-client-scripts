@@ -58,7 +58,7 @@ then
     while ( [ "`/usr/local/bin/doctl databases db list ${cluster_id} ${DATABASE_NAME} | /bin/grep ${DATABASE_NAME}`" = "" ] )
     do
         status "Probing for a database called ${DATABASE_NAME} in the cluster called ${CLUSTER_NAME} - Please Wait...."
-        /bin/sleep 10
+        /bin/sleep 30
     done
     
     status "######################################################################################################################################################"
