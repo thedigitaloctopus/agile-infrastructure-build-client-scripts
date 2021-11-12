@@ -44,6 +44,13 @@ then
     
     status "Tightening the firewall on your database cluster"
     
+    uuids="`/usr/local/bin/doctl databases firewalls list ${cluster_id} | /usr/bin/tail -n +2 | /usr/bin/awk '{print $1}'`"
+
+    for uuid in ${uuids}  
+    do
+        /usr/local/bin/doctl databases firewalls remove ${uuid}
+    done
+    
     /usr/local/bin/doctl databases firewalls append ${cluster_id} --rule ip_addr:${BUILD_CLIENT_IP}    
    
     status "Creating a database neame ${DATABASE_NAME} in cluster: ${cluster_id}"
