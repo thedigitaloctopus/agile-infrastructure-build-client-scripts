@@ -47,18 +47,12 @@ then
     status "Creating a database neame ${DATABASE_NAME} in cluster: ${cluster_id}"
     
     /usr/local/bin/doctl databases db create ${cluster_id} ${DATABASE_NAME}
-    
-    while ( [ "$?" != "0" ] )
-    do
-        /usr/local/bin/doctl databases db create ${cluster_id} ${DATABASE_NAME}
-        /bin/sleep 30
-    done
-
 
     while ( [ "`/usr/local/bin/doctl databases db list ${cluster_id} ${DATABASE_NAME} | /bin/grep ${DATABASE_NAME}`" = "" ] )
     do
         status "Probing for a database called ${DATABASE_NAME} in the cluster called ${CLUSTER_NAME} - Please Wait...."
         /bin/sleep 30
+        /usr/local/bin/doctl databases db create ${cluster_id} ${DATABASE_NAME}
     done
     
     status "######################################################################################################################################################"
