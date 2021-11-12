@@ -1,6 +1,8 @@
 #!/bin/sh
 #########################################################################################################
-#DATABASE_DBaaS_INSTALLATION_TYPE="DBAAS:mysql:lon1:1:db-s-1vcpu-1gb:8:testdbcluster1:testdb1"
+#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mysql:lon1:1:db-s-1vcpu-1gb:8:testdbcluster1:testdb1"
+#DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:lon1:1:db-s-1vcpu-1gb:8:testdbcluster1:testdb1"
+#DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:pg:lon1:1:db-s-1vcpu-1gb:8:testdbcluster1:testdb1"
 #########################################################################################################
 
 if ( [ "${CLOUDHOST}" = "digitalocean" ] )
