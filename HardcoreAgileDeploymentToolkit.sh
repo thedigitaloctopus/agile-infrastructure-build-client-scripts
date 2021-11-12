@@ -338,6 +338,7 @@ then
     fi
 
     . ${BUILD_HOME}/buildscripts/BuildFromSnapshots.sh
+    . ${BUILD_HOME}/buildscripts/TightenDBaaSFirewall.sh
 
     status ""
     status "##########################################################################################################"
@@ -352,6 +353,7 @@ else
     fi
     . ${BUILD_HOME}/buildscripts/BuildWebserver.sh
     . ${BUILD_HOME}/buildscripts/BuildDatabase.sh
+    . ${BUILD_HOME}/buildscripts/TightenDBaaSFirewall.sh
     ##Do the build finalisation procedures
     . ${BUILD_HOME}/buildscripts/FinaliseBuildProcessing.sh
     #If we have any messages to put out to the user post build, we add them to this script
