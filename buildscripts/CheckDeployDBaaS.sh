@@ -41,7 +41,13 @@ then
         cluster_id="`/usr/local/bin/doctl databases list | /bin/grep ${CLUSTER_NAME} | /usr/bin/awk '{print $1}'`"
         /bin/sleep 30
     done
-
+    
+    status "Tightening the firewall on your database cluster"
+    
+    /usr/local/bin/doctl databases firewalls append ${cluster_id} --rule ip_addr:${BUILD_CLIENT_IP}    
+   
+    status "Creating a database neame ${DATABASE_NAME} in cluster: ${cluster_id}"
+    
     /usr/local/bin/doctl databases db create ${cluster_id} ${DATABASE_NAME}
     
     while ( [ "$?" != "0" ] )
