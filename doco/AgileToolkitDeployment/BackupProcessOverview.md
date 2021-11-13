@@ -21,3 +21,7 @@ You can use any either of these scripts at any time from your build machine to m
 If you have made a temporal backup from your baseline machines in development mode, then, shutdown your development machines and redeploy in production mode from your temporal backups to "go live" with your application.
 
 **NOTE** if your baseline is to be used by 3rd parties by making the repository public ensure that there's no senstive credentials either in the database dump or the webroot sourcecode. Believe it or not, there are bots and people who trawl git repos for such oversights. 
+
+You can find a more detail explanation of the backup and baseline process here: 
+
+[Backup and Basseline](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/doco/AgileToolkitDeployment/BaselinesAndBackups.md)
