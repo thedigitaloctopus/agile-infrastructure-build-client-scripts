@@ -28,7 +28,8 @@ and
     The APPLICATIONIDENTIFIER should be set to 3 if your application is Drupal based  
     The APPLICATIONIDENTIFIER should be set to 4 if your application is Moodle based  
 
-    If it is not set correctly you can modify it by executing the following scripts on your webserver machine and the database machine from the build machine:
+    If it is not set correctly you can modify it by executing the following scripts on your webserver machine and the database machine from the build machine:  
+    
     
     **cd ${BUILD_HOME}/helperscripts/** 
     **./ExecuteOnWebserver.sh "/home/${SERVER_USERNAME}/providerscripts/utilities/StoreConfigValue.sh \"APPLICATIONIDENTIFIER\" \"(1|2|3|4)\""**
