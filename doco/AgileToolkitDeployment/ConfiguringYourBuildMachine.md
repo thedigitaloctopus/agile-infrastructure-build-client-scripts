@@ -39,7 +39,9 @@ With that done, here is a more detailed review of the protocol for authenticatio
 
 5. You will then be root  
 
-6. **cd /home/${BUILDMACHINE_USER}/agile-deployment**. If you are using a hardcore build, your build process will be proceeding automatically, if you are using an expedited build, you will need to run **ExpeditedAgileDeploymentToolkit.sh** and if you are running a full build, you need to run **AgileDeploymentToolkit.sh**
+6. **cd /home/${BUILDMACHINE_USER}/agile-deployment-toolkit**. 
+
+If you are using a hardcore build, your build process will be proceeding automatically, if you are using an expedited build, you will need to run **ExpeditedAgileDeploymentToolkit.sh** and if you are running a full build, you need to run **AgileDeploymentToolkit.sh**
 
 7. When you do an /bin/ls from here, you will see a directory helperscripts which you can cd into  
 
