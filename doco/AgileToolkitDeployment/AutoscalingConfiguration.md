@@ -14,6 +14,6 @@ You can also configure the scaling process to intiate at set times in the day. F
 
 from within cron to set how and when to scale up and scale down on a daily basis. If you want to set more scaling options automatically, you could, for example, make a copy of the **DailyScaleUp.sh** script and call it "MiddayScaleup.sh" and set a scaling event in cron such that there would be a daily scale up as well as your DailyScaledown and DailyScaleup
 
-#### NOTE: The profile.cnf needs to be a different size for changes to be picked up by s3fs
+#### NOTE: The profile.cnf directory is shared with webserver machines, but, changes to it should only be made on autoscaler machines to be sure that your changes are picked up. S3FS only picks up changes to files if the number of bytes in the files changes so if you changed a 4 to a 8, the number of bytes would be the same and the change would not be picked up. 
 
-I have taken steps to make this so by adding (and removing) spaces from **profile.cnf** from cron such that to trigger the s3fs system and reflect changes across all machines, the byte count of the file varies and therefore changes are picked up and reflected. 
+I have taken steps to remedy this on autoscaler machines, but not webservers or database machines, make this so by adding (and removing) spaces from **profile.cnf** from cron such that to trigger the s3fs system and reflect changes across all machines, the byte count of the file varies and therefore changes are picked up and reflected. 
