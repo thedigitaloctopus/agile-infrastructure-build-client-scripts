@@ -30,7 +30,8 @@ The APPLICATIONIDENTIFIER should be set to 4 if your application is Moodle based
 
 If it is not set correctly you can modify it by executing the following scripts on your webserver machine and the database machine from the build machine:  
     
-**cd ${BUILD_HOME}/helperscripts/** 
+**cd ${BUILD_HOME}/helperscripts/**  
+
 **./ExecuteOnWebserver.sh "/home/${SERVER_USERNAME}/providerscripts/utilities/StoreConfigValue.sh \"APPLICATIONIDENTIFIER\" \"(1|2|3|4)\""**
     
 Alternatively, you can simply use "ConnectToWebserver.sh" and "ConnectToDatabase.sh" and change the value of "APPLICATIONIDENTIFIER" to "(1|2|3|4)" in the files:
