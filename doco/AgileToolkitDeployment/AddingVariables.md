@@ -5,10 +5,10 @@ On the build client repository, add the new variable to **${BUILD_HOME}/builddes
 If you want the variable to be available on autoscaler machines:  
 On the build client repository, add the new variable to **${BUILD_HOME}/builddescriptors/autoscalerscp.dat**  
 
-If you want the variable to be available on the webserver machines:
+If you want the variable to be available on the webserver machines:  
 On the build client repository, add the new variable to **${BUILD_HOME}/builddescriptors/webserverscp.dat**  
 
-if you want the variable to be available on the database machines:
+if you want the variable to be available on the database machines:  
 On the build client repository, add the new variable to **${BUILD_HOME}/builddescriptors/databasescp.dat**  
 
 NOTE: there needs to be an empty line at the end of each file so that all of the lines are read by the script
