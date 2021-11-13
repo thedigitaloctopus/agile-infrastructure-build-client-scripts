@@ -26,8 +26,8 @@ To baseline an application follow these steps
 	
 4. Generate a baseline by manually creating repositories with your (application) git provider with the following nomenclature
 
-  #####  <baseline_name>-webroot-sourcecode-baseline  
-  #####  <baseline_name>-db-baseline  
+  #####  [baseline_name]-webroot-sourcecode-baseline  
+  #####  [baseline_name]-db-baseline  
 	
 5. Once your repositories are created in step 4 above, 
 
@@ -35,7 +35,7 @@ To baseline an application follow these steps
 	 
     ##### sh PerformWebsiteBaseline.sh
 	 
-	 enter **<baseline_name>** for the identifier, all other question should be self explanatory
+	 enter **[baseline_name]** for the identifier, all other question should be self explanatory
 	 
 	 the system will then create the baselined sourcecode for your website in your git provider's repository. 
 	 
@@ -43,7 +43,7 @@ To baseline an application follow these steps
 	 
     ##### sh PerformDatabaseBaseline.sh
 	 
-	 enter **<baseline_name>** for the identifier, all other questions should be self explanatory
+	 enter **[baseline_name]** for the identifier, all other questions should be self explanatory
 	 
 	 the system will then create a baseline of your database in the git provider's repository
 	 
@@ -61,8 +61,8 @@ If you are deploying from a baseline using the hardcore build method, then, you 
 
 **BUILD_CHOICE="1"** Setting this to 1 informs the toolkit that you are using a baseline  
 **BUILD_ARCHIVE_CHOICE="baseline"** This also needs to be set (for different reasons) to "baseline"  
-**export BASELINE_DB_REPOSITORY="<identifier>-db-baseline"** This needs to be set to the name of your database baseline repository  
-**export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="<identifier>-webroot-sourcecode-baseline"** This needs to be set to the name of your website baseline repository  
+**export BASELINE_DB_REPOSITORY="[identifier]-db-baseline"** This needs to be set to the name of your database baseline repository  
+**export APPLICATION_BASELINE_SOURCECODE_REPOSITORY="[identifier]-webroot-sourcecode-baseline"** This needs to be set to the name of your website baseline repository  
 **export DIRECTORIES_TO_MOUNT="wp-content.uploads"** You need to mention which assets directory need to be mounted from the object store (the example here is wordpress)  
 **export APPLICATION_IDENTIFIER="2"**  This needs to be set to 1 for joomla, 2 for wordpress, 3 for drupal or 4 for moodle  
 **export SELECTED_TEMPLATE="3"** This need to be set to 2 for joomla 3 for wordpress 4 for drupal and 5 for moodle  
