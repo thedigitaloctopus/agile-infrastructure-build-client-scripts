@@ -7,7 +7,7 @@ To perform a full build, you need to spin up a secured build machine on your clo
 **BUILDMACHINE_USER**   
 **BUILDMACHINE_PASSWORD**  
 **BUILDMACHINE_SSH_PORT**  
-**LAPTOP_IP**
+**LAPTOP_IP**  
 **SSH**
 
 before pasting it into the user data area of your VPS machine.
@@ -38,8 +38,8 @@ To perform the full build you need to run:
 **BUILDMACHINE_USER**   
 **BUILDMACHINE_PASSWORD**  
 **BUILDMACHINE_SSH_PORT**  
-**LAPTOP_IP**
-**SSH**
+**LAPTOP_IP**  
+**SSH**  
 
 before pasting it into the user data area of your VPS machine.
 
@@ -91,7 +91,7 @@ This can be a useful method if you are not too sure about how the scripts work b
 **BUILDMACHINE_SSH_PORT**  
 **LAPTOP_IP**  
 **SSH**  
-**SELECTED_TEMPLATE**
+**SELECTED_TEMPLATE**  
   
   8. Once you are happy that all the variables are correct copy it in its entirety and paste it into the user-data of a new VPS machine with your cloud provider
   
