@@ -14,3 +14,7 @@ IN_MEMORY_CACHING_HOST=""
 IN_MEMORY_CACHING_SECURITY_GROUP=""**  
 With values obtained from your Elasticcache cluster and refering the specification as well: [Specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md) 
 6) Again on your build client, when you select your **EC2 subnet**, make sure it is the same **subnet** as in 4.
+
+**NOTE:**  
+  
+ Joomla should automatically configure itself to use elasticache or any other caching solution that you install, but, Wordpress,Drupal and Moodle will all require you to use plugins, extensions or modules at an application level to enable in memory caching support. 
