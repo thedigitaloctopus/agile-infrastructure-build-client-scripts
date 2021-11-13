@@ -15,6 +15,6 @@ NOTE: there needs to be an empty line at the end of each file so that all of the
 
 It is then a devlopment task as to how to access the values of these variables which are stored in
 
-**${HOME}/.ssh/autoscaler_configuration_settings.dat** on the autoscaler
-**${HOME}/.ssh/webserver_configuration_settings.dat** on the autoscaler
-**${HOME}/.ssh/database_configuration_settings.dat** on the autoscaler
+**${HOME}/.ssh/autoscaler_configuration_settings.dat** on the autoscaler  
+**${HOME}/.ssh/webserver_configuration_settings.dat** on the autoscaler  
+**${HOME}/.ssh/database_configuration_settings.dat** on the autoscaler  
