@@ -17,4 +17,4 @@ With values obtained from your Elasticcache cluster and refering the specificati
 
 **NOTE:**  
   
- Joomla should automatically configure itself to use elasticache or any other caching solution that you install, but, Wordpress,Drupal and Moodle will all require you to use plugins, extensions or modules at an application level to enable in memory caching support. 
+ Joomla should automatically configure itself as part of the deployment process to use Elasticache or any other caching solution that you install, but, Wordpress,Drupal and Moodle will all require you to use plugins, extensions or modules at an application level to enable in memory caching support. 
