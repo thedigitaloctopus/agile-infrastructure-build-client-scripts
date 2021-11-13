@@ -1,8 +1,6 @@
-## AUTHENTICATION
+## CONFIGURING YOUR BUILD MACHINE
 
-The authentication process for the Agile Deployment Toolkit works as follows. You can use the templare override script to get your machine up. 
-  
-**https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/tree/master/templatedconfigurations/templateoverrides**  
+The authentication process for the Agile Deployment Toolkit works as follows. You can use the templare override script to get your machine up.   
 
 So, I will make it clear by using the template override script as an example for how to authenticate to your servers and build machine.  
 
@@ -10,14 +8,18 @@ So, I will make it clear by using the template override script as an example for
 -------------------------
 ### ESSENTIAL  
 
-The very first thing that you must do is change the values of the  
+The very first thing that you must do is to make a copy of the template override script on your laptop. You can do this either by cloning the repository fully and editing it in place or simply copy and paste the script to your laptop and edit your copy. The template override script id found here:
+
+[OverrideScript](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/OverrideScript.sh)
+
+In your copy, then, change the values of the  
 
 ##### BUILDMACHINE_USER  
 ##### BUILDMACHINE_PASSWORD  
 ##### BUILDMACHINE_SSH_PORT  
 ##### LAPTOP_IP
 
-in your template override script which you are going to populate and pass to your build machines userdata.  
+which you are going to populate and pass to your build machines userdata or init script depending on your providers nomenclature.  
 
 Your build machine is secured using private keys but if you want access root on it, you will need your **BUILDMACHINE_USER** and **BUILDMACHINE_PASSWORD** when you issue the command "sudo su"  
 
