@@ -7,7 +7,7 @@ To do this, you simply have to:
 2) Create a new security group which must be called precisely, "**AgileDeploymentToolkitSecurityGroup**" and assign it to a VPC.
 3) Create your Elasticache cluster using the AWS GUI and assign it to the Security Group you created in 2.
 4) Make a note of which subnet your Elasticache Cluster is in by looking in its assigned subnet group.
-5) Back on the build client, (presuming you are using the full build method) select that you want to use caching and assign the security group id from your new security group. If you are using an Expedited or Hardcore build, you need to assign 
+5) Back on the build client, (presuming you are using the full build method) select that you want to use caching and assign the security group id from your new security group. If you are using an Expedited or Hardcore build, you need to assign   
  **IN_MEMORY_CACHING=""  
 IN_MEMORY_CACHING_PORT=""  
 IN_MEMORY_CACHING_HOST=""  
