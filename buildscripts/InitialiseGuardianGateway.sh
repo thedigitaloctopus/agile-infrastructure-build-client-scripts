@@ -11,9 +11,9 @@ then
     
     if ( [ "${response}" = "y" ] || [ "${response}" = "Y" ] )
     then
-        GUARDIAN_GATEWAY="1"
+        GATEWAY_GUARDIAN="1"
     else
-        GUARDIAN_GATEWAY="0"
+        GATEWAY_GUARDIAN="0"
     fi
     
 fi
