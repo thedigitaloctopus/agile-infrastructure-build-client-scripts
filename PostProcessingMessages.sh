@@ -97,7 +97,7 @@ then
     status ""
     
     status "###############################################################################################################################"
-    status "OK, I'll be kind and show you one time your drupal application credentials."
+    status "OK, I'll be kind and show you one time your drupal database credentials."
     status "Please make a note of them but remember to keep them safe and secret"
     status "============================"
     status "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /bin/cat /home/${SERVER_USER}/config/credentials/shit"`"
@@ -130,7 +130,7 @@ then
     status "###########################################################################################################################################"
     status "You are installing a virgin copy of moodle."
     status "This will install the database for you and you will then have access to your moodle CMS instance"
-    status "OK, I'll be kind and show you one time your moodle credentials. You will need it during the installation process for moodle"
+    status "OK, I'll be kind and show you one time your moodle application credentials. You will need it during the installation process for moodle"
     status "Please make a note of them but remember to keep them safe and secret"
     status "============="
     status "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /bin/cat /home/${SERVER_USER}/config/credentials/shit"`"
