@@ -30,3 +30,9 @@ The settings work as follows:
 -----
 ##### POSTGRES:source
 ##### POSTGRES:repo
+-----
+##### If you are using S3FS for your config and assets you can select one of:
+-----
+##### S3FS:source
+##### S3FS:repo
+-----
