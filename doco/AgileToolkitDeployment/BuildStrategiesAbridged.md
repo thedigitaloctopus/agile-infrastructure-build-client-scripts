@@ -1,6 +1,6 @@
 #### BUILD STRATEGIES (ABRIDGED SUMMARY)
 
-What will happen during a full build (with the AgileDeploymentToolkit) script is that:
+What will happen during a **full build** (with the AgileDeploymentToolkit) script is that:
 
 1. You will provision a vanilla VPS system by populating the 5 or 6 necessary variables only in the [Build Machine](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/OverrideScript.sh) script and pasting it into the user data of a VPS machine that you are provisioning with your cloudhost.
 
@@ -16,15 +16,19 @@ What will happen during a full build (with the AgileDeploymentToolkit) script is
 
 **${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}**
 
-Which you can use next time to build from without answering all the questions or you can take a separate copy of and replace ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER} with any time you want to do the same build again. 
+Which you can use next time to build from without answering all the questions or you can take a separate copy of and replace 
+
+**${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}** 
+
+with any time you want to do the same build again. 
 
 -------------------
 
-During an Expedited build you will follow the same procedure as above, but, you will answer less questions and you will run the script "ExpeditedAgileDeploymentToolkit.sh" instead.
+During an **Expedited build** you will follow the same procedure as above, but, you will answer less questions and you will run the script **"ExpeditedAgileDeploymentToolkit.sh"** instead.
 
 --------------------
 
-During a hardcore build, you have a couple of options
+During a **hardcore build**, you have a couple of options
 
 For Option 1, you can:
 
