@@ -22,10 +22,24 @@ Before you run the Agile Deployment Toolkit build scripts, what you need to do, 
     a) For the full build, you can enter your database details when promppted for as part of the build process.  
     
     b) For an expedited build you will need to set the following parameters in your template  
+       
+       DATABASE_INSTALLATION_TYPE="DBaaS"  
+       DATABASE_DBaaS_INSTALLATION_TYPE=""  
+       DBaaS_HOSTNAME=""  
+       DBaaS_USERNAME=""  
+       DBaaS_PASSWORD=""  
+       DBaaS_DBNAME=""  
+       DB_PORT=""  
     
     c) For a hardcore build you will need to set the following parameters in your user data script  
     
-    
+       DATABASE_INSTALLATION_TYPE="DBaaS"  
+       DATABASE_DBaaS_INSTALLATION_TYPE=""  
+       DBaaS_HOSTNAME=""  
+       DBaaS_USERNAME=""  
+       DBaaS_PASSWORD=""  
+       DBaaS_DBNAME=""  
+       DB_PORT=""  
 
 ##### ESSENTIAL- Make sure you set the DB port in the configuration process to be the same as the port you chose when you deployed your RDS instance with Amazon. 
 
