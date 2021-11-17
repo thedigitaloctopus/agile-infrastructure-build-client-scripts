@@ -12,6 +12,11 @@ To send SMTP mail, the first thing you will need to do is set yourself up an acc
 
 Note: If you have deployed a domain specific email server which you can do using iRedmail, so, if your domain is "darren's social network", www.darrensnet.com with emails from mail.darrensnet.com. then with Send Pulse and possibly other providers, if you register with them using your domain specific emails then the source email address will be set to your own domain name. If you use darren@yahoo.com. then that is the address your emails will be sent from telling little about the originator.
 
+-------------------------
+For an expedited build or a hardcore build, you will need to set the following environment variables to enable the SMTP service which will send you system notification messages. I Joomla install will automatically pick up the credentials you set here and SMTP will be avaiable within Joomla. For other CMSs you will have to install SMTP plugins or extensions and configure the parameters manually. In all cases, system email will be sent according to these parameters.
+
+
+
 So, assuming we have an address notifications@darrensnet.com, then we can see how we need to configure the settings for our two SMTP service providers.
 
 When you are running, for example, the deployment script
