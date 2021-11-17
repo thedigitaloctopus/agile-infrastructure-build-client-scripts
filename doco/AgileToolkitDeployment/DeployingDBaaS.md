@@ -19,9 +19,12 @@ Before you run the Agile Deployment Toolkit build scripts, what you need to do, 
 7) Deploy the database instance, it will take a bit of time.
 8) Once the 'endpoint' becomes available, make a note of it, minus the colon and port number at the end of it.
 9)  
-    a) For the full build, you can enter your database details when promppted for as part of the build process.
-    b) For an expedited build you will need to set the following parameters in your template
-    c) For a hardcore build you will need to set the following parameters in your user data script
+    a) For the full build, you can enter your database details when promppted for as part of the build process.  
+    
+    b) For an expedited build you will need to set the following parameters in your template  
+    
+    c) For a hardcore build you will need to set the following parameters in your user data script  
+    
     
 
 ##### ESSENTIAL- Make sure you set the DB port in the configuration process to be the same as the port you chose when you deployed your RDS instance with Amazon. 
