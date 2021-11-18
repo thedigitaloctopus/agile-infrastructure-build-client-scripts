@@ -141,8 +141,15 @@ then
     export DATABASE_INSTALLATION_TYPE="DBaaS"
     export DATABASE_DBaaS_INSTALLATION_TYPE="${DATABASE_DBaaS_INSTALLATION_TYPE}:${database_name}"
     export DBaaS_HOSTNAME="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq --arg tmp_database_name "${database_name}" '.components[].Info | select (.host | contains($tmp_database_name)).host' | /bin/sed 's/\"//g' | /usr/bin/uniq`"
-    export DBaaS_USERNAME="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.users[].UserName' | /bin/sed 's/\"//g'`"
-    export DBaaS_PASSWORD="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.users[].Password' | /bin/sed 's/\"//g'`"
+    
+    while ( [ "${DBaaS_PASSWORD}" = "" ] || [ "${DBaaS_USERNAME}" = "" ] )
+    do
+        status "Trying to obtain database credentials...."
+        /bin/sleep 10
+        export DBaaS_USERNAME="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.users[].UserName' | /bin/sed 's/\"//g'`"
+        export DBaaS_PASSWORD="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.users[].Password' | /bin/sed 's/\"//g'`"
+    done   
+    
     export DBaaS_DBNAME="${DATABASE_NAME}"
     export DB_PORT="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${database_name} | /usr/bin/jq --arg tmp_database_name "${database_name}" '.components[].Info | select (.host | contains($tmp_database_name)).port' | /bin/sed 's/\"//g' | /usr/bin/head -1`"
 
