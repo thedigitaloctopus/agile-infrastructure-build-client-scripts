@@ -37,11 +37,15 @@ Then copy the tar archive to your laptop
   
    3. On your laptop extract the website_archive.tar.gz into a directory. Create a repository with your git provider with nomenclature:  
    
-   [identifier]-webroot-sourcecode-baseline and push the extracted website_archive.tar.gz into your empty repository.  
+   **[identifier]-webroot-sourcecode-baseline**  
+   
+   and push the extracted website_archive.tar.gz into your empty repository.  
    
    4. Create a repository with your git provider with nomenclature:  
   
-   [identifier]-db-baseline and push the unextracted ${websiteDB} into the new empty repository.  
+   **[identifier]-db-baseline**
+   
+   and push the unextracted ${websiteDB} into the new empty repository.  
    
    With these two repositories on with your git provider, you should be able to deploy your website as you would any other baseline. 
    
