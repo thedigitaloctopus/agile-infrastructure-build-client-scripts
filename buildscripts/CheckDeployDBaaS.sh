@@ -108,7 +108,6 @@ then
     /usr/bin/exo -O json lab database create ${DATABASE_ENGINE} ${DATABASE_SIZE} ${DATABASE_NAME} -z ${DATABASE_REGION}
     database_name="`/usr/bin/exo -O json lab database list | /usr/bin/jq '(.[] | .name)' | /bin/sed 's/\"//g' | /bin/grep ${DATABASE_NAME}`"
 
-    database_name=""
 
     while ( [ "${database_name}" = "" ] )
     do
