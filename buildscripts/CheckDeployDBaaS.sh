@@ -86,3 +86,64 @@ then
     export DBaaS_DBNAME="${DATABASE_NAME}"
     export DB_PORT="25060"
 fi
+
+#########################################################################################################
+#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mysql:ch-gva-2:hobbyist-1:testdb1"
+#DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:ch-gva-2:hobbyist-1:testdb1"
+#DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:pg:ch-gva-2:hobbyist-1:testdb1"
+#########################################################################################################
+if ( [ "${CLOUDHOST}" = "exoscale" ] )
+then
+    if ( [ "`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/grep DBAAS`" != "" ] )
+    then
+        database_details="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/sed 's/^.*DBAAS://g'`"
+        DATABASE_ENGINE="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $1}'`"
+        DATABASE_REGION="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $2}'`"
+        DATABASE_SIZE="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $4}'`"
+        DATABASE_NAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $6}'`"
+    fi
+    
+    status "Creating  database ${DATABASE_NAME}, please wait..."
+
+    /usr/bin/exo -O json lab database create ${DATABASE_ENGINE} ${DATABASE_SIZE} ${DATABASE_NAME} -z ${DATABASE_REGION}
+    database_name="`/usr/bin/exo -O json lab database list | /usr/bin/jq '(.[] | .name)' | /bin/sed 's/\"//g' | /bin/grep ${DATABASE_NAME}`"
+
+    database_name="` 
+    while ( [ "${database_name}" = "" ] )
+    do
+        status "Creating the database named ${DATABASE_NAME}"
+
+        /usr/bin/exo -O json lab database create ${DATABASE_ENGINE} ${DATABASE_SIZE} ${DATABASE_NAME} -z ${DATABASE_REGION}
+        database_name="`/usr/bin/exo -O json lab database list | /usr/bin/jq '(.[] | .name)' | /bin/sed 's/\"//g' | /bin/grep ${DATABASE_NAME}`"
+        
+        if ( [ "${database_name}" != "" ] )
+        then
+            status "I had trouble creating the database will have to exit....."
+            status "Trying again....."
+            /bin/sleep 30
+        fi
+    done
+
+    status "######################################################################################################################################################"
+    status "You might want to check that a database called ${DATABASE_NAME} is present using your Exoscale GUI system"
+    status "######################################################################################################################################################"
+    status "Press <enter> when you are satisfied"
+    read x
+
+    if ( [ "${CLUSTER_ENGINE}" = "mysql" ] )
+    then
+        export DATABASE_DBaaS_INSTALLATION_TYPE="MySQL"
+    elif ( [ "${CLUSTER_ENGINE}" = "pg" ] )
+    then
+        export DATABASE_DBaaS_INSTALLATION_TYPE="Postgres"
+    fi
+
+    export DATABASE_INSTALLATION_TYPE="DBaaS"
+    export DATABASE_DBaaS_INSTALLATION_TYPE="${DATABASE_DBaaS_INSTALLATION_TYPE}:${database_name}"
+    export DBaaS_HOSTNAME="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq --arg tmp_database_name "${database_name}" '.components[].Info | select (.host | contains($tmp_database_name)).host' | /bin/sed 's/\"//g' | /usr/bin/uniq`"
+    export DBaaS_USERNAME="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.users[].UserName' | /bin/sed 's/\"//g'`"
+    export DBaaS_PASSWORD="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.users[].Password' | /bin/sed 's/\"//g'`"
+    export DBaaS_DBNAME="${DATABASE_NAME}"
+    export DB_PORT="`/usr/bin/exo -O json lab database show -z ch-gva-2 test-pg | /usr/bin/jq --arg tmp_database_name "${database_name}" '.components[].Info | select (.host | contains($tmp_database_name)).port' | /bin/sed 's/\"//g' | /usr/bin/head -1`"
+
+fi
