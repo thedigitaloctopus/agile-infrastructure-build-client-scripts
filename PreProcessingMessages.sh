@@ -26,12 +26,6 @@
 
 if ( [ "${BUILD_ARCHIVE_CHOICE}" = "virgin" ] || [ "${BUILD_ARCHIVE_CHOICE}" = "baseline" ] )
 then
-    status "###############################################################################################################################"
-    status "I am enforcing a development mode build as your build choice is set to ${BUILD_ARCHIVE_CHOICE}"
-    status "Virgin builds and baseline builds are only supported as development mode deployments"
-    status "If you want to do a production build (with autoscaling etc.) you need to deploy from a temporal backup (hourly, daily, weekly and so on)"
-    status "###############################################################################################################################"
-    status "Press <enter> to continue"
     PRODUCTION="0"
     DEVELOPMENT="1"
 fi
