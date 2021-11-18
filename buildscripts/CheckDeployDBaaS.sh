@@ -99,16 +99,17 @@ then
         database_details="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/sed 's/^.*DBAAS://g'`"
         DATABASE_ENGINE="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $1}'`"
         DATABASE_REGION="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $2}'`"
-        DATABASE_SIZE="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $4}'`"
-        DATABASE_NAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $6}'`"
+        DATABASE_SIZE="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $3}'`"
+        DATABASE_NAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $4}'`"
     fi
     
-    status "Creating  database ${DATABASE_NAME}, please wait..."
+    status "Creating  database ${DATABASE_NAME}, with engine: ${DATABASE_ENGINE}, in region: ${DATABASE_REGION} and at size: ${DATABASE_SIZE} please wait..."
 
     /usr/bin/exo -O json lab database create ${DATABASE_ENGINE} ${DATABASE_SIZE} ${DATABASE_NAME} -z ${DATABASE_REGION}
     database_name="`/usr/bin/exo -O json lab database list | /usr/bin/jq '(.[] | .name)' | /bin/sed 's/\"//g' | /bin/grep ${DATABASE_NAME}`"
 
-    database_name="" 
+    database_name=""
+
     while ( [ "${database_name}" = "" ] )
     do
         status "Creating the database named ${DATABASE_NAME}"
@@ -116,12 +117,12 @@ then
         /usr/bin/exo -O json lab database create ${DATABASE_ENGINE} ${DATABASE_SIZE} ${DATABASE_NAME} -z ${DATABASE_REGION}
         database_name="`/usr/bin/exo -O json lab database list | /usr/bin/jq '(.[] | .name)' | /bin/sed 's/\"//g' | /bin/grep ${DATABASE_NAME}`"
         
-        if ( [ "${database_name}" != "" ] )
+        if ( [ "${database_name}" = "" ] )
         then
             status "I had trouble creating the database will have to exit....."
             status "Trying again....."
             /bin/sleep 30
-        fi
+       fi
     done
 
     status "######################################################################################################################################################"
