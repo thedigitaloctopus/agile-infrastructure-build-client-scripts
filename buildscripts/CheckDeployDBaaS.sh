@@ -144,6 +144,6 @@ then
     export DBaaS_USERNAME="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.users[].UserName' | /bin/sed 's/\"//g'`"
     export DBaaS_PASSWORD="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.users[].Password' | /bin/sed 's/\"//g'`"
     export DBaaS_DBNAME="${DATABASE_NAME}"
-    export DB_PORT="`/usr/bin/exo -O json lab database show -z ch-gva-2 test-pg | /usr/bin/jq --arg tmp_database_name "${database_name}" '.components[].Info | select (.host | contains($tmp_database_name)).port' | /bin/sed 's/\"//g' | /usr/bin/head -1`"
+    export DB_PORT="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${database_name} | /usr/bin/jq --arg tmp_database_name "${database_name}" '.components[].Info | select (.host | contains($tmp_database_name)).port' | /bin/sed 's/\"//g' | /usr/bin/head -1`"
 
 fi
