@@ -1,6 +1,4 @@
-If you provider has security groups or a firewall native to their service (not the ufw used by your machines internally), then, you will need to allow access through their firewall to the ports that the toolkit uses to run.
-
-The ports that will need to be opened to 0.0.0.0/0 and then further restricted using ufw internally are:
+If you provider has security groups or a firewall native to their service (not the ufw used by your machines internally), then, you will need to allow access through their firewall to the ports that the toolkit uses to run. If the provider native firwall doesn't allow requests through that you need to be let through, obviously, the build won't complete. So, as a general overview for my current setup I need to let the following through any cloudnative firewall which I do using their GUI:
 
 1. Whatever your SSH port is set to. In my case, I set this to 1035 so I need a rule where the firewall/security group allows access to port 1035 for all machines
 2. Whatever your Database port is set to. In my case I set this to 2035 so I need a rule where the firewall/security group allows access to port 2035 for all machines.
