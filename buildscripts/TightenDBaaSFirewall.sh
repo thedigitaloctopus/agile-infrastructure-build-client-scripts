@@ -16,20 +16,23 @@ then
    
 fi
 
+
 if ( [ "${CLOUDHOST}" = "exoscale" ] && [ "${DATABASE_INSTALLATION_TYPE}"="DBaaS" ] )
 then
    if ( [ "${ASIP}" != "" ] )
    then
-       ips="${ASIP},${WSIP},${DBIP},${BUILD_CLIENT_IP}""
+       ips="${ASIP},${WSIP},${DBIP},${BUILD_CLIENT_IP}"
    else
-       ips="${WSIP},${DBIP},${BUILD_CLIENT_IP}""
+       ips="${WSIP},${DBIP},${BUILD_CLIENT_IP}"
    fi
 
     if ( [ "${DATABASE_ENGINE}" = "pg" ] )
     then
+        status "Tightening the firewall on your postgres database for your webserver with following IPs: ${ips}"    
         /usr/bin/exo dbaas update -z ${DATABASE_REGION} ${DBaaS_DBNAME} --pg-ip-filter=${ips}
     elif ( [ "${DATABASE_ENGINE}" = "mysql" ] )
     then
+        status "Tightening the firewall on your mysql database for your webserver with following IPs: ${ips}"    
         /usr/bin/exo dbaas update -z ${DATABASE_REGION} ${DBaaS_DBNAME} --mysql-ip-filter=${ips}
     fi
 fi
