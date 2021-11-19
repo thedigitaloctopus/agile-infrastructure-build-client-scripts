@@ -97,6 +97,7 @@ then
     read x
 fi
 
+
 #########################################################################################################
 #DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mysql:ch-gva-2:hobbyist-1:testdb1"
 #DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:ch-gva-2:hobbyist-1:testdb1"
@@ -141,18 +142,18 @@ then
     read x
 
     export DATABASE_INSTALLATION_TYPE="DBaaS"
-    export DBaaS_HOSTNAME="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.mysql.uri_params.host' | /bin/sed 's/\"//g'`"
+    export DBaaS_HOSTNAME="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq ".${DATABASE_ENGINE}.uri_params.host" | /bin/sed 's/\"//g'`"
 
     while ( [ "${DBaaS_PASSWORD}" = "" ] || [ "${DBaaS_USERNAME}" = "" ] )
     do
         status "Trying to obtain database credentials...This might take a couple of minutes as the new database initialises..."
         /bin/sleep 10
-        export DBaaS_USERNAME="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.mysql.uri_params.user' | /bin/sed 's/\"//g'`"
-        export DBaaS_PASSWORD="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.mysql.uri_params.password' | /bin/sed 's/\"//g'`"
+        export DBaaS_USERNAME="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq ".${DATABASE_ENGINE}.uri_params.user" | /bin/sed 's/\"//g'`"
+        export DBaaS_PASSWORD="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq ".${DATABASE_ENGINE}.uri_params.password" | /bin/sed 's/\"//g'`"
     done   
     
     export DBaaS_DBNAME="${DATABASE_NAME}"
-    export DB_PORT="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.mysql.uri_params.port' | /bin/sed 's/\"//g'`"
+    export DB_PORT="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq ".${DATABASE_ENGINE}.uri_params.port" | /bin/sed 's/\"//g'`"
 
     status "The Values I have retrieved for your database setup are:"
     status "##########################################################"
