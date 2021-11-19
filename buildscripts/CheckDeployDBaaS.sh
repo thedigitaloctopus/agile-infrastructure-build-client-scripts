@@ -113,7 +113,7 @@ then
     do
         status "Creating the database named ${DATABASE_NAME}"
 
-        /usr/bin/exo -O json lab database create ${DATABASE_ENGINE} ${DATABASE_SIZE} ${DATABASE_NAME} -z ${DATABASE_REGION}
+        /usr/bin/exo -O json dbaas create ${DATABASE_ENGINE} ${DATABASE_SIZE} ${DATABASE_NAME} -z ${DATABASE_REGION}
         database_name="`/usr/bin/exo -O json dbaas list | /usr/bin/jq '(.[] | .name)' | /bin/sed 's/\"//g' | /bin/grep ${DATABASE_NAME}`"
         
         if ( [ "${database_name}" = "" ] )
