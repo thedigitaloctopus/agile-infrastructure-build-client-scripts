@@ -144,7 +144,7 @@ then
     
     while ( [ "${DBaaS_PASSWORD}" = "" ] || [ "${DBaaS_USERNAME}" = "" ] )
     do
-        status "Trying to obtain database credentials...."
+        status "Trying to obtain database credentials...This might take a couple of minutes as the new database initialises..."
         /bin/sleep 10
         export DBaaS_USERNAME="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.users[].UserName' | /bin/sed 's/\"//g'`"
         export DBaaS_PASSWORD="`/usr/bin/exo -O json lab database show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.users[].Password' | /bin/sed 's/\"//g'`"
