@@ -113,7 +113,7 @@ then
     do
         status "Creating the database named ${DATABASE_NAME}"
 
-        /usr/bin/exo -O json dbaas create ${DATABASE_ENGINE} ${DATABASE_SIZE} ${DATABASE_NAME} -z ${DATABASE_REGION}
+        /usr/bin/exo -O json lab database create ${DATABASE_ENGINE} ${DATABASE_SIZE} ${DATABASE_NAME} -z ${DATABASE_REGION}
         database_name="`/usr/bin/exo -O json dbaas list | /usr/bin/jq '(.[] | .name)' | /bin/sed 's/\"//g' | /bin/grep ${DATABASE_NAME}`"
         
         if ( [ "${database_name}" = "" ] )
@@ -130,27 +130,17 @@ then
     status "Press <enter> when you are satisfied"
     read x
 
-    if ( [ "${CLUSTER_ENGINE}" = "mysql" ] )
-    then
-        export DATABASE_DBaaS_INSTALLATION_TYPE="MySQL"
-    elif ( [ "${CLUSTER_ENGINE}" = "pg" ] )
-    then
-        export DATABASE_DBaaS_INSTALLATION_TYPE="Postgres"
-    fi
-
     export DATABASE_INSTALLATION_TYPE="DBaaS"
-    export DATABASE_DBaaS_INSTALLATION_TYPE="${DATABASE_DBaaS_INSTALLATION_TYPE}:${database_name}"
-    export DBaaS_HOSTNAME="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq --arg tmp_database_name "${database_name}" '.components[].Info | select (.host | contains($tmp_database_name)).host' | /bin/sed 's/\"//g' | /usr/bin/uniq`"
-    
+    export DBaaS_HOSTNAME="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.mysql.uri_params.host' | /bin/sed 's/\"//g'`"
+
     while ( [ "${DBaaS_PASSWORD}" = "" ] || [ "${DBaaS_USERNAME}" = "" ] )
     do
         status "Trying to obtain database credentials...This might take a couple of minutes as the new database initialises..."
         /bin/sleep 10
-        export DBaaS_USERNAME="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.users[].UserName' | /bin/sed 's/\"//g'`"
-        export DBaaS_PASSWORD="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.users[].Password' | /bin/sed 's/\"//g'`"
+        export DBaaS_USERNAME="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.mysql.uri_params.user' | /bin/sed 's/\"//g'`"
+        export DBaaS_PASSWORD="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.mysql.uri_params.password' | /bin/sed 's/\"//g'`"
     done   
     
     export DBaaS_DBNAME="${DATABASE_NAME}"
-    export DB_PORT="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${database_name} | /usr/bin/jq --arg tmp_database_name "${database_name}" '.components[].Info | select (.host | contains($tmp_database_name)).port' | /bin/sed 's/\"//g' | /usr/bin/head -1`"
-
+    export DB_PORT="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq '.mysql.uri_params.port' | /bin/sed 's/\"//g'`"
 fi
