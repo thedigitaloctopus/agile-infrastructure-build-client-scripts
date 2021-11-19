@@ -85,6 +85,16 @@ then
     export DBaaS_PASSWORD="`/usr/local/bin/doctl databases user list ${cluster_id} | /usr/bin/awk '{print $3}' | /usr/bin/tail -1`"
     export DBaaS_DBNAME="${DATABASE_NAME}"
     export DB_PORT="25060"
+    
+    status "The Values I have retrieved for your database setup are:"
+    status "##########################################################"
+    status "HOSTNAME:${DBaaS_HOSTNAME}"
+    status "USERNAME:${DBaaS_USERNAME}"
+    status "PASSWORD:${DBaaS_PASSWORD}"
+    status "PORT:${DB_PORT}"
+    status "##########################################################"
+    status "If these settings look OK to you, press <enter>"
+    read x
 fi
 
 #########################################################################################################
