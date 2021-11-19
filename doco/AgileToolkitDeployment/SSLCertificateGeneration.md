@@ -5,8 +5,8 @@ Here is the architectural overview of how SSL Certificates are automatically gen
 For a new deployment, the first time a webserver is built, we generate an SSL certificate using Let's Encrypt. Once a certificate is generated, we save it on the filesystem of the build client.
 The next time a deployment is made for a given url, we check the file system to see if  
 
-**    a) There is a certificate from a previous build that we can use (we check that it is not expired)**  
-**    b) That it is not out of date or expired. If it is, then we generate a new one and copy that to the filesystem**  
+**a) There is a certificate from a previous build that we can use (we check that it is not expired)**  
+**b) That it is not out of date or expired. If it is, then we generate a new one and copy that to the filesystem**  
 
 Either way, if we are generating a new one or using an older previously generated one, by the time we get to here, we have a certificate on our build client filesystem
 
