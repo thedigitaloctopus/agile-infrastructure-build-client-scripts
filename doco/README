@@ -20,4 +20,5 @@ difference between an application deployed like this and something deployed out 
 that you can have full control over your servers if you want that without having to configure from the ground up as it is done for you 
 to a basic level. Also, you can easily create applications once and automatically customise them for each different deployment. So, 
 if you are creating an application for town A, you can automatically deploy it for town B just with some parameter changes at build 
-time. 
+time. This toolkit might be especially useful to students and learners who want to easily spin up functional servers and tinker with their setup. 
+This is intended for serious use, but, also, if you are someone who wants to learn a bit more about server systems this might be useful to you. 
