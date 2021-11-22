@@ -6,7 +6,7 @@
 
 ----------------------------------------------------------------------
 
-AWS or "Amazon Webservices". If you want to have your database service with Amazon, there's some steps to go through.
+#### RDS GUI BASED DATABASE DEPLOYMENT ON AWS
 
 Before you run the Agile Deployment Toolkit build scripts, what you need to do, is get your database instance up and running with Amazon, so assuming you have a valid and active account with Amazon here are the steps.
 
