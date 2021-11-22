@@ -51,7 +51,7 @@ Before you run the Agile Deployment Toolkit build scripts, what you need to do, 
        DATABASE_DBaaS_INSTALLATION_TYPE=""  
        DBaaS_HOSTNAME=""  
        DBaaS_USERNAME=""  
-       DBaaS_PASSWORD=""  
+       DBaaS_PASSWORD=""   
        DBaaS_DBNAME=""  
        DB_PORT=""  
     
