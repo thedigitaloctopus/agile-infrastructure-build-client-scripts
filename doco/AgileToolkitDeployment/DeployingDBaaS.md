@@ -1,8 +1,14 @@
-#### IMPORTANT: Don't necessarily expect your DB dump files to automatically import from one DBaaS provider to another without first manually verifying it first. Each DBaaS provider may put things in the dump files which only work correctly within the configuration of their system. 
+#### IMPORTANT:  
 
-#### NOTE: The "database layer" is still deployed with or on your cloudhost VPS when you use DBaaS. It is functionally redundent in terms of application operation but, it is how the "backup" part of the architecture works, so the DB layer is still deployed so that the backup process runs and completes successfully and gives you backups as usual of your DB even though you are using DBaaS. Probably your DBaaS provider has its own mechanism for backups also, but, when we deploy using the Agile Deployment Toolkit, we depend on our bespoke backup and archiving mechanism, so it is essential that the backups still take place for the toolkit to function correctly. Whilst we do take backups in a specific way which the toolkit depends on for its operation, you can take independent additional backups (which is recommended in important systems) using the backup process provided by your "managed database" service provider.  
+Don't necessarily expect your DB dump files to automatically import from one DBaaS provider to another without first manually verifying it first. Each DBaaS provider may put things in the dump files which only work correctly within the configuration of their system. 
 
-#### Recommendation. You should only ever use DBaaS direct to the managed database itself and within a private network of your cloudhost provider. This means, however, that you are tied to only using cloudhosts with a managed DB service offering if you want to use a managed DB service rather than running and configuring your own. 
+#### NOTE:  
+
+The "database layer" is still deployed with or on your cloudhost VPS when you use DBaaS. It is functionally redundent in terms of application operation but, it is how the "backup" part of the architecture works, so the DB layer is still deployed so that the backup process runs and completes successfully and gives you backups as usual of your DB even though you are using DBaaS. Probably your DBaaS provider has its own mechanism for backups also, but, when we deploy using the Agile Deployment Toolkit, we depend on our bespoke backup and archiving mechanism, so it is essential that the backups still take place for the toolkit to function correctly. Whilst we do take backups in a specific way which the toolkit depends on for its operation, you can take independent additional backups (which is recommended in important systems) using the backup process provided by your "managed database" service provider.  
+
+#### Recommendation:  
+
+You should only ever use DBaaS direct to the managed database itself and within a private network of your cloudhost provider. This means, however, that you are tied to only using cloudhosts with a managed DB service offering if you want to use a managed DB service rather than running and configuring your own. 
 
 ----------------------------------------------------------------------
 
