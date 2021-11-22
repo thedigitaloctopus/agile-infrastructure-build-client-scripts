@@ -16,7 +16,7 @@ and also:
 #### SSH  (a public key that matches a private key that you have on your laptop)
 #### SELECTED_TEMPLATE  (the template number that you are overriding) 
 
-3. You now need to override the environment variables you require for your build. You will need to review the template you have selected using ${SELECTED_TEMPLATE} which you can review at 
+3. You now need to override the environment variables you require for your build. You will need to review the template you have selected using **${SELECTED_TEMPLATE}** which you can review at: 
 
 **${BUILD_HOME}/templatedconfigurations/templates/${cloudhost}/${cloudhost}${SELECTED_TEMPLATE}.tmpl**
 
