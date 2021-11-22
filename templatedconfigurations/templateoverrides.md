@@ -1,6 +1,6 @@
 To use template overrides with you cloudhost you need to pick one method or the other.
 
-## Method 1 - Manual Overriding (expert)
+## Method 1 - Manual Overriding
 
 1. This involves taking a copy of the overide script : [Override Script](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides/OverrideScript.sh)  and editing the copy directly.
 
@@ -16,9 +16,13 @@ and also:
 #### SSH  (a public key that matches a private key that you have on your laptop)
 #### SELECTED_TEMPLATE  (the template number that you are overriding) 
 
-3. You now need to override the environment variables you require for your build. You will need to review the template you have selected using ${SELECTED_TEMPLATE} which you can review at ${BUILD_HOME}/templatedconfigurations/templates/${cloudhost}/${cloudhost}${SELECTED_TEMPLATE}.tmpl. Once you have decided with variables you want to override, override them in the copy of the Override Script that you made. pay attention to the template specification [Template Specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md). You can place your overrides in the override script as export statements, around about line 50 where it says, "Additionl Overrides". An example if given of how to override the WS_SIZE variable. 
+3. You now need to override the environment variables you require for your build. You will need to review the template you have selected using ${SELECTED_TEMPLATE} which you can review at 
 
-4. When you are very sure that you have completed all the overrides you require in your copy of the override script, paste the entire modified script into the "user data" part of a VPS system which you need to  spin up using your cloudhosts gui as your build machine on your cloudhost's infrastructure.
+**${BUILD_HOME}/templatedconfigurations/templates/${cloudhost}/${cloudhost}${SELECTED_TEMPLATE}.tmpl**
+
+Once you have decided with variables you want to override, override them in the copy of the Override Script that you made. pay attention to the template specification [Template Specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md). You can place your overrides in the override script as export statements, around about line 50 where it says, "Additionl Overrides". An example if given of how to override the WS_SIZE variable. 
+
+4. When you are very sure that you have completed all the overrides you require in your copy of the override script, paste the entire modified script into the "user data" part of a VPS system which you need to  spin up using your cloudhost's gui as your build machine on your cloudhost's infrastructure.
 
 5. Allow you build machine to start and then SSH onto it from your laptop. Assuming you have the private key available that you set the public key to in the SSH variable in 2., you can ssh onto your build machine with a command similar to:
 
@@ -30,7 +34,7 @@ and also:
   
   -----------------------------------
 
-## Method 2 - Automated Generation (recommended)
+## Method 2 - Automated Generation
 
 1. On your laptop clone the build client scripts for example (or from your fork):
 
