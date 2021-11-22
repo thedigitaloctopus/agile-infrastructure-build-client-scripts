@@ -10,15 +10,39 @@ AWS or "Amazon Webservices". If you want to have your database service with Amaz
 
 Before you run the Agile Deployment Toolkit build scripts, what you need to do, is get your database instance up and running with Amazon, so assuming you have a valid and active account with Amazon here are the steps.
 
-1) Select the RDS service.
-2) Using standard mode and NOT easy mode, decide what type of database you are deploying, MySQl, Postgres and so on and select it.
-3) Set the size and so on of your database and review all the settings of your database.
-4) Set the username, password and name of your database. Make a note of them as you will need them for the agile deployment script.
-5) Set the availability zone and port of the database (if you forget this, you can modify it post deployment). 
-6) Grant security access to the security group that our webservers belong to (AgileDeploymentToolkitSecurityGroup) and set a VPC which is accessible by this security group. If there is no "AgileDeploymentToolkitSecurityGroup" create a new one with that precise name, "AgileDeploymentToolkitSecurityGroup".
-7) Deploy the database instance, it will take a bit of time.
-8) Once the 'endpoint' becomes available, make a note of it, minus the colon and port number at the end of it.
-9)  
+1. Navigate to the RDS service offering page
+
+2. Select "Standard create"
+
+3. Select which database you want, "mysql", "mariadb" or "postgres"
+
+4. Select if you want "dev/test" or full production mode
+
+5. Give some credentials for your new database (Note these must be unique in the ADT's code base, because if you use the username "admin" for example, that will hose the search and replace that we do later on on your codebase). So something like, "adminXYZ123" would be OK because it is likely unique.So, give a unique database identifier, username and password.
+	
+6. Pick the size of machine you want for your database (be aware of costs).
+
+7. Configure your storage (how many GBs)
+
+8. Enable or disable autoscaling for your database.
+
+9. Select whether you want a standby instance or not
+
+10. Select the same VPC as your EC2 instances are running in or will be running in
+
+11. Select the default-vpc subnet group for your VPC selected in 10.
+
+12. Select "no" for publicly accessible
+
+13. If you don't have a security group create one with the precise name "AgileDeploymentToolkitSecurityGroup" and that will place your database in the same VPC security group as your webservers when they are built, thereby giving them access to your database.
+
+14. Pick your availability zone
+
+15. Select password authentication.
+
+16. Make a note of your database username, database password and database port. Once the database has initiated, make a note of the database endpoint (minus the port number if it is part of it) and use these credentials/variables as part of your build process whether it is a full build, an expedited build or a hardcore build. 
+
+17)  
     a) For the full build, you can enter your database details when promppted for as part of the build process.  
     
     b) For an expedited build you will need to set the following parameters in your template  
@@ -40,6 +64,16 @@ Before you run the Agile Deployment Toolkit build scripts, what you need to do, 
        DBaaS_PASSWORD=""  
        DBaaS_DBNAME=""  
        DB_PORT=""  
+
+Here's an example of what these values looked like in a template of a test build I was making:
+
+       export DBaaS_HOSTNAME="adtdatabase1.crvxjfddo74b.eu-west-1.rds.amazonaws.com"
+       export DBaaS_USERNAME="adtuser"
+       export DBaaS_PASSWORD="12oighvcgh7HJghsPoe"
+       export DBaaS_DBNAME="adtdemodb"
+       export DATABASE_DBaaS_INSTALLATION_TYPE="MySQL"
+       export DBaaSDBSECURITYGROUP="AgileDeploymentToolkitSecurityGroup"
+       export DB_PORT="2035"
 
 ##### ESSENTIAL- Make sure you set the DB port in the configuration process to be the same as the port you chose when you deployed your RDS instance with Amazon. 
 
