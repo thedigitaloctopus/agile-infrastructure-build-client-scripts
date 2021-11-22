@@ -165,3 +165,33 @@ then
     status "If these settings look OK to you, press <enter>"
     read x
 fi
+
+######THIS ISN'T JUST TESTING#################################
+#########################################################################################################
+#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mysql:eu-west-1a:db.t3.micro:Test Database:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g:subnet-47864321"
+#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mariadb:eu-west-1a:db.t3.micro:Test Database:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g:subnet-47864321"
+#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:postgres:eu-west-1a:db.t3.micro:Test Database:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g:subnet-47864321"
+#########################################################################################################
+if ( [ "${CLOUDHOST}" = "aws-test" ] )
+then
+    if ( [ "`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/grep DBAAS`" != "" ] )
+    then
+        database_details="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/sed 's/^.*DBAAS://g'`"
+        DATABASE_ENGINE="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $1}'`"
+        DATABASE_REGION="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $2}'`"
+        DATABASE_SIZE="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $3}'`"
+        DATABASE_NAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $4}'`"
+        DATABASE_IDENTIFIER="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $5}'`"
+        ALLOCATED_STORAGE="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $6}'`"
+        DB_PORT="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $7}'`"
+        DATABASE_USERNAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $8}'`"
+        DATABASE_PASSWORD="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $9}'`"
+        SUBNET_NAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $10}'`"
+    fi
+
+    /usr/bin/aws rds create-db-subnet-group --db-subnet-group-name agiledeploymentdbsubnetgroup --db-subnet-group-description "Agile Deployment Test DB subnet group" --subnet-ids '["subnet-46634131","subnet-786d1721"]'
+    /usr/bin/aws rds create-db-security-group --db-security-group-name agiledeploymenttoolkitdbsecuritygroup --db-security-group-description "AgileDeploymentToolkitDBSecurityGroup"
+    /usr/bin/aws rds authorize-db-security-group-ingress --db-security-group-name "agiledeploymenttoolkitdbsecuritygroup" --cidrip 111.111.111.111/32
+    /usr/bin/aws rds create-db-instance --db-name "Test_Database" --db-instance-identifier "testdb1" --allocated-storage 20 --db-instance-class db.t3.micro --engine mysql --master-username "testuser123"  --master-user-password "XYZ123PPQQ" --availability-zone eu-west-1a --db-security-groups "agiledeploymentdbsecuritygroup" --db-subnet-group-name agiledeploymentdbsubnetgroup --port 2035 --no-publicly-accessible  --storage-encrypted 
+#    /usr/bin/aws rds create-db-instance --db-name "${DATABASE_NAME}" --db-instance-identifier ${DATABASE_IDENTIFIER}" --allocated-storage ${ALLOCATED_STORAGE} --db-instance-class ${DATABASE_SIZE} --engine ${DATABASE_ENGINE}" --master-username "${DATABASE_USERNAME}"  --master-user-password "${DATABASE_PASSWORD}" --availability-zone "${DATABASE_REGION}" --db-security-groups "agiledeploymentdbsecuritygroup" --db-subnet-group-name agiledeploymentdbsubnetgroup --port ${DB_PORT} --no-publicly-accessible  --storage-encrypted 
+fi
