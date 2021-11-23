@@ -5,7 +5,7 @@
 #DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:pg:lon1:1:db-s-1vcpu-1gb:8:testdbcluster1:testdb1"
 #########################################################################################################
 
-if ( [ "${CLOUDHOST}" = "digitalocean" ] && [ "${DATABASE_INSTALLATION_TYPE}"="DBaaS" ] )
+if ( [ "${CLOUDHOST}" = "digitalocean" ] && [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
 then
     if ( [ "`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/grep DBAAS`" != "" ] )
     then
@@ -103,7 +103,7 @@ fi
 #DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:ch-gva-2:hobbyist-1:testdb1"
 #DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:pg:ch-gva-2:hobbyist-1:testdb1"
 #########################################################################################################
-if ( [ "${CLOUDHOST}" = "exoscale" ] && [ "${DATABASE_INSTALLATION_TYPE}"="DBaaS" ] )
+if ( [ "${CLOUDHOST}" = "exoscale" ] && [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
 then
     if ( [ "`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/grep DBAAS`" != "" ] )
     then
@@ -172,7 +172,7 @@ fi
 #DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mariadb:eu-west-1a:db.t3.micro:Test Database:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g:subnet-47864321"
 #DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:postgres:eu-west-1a:db.t3.micro:Test Database:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g:subnet-47864321"
 #########################################################################################################
-if ( [ "${CLOUDHOST}" = "aws-test" ] && [ "${DATABASE_INSTALLATION_TYPE}"="DBaaS" ] )
+if ( [ "${CLOUDHOST}" = "aws-test" ] && [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
 then
     if ( [ "`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/grep DBAAS`" != "" ] )
     then
