@@ -1,4 +1,26 @@
-#!/bin/sh
+#!/bin/bash
+########################################################################################
+# Author: Peter Winter
+# Date  : 12/07/2016
+# Description: If you are deploying a DBaaS system, this will tighten the firewalling system
+# so that the databases are only accessible by ip addresses that we are using. 
+# This is applied towards the end of the build process
+########################################################################################
+# License Agreement:
+# This file is part of The Agile Deployment Toolkit.
+# The Agile Deployment Toolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# The Agile Deployment Toolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
+#########################################################################################
+#########################################################################################
+#set -x
 
 if ( [ "${CLOUDHOST}" = "digitalocean" ] && [ "${DATABASE_INSTALLATION_TYPE}"="DBaaS" ] )
 then
