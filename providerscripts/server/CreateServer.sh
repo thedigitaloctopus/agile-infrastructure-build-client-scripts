@@ -86,7 +86,7 @@ then
        done
    fi
    
-   private_network_ids="`/usr/local/bin/cs listNetworks | jq --arg tmp_zone_id "${zone_id}" --arg tmp_zonename "${zone_name}" '(.network[] | select(.zonename == $tmp_zonename and .name == "adt" and .zoneid == $tmp_zone_id ) | .id)' | /bin/sed 's/"//g'`"
+   private_network_id="`/usr/local/bin/cs listNetworks | jq --arg tmp_zone_id "${zone_id}" --arg tmp_zonename "${zone_name}" '(.network[] | select(.zonename == $tmp_zonename and .name == "adt" and .zoneid == $tmp_zone_id ) | .id)' | /bin/sed 's/"//g'`"
    
    while ( [ "${private_network_id}" = "" ] )
    do
