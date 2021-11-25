@@ -86,6 +86,8 @@ then
        done
    fi
    
+   private_network_id=""
+   
    while ( [ "${private_network_id}" = "" ] )
    do
        private_network_id="`/usr/local/bin/cs createNetwork displaytext="AgileDeploymentToolkit" name="adt" networkofferingid="${network_offering_id}" zoneid="${zone_id}" startip="10.0.0.10" endip="10.0.0.40" netmask="255.255.255.0" | jq '.network.id' | /bin/sed 's/"//g'`"
