@@ -4,18 +4,12 @@ Say you are running joomla on 6 webservers.
 
 You can ssh onto one of your webservers and go to 
 
-**${HOME}/runtime**  
+**${HOME}/config**  
 
-you can then 
+Using Joomla as an example, you can then edit 
 
-**/bin/cp ${HOME}/runtime/joomla_configuration.php**  
-**${HOME}/runtime/joomla_configuration.php.updating**  
-**vi ${HOME}/runtime/joomla_configuration.php.updating**  
+**${HOME}/runtime/joomla_configuration.php**  
 
-Make sure that the configuration is correct or it will take your application offline when you update  it.
+and immediately issue the command:
 
-Then, save the file you have edited and IMMEDIATELY ISSUE BOTH OF THE FOLLOWING COMMANDS TO INSTALL IT TO ALL YOUR WEBSERVERS:
-
-**/bin/cp ${HOME}/runtime/joomla_configuration.php.updating ${HOME}/config/joomla_configuration.php**  
 **/bin/touch ${HOME}/config/GLOBAL_CONFIG_UPDATE**  
-**/bin/rm ${HOME}/runtime/joomla_configuration.php.updating**  
