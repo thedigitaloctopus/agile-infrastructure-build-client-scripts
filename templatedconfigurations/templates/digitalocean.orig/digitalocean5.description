@@ -1,5 +1,0 @@
-VIRGIN DEVELOPMENT MODE INSTALLATION OF MOODLE 
-----------------------------------------------
-
-DETAIL: This template, as is, will deploy to Amsterdam on Digital Ocean. It will deploy a Moodle instance in development mode. You will need a Cloudflare account with your email address and global API key and you will also need a Digital Ocean account with a personal access token and a set of spaces keys. The first 25 export statements of the template require review and configuration and some of these are marked mandatory. You need to give the requisite API keys here so that the build can complete.
-The database used by default is Maria on a VPS and the webserver is Lighty. You will also need a git provider account for your application repositories.
