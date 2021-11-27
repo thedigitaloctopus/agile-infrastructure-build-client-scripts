@@ -4,21 +4,15 @@ Say you are running joomla on 6 webservers.
 
 You can ssh onto one of your webservers and go to 
 
-**${HOME}/config**  
+**${HOME}/runtime**  
 
 Using Joomla as an example, you can then edit 
 
-**${HOME}/config/joomla_configuration.php**  
+**/bin/cp ${HOME}/runtime/joomla_configuration.php ${HOME}/runtime/joomla_configuration.php.new**  
 
-and immediately issue the commands:
+Issue the command 
 
-**/bin/echo " " >> ${HOME}/config/joomla_configuration.php && /bin/touch ${HOME}/config/GLOBAL_CONFIG_UPDATE**  
-
-The echo command is need if the byte size of the joomla_configuration.php file didn't increase or decrease when you edited it. S3FS doesn't pick up file changes unless the byte size has changed. 
-
-Once you have issued all of these command, recheck
-
-**${HOME}/config/joomla_configuration.php**  
+**run ${HOME}/providerscripts/utilities/PushGlobalUpdate.sh "joomla_configuration"**
 
 That it is as you want it to be and wait a minute and your updates should be pushed out to all of your webservers in that time. As long as your update was valid, your webservers should still be online. 
 
