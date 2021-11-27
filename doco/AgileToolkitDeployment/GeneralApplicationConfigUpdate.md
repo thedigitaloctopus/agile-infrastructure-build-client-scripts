@@ -15,3 +15,10 @@ and immediately issue the commands:
 **/bin/echo " " >> ${HOME}/config/joomla_configuration.php && /bin/touch ${HOME}/config/GLOBAL_CONFIG_UPDATE**  
 
 The echo command is need if the byte size of the joomla_configuration.php file didn't increase or decrease when you edited it. S3FS doesn't pick up file changes unless the byte size has changed. 
+
+Once you have issued all of these command, recheck
+
+**${HOME}/config/joomla_configuration.php**  
+
+That it is as you want it to be and wait a minute and your updates should be pushed out to all of your webservers in that time. As long as your update was valid, your webservers should still be online. 
+
