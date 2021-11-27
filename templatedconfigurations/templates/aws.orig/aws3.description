@@ -1,5 +1,0 @@
-VIRGIN DEVELOPMENT MODE INSTALLATION OF WORDPRESS 
--------------------------------------------------
-
-DETAIL: This template, as is, will deploy to "EU-WEST" on "AWS". It will deploy a Wordpress instance in development mode . You will need a Cloudflare account with your email address and global API key and you will also need an AWS account with an Access Key and Secret Key with EC2 privileges and access key and secret key with S3 Object Storage privileges. The first export statements of the template require review and configuration and some of these are marked mandatory. You need to give the requisite API keys here so that the build can complete. 
-The database used by default is MySQL on a VPS and the webserver is Apache. You will need an account with one of github,gitlab or bitbucket (for your application repositories).
