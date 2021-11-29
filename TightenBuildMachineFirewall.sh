@@ -69,7 +69,7 @@ else
     /usr/sbin/ufw --force reset
     /usr/sbin/ufw default deny incoming
     /usr/sbin/ufw default allow outgoing
-    /usr/sbin/ufw allow ${SSH_PORT}
+    /usr/sbin/ufw allow from ${LAPTOP_IP} to any port ${SSH_PORT}
     /bin/echo "y" | /usr/sbin/ufw enable
 fi
 
