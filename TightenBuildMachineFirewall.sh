@@ -49,6 +49,16 @@ fi
 
 /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
 
+if ( [ "${LAPTOP_IP}" != "" ] )
+then
+    /bin/echo "${LAPTOP_IP}" >> /root/authorised-ips.dat
+    if ( [ "`/usr/bin/s3cmd ls s3://authip-${BUILD_IDENTIFIER}`" = "" ] )
+    then
+        /usr/bin/s3cmd mb s3://authip-${BUILD_IDENTIFIER}
+    fi
+    /usr/bin/s3cmd put /root/authorised-ips.dat s3://authip-${BUILD_IDENTIFIER}
+fi
+
 if ( [ -f /root/authorised-ips.dat ] )
 then
     /bin/mv /root/authorised-ips.dat ${BUILD_HOME}
@@ -65,12 +75,12 @@ then
     done < ${BUILD_HOME}/authorised-ips.dat
     
     /bin/echo "y" | /usr/sbin/ufw enable
-else        
-    /usr/sbin/ufw --force reset
-    /usr/sbin/ufw default deny incoming
-    /usr/sbin/ufw default allow outgoing
-    /usr/sbin/ufw allow from ${LAPTOP_IP} to any port ${SSH_PORT}
-    /bin/echo "y" | /usr/sbin/ufw enable
+#else        
+#    /usr/sbin/ufw --force reset
+#    /usr/sbin/ufw default deny incoming
+#    /usr/sbin/ufw default allow outgoing
+#    /usr/sbin/ufw allow from ${LAPTOP_IP} to any port ${SSH_PORT}
+#    /bin/echo "y" | /usr/sbin/ufw enable
 fi
 
 if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" != "" ] )
