@@ -426,7 +426,7 @@ status ""
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
 . ${BUILD_HOME}/providerscripts/datastore/PersistBuildClientIP.sh
-
+. ${BUILD_HOME}/buildscripts/CheckNativeFirewall.sh
 
 #Set a username and password which we can set on all our servers. Once the machines are built, password authentication is
 #switched off and you can find some ssh key based helper scripts here that will enable you to authenticate to your machines.
