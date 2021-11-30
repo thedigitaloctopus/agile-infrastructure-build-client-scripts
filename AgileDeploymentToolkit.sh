@@ -586,6 +586,8 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 . ${BUILD_HOME}/buildscripts/InitialiseDatastore.sh
 . ${BUILD_HOME}/buildscripts/InitialiseBuildChoice.sh
 . ${BUILD_HOME}/providerscripts/datastore/PersistBuildClientIP.sh
+. ${BUILD_HOME}/buildscripts/CheckNativeFirewall.sh
+
 /bin/rm ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/* 2>/dev/null
 
 /bin/mkdir -p ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}
