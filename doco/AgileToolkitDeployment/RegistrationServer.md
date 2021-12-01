@@ -1,7 +1,7 @@
 Naked DNS systems don't have as much security protection for your website as if you route through a proxy service like Cloudflare. Cloudflare is the only proxy service I support with this toolkit at the moment, but, if you want to extend it to support another, you are more than welcome. The rest of the DNS systems are just naked DNS systems and I wanted to do what I could to bolster the fortifications if such a solution were to be used. 
 
 The idea is to use this software for serious systems which means I am looking for ways to make the system as secure as possible because I have seen the abuses of vulnerable people.
-One option is the Gateway Guardian technique but, if you want to gateway off your whole application then how do new users gain access to your webproperty?
+One option is the [Gateway Guardian](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/doco/AgileToolkitDeployment/GatewayGuardian.md) technique but, if you want to gateway off your whole application then how do new users gain access to your webproperty?
 
 1. One way they can gain access is if you do manual registrations. This might be the case if you know who all your application users are and as an administrator you set up their accounts for them and then inform them of their credentials (including their gateway guardian password). This can work for some scenarios.
 
