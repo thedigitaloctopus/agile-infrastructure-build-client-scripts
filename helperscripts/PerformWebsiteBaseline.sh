@@ -116,9 +116,9 @@ then
         /bin/echo "PRESS THE ENTER KEY IF YOU ARE HAPPY"
         /bin/echo "#############################################"
         read x
-        /bin/echo "You must have a repository of name '${BUILD_IDENTIFIER}-webroot-sourcecode-baseline' available"
-        /bin/echo "If you haven't got one please create one and press <enter> when you are sure"
-        identifier="${BUILD_IDENTIFIER}"
+        /bin/echo "You must have a repository of name '<identifier>-webroot-sourcecode-baseline' available"
+        /bin/echo "If you haven't got one please create one and then tell me the <identifier> part by entering it below:"
+        read identifier
         /bin/echo "OK, ready to create baseline - press enter to confirm"
         read x
         /usr/bin/ssh -o ConnectTimeout=10 -o ConnectionAttempts=30 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_rsa_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USERNAME}@${WEB_IP} "${SUDO} /home/${SERVER_USERNAME}/providerscripts/git/CreateWebrootBaseline.sh ${identifier}" 2>/dev/null
