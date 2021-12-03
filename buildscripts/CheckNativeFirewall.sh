@@ -34,6 +34,7 @@ then
     /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 443
     /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 80
     /usr/bin/exo compute security-group rule add adt --network ${BUILD_CLIENT_IP}/32 --port 22
+    /usr/bin/exo compute security-group rule add adt --protocol icmp --network 0.0.0.0/0 --icmp-code 0 --icmp-type 8
 fi
 
 if ( [ "${CLOUDHOST}" = "linode" ] )
