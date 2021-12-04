@@ -316,20 +316,6 @@ fi
 
 status ""
 status ""
-
-BACKUP_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc _A-Z-a-z-0-9 | /usr/bin/head -c${1:-8};echo;`"
-status "###############################################################################################"
-status "YOUR BACKUP PASSWORD IS SET TO: ${BACKUP_PASSWORD} FOR THIS BUILD, PLEASE MAKE A NOTE OF IT"
-status "###############################################################################################"
-status "If you you don't want to make backups of your build machine for safety enter N other wise  press <enter>"
-read response
-if ( [ "${response}" = "N" ] || [ "${response}" = "n" ] )
-then
-    BACKUP_PASSWORD=""
-fi
-
-status ""
-status ""
 status "##################################################################################################"
 status "#####Please enter a unique build identifier for this build. It needs to uniquely identify     #####"
 status "#####This build. For example, if I am building my sample 'nuocial' application with subdomain #####"
@@ -350,6 +336,28 @@ do
 done
 
 BUILD_IDENTIFIER="`/bin/echo ${BUILD_IDENTIFIER} | /usr/bin/tr '[:upper:]' '[:lower:]' | /bin/sed 's/-//g'`"
+
+status ""
+status ""
+
+if ( [ "`/usr/bin/crontab -l | /bin/grep "BackupBuildMachine.sh" | /bin/grep "${BUILD_IDENTIFIER}"`" != "" ] )
+then
+    status "Your system is set to make backups of your build machine on a daily basis for build identifier ${BUILD_IDENTIFIER}"
+    status "Press <enter> to continue"
+    read x
+else
+    BACKUP_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc _A-Z-a-z-0-9 | /usr/bin/head -c${1:-8};echo;`"
+    status "###############################################################################################"
+    status "YOUR BACKUP PASSWORD IS SET TO: ${BACKUP_PASSWORD} FOR THIS BUILD, PLEASE MAKE A NOTE OF IT"
+    status "###############################################################################################"
+    status "If you you don't want to make backups of your build machine for safety enter N other wise  press <enter>"
+    read response
+    if ( [ "${response}" = "N" ] || [ "${response}" = "n" ] )
+    then
+        BACKUP_PASSWORD=""
+    fi
+fi
+
 
 if (    [ "`${BUILD_HOME}/providerscripts/server/ListServerIDs.sh "autoscale*" ${CLOUDHOST} 2> /dev/null`" != "" ] )
 then
