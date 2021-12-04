@@ -299,17 +299,6 @@ fi
 status ""
 status ""
 
-BACKUP_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc _A-Z-a-z-0-9 | /usr/bin/head -c${1:-8};echo;`"
-status "###############################################################################################"
-status "YOUR BACKUP PASSWORD IS SET TO: ${BACKUP_PASSWORD} FOR THIS BUILD, PLEASE MAKE A NOTE OF IT"
-status "###############################################################################################"
-status "If you you don't want to make backups of your build machine for safety enter N other wise  press <enter>"
-read response
-if ( [ "${response}" = "N" ] || [ "${response}" = "n" ] )
-then
-    BACKUP_PASSWORD=""
-fi
-
 #Let the user set the timezone they are in. This will be used on the deployed servers also.
 #So, be aware, if you are in a different timezone to where you are making your deployment,
 #you way want to set the timezone to be where your servers are, not where you are, necessarily
@@ -341,6 +330,27 @@ do
 done
 
 BUILD_IDENTIFIER="`/bin/echo ${BUILD_IDENTIFIER} | /usr/bin/tr '[:upper:]' '[:lower:]' | /bin/sed 's/-//g'`"
+
+status ""
+status ""
+
+if ( [ "`/usr/bin/crontab -l | /bin/grep "BackupBuildMachine.sh" | /bin/grep "${BUILD_IDENTIFIER}"`" != "" ] )
+then
+    status "Your system is set to make backups of your build machine on a daily basis for build identifier ${BUILD_IDENTIFIER}"
+    status "Press <enter> to continue"
+    read x
+else
+    BACKUP_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc _A-Z-a-z-0-9 | /usr/bin/head -c${1:-8};echo;`"
+    status "###############################################################################################"
+    status "YOUR BACKUP PASSWORD IS SET TO: ${BACKUP_PASSWORD} FOR THIS BUILD, PLEASE MAKE A NOTE OF IT"
+    status "###############################################################################################"
+    status "If you you don't want to make backups of your build machine for safety enter N other wise  press <enter>"
+    read response
+    if ( [ "${response}" = "N" ] || [ "${response}" = "n" ] )
+    then
+        BACKUP_PASSWORD=""
+    fi
+fi
 
 /bin/chown -R ${USER} ${BUILD_HOME}/.
 /bin/chmod -R 700 ${BUILD_HOME}/.
