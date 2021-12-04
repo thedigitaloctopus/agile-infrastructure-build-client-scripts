@@ -55,7 +55,7 @@ fi
 
 if ( [ "${BACKUP_PASSWORD}" != "" ] && [ "${3}" = "fromcron" ] )
 then
-    bucket_name="backup-${BUILD_IDENTIFIER}"
+    bucket_name="buildmachine-backup-${BUILD_IDENTIFIER}"
 
     /usr/bin/s3cmd mb s3://${bucket_name}
 
