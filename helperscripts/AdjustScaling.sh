@@ -100,11 +100,17 @@ SUDO="DEBIAN_FRONTEND=noninteractive /bin/echo ${SERVER_USER_PASSWORD} | /usr/bi
 
 for ip in ${autoscalerips}
 do
-    /usr/bin/ssh -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=5 -o ConnectionAttempts=6 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${ip} "${SUDO} /bin/sed -i "s/NO_WEBSERVERS.*/NO_WEBSERVERS=${nowebservers}/g" /home/${SERVER_USERNAME}/config/scalingprofile/profile.cnf" >/dev/null
-    if ( [ "$?" = "0" ] )
+    /usr/bin/ssh -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=5 -o ConnectionAttempts=6 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${ip} "${SUDO} /bin/ls /home/${SERVER_USERNAME}/config/scalingprofile/profile.cnf" 1>/dev/null 2>/dev/null
+    if ( [ "$?" != "0" ] )
     then
-        /bin/echo "I have updated the number of webservers to scale to to: ${nowebservers} on autoscaler ${ip}"
+         /bin/echo "It looks like autoscaling is not enabled yet for autoscaler with ip address: ${ip}. It takes 20 minutes from build initation for autoscaling to come online, you might need to wait a bit"
     else
-        /bin/echo "Couldn't update number of webservers to scale to on autoscaler: ${ip}"
+        /usr/bin/ssh -p ${SSH_PORT} -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=5 -o ConnectionAttempts=6 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${ip} "${SUDO} /bin/sed -i "s/NO_WEBSERVERS.*/NO_WEBSERVERS=${nowebservers}/g" /home/${SERVER_USERNAME}/config/scalingprofile/profile.cnf" 2>/dev/null
+        if ( [ "$?" = "0" ] )
+        then
+            /bin/echo "I have updated the number of webservers to scale to to: ${nowebservers} on autoscaler ${ip}"
+        else
+            /bin/echo "Couldn't update number of webservers to scale to on autoscaler: ${ip}"
+        fi
     fi
 done
