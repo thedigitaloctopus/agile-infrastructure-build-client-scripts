@@ -26,6 +26,6 @@ then
     exit
 fi
 
-export BUILD_HOME="`/usr/bin/pwd | /bin/sed 's/\/helper.*//g'`"
+export BUILD_HOME="`/bin/pwd | /bin/sed 's/\/helper.*//g'`"
 
 /bin/sh ./ExecuteOnDatabase.sh "/bin/cat /home/\${SERVER_USERNAME}/runtime/credentials/htpasswd_plaintext_history"
