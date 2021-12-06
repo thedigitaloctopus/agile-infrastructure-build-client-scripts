@@ -75,7 +75,7 @@ then
     while read ip
     do
         /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-        . ${BUILD_HOME}/buildscripts/AdjustNativeFirewall.sh
+        . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
     done < ${BUILD_HOME}/authorised-ips.dat
     
     /bin/echo "y" | /usr/sbin/ufw enable
@@ -92,7 +92,7 @@ then
     /usr/sbin/ufw default allow outgoing  
     /usr/sbin/ufw allow ${SSH_PORT}
     ip="NOIP"
-    . ${BUILD_HOME}/buildscripts/AdjustNativeFirewall.sh 
+    . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh 
 fi
 
 if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" != "" ] )
