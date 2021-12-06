@@ -30,7 +30,7 @@ then
     exit
 fi
 
-export BUILD_HOME="`/usr/bin/pwd | /bin/sed 's/\/helper.*//g'`"
+export BUILD_HOME="`/bin/pwd | /bin/sed 's/\/helper.*//g'`"
 
 /bin/rm .* 2>/dev/null
 
