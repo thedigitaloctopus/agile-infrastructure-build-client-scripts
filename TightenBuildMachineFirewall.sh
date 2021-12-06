@@ -80,8 +80,11 @@ then
     /usr/sbin/ufw default allow outgoing
     while read ip
     do
-        /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-        . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
+        if ( [ "`/usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
+        then
+            /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
+            . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
+        fi
     done < ${BUILD_HOME}/authorised-ips.dat
     
     /bin/echo "y" | /usr/sbin/ufw enable
