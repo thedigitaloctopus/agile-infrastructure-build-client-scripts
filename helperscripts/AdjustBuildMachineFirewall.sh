@@ -27,6 +27,11 @@ else
     BUILD_IDENTIFIER="${1}"
     ip="${2}"
     mode="${3}"
+    if ( [ "${mode}" != "add" ] && [ "${mode}" != "remove" ] )
+    then
+        /bin/echo "Sorry, that's an invalid mode"
+        exit
+    fi
 fi
 
 if ( [ "`/usr/bin/s3cmd ls s3://authip-${BUILD_IDENTIFIER}`" = "" ] )
