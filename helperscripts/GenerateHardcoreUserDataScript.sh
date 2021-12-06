@@ -52,7 +52,10 @@ read userdatascript
 configurationsettings="${BUILD_HOME}/overridescripts/${overridescript}"
 configurationsettings_stack="${BUILD_HOME}/overridescripts/${overridescript}.stack"
 
-/bin/sed -i '/^export/d' ${configurationsettings_stack}
+if ( [ -f ${configurationsettings_stack} ] )
+then
+    /bin/sed -i '/^export/d' ${configurationsettings_stack}
+fi
 
 if ( [ ! -d ${BUILD_HOME}/userdatascripts ] )
 then
@@ -68,7 +71,10 @@ then
     /bin/sed -i 's/#XXXROOTENVZZZ/  \" \>\> \/root\/Environment.env/g' ${BUILD_HOME}/userdatascripts/${userdatascript}
     /bin/sed -e '/#XXXYYYZZZ/ {' -e "r ${configurationsettings}.live" -e 'd' -e '}' -i ${BUILD_HOME}/userdatascripts/${userdatascript}
 else
-    /bin/sed -e '/#XXXSTACKYYY/ {' -e "r ${configurationsettings_stack}" -e 'd' -e '}' -i ${BUILD_HOME}/userdatascripts/${userdatascript}
+    if ( [ -f ${configurationsettings_stack} ] )
+    then
+        /bin/sed -e '/#XXXSTACKYYY/ {' -e "r ${configurationsettings_stack}" -e 'd' -e '}' -i ${BUILD_HOME}/userdatascripts/${userdatascript}
+    fi
 fi
 
 /bin/echo "cd agile-infrastructure-build-client-scripts
