@@ -1,5 +1,13 @@
 #### HOW TO TIGHTEN BUILD MACHINE ACCESS  
 
+You can use the helperscript:  
+
+**${BUILD_HOME}/helperscripts/AdjustBuildMachineNativeFirewall.sh**
+
+to adjust access to your build machine or you can use the manual process described below, if you need to.
+
+-----------------------------------
+
 Your build machine (the one that your user-data script gets run on) contains a lot of senstive data pertinent to your webservers and databases. By default all ports are firewalled off on it except for the SSH port you have selected. By default this SSH port accepts connections only from your laptop. You might want to grant access to other IP addresses, here is how you do that. 
 
 1. Install S3CMD on your laptop/desktop and configure it so it can access your S3 compatible object store for your cloudhost.  
