@@ -28,7 +28,7 @@ then
     exit
 fi
 
-export BUILD_HOME="`/usr/bin/pwd | /bin/sed 's/\/helper.*//g'`"
+export BUILD_HOME="`/bin/pwd | /bin/sed 's/\/helper.*//g'`"
 
 /bin/echo
 /bin/echo "I can currently find the following domains"
