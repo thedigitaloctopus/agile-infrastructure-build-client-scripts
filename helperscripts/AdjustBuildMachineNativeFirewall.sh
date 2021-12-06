@@ -28,3 +28,5 @@ fi
 /usr/bin/sort -u -o ./authorised-ips.dat ./authorised-ips.dat | /bin/sed -i '/^$/d' ./authorised-ips.dat
 
 /usr/bin/s3cmd put ./authorised-ips.dat  s3://authip-${BUILD_IDENTIFIER}
+
+/bin/rm ./authorised-ips.dat
