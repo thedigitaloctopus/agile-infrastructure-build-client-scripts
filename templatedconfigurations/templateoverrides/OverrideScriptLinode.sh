@@ -15,8 +15,12 @@
 # <UDF name="SSH" label="An SSH public key to match a private key you have installed on your laptop" />
 #################################################################################################
 
+/bin/mkdir /root/logs
 
-
+OUT_FILE="webserver-build-out-`/bin/date | /bin/sed 's/ //g'`"
+exec 1>>/root/logs/${OUT_FILE}
+ERR_FILE="webserver-build-err-`/bin/date | /bin/sed 's/ //g'`"
+exec 2>>/root/logs/${ERR_FILE}
 
 /usr/sbin/adduser --disabled-password --gecos \"\" ${BUILDMACHINE_USER} 
 /bin/sed -i '$ a\ ClientAliveInterval 60\nTCPKeepAlive yes\nClientAliveCountMax 10000' /etc/ssh/sshd_config
