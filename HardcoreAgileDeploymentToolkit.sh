@@ -278,6 +278,7 @@ export BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
 . ${BUILD_HOME}/providerscripts/datastore/PersistBuildClientIP.sh
+export PRE_BUILD="1"
 . ${BUILD_HOME}/buildscripts/CheckNativeFirewall.sh
 
 #Set a username and password which we can set on all our servers. Once the machines are built, password authentication is
@@ -340,6 +341,8 @@ then
 
     . ${BUILD_HOME}/buildscripts/BuildFromSnapshots.sh
     . ${BUILD_HOME}/buildscripts/TightenDBaaSFirewall.sh
+    export PRE_BUILD="0"
+    . ${BUILD_HOME}/buildscripts/CheckNativeFirewall.sh
 
     status ""
     status "##########################################################################################################"
@@ -355,6 +358,8 @@ else
     . ${BUILD_HOME}/buildscripts/BuildWebserver.sh
     . ${BUILD_HOME}/buildscripts/BuildDatabase.sh
     . ${BUILD_HOME}/buildscripts/TightenDBaaSFirewall.sh
+    export PRE_BUILD="0"
+    . ${BUILD_HOME}/buildscripts/CheckNativeFirewall.sh
     ##Do the build finalisation procedures
     . ${BUILD_HOME}/buildscripts/FinaliseBuildProcessing.sh
     #If we have any messages to put out to the user post build, we add them to this script
