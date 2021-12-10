@@ -18,3 +18,19 @@ then
     fi
     
 fi
+
+if ( [ "${CLOUDHOST}" = "linode" ] )
+then
+    if ( [ "`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt-build-machine" ).id'`" = "" ] )
+    then
+        /usr/local/bin/linode-cli firewalls create --label "adt-build-machine" --rules.inbound_policy DROP   --rules.outbound_policy DROP
+    fi
+    
+    if ( [ "${ip}" != "NOIP" ] )
+    then
+        /usr/local/bin/linode-cli firewalls create --label "adt-build-machine"  --rules.inbound '[{"addresses":{"ipv4":["${ip}/32"]},"action":"ACCEPT","protocol":"TCP","port":"${SSH_PORT}"}'
+    else
+        /usr/local/bin/linode-cli firewalls create --label "adt-build-machine"  --rules.inbound '[{"addresses":{"ipv4":["0.0.0.0/0"]},"action":"ACCEPT","protocol":"TCP","port":"${SSH_PORT}"}'
+    fi
+fi
+    
