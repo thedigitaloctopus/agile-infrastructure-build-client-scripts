@@ -86,7 +86,7 @@ then
             fi
         elif ( [ "${ACCESS_KEY}" != "" ] && [ "${SECRET_KEY}" != "" ] )
         then
-            status "Using your the keys from your template for your ${CLOUDHOST} authentication"
+            status "Using the keys from your template for your ${CLOUDHOST} authentication"
             /bin/mkdir -p ${BUILD_HOME}/runtimedata/${CLOUDHOST}
 
             /bin/echo "${ACCESS_KEY}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/ACCESS_KEY
@@ -137,7 +137,7 @@ then
            fi
         elif ( [ "${TOKEN}" != "" ] )
         then
-            status "Using your the keys from your template for your ${CLOUDHOST} authentication"
+            status "Using the keys from your template for your ${CLOUDHOST} authentication"
             /bin/mkdir -p ${BUILD_HOME}/runtimedata/${CLOUDHOST}
 
             /bin/echo "${TOKEN}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN
@@ -229,7 +229,7 @@ then
         if ( ( [ "${access_key}" != "" ] && [ "${secret_key}" != "" ] && [ "${ACCESS_KEY}" != "" ] && [ "${SECRET_KEY}" != "" ] ) && ( [ "${access_key}" != "${ACCESS_KEY}" ] || [ "${secret_key}" != "${SECRET_KEY}" ] ) )
         then
             status "KEYS MISMATCH DETECTED"
-            status "The keys in your exoscale configuration file are: ${access_key} and ${secret_key}"
+            status "The keys in your aws configuration file are: ${access_key} and ${secret_key}"
             status "And, the access keys you are providing from your chosen template are: ${ACCESS_KEY} and ${SECRET_KEY}"
             status "Enter Y or y to update your live configuration with your the token from your template"
             read response
@@ -240,7 +240,7 @@ then
             fi
         elif ( [ "${ACCESS_KEY}" != "" ] && [ "${SECRET_KEY}" != "" ] )
         then
-            status "Using your the keys from your template for your ${CLOUDHOST} authentication"
+            status "Using the keys from your template for your ${CLOUDHOST} authentication"
             /bin/mkdir -p ${BUILD_HOME}/runtimedata/${CLOUDHOST}
 
             /bin/echo "${ACCESS_KEY}" > ${BUILD_HOME}/runtimedata/${CLOUDHOST}/ACCESS_KEY
