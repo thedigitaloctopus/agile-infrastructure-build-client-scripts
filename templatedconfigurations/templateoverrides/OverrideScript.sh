@@ -2,9 +2,9 @@
 
 /bin/mkdir /root/logs
 
-OUT_FILE="webserver-build-out-`/bin/date | /bin/sed 's/ //g'`"
+OUT_FILE="buildmachine-out-`/bin/date | /bin/sed 's/ //g'`"
 exec 1>>/root/logs/${OUT_FILE}
-ERR_FILE="webserver-build-err-`/bin/date | /bin/sed 's/ //g'`"
+ERR_FILE="buildmachine-err-`/bin/date | /bin/sed 's/ //g'`"
 exec 2>>/root/logs/${ERR_FILE}
 
 ###############################################################################################
