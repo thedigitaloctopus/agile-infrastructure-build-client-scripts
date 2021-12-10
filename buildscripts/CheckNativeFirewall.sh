@@ -27,37 +27,43 @@ fi
 
 if ( [ "${CLOUDHOST}" = "exoscale" ] )
 then
-    /bin/echo "y" | /usr/bin/exo compute security-group delete adt
-    /usr/bin/exo compute security-group create adt
-    /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port ${SSH_PORT}
-    /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port ${DB_PORT}
-    /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 443
-    /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 80
-    /usr/bin/exo compute security-group rule add adt --network ${BUILD_CLIENT_IP}/32 --port 22
-    /usr/bin/exo compute security-group rule add adt --protocol icmp --network 0.0.0.0/0 --icmp-code 0 --icmp-type 8
+    if ( [ "${PRE_BUILD}" = "1" ] )
+    then
+        /bin/echo "y" | /usr/bin/exo compute security-group delete adt
+        /usr/bin/exo compute security-group create adt
+        /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port ${SSH_PORT}
+        /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port ${DB_PORT}
+        /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 443
+        /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 80
+        /usr/bin/exo compute security-group rule add adt --network ${BUILD_CLIENT_IP}/32 --port 22
+        /usr/bin/exo compute security-group rule add adt --protocol icmp --network 0.0.0.0/0 --icmp-code 0 --icmp-type 8
+    fi
 fi
 
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
-    firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt" ).id'`"
-    if ( [ "${firewall_id}" != "" ] )
+    if ( [ "${PRE_BUILD}" = "0" ] )
     then
-        /usr/local/bin/linode-cli firewalls delete ${firewall_id}
-    fi
+        firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt" ).id'`"
+        
+        if ( [ "${firewall_id}" != "" ] )
+        then
+            /usr/local/bin/linode-cli firewalls delete ${firewall_id}
+        fi
    
-    /usr/local/bin/linode-cli firewalls create --label "adt" --rules.inbound_policy DROP   --rules.outbound_policy DROP
-    firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt" ).id'`"
+        /usr/local/bin/linode-cli firewalls create --label "adt" --rules.inbound_policy DROP   --rules.outbound_policy DROP
+        firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt" ).id'`"
 
-    /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},443,80,22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
+        /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},443,80,22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
     
-    autoscaler_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("autoscaler")).id'`"
-    webserver_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("webserver")).id'`"
-    database_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("database")).id'`"
+        autoscaler_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("autoscaler")).id'`"
+        webserver_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("webserver")).id'`"
+        database_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("database")).id'`"
     
-    /usr/local/bin/linode-cli firewalls device-create --id ${autoscaler_id} --type linode ${firewall_id} 
-    /usr/local/bin/linode-cli firewalls device-create --id ${webserver_id} --type linode ${firewall_id} 
-    /usr/local/bin/linode-cli firewalls device-create --id ${database_id} --type linode ${firewall_id} 
-    
+        /usr/local/bin/linode-cli firewalls device-create --id ${autoscaler_id} --type linode ${firewall_id} 
+        /usr/local/bin/linode-cli firewalls device-create --id ${webserver_id} --type linode ${firewall_id} 
+        /usr/local/bin/linode-cli firewalls device-create --id ${database_id} --type linode ${firewall_id} 
+    fi    
 fi
 
 if ( [ "${CLOUDHOST}" = "vultr" ] )
