@@ -26,11 +26,17 @@ then
         /usr/local/bin/linode-cli firewalls create --label "adt-build-machine" --rules.inbound_policy DROP   --rules.outbound_policy DROP
     fi
     
+    id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt-build-machine" ).id'`"
+    
     if ( [ "${ip}" != "NOIP" ] )
     then
-        /usr/local/bin/linode-cli firewalls create --label "adt-build-machine"  --rules.inbound "[{\"addresses\":{\"ipv4\":[\"${ip}/32\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"${SSH_PORT}\"}"
+     #   /usr/local/bin/linode-cli firewalls create --label "adt-build-machine"  --rules.inbound "[{\"addresses\":{\"ipv4\":[\"${ip}/32\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"${SSH_PORT}\"}"
+        /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"${ip}/32\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"${SSH_PORT}\"}" ${id}
+
     else
-        /usr/local/bin/linode-cli firewalls create --label "adt-build-machine"  --rules.inbound "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"${SSH_PORT}\"}"
+   #   # /usr/local/bin/linode-cli firewalls create --label "adt-build-machine"  --rules.inbound "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"${SSH_PORT}\"}"
+       /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"${SSH_PORT}\"}" ${id}
+       /usr/local/bin/linode-cli firewalls rules-update --inbound "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${id}
     fi
 fi
     
