@@ -48,10 +48,9 @@ then
     /usr/local/bin/linode-cli firewalls create --label "adt" --rules.inbound_policy DROP   --rules.outbound_policy DROP
     firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt" ).id'`"
 
-    /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"${SSH_PORT}\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"${DB_PORT}\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"${DB_PORT}\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"443\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"80\"},{\"ipv4\":[\"${BUILD_CLIENT_IP}/32\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
+    /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},443,80,22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
     
-
-autoscaler_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("autoscaler")).id'`"
+    autoscaler_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("autoscaler")).id'`"
     webserver_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("webserver")).id'`"
     database_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("database")).id'`"
     
