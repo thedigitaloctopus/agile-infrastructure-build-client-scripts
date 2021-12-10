@@ -596,6 +596,7 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 . ${BUILD_HOME}/buildscripts/InitialiseDatastore.sh
 . ${BUILD_HOME}/buildscripts/InitialiseBuildChoice.sh
 . ${BUILD_HOME}/providerscripts/datastore/PersistBuildClientIP.sh
+export PRE_BUILD="1"
 . ${BUILD_HOME}/buildscripts/CheckNativeFirewall.sh
 
 /bin/rm ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/* 2>/dev/null
@@ -722,6 +723,8 @@ else
     . ${BUILD_HOME}/buildscripts/BuildWebserver.sh
     . ${BUILD_HOME}/buildscripts/BuildDatabase.sh
     . ${BUILD_HOME}/buildscripts/TightenDBaaSFirewall.sh
+    export PRE_BUILD="0"
+    . ${BUILD_HOME}/buildscripts/CheckNativeFirewall.sh
 
     ##Do the build finalisation procedures
     . ${BUILD_HOME}/buildscripts/FinaliseBuildProcessing.sh
