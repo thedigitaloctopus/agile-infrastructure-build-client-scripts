@@ -544,6 +544,8 @@ then
     done
     . ${BUILD_HOME}/buildscripts/BuildFromSnapshots.sh
     . ${BUILD_HOME}/buildscripts/TightenDBaaSFirewall.sh
+    export PRE_BUILD="0"
+    . ${BUILD_HOME}/buildscripts/CheckNativeFirewall.sh
 
     status ""
     status "##########################################################################################################"
