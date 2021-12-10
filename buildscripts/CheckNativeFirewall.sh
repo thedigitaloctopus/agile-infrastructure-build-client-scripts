@@ -39,7 +39,30 @@ fi
 
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
-    :
+    firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt" ).id'`"
+    if ( [ "${firewall_id}" != "" ] )
+    then
+        /usr/local/bin/linode-cli firewalls delete ${firewall_id}
+    fi
+   
+    /usr/local/bin/linode-cli firewalls create --label "adt" --rules.inbound_policy DROP   --rules.outbound_policy DROP
+    firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt" ).id'`"
+
+    /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"${SSH_PORT}\"}" ${firewall_id}
+    /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"${DB_PORT}\"}" ${firewall_id}
+    /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"443\"}" ${firewall_id}
+    /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"80\"}" ${firewall_id}
+    /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"${BUILD_CLIENT_IP}/32\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"port\":\"22\"}" ${firewall_id}
+    /usr/local/bin/linode-cli firewalls rules-update --inbound "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
+
+    autoscaler_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("autoscaler")).id'`"
+    webserver_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("webserver")).id'`"
+    database_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("database")).id'`"
+    
+    /usr/local/bin/linode-cli firewalls device-create --id ${autoscaler_id} --type linode ${firewall_id} 
+    /usr/local/bin/linode-cli firewalls device-create --id ${webserver_id} --type linode ${firewall_id} 
+    /usr/local/bin/linode-cli firewalls device-create --id ${database_id} --type linode ${firewall_id} 
+    
 fi
 
 if ( [ "${CLOUDHOST}" = "vultr" ] )
