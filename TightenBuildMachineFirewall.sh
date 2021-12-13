@@ -75,7 +75,7 @@ fi
 
 if ( [ -f /root/authorised-ips.dat ] )
 then
-    /bin/mv /root/authorised-ips.dat ${BUILD_HOME}
+    /bin/cp /root/authorised-ips.dat ${BUILD_HOME}
 fi
 
 if ( [ "${LAPTOP_IP}" != "BYPASS" ] && [ -f ${BUILD_HOME}/authorised-ips.dat ] )
