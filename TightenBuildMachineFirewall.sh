@@ -29,7 +29,7 @@
 
 if ( [ "`/usr/bin/crontab -l | /bin/grep Tighten`" = "" ] )
 then
-    /bin/echo "*/1 * * * * ${BUILD_HOME}/TightenBuildMachineFirewall.sh ${BUILD_IDENTIFIER} ${BUILD_HOME} ${SSH_PORT} ${CLOUDHOST}" >> /var/spool/cron/crontabs/root
+    /bin/echo "*/5 * * * * ${BUILD_HOME}/TightenBuildMachineFirewall.sh ${BUILD_IDENTIFIER} ${BUILD_HOME} ${SSH_PORT} ${CLOUDHOST}" >> /var/spool/cron/crontabs/root
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
@@ -54,6 +54,11 @@ then
 fi
 
 /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
+
+if ( [ "${LAPTOP_IP}" = "" ] )
+then
+    LAPTOP_IP="`/bin/ls ${BUILD_HOME}/runtimedata/LAPTOPIP:* | /usr/bin/awk -F':' '{print $NF}'`"
+fi 
 
 if ( [ "${LAPTOP_IP}" != "" ] )
 then
