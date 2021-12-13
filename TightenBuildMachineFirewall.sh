@@ -86,15 +86,7 @@ then
             . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
         fi
     done < ${BUILD_HOME}/authorised-ips.dat
-    
-    ip=${LAPTOP_IP}
-    
-    if ( [ "`/usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
-    then
-        /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-        . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
-    fi
-    
+     
     /bin/echo "y" | /usr/sbin/ufw enable
 #else        
 #    /usr/sbin/ufw --force reset
@@ -110,6 +102,14 @@ then
     /usr/sbin/ufw allow ${SSH_PORT}
     ip="NOIP"
     . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh 
+fi
+
+ip=${LAPTOP_IP}
+    
+if ( [ "`/usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
+then
+    /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
+    . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
 fi
 
 if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" != "" ] )
