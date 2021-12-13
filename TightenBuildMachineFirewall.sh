@@ -87,6 +87,14 @@ then
         fi
     done < ${BUILD_HOME}/authorised-ips.dat
     
+    ip=${BUILD_CLIENT_IP}
+    
+    if ( [ "`/usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
+    then
+        /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
+        . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
+    fi
+    
     /bin/echo "y" | /usr/sbin/ufw enable
 #else        
 #    /usr/sbin/ufw --force reset
