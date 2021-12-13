@@ -132,7 +132,7 @@ then
                 rules="`/usr/sbin/ufw status numbered | /bin/grep ${ip} |  /usr/bin/cut -d "[" -f2 | /usr/bin/cut -d "]" -f1 | /bin/sed 's/ //g' | /usr/bin/tr '\n' ' '`"
                 for rule in ${rules}
                 do
-                    /usr/sbin/ufw delete ${rule}
+                    /bin/echo "y" | /usr/sbin/ufw delete ${rule}
                 done
             fi
         fi
