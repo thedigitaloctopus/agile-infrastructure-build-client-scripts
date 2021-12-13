@@ -98,14 +98,18 @@ then
         then
             /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
         fi
-    done < ${BUILD_HOME}/authorised-ips.dat
     
-    . ${BUILD_HOME}/buildscripts/CheckIPInFirewall.sh
+        ipcovered="0"
+        
+        . ${BUILD_HOME}/buildscripts/CheckIPInFirewall.sh
 
-    if ( [ "${ipcovered}" = "0" ] )
-    then
-        . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
-    fi
+        if ( [ "${ipcovered}" = "0" ] )
+        then
+            . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
+        fi
+        
+    done < ${BUILD_HOME}/authorised-ips.dat
+
 fi
  
 /bin/echo "y" | /usr/sbin/ufw enable
