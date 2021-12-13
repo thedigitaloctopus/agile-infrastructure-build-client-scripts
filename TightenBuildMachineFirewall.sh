@@ -91,17 +91,18 @@ fi
 if ( [ "${LAPTOP_IP}" != "BYPASS" ] && [ -f ${BUILD_HOME}/authorised-ips.dat ] )
 then
     ips=""
-    updated="0"
     while read ip
     do
         ips="${ips}":${ip}
         if ( [ "`/usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
         then
             /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-            updated="1"
         fi
     done < ${BUILD_HOME}/authorised-ips.dat
-    if ( [ "${updated}" = "1" ] )
+    
+    . ${BUILD_HOME}/buildscripts/CheckIPInFirewall.sh
+
+    if ( [ "${ipcovered}" = "0" ] )
     then
         . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
     fi
@@ -109,14 +110,21 @@ fi
  
 /bin/echo "y" | /usr/sbin/ufw enable
 
-ip=${LAPTOP_IP}
-ips="${ips}":${LAPTOP_IP}
+#ip=${LAPTOP_IP}
+#ips="${ips}":${LAPTOP_IP}
     
-if ( [ "`/usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
-then
-    /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-    . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
-fi
+#if ( [ "`/usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
+#then
+#    /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
+#    . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
+#    . ${BUILD_HOME}/buildscripts/CheckIPInFirewall.sh
+#
+#    if ( [ "${ipcovered}" = "0" ] )
+#    then
+#        . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
+#    fi
+#fi
+
 
 if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" != "" ] )
 then
