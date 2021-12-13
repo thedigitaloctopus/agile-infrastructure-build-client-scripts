@@ -106,8 +106,7 @@ then
         if ( [ "`/bin/cat /tmp/removedips | /bin/grep ${ip}`" = "" ] )
         then
             ips="${ips}":${ip}
-        fi
-        if ( [ "`/bin/wc -l /tmp/removedips`" != "0" ] )
+        elif ( [ "`/bin/wc -l /tmp/removedips`" != "0" ] )
         then
             /bin/sed -i "/${ip}/d" /tmp/removedips
             /bin/sed -i "/${ip}/d" ${BUILD_HOME}/authorised-ips.dat
