@@ -87,7 +87,7 @@ then
         fi
     done < ${BUILD_HOME}/authorised-ips.dat
     
-    ip=${BUILD_CLIENT_IP}
+    ip=${LAPTOP_IP}
     
     if ( [ "`/usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
     then
