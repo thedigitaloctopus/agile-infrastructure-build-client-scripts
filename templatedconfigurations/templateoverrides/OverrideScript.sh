@@ -116,3 +116,5 @@ then
 else
     /usr/bin/git clone https://github.com/agile-deployer/agile-infrastructure-build-client-scripts.git
 fi
+
+/bin/touch /home/${BUILDMACHINE_USER}/agile-infrastructure-build-client-scripts/runtimedata/LAPTOPIP:${LAPTOP_IP}
