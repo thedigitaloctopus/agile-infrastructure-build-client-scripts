@@ -129,7 +129,7 @@ then
             updated="1"
             if ( [ "${removed}" = "1" ] )
             then
-                rules="`/usr/sbin/ufw status numbered | /bin/grep ${ip} |  /usr/bin/cut -d "[" -f2 | /usr/bin/cut -d "]" -f1 | /bin/sed 's/ //g' | /usr/bin/tr '\n' ' '`"
+                rules="`/usr/sbin/ufw status numbered | /bin/grep ${ip} |  /usr/bin/cut -d "[" -f2 | /usr/bin/cut -d "]" -f1 | /bin/sed 's/ //g' | /usr/bin/tr '\n' ' ' | /usr/bin/rev`"
                 for rule in ${rules}
                 do
                     /bin/echo "y" | /usr/sbin/ufw delete ${rule}
