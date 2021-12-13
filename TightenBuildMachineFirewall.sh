@@ -78,8 +78,11 @@ then
     /usr/sbin/ufw --force reset
     /usr/sbin/ufw default deny incoming
     /usr/sbin/ufw default allow outgoing
+    ips=""
     while read ip
     do
+        ips="${ips}":${ip}
+      
         if ( [ "`/usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
         then
             /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
@@ -105,6 +108,7 @@ then
 fi
 
 ip=${LAPTOP_IP}
+ips="${ips}":${LAPTOP_IP}
     
 if ( [ "`/usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
 then
