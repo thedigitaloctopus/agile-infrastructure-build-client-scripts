@@ -19,6 +19,13 @@
 #######################################################################################################
 #######################################################################################################
 #set -x
+
+if ( [ ! -f  ./AdjustBuildMachineFirewall.sh ] )
+then
+    /bin/echo "Sorry, this script has to be run from the helperscripts subdirectory"
+    exit
+fi
+
 if ( [ "${1}" = "" ] || [ "${2}" = "" ] || [ "${3}" = "" ] )
 then
     /bin/echo "Sorry usage: ${0} <build-identifier> <ip> <mode - add|remove>"
