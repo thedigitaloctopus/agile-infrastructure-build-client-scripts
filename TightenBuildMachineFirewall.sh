@@ -38,6 +38,8 @@ then
     exit
 fi
 
+/bin/rm /tmp/*FIREWALL*
+
 if ( [ "${1}" != "" ] )
 then
     BUILD_IDENTIFIER="${1}"
