@@ -85,88 +85,19 @@ then
     fi
 fi
 
-if ( [ -f /root/authorised-ips.dat ] )
-then
+ips="`/bin/cat /root/authorised-ips.dat | /usr/bin/tr '\n' ' '`"
 
-    if ( [ ! -f ${BUILD_HOME}/authorised-ips.dat ] )
-    then
-        /bin/touch ${BUILD_HOME}/authorised-ips.dat
-    fi
-    
-    /usr/bin/diff /root/authorised-ips.dat ${BUILD_HOME}/authorised-ips.dat >> /tmp/removedips
-    /bin/cat /tmp/removedips | /bin/grep ">" | /bin/grep -E -o '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)' > /tmp/removedips.$$    
-    /bin/mv /tmp/removedips.$$ /tmp/removedips
-fi
-
-if ( [ "`/usr/sbin/ufw status | /bin/grep ${LAPTOP_IP} | /bin/grep ALLOW`" = "" ] )
-then
-    /usr/sbin/ufw --force reset
-    /usr/sbin/ufw default deny incoming
-    /usr/sbin/ufw default allow outgoing
-fi
-
-
-if ( [ "${LAPTOP_IP}" != "BYPASS" ] && [ -f ${BUILD_HOME}/authorised-ips.dat ] )
-then
-    ips=""
-    updated="0"
-
-    while read ip 
+for ip in ${ips}
+do
+    rules="`/usr/sbin/ufw status numbered | /bin/grep ${ip} |  /usr/bin/cut -d "[" -f2 | /usr/bin/cut -d "]" -f1 | /bin/sed 's/ //g' | /usr/bin/tr '\n' ' ' | /usr/bin/rev`"
+    for rule in ${rules}
     do
-        removed="0"
+        /bin/echo "y" | /usr/sbin/ufw delete ${rule}
+    done
+done
 
-        if ( [ "`/bin/cat /tmp/removedips | /bin/grep ${ip}`" = "" ] )
-        then
-            ips="${ips}":${ip}
-        elif ( [ "`/bin/wc -l /tmp/removedips`" != "0" ] )
-        then
-            /bin/sed -i "/${ip}/d" /tmp/removedips
-            /bin/sed -i "/${ip}/d" ${BUILD_HOME}/authorised-ips.dat
-            /bin/sed -i "/${ip}/d" /root/authorised-ips.dat
-            ip=""
-            removed="1"
-        fi
-        if ( [ "`/usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
-        then
-            /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-        fi
+. ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
 
-        ipcovered="0"
-
-        . ${BUILD_HOME}/buildscripts/CheckIPInFirewall.sh
-
-        if ( [ "${removed}" = "1" ] || [ "${ipcovered}" = "0" ] )
-        then
-            updated="1"
-            if ( [ "${removed}" = "1" ] )
-            then
-                rules="`/usr/sbin/ufw status numbered | /bin/grep ${ip} |  /usr/bin/cut -d "[" -f2 | /usr/bin/cut -d "]" -f1 | /bin/sed 's/ //g' | /usr/bin/tr '\n' ' ' | /usr/bin/rev`"
-                for rule in ${rules}
-                do
-                    /bin/echo "y" | /usr/sbin/ufw delete ${rule}
-                done
-            fi
-        fi
-    done < ${BUILD_HOME}/authorised-ips.dat
-    
-    ips="`/bin/echo ${ips} | /bin/sed 's/^://g'`"
-
-    if ( [ "${updated}" = "1" ] )
-    then
-        . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
-    fi
-fi
- 
-/bin/echo "y" | /usr/sbin/ufw enable
-
-ip=${LAPTOP_IP}
-ips="${ips}":${LAPTOP_IP}
-    
-if ( [ "`/usr/sbin/ufw status | /bin/grep ${ip} | /bin/grep ALLOW`" = "" ] )
-then
-    /usr/sbin/ufw allow from ${ip} to any port ${SSH_PORT}
-    . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
-fi
 
 if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" != "" ] )
 then
