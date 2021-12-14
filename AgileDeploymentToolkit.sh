@@ -585,6 +585,8 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 
 #Perform all the initialisation necessary
 
+/bin/touch /tmp/PRIME_FIREWALL
+
 . ${BUILD_HOME}/buildscripts/InitialiseSourcecodeRepository.sh
 . ${BUILD_HOME}/buildscripts/InitialiseSecurityKeys.sh
 . ${BUILD_HOME}/buildscripts/InitialiseCaching.sh
