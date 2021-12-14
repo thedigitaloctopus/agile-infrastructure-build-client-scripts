@@ -60,3 +60,4 @@ fi
 /usr/bin/s3cmd put ./authorised-ips.dat  s3://authip-${BUILD_IDENTIFIER}
 /bin/cp ./authorised-ips.dat /root/authorised-ips.dat
 /bin/rm ./authorised-ips.dat
+/bin/touch /tmp/FIREWALL-EVENT
