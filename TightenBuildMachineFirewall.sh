@@ -33,6 +33,11 @@ then
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
+if ( [ ! -f /tmp/FIREWALL-EVENT ] )
+then
+    exit
+fi
+
 if ( [ "${1}" != "" ] )
 then
     BUILD_IDENTIFIER="${1}"
