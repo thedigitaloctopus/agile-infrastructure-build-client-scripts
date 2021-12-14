@@ -61,6 +61,7 @@ then
 fi
 
 /bin/rm /tmp/*FIREWALL*
+/usr/bin/s3cmd --force del s3://authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT 2>/dev/null
 
 /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat /root
 
