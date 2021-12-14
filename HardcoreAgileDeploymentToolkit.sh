@@ -268,7 +268,7 @@ fi
 
 #Get the ip address of our build machine
 export BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
-
+/bin/touch /tmp/PRIME_FIREWALL
 . ${BUILD_HOME}/templatedconfigurations/ConfigureTemplate.sh
 . ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
