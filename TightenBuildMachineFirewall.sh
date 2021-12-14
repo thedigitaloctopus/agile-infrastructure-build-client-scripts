@@ -84,8 +84,7 @@ then
     fi
     
     /usr/bin/diff /root/authorised-ips.dat ${BUILD_HOME}/authorised-ips.dat >> /tmp/removedips
-    /bin/grep -E -o '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)' /tmp/removedips | /bin/grep "<" > /tmp/removedips.$$
-    /bin/mv /tmp/removedips.$$ /tmp/removedips
+    /bin/cat /tmp/removedips | /bin/grep ">" | /bin/grep -E -o '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)' > /tmp/removedips.$$    /bin/mv /tmp/removedips.$$ /tmp/removedips
     /bin/cp /root/authorised-ips.dat ${BUILD_HOME}
 fi
 
