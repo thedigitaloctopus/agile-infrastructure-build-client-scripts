@@ -424,7 +424,7 @@ status "Please tell us which template you wish to build from"
 status "#####################################################################################################################"
 status ""
 status ""
-
+/bin/touch /tmp/PRIME_FIREWALL
 . ${BUILD_HOME}/templatedconfigurations/ConfigureTemplate.sh
 . ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
