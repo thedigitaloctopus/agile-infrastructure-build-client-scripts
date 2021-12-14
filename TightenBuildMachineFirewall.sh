@@ -85,19 +85,7 @@ then
     fi
 fi
 
-ips="`/bin/cat /root/authorised-ips.dat | /usr/bin/tr '\n' ' '`"
-
-for ip in ${ips}
-do
-    rules="`/usr/sbin/ufw status numbered | /bin/grep ${ip} |  /usr/bin/cut -d "[" -f2 | /usr/bin/cut -d "]" -f1 | /bin/sed 's/ //g' | /usr/bin/tr '\n' ' ' | /usr/bin/rev`"
-    for rule in ${rules}
-    do
-        /bin/echo "y" | /usr/sbin/ufw delete ${rule}
-    done
-done
-
 . ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
-
 
 if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" != "" ] )
 then
