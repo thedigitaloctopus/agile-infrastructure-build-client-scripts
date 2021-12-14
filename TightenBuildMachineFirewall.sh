@@ -85,7 +85,6 @@ then
     
     /usr/bin/diff /root/authorised-ips.dat ${BUILD_HOME}/authorised-ips.dat >> /tmp/removedips
     /bin/cat /tmp/removedips | /bin/grep ">" | /bin/grep -E -o '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)' > /tmp/removedips.$$    /bin/mv /tmp/removedips.$$ /tmp/removedips
-    /bin/cp /root/authorised-ips.dat ${BUILD_HOME}
 fi
 
 if ( [ "`/usr/sbin/ufw status | /bin/grep ${LAPTOP_IP} | /bin/grep ALLOW`" = "" ] )
@@ -138,6 +137,8 @@ then
             fi
         fi
     done < ${BUILD_HOME}/authorised-ips.dat
+    
+    ips="`/bin/echo ${ips} | /bin/sed 's/^://g'`"
 
     if ( [ "${updated}" = "1" ] )
     then
@@ -160,3 +161,5 @@ if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ip
 then
     /bin/mv ${BUILD_HOME}/authorised-ips.dat ${BUILD_HOME}/authorised-ips.dat.$$
 fi
+
+/bin/cp /root/authorised-ips.dat ${BUILD_HOME}
