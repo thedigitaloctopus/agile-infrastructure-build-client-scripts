@@ -33,7 +33,7 @@ then
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
-if ( [ ! -f /tmp/FIREWALL-EVENT ] )
+if ( [ ! -f /tmp/FIREWALL-EVENT ] && [ ! -f /tmp/PRIME_FIREWALL ] )
 then
     exit
 fi
