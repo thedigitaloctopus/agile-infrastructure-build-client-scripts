@@ -33,7 +33,6 @@ then
     
     firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt-build-machine" ).id'`"
     
-    iplist=""
     if ( [ "${ip}" != "NOIP" ] )
     then
         if ( [ "${ips}" != "" ] )
