@@ -33,13 +33,6 @@ then
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
-if ( [ ! -f /tmp/FIREWALL-EVENT ] && [ ! -f /tmp/PRIME_FIREWALL ] )
-then
-    exit
-fi
-
-/bin/rm /tmp/*FIREWALL*
-
 if ( [ "${1}" != "" ] )
 then
     BUILD_IDENTIFIER="${1}"
@@ -59,6 +52,15 @@ if ( [ "${4}" != "" ] )
 then
    CLOUDHOST="${4}"
 fi
+
+/usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT /tmp
+
+if ( [ ! -f /tmp/FIREWALL-EVENT ] && [ ! -f /tmp/PRIME_FIREWALL ] )
+then
+    exit
+fi
+
+/bin/rm /tmp/*FIREWALL*
 
 /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat /root
 
