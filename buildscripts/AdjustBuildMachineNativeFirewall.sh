@@ -31,6 +31,8 @@ then
        /usr/local/bin/linode-cli firewalls create --label "adt-build-machine" --rules.inbound_policy DROP   --rules.outbound_policy ACCEPT
     fi
     
+    /bin/sleep 30
+    
     firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt-build-machine" ).id'`"
     
     if ( [ "${ip}" != "NOIP" ] )
