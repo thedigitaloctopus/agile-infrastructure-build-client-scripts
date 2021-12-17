@@ -119,10 +119,10 @@ do
         if ( [ "${setting}" != "" ] )
         then
             /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"${setting}\"/g" ${newoverridescript}
-            /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" oneof=\"${setting}\" \/>/g" ${newoverridescript}.stack
+            /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" oneof=\"${setting}\" default=\"${setting}\"\/>/g" ${newoverridescript}.stack
         else
             /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"${value}\"/g" ${newoverridescript}
-            /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" oneof=\"${value}\" \/>/g" ${newoverridescript}.stack
+            /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" oneof=\"${value}\" default=\"${value}\"\/>/g" ${newoverridescript}.stack
         fi
     fi
 done
@@ -155,10 +155,10 @@ then
             if ( [ "${setting}" != "" ] )
             then
                 /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"$setting\"/g" ${newoverridescript}
-                /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" oneof=\"${setting}\"\/>/g" ${newoverridescript}.stack
+                /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" oneof=\"${setting}\" default=\"${setting}\"\/>/g" ${newoverridescript}.stack
             else
                 /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"${value}\"/g" ${newoverridescript}
-                /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" oneof=\"${value}\"\/>/g" ${newoverridescript}.stack
+                /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" oneof=\"${value}\" default=\"${value}\"\/>/g" ${newoverridescript}.stack
             fi
         fi
     done
