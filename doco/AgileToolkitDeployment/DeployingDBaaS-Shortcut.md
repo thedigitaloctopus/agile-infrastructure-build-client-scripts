@@ -5,8 +5,8 @@ The managed database you describe here will spin up automatically through the bu
 
 If you are using digital ocean managed databases you can set the following in your template or override
 
-##### DATABASE_DBaaS_INSTALLATION_TYPE="<db-type>:DBAAS:<db-engine>:<region>:<size>:<db-version>:<cluster-name>:<db-name>"  
-##### DATABASE_DBaaS_INSTALLATION_TYPE="<db-type>"
+##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>:DBAAS:\<db-engine\>:\<region\>:\<size\>:\<db-version\>:\<cluster-name\>:\<db-name\>"  
+##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>"
   
 So an example of this would be in your template or override:
 
@@ -40,8 +40,8 @@ So,
   
 If you are using exoscale managed databases you can set the following in your template or override
 
-##### DATABASE_DBaaS_INSTALLATION_TYPE="<db-type>:DBAAS:<db-engine>:<region>:<size>:<db-name>"  
-##### DATABASE_DBaaS_INSTALLATION_TYPE="<db-type>"
+##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>:DBAAS:\<db-engine\>:\<region\>:\<size\>:\<db-name\>"  
+##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>"
 
 So an example of this would be in your template or override:
 
