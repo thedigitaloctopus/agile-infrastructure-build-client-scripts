@@ -34,7 +34,9 @@ So,
   **cluster-name** can be unique string for your cluster, for example, **"testcluster"**   
   **db-name** can be a unique string for your database, for example, **"testdatabase"** 
   
-  ### Exoscale
+--------
+  
+### Exoscale
   
 If you are using exoscale managed databases you can set the following in your template or override
 
