@@ -5,7 +5,7 @@ The managed database you describe here will spin up automatically through the bu
 
 If you are using digital ocean managed databases you can set the following in your template or override
 
-##### DATABASE_DBaaS_INSTALLATION_TYPE=<db-type>:DBAAS:<db-engine>:<region>:<size>:<db-version>:<cluster-name>:<db-name>  
+##### DATABASE_DBaaS_INSTALLATION_TYPE="<db-type>:DBAAS:<db-engine>:<region>:<size>:<db-version>:<cluster-name>:<db-name>"  
 ##### DATABASE_DBaaS_INSTALLATION_TYPE="<db-type>"
   
 So an example of this would be in your template or override:
@@ -32,6 +32,38 @@ So,
   **size** can be **"db-s-1vcpu-1gb", "db-s-1vcpu-2gb", "db-s-1vcpu-3gb", "db-s-2vcpu-4gb", "db-s-4vcpu-8gb", "db-s-8vcpu-16gb", "db-s-8vcpu-32gb"**  
   **db-version** can be for **mysql = "8"** for **postgres="13"**  
   **cluster-name** can be unique string for your cluster, for example, **"testcluster"**   
-  **db-name** can be a unique string for your database, for example, **"testdatabase"**  
+  **db-name** can be a unique string for your database, for example, **"testdatabase"** 
+  
+  ### Exoscale
+  
+If you are using exoscale managed databases you can set the following in your template or override
+
+##### DATABASE_DBaaS_INSTALLATION_TYPE="<db-type>:DBAAS:<db-engine>:<region>:<size>:<db-name>"  
+##### DATABASE_DBaaS_INSTALLATION_TYPE="<db-type>"
+
+So an example of this would be in your template or override:
+
+1. DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mysql:ch-gva-2:hobbyist-1:testdb1"
+2. DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:ch-gva-2:hobbyist-1:testdb1"
+3. DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:pg:ch-gva-2:hobbyist-1:testdb1"
+  
+So, for the first example:  
+  
+db-type="Maria"
+db-engine="mysql"
+region="ch-gva-2"
+size="hobbyist-1"
+db-name="testdb1"
+
+So,
+  
+  **db-type** can be: **"Maria", "MySQL", "Postgres"**  
+  **db-engine** can be **"mysql", "pg"**
+  ** region** can be **"ch-gva-2", "de-fra-1", "de-muc-1", "at-vie-1", "ch-dk-2", "bg-sof-1"**
+  **size** can be **"hobbyist-1", startup-[4|8|16|32|64|128|255]", business-[4|8|16|32|64|128|255]", premium-[4|8|16|32|64|128|255]"**
+  **db-name** can be a unique string for your database, for example, **"testdatabase"** 
+ 
+  
+  
   
   
