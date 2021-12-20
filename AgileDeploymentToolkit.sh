@@ -689,7 +689,7 @@ then
         read NO_AUTOSCALERS
     done
     . ${BUILD_HOME}/buildscripts/BuildFromSnapshots.sh
-    . ${BUILD_HOME}/buildscripts/TightenDBaaSFirewall.sh
+    . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
 
 
     status ""
@@ -724,7 +724,7 @@ else
 
     . ${BUILD_HOME}/buildscripts/BuildWebserver.sh
     . ${BUILD_HOME}/buildscripts/BuildDatabase.sh
-    . ${BUILD_HOME}/buildscripts/TightenDBaaSFirewall.sh
+    . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
 
