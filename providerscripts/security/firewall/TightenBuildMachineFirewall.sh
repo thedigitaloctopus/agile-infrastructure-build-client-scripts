@@ -87,7 +87,7 @@ fi
 
 ips="`/bin/cat /root/authorised-ips.dat | /bin/tr '\n' ' '`"
 
-. ${BUILD_HOME}/buildscripts/AdjustBuildMachineNativeFirewall.sh
+. ${BUILD_HOME}/providerscripts/security/firewall/AdjustBuildMachineNativeFirewall.sh
 
 if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" != "" ] )
 then
