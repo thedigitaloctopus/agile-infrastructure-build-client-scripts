@@ -270,7 +270,7 @@ fi
 export BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
 /bin/touch /tmp/PRIME_FIREWALL
 . ${BUILD_HOME}/templatedconfigurations/ConfigureTemplate.sh
-. ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
+. ${BUILD_HOME}/initscripts/InitialiseSMTPMailServer.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
 . ${BUILD_HOME}/providerscripts/datastore/ObtainSnapshotData.sh
 . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
