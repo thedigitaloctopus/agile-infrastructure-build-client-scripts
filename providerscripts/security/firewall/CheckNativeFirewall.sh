@@ -40,6 +40,7 @@ then
     fi
 fi
 
+
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
     if ( [ "${PRE_BUILD}" = "0" ] )
@@ -54,13 +55,43 @@ then
         /usr/local/bin/linode-cli firewalls create --label "adt" --rules.inbound_policy DROP   --rules.outbound_policy ACCEPT
         firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt" ).id'`"
 
-        /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},443,80,22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
+        
+        server_type="autoscaler"
+        autoscaler_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep -v "192.168"`"
+        server_type="webserver"
+        webserver_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep -v "192.168"`"
+        server_type="database"
+        database_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep -v "192.168"`"
+        ips=""
+        if ( [ "${autoscaler_ip}" != "" ] )
+        then
+            ips="\"${autoscalerip}/32\","
+        fi
+        if ( [ "${webserver_ip}" != "" ] )
+        then
+            ips=${ips}" \"${webserver_ip}/32\","
+        fi
+        if ( [ "${database_ip}" != "" ] )
+        then
+            ips=${ips}" \"${database_ip}/32\","
+        fi
+
+        if ( [ "${BUILD_CLIENT_IP}" != "" ] )
+        then
+            ips=${ips}" \"${BUILD_CLIENT_IP}/32\""
+        fi
+
+        ips="`/bin/echo ${ips} | /bin/sed 's/,$//g'`"
+   
+        /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[${ips}]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT}\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"443,80,22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
+
+        #/usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},443,80,22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
     
         autoscaler_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("autoscaler")).id'`"
         webserver_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("webserver")).id'`"
         database_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("database")).id'`"
     
-        /usr/local/bin/linode-cli firewalls device-create --id ${autoscaler_id} --type linode ${firewall_id} 
+        /usr/local/bin/linode-cli firewalls device-create --id ${autoscaler_id} --type linode ${firewall_id} 2>/dev/null
         /usr/local/bin/linode-cli firewalls device-create --id ${webserver_id} --type linode ${firewall_id} 
         /usr/local/bin/linode-cli firewalls device-create --id ${database_id} --type linode ${firewall_id} 
     fi    
