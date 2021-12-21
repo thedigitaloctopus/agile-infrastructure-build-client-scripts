@@ -1,4 +1,4 @@
-1) On the build client, add the option for your new database to ${BUILD_HOME}/buildscripts/InitialiseDatabase.sh
+1) On the build client, add the option for your new database to ${BUILD_HOME}/initscripts/InitialiseDatabase.sh
 
 2) On the DATABASE codebase, add a directory for your new database in ${HOME}/providerscripts/singledb/{{{DB-NAME}}}
 
