@@ -96,26 +96,36 @@ do
 
         status "Initialising a new server machine, please wait......"
 
-        #Actually spin up the machine we are going to build on
-        ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${ostype}'" "${REGION_ID}" "${DB_SERVER_TYPE}" "${database_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${DATABASE_IMAGE_ID}
-        #If for some reason, we failed to build the machine, then, give it another try
-        while ( [ "$?" != "0" ] )
+        server_started="0"
+        while ( [ "${server_started}" = "0" ] )
         do
-            ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${ostype}" "${REGION_ID}" "${DB_SERVER_TYPE}" "${database_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${DATABASE_IMAGE_ID}
-        done
+            #Actually spin up the machine we are going to build on
+            ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${ostype}'" "${REGION_ID}" "${DB_SERVER_TYPE}" "${database_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${DATABASE_IMAGE_ID}
+            #If for some reason, we failed to build the machine, then, give it another try
+            while ( [ "$?" != "0" ] )
+            do
+                ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${ostype}" "${REGION_ID}" "${DB_SERVER_TYPE}" "${database_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${DATABASE_IMAGE_ID}
+            done
 
-        #Check that the server has been assigned its IP addresses and that they are active
-        ip=""
-        private_ip=""
-        count="0"
+            #Check that the server has been assigned its IP addresses and that they are active
+           ip=""
+           private_ip=""
+           count="0"
 
-        while ( ( [ "${ip}" = "" ] || [ "${private_ip}" = "" ] ) && [ "${count}" -lt "20" ] )
-        do
-            status "Interrogating for database ip address"
-            ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${database_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-            private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${database_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-            /bin/sleep 10
-            count="`/usr/bin/expr ${count} + 1`"
+           while ( ( [ "${ip}" = "" ] || [ "${private_ip}" = "" ] ) && [ "${count}" -lt "20" ] )
+           do
+               status "Interrogating for database ip address"
+               ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${database_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
+               private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${database_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
+               /bin/sleep 10
+               count="`/usr/bin/expr ${count} + 1`"
+           done
+           if ( [ "${ip}" != "" ] && [ "${private_ip}" != "" ] )
+           then
+               server_started="1"
+           else
+               status "Haven't been able to start your server, I will try again....."
+           fi
         done
 
         DBIP="${ip}"
