@@ -444,7 +444,7 @@ fi
 #Configure the datastore (s3cmd tool)
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
 . ${BUILD_HOME}/providerscripts/datastore/ObtainSnapshotData.sh
-. ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
+. ${BUILD_HOME}/initscripts/InitialiseSMTPMailServer.sh
 
 if (    [ "`${BUILD_HOME}/providerscripts/server/ListServerIDs.sh "autoscale*" ${CLOUDHOST} 2> /dev/null`" != "" ] )
 then
