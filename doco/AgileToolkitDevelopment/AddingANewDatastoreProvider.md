@@ -39,7 +39,7 @@ providerscripts/datastore/InitialiseDatastore.sh
 providerscripts/datastore/InstallDatastoreTools.sh	
 providerscripts/datastore/ListFromDatastore.sh	
 
-buildscripts/InitialiseDatastore.sh
+initscripts/InitialiseDatastore.sh
 
 helperscripts/SuperSafeBackupToDatastore.sh
 
