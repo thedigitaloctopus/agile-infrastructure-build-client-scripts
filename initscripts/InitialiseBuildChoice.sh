@@ -148,7 +148,7 @@ elif ( [ "${response}" = "2" ] )
         done
 
         case ${BUILD_CHOICE} in
-            0)  . ${BUILD_HOME}/buildscripts/InitialiseVirginApplication.sh
+            0)  . ${BUILD_HOME}/initscripts/InitialiseVirginApplication.sh
                 break ;;
             1)      status "#################################################################################################################"
                 status "You previously chose to build an application of type: " ${APPLICATION_NAME}
