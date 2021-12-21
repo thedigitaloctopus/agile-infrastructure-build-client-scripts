@@ -490,7 +490,7 @@ fi
 BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
 
 #Initialise required software for the build process
-. ${BUILD_HOME}/buildscripts/InitialiseBuild.sh
+. ${BUILD_HOME}/initscripts/InitialiseBuild.sh
 
 #Setup logging directory
 if ( [ ! -d ${BUILD_HOME}/logs ] )
