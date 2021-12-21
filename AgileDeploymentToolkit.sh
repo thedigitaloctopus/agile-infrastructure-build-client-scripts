@@ -596,7 +596,7 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 . ${BUILD_HOME}/BackupBuildMachine.sh
 . ${BUILD_HOME}/buildscripts/InitialiseBuildParams.sh
 . ${BUILD_HOME}/buildscripts/InitialiseDatastore.sh
-. ${BUILD_HOME}/buildscripts/InitialiseBuildChoice.sh
+. ${BUILD_HOME}/initscripts/InitialiseBuildChoice.sh
 . ${BUILD_HOME}/providerscripts/datastore/PersistBuildClientIP.sh
 export PRE_BUILD="1"
 . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
