@@ -116,6 +116,14 @@ then
         /usr/local/bin/linode-cli firewalls device-create --id ${autoscaler_id} --type linode ${firewall_id} 2>/dev/null
         /usr/local/bin/linode-cli firewalls device-create --id ${webserver_id} --type linode ${firewall_id} 
         /usr/local/bin/linode-cli firewalls device-create --id ${database_id} --type linode ${firewall_id} 
+    elif ( [ "${PRE_BUILD}" = "1" ] )
+    then
+       firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt" ).id'`"
+        
+       if ( [ "${firewall_id}" != "" ] )
+       then
+           /usr/local/bin/linode-cli firewalls delete ${firewall_id}
+       fi
     fi    
 fi
 
