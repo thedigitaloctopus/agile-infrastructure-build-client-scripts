@@ -445,7 +445,7 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 /bin/echo "${SERVER_USER}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER
 /bin/echo "${SERVER_USER_PASSWORD}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSERPASSWORD
 
-. ${BUILD_HOME}/buildscripts/InitialiseSecurityKeys.sh
+. ${BUILD_HOME}/initscripts/InitialiseSecurityKeys.sh
 
 PUBLIC_KEY_ID="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYID`"
 /bin/sed -i '/PUBLIC_KEY_ID=/d' ${templatefile}
