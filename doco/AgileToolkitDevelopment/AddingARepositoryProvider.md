@@ -1,4 +1,4 @@
-1) Update ${HOME}/buildscripts/InitialiseSourcecodeRepository.sh on the BUILD CLIENT for your new repository provider 
+1) Update ${HOME}/initscripts/InitialiseSourcecodeRepository.sh on the BUILD CLIENT for your new repository provider 
 
 2) Update ${HOME}/providerscripts/git/* for your new repository provider
 
