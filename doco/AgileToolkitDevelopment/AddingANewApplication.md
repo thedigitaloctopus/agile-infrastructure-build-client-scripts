@@ -1,7 +1,7 @@
 Adding a new application is a fairly involved process, but it's not too difficult in most cases. There's a procedure that you need to follow and as long as the application itself isn't too quirky, it should work OK. Here are the steps
 
-1) To the BUILD CLIENT scripts, update the file buildscripts/InitialiseBuildChoice.sh. You need to add a new action to the case statement which switches on  ${BUILD_CHOICE} in the case where it is set to 0. You can add your application here following what has been done for other applications.
-  Also, around about line 30-40 of buildscripts/InitialiseBuildChoice.sh enable a new choice switch for your new application. 
+1) To the BUILD CLIENT scripts, update the file initscripts/InitialiseBuildChoice.sh. You need to add a new action to the case statement which switches on  ${BUILD_CHOICE} in the case where it is set to 0. You can add your application here following what has been done for other applications.
+  Also, around about line 30-40 of initscripts/InitialiseBuildChoice.sh enable a new choice switch for your new application. 
   For example Joomla is choice 1.
 
 2) Now, still on the BUILD CLIENT scripts, you need to update 
