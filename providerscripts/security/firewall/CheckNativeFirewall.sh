@@ -58,22 +58,44 @@ then
         
         server_type="autoscaler"
         autoscaler_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep -v "192.168"`"
+        autoscaler_private_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep "192.168"`"
         server_type="webserver"
         webserver_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep -v "192.168"`"
+        webserver_private_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep "192.168"`"
         server_type="database"
         database_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep -v "192.168"`"
+        database_private_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep "192.168"`"
+    
         ips=""
+        
         if ( [ "${autoscaler_ip}" != "" ] )
         then
             ips="\"${autoscalerip}/32\","
         fi
+        
+        if ( [ "${autoscaler_private_ip}" != "" ] )
+        then
+            ips=${ips}" \"${autoscaler_private_ip}/32\","
+        fi
+        
         if ( [ "${webserver_ip}" != "" ] )
         then
             ips=${ips}" \"${webserver_ip}/32\","
         fi
+        
+        if ( [ "${webserver_private_ip}" != "" ] )
+        then
+            ips=${ips}" \"${webserver_private_ip}/32\","
+        fi
+        
         if ( [ "${database_ip}" != "" ] )
         then
             ips=${ips}" \"${database_ip}/32\","
+        fi
+        
+        if ( [ "${database_private_ip}" != "" ] )
+        then
+            ips=${ips}" \"${database_private_ip}/32\","
         fi
 
         if ( [ "${BUILD_CLIENT_IP}" != "" ] )
