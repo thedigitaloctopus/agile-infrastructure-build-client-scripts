@@ -289,7 +289,7 @@ SERVER_USER_PASSWORD="`/usr/bin/perl -le 'print map { (a..z,A..Z,0..9)[rand 62] 
 /bin/echo "${SERVER_USER}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER
 /bin/echo "${SERVER_USER_PASSWORD}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSERPASSWORD
 
-. ${BUILD_HOME}/buildscripts/InitialiseSecurityKeys.sh
+. ${BUILD_HOME}/initscripts/InitialiseSecurityKeys.sh
 
 PUBLIC_KEY_ID="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/PUBLICKEYID`"
 /bin/sed -i '/PUBLIC_KEY_ID=/d' ${templatefile}
