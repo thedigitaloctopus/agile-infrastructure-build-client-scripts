@@ -99,29 +99,41 @@ do
         fi
         
         status "Initialising a new server machine, please wait......"
-
-        #Actually create the autoscaler machine. If the create fails, keep trying again - it must be a provider issue
-        ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${ostype}'" "${REGION_ID}" "${AS_SERVER_TYPE}" "${autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${AUTOSCALER_IMAGE_ID}
-
-        #Somehow we failed, let's try again...
-        while ( [ "$?" != 0 ] )
+        
+        server_started="0"
+        while ( [ "${server_started}" = "0" ] )
         do
+
+            #Actually create the autoscaler machine. If the create fails, keep trying again - it must be a provider issue
             ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${ostype}'" "${REGION_ID}" "${AS_SERVER_TYPE}" "${autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${AUTOSCALER_IMAGE_ID}
-        done
 
-        #Get the ip addresses of the server we have just built
-        ip=""
-        private_ip=""
-        count="0"
+            #Somehow we failed, let's try again...
+            while ( [ "$?" != 0 ] )
+            do
+                ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${ostype}'" "${REGION_ID}" "${AS_SERVER_TYPE}" "${autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${AUTOSCALER_IMAGE_ID}
+            done
 
-        while ( ( [ "${ip}" = "" ] || [ "${private_ip}" = "" ] ) && [ "${count}" -lt "20" ] )
-        do
-            status "Interrogating for autoscaler ip addresses....."
-            ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-            private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-            /bin/sleep 10
-            count="`/usr/bin/expr ${count} + 1`"
-        done
+            #Get the ip addresses of the server we have just built
+            ip=""
+            private_ip=""
+            count="0"
+
+            while ( ( [ "${ip}" = "" ] || [ "${private_ip}" = "" ] ) && [ "${count}" -lt "20" ] )
+            do
+                status "Interrogating for autoscaler ip addresses....."
+                ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
+                private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${autoscaler_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
+                /bin/sleep 10
+                count="`/usr/bin/expr ${count} + 1`"
+            done
+            
+            if ( [ "${ip}" != "" ] && [ "${private_ip}" != "" ] )
+            then
+                server_started="1"
+            else
+                status "I haven't been able to start your server for you, trying again...."
+            fi
+       done
 
         status "It looks like the machine has booted OK"
         ASIP=${ip}
