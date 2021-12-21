@@ -2,7 +2,7 @@ If you wish to add an SMTP service to the Agile Deployment Toolkit, then here is
 
 On the build client
 
-1. Review the code in ${BUILD_HOME}/buildscripts/InitialiseMailServer.sh
+1. Review the code in ${BUILD_HOME}/initscripts/InitialiseSMTPMailServer.sh
 
 2. Look for the code which adds the new SMTP Provider and sets the environment variable SYSTEM_EMAIL_PROVIDER. Add your new provider here
 
