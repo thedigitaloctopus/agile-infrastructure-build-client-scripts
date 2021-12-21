@@ -91,29 +91,40 @@ do
         fi
 
         status "Initialising a new server machine, please wait......"
-
-        #Actually start the server machine. Following this, there will be an active machine instance running on your cloud provider
-        ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${ostype}'" "${REGION_ID}" "${WS_SERVER_TYPE}" "${webserver_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${WEBSERVER_IMAGE_ID}
-
-        #Keep trying if the first time wasn't successful
-        while ( [ "$?" != "0" ] )
+        
+        server_started="0"
+        while ( [ "${server_started}" = "0" ] )
         do
-            ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${ostype}" "${REGION_ID}" "${WS_SERVER_TYPE}" "${webserver_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${WEBSERVER_IMAGE_ID}
-        done
+            #Actually start the server machine. Following this, there will be an active machine instance running on your cloud provider
+            ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${ostype}'" "${REGION_ID}" "${WS_SERVER_TYPE}" "${webserver_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${WEBSERVER_IMAGE_ID}
 
-        #Check that the server has been assigned its IP addresses and that they are active
-        ip=""
-        private_ip=""
-        count="0"
+            #Keep trying if the first time wasn't successful
+            while ( [ "$?" != "0" ] )
+            do
+                ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${ostype}" "${REGION_ID}" "${WS_SERVER_TYPE}" "${webserver_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${WEBSERVER_IMAGE_ID}
+            done
 
-        #Keep trying until we get the ip addresses of our new machine, both public and private ips
-        while ( ( [ "${ip}" = "" ] || [ "${private_ip}" = "" ] ) || [ "${ip}" = "0.0.0.0" ] && [ "${count}" -lt "20" ] )
-        do
-            ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${webserver_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-            private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${webserver_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
-            /bin/sleep 10
-            count="`/usr/bin/expr ${count} + 1`"
-        done
+            #Check that the server has been assigned its IP addresses and that they are active
+            ip=""
+            private_ip=""
+            count="0"
+
+            #Keep trying until we get the ip addresses of our new machine, both public and private ips
+            while ( ( [ "${ip}" = "" ] || [ "${private_ip}" = "" ] ) || [ "${ip}" = "0.0.0.0" ] && [ "${count}" -lt "20" ] )
+            do
+                ip="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh "${webserver_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
+                private_ip="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh "${webserver_name}" ${CLOUDHOST} | /bin/grep -P "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$"`"
+                /bin/sleep 10
+                count="`/usr/bin/expr ${count} + 1`"
+            done
+            
+            if ( [ "${ip}" != "" ] && [ "${private_ip}" != "" ] )
+            then
+                server_started="1"
+            else
+                status "I haven't been able to start your server, trying again...."
+            fi
+       done
 
         WSIP=${ip}
         WSIP_PRIVATE=${private_ip}
