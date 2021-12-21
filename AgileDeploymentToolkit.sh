@@ -589,7 +589,7 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 
 . ${BUILD_HOME}/buildscripts/InitialiseSourcecodeRepository.sh
 . ${BUILD_HOME}/buildscripts/InitialiseSecurityKeys.sh
-. ${BUILD_HOME}/buildscripts/InitialiseCaching.sh
+. ${BUILD_HOME}/initscripts/InitialiseCaching.sh
 . ${BUILD_HOME}/buildscripts/InitialiseGuardianGateway.sh
 . ${BUILD_HOME}/buildscripts/InitialiseDatabase.sh
 . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
