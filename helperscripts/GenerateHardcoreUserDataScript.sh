@@ -74,7 +74,7 @@ else
     if ( [ -f ${configurationsettings_stack} ] )
     then
         /bin/sed -e '/#XXXSTACKYYY/ {' -e "r ${configurationsettings_stack}" -e 'd' -e '}' -i ${BUILD_HOME}/userdatascripts/${userdatascript}
-        /bin/sed "s/^export/^#export/g" ${BUILD_HOME}/userdatascripts/${userdatascript}
+        /bin/sed -i "s/^export/#export/g" ${BUILD_HOME}/userdatascripts/${userdatascript}
     fi
 fi
 
