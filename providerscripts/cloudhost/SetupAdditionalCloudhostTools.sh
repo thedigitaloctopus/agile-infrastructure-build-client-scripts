@@ -46,8 +46,7 @@ fi
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
     /bin/mkdir /root/.config ${BUILD_HOME}/.config
-    TOKEN="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
-
+    
     /bin/echo "[DEFAULT]
 default-user = ${LINODEACCOUNT_USERNAME}
 [${LINODEACCOUNT_USERNAME}]
