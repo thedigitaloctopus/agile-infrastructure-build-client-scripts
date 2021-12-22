@@ -275,8 +275,8 @@ export BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
 . ${BUILD_HOME}/providerscripts/datastore/ObtainSnapshotData.sh
 . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 . ${BUILD_HOME}/BackupBuildMachine.sh
-. ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
+. ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 . ${BUILD_HOME}/providerscripts/datastore/PersistBuildClientIP.sh
 export PRE_BUILD="1"
 . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
