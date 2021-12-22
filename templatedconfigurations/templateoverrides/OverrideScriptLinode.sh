@@ -57,15 +57,15 @@ fi
 /bin/mkdir /home/${BUILDMACHINE_USER}/agile-infrastructure-build-client-scripts/runtimedata
 /bin/touch /home/${BUILDMACHINE_USER}/agile-infrastructure-build-client-scripts/runtimedata/LAPTOPIP:${LAPTOP_IP}
 
-/bin/mkdir /root/.config ${BUILD_HOME}/.config
+#/bin/mkdir /root/.config ${BUILD_HOME}/.config
 
-/bin/echo "[DEFAULT]
-default-user = ${LINODEACCOUNT_USERNAME}
+#/bin/echo "[DEFAULT]
+#default-user = ${LINODEACCOUNT_USERNAME}
+#
+#[${LINODEACCOUNT_USERNAME}]
+#token = ${TOKEN}" > ${BUILD_HOME}/.config/linode-cli
 
-[${LINODEACCOUNT_USERNAME}]
-token = ${TOKEN}" > ${BUILD_HOME}/.config/linode-cli
-
-/bin/cp ${BUILD_HOME}/.config/linode-cli /root/.config/linode-cli
+#/bin/cp ${BUILD_HOME}/.config/linode-cli /root/.config/linode-cli
 
 /usr/bin/find /home/${BUILDMACHINE_USER} -type d -exec chmod 755 {} \;
 /usr/bin/find /home/${BUILDMACHINE_USER} -type f -exec chmod 644 {} \;
