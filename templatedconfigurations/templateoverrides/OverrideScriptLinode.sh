@@ -8,6 +8,12 @@
 # password:${BUILDCLIENT_PASSWORD}
 # cd agile-infrastructure-build-client-scripts/logs
 #################################################################################################
+# <UDF name="SSH" label="SSH Public Key from your laptop" />
+# <UDF name="BUILDMACHINE_USER" label="The username for your build machine" />
+# <UDF name="BUILDMACHINE_PASSWORD" label="The password for your build machine user" />
+# <UDF name="BUILDMACHINE_SSH_PORT" label="The SSH port for your build machine" />
+# <UDF name="LAPTOP_IP" label="IP address of your laptop" />
+##################################################################################################
 /bin/mkdir /root/logs
 
 OUT_FILE="buildmachine-out-`/bin/date | /bin/sed 's/ //g'`"
@@ -56,16 +62,6 @@ fi
 
 /bin/mkdir /home/${BUILDMACHINE_USER}/agile-infrastructure-build-client-scripts/runtimedata
 /bin/touch /home/${BUILDMACHINE_USER}/agile-infrastructure-build-client-scripts/runtimedata/LAPTOPIP:${LAPTOP_IP}
-
-#/bin/mkdir /root/.config ${BUILD_HOME}/.config
-
-#/bin/echo "[DEFAULT]
-#default-user = ${LINODEACCOUNT_USERNAME}
-#
-#[${LINODEACCOUNT_USERNAME}]
-#token = ${TOKEN}" > ${BUILD_HOME}/.config/linode-cli
-
-#/bin/cp ${BUILD_HOME}/.config/linode-cli /root/.config/linode-cli
 
 /usr/bin/find /home/${BUILDMACHINE_USER} -type d -exec chmod 755 {} \;
 /usr/bin/find /home/${BUILDMACHINE_USER} -type f -exec chmod 644 {} \;
