@@ -75,16 +75,6 @@ else
     then
         /bin/sed -e '/#XXXSTACKYYY/ {' -e "r ${configurationsettings_stack}" -e 'd' -e '}' -i ${BUILD_HOME}/userdatascripts/${userdatascript}
         /bin/sed "s/^export/^#export/g" ${BUILD_HOME}/userdatascripts/${userdatascript}
-        
-        /bin/echo "[DEFAULT]
-default-user = ${LINODE_USERNAME}
-
-[${LINODE_USERNAME}]
-token = ${TOKEN}" > ${BUILD_HOME}/.config/linode-cli
-
-/bin/cp ${BUILD_HOME}/.config/linode-cli /root/.config
-    fi
-fi
     fi
 fi
 
