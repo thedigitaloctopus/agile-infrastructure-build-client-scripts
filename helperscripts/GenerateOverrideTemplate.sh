@@ -100,7 +100,7 @@ read x
 
 for livevariable in ${variables}
 do
-    value="`/bin/grep "^export ${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
+    value="`/bin/grep -w "^export ${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
     display_name="`/bin/echo ${livevariable} | /bin/sed 's/_/ /g'`" 
 
     if ( [ "`/bin/grep 'MANDATORY' ${overridescript} | /bin/grep "^export ${livevariable}="`" != "" ] ) 
@@ -110,7 +110,7 @@ do
         /bin/echo "############################################################################################"
         /bin/sed "/### ${livevariable}/,/----/!d;/----/q" ${BUILD_HOME}/templatedconfigurations/specification.md
         /bin/echo "Found a variable ${livevariable} what do you want to set it to?"
-        value="`/bin/grep "${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
+        value="`/bin/grep -w "${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
         /bin/echo "Its current value is \"${value}\" press <enter> to retain, anything else to override"
         read setting
         /bin/echo "OK, thanks..."
@@ -141,7 +141,7 @@ then
     for livevariable in ${variables}
     do
         display_name="`/bin/echo ${livevariable} | /bin/sed 's/_/ /g'`" 
-        value="`/bin/grep "^export ${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
+        value="`/bin/grep -w "^export ${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
 
         if ( ( [ "`/bin/grep 'NOT REQUIRED' ${overridescript} | /bin/grep "^export ${livevariable}="`" = "" ] ) && ( [ "`/bin/grep 'MANDATORY' ${overridescript} | /bin/grep "^export ${livevariable}="`" = "" ] ) )
         then
@@ -150,7 +150,7 @@ then
             /bin/echo "############################################################################################"
             /bin/sed "/### ${livevariable}/,/----/!d;/----/q" ${BUILD_HOME}/templatedconfigurations/specification.md
             /bin/echo "Found a variable ${livevariable} what do you want to set it to?"
-            value="`/bin/grep "^export ${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
+            value="`/bin/grep -w "^export ${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
             /bin/echo "Its current value is \"${value}\" press <enter> to retain, anything else to override"
             read setting
             /bin/echo "OK, thanks..."
