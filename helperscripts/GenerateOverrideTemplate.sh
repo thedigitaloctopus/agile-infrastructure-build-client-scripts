@@ -85,6 +85,7 @@ newoverridescript="/tmp/${CLOUDHOST}${template}"
 /bin/echo "# <UDF name=\"BUILDMACHINE_SSH_PORT\" label=\"The SSH port for your build machine\" />" >> ${newoverridescript}.stack
 /bin/echo "# <UDF name=\"LAPTOP_IP\" label=\"IP address of your laptop\" />" >> ${newoverridescript}.stack
 /bin/echo "# <UDF name=\"SELECTED_TEMPLATE\" label=\"The number of the template you are using\" />" >> ${newoverridescript}.stack
+/bin/echo "# <UDF name=\"LINODE_USERNAME\" label=\"The username of your linode account\" />" >> ${newoverridescript}.stack
 
 /bin/cp ${overridescript} ${newoverridescript}
 /bin/cat ${overridescript} >> ${newoverridescript}.stack
@@ -120,10 +121,10 @@ do
         if ( [ "${setting}" != "" ] )
         then
             /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"${setting}\"/g" ${newoverridescript}
-            /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" oneof=\"${setting}\" default=\"${setting}\"\/>/g" ${newoverridescript}.stack
+            /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" default=\"${setting}\"\/>/g" ${newoverridescript}.stack
         else
             /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"${value}\"/g" ${newoverridescript}
-            /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" oneof=\"${value}\" default=\"${value}\"\/>/g" ${newoverridescript}.stack
+            /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" default=\"${value}\"\/>/g" ${newoverridescript}.stack
         fi
     fi
 done
@@ -156,10 +157,10 @@ then
             if ( [ "${setting}" != "" ] )
             then
                 /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"$setting\"/g" ${newoverridescript}
-                /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" oneof=\"${setting}\" default=\"${setting}\"\/>/g" ${newoverridescript}.stack
+                /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" default=\"${setting}\"\/>/g" ${newoverridescript}.stack
             else
                 /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"${value}\"/g" ${newoverridescript}
-                /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" oneof=\"${value}\" default=\"${value}\"\/>/g" ${newoverridescript}.stack
+                /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" default=\"${value}\"\/>/g" ${newoverridescript}.stack
             fi
         fi
     done
