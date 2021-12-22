@@ -30,7 +30,12 @@ fi
 
 export BUILD_HOME="`/bin/pwd | /bin/sed 's/\/helper.*//g'`"
 
-baseoverridescript="${BUILD_HOME}/templatedconfigurations/templateoverrides/OverrideScript.sh"
+if ( [ "${1}" != "stack" ] )
+then
+    baseoverridescript="${BUILD_HOME}/templatedconfigurations/templateoverrides/OverrideScript.sh"
+else
+    baseoverridescript="${BUILD_HOME}/templatedconfigurations/templateoverrides/OverrideScriptLinode.sh"
+fi
 
 /bin/echo "Override scripts that you have generated are:"
 /bin/echo "#########################################################"
