@@ -62,7 +62,9 @@ fi
 /bin/mkdir /home/${BUILDMACHINE_USER}/agile-infrastructure-build-client-scripts/runtimedata
 /bin/touch /home/${BUILDMACHINE_USER}/agile-infrastructure-build-client-scripts/runtimedata/LAPTOPIP:${LAPTOP_IP}
 
-        /bin/echo "[DEFAULT]
+    /bin/mkdir /root/.config ${BUILD_HOME}/.config
+
+    /bin/echo "[DEFAULT]
 default-user = ${LINODEACCOUNT_USERNAME}
 
 [${LINODEACCOUNT_USERNAME}]
