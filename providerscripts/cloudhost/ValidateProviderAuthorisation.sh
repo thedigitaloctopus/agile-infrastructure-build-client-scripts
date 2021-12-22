@@ -117,6 +117,10 @@ then
 
     while ( [ "$?" != "0" ] )
     do
+        if ( [ "${LINODEACCOUNT_USERNAME}" != "" ] )
+        then
+            . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
+        fi
         if ( [ -f ${HOME}/.config/linode-cli ] )
         then
             access_token="`/bin/grep "token" ~/.config/linode-cli | /usr/bin/awk '{print $NF}'`"
