@@ -45,7 +45,14 @@ fi
 
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
-    :
+    /bin/mkdir /root/.config ${BUILD_HOME}/.config
+    TOKEN="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
+
+    /bin/echo "[DEFAULT]
+default-user = ${LINODEACCOUNT_USERNAME}
+[${LINODEACCOUNT_USERNAME}]
+token = ${TOKEN}" | /usr/bin/tee ${BUILD_HOME}/.config/linode-cli /root/.config/linode-cli
+
 fi
 
 if ( [ "${CLOUDHOST}" = "vultr" ] )
