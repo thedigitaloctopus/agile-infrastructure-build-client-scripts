@@ -63,9 +63,9 @@ fi
 /bin/touch /home/${BUILDMACHINE_USER}/agile-infrastructure-build-client-scripts/runtimedata/LAPTOPIP:${LAPTOP_IP}
 
         /bin/echo "[DEFAULT]
-default-user = ${LINODE_USERNAME}
+default-user = ${LINODEACCOUNT_USERNAME}
 
-[${LINODE_USERNAME}]
+[${LINODEACCOUNT_USERNAME}]
 token = ${TOKEN}" > ${BUILD_HOME}/.config/linode-cli
 
 /bin/cp ${BUILD_HOME}/.config/linode-cli /root/.config/linode-cli
