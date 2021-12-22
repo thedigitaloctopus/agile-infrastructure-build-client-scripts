@@ -84,6 +84,7 @@ newoverridescript="/tmp/${CLOUDHOST}${template}"
 /bin/echo "# <UDF name=\"BUILDMACHINE_PASSWORD\" label=\"The password for your build machine user\" />" >> ${newoverridescript}.stack
 /bin/echo "# <UDF name=\"BUILDMACHINE_SSH_PORT\" label=\"The SSH port for your build machine\" />" >> ${newoverridescript}.stack
 /bin/echo "# <UDF name=\"LAPTOP_IP\" label=\"IP address of your laptop\" />" >> ${newoverridescript}.stack
+/bin/echo "# <UDF name=\"SELECTED_TEMPLATE\" label=\"The number of the template you are using\" />" >> ${newoverridescript}.stack
 
 /bin/cp ${overridescript} ${newoverridescript}
 /bin/cat ${overridescript} >> ${newoverridescript}.stack
