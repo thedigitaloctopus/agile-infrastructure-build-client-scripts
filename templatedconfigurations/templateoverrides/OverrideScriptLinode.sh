@@ -8,13 +8,6 @@
 # password:${BUILDCLIENT_PASSWORD}
 # cd agile-infrastructure-build-client-scripts/logs
 #################################################################################################
-# <UDF name="BUILDMACHINE_USER" label="The username to login to your build machine with this will create a user with this name on your build machine" />
-# <UDF name="BUILDMACHINE_PASSWORD" label="The password for the username you have supplied above to login to your build machine with" />
-# <UDF name="BUILDMACHINE_SSH_PORT" label="The port to use to ssh onto your build machine" />
-# <UDF name="LAPTOP_IP" label="The IP address of your laptop or desktop machine" />
-# <UDF name="SSH" label="An SSH public key to match a private key you have installed on your laptop" />
-#################################################################################################
-
 /bin/mkdir /root/logs
 
 OUT_FILE="buildmachine-out-`/bin/date | /bin/sed 's/ //g'`"
@@ -64,9 +57,9 @@ fi
 /bin/mkdir /home/${BUILDMACHINE_USER}/agile-infrastructure-build-client-scripts/runtimedata
 /bin/touch /home/${BUILDMACHINE_USER}/agile-infrastructure-build-client-scripts/runtimedata/LAPTOPIP:${LAPTOP_IP}
 
-    /bin/mkdir /root/.config ${BUILD_HOME}/.config
+/bin/mkdir /root/.config ${BUILD_HOME}/.config
 
-    /bin/echo "[DEFAULT]
+/bin/echo "[DEFAULT]
 default-user = ${LINODEACCOUNT_USERNAME}
 
 [${LINODEACCOUNT_USERNAME}]
