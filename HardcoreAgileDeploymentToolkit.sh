@@ -70,7 +70,7 @@ fi
 
 if ( [ ! -f ${BUILD_HOME}/runtimedata/EXUPDATEDSOFTWARE ] )
 then
-    if ( "`/usr/bin/find "${BUILD_HOME}/runtimedata/EXUPDATEDSOFTWARE" -mtime +10 -print 2>/dev/null`" = "" ] )
+    if ( [ "`/usr/bin/find "${BUILD_HOME}/runtimedata/EXUPDATEDSOFTWARE" -mtime +10 -print 2>/dev/null`" = "" ] )
     then
         /bin/rm ${BUILD_HOME}/runtimedata/EXUPDATEDSOFTWARE
     else
