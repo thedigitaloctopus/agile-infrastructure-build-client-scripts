@@ -31,8 +31,54 @@ then
     then
         /bin/echo "y" | /usr/bin/exo compute security-group delete adt
         /usr/bin/exo compute security-group create adt
-        /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port ${SSH_PORT}
-        /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port ${DB_PORT}
+        /usr/bin/exo compute security-group rule add adt --network ${BUILD_CLIENT_IP}/32 --port 22
+        /usr/bin/exo compute security-group rule add adt --network ${BUILD_CLIENT_IP}/32 --port ${SSH_PORT}
+        /usr/bin/exo compute security-group rule add adt --protocol icmp --network 0.0.0.0/0 --icmp-code 0 --icmp-type 8
+    elif ( [ "${PRE_BUILD}" = "0" ] )
+    then
+        server_type="autoscaler"
+        autoscaler_ip="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_server_type "${server_type}" '(.virtualmachine[] | select(.displayname | contains($tmp_server_type)) | .publicip)' | /bin/sed 's/"//g'`"
+        vmid="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_ip_address "${autoscaler_ip}" '(.virtualmachine[].nic[] | select(.ipaddress == $tmp_ip_address) | .id)' | /bin/sed 's/"//g'`"
+        vmid2="`/usr/local/bin/cs listNics | jq --arg tmp_virtual_machine_id "${vmid}" '(.nic[] | select(.id == $tmp_virtual_machine_id) | .virtualmachineid)' | /bin/sed 's/"//g'`"
+        autoscaler_private_ip="`/usr/local/bin/cs listNics | jq --arg tmp_virtual_machine_id "${vmid2}" '(.nic[] | select(.isdefault == false and .virtualmachineid == $tmp_virtual_machine_id) | .ipaddress)' | /bin/sed 's/"//g'`"
+
+        server_type="webserver"
+        webserver_ip="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_server_type "${server_type}" '(.virtualmachine[] | select(.displayname | contains($tmp_server_type)) | .publicip)' | /bin/sed 's/"//g'`"
+        vmid="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_ip_address "${webserver_ip}" '(.virtualmachine[].nic[] | select(.ipaddress == $tmp_ip_address) | .id)' | /bin/sed 's/"//g'`"
+        vmid2="`/usr/local/bin/cs listNics | jq --arg tmp_virtual_machine_id "${vmid}" '(.nic[] | select(.id == $tmp_virtual_machine_id) | .virtualmachineid)' | /bin/sed 's/"//g'`"
+        webserver_private_ip="`/usr/local/bin/cs listNics | jq --arg tmp_virtual_machine_id "${vmid2}" '(.nic[] | select(.isdefault == false and .virtualmachineid == $tmp_virtual_machine_id) | .ipaddress)' | /bin/sed 's/"//g'`"
+
+        server_type="database"
+        database_ip="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_server_type "${server_type}" '(.virtualmachine[] | select(.displayname | contains($tmp_server_type)) | .publicip)' | /bin/sed 's/"//g'`"
+        vmid="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_ip_address "${database_ip}" '(.virtualmachine[].nic[] | select(.ipaddress == $tmp_ip_address) | .id)' | /bin/sed 's/"//g'`"
+        vmid2="`/usr/local/bin/cs listNics | jq --arg tmp_virtual_machine_id "${vmid}" '(.nic[] | select(.id == $tmp_virtual_machine_id) | .virtualmachineid)' | /bin/sed 's/"//g'`"
+        database_private_ip="`/usr/local/bin/cs listNics | jq --arg tmp_virtual_machine_id "${vmid2}" '(.nic[] | select(.isdefault == false and .virtualmachineid == $tmp_virtual_machine_id) | .ipaddress)' | /bin/sed 's/"//g'`"
+
+
+        if ( [ "${autoscaler_ip}" != "" ] )
+        then
+            /usr/bin/exo compute security-group rule add adt --network ${autoscaler_ip}/32 --port ${SSH_PORT}
+            /usr/bin/exo compute security-group rule add adt --network ${autoscaler_private_ip}/32 --port ${SSH_PORT}
+            /usr/bin/exo compute security-group rule add adt --network ${autoscaler_ip}/32 --port ${DB_PORT}
+            /usr/bin/exo compute security-group rule add adt --network ${autoscaler_private_ip}/32 --port ${DB_PORT}
+        fi
+        
+        if ( [ "${webserver_ip}" != "" ] )
+        then
+            /usr/bin/exo compute security-group rule add adt --network ${webserver_ip}/32 --port ${SSH_PORT}
+            /usr/bin/exo compute security-group rule add adt --network ${webserver_private_ip}/32 --port ${SSH_PORT}
+            /usr/bin/exo compute security-group rule add adt --network ${webserver_ip}/32 --port ${DB_PORT}
+            /usr/bin/exo compute security-group rule add adt --network ${webserver_private_ip}/32 --port ${DB_PORT}
+        fi
+        
+        if ( [ "${database_ip}" != "" ] )
+        then
+            /usr/bin/exo compute security-group rule add adt --network ${database_ip}/32 --port ${SSH_PORT}
+            /usr/bin/exo compute security-group rule add adt --network ${database_private_ip}/32 --port ${SSH_PORT}
+            /usr/bin/exo compute security-group rule add adt --network ${database_ip}/32 --port ${DB_PORT}
+            /usr/bin/exo compute security-group rule add adt --network ${database_private_ip}/32 --port ${DB_PORT}
+        fi
+
         /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 443
         /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 80
         /usr/bin/exo compute security-group rule add adt --network ${BUILD_CLIENT_IP}/32 --port 22
@@ -55,7 +101,6 @@ then
         /usr/local/bin/linode-cli firewalls create --label "adt" --rules.inbound_policy DROP   --rules.outbound_policy ACCEPT
         firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt" ).id'`"
 
-        
         server_type="autoscaler"
         autoscaler_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep -v "192.168"`"
         autoscaler_private_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep "192.168"`"
