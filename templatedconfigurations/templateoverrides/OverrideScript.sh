@@ -32,35 +32,7 @@ export SSH=\"\" #paste your public key here
 #export INFRASTRUCTURE_REPOSITORY_OWNER=\"adt-demos\"
 #export INFRASTRUCTURE_REPOSITORY_USERNAME=\"adt-demos\"
 #export INFRASTRUCTURE_REPOSITORY_PASSWORD=\"none\"
-
-#############################################################################################################
-####POPULATE THESE export VARIABLES BETWEEN THE STARS AND PASTE THIS SCRIPT INTO YOUR VPS MACHINES USER-DATA #
-#############################################################################################################
 ####################################################################################
-#**********************************************************************************#
-####################################################################################
-#If you understand the way this toolkit works you can set the template you are using
-#below and override any of the variables in it. For example, you can override
-#the WS_SIZE default by entering:
-#export WS_SIZE=\"t2.small\" to override the export WS_SIZE=\"t2.micro\" of the selected template.
-#Alter the value SELECTED_TEMPLATE below to change which template the build will be based on
-#########################################################################################################
-#ADDITIONAL OVERRIDES, ANYTHING NOT OVERRIDEN WILL TAKE IT'S VALUE FROM THE SELECTED_TEMPLATE VALUE
-#THE TEMPLATES CAN BE FOUND at ${BUILD_HOME}/templatedconfiguration/templates/
-#For manual overriding to work, you must override at the very least all the variables marked "MANDATORY"
-#as you find them in your template.
-#########################################################################################################
-
-
-#export WS_SIZE=\"t2.small\" #example override if you want t2.small machines instead of t2.micro if you are deploying to AWS
-#export SELECTED_TEMPLATE=\"\"
-
-####################################################################################
-#**********************************************************************************#
-####################################################################################
-####################################################################################
-
-
 " > /root/Environment.env
 
 #XXXECHOZZZ
