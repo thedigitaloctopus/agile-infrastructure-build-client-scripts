@@ -516,7 +516,7 @@ then
     status "###############################################################################################################################################"
     read carryon
 
-    if ( [ [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
+    if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
     then
         status "##############################################################################################################"
         status "You have selected to use a 3rd party DBaaS for your database solution"
