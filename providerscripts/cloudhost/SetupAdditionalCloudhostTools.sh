@@ -50,8 +50,10 @@ then
     /bin/echo "[DEFAULT]
 default-user = ${LINODEACCOUNT_USERNAME}
 [${LINODEACCOUNT_USERNAME}]
-token = ${TOKEN}" | /usr/bin/tee ${BUILD_HOME}/.config/linode-cli /root/.config/linode-cli
-
+token = ${TOKEN}
+region = eu-west
+type = g6-nanode-1
+image = linode/debian11" | /usr/bin/tee ${BUILD_HOME}/.config/linode-cli /root/.config/linode-cli
 fi
 
 if ( [ "${CLOUDHOST}" = "vultr" ] )
