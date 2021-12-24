@@ -341,10 +341,11 @@ then
 
     . ${BUILD_HOME}/buildscripts/BuildFromSnapshots.sh
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
-    . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+    . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
+
 
     status ""
     status "##########################################################################################################"
@@ -360,9 +361,10 @@ else
     . ${BUILD_HOME}/buildscripts/BuildWebserver.sh
     . ${BUILD_HOME}/buildscripts/BuildDatabase.sh
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
-    . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+    . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
+
     ##Do the build finalisation procedures
     . ${BUILD_HOME}/buildscripts/FinaliseBuildProcessing.sh
     #If we have any messages to put out to the user post build, we add them to this script
