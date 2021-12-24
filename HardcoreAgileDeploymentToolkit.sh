@@ -273,7 +273,7 @@ export BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
 . ${BUILD_HOME}/initscripts/InitialiseSMTPMailServer.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
 . ${BUILD_HOME}/providerscripts/datastore/ObtainSnapshotData.sh
-. ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
+#. ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 . ${BUILD_HOME}/BackupBuildMachine.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
@@ -341,6 +341,8 @@ then
 
     . ${BUILD_HOME}/buildscripts/BuildFromSnapshots.sh
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
+    . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
+
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
 
@@ -358,6 +360,7 @@ else
     . ${BUILD_HOME}/buildscripts/BuildWebserver.sh
     . ${BUILD_HOME}/buildscripts/BuildDatabase.sh
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
+    . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
     ##Do the build finalisation procedures
