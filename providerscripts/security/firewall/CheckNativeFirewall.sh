@@ -86,10 +86,10 @@ then
         
         . ${BUILD_HOME}/providerscripts/security/firewall/GetDNSIPs.sh
 
-        if ( [ "${allproxyips}" != "" ] )
+        if ( [ "${alldnsproxyips}" != "" ] )
         then
-            allproxyips="`/bin/echo ${allproxyips} | /bin/sed 's/,/ /g'`"
-            for ip in ${allproxyips}
+            alldnsproxyips="`/bin/echo ${alldnsproxyips} | /bin/sed 's/,/ /g'`"
+            for ip in ${alldnsproxyips}
             do
                 /usr/bin/exo compute security-group rule add adt --network ${ip} --port 443
                 /usr/bin/exo compute security-group rule add adt --network ${ip} --port 80
