@@ -115,7 +115,7 @@ then
         
         if ( [ "${autoscaler_ip}" != "" ] )
         then
-            ips="\"${autoscalerip}/32\","
+            ips="\"${autoscaler_ip}/32\","
         fi
         
         if ( [ "${autoscaler_private_ip}" != "" ] )
