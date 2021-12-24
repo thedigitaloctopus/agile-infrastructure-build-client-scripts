@@ -41,6 +41,8 @@ then
         /bin/sleep 30
     done
     
+    firewall_id="${firewall_id2}"
+    
     if ( [ "${ip}" != "NOIP" ] )
     then
         if ( [ "${ips}" != "" ] )
