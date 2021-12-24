@@ -61,7 +61,7 @@ then
      bmip="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
      bmid="`/usr/local/bin/linode-cli --json linodes list | jq --arg tmp_ip "${bmip}" '.[] | select (.ipv4 | tostring | contains ($tmp_ip))'.id | /bin/sed 's/\"//g'`"
      
-     /usr/local/bin/linode-cli firewalls device-create --id ${bmid} --type linode ${firewall_id} 
+    # /usr/local/bin/linode-cli firewalls device-create --id ${bmid} --type linode ${firewall_id} 
      
 fi
     
