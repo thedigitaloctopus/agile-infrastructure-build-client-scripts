@@ -23,20 +23,16 @@ if ( [ "${CLOUDHOST}" = "linode" ] )
 then
     firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt-build-machine" ).id'`"
 
-  #  if ( [ "${firewall_id}" = "" ] )
- #   then
- #       /usr/local/bin/linode-cli firewalls create --label "adt-build-machine" --rules.inbound_policy DROP   --rules.outbound_policy ACCEPT
- #   else
+    if ( [ "${firewall_id}" = "" ] )
+    then
+        /usr/local/bin/linode-cli firewalls create --label "adt-build-machine" --rules.inbound_policy DROP   --rules.outbound_policy ACCEPT
+    else
        /usr/local/bin/linode-cli firewalls delete ${firewall_id}
        /usr/local/bin/linode-cli firewalls create --label "adt-build-machine" --rules.inbound_policy DROP   --rules.outbound_policy ACCEPT
- #   fi
-    
-  #  /bin/sleep 30
-    
+    fi
+        
     firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt-build-machine" ).id'`"
-    
-
-    
+      
     if ( [ "${ip}" != "NOIP" ] )
     then
         if ( [ "${ips}" != "" ] )
