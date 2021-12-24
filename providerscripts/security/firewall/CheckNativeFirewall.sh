@@ -79,10 +79,25 @@ then
             /usr/bin/exo compute security-group rule add adt --network ${database_private_ip}/32 --port ${DB_PORT}
         fi
 
-        /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 443
-        /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 80
+       # /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 443
+      #  /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 80
         /usr/bin/exo compute security-group rule add adt --network ${BUILD_CLIENT_IP}/32 --port 22
         /usr/bin/exo compute security-group rule add adt --protocol icmp --network 0.0.0.0/0 --icmp-code 0 --icmp-type 8
+        
+        . ${HOME}/providerscripts/security/firewall/GetDNSIPs.sh
+
+        if ( [ "${allproxyips}" != "" ] )
+        then
+            allproxyips="`/bin/echo ${allproxyips} | /bin/sed 's/,/ /g'`"
+            for ip in ${allproxyips}
+            do
+                /usr/bin/exo compute security-group rule add adt --network ${ip} --port 443
+                /usr/bin/exo compute security-group rule add adt --network ${ip} --port 80
+            done
+        else
+            /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 443
+            /usr/bin/exo compute security-group rule add adt --network 0.0.0.0/0 --port 80        
+        fi
     fi
 fi
 
@@ -149,15 +164,16 @@ then
         fi
 
         . ${HOME}/providerscripts/security/firewall/GetDNSIPs.sh
-        
-        allproxyips="`/bin/echo ${allproxyips} | /bin/sed 's/,$//g'`"
-        
-        ips="${ips} ${allproxyips}"
-        
+                        
         ips="`/bin/echo ${ips} | /bin/sed 's/,$//g'`"
         
-        /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[${ips}]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT}\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"443,80,22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
-
+        if ( [ "${alldnsproxyips}" = "" ] )
+        then
+            /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[${ips}]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"443,80\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
+        else 
+             /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[${ips}]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},22\"},{\"addresses\":{\"ipv4\":[${allproxyips}]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"443,80\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
+        fi
+        
         #/usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},443,80,22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
     
         autoscaler_id="`/usr/local/bin/linode-cli --json linodes list | jq '.[] | select (.label | contains ("autoscaler")).id'`"
