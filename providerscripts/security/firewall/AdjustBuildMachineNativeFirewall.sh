@@ -21,19 +21,25 @@ fi
 
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
-    firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt-build-machine" ).id'`"
+    firewall_id1="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt-build-machine" ).id'`"
 
-    if ( [ "${firewall_id}" = "" ] )
-    then
-        /usr/local/bin/linode-cli firewalls create --label "adt-build-machine" --rules.inbound_policy DROP   --rules.outbound_policy ACCEPT
-    else
-       /usr/local/bin/linode-cli firewalls delete ${firewall_id}
+  #  if ( [ "${firewall_id}" = "" ] )
+ #   then
+ #       /usr/local/bin/linode-cli firewalls create --label "adt-build-machine" --rules.inbound_policy DROP   --rules.outbound_policy ACCEPT
+ #   else
+       /usr/local/bin/linode-cli firewalls delete ${firewall_id1}
        /usr/local/bin/linode-cli firewalls create --label "adt-build-machine" --rules.inbound_policy DROP   --rules.outbound_policy ACCEPT
-    fi
+ #   fi
     
-    /bin/sleep 30
+  #  /bin/sleep 30
     
-    firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt-build-machine" ).id'`"
+    firewall_id2="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt-build-machine" ).id'`"
+    
+    while ( [ "${firewall_id1}" = "${firewall_id2}" ] )
+    do
+        firewall_id2="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt-build-machine" ).id'`"
+        /bin/sleep 30
+    done
     
     if ( [ "${ip}" != "NOIP" ] )
     then
