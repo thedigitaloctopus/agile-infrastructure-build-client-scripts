@@ -592,7 +592,7 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 . ${BUILD_HOME}/initscripts/InitialiseCaching.sh
 . ${BUILD_HOME}/initscripts/InitialiseGuardianGateway.sh
 . ${BUILD_HOME}/initscripts/InitialiseDatabase.sh
-. ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
+#. ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 . ${BUILD_HOME}/BackupBuildMachine.sh
 . ${BUILD_HOME}/initscripts/InitialiseBuildParams.sh
 . ${BUILD_HOME}/initscripts/InitialiseDatastore.sh
@@ -690,7 +690,9 @@ then
     done
     . ${BUILD_HOME}/buildscripts/BuildFromSnapshots.sh
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
-
+    export PRE_BUILD="0"
+    . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+    . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
     status ""
     status "##########################################################################################################"
@@ -727,6 +729,7 @@ else
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+    . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
     ##Do the build finalisation procedures
     . ${BUILD_HOME}/buildscripts/FinaliseBuildProcessing.sh
