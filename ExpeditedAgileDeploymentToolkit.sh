@@ -429,7 +429,7 @@ status ""
 . ${BUILD_HOME}/initscripts/InitialiseSMTPMailServer.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
 . ${BUILD_HOME}/providerscripts/datastore/ObtainSnapshotData.sh
-. ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
+#. ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 . ${BUILD_HOME}/BackupBuildMachine.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
@@ -546,6 +546,7 @@ then
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+    . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
     status ""
     status "##########################################################################################################"
@@ -581,6 +582,7 @@ else
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+    . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
     ##Do the build finalisation procedures
     . ${BUILD_HOME}/buildscripts/FinaliseBuildProcessing.sh
