@@ -51,4 +51,10 @@ This will generate a temmplate override script for you interactively.
 
 This will take the generated ovrride script from 9 and create a user data script ready for deployment using the hardcore method
 
-11) 
+11) Adjust Build Machine Firewall
+
+This will adjust the build machine firewall so that you can add additional laptop ip addresses that can access your build machine. 
+
+12) Adjust Scaling
+
+You can use this script to scale up and scale down the number of webservers that will be used.
