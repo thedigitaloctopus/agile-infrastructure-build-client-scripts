@@ -46,3 +46,9 @@ know that your next build run will be fresh and clean. This is similar to a fact
 9) Generate Override Template
 
 This will generate a temmplate override script for you interactively. 
+
+10) Generate Hardcore User Data Script
+
+This will take the generated ovrride script from 9 and create a user data script ready for deployment using the hardcore method
+
+11) 
