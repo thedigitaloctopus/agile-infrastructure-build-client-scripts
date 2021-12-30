@@ -84,7 +84,7 @@ then
         /usr/bin/exo compute security-group rule add adt --network ${BUILD_CLIENT_IP}/32 --port 22
         /usr/bin/exo compute security-group rule add adt --protocol icmp --network 0.0.0.0/0 --icmp-code 0 --icmp-type 8
         
-        . ${BUILD_HOME}/providerscripts/security/firewall/GetDNSIPs.sh
+        . ${BUILD_HOME}/providerscripts/security/firewall/GetProxyDNSIPs.sh
 
         if ( [ "${alldnsproxyips}" != "" ] )
         then
@@ -163,7 +163,7 @@ then
             ips=${ips}" \"${BUILD_CLIENT_IP}/32\""
         fi
 
-        . ${BUILD_HOME}/providerscripts/security/firewall/GetDNSIPs.sh
+        . ${BUILD_HOME}/providerscripts/security/firewall/GetProxyDNSIPs.sh
                         
         ips="`/bin/echo ${ips} | /bin/sed 's/,$//g'`"
         
