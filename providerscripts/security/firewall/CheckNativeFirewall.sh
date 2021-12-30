@@ -163,7 +163,7 @@ then
             ips=${ips}" \"${BUILD_CLIENT_IP}/32\""
         fi
 
-        . ${BUILD_HOME}/providerscripts/security/firewall/GetProxyDNSIPs.sh
+        . ${HOME}/providerscripts/security/firewall/GetProxyDNSIPs.sh
                         
         ips="`/bin/echo ${ips} | /bin/sed 's/,$//g'`"
         
