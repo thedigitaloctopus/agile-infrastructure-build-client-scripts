@@ -135,32 +135,32 @@ then
         
         if ( [ "${autoscaler_private_ip}" != "" ] )
         then
-            ips=${ips}" \"${autoscaler_private_ip}/32\","
+            ips=${ips}"\"${autoscaler_private_ip}/32\","
         fi
         
         if ( [ "${webserver_ip}" != "" ] )
         then
-            ips=${ips}" \"${webserver_ip}/32\","
+            ips=${ips}"\"${webserver_ip}/32\","
         fi
         
         if ( [ "${webserver_private_ip}" != "" ] )
         then
-            ips=${ips}" \"${webserver_private_ip}/32\","
+            ips=${ips}"\"${webserver_private_ip}/32\","
         fi
         
         if ( [ "${database_ip}" != "" ] )
         then
-            ips=${ips}" \"${database_ip}/32\","
+            ips=${ips}"\"${database_ip}/32\","
         fi
         
         if ( [ "${database_private_ip}" != "" ] )
         then
-            ips=${ips}" \"${database_private_ip}/32\","
+            ips=${ips}"\"${database_private_ip}/32\","
         fi
 
         if ( [ "${BUILD_CLIENT_IP}" != "" ] )
         then
-            ips=${ips}" \"${BUILD_CLIENT_IP}/32\""
+            ips=${ips}"\"${BUILD_CLIENT_IP}/32\""
         fi
 
         . ${BUILD_HOME}/providerscripts/security/firewall/GetProxyDNSIPs.sh
@@ -169,9 +169,9 @@ then
         
         if ( [ "${alldnsproxyips}" = "" ] )
         then
-            /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[${ips}]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"443,80\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
+            /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[${ips}]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"443,80,446\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
         else 
-             /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[${ips}]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},22\"},{\"addresses\":{\"ipv4\":[${alldnsproxyips}]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"443,80\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
+             /usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[${ips}]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},22\"},{\"addresses\":{\"ipv4\":[${alldnsproxyips}]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"443,80,445\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
         fi
         
         #/usr/local/bin/linode-cli firewalls rules-update --inbound  "[{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"TCP\",\"ports\":\"${SSH_PORT},${DB_PORT},443,80,22\"},{\"addresses\":{\"ipv4\":[\"0.0.0.0/0\"]},\"action\":\"ACCEPT\",\"protocol\":\"ICMP\"}]" ${firewall_id}
