@@ -48,4 +48,6 @@ Always rememeber that there are cron scripts which configure how many webservers
 
 16. These builds depend on external services, if a service is down, the build may well not complete.
 
-17. I haven't been able to figure out why, but, sometimes for the Vultr cloudhost, the Ubuntu machine's networking availability freezes for about 10 minutes during the build. For this reason its recommended to only use Debian on Vultr unless you can use Ubuntu and figure out why that is happening, I couldn't. 
+17. I haven't been able to figure out why, but, sometimes for the Vultr cloudhost, the Ubuntu machine's networking availability freezes for about 10 minutes during the build. For this reason its recommended to only use Debian on Vultr unless you can use Ubuntu and figure out why that is happening, I couldn't.
+
+18. If you get problems with SSL certificate issuance during a build, it is most likely because of "rate limiting". This is most likely to occur if you are using the "hardcore" build method because the other build methods reuse previously issued certificates. 
