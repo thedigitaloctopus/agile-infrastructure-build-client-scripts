@@ -116,9 +116,10 @@ then
         /usr/local/bin/linode-cli firewalls create --label "adt" --rules.inbound_policy DROP   --rules.outbound_policy ACCEPT
         firewall_id="`/usr/local/bin/linode-cli --json firewalls list | jq '.[] | select (.label == "adt" ).id'`"
 
+
         server_type="autoscaler"
-        autoscaler_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep -v "192.168"`"
-        autoscaler_private_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep "192.168"`"
+        autoscaler_ips="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep -v "192.168"`"
+        autoscaler_private_ips="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep "192.168"`"
         server_type="webserver"
         webserver_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep -v "192.168"`"
         webserver_private_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep "192.168"`"
@@ -127,16 +128,22 @@ then
         database_private_ip="`/usr/local/bin/linode-cli linodes list --text | /bin/grep ${server_type} | /bin/grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | /bin/grep "192.168"`"
     
         ips=""
-        
-        if ( [ "${autoscaler_ip}" != "" ] )
-        then
-            ips="\"${autoscaler_ip}/32\","
-        fi
-        
-        if ( [ "${autoscaler_private_ip}" != "" ] )
-        then
-            ips=${ips}"\"${autoscaler_private_ip}/32\","
-        fi
+
+        for autoscaler_ip in ${autoscaler_ips}
+        do
+            if ( [ "${autoscaler_ip}" != "" ] )
+            then
+                ips=${ips}"\"${autoscaler_ip}/32\","
+            fi
+        done
+
+        for autoscaler_private_ip in ${autoscaler_private_ips}
+        do
+            if ( [ "${autoscaler_private_ip}" != "" ] )
+            then
+                ips=${ips}"\"${autoscaler_private_ip}/32\","
+            fi
+        done
         
         if ( [ "${webserver_ip}" != "" ] )
         then
