@@ -12,7 +12,7 @@ To get started as quickly as possible before going into more depth, you can use 
 
 ### INTRODUCTION
 
-##### ASSOCIATED WEBSITE: [Code Breakers](www.codebreakers.uk)
+##### ASSOCIATED WEBSITE: [Code Breakers](https://www.codebreakers.uk)
 
 This toolkit automates the deployment of LEMP/LAMP stacks with built in scalability for various CMS systems (currently Wordpress, Joomla, Moodle, Drupal) starting with nothing and building out from there. This is close to being a PAAS solution meaning that purely through parameter configuration, you can have a fully deployed application infrastructure that can scale with consistent security practices built in. A disadvantage of fully PAAS solutions is a lack of operational control and features. Using this solution, you have, what is effectively a PAAS solution but, with total control of your servers and databases if you choose to have or need to have. For my needs this was the best of both worlds because through automation, I avoid the repeated work of server configuration and at the same time retain full control over my deployed environment. This solution is extensible and reusable meaning developers can easily extend (and share their work) for their use cases. As examples of how it is extensible, if you wanted to extend the toolkit to support another cloudhost, for example, Rackspace or Google Cloud, you are free to do that in a manner which is easy to follow. The scripts can look quite involved at their core, but, you shouldn't need to touch any of that and the parts of the code you need to work with are abstracted out. Clearly, there's a plethora of deploymemt options out there if you want a CMS system, and, this is another one.
 
