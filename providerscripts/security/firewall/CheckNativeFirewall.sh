@@ -131,6 +131,13 @@ then
         then
             /bin/echo "y" | /usr/local/bin/doctl compute firewall delete ${firewall_id}
         fi
+        
+        webserver_firewall_id="`/usr/local/bin/doctl -o json compute firewall list | jq '.[] | select (.name == "adt-webserver-machines" ).id' | /bin/sed 's/"//g'`"
+        
+        if ( [ "${webserver_firewall_id}" != "" ] )
+        then
+            /bin/echo "y" | /usr/local/bin/doctl compute firewall delete ${webserver_firewall_id}
+        fi
     fi    
 fi
 
