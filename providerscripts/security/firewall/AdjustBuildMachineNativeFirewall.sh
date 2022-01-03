@@ -7,10 +7,10 @@ then
 
     if ( [ "${firewall_id}" = "" ] )
     then
-        /usr/local/bin/doctl compute firewall create --name "adt-build-machine" --outbound-rules "protocol:tcp,ports:all,address:0.0.0.0/0 protocol:icmp,address:0.0.0.0/0"
+        /usr/local/bin/doctl compute firewall create --name "adt-build-machine" --outbound-rules "protocol:tcp,ports:all,address:0.0.0.0/0 protocol:udp,ports:all,address:0.0.0.0/0 protocol:icmp,address:0.0.0.0/0"
     else
         /bin/echo "y" | /usr/local/bin/doctl compute firewall delete ${firewall_id}
-        /usr/local/bin/doctl compute firewall create --name "adt-build-machine" --outbound-rules "protocol:tcp,ports:all,address:0.0.0.0/0 protocol:icmp,address:0.0.0.0/0"
+        /usr/local/bin/doctl compute firewall create --name "adt-build-machine" --outbound-rules "protocol:tcp,ports:all,address:0.0.0.0/0 protocol:udp,ports:all,address:0.0.0.0/0 protocol:icmp,address:0.0.0.0/0"
     fi
 
     firewall_id="`/usr/local/bin/doctl -o json compute firewall list | jq '.[] | select (.name == "adt-build-machine" ).id' | /bin/sed 's/"//g'`"
