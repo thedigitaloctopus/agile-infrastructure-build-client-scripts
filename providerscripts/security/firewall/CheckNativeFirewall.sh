@@ -113,7 +113,7 @@ then
 
         rules=${rules}" protocol:icmp,address:0.0.0.0/0"
 
-        /usr/local/bin/doctl compute firewall add-rules ${firewall_id} --inbound-rules "${standard_rules}"
+        /usr/local/bin/doctl compute firewall add-rules ${firewall_id} --inbound-rules "${rules}"
 
         autoscaler_id="`/usr/local/bin/doctl compute droplet list | /bin/grep autoscaler | /usr/bin/awk -F'    ' '{print $1}' | /bin/sed 's/ //g'`"
         webserver_id="`/usr/local/bin/doctl compute droplet list | /bin/grep webserver | /usr/bin/awk -F'    ' '{print $1}' | /bin/sed 's/ //g'`"
