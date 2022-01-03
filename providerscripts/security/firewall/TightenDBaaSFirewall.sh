@@ -22,7 +22,7 @@
 #########################################################################################
 #set -x
 
-if ( [ "${CLOUDHOST}" = "digitalocean" ] && [ "${DATABASE_INSTALLATION_TYPE}"="DBaaS" ] )
+if ( [ "${CLOUDHOST}" = "digitalocean" ] && [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
 then
    if ( [ "${ASIP}" != "" ] )
    then
