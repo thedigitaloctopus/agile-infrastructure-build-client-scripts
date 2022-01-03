@@ -268,7 +268,6 @@ fi
 
 #Get the ip address of our build machine
 export BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
-/bin/touch /tmp/PRIME_FIREWALL
 . ${BUILD_HOME}/templatedconfigurations/ConfigureTemplate.sh
 . ${BUILD_HOME}/initscripts/InitialiseSMTPMailServer.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
@@ -344,6 +343,7 @@ then
 
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+    /bin/touch /tmp/PRIME_FIREWALL
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
 
@@ -363,6 +363,7 @@ else
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+    /bin/touch /tmp/PRIME_FIREWALL
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
     ##Do the build finalisation procedures
