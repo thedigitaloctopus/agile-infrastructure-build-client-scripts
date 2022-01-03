@@ -22,7 +22,115 @@
 
 if ( [ "${CLOUDHOST}" = "digitalocean" ] )
 then
-    :
+    if ( [ "${PRE_BUILD}" = "0" ] )
+    then
+        firewall_id="`/usr/local/bin/doctl -o json compute firewall list | jq '.[] | select (.name == "adt" ).id' | /bin/sed 's/"//g'`"
+
+        
+        if ( [ "${firewall_id}" != "" ] )
+        then
+            /usr/local/bin/doctl compute firewall delete ${firewall_id}
+        fi
+
+        /usr/local/bin/doctl compute firewall create --name "adt" --outbound-rules "protocol:tcp,ports:all,address:0.0.0.0/0 protocol:udp,ports:all,address:0.0.0.0/0 protocol:icmp,address:0.0.0.0/0"
+
+
+        firewall_id="`/usr/local/bin/doctl -o json compute firewall list | jq '.[] | select (.name == "adt" ).id' | /bin/sed 's/"//g'`"
+
+        server_type="autoscaler"
+        autoscaler_ips="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $3}' | /usr/bin/tail -n +2`"
+        autoscaler_private_ips="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $4}' | /usr/bin/tail -n +2`"
+        server_type="webserver"
+        webserver_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $3}' | /usr/bin/tail -n +2`"
+        webserver_private_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $4}' | /usr/bin/tail -n +2`"
+        server_type="database"
+        database_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $3}' | /usr/bin/tail -n +2`"
+        database_private_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $4}' | /usr/bin/tail -n +2`"
+    
+        ips=""
+
+        for autoscaler_ip in ${autoscaler_ips}
+        do
+            if ( [ "${autoscaler_ip}" != "" ] )
+            then
+                ips=${ips}"\"${autoscaler_ip}/32\" "
+            fi
+        done
+
+        for autoscaler_private_ip in ${autoscaler_private_ips}
+        do
+            if ( [ "${autoscaler_private_ip}" != "" ] )
+            then
+                ips=${ips}"\"${autoscaler_private_ip}/32\" "
+            fi
+        done
+        
+        if ( [ "${webserver_ip}" != "" ] )
+        then
+            ips=${ips}"\"${webserver_ip}/32\" "
+        fi
+        
+        if ( [ "${webserver_private_ip}" != "" ] )
+        then
+            ips=${ips}"\"${webserver_private_ip}/32\" "
+        fi
+        
+        if ( [ "${database_ip}" != "" ] )
+        then
+            ips=${ips}"\"${database_ip}/32\" "
+        fi
+        
+        if ( [ "${database_private_ip}" != "" ] )
+        then
+            ips=${ips}"\"${database_private_ip}/32\" "
+        fi
+
+        if ( [ "${BUILD_CLIENT_IP}" != "" ] )
+        then
+            ips=${ips}"\"${BUILD_CLIENT_IP}/32\""
+        fi
+
+        rules=""
+
+        for ip in ${ips}
+        do
+            rules=${rules}" protocol:tcp,ports:${SSH_PORT},address:${ip}" 
+            rules=${rules}" protocol:tcp,ports:${DB_PORT},address:${ip}" 
+        done
+
+
+        . ${BUILD_HOME}/providerscripts/security/firewall/GetProxyDNSIPs.sh
+                        
+        
+        if ( [ "${alldnsproxyips}" = "" ] )
+        then
+             for ip in ${alldnsproxyips}
+             do
+                rules=${rules}" protocol:tcp,ports:443,address:${ip}" 
+             done
+        fi
+
+        rules=${rules}" protocol:icmp,address:0.0.0.0/0"
+
+        /usr/local/bin/doctl compute firewall add-rules ${firewall_id} --inbound-rules "${standard_rules}"
+
+        autoscaler_id="`/usr/local/bin/doctl compute droplet list | /bin/grep autoscaler | /usr/bin/awk -F'    ' '{print $1}' | /usr/bin/tail -n +2`"
+        webserver_id="`/usr/local/bin/doctl compute droplet list | /bin/grep webserver | /usr/bin/awk -F'    ' '{print $1}' | /usr/bin/tail -n +2`"
+        database_id="`/usr/local/bin/doctl compute droplet list | /bin/grep database | /usr/bin/awk -F'    ' '{print $1}' | /usr/bin/tail -n +2`"
+
+        /usr/local/bin/doctl compute firewall add-droplets ${firewall_id} --droplet-ids ${autoscaler_id}
+        /usr/local/bin/doctl compute firewall add-droplets ${firewall_id} --droplet-ids ${webserver_id}
+        /usr/local/bin/doctl compute firewall add-droplets ${firewall_id} --droplet-ids ${database_id}
+    
+    elif ( [ "${PRE_BUILD}" = "1" ] )
+    then
+       firewall_id="`/usr/local/bin/doctl -o json compute firewall list | jq '.[] | select (.name == "adt" ).id' | /bin/sed 's/"//g'`"
+        
+        if ( [ "${firewall_id}" != "" ] )
+        then
+            /usr/local/bin/doctl compute firewall delete ${firewall_id}
+        fi
+    fi    
 fi
 
 if ( [ "${CLOUDHOST}" = "exoscale" ] )
