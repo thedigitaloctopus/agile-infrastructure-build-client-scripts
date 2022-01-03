@@ -585,8 +585,6 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 
 #Perform all the initialisation necessary
 
-/bin/touch /tmp/PRIME_FIREWALL
-
 . ${BUILD_HOME}/initscripts/InitialiseSourcecodeRepository.sh
 . ${BUILD_HOME}/initscripts/InitialiseSecurityKeys.sh
 . ${BUILD_HOME}/initscripts/InitialiseCaching.sh
@@ -692,6 +690,7 @@ then
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+    /bin/touch /tmp/PRIME_FIREWALL
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
     status ""
@@ -729,6 +728,7 @@ else
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+    /bin/touch /tmp/PRIME_FIREWALL
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
     ##Do the build finalisation procedures
