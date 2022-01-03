@@ -20,6 +20,7 @@
 #########################################################################################
 #set -x
 
+
 if ( [ "${CLOUDHOST}" = "digitalocean" ] )
 then
     if ( [ "${PRE_BUILD}" = "0" ] )
@@ -29,7 +30,7 @@ then
         
         if ( [ "${firewall_id}" != "" ] )
         then
-            /usr/local/bin/doctl compute firewall delete ${firewall_id}
+            /bin/echo "y" | /usr/local/bin/doctl compute firewall delete ${firewall_id}
         fi
 
         /usr/local/bin/doctl compute firewall create --name "adt" --outbound-rules "protocol:tcp,ports:all,address:0.0.0.0/0 protocol:udp,ports:all,address:0.0.0.0/0 protocol:icmp,address:0.0.0.0/0"
@@ -46,7 +47,7 @@ then
         server_type="database"
         database_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $3}' | /usr/bin/tail -n +2`"
         database_private_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $4}' | /usr/bin/tail -n +2`"
-    
+
         ips=""
 
         for autoscaler_ip in ${autoscaler_ips}
@@ -128,7 +129,7 @@ then
         
         if ( [ "${firewall_id}" != "" ] )
         then
-            /usr/local/bin/doctl compute firewall delete ${firewall_id}
+            /bin/echo "y" | /usr/local/bin/doctl compute firewall delete ${firewall_id}
         fi
     fi    
 fi
