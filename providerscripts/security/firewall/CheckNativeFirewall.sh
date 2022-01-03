@@ -39,14 +39,14 @@ then
         firewall_id="`/usr/local/bin/doctl -o json compute firewall list | jq '.[] | select (.name == "adt" ).id' | /bin/sed 's/"//g'`"
 
         server_type="autoscaler"
-        autoscaler_ips="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $3}' | /usr/bin/tail -n +2`"
-        autoscaler_private_ips="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $4}' | /usr/bin/tail -n +2`"
+        autoscaler_ips="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $3}' | /bin/sed 's/ //g'`"
+        autoscaler_private_ips="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $4}' | /bin/sed 's/ //g'`"
         server_type="webserver"
-        webserver_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $3}' | /usr/bin/tail -n +2`"
-        webserver_private_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $4}' | /usr/bin/tail -n +2`"
+        webserver_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $3}' | /bin/sed 's/ //g'`"
+        webserver_private_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $4}' | /bin/sed 's/ //g'`"
         server_type="database"
-        database_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $3}' | /usr/bin/tail -n +2`"
-        database_private_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $4}' | /usr/bin/tail -n +2`"
+        database_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $3}' | /bin/sed 's/ //g'`"
+        database_private_ip="`/usr/local/bin/doctl compute droplet list | /bin/grep ${server_type} | /usr/bin/awk -F'    ' '{print $4}' | /bin/sed 's/ //g'`"
 
         ips=""
 
@@ -115,9 +115,9 @@ then
 
         /usr/local/bin/doctl compute firewall add-rules ${firewall_id} --inbound-rules "${standard_rules}"
 
-        autoscaler_id="`/usr/local/bin/doctl compute droplet list | /bin/grep autoscaler | /usr/bin/awk -F'    ' '{print $1}' | /usr/bin/tail -n +2`"
-        webserver_id="`/usr/local/bin/doctl compute droplet list | /bin/grep webserver | /usr/bin/awk -F'    ' '{print $1}' | /usr/bin/tail -n +2`"
-        database_id="`/usr/local/bin/doctl compute droplet list | /bin/grep database | /usr/bin/awk -F'    ' '{print $1}' | /usr/bin/tail -n +2`"
+        autoscaler_id="`/usr/local/bin/doctl compute droplet list | /bin/grep autoscaler | /usr/bin/awk -F'    ' '{print $1}' | /bin/sed 's/ //g'`"
+        webserver_id="`/usr/local/bin/doctl compute droplet list | /bin/grep webserver | /usr/bin/awk -F'    ' '{print $1}' | /bin/sed 's/ //g'`"
+        database_id="`/usr/local/bin/doctl compute droplet list | /bin/grep database | /usr/bin/awk -F'    ' '{print $1}' | /bin/sed 's/ //g'`"
 
         /usr/local/bin/doctl compute firewall add-droplets ${firewall_id} --droplet-ids ${autoscaler_id}
         /usr/local/bin/doctl compute firewall add-droplets ${firewall_id} --droplet-ids ${webserver_id}
