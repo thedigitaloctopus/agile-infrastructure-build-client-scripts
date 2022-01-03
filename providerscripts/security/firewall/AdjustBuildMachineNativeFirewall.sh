@@ -30,6 +30,7 @@ then
             for ipaddress in ${ips}
             do
                  rules=$rules"protocol:tcp,ports:${SSH_PORT},address:${ipaddress}/32 "
+                 rules=$rules"protocol:tcp,ports:${DB_PORT},address:${ipaddress}/32 "
             done
             rules=$rules"protocol:icmp,address:0.0.0.0/0"
             rules="`/bin/echo ${rules} | /bin/sed 's/ $//g'`"
