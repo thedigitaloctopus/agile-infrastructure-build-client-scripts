@@ -37,7 +37,7 @@ then
     else
         os_choice="`/bin/echo "${os_choice}" | /bin/sed "s/'//g"`"
     fi
-    /usr/local/bin/doctl compute droplet create "${server_name}" --size "${server_size}" --image "${os_choice}"  --region "${region}" --ssh-keys "${key_id}" --enable-private-networking
+    /usr/local/bin/doctl compute droplet create "${server_name}" --size "${server_size}" --tag-name "adt" --image "${os_choice}"  --region "${region}" --ssh-keys "${key_id}" --enable-private-networking
 fi
 
 template_id="${1}"
