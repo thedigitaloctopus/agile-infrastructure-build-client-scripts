@@ -1,5 +1,49 @@
 #!/bin/sh
 
+
+if ( [ "${CLOUDHOST}" = "digitalocean" ] )
+then
+    firewall_id="`/usr/local/bin/doctl -o json compute firewall list | jq '.[] | select (.name == "adt-build-machine" ).id' | /bin/sed 's/"//g'`"
+
+    if ( [ "${firewall_id}" = "" ] )
+    then
+        /usr/local/bin/doctl compute firewall create --name "adt-build-machine" --outbound-rules protocol:tcp,ports:all,address:0.0.0.0/0,protocol:icmp,ports:all,address:0.0.0.0/0,protocol:udp,ports:all,address:0.0.0.0/0 
+    else
+        /bin/echo "y" | /usr/local/bin/doctl compute firewall delete ${firewall_id}
+        /usr/local/bin/doctl compute firewall create --name "adt-build-machine" --outbound-rules protocol:tcp,ports:all,address:0.0.0.0/0,protocol:icmp,ports:all,address:0.0.0.0/0,protocol:udp,ports:all,address:0.0.0.0/0 
+    fi
+
+    firewall_id="`/usr/local/bin/doctl -o json compute firewall list | jq '.[] | select (.name == "adt-build-machine" ).id' | /bin/sed 's/"//g'`"
+
+    /usr/local/bin/doctl compute firewall add-rules --inbound-rules protocol:tcp,ports:22,address:0.0.0.0/0 
+    if ( [ "${ip}" != "NOIP" ] )
+    then
+        if ( [ "${ips}" != "" ] )
+        then
+            ips="`/bin/echo ${ips} | /bin/sed 's/:/ /g'`"
+        fi
+        if ( [ "${ips}" = "" ] )
+        then
+            /usr/local/bin/doctl compute firewall add-rules --inbound-rules protocol:tcp,ports:${SSH_PORT},address:${ip}/32 ${firewall_id}
+        else
+            rules=""
+            for ipaddress in ${ips}
+            do
+                 rules=$rules"protocol:tcp,ports:${SSH_PORT},address:${ipaddress}/32,"
+            done
+            rules="`/bin/echo ${rules} | /bin/sed 's/,$//g'`"
+            /usr/local/bin/linode-cli firewalls rules-update --inbound-rules  "[${rules}]" ${firewall_id}
+        fi
+    else
+        /usr/local/bin/doctl compute firewall add-rules --inbound-rules protocol:tcp,ports:${SSH_PORT},address:0.0.0.0/0,protocol:icmp,ports:${SSH_PORT},address:0.0.0.0/0, ${firewall_id}
+    fi
+
+     bmip="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
+     bmid="`/usr/local/bin/doctl compute droplet list | /bin/grep "${bmip}" | /usr/bin/awk '{print $1}'`"
+
+     /usr/local/bin/doctl compute firewall add-droplets ${firewall_id} --droplet-ids ${bmid}
+fi
+
 if ( [ "${CLOUDHOST}" = "exoscale" ] )
 then
     
