@@ -424,7 +424,6 @@ status "Please tell us which template you wish to build from"
 status "#####################################################################################################################"
 status ""
 status ""
-/bin/touch /tmp/PRIME_FIREWALL
 . ${BUILD_HOME}/templatedconfigurations/ConfigureTemplate.sh
 . ${BUILD_HOME}/initscripts/InitialiseSMTPMailServer.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
@@ -546,6 +545,7 @@ then
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+    /bin/touch /tmp/PRIME_FIREWALL
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
     status ""
@@ -582,6 +582,7 @@ else
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
     export PRE_BUILD="0"
     . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+    /bin/touch /tmp/PRIME_FIREWALL
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
     ##Do the build finalisation procedures
