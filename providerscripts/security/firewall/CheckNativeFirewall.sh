@@ -120,9 +120,7 @@ then
         webserver_id="`/usr/local/bin/doctl compute droplet list | /bin/grep webserver | /usr/bin/awk -F'    ' '{print $1}' | /bin/sed 's/ //g'`"
         database_id="`/usr/local/bin/doctl compute droplet list | /bin/grep database | /usr/bin/awk -F'    ' '{print $1}' | /bin/sed 's/ //g'`"
 
-        /usr/local/bin/doctl compute firewall add-droplets ${firewall_id} --droplet-ids ${autoscaler_id}
-        /usr/local/bin/doctl compute firewall add-droplets ${firewall_id} --droplet-ids ${webserver_id}
-        /usr/local/bin/doctl compute firewall add-droplets ${firewall_id} --droplet-ids ${database_id}
+        /usr/local/bin/doctl compute firewall add-droplets ${firewall_id} --droplet-ids ${autoscaler_id},${webserver_id},${database_id}
     
     elif ( [ "${PRE_BUILD}" = "1" ] )
     then
