@@ -57,46 +57,45 @@ fi
 
 if ( [ ! -f /tmp/FIREWALL-EVENT ] && [ ! -f /tmp/PRIME_FIREWALL ] )
 then
-    exit
+    /bin/rm /tmp/*FIREWALL*
+else
+    /usr/bin/s3cmd --force del s3://authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT 2>/dev/null
+
+   /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat /root
+
+   if ( [ "${LAPTOP_IP}" = "" ] )
+   then
+       LAPTOP_IP="`/bin/ls ${BUILD_HOME}/runtimedata/LAPTOPIP:* | /usr/bin/awk -F':' '{print $NF}'`"
+   fi 
+
+   if ( [ "${LAPTOP_IP}" != "" ] )
+   then
+       if ( [ "${LAPTOP_IP}" != "BYPASS" ] )
+       then
+           /bin/echo "${LAPTOP_IP}" >> /root/authorised-ips.dat
+           /usr/bin/uniq /root/authorised-ips.dat > /root/authorised-ips.dat.$$
+           /bin/mv /root/authorised-ips.dat.$$ /root/authorised-ips.dat
+           if ( [ "`/usr/bin/s3cmd ls s3://authip-${BUILD_IDENTIFIER}`" = "" ] )
+           then
+               /usr/bin/s3cmd mb s3://authip-${BUILD_IDENTIFIER}
+           fi
+           /usr/bin/s3cmd put /root/authorised-ips.dat s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
+       fi
+   fi
+
+   ips="`/bin/cat /root/authorised-ips.dat | /bin/tr '\n' ' '`"
+
+   for ip in ${ips}
+   do
+       /usr/sbin/ufw allow from ${ip}
+   done
+
+   . ${BUILD_HOME}/providerscripts/security/firewall/AdjustBuildMachineNativeFirewall.sh
+
+   if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" != "" ] )
+   then
+       /bin/mv ${BUILD_HOME}/authorised-ips.dat ${BUILD_HOME}/authorised-ips.dat.$$
+   fi
+
+   /bin/cp /root/authorised-ips.dat ${BUILD_HOME}
 fi
-
-/bin/rm /tmp/*FIREWALL*
-/usr/bin/s3cmd --force del s3://authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT 2>/dev/null
-
-/usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat /root
-
-if ( [ "${LAPTOP_IP}" = "" ] )
-then
-    LAPTOP_IP="`/bin/ls ${BUILD_HOME}/runtimedata/LAPTOPIP:* | /usr/bin/awk -F':' '{print $NF}'`"
-fi 
-
-if ( [ "${LAPTOP_IP}" != "" ] )
-then
-    if ( [ "${LAPTOP_IP}" != "BYPASS" ] )
-    then
-        /bin/echo "${LAPTOP_IP}" >> /root/authorised-ips.dat
-        /usr/bin/uniq /root/authorised-ips.dat > /root/authorised-ips.dat.$$
-        /bin/mv /root/authorised-ips.dat.$$ /root/authorised-ips.dat
-        if ( [ "`/usr/bin/s3cmd ls s3://authip-${BUILD_IDENTIFIER}`" = "" ] )
-        then
-            /usr/bin/s3cmd mb s3://authip-${BUILD_IDENTIFIER}
-        fi
-        /usr/bin/s3cmd put /root/authorised-ips.dat s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
-    fi
-fi
-
-ips="`/bin/cat /root/authorised-ips.dat | /bin/tr '\n' ' '`"
-
-for ip in ${ips}
-do
-    /usr/sbin/ufw allow from ${ip}
-done
-
-. ${BUILD_HOME}/providerscripts/security/firewall/AdjustBuildMachineNativeFirewall.sh
-
-if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" != "" ] )
-then
-    /bin/mv ${BUILD_HOME}/authorised-ips.dat ${BUILD_HOME}/authorised-ips.dat.$$
-fi
-
-/bin/cp /root/authorised-ips.dat ${BUILD_HOME}
