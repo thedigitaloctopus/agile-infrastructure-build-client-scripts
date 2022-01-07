@@ -55,13 +55,12 @@ fi
 
 /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT /tmp
 
-if ( [ ! -f /tmp/FIREWALL-EVENT ] && [ ! -f /tmp/PRIME_FIREWALL ] )
+if ( [ -f /tmp/FIREWALL-EVENT ] || [ -f /tmp/PRIME_FIREWALL ] )
 then
     /bin/rm /tmp/*FIREWALL*
-else
-    /usr/bin/s3cmd --force del s3://authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT 2>/dev/null
 
-   /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat /root
+    /usr/bin/s3cmd --force del s3://authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT 2>/dev/null
+    /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat /root
 
    if ( [ "${LAPTOP_IP}" = "" ] )
    then
