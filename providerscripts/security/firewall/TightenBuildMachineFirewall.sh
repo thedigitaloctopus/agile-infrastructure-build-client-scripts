@@ -87,6 +87,11 @@ fi
 
 ips="`/bin/cat /root/authorised-ips.dat | /bin/tr '\n' ' '`"
 
+for ip in ${ips}
+do
+    /usr/sbin/ufw allow from ${ip}
+done
+
 . ${BUILD_HOME}/providerscripts/security/firewall/AdjustBuildMachineNativeFirewall.sh
 
 if ( [ -f ${BUILD_HOME}/authorised-ips.dat ] && [ -f ${BUILD_HOME}/authorised-ips.dat.$$ ] && [ "`/usr/bin/diff authorised-ips.dat.$$ authorised-ips.dat`" != "" ] )
