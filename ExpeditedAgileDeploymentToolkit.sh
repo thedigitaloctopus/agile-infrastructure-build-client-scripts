@@ -543,8 +543,8 @@ then
     done
     . ${BUILD_HOME}/buildscripts/BuildFromSnapshots.sh
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
-    export PRE_BUILD="0"
-    . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+ #   export PRE_BUILD="0"
+ #   . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
     /bin/touch /tmp/PRIME_FIREWALL
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
@@ -580,8 +580,8 @@ else
     . ${BUILD_HOME}/buildscripts/BuildWebserver.sh
     . ${BUILD_HOME}/buildscripts/BuildDatabase.sh
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
-    export PRE_BUILD="0"
-    . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+ #   export PRE_BUILD="0"
+ #   . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
     /bin/touch /tmp/PRIME_FIREWALL
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
@@ -612,6 +612,10 @@ fi
 end=`/bin/date +%s`
 runtime="`/usr/bin/expr ${end} - ${start}`"
 status "This script took `/bin/date -u -d @${runtime} +\"%T\"` to complete"
+
+status "Just making a final adjustment to your native firewalling system and then I will shutdown and you can reconnect to me using SSH"
+export PRE_BUILD="0"
+. ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
 
 #Might be needed for the updates we applied at the start. The user can ssh onto the machie again and tail the logs to see what happened. 
 /usr/sbin/shutdown -r now
