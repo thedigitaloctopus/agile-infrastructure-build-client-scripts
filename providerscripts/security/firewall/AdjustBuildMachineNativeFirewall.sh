@@ -108,4 +108,45 @@ then
      /usr/local/bin/linode-cli firewalls device-create --id ${bmid} --type linode ${firewall_id} 
      
 fi
+
+if ( [ "${CLOUDHOST}" = "vultr" ] )
+then
+    firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt-build-machine' | /usr/bin/awk '{print $1}'`"
+
+    if ( [ "${firewall_id}" = "" ] )
+    then
+        firewall_id="`/usr/bin/vultr firewall group create | /usr/bin/tail -n +2 | /usr/bin/awk '{print $1}'`"  
+    else
+        /usr/bin/vultr firewall group delete ${firewall_id}
+        firewall_id="`/usr/bin/vultr firewall group create | /usr/bin/tail -n +2 | /usr/bin/awk '{print $1}'`"  
+    fi
+
+    /usr/bin/vultr firewall group update ${firewall_id} "adt-build-machine"
+
+    if ( [ "${ip}" != "NOIP" ] )
+    then
+        if ( [ "${ips}" != "" ] )
+        then
+            ips="`/bin/echo ${ips} | /bin/sed 's/:/ /g'`"
+        fi
+
+        if ( [ "${ips}" = "" ] )
+        then
+            /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 32 --type v4 -s ${ip}
+        else
+            for ip in ${ips}
+            do
+                /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 32 --type v4 -s ${ip}
+            done
+        fi
+    else
+        /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
+    fi
+
+     bmip="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
+     bmid="`/usr/bin/vultr instance list | /bin/grep -w ${bmip} | /usr/bin/awk '{print $1}'`"
+
+     /usr/bin/vultr instance update-firewall-group -f ${firewall_id} -i ${bmid}
+
+fi
     
