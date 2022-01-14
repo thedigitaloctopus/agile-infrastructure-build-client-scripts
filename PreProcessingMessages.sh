@@ -40,32 +40,6 @@ then
     read response
 fi
 
-if ( [ "${CLOUDHOST}" = "vultr" ] )
-then
-    status "############################################################################################################################################"
-    status "There is a feature with this cloudhost provider which restricts access to the API by ip address. By default, it is very restrictive"
-    status "For the build to work, you need to place the public ip address of your build client machine (which you must have already done)"
-    status "and also the public ip address of your autoscaler into the whitelist for your account. You will have to do this for each new deployment you"
-    status "make. The Build Client will likely remain the same, but the autoscaler ip will change with each new build initiation."
-    status  ""
-    status "You can add your IP addresses by going to the URL, https://my.vultr.com/settings/#settingsapi. The Build Client IP you can add now, I will try and"
-    status "Get the IP address of your machine so you can  add it."
-    status "The IP address of your BUILD CLIENT is: `/usr/bin/curl ifconfig.me 2>/dev/null`"
-    status "Please also whitelist it on your vultr account"
-    status ""
-    if ( [ "${DEVELOPMENT}" = "1" ] )
-    then
-        status "***************************************************TOTALLY ESSENTIAL MAN*************************************************************"
-        status "Once the build process has provisioned your autoscaler(s), you can add the ip address of your autoscaler(s) to your whitelist using the vultr dashboard"
-        status "It is necessary to be right on it and whitelist the IP as soon as it is provisioned by the build process. FAILURE TO ACTION THIS LEADS TO OPERATIONAL FAILURE"
-        status "**********************************************************TOTALLY ESSENTIAL MAN*************************************************************"
-        status "NOTE:"
-        status "If you can't be bothered with this, then, simply whitelist all IPs in the dashboard although this will be less secure"
-        status "############################################################################################################################################"
-    fi
-    status "Press <enter> to acknowledge"
-    read response
-fi
 
 if ( [ "${DATABASE_INSTALLATION_TYPE}" = "Postgres" ] && [ "${APPLICATION}" = "wordpress" ] )
 then
