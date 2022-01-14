@@ -381,10 +381,12 @@ then
 
         firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt-webserver-machines' | /usr/bin/awk '{print $1}'`"
 
-        if ( [ "${firewall_id}" != "" ] )
-        then
+        while ( [ "${firewall_id}" != "" ] )
+        do
             /usr/bin/vultr firewall group delete ${firewall_id}
-        fi
+            /bin/sleep 10
+            firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt$' | /usr/bin/awk '{print $1}'`"
+        done            
     fi    
 fi
 
