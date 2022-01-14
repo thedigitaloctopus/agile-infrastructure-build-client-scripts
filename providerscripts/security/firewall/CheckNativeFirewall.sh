@@ -327,7 +327,7 @@ then
 
     if ( [ "${PRE_BUILD}" = "0" ] )
     then
-        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt' | /usr/bin/awk '{print $1}'`"
+        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w '^adt$' | /usr/bin/awk '{print $1}'`"
 
         if ( [ "${firewall_id}" != "" ] )
         then
@@ -447,7 +447,7 @@ then
 
     elif ( [ "${PRE_BUILD}" = "1" ] )
     then
-        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt' | /usr/bin/awk '{print $1}'`"
+        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w '^adt$' | /usr/bin/awk '{print $1}'`"
 
         if ( [ "${firewall_id}" != "" ] )
         then
