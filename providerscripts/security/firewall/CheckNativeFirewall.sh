@@ -327,7 +327,7 @@ then
 
     if ( [ "${PRE_BUILD}" = "0" ] )
     then
-        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w '^adt$' | /usr/bin/awk '{print $1}'`"
+        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt$' | /usr/bin/awk '{print $1}'`"
 
         if ( [ "${firewall_id}" != "" ] )
         then
@@ -428,7 +428,6 @@ then
             for ip in ${alldnsproxyips}
             do
                 /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s ${ip}
-                /usr/bin/vultr firewall rule create --id ${firewall_id} --port 80 --protocol tcp --size 32 --type v4 -s ${ip}
             done
 
             /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
