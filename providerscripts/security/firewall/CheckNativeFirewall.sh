@@ -339,21 +339,37 @@ then
 
         /usr/bin/vultr firewall group update ${firewall_id} "adt"
         
+        
         if ( [ "${alldnsproxyips}" = "" ] )
         then
+            /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s Cloudflare
 
-            /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
-            /usr/bin/vultr firewall rule create --id ${firewall_id} --port 80 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
-            /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
+           #   /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
+           #   /usr/bin/vultr firewall rule create --id ${firewall_id} --port 80 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
+           /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
         else 
             for ip in ${alldnsproxyips}
             do
                 /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s ${ip}
             done
-
             /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
-
         fi
+        
+      #  if ( [ "${alldnsproxyips}" = "" ] )
+      #  then
+
+      #      /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
+      #      /usr/bin/vultr firewall rule create --id ${firewall_id} --port 80 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
+      #      /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
+      #  else 
+      #      for ip in ${alldnsproxyips}
+      #      do
+      #          /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s ${ip}
+      #      done
+      #
+      #      /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
+#
+       # fi
         
         /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 24 --type v4 -s ${private_network_ip}
         /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${DB_PORT} --protocol tcp --size 24 --type v4 -s ${private_network_ip}
