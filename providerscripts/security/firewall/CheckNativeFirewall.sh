@@ -339,13 +339,9 @@ then
 
         /usr/bin/vultr firewall group update ${firewall_id} "adt"
         
-        
-        if ( [ "${alldnsproxyips}" = "" ] )
+        if ( [ "${DNS_CHOICE}" = "cloudflare" ] )
         then
-            /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s Cloudflare
-
-           #   /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
-           #   /usr/bin/vultr firewall rule create --id ${firewall_id} --port 80 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
+           /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol tcp --port 443 --type v4 --source "cloudflare"
            /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
         else 
             for ip in ${alldnsproxyips}
@@ -354,22 +350,6 @@ then
             done
             /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
         fi
-        
-      #  if ( [ "${alldnsproxyips}" = "" ] )
-      #  then
-
-      #      /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
-      #      /usr/bin/vultr firewall rule create --id ${firewall_id} --port 80 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
-      #      /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
-      #  else 
-      #      for ip in ${alldnsproxyips}
-      #      do
-      #          /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s ${ip}
-      #      done
-      #
-      #      /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
-#
-       # fi
         
         /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 24 --type v4 -s ${private_network_ip}
         /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${DB_PORT} --protocol tcp --size 24 --type v4 -s ${private_network_ip}
@@ -388,23 +368,99 @@ then
 
     elif ( [ "${PRE_BUILD}" = "1" ] )
     then
-        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w '^adt$' | /usr/bin/awk '{print $1}'`"
+        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt$' | /usr/bin/awk '{print $1}'`"
 
         if ( [ "${firewall_id}" != "" ] )
         then
             /usr/bin/vultr firewall group delete ${firewall_id}
         fi
-
-        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt-webserver-machines' | /usr/bin/awk '{print $1}'`"
-
-        while ( [ "${firewall_id}" != "" ] )
-        do
-            /usr/bin/vultr firewall group delete ${firewall_id}
-            /bin/sleep 10
-            firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt$' | /usr/bin/awk '{print $1}'`"
-        done            
     fi    
 fi
+
+#if ( [ "${CLOUDHOST}" = "vultr" ] )
+#then
+#    export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
+#
+#    if ( [ "${PRE_BUILD}" = "0" ] )
+#    then
+#        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt$' | /usr/bin/awk '{print $1}'`"
+#        private_network_ip="`/usr/bin/vultr network list | grep "Default private network" | /usr/bin/awk '{print $6}'`/24"
+#       
+#       if ( [ "${firewall_id}" != "" ] )
+#        then
+#            /usr/bin/vultr firewall group delete ${firewall_id}
+#        fi
+#   
+#        firewall_id="`/usr/bin/vultr firewall group create | /usr/bin/tail -n +2 | /usr/bin/awk '{print $1}'`"  
+#
+#        /usr/bin/vultr firewall group update ${firewall_id} "adt"
+#        
+#        
+#        if ( [ "${alldnsproxyips}" = "" ] )
+#        then
+#            /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s Cloudflare
+#
+#           #   /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
+#           #   /usr/bin/vultr firewall rule create --id ${firewall_id} --port 80 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
+#           /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
+#        else 
+#            for ip in ${alldnsproxyips}
+#            do
+#                /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s ${ip}
+#            done
+#            /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
+#        fi
+#        
+#      #  if ( [ "${alldnsproxyips}" = "" ] )
+#      #  then
+#
+#      #      /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
+#      #      /usr/bin/vultr firewall rule create --id ${firewall_id} --port 80 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
+#      #      /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
+#      #  else 
+#      #      for ip in ${alldnsproxyips}
+#      #      do
+#      #          /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s ${ip}
+#      #      done
+#      #
+#      #      /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
+##
+#       # fi
+#        
+#        /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 24 --type v4 -s ${private_network_ip}
+#        /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${DB_PORT} --protocol tcp --size 24 --type v4 -s ${private_network_ip}
+#        /usr/bin/vultr firewall rule create --id ${firewall_id} --port 22 --protocol tcp --size 24 --type v4 -s ${private_network_ip}
+#        /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 32 --type v4 -s ${BUILD_CLIENT_IP}
+#        
+#        autoscaler_ids="`/usr/bin/vultr instance list | /bin/grep autoscaler | /usr/bin/awk '{print $1}' | /usr/bin/tr '\n' ' '`"
+#        webserver_ids="`/usr/bin/vultr instance list | /bin/grep webserver | /usr/bin/awk '{print $1}' | /usr/bin/tr '\n' ' '`"
+#        database_ids="`/usr/bin/vultr instance list | /bin/grep database | /usr/bin/awk '{print $1}' | /usr/bin/tr '\n' ' '`"
+#        machine_ids="${autoscaler_ids} ${webserver_ids} ${database_ids}"
+#
+#        for machine_id in ${machine_ids}
+#        do
+#            /usr/bin/vultr instance update-firewall-group -f ${firewall_id} -i ${machine_id}
+#        done
+#
+#    elif ( [ "${PRE_BUILD}" = "1" ] )
+#    then
+#        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w '^adt$' | /usr/bin/awk '{print $1}'`"
+#
+#        if ( [ "${firewall_id}" != "" ] )
+#        then
+#            /usr/bin/vultr firewall group delete ${firewall_id}
+#        fi
+#
+#        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt-webserver-machines' | /usr/bin/awk '{print $1}'`"
+#
+#        while ( [ "${firewall_id}" != "" ] )
+#        do
+#            /usr/bin/vultr firewall group delete ${firewall_id}
+#            /bin/sleep 10
+#            firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt$' | /usr/bin/awk '{print $1}'`"
+#        done            
+#    fi    
+#fi
 
 if ( [ "${CLOUDHOST}" = "aws" ] )
 then
