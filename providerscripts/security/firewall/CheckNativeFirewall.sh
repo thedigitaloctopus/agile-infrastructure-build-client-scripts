@@ -328,7 +328,7 @@ then
     if ( [ "${PRE_BUILD}" = "0" ] )
     then
         firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt$' | /usr/bin/awk '{print $1}'`"
-        private_network_ip="`/usr/bin/vultr network list | grep "Default private network" | /usr/bin/awk '{print $6}'`/24"
+      #  private_network_ip="`/usr/bin/vultr network list | grep "Default private network" | /usr/bin/awk '{print $6}'`/24"
        
        if ( [ "${firewall_id}" != "" ] )
         then
