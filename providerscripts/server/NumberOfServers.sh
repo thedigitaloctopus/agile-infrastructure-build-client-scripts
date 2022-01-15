@@ -39,6 +39,7 @@ fi
 
 if ( [ "${cloudhost}" = "vultr" ] )
 then
+    BUILD_HOME="`/usr/bin/pwd | /bin/sed 's/agile-infrastructure-build-client-scripts.*/agile-infrastructure-build-client-scripts/g'`"    
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${cloudhost}/TOKEN`"
     /bin/sleep 1
     server_type="`/bin/echo ${server_type} | /usr/bin/cut -c -25`"
