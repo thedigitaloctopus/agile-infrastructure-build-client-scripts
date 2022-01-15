@@ -341,20 +341,19 @@ then
         
         if ( [ "${DNS_CHOICE}" = "cloudflare" ] )
         then
-           /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol tcp --port 443 --type v4 --source "cloudflare"
+        # I couldn't get this command to work, it was giving an error message so it is commented out and the command below used instead which is not ideal
+        #  /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol tcp --port 443 --size 32 --type v4 --source cloudflare
+           /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
            /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
         else 
-            for ip in ${alldnsproxyips}
-            do
-                /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s ${ip}
-            done
-            /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
+           /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
+           /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
         fi
         
-        /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 24 --type v4 -s ${private_network_ip}
-        /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${DB_PORT} --protocol tcp --size 24 --type v4 -s ${private_network_ip}
-        /usr/bin/vultr firewall rule create --id ${firewall_id} --port 22 --protocol tcp --size 24 --type v4 -s ${private_network_ip}
-        /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 32 --type v4 -s ${BUILD_CLIENT_IP}
+      #  /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 24 --type v4 -s ${private_network_ip}
+      #  /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${DB_PORT} --protocol tcp --size 24 --type v4 -s ${private_network_ip}
+      #  /usr/bin/vultr firewall rule create --id ${firewall_id} --port 22 --protocol tcp --size 24 --type v4 -s ${private_network_ip}
+      #  /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 32 --type v4 -s ${BUILD_CLIENT_IP}
         
         autoscaler_ids="`/usr/bin/vultr instance list | /bin/grep autoscaler | /usr/bin/awk '{print $1}' | /usr/bin/tr '\n' ' '`"
         webserver_ids="`/usr/bin/vultr instance list | /bin/grep webserver | /usr/bin/awk '{print $1}' | /usr/bin/tr '\n' ' '`"
