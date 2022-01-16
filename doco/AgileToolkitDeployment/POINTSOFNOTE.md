@@ -53,3 +53,4 @@ Always rememeber that there are cron scripts which configure how many webservers
 18. If you get problems with SSL certificate issuance during a build, it is most likely because of "rate limiting". This is most likely to occur if you are using the "hardcore" build method because the other build methods reuse previously issued certificates. 
 
 19. Be aware of firewall rules limits which are different by provider. For example with digital ocean you can only have 50 rules per firewall and the way this is currently set up, if you wanted to have say 30 webservers running (they have at least 2 firewall rules each) you would run out of firewall rules to allocate and the system wouldn't work. So, review how many firewall rules you can have if you were planning on some huge system (which you most probably aren't. )
+Vultr, for example, only allows one firewall per server with a 50 rules limit. This means you will be limited in the number of webservers you can deploy.
