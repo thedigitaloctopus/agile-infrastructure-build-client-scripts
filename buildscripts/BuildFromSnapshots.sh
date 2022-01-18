@@ -410,6 +410,12 @@ done
 
 /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/rm -rf /home/${FULL_SNAPSHOT_ID}/config/autoscalerip/* /home/${FULL_SNAPSHOT_ID}/config/autoscalerpublicip/* /home/${FULL_SNAPSHOT_ID}/config/beingbuiltips/* /home/${FULL_SNAPSHOT_ID}/config/bootedwebserverips/* /home/${FULL_SNAPSHOT_ID}/config/databaseip/* /home/${FULL_SNAPSHOT_ID}/config/databasepublicip/* /home/${FULL_SNAPSHOT_ID}/config/lowcpuaudit/* /home/${FULL_SNAPSHOT_ID}/config/lowdiskaudit/* /home/${FULL_SNAPSHOT_ID}/config/lowmemoryaudit/* /home/${FULL_SNAPSHOT_ID}/config/shuttingdownwebserverips/* /home/${FULL_SNAPSHOT_ID}/config/webrootsynctunnel/* /home/${FULL_SNAPSHOT_ID}/config/webserverips/* /home/${FULL_SNAPSHOT_ID}/config/webserverpublicips/* /home/${FULL_SNAPSHOT_ID}/runtime/*lock*"
 
+#Refresh the native firewalling system
+for ip in ${ASIPS}
+do
+    /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${ip} "${SUDO} /bin/touch /home/${FULL_SNAPSHOT_ID}/runtime/FIREWALL-REFRESH"
+done
+
 #Tell our infrastructure, 'yes, I am happy that you are up and running and functioning correctly'. Other
 #scripts can then check if the build has completed before any action is taken
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/touch /home/${FULL_SNAPSHOT_ID}/config/INSTALLEDSUCCESSFULLY"
