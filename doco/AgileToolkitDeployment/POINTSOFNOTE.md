@@ -56,3 +56,5 @@ Always rememeber that there are cron scripts which configure how many webservers
 Vultr, for example, only allows one firewall per server with a 50 rules limit. This means you will be limited in the number of webservers you can deploy.
 
 20. If you are building a deployment from snapshots, you should only deploy in the same region that the snapshots were taken in or from. In other words, if you need to deploy the snapshots to a different region you will have to regenerate them.
+
+21. When you deploy using snapshots you will need to deploy using the same build machine configuration that the snapshot was built with. You can do this either by always deploying from the same build machine or by using a backup of the build machine that the snapshot was generated from by following: [Backup Build Machine](
