@@ -24,6 +24,16 @@
 #If you have any pre-processing messages to add, you can add them here. These messages will be displayed before the build
 #truly gets going.
 
+if ( [ "${CLOUDHOST}" = "vultr" ] && [ "${REGION_ID}" != "ewr" ] )
+then
+    status ""
+    status "##################################################################################################################################################"
+    status "# PLEASE MAKE SURE YOU ARE AWARE OF PROBLEM 8 LOCATED HERE: https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/issues/139"
+    status "# IN SHORT, YOU LIKELY ONLY WANT TO BUILD IN THE EWR REGION ALTHOUGH YOU ARE WELCOME TO TEST OTHERS ON THE PROVISO YOU MIGHT FACE ISSUES"
+    status "##################################################################################################################################################"
+    status ""
+fi
+
 if ( [ "${BUILD_ARCHIVE_CHOICE}" = "virgin" ] || [ "${BUILD_ARCHIVE_CHOICE}" = "baseline" ] )
 then
     PRODUCTION="0"
