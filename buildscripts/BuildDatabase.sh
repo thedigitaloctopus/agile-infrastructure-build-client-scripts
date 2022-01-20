@@ -127,6 +127,8 @@ do
                status "Haven't been able to start your server, I will try again....."
            fi
         done
+        
+        . ${BUILD_HOME}/providerscripts/server/VultrIssueFix.sh
 
         DBIP="${ip}"
         DBIP_PRIVATE="${private_ip}"
