@@ -728,6 +728,8 @@ else
                 status "Sorry, invalid input, try again"
                 read NO_AUTOSCALERS
             done
+	else
+	    status "One autoscaler is being deployed (generate snapshots is active)"
         fi
         . ${BUILD_HOME}/buildscripts/BuildAutoscaler.sh
     fi
