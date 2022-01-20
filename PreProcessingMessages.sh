@@ -32,6 +32,8 @@ then
     status "# IN SHORT, YOU LIKELY ONLY WANT TO BUILD IN THE EWR REGION ALTHOUGH YOU ARE WELCOME TO TEST OTHERS ON THE PROVISO YOU MIGHT FACE ISSUES"
     status "##################################################################################################################################################"
     status ""
+    status "Press <enter> to continue"
+    read response
 fi
 
 if ( [ "${BUILD_ARCHIVE_CHOICE}" = "virgin" ] || [ "${BUILD_ARCHIVE_CHOICE}" = "baseline" ] )
