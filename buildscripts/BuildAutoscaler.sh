@@ -134,6 +134,8 @@ do
                 status "I haven't been able to start your server for you, trying again...."
             fi
        done
+       
+       . ${BUILD_HOME}/providerscripts/server/VultrIssueFix.sh
 
         status "It looks like the machine has booted OK"
         ASIP=${ip}
