@@ -128,8 +128,6 @@ do
            fi
         done
         
-        . ${BUILD_HOME}/providerscripts/server/VultrIssueFix.sh
-
         DBIP="${ip}"
         DBIP_PRIVATE="${private_ip}"
         #We create an ip mask for our server this is used when we set access privileges and so on within the database
