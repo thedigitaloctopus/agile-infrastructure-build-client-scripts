@@ -557,6 +557,12 @@ then
 else
     status "###############################################################################################################################################"
     status "Performing a regular style build (no snapshots used). If this is what you want, press <enter> if not <ctrl-c> to reconfigure"
+    if ( [ "${GENERATE_SNAPSHOTS}" = "1" ] )
+    then
+         status "SNAPSHOTS OF YOUR MACHINES WILL BE GENERATED FOR FUTURE USE"
+    else
+         status "NO SNAPSHOTS ARE BEING GENERATED"
+    fi
     status "###############################################################################################################################################"
     read carryon
     #Call the build scripts. These actually build and deploy the machines. Until this point, there was nothing new running on
