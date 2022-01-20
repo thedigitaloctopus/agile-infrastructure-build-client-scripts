@@ -125,6 +125,8 @@ do
                 status "I haven't been able to start your server, trying again...."
             fi
        done
+       
+        . ${BUILD_HOME}/providerscripts/server/VultrIssueFix.sh
 
         WSIP=${ip}
         WSIP_PRIVATE=${private_ip}
