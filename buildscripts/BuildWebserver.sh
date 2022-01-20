@@ -126,8 +126,6 @@ do
             fi
        done
        
-        . ${BUILD_HOME}/providerscripts/server/VultrIssueFix.sh
-
         WSIP=${ip}
         WSIP_PRIVATE=${private_ip}
 
