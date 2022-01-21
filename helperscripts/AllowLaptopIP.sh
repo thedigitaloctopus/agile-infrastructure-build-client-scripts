@@ -55,6 +55,10 @@ fi
 
 /bin/echo ${ip} >> ./authorised-ips.dat
 
+/bin/cat ./authorised-ips.dat | /usr/bin/sort | /usr/bin/uniq >> ./authorised-ips.dat.$$
+
+/bin/mv ./authorised-ips.dat.$$ ./authorised-ips.dat
+
 /usr/bin/s3cmd put ./authorised-ips.dat s3://authip-${BUILD_IDENTIFIER}
 
 /bin/touch  ./FIREWALL-EVENT
