@@ -65,6 +65,17 @@ read BUILD_IDENTIFIER
 /bin/echo "Please enter the IP address you wish to add access for. You can find the ip address of your laptop using: www.whatsmyip.com"
 read ip
 
+/bin/echo "Do you want to add or remove access for this ip address?"
+/bin/echo "1) Add  2) Remove"
+read mode
+
+while ( [ "`/bin/echo "1 2" | /bin/grep ${mode}`" = "" ] )
+then
+    /bin/echo "I don't recognise that input..."
+    /bin/echo "Please enter 1 or 2"
+    read mode
+fi
+
 
 /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
 
@@ -74,7 +85,12 @@ then
     exit
 fi
 
-/bin/echo ${ip} >> ./authorised-ips.dat
+if ( [ "${mode}" = "1" ] )
+then
+    /bin/echo ${ip} >> ./authorised-ips.dat
+else
+    /bin/sed -i "/${ip}/d" ./authorised-ips.dat
+fi
 
 /bin/cat ./authorised-ips.dat | /usr/bin/sort | /usr/bin/uniq >> ./authorised-ips.dat.$$
 
