@@ -62,7 +62,7 @@ export BUILD_HOME="`/bin/pwd | /bin/sed 's/\/helper.*//g'`"
 /bin/echo "Please enter the name of the build of the server you wish to connect with"
 read BUILD_IDENTIFIER
 
-/bin/echo "Please enter the IP address you wish to add access for. You can find the ip address of your laptop using: www.whatsmyip.com"
+/bin/echo "Please enter the IP address you are modifying access for. You can find the ip address of your laptop using: www.whatsmyip.com"
 read ip
 
 /bin/echo "Do you want to add or remove access for this ip address?"
@@ -70,12 +70,11 @@ read ip
 read mode
 
 while ( [ "`/bin/echo "1 2" | /bin/grep ${mode}`" = "" ] )
-then
+do
     /bin/echo "I don't recognise that input..."
     /bin/echo "Please enter 1 or 2"
     read mode
-fi
-
+done
 
 /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
 
