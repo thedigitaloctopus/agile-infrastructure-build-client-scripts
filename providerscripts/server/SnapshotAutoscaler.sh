@@ -57,6 +57,10 @@ then
     then 
         region_id="de-muc-1" 
     fi 
+    
+    status ""
+    status "########################SNAPSHOTING YOUR AUTOSCALER IN THE BACKGROUND####################################"
+    status ""
 
     autoscaler_id="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${autoscaler_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .id)' | /bin/sed 's/"//g'`"
     /usr/bin/exo compute instance snapshot create -z ${region_id} ${autoscaler_id}
