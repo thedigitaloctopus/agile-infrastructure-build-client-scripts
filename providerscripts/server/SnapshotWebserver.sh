@@ -33,6 +33,10 @@ fi
 if ( [ "${CLOUDHOST}" = "exoscale" ] )
 then
 
+    status ""
+    status "########################SNAPSHOTING YOUR WEBSERVER IN THE BACKGROUND####################################"
+    status ""
+
     if ( [ "${REGION_ID}" = "1128bd56-b4d9-4ac6-a7b9-c715b187ce11" ] ) 
     then 
         region_id="ch-gva-2" 
@@ -61,8 +65,7 @@ then
     webserver_id="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${webserver_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .id)' | /bin/sed 's/"//g'`"
     /usr/bin/exo compute instance snapshot create -z ${region_id} ${webserver_id}
     snapshot_id="`/usr/bin/exo -O json  compute instance snapshot list  | /usr/bin/jq --arg tmp_instance_name "${webserver_name}" '(.[] | select (.instance | contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
-    /usr/bin/exo compute instance-template register --boot-mode legacy --disable-password --description ${webserver_name} --from-snapshot ${snapshot_id} --zone ${region_id}
-    
+    /usr/bin/exo compute instance-template register --boot-mode legacy --disable-password --from-snapshot ${snapshot_id} --zone ${region_id} --username ${DEFAULT_USER} ${webserver_name} 
     
     #webserver_id="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${webserver_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .id)' | /bin/sed 's/"//g'`"
     #    /usr/bin/exo vm snapshot create ${webserver_id}
