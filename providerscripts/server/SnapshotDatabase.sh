@@ -32,16 +32,6 @@ fi
 
 if ( [ "${CLOUDHOST}" = "exoscale" ] )
 then
-    database_id="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${database_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .id)' | /bin/sed 's/"//g'`"
-        /usr/bin/exo vm snapshot create ${database_id}
-    snapshot_id="`/usr/bin/exo -O json  vm snapshot list  | /usr/bin/jq --arg tmp_instance_name "${database_name}" '(.[] | select (.instance | contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
-    /usr/bin/exo vm snapshot export ${snapshot_id}
-    . ${BUILD_HOME}/providerscripts/server/RegisterTemplateFromSnapshot.sh
-    url_and_checksum="`/usr/bin/exo -O json vm snapshot export ${snapshot_id} | /usr/bin/jq '.url , .checksum' | /bin/sed 's/\"//g' |  paste - - | /usr/bin/awk '{print $1,"XXYYZZ",$2}' | /bin/sed 's/ //g'`"
-
-    url="`/bin/echo ${url_and_checksum} | /usr/bin/awk -F'XXYYZZ' '{print $1}'`"
-    checksum="`/bin/echo ${url_and_checksum} | /usr/bin/awk -F'XXYYZZ' '{print $2}'`"
-    
     if ( [ "${REGION_ID}" = "1128bd56-b4d9-4ac6-a7b9-c715b187ce11" ] ) 
     then 
         region_id="ch-gva-2" 
@@ -67,7 +57,51 @@ then
         region_id="de-muc-1" 
     fi 
 
-    /usr/bin/exo vm template register ${database_name} --disable-password --boot-mode $BOOTMODE --url ${url} --username debian --zone ${region_id} --checksum ${checksum} --description "Snapshot of an ADT database"
+    database_id="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${database_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .id)' | /bin/sed 's/"//g'`"
+    /usr/bin/exo compute instance snapshot create -z ${region_id} ${database_id}
+    snapshot_id="`/usr/bin/exo -O json  compute instance snapshot list  | /usr/bin/jq --arg tmp_instance_name "${database_name}" '(.[] | select (.instance | contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
+    /usr/bin/exo compute instance-template register --boot-mode legacy --disable-password --description ${database_name} --from-snapshot ${snapshot_id} --zone ${region_id}
+
+
+
+
+
+    #database_id="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${database_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .id)' | /bin/sed 's/"//g'`"
+    #    /usr/bin/exo vm snapshot create ${database_id}
+   # snapshot_id="`/usr/bin/exo -O json  vm snapshot list  | /usr/bin/jq --arg tmp_instance_name "${database_name}" '(.[] | select (.instance | contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
+   # /usr/bin/exo vm snapshot export ${snapshot_id}
+  #  . ${BUILD_HOME}/providerscripts/server/RegisterTemplateFromSnapshot.sh
+  #  url_and_checksum="`/usr/bin/exo -O json vm snapshot export ${snapshot_id} | /usr/bin/jq '.url , .checksum' | /bin/sed 's/\"//g' |  paste - - | /usr/bin/awk '{print $1,"XXYYZZ",$2}' | /bin/sed 's/ //g'`"
+
+  #  url="`/bin/echo ${url_and_checksum} | /usr/bin/awk -F'XXYYZZ' '{print $1}'`"
+  #  checksum="`/bin/echo ${url_and_checksum} | /usr/bin/awk -F'XXYYZZ' '{print $2}'`"
+    
+  #  if ( [ "${REGION_ID}" = "1128bd56-b4d9-4ac6-a7b9-c715b187ce11" ] ) 
+  #  then 
+  #      region_id="ch-gva-2" 
+  #  fi 
+  #  if ( [ "${REGION_ID}" = "91e5e9e4-c9ed-4b76-bee4-427004b3baf9" ] ) 
+  #  then 
+  #      region_id="ch-dk-2" 
+  #  fi 
+  #  if ( [ "${REGION_ID}" = "4da1b188-dcd6-4ff5-b7fd-bde984055548" ] ) 
+  #  then 
+  #      region_id="at-vie-1" 
+  #  fi 
+  #  if ( [ "${REGION_ID}" = "35eb7739-d19e-45f7-a581-4687c54d6d02" ] ) 
+  #  then 
+  #      region_id="de-fra-1" 
+  #  fi 
+  #  if ( [ "${REGION_ID}" = "70e5f8b1-0b2c-4457-a5e0-88bcf1f3db68" ] ) 
+  #  then 
+  #      region_id="bg-sof-1" 
+  #  fi 
+  #  if ( [ "${REGION_ID}" = "85664334-0fd5-47bd-94a1-b4f40b1d2eb7" ] ) 
+  #  then 
+  #      region_id="de-muc-1" 
+  #  fi #
+#
+ #   /usr/bin/exo vm template register ${database_name} --disable-password --boot-mode $BOOTMODE --url ${url} --username debian --zone ${region_id} --checksum ${checksum} --description "Snapshot of an ADT database"
 fi
 
 if ( [ "${CLOUDHOST}" = "linode" ] )
