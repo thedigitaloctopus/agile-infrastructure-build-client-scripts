@@ -46,7 +46,7 @@ service_offering_id="${3}"
 server_name="${4}"
 key_pair="${5}"
 cloudhost="${6}"
-snapshot_id="${8}"
+snapshot_id="${9}"
 
 if ( [ "${cloudhost}" = "exoscale" ] )
 then
