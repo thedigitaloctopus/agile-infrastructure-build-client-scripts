@@ -61,8 +61,8 @@ then
     autoscaler_id="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${autoscaler_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .id)' | /bin/sed 's/"//g'`"
     /usr/bin/exo compute instance snapshot create -z ${region_id} ${autoscaler_id}
     snapshot_id="`/usr/bin/exo -O json  compute instance snapshot list  | /usr/bin/jq --arg tmp_instance_name "${autoscaler_name}" '(.[] | select (.instance | contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
-    /usr/bin/exo compute instance-template register --boot-mode legacy --disable-password --description ${autoscaler_name} --from-snapshot ${snapshot_id} --zone ${region_id}
-
+    /usr/bin/exo compute instance-template register --boot-mode legacy --disable-password --from-snapshot ${snapshot_id} --zone ${region_id} --username ${DEFAULT_USER} ${autoscaler_name} 
+    
 
   #  autoscaler_id="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${autoscaler_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .id)' | /bin/sed 's/"//g'`"
   #  /usr/bin/exo compute instance snapshot create ${autoscaler_id}
