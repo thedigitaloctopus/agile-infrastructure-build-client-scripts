@@ -78,6 +78,8 @@ then
     status "Press <enter> to generate snapshots and complete the build"
     read x
     
+    status "Generating snasphots please wait......"
+    
     . ${BUILD_HOME}/providerscripts/server/SnapshotAutoscaler.sh
     . ${BUILD_HOME}/providerscripts/server/SnapshotWebserver.sh
     . ${BUILD_HOME}/providerscripts/server/SnapshotDatabase.sh
