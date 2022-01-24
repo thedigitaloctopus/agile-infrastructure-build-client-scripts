@@ -76,12 +76,12 @@ do
     read mode
 done
 
-/usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
+/usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat 2>/dev/null
 
-if ( [ ! ./authorised-ips.dat ] )
+if ( [ ! -f ./authorised-ips.dat ] )
 then
-    /bin/echo "Failed to get a list of authorised ips, you might have to look into a manual update"
-    exit
+    /bin/echo "Couldn't find existing authorised ip addresses"
+    /usr/bin/s3cmd mb s3://authip-${BUILD_IDENTIFIER}
 fi
 
 if ( [ "${mode}" = "1" ] )
