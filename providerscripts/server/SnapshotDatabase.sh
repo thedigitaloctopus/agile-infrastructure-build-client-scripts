@@ -32,6 +32,11 @@ fi
 
 if ( [ "${CLOUDHOST}" = "exoscale" ] )
 then
+
+    status ""
+    status "########################SNAPSHOTING YOUR DATABASE IN THE BACKGROUND####################################"
+    status ""
+
     if ( [ "${REGION_ID}" = "1128bd56-b4d9-4ac6-a7b9-c715b187ce11" ] ) 
     then 
         region_id="ch-gva-2" 
@@ -60,8 +65,7 @@ then
     database_id="`/usr/local/bin/cs listVirtualMachines | /usr/bin/jq --arg tmp_display_name "${database_name}" '(.virtualmachine[] | select(.displayname | contains($tmp_display_name)) | .id)' | /bin/sed 's/"//g'`"
     /usr/bin/exo compute instance snapshot create -z ${region_id} ${database_id}
     snapshot_id="`/usr/bin/exo -O json  compute instance snapshot list  | /usr/bin/jq --arg tmp_instance_name "${database_name}" '(.[] | select (.instance | contains($tmp_instance_name)) | .id)' | /bin/sed 's/"//g'`"
-    /usr/bin/exo compute instance-template register --boot-mode legacy --disable-password --description ${database_name} --from-snapshot ${snapshot_id} --zone ${region_id}
-
+    /usr/bin/exo compute instance-template register --boot-mode legacy --disable-password --from-snapshot ${snapshot_id} --zone ${region_id} --username ${DEFAULT_USER} ${database_name} 
 
 
 
