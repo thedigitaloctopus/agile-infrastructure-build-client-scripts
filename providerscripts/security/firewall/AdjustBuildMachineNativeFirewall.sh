@@ -30,7 +30,7 @@ then
             for ipaddress in ${ips}
             do
                  rules=$rules"protocol:tcp,ports:${SSH_PORT},address:${ipaddress}/32 "
-                 rules=$rules"protocol:tcp,ports:${DB_PORT},address:${ipaddress}/32 "
+                # rules=$rules"protocol:tcp,ports:${DB_PORT},address:${ipaddress}/32 "
             done
             rules=$rules"protocol:icmp,address:0.0.0.0/0"
             rules="`/bin/echo ${rules} | /bin/sed 's/ $//g'`"
@@ -56,6 +56,21 @@ then
     
     if ( [ "${ip}" != "NOIP" ] )
     then
+        if ( [ "${ips}" != "" ] )
+        then
+            ips="`/bin/echo ${ips} | /bin/sed 's/:/ /g'`"
+        fi
+        if ( [ "${ips}" = "" ] )
+        then
+            /usr/bin/exo compute security-group rule add adt-build-machine --network ${ip}/32 --port ${SSH_PORT} 2>/dev/null
+        else
+            rules=""
+            for ipaddress in ${ips}
+            do
+                /usr/bin/exo compute security-group rule add adt-build-machine --network ${ipaddress}/32 --port ${SSH_PORT} 2>/dev/null
+
+            done
+        fi
         /usr/bin/exo compute security-group rule add adt-build-machine --network ${ip}/32 --port ${SSH_PORT} 2>/dev/null
         /usr/bin/exo compute security-group rule add adt-build-machine --protocol icmp --network 0.0.0.0/0 --icmp-code 0 --icmp-type 8 2>/dev/null
     else
