@@ -1,4 +1,9 @@
 #!/bin/bash
+#################################################################################################
+#THIS SCRIPT IS FOR USE ON A DEBIAN OR UBUNTU LINODE SERVER WITH THE LINODE CLOUDHOST EXCLUSIVELY
+#IF YOU WISH TO SUPPORT A DIFFERENT FLAVOUR OF LINUX YOU WILL NEED SEPARATE SCRIPTS
+#SUITABLE FOR THAT PARTICULAR FLAVOUR
+################################################################################################
 ###############################################################################################
 # SET THESE FOR YOUR BUILD CLIENT MACHINE
 # THIS WILL NOT START A BUILD IT WILL JUST SETUP THE TOOLKIT
