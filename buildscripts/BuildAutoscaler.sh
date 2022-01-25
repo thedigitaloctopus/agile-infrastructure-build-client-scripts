@@ -242,13 +242,15 @@ do
         #                  4) Set up sshd to keep alive ssh connections on this server and restart sshd
 
 
-        
-        /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c ' ${SUDO} /usr/bin/apt-get -qq -y update'"
-        while ( [ "$?" != "0" ] )
-        do
-            /bin/sleep 10
+        if ( [ "${BUILDOS}" = "ubuntu" ] || [ "${BUILDOS}" = "debian" ] )
+        then
             /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c ' ${SUDO} /usr/bin/apt-get -qq -y update'"
-        done
+            while ( [ "$?" != "0" ] )
+            do
+                /bin/sleep 10
+                /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c ' ${SUDO} /usr/bin/apt-get -qq -y update'"
+            done
+        fi
         
         /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '${SUDO} /usr/sbin/adduser --disabled-password --force-badname --gecos \"\" ${SERVER_USER} ; /bin/echo ${SERVER_USER}:${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/chpasswd ; ${SUDO} /usr/bin/gpasswd -a ${SERVER_USER} sudo ; ${SUDO} /bin/mkdir -p /home/${SERVER_USER}/.ssh ; ${SUDO} /bin/chown -R ${SERVER_USER}.${SERVER_USER} /home/${SERVER_USER}/ ; ${SUDO} /bin/chmod 700 /home/${SERVER_USER}/.ssh ; ${SUDO} /bin/chmod 400 /home/${SERVER_USER}/.ssh/authorized_keys' ; ${SUDO} /bin/sed -i '$ a\ ClientAliveInterval 60\nTCPKeepAlive yes\nClientAliveCountMax 10000' /etc/ssh/sshd_config ; ${SUDO} /bin/sed -i 's/.*PermitRootLogin.*$/PermitRootLogin no/g' /etc/ssh/sshd_config ;  ${SUDO} /usr/sbin/service sshd restart"
 
@@ -296,13 +298,17 @@ do
         #Our sourcecode which actually defines what an autoscaler will do and how it will function is held in a git repo. So, if
         #We are to have any chance of getting a working autoscaler, then we must install git on our machine as it is not bundled
         #or available be default, so, lets do that
-        /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '/bin/chmod 400 /home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ; /bin/chmod 400 /home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub ; /bin/touch /home/${SERVER_USER}/${MACHINE_TYPE} ; ${CUSTOM_USER_SUDO} /usr/bin/apt-get -qq -y update ; ${CUSTOM_USER_SUDO} /usr/bin/apt-get install -qq -y git ;  /usr/bin/git init ; /bin/mkdir -p /home/${SERVER_USER}/bootstrap ; ${CUSTOM_USER_SUDO}  /usr/bin/git config --global init.defaultBranch master ; ${CUSTOM_USER_SUDO} /usr/bin/git config --global pull.rebase false'"
         
-        while ( [ "$?" != "0" ] )
-        do
-            /bin/sleep 10
+        if ( [ "${BUILDOS}" = "ubuntu" ] || [ "${BUILDOS}" = "debian" ] )
+        then
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '/bin/chmod 400 /home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ; /bin/chmod 400 /home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub ; /bin/touch /home/${SERVER_USER}/${MACHINE_TYPE} ; ${CUSTOM_USER_SUDO} /usr/bin/apt-get -qq -y update ; ${CUSTOM_USER_SUDO} /usr/bin/apt-get install -qq -y git ;  /usr/bin/git init ; /bin/mkdir -p /home/${SERVER_USER}/bootstrap ; ${CUSTOM_USER_SUDO}  /usr/bin/git config --global init.defaultBranch master ; ${CUSTOM_USER_SUDO} /usr/bin/git config --global pull.rebase false'"
-       done
+        
+            while ( [ "$?" != "0" ] )
+            do
+                /bin/sleep 10
+                /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '/bin/chmod 400 /home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ; /bin/chmod 400 /home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub ; /bin/touch /home/${SERVER_USER}/${MACHINE_TYPE} ; ${CUSTOM_USER_SUDO} /usr/bin/apt-get -qq -y update ; ${CUSTOM_USER_SUDO} /usr/bin/apt-get install -qq -y git ;  /usr/bin/git init ; /bin/mkdir -p /home/${SERVER_USER}/bootstrap ; ${CUSTOM_USER_SUDO}  /usr/bin/git config --global init.defaultBranch master ; ${CUSTOM_USER_SUDO} /usr/bin/git config --global pull.rebase false'"
+            done
+        fi
 
         #We need some of our scripts to bootstrap our access to git from our autoscaler so copy the scripts we need to our autoscaler
         #and from there we can get our scripts out of the git repo and start them running
