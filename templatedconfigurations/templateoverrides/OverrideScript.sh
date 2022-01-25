@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#####################################################################################
+#THIS SCRIPT IS FOR USE ON A DEBIAN OR UBUNTU VPS SERVER WITH YOUR CHOSEN CLOUDHOST
+#IF YOU WISH TO SUPPORT A DIFFERENT FLAVOUR OF LINUX YOU WILL NEED SEPARATE SCRIPTS
+#SUITABLE FOR THAT PARTICULAR FLAVOUR
+######################################################################################
+
 /bin/mkdir /root/logs
 
 OUT_FILE="buildmachine-out-`/bin/date | /bin/sed 's/ //g'`"
