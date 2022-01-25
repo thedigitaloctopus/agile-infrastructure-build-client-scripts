@@ -237,12 +237,15 @@ do
         #                  3) Switch off root login on our new server
         #                  4) Set up sshd to keep alive ssh connections on this server and restart sshd
 
-        /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c ' ${SUDO} /usr/bin/apt-get -qq -y update'"
-        while ( [ "$?" != "0" ] )
-        do
-            /bin/sleep 10
+        if ( [ "${BUILDOS}" = "ubuntu" ] || [ "${BUILDOS}" = "debian" ] )
+        then
             /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c ' ${SUDO} /usr/bin/apt-get -qq -y update'"
-        done
+            while ( [ "$?" != "0" ] )
+            do
+                /bin/sleep 10
+                /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c ' ${SUDO} /usr/bin/apt-get -qq -y update'"
+            done
+        fi
         
         /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '${SUDO} /usr/sbin/adduser --disabled-password --force-badname --gecos \"\" ${SERVER_USER} ; /bin/echo ${SERVER_USER}:${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/chpasswd ; ${SUDO} /usr/bin/gpasswd -a ${SERVER_USER} sudo ; ${SUDO} /bin/mkdir -p /home/${SERVER_USER}/.ssh ; ${SUDO} /bin/chown -R ${SERVER_USER}.${SERVER_USER} /home/${SERVER_USER}/ ; ${SUDO} /bin/chmod 700 /home/${SERVER_USER}/.ssh ; ${SUDO} /bin/chmod 400 /home/${SERVER_USER}/.ssh/authorized_keys' ; ${SUDO} /bin/sed -i '$ a\ ClientAliveInterval 60\nTCPKeepAlive yes\nClientAliveCountMax 10000' /etc/ssh/sshd_config ; ${SUDO} /bin/sed -i 's/.*PermitRootLogin.*$/PermitRootLogin no/g' /etc/ssh/sshd_config ;  ${SUDO} /usr/sbin/service sshd restart"
 
@@ -285,13 +288,16 @@ do
         #We are to have any chance of getting a working autoscaler, then we must install git on our machine as it is not bundled
         #or available be default, so, lets do that
 
-        /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '/bin/touch /home/${SERVER_USER}/${MACHINE_TYPE} ; ${CUSTOM_USER_SUDO} /usr/bin/apt-get -qq -y update; ${CUSTOM_USER_SUDO}  /usr/bin/apt-get install -qq -y git ; cd /home/${SERVER_USER} ; /usr/bin/git init ; /bin/mkdir /home/${SERVER_USER}/bootstrap ; ${CUSTOM_USER_SUDO}  /usr/bin/git config --global init.defaultBranch master ; ${CUSTOM_USER_SUDO} /usr/bin/git config --global pull.rebase false'"
+        if ( [ "${BUILDOS}" = "ubuntu" ] || [ "${BUILDOS}" = "debian" ] )
+        then
+            /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '/bin/touch /home/${SERVER_USER}/${MACHINE_TYPE} ; ${CUSTOM_USER_SUDO} /usr/bin/apt-get -qq -y update; ${CUSTOM_USER_SUDO}  /usr/bin/apt-get install -qq -y git ; cd /home/${SERVER_USER} ; /usr/bin/git init ; /bin/mkdir /home/${SERVER_USER}/bootstrap ; ${CUSTOM_USER_SUDO}  /usr/bin/git config --global init.defaultBranch master ; ${CUSTOM_USER_SUDO} /usr/bin/git config --global pull.rebase false'"
         
-        while ( [ "$?" != "0" ] )
-        do 
-            /bin/sleep 10
-            /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '/bin/touch /home/${SERVER_USER}/${MACHINE_TYPE} ; ${CUSTOM_USER_SUDO} /usr/bin/apt-get -qq -y update; ${CUSTOM_USER_SUDO} /usr/bin/apt-get install -qq -y git ; cd /home/${SERVER_USER} ; /usr/bin/git init ; /bin/mkdir /home/${SERVER_USER}/bootstrap ; ${CUSTOM_USER_SUDO}  /usr/bin/git config --global init.defaultBranch master ; ${CUSTOM_USER_SUDO} /usr/bin/git config --global pull.rebase false'"
-        done
+            while ( [ "$?" != "0" ] )
+            do 
+                /bin/sleep 10
+                /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '/bin/touch /home/${SERVER_USER}/${MACHINE_TYPE} ; ${CUSTOM_USER_SUDO} /usr/bin/apt-get -qq -y update; ${CUSTOM_USER_SUDO} /usr/bin/apt-get install -qq -y git ; cd /home/${SERVER_USER} ; /usr/bin/git init ; /bin/mkdir /home/${SERVER_USER}/bootstrap ; ${CUSTOM_USER_SUDO}  /usr/bin/git config --global init.defaultBranch master ; ${CUSTOM_USER_SUDO} /usr/bin/git config --global pull.rebase false'"
+            done
+        fi
 
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/providerscripts/git/GitPull.sh ${BUILD_HOME}/providerscripts/git/GitFetch.sh ${BUILD_HOME}/providerscripts/git/GitCheckout.sh ${SERVER_USER}@${ip}:/home/${SERVER_USER}/bootstrap
 
