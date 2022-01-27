@@ -171,6 +171,16 @@ then
             fi
         fi
     done
+else
+    for livevariable in ${variables}
+    do
+       value="`/bin/grep -w "^export ${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
+       if ( ( [ "`/bin/grep 'NOT REQUIRED' ${overridescript} | /bin/grep "^export ${livevariable}="`" = "" ] ) && ( [ "`/bin/grep 'MANDATORY' ${overridescript} | /bin/grep "^export ${livevariable}="`" = "" ] ) )
+       then 
+          /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"${value}\"/g" ${newoverridescript}
+          /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" default=\"${value}\"\/>/g" ${newoverridescript}.stack
+       fi
+    done
 fi
 
 /bin/echo "/bin/sh HardcoreADTWrapper.sh" >> ${newoverridescript}
