@@ -175,6 +175,13 @@ else
     for livevariable in ${variables}
     do
        value="`/bin/grep -w "^export ${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
+       if ( [ "`/bin/echo ${livevariable} | /bin/grep "CLOUDHOST_PASSWORD"`" != "" ] )
+       then
+           if ( [ "${value}" = "" ] )
+           then
+               value="`/bin/cat /dev/urandom | /usr/bin/tr -dc _A-Z-a-z-0-9 | /usr/bin/head -c${1:-12};echo;`"
+           fi
+       fi
        if ( ( [ "`/bin/grep 'NOT REQUIRED' ${overridescript} | /bin/grep "^export ${livevariable}="`" = "" ] ) && ( [ "`/bin/grep 'MANDATORY' ${overridescript} | /bin/grep "^export ${livevariable}="`" = "" ] ) )
        then 
           /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"${value}\"/g" ${newoverridescript}
