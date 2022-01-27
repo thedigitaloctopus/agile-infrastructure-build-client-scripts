@@ -136,6 +136,12 @@ done
 /bin/echo "Enter 'y' or 'Y' if you wish to review/override the rest of the variables used by this template, 'N' or 'n' will use the default settings"
 read response
 
+while ( [ "`/bin/echo "Y y N n" | /bin/grep ${response}" = "" ] )
+do
+    /bin/echo "That is not a valid response, please try again....."
+    read response
+done
+
 if ( [ "${response}" = "y" ] || [ "${response}" = "Y" ] )
 then
     for livevariable in ${variables}
