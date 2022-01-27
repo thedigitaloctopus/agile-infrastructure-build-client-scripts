@@ -174,6 +174,7 @@ then
 else
     for livevariable in ${variables}
     do
+       display_name="`/bin/echo ${livevariable} | /bin/sed 's/_/ /g'`" 
        value="`/bin/grep -w "^export ${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
        if ( [ "`/bin/echo ${livevariable} | /bin/grep "CLOUDHOST_PASSWORD"`" != "" ] )
        then
