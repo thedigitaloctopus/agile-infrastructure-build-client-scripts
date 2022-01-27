@@ -78,6 +78,7 @@ fi
 overridescript="${BUILD_HOME}/templatedconfigurations/templates/${CLOUDHOST}/${CLOUDHOST}${template}.tmpl"
 
 newoverridescript="/tmp/${CLOUDHOST}${template}"
+/bin/rm ${newoverridescript}
 
 #/bin/echo "# <UDF name=\"SSH\" label=\"SSH Public Key from your laptop\" />" > ${newoverridescript}.stack
 #/bin/echo "# <UDF name=\"BUILDMACHINE_USER\" label=\"The username for your build machine\" />" >> ${newoverridescript}.stack
