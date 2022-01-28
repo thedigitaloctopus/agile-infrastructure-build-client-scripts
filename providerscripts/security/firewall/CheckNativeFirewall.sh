@@ -122,7 +122,7 @@ then
         database_id="`/usr/local/bin/doctl compute droplet list | /bin/grep database | /usr/bin/awk -F'    ' '{print $1}' | /bin/sed 's/ //g'`"
 
         droplet_ids="${autoscaler_ids} ${webserver_id} ${database_id}"
-        droplet_ids="`/bin/echo ${droplet_ids} | /bin/sed 's/^ //g' | /bin/sed 's/ $//g' | /bin/sed 's/  / /g' | /bin/sed 's/ /,/'`"
+        droplet_ids="`/bin/echo ${droplet_ids} | /bin/sed 's/^ //g' | /bin/sed 's/ $//g' | /bin/sed 's/  / /g' | /bin/sed 's/ /,/g'`"
         
       #  /usr/local/bin/doctl compute firewall add-droplets ${firewall_id} --droplet-ids ${autoscaler_id},${webserver_id},${database_id}
          /usr/local/bin/doctl compute firewall add-droplets ${firewall_id} --droplet-ids ${droplet_ids}
