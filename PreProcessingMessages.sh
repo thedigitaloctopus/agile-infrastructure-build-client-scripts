@@ -26,6 +26,7 @@
 
 if ( [ "${CLOUDHOST}" = "aws" ] && [ "${DISABLE_HOURLY}" = "0" ] )
 then
+    /usr/bin/banner "Read this please" >&3
     status "############################################################################################################################################"
     status "Please be aware that you have hourly backups enabled which are counted as \"dataout\" by AWS. This can rack up quite some costs as such transfers"
     status "Are billable under AWS. It is recommended therefore that you switch off hourly backups and only rely on daily, weekly, monthly and bi-monthly"
