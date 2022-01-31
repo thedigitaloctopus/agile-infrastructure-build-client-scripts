@@ -1,6 +1,6 @@
 #!/bin/sh
 ######################################################################################################
-# Description: This script will install the AWS CLI toolkit
+# Description: This script will install the AWS CLI 53 tool
 # Author: Peter Winter
 # Date: 17/01/2017
 #######################################################################################################
