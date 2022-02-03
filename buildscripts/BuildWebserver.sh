@@ -85,9 +85,9 @@ do
         
         if ( [ "${OS_TYPE}" = "" ] )
         then
-            ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${WS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
-        else
-            ostype="${OS_TYPE}"
+            OS_TYPE="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${WS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
+        #else
+        #    ostype="${OS_TYPE}"
         fi
 
         status "Initialising a new server machine, please wait......"
@@ -96,12 +96,12 @@ do
         while ( [ "${server_started}" = "0" ] )
         do
             #Actually start the server machine. Following this, there will be an active machine instance running on your cloud provider
-            ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${ostype}'" "${REGION_ID}" "${WS_SERVER_TYPE}" "${webserver_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${WEBSERVER_IMAGE_ID}
+            ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${OS_TYPE}'" "${REGION_ID}" "${WS_SERVER_TYPE}" "${webserver_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${WEBSERVER_IMAGE_ID}
 
             #Keep trying if the first time wasn't successful
             while ( [ "$?" != "0" ] )
             do
-                ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${ostype}" "${REGION_ID}" "${WS_SERVER_TYPE}" "${webserver_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${WEBSERVER_IMAGE_ID}
+                ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${OS_TYPE}" "${REGION_ID}" "${WS_SERVER_TYPE}" "${webserver_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${WEBSERVER_IMAGE_ID}
             done
 
             #Check that the server has been assigned its IP addresses and that they are active
