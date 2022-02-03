@@ -89,9 +89,9 @@ do
         #What type of OS are we building for. Currently, (April 2018) only ubuntu and debian are supported
         if ( [ "${OS_TYPE}" = "" ] )
         then
-            ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${DB_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
-        else
-            ostype="${OS_TYPE}"
+            OS_TYPE="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${DB_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
+        #else
+        #    ostype="${OS_TYPE}"
         fi
 
         status "Initialising a new server machine, please wait......"
@@ -100,11 +100,11 @@ do
         while ( [ "${server_started}" = "0" ] )
         do
             #Actually spin up the machine we are going to build on
-            ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${ostype}'" "${REGION_ID}" "${DB_SERVER_TYPE}" "${database_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${DATABASE_IMAGE_ID}
+            ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${OS_TYPE}'" "${REGION_ID}" "${DB_SERVER_TYPE}" "${database_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${DATABASE_IMAGE_ID}
             #If for some reason, we failed to build the machine, then, give it another try
             while ( [ "$?" != "0" ] )
             do
-                ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${ostype}" "${REGION_ID}" "${DB_SERVER_TYPE}" "${database_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${DATABASE_IMAGE_ID}
+                ${BUILD_HOME}/providerscripts/server/CreateServer.sh "${OS_TYPE}" "${REGION_ID}" "${DB_SERVER_TYPE}" "${database_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${DATABASE_IMAGE_ID}
             done
 
             #Check that the server has been assigned its IP addresses and that they are active
