@@ -81,6 +81,7 @@ recordid="${2}"
 authkey="${4}"
 dns="${5}"
 domainurl="`/bin/echo ${7} | /usr/bin/cut -d'.' -f2-`"
+subdomain="`/bin/echo ${7} | /usr/bin/awk -F'.' '{print $1}'`"
 
 if ( [ "${dns}" = "aws" ] )
 then
