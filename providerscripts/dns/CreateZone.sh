@@ -81,4 +81,9 @@ else
         #Official
         /usr/bin/vultr dns domain create -d ${domainurl}
     fi
+    
+    if ( [ "${dns}" = "aws" ] )
+    then
+        /usr/local/bin/cli53 create ${domainurl}
+    fi
 fi
