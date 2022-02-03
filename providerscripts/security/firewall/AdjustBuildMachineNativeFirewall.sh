@@ -164,4 +164,39 @@ then
      /usr/bin/vultr instance update-firewall-group -f ${firewall_id} -i ${bmid}
 
 fi
+
+if ( [ "${CLOUDHOST}" = "aws" ] )
+then
+    interface="`/usr/bin/curl --silent http://169.254.169.254/latest/meta-data/network/interfaces/macs/`"
+    subnet_id="`/usr/bin/curl --silent http://169.254.169.254/latest/meta-data/network/interfaces/macs/${interface}/subnet-id`"
+    vpc_id="`/usr/bin/curl --silent http://169.254.169.254/latest/meta-data/network/interfaces/macs/${interface}/vpc-id)`"
+
+    security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep adt-build-machine | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+
+    if ( [ "${security_group_id}" = "" ] )
+    then
+        /usr/bin/aws ec2 create-security-group --description "This is the security group for your agile deployment toolkit build machine" --group-name "adt-build-machine" --vpc-id=${vpc_id}
+        security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep  adt-build-machine | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+    fi
+
+    if ( [ "${ip}" != "NOIP" ] )
+    then
+        if ( [ "${ips}" != "" ] )
+        then
+            ips="`/bin/echo ${ips} | /bin/sed 's/:/ /g'`"
+        fi
+
+        if ( [ "${ips}" = "" ] )
+        then
+            /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges="[{CidrIp=${ip}/32}]"
+        else
+            for ip in ${ips}
+            do
+                /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges="[{CidrIp=${ip}/32}]"
+            done
+        fi
+    else
+        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges="[{0.0.0.0/0}]"
+    fi
+fi
     
