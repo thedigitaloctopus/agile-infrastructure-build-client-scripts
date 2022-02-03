@@ -82,13 +82,4 @@ else
         /usr/bin/vultr dns domain create -d ${domainurl}
     fi
     
-    email="${1}"
-    authkey="${2}"
-    domainurl="`/bin/echo ${3} | /usr/bin/cut -d'.' -f2-`"
-    dns="${4}"
-    
-    if ( [ "${dns}" = "aws" ] )
-    then
-        /usr/local/bin/cli53 create ${domainurl}
-    fi
 fi
