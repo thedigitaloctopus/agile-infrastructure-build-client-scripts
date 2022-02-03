@@ -88,6 +88,13 @@ elif ( [ "${buildos}" = "ubuntu" ] )
         /bin/echo "################################################################################################################" >&3
         /bin/echo "OK, please enter your prefered AMI identifier" >&3
         read ami_identifier
+    
+        while ( [ "${ami_identifier}" = "" ] )
+        do
+            /bin/echo "You need to select an identifier, please try again...."
+            read ami_identifier
+        done
+    
         /bin/cp /dev/null /dev/stdout
         /bin/echo "${ami_identifier}"
 elif ( [ "${buildos}" = "debian" ] )
@@ -96,7 +103,12 @@ elif ( [ "${buildos}" = "debian" ] )
         then
             /usr/bin/aws ec2 describe-images --owners 136693071363 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep debian-10-amd64 | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/sed 's/"//g' >&3
             /bin/echo "Please enter the ami identifier for the OS you wish to use" >&3
-            read ami_identifier        
+            read ami_identifier  
+            while ( [ "${ami_identifier}" = "" ] )
+            do
+                /bin/echo "You need to select an identifier, please try again...."
+                read ami_identifier
+            done
             /bin/cp /dev/null /dev/stdout
             /bin/echo "${ami_identifier}"
         fi
@@ -104,7 +116,12 @@ elif ( [ "${buildos}" = "debian" ] )
         then
             /usr/bin/aws ec2 describe-images --owners 136693071363 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep debian-11-amd64 | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/sed 's/"//g' >&3
             /bin/echo "Please enter the ami identifier for the OS you wish to use" >&3
-            read ami_identifier        
+            read ami_identifier          
+            while ( [ "${ami_identifier}" = "" ] )
+            do
+                /bin/echo "You need to select an identifier, please try again...."
+                read ami_identifier
+            done      
             /bin/cp /dev/null /dev/stdout
             /bin/echo "${ami_identifier}"
         fi
