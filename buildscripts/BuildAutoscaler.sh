@@ -93,9 +93,9 @@ do
         #See what os type we are building on. Currently only Ubuntu and debian are supported
         if ( [ "${OS_TYPE}" = "" ] )
         then
-            ostype="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${AS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
-        else
-            ostype="${OS_TYPE}"
+            OS_TYPE="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${AS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
+        #else
+        #    ostype="${OS_TYPE}"
         fi
         
         status "Initialising a new server machine, please wait......"
@@ -105,12 +105,12 @@ do
         do
 
             #Actually create the autoscaler machine. If the create fails, keep trying again - it must be a provider issue
-            ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${ostype}'" "${REGION_ID}" "${AS_SERVER_TYPE}" "${autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${AUTOSCALER_IMAGE_ID}
+            ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${OS_TYPE}'" "${REGION_ID}" "${AS_SERVER_TYPE}" "${autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${AUTOSCALER_IMAGE_ID}
 
             #Somehow we failed, let's try again...
             while ( [ "$?" != 0 ] )
             do
-                ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${ostype}'" "${REGION_ID}" "${AS_SERVER_TYPE}" "${autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${AUTOSCALER_IMAGE_ID}
+                ${BUILD_HOME}/providerscripts/server/CreateServer.sh "'${OS_TYPE}'" "${REGION_ID}" "${AS_SERVER_TYPE}" "${autoscaler_name}" "${PUBLIC_KEY_ID}" ${CLOUDHOST} ${CLOUDHOST_USERNAME} ${CLOUDHOST_PASSWORD} ${SUBNET_ID} ${AUTOSCALER_IMAGE_ID}
             done
 
             #Get the ip addresses of the server we have just built
