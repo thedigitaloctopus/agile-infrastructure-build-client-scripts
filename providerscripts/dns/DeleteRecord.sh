@@ -77,4 +77,13 @@ then
     /usr/bin/vultr dns record delete ${domainurl} ${recordid}
 fi
 
+recordid="${2}"
+authkey="${4}"
+dns="${5}"
+domainurl="`/bin/echo ${7} | /usr/bin/cut -d'.' -f2-`"
+
+if ( [ "${dns}" = "aws" ] )
+then
+    /usr/local/bin/cli53 rrdelete ${domainurl} ${subdomain} A
+fi
 
