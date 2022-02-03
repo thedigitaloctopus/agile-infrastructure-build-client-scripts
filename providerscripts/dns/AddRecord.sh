@@ -86,4 +86,15 @@ then
     /usr/bin/vultr dns record create -m ${domainurl} -n ${subdomain} -t A -d "${ip}" --priority=10 --ttl=120
 fi
 
+authkey="${3}"
+subdomain="`/bin/echo ${4} | /usr/bin/awk -F'.' '{print $1}'`"
+domainurl="`/bin/echo ${4} | /usr/bin/cut -d'.' -f2-`"
+ip="${5}"
+dns="${7}"
+
+if ( [ "${dns}" = "aws" ] )
+then
+    /usr/local/bin/cli53 rrcreate ${domainurl} "${subdomain} 120 A ${ip}"
+fi
+
 
