@@ -178,6 +178,10 @@ then
         /usr/bin/aws ec2 create-security-group --description "This is the security group for your agile deployment toolkit build machine" --group-name "adt-build-machine" --vpc-id=${vpc_id}
         security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep  adt-build-machine | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
     fi
+    
+    /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 1035 --cidr 0.0.0.0/0 
+    /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 22 --cidr 0.0.0.0/0
+    /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 0-65535 --cidr 0.0.0.0/0
 
     if ( [ "${ip}" != "NOIP" ] )
     then
@@ -199,8 +203,6 @@ then
         /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges="[{0.0.0.0/0}]"
     fi
     
-    /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 1035 --cidr 0.0.0.0/0 
-    /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 22 --cidr 0.0.0.0/0
-    /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 0-65535 --cidr 0.0.0.0/0
+
 fi
     
