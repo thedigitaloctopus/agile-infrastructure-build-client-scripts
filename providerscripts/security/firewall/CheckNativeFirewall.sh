@@ -410,73 +410,50 @@ then
     fi    
 fi
 
-#if ( [ "${CLOUDHOST}" = "vultr" ] )
-#then
-#    export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
-#
-#    if ( [ "${PRE_BUILD}" = "0" ] )
-#    then
-#       firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt$' | /usr/bin/awk '{print $1}'`"       
-#       
-#       if ( [ "${firewall_id}" != "" ] )
-#       then
-#           /usr/bin/vultr firewall group delete ${firewall_id}
-#       fi
-#   
-#        firewall_id="`/usr/bin/vultr firewall group create | /usr/bin/tail -n +2 | /usr/bin/awk '{print $1}'`"  
-#
-#        /usr/bin/vultr firewall group update ${firewall_id} "adt"
-#        
-#        if ( [ "${DNS_CHOICE}" = "cloudflare" ] )
-#        then
-#        # I couldn't get this command to work, it was giving an error message so it is commented out and the command below used instead which is not ideal
-#        #  /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol tcp --port 443 --size 32 --type v4 --source cloudflare
-#           /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
-#           /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
-#        else 
-#           /usr/bin/vultr firewall rule create --id ${firewall_id} --port 443 --protocol tcp --size 32 --type v4 -s 0.0.0.0/0
-#           /usr/bin/vultr firewall rule create --id ${firewall_id} --protocol icmp --size 32 --type v4 -s 0.0.0.0/0
- #       fi
-#
-#        autoscaler_ips="`/usr/bin/vultr instance list | /bin/grep autoscaler | /usr/bin/awk '{print $2}' | /usr/bin/tr '\n' ' '`"
-#        webserver_ips="`/usr/bin/vultr instance list | /bin/grep webserver | /usr/bin/awk '{print $2}' | /usr/bin/tr '\n' ' '`"
-#        database_ips="`/usr/bin/vultr instance list | /bin/grep database | /usr/bin/awk '{print $2}' | /usr/bin/tr '\n' ' '`"
-#        machine_ips="${autoscaler_ips} ${webserver_ips} ${database_ips}"
-#       
-#       for machine_ip in ${machine_ips}
-#       do              
-#           /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 32 --type v4 -s ${machine_ip}
-#           /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${DB_PORT} --protocol tcp --size 32 --type v4 -s ${machine_ip}
-#           /usr/bin/vultr firewall rule create --id ${firewall_id} --port 22 --protocol tcp --size 32 --type v4 -s ${machine_ip}
-#           /usr/bin/vultr firewall rule create --id ${firewall_id} --port ${SSH_PORT} --protocol tcp --size 32 --type v4 -s ${BUILD_CLIENT_IP}
-#       done
-#        
-#        autoscaler_ids="`/usr/bin/vultr instance list | /bin/grep autoscaler | /usr/bin/awk '{print $1}' | /usr/bin/tr '\n' ' '`"
-#        webserver_ids="`/usr/bin/vultr instance list | /bin/grep webserver | /usr/bin/awk '{print $1}' | /usr/bin/tr '\n' ' '`"
-#        database_ids="`/usr/bin/vultr instance list | /bin/grep database | /usr/bin/awk '{print $1}' | /usr/bin/tr '\n' ' '`"
-#        machine_ids="${autoscaler_ids} ${webserver_ids} ${database_ids}"
-#
-#        for machine_id in ${machine_ids}
-#        do
-#            /usr/bin/vultr instance update-firewall-group -f ${firewall_id} -i ${machine_id}
-#        done
-#
-#    elif ( [ "${PRE_BUILD}" = "1" ] )
-#    then
-#        firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt$' | /usr/bin/awk '{print $1}'`"
-#        
-#        while ( [ "${firewall_id}" != "" ] )
-#        do
-#            /usr/bin/vultr firewall group delete ${firewall_id}
-#            /bin/sleep 10
-#            firewall_id="`/usr/bin/vultr firewall group list | /usr/bin/tail -n +2 | /bin/grep -w 'adt$' | /usr/bin/awk '{print $1}'`"
-#        done     
-#    fi    
-#fi
-
-
-
 if ( [ "${CLOUDHOST}" = "aws" ] )
 then
-    :
+    if ( [ "${PRE_BUILD}" = "1" ] )
+    then
+        security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+
+        if ( [ "${security_group_id}" != "" ] )
+        then
+            /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id} --query "SecurityGroups[0].IpPermissions"`"    
+        fi
+    elif ( [ "${PRE_BUILD}" = "0" ] )
+    then
+        security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+
+        if ( [ "${security_group_id}" != "" ] )
+        then
+            /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id} --query "SecurityGroups[0].IpPermissions"`"    
+        fi
+
+        . ${BUILD_HOME}/providerscripts/security/firewall/GetProxyDNSIPs.sh
+                        
+        
+        if ( [ "${alldnsproxyips}" = "" ] )
+        then
+           /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=443,ToPort=443,IpRanges='[{CidrIp=0.0.0.0/0}]'
+           /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=icmp,FromPort=-1,ToPort=-1,IpRanges='[{CidrIp=0.0.0.0/0}]'
+        else 
+           for ip in ${alldnsproxyips} 
+           do
+               /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=443,ToPort=443,IpRanges='[{CidrIp=${ip}}]'
+               /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=icmp,FromPort=-1,ToPort=-1,IpRanges='[{CidrIp=0.0.0.0/0}]'
+           done
+        fi
+
+        autoscaler_ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh autoscaler ${CLOUDHOST}`"
+        webserver_ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh webserver ${CLOUDHOST}`"
+        database_ips="`${BUILD_HOME}/providerscripts/server/GetServerIPAddresses.sh database ${CLOUDHOST}`"
+        machine_ips="${autoscaler_ips} ${webserver_ips} ${database_ips}"
+       
+       for machine_ip in ${machine_ips}
+       do              
+           /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges='[{CidrIp=${machine_ip}}]'
+           /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${DB_PORT},IpRanges='[{CidrIp=${machine_ip}}]'
+           /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges='[{CidrIp=${BUILD_CLIENT_IP}}]'
+       done
+   fi
 fi
