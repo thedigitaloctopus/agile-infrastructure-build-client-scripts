@@ -179,7 +179,7 @@ then
         security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep  AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
     fi
     
-    /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 1035 --cidr 0.0.0.0/0 
+    /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port ${SSH_PORT} --cidr 0.0.0.0/0 
     /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 22 --cidr 0.0.0.0/0
     /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 0-65535 --cidr 0.0.0.0/0
 
