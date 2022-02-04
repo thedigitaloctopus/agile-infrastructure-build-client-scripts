@@ -198,5 +198,9 @@ then
     else
         /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges="[{0.0.0.0/0}]"
     fi
+    
+    /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 1035 --cidr 0.0.0.0/0 
+    /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 22 --cidr 0.0.0.0/0
+    /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 0-65535 --cidr 0.0.0.0/0
 fi
     
