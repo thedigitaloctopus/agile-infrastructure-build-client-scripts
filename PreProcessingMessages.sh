@@ -24,15 +24,30 @@
 #If you have any pre-processing messages to add, you can add them here. These messages will be displayed before the build
 #truly gets going.
 
-if ( [ "${CLOUDHOST}" = "aws" ] && [ "${DISABLE_HOURLY}" = "0" ] )
+if ( [ "${CLOUDHOST}" = "aws" ] && [ "${DISABLE_HOURLY}" != "1" ] )
 then
-    /usr/bin/banner "Read this please" >&3
+    /usr/bin/banner "WARNING" >&3
     status "############################################################################################################################################"
     status "Please be aware that you have hourly backups enabled which are counted as \"dataout\" by AWS. This can rack up quite some costs as such transfers"
     status "Are billable under AWS. It is recommended therefore that you switch off hourly backups and only rely on daily, weekly, monthly and bi-monthly"
     status "I recommend making very sure of your cost profile when using the AWS system because it can surprise bill you if you are not careful. I think its great"
     status "and all that, but, you know, we don't want to end up brassic"
     status "############################################################################################################################################"
+fi
+
+if ( [ "${CLOUDHOST}" = "aws" ] && [ "${ENABLE_EFS}" != "1" ] )
+then
+    /usr/bin/banner "WARNING" >&3
+    status "############################################################################################################################################"
+    status "You are strongly advised to enable EFS (Elastic File System) when making an AWS deployment"
+    status "At the moment you are choosing to make an S3FS based deployment which might rack up your costs"
+    status "############################################################################################################################################"
+    status "If you want me to enable EFS for you, then, type 'Y' or 'y' below"
+    read response
+    if ( [ "${response}" = "y" ] || [ "${response}" = "Y" ] )
+    then
+        export ENABLE_EFS="1"
+    fi
 fi
 
 if ( [ "${BUILD_ARCHIVE_CHOICE}" = "virgin" ] || [ "${BUILD_ARCHIVE_CHOICE}" = "baseline" ] )
