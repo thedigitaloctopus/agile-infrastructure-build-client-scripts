@@ -2,7 +2,7 @@
 
 #### FINANCES
 
-Always take close note of how any particular configuration you are deploying is being billed by your provider(s) so that you don't get any unexpected costs. For example, some providers bill for data out (to, for example, Github when webroot sourcecode is being updated which happens regularly by default) and some providers don't. So, in such a circumstance there will be a different cost profile for different providers. In short keep an eye on your costs when you first make a deployment until it is clear to you how that particular deployment will be billed.  
+Always take close note of how any particular configuration you are deploying with this toolkit is being billed by your provider(s) so that you don't get any unexpected costs. For example, some providers bill for data out (to, for example, Github when webroot sourcecode is being updated which happens regularly by default) and some providers don't. So, in such a circumstance there will be a different cost profile for different providers. In short keep an eye on your costs when you first make a deployment until it is clear to you how that particular deployment will be billed.  
 
 -----------------------------------
 
