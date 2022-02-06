@@ -75,7 +75,7 @@ then
         then
             status "Please enter a subnet ID to use. Your available regions and subnets are:"
             status "REGIONS         SUBNETS         VPC"
-            /usr/bin/aws ec2 describe-subnets | /usr/bin/jq '.Subnets[] | .AvailabilityZone + " " + .SubnetId + " " + .VpcId'  | /bin/grep ${vpc_id} | /bin/grep ${REGION_ID} >&3
+            /usr/bin/aws ec2 describe-subnets | /usr/bin/jq '.Subnets[] | .AvailabilityZone + " " + .SubnetId + " " + .VpcId'  | /bin/grep ${vpc_id} | /bin/grep ${REGION_ID} | /bin/sed 's/\"//g' >&3
             status "================================================"
             status "If no values are listed you do not have any suitable subnets to use, and you will need to create one otherwise:"
             status "Copy and paste the subnet (2nd column value) you want to use below please..."
@@ -91,7 +91,7 @@ then
     else
         status "Please enter a subnet ID to use. Your available regions and subnets are:"
         status "REGIONS        SUBNETS           VPC"
-        /usr/bin/aws ec2 describe-subnets | /usr/bin/jq '.Subnets[] | .AvailabilityZone + " " + .SubnetId + " " + .VpcId' | /bin/grep ${vpc_id} | /bin/grep ${REGION_ID} >&3
+        /usr/bin/aws ec2 describe-subnets | /usr/bin/jq '.Subnets[] | .AvailabilityZone + " " + .SubnetId + " " + .VpcId' | /bin/grep ${vpc_id} | /bin/grep ${REGION_ID} | /bin/sed 's/\"//g' >&3
         status "================================================"
         status "If no values are listed you do not have any suitable subnets to use, and you will need to create one otherwise:"
         status "Copy and paste the subnet (2nd column value) you want to use below please..."
