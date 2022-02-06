@@ -76,14 +76,31 @@ then
             status "Please enter a subnet ID to use. Your available regions and subnets are:"
             status "REGIONS         SUBNETS         VPC"
             /usr/bin/aws ec2 describe-subnets | /usr/bin/jq '.Subnets[] | .AvailabilityZone + " " + .SubnetId + " " + .VpcId'  | /bin/grep ${vpc_id} | /bin/grep ${REGION_ID} >&3
+            status "================================================"
+            status "If no values are listed you do not have any suitable subnets to use, and you will need to create one otherwise:"
+            status "Copy and paste the subnet (2nd column value) you want to use below please..."
             read subnet_id
+            while ( [ "${subnet_id}" = "" ] )
+            do
+                status "The subnet id cannot be blank, please try again"
+                read subnet_id
+            done
+             
             export SUBNET_ID=${subnet_id}
         fi
     else
         status "Please enter a subnet ID to use. Your available regions and subnets are:"
         status "REGIONS        SUBNETS           VPC"
         /usr/bin/aws ec2 describe-subnets | /usr/bin/jq '.Subnets[] | .AvailabilityZone + " " + .SubnetId + " " + .VpcId' | /bin/grep ${vpc_id} | /bin/grep ${REGION_ID} >&3
-        read subnet_id        
+        status "================================================"
+        status "If no values are listed you do not have any suitable subnets to use, and you will need to create one otherwise:"
+        status "Copy and paste the subnet (2nd column value) you want to use below please..."
+        read subnet_id
+        while ( [ "${subnet_id}" = "" ] )
+        do
+           status "The subnet id cannot be blank, please try again"
+           read subnet_id
+        done        
         export SUBNET_ID=${subnet_id}
     fi
 
