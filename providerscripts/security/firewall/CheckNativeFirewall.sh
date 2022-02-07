@@ -449,6 +449,14 @@ then
         then
             /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id} --query "SecurityGroups[0].IpPermissions"`"    
         fi
+        
+        security_group_id1="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitWebserversSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+
+        if ( [ "${security_group_id1}" != "" ] )
+        then
+            /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id1}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id1} --query "SecurityGroups[0].IpPermissions"`"    
+        fi
+        
     elif ( [ "${PRE_BUILD}" = "0" ] )
     then
         security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
@@ -456,6 +464,13 @@ then
         if ( [ "${security_group_id}" != "" ] )
         then
             /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id} --query "SecurityGroups[0].IpPermissions"`"    
+        fi
+        
+         security_group_id1="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitWebserversSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+
+        if ( [ "${security_group_id1}" != "" ] )
+        then
+            /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id1}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id1} --query "SecurityGroups[0].IpPermissions"`"    
         fi
 
         . ${BUILD_HOME}/providerscripts/security/firewall/GetProxyDNSIPs.sh
