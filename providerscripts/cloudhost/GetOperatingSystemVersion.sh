@@ -101,7 +101,7 @@ elif ( [ "${buildos}" = "debian" ] )
     then
         if ( [ "${buildosversion}" = "10" ] )
         then
-            /usr/bin/aws ec2 describe-images --owners 136693071363 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep debian-10-amd64 | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/sed 's/"//g' >&3
+            /usr/bin/aws ec2 describe-images --owners 136693071363 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep debian-10-amd64 | /bin/grep "2022\|2023\|2024\|2025\|2026" | /bin/sed 's/"//g' >&3
             /bin/echo "Please enter the ami identifier for the OS you wish to use" >&3
             read ami_identifier  
             while ( [ "${ami_identifier}" = "" ] )
@@ -114,7 +114,7 @@ elif ( [ "${buildos}" = "debian" ] )
         fi
         if ( [ "${buildosversion}" = "11" ] )
         then
-            /usr/bin/aws ec2 describe-images --owners 136693071363 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep debian-11-amd64 | /bin/grep "2019\|2020\|2021\|2022\|2023" | /bin/sed 's/"//g' >&3
+            /usr/bin/aws ec2 describe-images --owners 136693071363 | /usr/bin/jq '.Images[] | .ImageId + " " + .Name' | /bin/grep debian-11-amd64 | /bin/grep "2022\|2023\|2024\|2025\|2026" | /bin/sed 's/"//g' >&3
             /bin/echo "Please enter the ami identifier for the OS you wish to use" >&3
             read ami_identifier          
             while ( [ "${ami_identifier}" = "" ] )
