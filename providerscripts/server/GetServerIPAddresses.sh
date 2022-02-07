@@ -61,7 +61,7 @@ fi
 
 if ( [ "${cloudhost}" = "aws" ] )
 then
-    /usr/bin/aws ec2 describe-instances --filter "Name=tag:descriptiveName,Values=${server_type}*" "Name=instance-state-name,Values=running" | /usr/bin/jq '.Reservations[].Instances[].PublicIpAddress' | /bin/sed 's/\"//g'
+    /usr/bin/aws ec2 describe-instances --filter "Name=tag:descriptiveName,Values=*${server_type}*" "Name=instance-state-name,Values=running" | /usr/bin/jq '.Reservations[].Instances[].PublicIpAddress' | /bin/sed 's/\"//g'
 fi
 
 
