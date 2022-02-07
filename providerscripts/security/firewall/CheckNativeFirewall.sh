@@ -493,7 +493,7 @@ then
                #/usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=2049,ToPort=2049,IpRanges="[{CidrIp=${machine_ip}/32}]"
                /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol nfs --source-group AgileDeploymentToolkitSecurityGroup --port 2049 --cidr 0.0.0.0/0
            fi
-       done
+    #   done
        
        /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=0,ToPort=65535,IpRanges=[{CidrIp=0.0.0.0/0}]
 
