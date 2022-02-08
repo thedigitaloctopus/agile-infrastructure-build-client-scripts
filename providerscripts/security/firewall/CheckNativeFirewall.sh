@@ -450,13 +450,6 @@ then
             /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id} --query "SecurityGroups[0].IpPermissions"`"    
         fi
         
-        security_group_id1="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitWebserversSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
-
-        if ( [ "${security_group_id1}" != "" ] )
-        then
-            /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id1}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id1} --query "SecurityGroups[0].IpPermissions"`"    
-        fi
-        
     elif ( [ "${PRE_BUILD}" = "0" ] )
     then
         security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
@@ -466,16 +459,8 @@ then
             /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id} --query "SecurityGroups[0].IpPermissions"`"    
         fi
         
-         security_group_id1="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitWebserversSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
-
-        if ( [ "${security_group_id1}" != "" ] )
-        then
-            /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id1}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id1} --query "SecurityGroups[0].IpPermissions"`"    
-        fi
-
         . ${BUILD_HOME}/providerscripts/security/firewall/GetProxyDNSIPs.sh
-                        
-        
+                       
         if ( [ "${alldnsproxyips}" = "" ] )
         then
            /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=443,ToPort=443,IpRanges='[{CidrIp=0.0.0.0/0}]'
@@ -485,13 +470,10 @@ then
                /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=443,ToPort=443,IpRanges="[{CidrIp=${ip}}]"
            done
         fi
-        
-        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp --source-group ${security_group_id} --port ${SSH_PORT} --cidr 0.0.0.0/0
-        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp --source-group ${security_group_id1} --port ${SSH_PORT} --cidr 0.0.0.0/0
-        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp --source-group ${security_group_id} --port ${DB_PORT} --cidr 0.0.0.0/0
-        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp --source-group ${security_group_id1} --port ${DB_PORT} --cidr 0.0.0.0/0
-        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp --source-group ${security_group_id} --port 22 --cidr 0.0.0.0/0
-        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp --source-group ${security_group_id1} --port 22 --cidr 0.0.0.0/0
+       
+        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp --source-group ${security_group_id} --port ${SSH_PORT} 
+        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp --source-group ${security_group_id} --port ${DB_PORT}
+        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp --source-group ${security_group_id} --port 22 
 
         /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=icmp,FromPort=-1,ToPort=-1,IpRanges='[{CidrIp=0.0.0.0/0}]'
 
