@@ -482,7 +482,27 @@ then
        do    
             /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port ${SSH_PORT} --cidr ${machine_ip}/32
             /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port ${DB_PORT} --cidr ${machine_ip}/32
-            /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port 22 --cidr ${machine_ip}/32
+       done
+       
+       for autoscaler_ip in ${autoscaler_ips}
+       do
+            /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port 22 --cidr ${autoscaler_ip}/32
+       done
+       
+        autoscaler_private_ips="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh autoscaler ${CLOUDHOST}`"
+        webserver_private_ips="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh webserver ${CLOUDHOST}`"
+        database_private_ips="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh database ${CLOUDHOST}`"
+        machine_private_ips="${autoscaler_private_ips} ${webserver_private_ips} ${database_private_ips}"
+       
+       for machine_private_ip in ${machine_private_ips}
+       do              
+            /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port ${SSH_PORT} --cidr ${machine_private_ip}/32
+            /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port ${DB_PORT} --cidr ${machine_private_ip}/32
+       done
+       
+       for autoscaler_private_ip in ${autoscaler_private_ips}
+       do
+            /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port 22 --cidr ${autoscaler_private_ip}/32
        done
 
        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges="[{CidrIp=${BUILD_CLIENT_IP}/32}]"
