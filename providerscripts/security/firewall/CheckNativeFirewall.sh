@@ -459,9 +459,6 @@ then
             /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id} --query "SecurityGroups[0].IpPermissions"`"    
         fi
         
-        security_group_owner="`/usr/bin/aws ec2 describe-security-groups --group-id ${security_group_id} | grep OwnerId | /usr/bin/awk -F':' '{print $2}' | /bin/sed 's/ //g' | /bin/sed 's/\"//g' | /bin/sed 's/,//g'`"
-
-        
         . ${BUILD_HOME}/providerscripts/security/firewall/GetProxyDNSIPs.sh
                        
         if ( [ "${alldnsproxyips}" = "" ] )
@@ -473,10 +470,6 @@ then
                /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=443,ToPort=443,IpRanges="[{CidrIp=${ip}}]"
            done
         fi
-       
-        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --group-owner ${security_group_owner} --protocol tcp --source-group ${security_group_id} --port ${SSH_PORT} 
-        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --group-owner ${security_group_owner} --protocol tcp --source-group ${security_group_id} --port ${DB_PORT}
-        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --group-owner ${security_group_owner} --protocol tcp --source-group ${security_group_id} --port 22 
 
         /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=icmp,FromPort=-1,ToPort=-1,IpRanges='[{CidrIp=0.0.0.0/0}]'
 
@@ -486,13 +479,17 @@ then
         machine_ips="${autoscaler_ips} ${webserver_ips} ${database_ips}"
        
        for machine_ip in ${machine_ips}
-       do              
-           /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges="[{CidrIp=${BUILD_CLIENT_IP}/32}]"
+       do    
+            /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port ${SSH_PORT} --cidr ${machine_ip}/32
+            /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port ${DB_PORT} --cidr ${machine_ip}/32
+            /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port 22 --cidr ${machine_ip}/32
        done
+
+       /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges="[{CidrIp=${BUILD_CLIENT_IP}/32}]"
 
        if ( [ "${ENABLE_EFS}" = "1" ] )
        then
-           /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id}  --group-owner ${security_group_owner} --protocol tcp --source-group ${security_group_id} --port 2049 --cidr 0.0.0.0/0
+           /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp --source-group ${security_group_id} --port 2049 --cidr 0.0.0.0/0
        fi
        
        /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=0,ToPort=65535,IpRanges=[{CidrIp=0.0.0.0/0}]
