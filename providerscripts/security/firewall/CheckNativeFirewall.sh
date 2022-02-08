@@ -488,9 +488,7 @@ then
        do
             /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port 22 --cidr ${autoscaler_ip}/32
        done
-       
-       /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port 9000 --cidr 127.0.0.1/32
-       
+              
         autoscaler_private_ips="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh autoscaler ${CLOUDHOST}`"
         webserver_private_ips="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh webserver ${CLOUDHOST}`"
         database_private_ips="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh database ${CLOUDHOST}`"
