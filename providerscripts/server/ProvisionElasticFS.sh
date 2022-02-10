@@ -127,7 +127,7 @@ then
          done
 
          status "You have elastic file systems available with the following identities and mount points"
-         status "  FILESYSTEM ID       |         ID               |          NO MOUNT POINTS (must not be 0)"
+         status "  FILESYSTEM ID    |         ID            |     NO MOUNT POINTS (must not be 0)"
          status "=========================================================================================="
          status "`/usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + "      " + .FileSystemId + "      " + (.NumberOfMountTargets|tostring)' | /bin/sed 's/\"//g'`"
          status "Press <enter> to continue with the build"
