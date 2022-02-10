@@ -85,8 +85,21 @@ then
                 status "The subnet id cannot be blank, please try again"
                 read subnet_id
             done
+            
+            if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
+            then
+                status "You are deploying for DBaaS which means you need to choose a second or additional subnet (in a different availability zone)"
+                read subnet_id1
+                while ( [ "${subnet_id}" = "${subnet_id1}" ] )
+                do
+                   status "You can't pick the same subnet twice. Please choose a subnet in a different availability zone to ${subnet_id}"
+                   read subnet_id1
+                done
+            fi
+        fi
              
             export SUBNET_ID=${subnet_id}
+            export SUBNET_ID1=${subnet_id1}
         fi
     else
         status "Please enter a subnet ID to use. Your available regions and subnets are:"
@@ -100,8 +113,20 @@ then
         do
            status "The subnet id cannot be blank, please try again"
            read subnet_id
-        done        
+        done   
+        
+        if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
+        then
+            status "You are deploying for DBaaS which means you need to choose a second or additional subnet (in a different availability zone)"
+            read subnet_id1
+            while ( [ "${subnet_id}" = "${subnet_id1}" ] )
+            do
+               status "You can't pick the same subnet twice. Please choose a subnet in a different availability zone to ${subnet_id}"
+               read subnet_id1
+            done        
+        fi
         export SUBNET_ID=${subnet_id}
+        export SUBNET_ID1=${subnet_id1}
     fi
 
     /bin/sed -i '/SUBNET_ID=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
