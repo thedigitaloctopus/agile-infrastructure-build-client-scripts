@@ -58,8 +58,8 @@ Detailed tutorials for how to use this toolkit are available here: [Tutorials](h
 
 There are four repositories associated with this toolkit, this one, and the one's listed below. These repos are private, but, will be made public. Whilst they are private, you will need to request read access to the   
 
-##### [Agile Infrastructure Webserver Scripts](https://github.com/agile-deployer/agile-infrastructure-webserver-scripts)
 ##### [Agile Infrastructure Autoscaler Scripts](https://github.com/agile-deployer/agile-infrastructure-autoscaler-scripts)  
+##### [Agile Infrastructure Webserver Scripts](https://github.com/agile-deployer/agile-infrastructure-webserver-scripts)
 ##### [Agile Infrastructure Database Scripts](https://github.com/agile-deployer/agile-infrastructure-database-scripts) 
 
 Edit: (They have now been made public)
