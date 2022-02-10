@@ -122,7 +122,7 @@ then
     fi
 fi
 
-if ( [ "${APPLICATION}" = "moodle" ] && ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] || [ "${DATABASE_DBaaS_INSTALLATION_TYPE}" = "Maria" ] ) )
+if ( [ "${APPLICATION}" = "moodle" ] && ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] || [ "${DATABASE_DBaaS_INSTALLATION_TYPE}" = "MySQL" ] ) )
 then
     status "###################################################################################################################################"
     status "Hi, it's me again... I am going to try and set some parameters for your database. Some providers, for example, AWS, don't"
