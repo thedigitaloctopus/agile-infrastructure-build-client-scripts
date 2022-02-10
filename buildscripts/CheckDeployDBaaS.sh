@@ -263,7 +263,9 @@ then
                         export DBaaS_DBNAME="${db_name}"
                    fi
                done
-               /bin/echo "Setting up and configuring your database, waiting for database endpoint to become available. Will try again in 30 seconds"
+               status "Setting up and configuring your database, waiting for database endpoint to become available. Will try again in 30 seconds"
+               status "It may take 5 minutes or more for your database to come online"
+               status "#########################################################################################################################"
                /bin/sleep 30
            done
        fi
