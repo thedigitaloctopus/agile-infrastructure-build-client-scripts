@@ -488,14 +488,7 @@ then
        do
             /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port 22 --cidr ${autoscaler_ip}/32
        done
-       
-       if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
-       then
-           for webserver_ip in ${webserver_ips}
-           do
-               /usr/bin/aws rds authorize-db-security-group-ingress --db-security-group-name "agiledeploymenttoolkitdbsecuritygroup" --cidr ${webserver_ip}/32
-           done
-       fi
+      
               
         autoscaler_private_ips="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh autoscaler ${CLOUDHOST}`"
         webserver_private_ips="`${BUILD_HOME}/providerscripts/server/GetServerPrivateIPAddresses.sh webserver ${CLOUDHOST}`"
@@ -512,14 +505,6 @@ then
        do
             /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp  --port 22 --cidr ${autoscaler_private_ip}/32
        done
-       
-       if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
-       then
-           for webserver_private_ip in ${webserver_private_ips}
-           do
-               /usr/bin/aws rds authorize-db-security-group-ingress --db-security-group-name "agiledeploymenttoolkitdbsecuritygroup" --cidr ${webserver_private_ip}/32
-           done
-       fi
 
        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges="[{CidrIp=${BUILD_CLIENT_IP}/32}]"
 
@@ -527,9 +512,7 @@ then
        then
            /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --protocol tcp --source-group ${security_group_id} --port 2049 --cidr 0.0.0.0/0
        fi
-       
-
-       
+      
        /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=0,ToPort=65535,IpRanges=[{CidrIp=0.0.0.0/0}]
        /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges=[{CidrIp=0.0.0.0/0}]
        /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${DB_PORT},ToPort=${DB_PORT},IpRanges=[{CidrIp=0.0.0.0/0}]
