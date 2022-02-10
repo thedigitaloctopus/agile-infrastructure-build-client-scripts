@@ -268,6 +268,11 @@ then
                status "#########################################################################################################################"
                /bin/sleep 30
            done
+           status ""
+           status "******************************************************************"
+           status "DATABASE SUCCESSFULLY PROVISIONED WITH AN ENDPOINT OF: ${endpoint}"
+           status "******************************************************************"
+           status ""
        else
            status "Couldn't create your RDS database, please investigate your log files to find out why"
            exit
