@@ -23,7 +23,6 @@
 #########################################################################################
 #set -x
 #########################################################################################################
-#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mysql:lon1:1:db-s-1vcpu-1gb:8:testdbcluster1:testdb1"
 #DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:lon1:1:db-s-1vcpu-1gb:8:testdbcluster1:testdb1"
 #DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:pg:lon1:1:db-s-1vcpu-1gb:8:testdbcluster1:testdb1"
 #########################################################################################################
@@ -122,7 +121,6 @@ fi
 
 
 #########################################################################################################
-#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mysql:ch-gva-2:hobbyist-1:testdb1"
 #DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:ch-gva-2:hobbyist-1:testdb1"
 #DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:pg:ch-gva-2:hobbyist-1:testdb1"
 #########################################################################################################
@@ -190,9 +188,9 @@ then
 fi
 
 #########################################################################################################
-#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mysql:eu-west-1b:db.t3.micro:TestDatabase:testdb4:20:2035:testdatabaseuser1:ghdbRtjh=g"
-#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mariadb:eu-west-1a:db.t3.micro:TestDatabase:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g"
-#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:postgres:eu-west-1a:db.t3.micro:TestDatabase:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g"
+#DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:eu-west-1b:db.t3.micro:TestDatabase:testdb4:20:2035:testdatabaseuser1:ghdbRtjh=g"
+#DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mariadb:eu-west-1a:db.t3.micro:TestDatabase:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g"
+#DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:postgres:eu-west-1a:db.t3.micro:TestDatabase:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g"
 #########################################################################################################
 
 if ( [ "${CLOUDHOST}" = "aws" ] && [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
