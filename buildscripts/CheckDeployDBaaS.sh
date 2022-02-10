@@ -233,6 +233,8 @@ then
 
         security_group_id1="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitWebserversSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
 
+        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=0,ToPort=65535,IpRanges='[{CidrIp=0.0.0.0/0}]'
+        /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=icmp,FromPort=-1,ToPort=-1,IpRanges='[{CidrIp=0.0.0.0/0}]'
     
         /usr/bin/aws rds delete-db-subnet-group --db-subnet-group-name "AgileDeploymentToolkitSubnetGroup" 
         /usr/bin/aws rds create-db-subnet-group --db-subnet-group-name "AgileDeploymentToolkitSubnetGroup" --db-subnet-group-description "Agile Deployment DB subnet group" --subnet-ids "${SUBNET_ID}" "${SUBNET_ID1}"
