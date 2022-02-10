@@ -268,6 +268,9 @@ then
                status "#########################################################################################################################"
                /bin/sleep 30
            done
+       else
+           status "Couldn't create your RDS database, please investigate your log files to find out why"
+           exit
        fi
     fi
 fi
