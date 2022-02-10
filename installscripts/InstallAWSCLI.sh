@@ -30,6 +30,7 @@ then
     /usr/bin/apt-get install unzip
     /usr/bin/curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     /usr/bin/unzip -o awscliv2.zip
+    /bin/rm awscliv2.zip
     ./aws/install
     ./aws/install --update
     /bin/rm /usr/bin/aws
