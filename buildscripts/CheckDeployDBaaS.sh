@@ -189,16 +189,17 @@ then
     read x
 fi
 
-######THIS ISN'T JUST TESTING#################################
 #########################################################################################################
-#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mysql:eu-west-1a:db.t3.micro:Test Database:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g:subnet-47864321"
-#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mariadb:eu-west-1a:db.t3.micro:Test Database:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g:subnet-47864321"
-#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:postgres:eu-west-1a:db.t3.micro:Test Database:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g:subnet-47864321"
+#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mysql:eu-west-1b:db.t3.micro:TestDatabase:testdb4:20:2035:testdatabaseuser1:ghdbRtjh=g"
+#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mariadb:eu-west-1a:db.t3.micro:TestDatabase:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g"
+#DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:postgres:eu-west-1a:db.t3.micro:TestDatabase:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g"
 #########################################################################################################
-if ( [ "${CLOUDHOST}" = "aws-test" ] && [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
+
+if ( [ "${CLOUDHOST}" = "aws" ] && [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
 then
     if ( [ "`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/grep DBAAS`" != "" ] )
     then
+        DB_TYPE="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /usr/bin/awk -F':' '{print $1}'`"
         database_details="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/sed 's/^.*DBAAS://g'`"
         DATABASE_ENGINE="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $1}'`"
         DATABASE_REGION="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $2}'`"
@@ -209,12 +210,62 @@ then
         DB_PORT="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $7}'`"
         DATABASE_USERNAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $8}'`"
         DATABASE_PASSWORD="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $9}'`"
-        SUBNET_NAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $10}'`"
-    fi
 
-    /usr/bin/aws rds create-db-subnet-group --db-subnet-group-name agiledeploymentdbsubnetgroup --db-subnet-group-description "Agile Deployment Test DB subnet group" --subnet-ids '["subnet-46634131","subnet-786d1721"]'
-    /usr/bin/aws rds create-db-security-group --db-security-group-name agiledeploymenttoolkitdbsecuritygroup --db-security-group-description "AgileDeploymentToolkitDBSecurityGroup"
-    /usr/bin/aws rds authorize-db-security-group-ingress --db-security-group-name "agiledeploymenttoolkitdbsecuritygroup" --cidrip 111.111.111.111/32
-    /usr/bin/aws rds create-db-instance --db-name "Test_Database" --db-instance-identifier "testdb1" --allocated-storage 20 --db-instance-class db.t3.micro --engine mysql --master-username "testuser123"  --master-user-password "XYZ123PPQQ" --availability-zone eu-west-1a --db-security-groups "agiledeploymentdbsecuritygroup" --db-subnet-group-name agiledeploymentdbsubnetgroup --port 2035 --no-publicly-accessible  --storage-encrypted 
-#    /usr/bin/aws rds create-db-instance --db-name "${DATABASE_NAME}" --db-instance-identifier ${DATABASE_IDENTIFIER}" --allocated-storage ${ALLOCATED_STORAGE} --db-instance-class ${DATABASE_SIZE} --engine ${DATABASE_ENGINE}" --master-username "${DATABASE_USERNAME}"  --master-user-password "${DATABASE_PASSWORD}" --availability-zone "${DATABASE_REGION}" --db-security-groups "agiledeploymentdbsecuritygroup" --db-subnet-group-name agiledeploymentdbsubnetgroup --port ${DB_PORT} --no-publicly-accessible  --storage-encrypted 
+        vpc_id="`/usr/bin/aws ec2 describe-subnets | /usr/bin/jq '.Subnets[] | .SubnetId + " " + .VpcId' | /bin/sed 's/\"//g' | /bin/grep ${SUBNET_ID}  | /usr/bin/awk '{print $2}'`"
+        security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+
+        if ( [ "${security_group_id}" != "" ] )
+        then
+            /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id} --query "SecurityGroups[0].IpPermissions"`"    
+        else
+            /usr/bin/aws ec2 create-security-group --description "This is the security group for your agile deployment toolkit" --group-name "AgileDeploymentToolkitSecurityGroup" --vpc-id=${vpc_id}
+        fi
+
+        security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+
+        security_group_id1="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitWebserversSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+
+
+        if ( [ "${security_group_id1}" != "" ] )
+        then
+            /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id1}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id1} --query "SecurityGroups[0].IpPermissions"`"    
+        else
+            /usr/bin/aws ec2 create-security-group --description "This is the security group for your agile deployment toolkit" --group-name "AgileDeploymentToolkitWebserversSecurityGroup" --vpc-id=${vpc_id}
+        fi
+
+        security_group_id1="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitWebserversSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+
+    
+        /usr/bin/aws rds delete-db-subnet-group --db-subnet-group-name "AgileDeploymentToolkitSubnetGroup" 
+        /usr/bin/aws rds create-db-subnet-group --db-subnet-group-name "AgileDeploymentToolkitSubnetGroup" --db-subnet-group-description "Agile Deployment DB subnet group" --subnet-ids "${SUBNET_ID}" "${SUBNET_ID1}"
+
+        /usr/bin/aws rds create-db-instance --db-name "${DATABASE_NAME}" --db-instance-identifier "${DATABASE_IDENTIFIER}" --allocated-storage "${ALLOCATED_STORAGE}" --db-instance-class "${DATABASE_SIZE}" --engine "${DATABASE_ENGINE}" --master-username "${DATABASE_USERNAME}"  --master-user-password "${DATABASE_PASSWORD}" --availability-zone "${DATABASE_REGION}" --db-subnet-group-name agiledeploymentdbsubnetgroup --port ${DB_PORT} --no-publicly-accessible  --storage-encrypted --vpc-security-group-ids ${security_group_id} ${security_group_id1} --db-subnet-group-name "AgileDeploymentToolkitSubnetGroup"
+
+        if ( [ "$?" = "0" ] )
+        then
+            db_name=""
+            while ( [ "${db_name}" = "" ] )
+            do
+                endpoints="`/usr/bin/aws rds describe-db-instances | /usr/bin/jq '.DBInstances[] | .Endpoint | .Address' | /bin/sed 's/\"//g' | /usr/bin/tr '\n' ' '`"
+                for endpoint in ${endpoints}
+                do
+                    db_name="`/bin/echo ${endpoint} | /usr/bin/awk -F'.' '{print $1}'`"
+                    if ( [ "${db_name}" = "null" ] )
+                    then
+                        db_name=""
+                    fi
+                    if ( [ "${db_name}" = "${DATABASE_IDENTIFIER}" ] )
+                    then
+                        export DBaaS_HOSTNAME="${endpoint}"
+                        export DATABASE_DBaaS_INSTALLATION_TYPE="${DATABASE_TYPE}"
+                        export DBaaS_USERNAME="${DATABASE_USERNAME}"
+                        export DBaaS_PASSWORD="${DATABASE_PASSWORD}"
+                        export DBaaS_DBNAME="${db_name}"
+                   fi
+               done
+               /bin/echo "Setting up and configuring your database, waiting for database endpoint to become available. Will try again in 30 seconds"
+               /bin/sleep 30
+           done
+       fi
+    fi
 fi
