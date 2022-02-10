@@ -94,7 +94,7 @@ then
 
             if ( [ "${response}" = "1" ] )
             then
-                DATABASE_DBaaS_INSTALLATION_TYPE="Maria"
+                DATABASE_DBaaS_INSTALLATION_TYPE="MySQL"
             fi
 
             if ( [ "${response}" = "2" ] )
