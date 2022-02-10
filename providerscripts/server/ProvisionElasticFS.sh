@@ -1,7 +1,7 @@
 #!/bin/sh
 ############################################################################################
 # Author : Peter Winter
-# Date   : 13/07/2016
+# Date   : 13/07/2018
 # Description : If Elastic File Systems are offered, see if the user wants to provision one
 ############################################################################################
 # License Agreement:
@@ -100,6 +100,13 @@ then
             then
                 filesystemid="`/usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g' | /bin/grep ${EFS_IDENTIFIER} | /usr/bin/awk '{print $NF}'`"
                 security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
+
+                if ( [ "`/usr/bin/aws efs describe-mount-targets --file-system-id ${filesystemid}`" = "" ] )
+                then
+                    status "There is no mount target for EFS filesystem ${filesystemid}"
+                    status "I will try to create one...."
+                    status "=============================================================="
+                fi
         
                 /usr/bin/aws efs create-mount-target --file-system-id ${filesystemid} --subnet-id ${SUBNET_ID} --security-group ${security_group_id} --region ${aws_region}
 
@@ -119,8 +126,10 @@ then
             fi
          done
 
-         status "You have elastic file systems available with the following identities"
-         status "`/usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + " " + .FileSystemId' | /bin/sed 's/\"//g'`"
+         status "You have elastic file systems available with the following identities and mount points"
+         status "  FILESYSTEMID       |         ID               |          NO MOUNT POINTS (must not be 0)"
+         status "=========================================================================================="
+         status "`/usr/bin/aws efs describe-file-systems | /usr/bin/jq '.FileSystems[] | .CreationToken + "      " + .FileSystemId + "      " + (.NumberOfMountTargets|tostring)' | /bin/sed 's/\"//g'`"
          status "Press <enter> to continue with the build"
          read x
     fi
