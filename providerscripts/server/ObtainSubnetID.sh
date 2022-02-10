@@ -96,11 +96,9 @@ then
                    read subnet_id1
                 done
             fi
-        fi
-             
-            export SUBNET_ID=${subnet_id}
-            export SUBNET_ID1=${subnet_id1}
-        fi
+        fi     
+        export SUBNET_ID=${subnet_id}
+        export SUBNET_ID1=${subnet_id1}
     else
         status "Please enter a subnet ID to use. Your available regions and subnets are:"
         status "REGIONS        SUBNETS           VPC"
