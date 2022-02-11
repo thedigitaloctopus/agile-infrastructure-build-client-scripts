@@ -597,7 +597,7 @@ SERVER_USER_PASSWORD="`/bin/cat /dev/urandom | /usr/bin/tr -dc 'a-zA-Z' | /usr/b
 . ${BUILD_HOME}/initscripts/InitialiseBuildChoice.sh
 . ${BUILD_HOME}/providerscripts/datastore/PersistBuildClientIP.sh
 export PRE_BUILD="1"
-. ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+. ${BUILD_HOME}/providerscripts/security/firewall/SetupNativeFirewall.sh
 
 /bin/rm ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/* 2>/dev/null
 
@@ -772,7 +772,7 @@ status "This script took `/bin/date -u -d @${runtime} +\"%T\"` to complete"
 
 status "Just making a final adjustment to your native firewalling system and then I will shutdown and you can reconnect to me using SSH"
 export PRE_BUILD="0"
-. ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+. ${BUILD_HOME}/providerscripts/security/firewall/SetupNativeFirewall.sh
 
 #Might be needed for the updates we applied at the start. The user can ssh onto the machie again and tail the logs to see what happened. 
 /usr/sbin/shutdown -r now
