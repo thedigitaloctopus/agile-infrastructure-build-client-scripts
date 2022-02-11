@@ -89,14 +89,14 @@ So,
   db-username="testdatabaseuser1"
   db-password="ghdbRtjh=g"
   
-  **db-type** can be: **"MySQL", "Postgres"**
-  **db-engine** can be: **"mysql", "postgresql"**
-  **region** can be: **us-east-1a,us-east-1b,us-east-1c,us-east-1d,us-east-1e,us-east-1f,us-west-2a,us-west-2b,us-west-2c,us-west-1a,us-west-1b,eu-west-1a,eu-west-1b,eu-west-1c,eu-central-1a,eu-central-1b,ap-southeast-1a,ap-southeast-1b,ap-southeast-2a,ap-southeast-2b,ap-southeast-2c,ap-northeast-1a,ap-northeast-1c,sa-east-1a,sa-east-1b,sa-east-1c,ap-south-1a,ap-south-1b**
-  **size** can be: **"db.t3.micro,db.t3.small,db.t3.medium,db.t3.large,db.t3.xlarge,db.t3.2xlarge"**
-  **db-name** can be a descriptive name for your database, for example, **"TestDatabase"** (note, must be no spaces in the db-name parameter)
-  **db-identifier** can be a unique string for your database, for example, **"testdb4"** 
-  **storage-capacity** disk storage capacity of your database, for example, **"20"** for 20GB
-  **db-username** the username for your database for example, **"testdatabaseuser1"**
-  **db-password** the password for your database for example, **"ghdbRtjh=g""**
+  **db-type** can be: **"MySQL", "Postgres"**  
+  **db-engine** can be: **"mysql", "postgresql"**  
+  **region** can be: **us-east-1a,us-east-1b,us-east-1c,us-east-1d,us-east-1e,us-east-1f,us-west-2a,us-west-2b,us-west-2c,us-west-1a,us-west-1b,eu-west-1a,eu-west-1b,eu-west-1c,eu-central-1a,eu-central-1b,ap-southeast-1a,ap-southeast-1b,ap-southeast-2a,ap-southeast-2b,ap-southeast-2c,ap-northeast-1a,ap-northeast-1c,sa-east-1a,sa-east-1b,sa-east-1c,ap-south-1a,ap-south-1b**  
+  **size** can be: **"db.t3.micro,db.t3.small,db.t3.medium,db.t3.large,db.t3.xlarge,db.t3.2xlarge"**  
+  **db-name** can be a descriptive name for your database, for example, **"TestDatabase"** (note, must be no spaces in the db-name parameter)  
+  **db-identifier** can be a unique string for your database, for example, **"testdb4"**   
+  **storage-capacity** disk storage capacity of your database, for example, **"20"** for 20GB  
+  **db-username** the username for your database for example, **"testdatabaseuser1"**  
+  **db-password** the password for your database for example, **"ghdbRtjh=g""**  
 
   
