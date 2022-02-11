@@ -209,6 +209,7 @@ then
         DATABASE_USERNAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $8}'`"
         DATABASE_PASSWORD="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $9}'`"
 
+
         vpc_id="`/usr/bin/aws ec2 describe-subnets | /usr/bin/jq '.Subnets[] | .SubnetId + " " + .VpcId' | /bin/sed 's/\"//g' | /bin/grep ${SUBNET_ID}  | /usr/bin/awk '{print $2}'`"
         security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
 
@@ -261,6 +262,7 @@ then
                         export DBaaS_USERNAME="${DATABASE_USERNAME}"
                         export DBaaS_PASSWORD="${DATABASE_PASSWORD}"
                         export DBaaS_DBNAME="${db_name}"
+                        export DATABASE_INSTALLATION_TYPE="DBaaS"
                    fi
                done
                status "Setting up and configuring your database, waiting for database endpoint to become available. Will try again in 30 seconds"
@@ -273,6 +275,15 @@ then
            status "DATABASE SUCCESSFULLY PROVISIONED WITH AN ENDPOINT OF: ${endpoint}"
            status "******************************************************************"
            status ""
+           status "The rest of the settings for your database are as follows:"
+           status "##########################################################"
+           status "USERNAME:${DBaaS_USERNAME}"
+           status "PASSWORD:${DBaaS_PASSWORD}"
+           status "PORT:${DB_PORT}"
+           status "DB NAME:${db_name}"
+           status "##########################################################"
+           status "If these settings look OK to you, press <enter>"
+           read response
        else
            status "Couldn't create your RDS database, please investigate your log files to find out why"
            exit
