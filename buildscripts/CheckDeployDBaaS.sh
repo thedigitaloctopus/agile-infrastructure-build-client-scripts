@@ -189,7 +189,6 @@ fi
 
 #########################################################################################################
 #DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:eu-west-1b:db.t3.micro:TestDatabase:testdb4:20:2035:testdatabaseuser1:ghdbRtjh=g"
-#DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mariadb:eu-west-1a:db.t3.micro:TestDatabase:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g"
 #DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:postgres:eu-west-1a:db.t3.micro:TestDatabase:testdb1:20:2035:testdatabaseuser1:ghdbRtjh=g"
 #########################################################################################################
 
