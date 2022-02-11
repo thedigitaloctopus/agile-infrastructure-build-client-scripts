@@ -6,7 +6,7 @@ The managed database you describe here will spin up automatically through the bu
 If you are using digital ocean managed databases you can set the following in your template or override
 
 ##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>:DBAAS:\<db-engine\>:\<region\>:\<size\>:\<db-version\>:\<cluster-name\>:\<db-name\>"  
-##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>"
+##### DATABASE_INSTALLATION_TYPE="DBaaS"
   
 So an example of this would be in your template or override:
 
@@ -40,7 +40,7 @@ So,
 If you are using exoscale managed databases you can set the following in your template or override
 
 ##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>:DBAAS:\<db-engine\>:\<region\>:\<size\>:\<db-name\>"  
-##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>"
+##### DATABASE_INSTALLATION_TYPE="DBaaS"
 
 So an example of this would be in your template or override:
 
@@ -62,7 +62,15 @@ So,
   ** region** can be **"ch-gva-2", "de-fra-1", "de-muc-1", "at-vie-1", "ch-dk-2", "bg-sof-1"**
   **size** can be **"hobbyist-1", startup-[4|8|16|32|64|128|255]", business-[4|8|16|32|64|128|255]", premium-[4|8|16|32|64|128|255]"**
   **db-name** can be a unique string for your database, for example, **"testdatabase"** 
- 
+  
+  ----------
+  
+  ### AWS
+  
+  If you are using AWS Managed Databases you can set the following in your template or override:
+  
+  ##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>:DBAAS:\<db-engine\>:\<region\>:\<size\>:\<db-name\>:\<db-identifier\>:\<storage-capacity\>:\<db-username\>:\<db-password\>"  
+  ##### DATABASE_INSTALLATION_TYPE="DBaaS"
   
   
   
