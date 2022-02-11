@@ -607,6 +607,8 @@ export PRE_BUILD="1"
 . ${BUILD_HOME}/providerscripts/server/ObtainSubnetID.sh
 . ${BUILD_HOME}/providerscripts/server/ProvisionElasticFS.sh
 
+. ${BUILD_HOME}/buildscripts/BuildAndDeployDBaaS.sh
+
 status "##############################################################################################"
 status "A recommended solution if you want to roll your own mail server with a custom domain for your"
 status "users' email addresses is to be found at: https://www.iredmail.org/"
