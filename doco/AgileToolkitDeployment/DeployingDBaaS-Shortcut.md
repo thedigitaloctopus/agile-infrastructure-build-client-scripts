@@ -25,7 +25,7 @@ db-name="testdb1"
   
 So,  
   
-  **db-type** can be: **"Maria", "MySQL", "Postgres"**  
+  **db-type** can be: **"MySQL", "Postgres"**  
   **db-engine** can be **"mysql", "pg"**  
   **region** can be **"nyc1, sfo1, nyc2, ams2, sgp1, lon1, nyc3, ams3, fra1, tor1, sfo2, blr1, sfo3"**  
   **size** can be **"db-s-1vcpu-1gb", "db-s-1vcpu-2gb", "db-s-1vcpu-3gb", "db-s-2vcpu-4gb", "db-s-4vcpu-8gb", "db-s-8vcpu-16gb", "db-s-8vcpu-32gb"**  
@@ -57,9 +57,9 @@ db-name="testdb1"
 
 So,
   
-  **db-type** can be: **"Maria", "MySQL", "Postgres"**  
+  **db-type** can be: **"MySQL", "Postgres"**  
   **db-engine** can be **"mysql", "pg"**
-  ** region** can be **"ch-gva-2", "de-fra-1", "de-muc-1", "at-vie-1", "ch-dk-2", "bg-sof-1"**
+  **region** can be **"ch-gva-2", "de-fra-1", "de-muc-1", "at-vie-1", "ch-dk-2", "bg-sof-1"**
   **size** can be **"hobbyist-1", startup-[4|8|16|32|64|128|255]", business-[4|8|16|32|64|128|255]", premium-[4|8|16|32|64|128|255]"**
   **db-name** can be a unique string for your database, for example, **"testdatabase"** 
   
@@ -72,6 +72,21 @@ So,
   ##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>:DBAAS:\<db-engine\>:\<region\>:\<size\>:\<db-name\>:\<db-identifier\>:\<storage-capacity\>:\<db-username\>:\<db-password\>"  
   ##### DATABASE_INSTALLATION_TYPE="DBaaS"
   
+  So an example of this would be in your template or override:
+
+ 1. DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:eu-west-1b:db.t3.micro:TestDatabase:testdb4:20:testdatabaseuser1:ghdbRtjh=g"
+ 2. DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:postgres:eu-west-1a:db.t3.micro:TestDatabase:testdb1:20:testdatabaseuser1:ghdbRtjh=g"
   
+  So, for the first example: 
+  
+  db-type="MySQL"
+  db-engine="mysql"
+  region="eu-west-1b"
+  size="db.t3.micro"
+  db-name="TestDatabase"
+  db-identifier="testdb4"
+  storage-capacity="20"
+  db-username="testdatabaseuser1"
+  db-password="ghdbRtjh=g"
   
   
