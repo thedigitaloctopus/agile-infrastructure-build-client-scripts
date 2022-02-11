@@ -278,7 +278,7 @@ export BUILD_CLIENT_IP="`/usr/bin/wget http://ipinfo.io/ip -qO -`"
 . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
 . ${BUILD_HOME}/providerscripts/datastore/PersistBuildClientIP.sh
 export PRE_BUILD="1"
-. ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+. ${BUILD_HOME}/providerscripts/security/firewall/SetupNativeFirewall.sh
 
 #Set a username and password which we can set on all our servers. Once the machines are built, password authentication is
 #switched off and you can find some ssh key based helper scripts here that will enable you to authenticate to your machines.
@@ -391,7 +391,7 @@ status "This script took `/bin/date -u -d @${runtime} +\"%T\"` to complete"
 
 status "Just making a final adjustment to your native firewalling system and then I will shutdown and you can reconnect to me using SSH"
 export PRE_BUILD="0"
-. ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
+. ${BUILD_HOME}/providerscripts/security/firewall/SetupNativeFirewall.sh
 
 #Might be needed for the updates we applied at the start. The user can ssh onto the machie again and tail the logs to see what happened. 
 /usr/sbin/shutdown -r now
