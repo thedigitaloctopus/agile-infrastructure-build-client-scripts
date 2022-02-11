@@ -95,7 +95,7 @@ then
         ${BUILD_HOME}/installscripts/InstallSudo.sh "${buildos}"
         ${BUILD_HOME}/installscripts/InstallJQ.sh "${buildos}"
         ${BUILD_HOME}/installscripts/InstallAWSCLI.sh "${buildos}"
-        ${BUILD_HOME}/installscripts/InstallAWSCLI53.sh "${buildos}"
+     #   ${BUILD_HOME}/installscripts/InstallAWSCLI53.sh "${buildos}"
     fi
 fi
 
