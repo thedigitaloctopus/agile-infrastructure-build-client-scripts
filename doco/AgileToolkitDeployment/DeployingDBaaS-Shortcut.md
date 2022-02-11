@@ -74,20 +74,20 @@ So,
   
   So an example of this would be in your template or override:
 
- 1. DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:eu-west-1b:db.t3.micro:TestDatabase:testdb4:20:testdatabaseuser1:ghdbRtjh=g"
- 2. DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:postgres:eu-west-1a:db.t3.micro:TestDatabase:testdb1:20:testdatabaseuser1:ghdbRtjh=g"
+ 1. DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:eu-west-1b:db.t3.micro:TestDatabase:testdb4:20:testdatabaseuser1:ghdbRtjh=g"  
+ 2. DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:postgres:eu-west-1a:db.t3.micro:TestDatabase:testdb1:20:testdatabaseuser1:ghdbRtjh=g"  
   
-  So, for the first example: 
+  So, for the first example:  
   
-  db-type="MySQL"
-  db-engine="mysql"
-  region="eu-west-1b"
-  size="db.t3.micro"
-  db-name="TestDatabase"
-  db-identifier="testdb4"
-  storage-capacity="20"
-  db-username="testdatabaseuser1"
-  db-password="ghdbRtjh=g"
+  db-type="MySQL"  
+  db-engine="mysql"  
+  region="eu-west-1b"  
+  size="db.t3.micro"  
+  db-name="TestDatabase"  
+  db-identifier="testdb4"  
+  storage-capacity="20"  
+  db-username="testdatabaseuser1"  
+  db-password="ghdbRtjh=g"  
   
   **db-type** can be: **"MySQL", "Postgres"**  
   **db-engine** can be: **"mysql", "postgresql"**  
