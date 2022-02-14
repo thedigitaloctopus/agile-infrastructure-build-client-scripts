@@ -370,6 +370,11 @@ else
 
     ##Do the build finalisation procedures
     . ${BUILD_HOME}/buildscripts/FinaliseBuildProcessing.sh
+    
+    status "Just making a final adjustment to your native firewalling system , please wait...."
+    export PRE_BUILD="0"
+    . ${BUILD_HOME}/providerscripts/security/firewall/SetupNativeFirewall.sh
+
     #If we have any messages to put out to the user post build, we add them to this script
     . ${BUILD_HOME}/PostProcessingMessages.sh
     
@@ -390,10 +395,6 @@ fi
 end=`/bin/date +%s`
 runtime="`/usr/bin/expr ${end} - ${start}`"
 status "This script took `/bin/date -u -d @${runtime} +\"%T\"` to complete"
-
-status "Just making a final adjustment to your native firewalling system and then I will shutdown and you can reconnect to me using SSH"
-export PRE_BUILD="0"
-. ${BUILD_HOME}/providerscripts/security/firewall/SetupNativeFirewall.sh
 
 #Might be needed for the updates we applied at the start. The user can ssh onto the machie again and tail the logs to see what happened. 
 /usr/sbin/shutdown -r now
