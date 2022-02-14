@@ -138,7 +138,7 @@ then
     exit
 fi
 
-. ${BUILD_HOME}/SelectDeploymentOS.sh
+#. ${BUILD_HOME}/SelectDeploymentOS.sh
 
 #If this is set, the user who ran it previously, then we know that this is not our first time running the script
 if ( [ ! -f ${BUILD_HOME}/runtimedata/INSTALLUSER ] )
