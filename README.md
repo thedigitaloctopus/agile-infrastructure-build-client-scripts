@@ -26,9 +26,9 @@ If you find any issues with this toolkit, please open an issue under "issues" on
 
 ------------------------------------
 
-#### QUICK START
+#### GETTING STARTED
 
-To get started as quickly as possible before going into more depth, you can use one of these methods: [Template Overrides](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides.md)
+Detailed tutorials for this toolkit arranged by provider are available [here](https://www.codebreakers.uk/tutorials)
 
 ------------------------
 
@@ -47,9 +47,7 @@ The full set of services that are supported by the core of the toolkit and which
 
 --------------------------------
 
-#### BUILD METHODS
-
-**Detailed tutorials for how to use this toolkit are available here: [Tutorials](https://www.codebreakers.uk/tutorials)**
+#### BUILD METHODS OVERVIEW
 
 There are three types of build method you can employ to get a functioning application. These are the hardcore build, the expedited build and the full build. There's pluses and minuses to all of them. The quick build and the expedited build you need to understand how the toolkit is working by studying the spec to find out what each parameter of your startup script is doing and making direct template modifications. The Expedited build shortcuts the full build process such that you have to deploy (and secure) a build machine VPS and then, clone the toolkit and provide a limited set of parameters to the **ExpeditedAgileDeploymenToolkit.sh** script. The final way is the full build where you will need to understand the toolkit the least but it means that you will be prompted for every parameter that the toolkit needs. For me I tend to use the expedited method, but to begin with you **might** want to fire up (and secure) a dedicated build machine with your VPS provider and run the full build with an eye to the [specification](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/specification.md) of course. 
 
