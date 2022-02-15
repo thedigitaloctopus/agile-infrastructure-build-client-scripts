@@ -15,13 +15,13 @@ So an example of this would be in your template or override:
 
 So, for the first example:  
   
-db-type="MySQL"
-db-engine="mysql"
-region="lon1"
-size="db-s-1vcpu-1gb"
-db-version="8"  (mysql 8)
-cluster-name="testdbcluster1"
-db-name="testdb1"
+db-type="MySQL"  
+db-engine="mysql"  
+region="lon1"  
+size="db-s-1vcpu-1gb"  
+db-version="8"  (mysql 8)  
+cluster-name="testdbcluster1"  
+db-name="testdb1"  
   
 So,  
   
