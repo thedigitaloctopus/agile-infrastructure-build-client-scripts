@@ -177,8 +177,13 @@ then
     export DB_PORT="`/usr/bin/exo -O json dbaas show -z ${DATABASE_REGION} ${DATABASE_NAME} | /usr/bin/jq ".${DATABASE_ENGINE}.uri_params.port" | /bin/sed 's/\"//g'`"
 
     #Open up fully until we are installed and then tighten up the firewall
-    /usr/bin/exo dbaas update -z ${DATABASE_REGION} ${DATABASE_NAME} --mysql-ip-filter="0.0.0.0/0"
-
+    if ( [ "`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/grep Postgres`" = "" ] )
+    then 
+        /usr/bin/exo dbaas update -z ${DATABASE_REGION} ${DATABASE_NAME} --mysql-ip-filter="0.0.0.0/0"
+    else
+        /usr/bin/exo dbaas update -z ${DATABASE_REGION} ${DATABASE_NAME} --pg-ip-filter="0.0.0.0/0"
+    fi
+    
     status "The Values I have retrieved for your database setup are:"
     status "##########################################################"
     status "HOSTNAME:${DBaaS_HOSTNAME}"
