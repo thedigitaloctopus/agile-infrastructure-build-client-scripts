@@ -65,17 +65,18 @@ So,
   
   ----------
   
-  ### AWS
+  ### AWS  
   
-  If you are using AWS Managed Databases you can set the following in your template or override:
+  If you are using AWS Managed Databases you can set the following in your template or override:  
   
   ##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>:DBAAS:\<db-engine\>:\<region\>:\<size\>:\<db-name\>:\<db-identifier\>:\<storage-capacity\>:\<db-username\>:\<db-password\>"  
-  ##### DATABASE_INSTALLATION_TYPE="DBaaS"
+  ##### DATABASE_INSTALLATION_TYPE="DBaaS"  
   
-  So an example of this would be in your template or override:
+  So an example of this would be in your template or override:  
 
- 1. DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:eu-west-1b:db.t3.micro:TestDatabase:testdb4:20:testdatabaseuser1:ghdbRtjh=g"  
- 2. DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:postgres:eu-west-1a:db.t3.micro:TestDatabase:testdb1:20:testdatabaseuser1:ghdbRtjh=g"  
+ 1. DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:eu-west-1b:db.t3.micro:TestDatabase:testdb:20:testdatabaseuser1:ghdbRtjh=g"  
+ 2. DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mariadb:eu-west-1b:db.t3.micro:TestDatabase:testdb:20:testdatabaseuser1:ghdbRtjh=g"   
+ 3. DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:postgres:eu-west-1a:db.t3.micro:TestDatabase:testdb:20:testdatabaseuser1:ghdbRtjh=g"  
   
   So, for the first example:  
   
@@ -87,11 +88,12 @@ So,
   db-identifier="testdb4"  
   storage-capacity="20"  
   db-username="testdatabaseuser1"  
-  db-password="ghdbRtjh=g"  
+  db-password="ghdbRtjh=g"
   
   **db-type** can be: **"MySQL", "Postgres"**  
   **db-engine** can be: **"mysql", "postgresql"**  
-  **region** can be: **us-east-1a,us-east-1b,us-east-1c,us-east-1d,us-east-1e,us-east-1f,us-west-2a,us-west-2b,us-west-2c,us-west-1a,us-west-1b,eu-west-1a,eu-west-1b,eu-west-1c,eu-central-1a,eu-central-1b,ap-southeast-1a,ap-southeast-1b,ap-southeast-2a,ap-southeast-2b,ap-southeast-2c,ap-northeast-1a,ap-northeast-1c,sa-east-1a,sa-east-1b,sa-east-1c,ap-south-1a,ap-south-1b**  
+  **region** can be:  
+  **us-east-1a,us-east-1b,us-east-1c,us-east-1d,us-east-1e,us-east-1f,us-west-2a,us-west-2b,us-west-2c,us-west-1a,us-west-1b,eu-west-1a,eu-west-1b,eu-west-1c,eu-central-1a,eu-central-1b,ap-southeast-1a,ap-southeast-1b,ap-southeast-2a,ap-southeast-2b,ap-southeast-2c,ap-northeast-1a,ap-northeast-1c,sa-east-1a,sa-east-1b,sa-east-1c,ap-south-1a,ap-south-1b**  
   **size** can be: **"db.t3.micro,db.t3.small,db.t3.medium,db.t3.large,db.t3.xlarge,db.t3.2xlarge"**  
   **db-name** can be a descriptive name for your database, for example, **"TestDatabase"** (note, must be no spaces in the db-name parameter)  
   **db-identifier** can be a unique string for your database, for example, **"testdb4"**   
