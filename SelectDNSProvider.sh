@@ -246,7 +246,6 @@ then
             /bin/echo "${DNS_USERNAME}" > ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-linode-credentials/DNSUSERNAME
         fi
     fi
-fi
 elif ( [ "${choice}" = "5" ] )
 then
     DNS_CHOICE="vultr"
