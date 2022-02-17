@@ -186,19 +186,6 @@ then
     
     . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
     
-    status "This provider has a firewalling system. Before going on with the build, please make sure that you have set the following rules for the firewall"
-    status "By going to the GUI for Exoscale and selecting Compute -> Firewall and entering all the following rules"
-    status "INGRESS TCP CIDR 0.0.0.0/0 TCP 22 - 22"
-    status "INGRESS TCP CIDR 0.0.0.0/0 TCP ${SSH_PORT} - ${SSH_PORT}"
-    status "INGRESS TCP CIDR 0.0.0.0/0 TCP ${DB_PORT} - ${DB_PORT}"
-    status "INGRESS TCP CIDR 0.0.0.0/0 TCP 443 - 443"
-    status "INGRESS TCP CIDR 0.0.0.0/0 TCP 80 - 80"
-    status "Once these rules are set, you are ready to rock"
-    status "We have our own firewall which will be more restrictive. We are quite open here just so that we know"
-    status "That all the ports our different machine types can use are not blocked here"
-    status "Further restrictions apply on a machine by machine basis using the uncomplicated firewall tool ufw"
-    status "Press <enter> to continue"
-    read answer
 
     if ( [ "${BUILDOS}" = "ubuntu" ] )
     then
@@ -467,13 +454,7 @@ then
     . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
 
     export VULTR_API_KEY="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/TOKEN`"
-    status "#########################################################################################################################"
-    status "OK, your cloudhost is set to vultr"
-    status "For this cloudhost, you need to whitelist the API of the machine you are running this build on"
-    status "You can do this by going to https://my.vultr.com/settings/#settingsapi and entering `/bin/ip route get 8.8.8.8 | head -1 | cut -d' ' -f7`"
-    status "#########################################################################################################################"
-    status "Press enter when this is done. Failure to have the ip address of the build client whitelisted will cause the build to fail"
-    read response
+
 
     #Vultr supports snapshots, so we offer that as a choice. With autoscaling using snapshots, new webservers
     #will be built using a snapshot rather than a fresh build using repositories and so on. It's probably faster like
