@@ -15,8 +15,6 @@
 # If you are building for NGINX you can select one of:
 # NGINX:source
 # NGINX:repo
-# NGINX:source:modsecurity
-# NGINX:repo:modsecurity
 #(NGINX is configured to have similar functionality to mod_evasive of apache by default)
 # If you are building for APACHE you can select one of:
 # APACHE:source
