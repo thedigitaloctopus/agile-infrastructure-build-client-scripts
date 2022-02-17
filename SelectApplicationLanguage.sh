@@ -54,7 +54,7 @@ then
     while ( [ "`/bin/echo '7.0 7.1 7.2 7.3 7.4 8.0' | /bin/grep ${PHP_VERSION}`" = "" ] )
     do
         status "Sorry, that's not a valid selection, please try again"
-        status "Please enter one of 7.0 7.1 7.2 7.3 7.4 8.0"
+        status "Please enter one of 7.0 7.1 7.2 7.3 7.4 8.0 8.1"
         read PHP_VERSION
     done
     
