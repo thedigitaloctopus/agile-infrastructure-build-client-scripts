@@ -49,6 +49,8 @@ status "Please enter one of:"
 status "0: to not install an application "
 status "or 1: a customised joomla based application"
 status "or 2: a customised wordpress based application"
+status "or 3: a customised drupal based application"
+status "or 4: a customised moodle based application"
 status "##################################################################################################"
 
 response=""
