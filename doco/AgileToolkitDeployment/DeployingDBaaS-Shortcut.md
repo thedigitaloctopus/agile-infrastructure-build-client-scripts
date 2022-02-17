@@ -60,7 +60,7 @@ So,
   **db-type** can be: **"MySQL", "Postgres"**  
   **db-engine** can be **"mysql", "pg"**  
   **region** can be **"ch-gva-2", "de-fra-1", "de-muc-1", "at-vie-1", "ch-dk-2", "bg-sof-1"**  
-  **size** can be **"hobbyist-1", startup-[4|8|16|32|64|128|255]", business-[4|8|16|32|64|128|255]", premium-[4|8|16|32|64|128|255]"**  
+  **size** can be **"startup-[4|8|16|32|64|128|255]", business-[4|8|16|32|64|128|255]", premium-[4|8|16|32|64|128|255]"**  
   **db-name** can be a unique string for your database, for example, **"testdatabase"**  
   
   ----------
