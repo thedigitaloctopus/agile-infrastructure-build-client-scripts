@@ -746,30 +746,30 @@ else
 
     ##Do the build finalisation procedures
     . ${BUILD_HOME}/buildscripts/FinaliseBuildProcessing.sh
-    
-    status "Just making a final adjustment to your native firewalling system , please wait...."
-    export PRE_BUILD="0"
-    . ${BUILD_HOME}/providerscripts/security/firewall/SetupNativeFirewall.sh
-
-    #If we have any messages to put out to the user post build, we add them to this script
-    . ${BUILD_HOME}/PostProcessingMessages.sh
-
-    #We inform the users of their credentials. Sometimes, depending on the application, the user needs to know more or less
-    #Some applications we can configure for use behind the scenes, other times, the user has to do some stuff in the gui to
-    #get to the point where the application can be used. In the later case, any additional information will be added here.
-
-    status ""
-    status "###################################################################################################################"
-    status "IMPORTANT, THE USERNAME FOR YOUR SERVERS IS: ${SERVER_USER}"
-    status "THE PASSWORD FOR YOUR SERVERS IS: ${SERVER_USER_PASSWORD}"
-    status "CONSIDER ANY COMPROMISE OF THESE CREDENTIALS AS POTENTIALLY GIVING ROOT ACCESS TO YOUR SERVERS. KEEP THEM VERY SECURE"
-    status "A COPY OF THESE CREDENTIALS IS STORED IN:"
-    status "SERVER USERNAME :  ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER"
-    status "SERVER PASSWORD :  ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSERPASSWORD"
-    status "###################################################################################################################"
-    status "That should be your application built and online."
-    status "OK, have fun with it...."
 fi
+    
+status "Just making a final adjustment to your native firewalling system , please wait...."
+export PRE_BUILD="0"
+. ${BUILD_HOME}/providerscripts/security/firewall/SetupNativeFirewall.sh
+
+#If we have any messages to put out to the user post build, we add them to this script
+. ${BUILD_HOME}/PostProcessingMessages.sh
+
+#We inform the users of their credentials. Sometimes, depending on the application, the user needs to know more or less
+#Some applications we can configure for use behind the scenes, other times, the user has to do some stuff in the gui to
+#get to the point where the application can be used. In the later case, any additional information will be added here.
+
+status ""
+status "###################################################################################################################"
+status "IMPORTANT, THE USERNAME FOR YOUR SERVERS IS: ${SERVER_USER}"
+status "THE PASSWORD FOR YOUR SERVERS IS: ${SERVER_USER_PASSWORD}"
+status "CONSIDER ANY COMPROMISE OF THESE CREDENTIALS AS POTENTIALLY GIVING ROOT ACCESS TO YOUR SERVERS. KEEP THEM VERY SECURE"
+status "A COPY OF THESE CREDENTIALS IS STORED IN:"
+status "SERVER USERNAME :  ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSER"
+status "SERVER PASSWORD :  ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSERPASSWORD"
+status "###################################################################################################################"
+status "That should be your application built and online."
+status "OK, have fun with it...."
 
 #Output how long the build took
 end=`/bin/date +%s`
