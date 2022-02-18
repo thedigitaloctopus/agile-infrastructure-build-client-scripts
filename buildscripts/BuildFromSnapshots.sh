@@ -363,7 +363,7 @@ then
     #Refresh all our ip addresses and so on
 #    /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${DBIP} "${SUDO} /bin/touch /home/${FULL_SNAPSHOT_ID}/.ssh/BUILDARCHIVECHOICE:${BUILD_ARCHIVE_CHOICE} /home/${FULL_SNAPSHOT_ID}/.ssh/BUILDCLIENTIP:${BUILD_CLIENT_IP} /home/${FULL_SNAPSHOT_ID}/.ssh/ASIP:${ASIP_PRIVATE} /home/${FULL_SNAPSHOT_ID}/.ssh/ASPUBLICIP:${ASIP} /home/${FULL_SNAPSHOT_ID}/.ssh/MYPUBLICIP:${DBIP} /home/${FULL_SNAPSHOT_ID}/.ssh/MYIP:${DBIP_PRIVATE} /home/${FULL_SNAPSHOT_ID}/.ssh/WSIP:${WSIP_PRIVATE}  "
 
-   /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${DBIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDCLIENTIP\" \"${BUILD_CLIENT_IP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDARCHIVECHOICE\" \"${BUILD_ARCHIVE_CHOICE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIP\" \"${ASIP_PRIVATE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASPUBLICIP\" \"${ASIP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"MYPUBLICIP\" \"${DBIP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"MYIP\" \"${DBIP_PRIVATE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"WSIP\" \"${WSIP_PRIVATE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"WSPUBLICIP\" \"${WSIP}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIPS\" \"${ASIPS}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIP_PRIVATES\" \"${ASIP_PRIVATES}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DATABASEINSTALLATIONTYPE\" \"${DATABASE_INSTALLATION_TYPE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSHOSTNAME\" \"${DBaaS_HOSTNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSDBNAME\" \"${DBaaS_DBNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSHOSTNAME\" \"${DBaaS_HOSTNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSUSERNAME\" \"${DBaaS_USERNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSPASSWORD\" \"${DBaaS_PASSWORD}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DATABASEDBaaSINSTALLATIONTYPE\" \"${DATABASE_DBaaS_INSTALLATION_TYPE}\""
+   /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${DBIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDCLIENTIP\" \"${BUILD_CLIENT_IP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDARCHIVECHOICE\" \"${BUILD_ARCHIVE_CHOICE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIP\" \"${ASIP_PRIVATE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASPUBLICIP\" \"${ASIP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"MYPUBLICIP\" \"${DBIP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"MYIP\" \"${DBIP_PRIVATE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"WSIP\" \"${WSIP_PRIVATE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"WSPUBLICIP\" \"${WSIP}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIPS\" \"${ASIPS}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIP_PRIVATES\" \"${ASIP_PRIVATES}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DATABASEINSTALLATIONTYPE\" \"${DATABASE_INSTALLATION_TYPE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSDBNAME\" \"${DBaaS_DBNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSHOSTNAME\" \"${DBaaS_HOSTNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSUSERNAME\" \"${DBaaS_USERNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSPASSWORD\" \"${DBaaS_PASSWORD}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DATABASEDBaaSINSTALLATIONTYPE\" \"${DATABASE_DBaaS_INSTALLATION_TYPE}\""
    
 
     #This will refresh the private networking including the renewal of the firewall rules as the ip addresses have changed
@@ -389,6 +389,25 @@ then
     done
 fi
 
+#Check that the configuration directory is mounted
+while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/mount | /bin/grep '/home/${FULL_SNAPSHOT_ID}/config'"`" = "" ] )
+do
+    status "Wating for the configuration directory to be mounted...."
+    /bin/sleep 30
+done
+
+#Check that the configuration directory is mounted
+while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/ls /home/${FULL_SNAPSHOT_ID}/config/credentials/shit"`" = "" ] )
+do
+    status "Wating for the database credentials to be available...."
+    /bin/sleep 30
+done
+
+if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
+then
+    /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${DBIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreDatabaseCredentials.sh \"DBaaSNAME\" \"${DBaaS_DBNAME}\" \"DBaaSUSERNAME\" \"${DBaaS_USERNAME}\" \"DBaaSPASSWORD\" \"${DBaaS_PASSWORD}\""
+fi
+
 # A snapshot might have been made weeks ago and there's been some application modifications or new data is in the database.
 # We want to sync, therefore with our latest db backups and repos. Note if the snapshot is generated during a baseline build
 # then, when we rerun the config process, we need to select an hourly backup, for example, to sync here with our hourly backup repo/db
@@ -402,11 +421,7 @@ fi
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${DBIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDARCHIVECHOICE\" \"${BUILD_ARCHIVE_CHOICE}\""
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${DBIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/applicationdb/InstallApplicationDB.sh force"
 
-while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/mount | /bin/grep '/home/${FULL_SNAPSHOT_ID}/config'"`" = "" ] )
-do
-    status "Wating for the configuration directory to be mounted...."
-    /bin/sleep 30
-done
+
 
 /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/rm -rf /home/${FULL_SNAPSHOT_ID}/config/autoscalerip/* /home/${FULL_SNAPSHOT_ID}/config/autoscalerpublicip/* /home/${FULL_SNAPSHOT_ID}/config/beingbuiltips/* /home/${FULL_SNAPSHOT_ID}/config/bootedwebserverips/* /home/${FULL_SNAPSHOT_ID}/config/databaseip/* /home/${FULL_SNAPSHOT_ID}/config/databasepublicip/* /home/${FULL_SNAPSHOT_ID}/config/lowcpuaudit/* /home/${FULL_SNAPSHOT_ID}/config/lowdiskaudit/* /home/${FULL_SNAPSHOT_ID}/config/lowmemoryaudit/* /home/${FULL_SNAPSHOT_ID}/config/shuttingdownwebserverips/* /home/${FULL_SNAPSHOT_ID}/config/webrootsynctunnel/* /home/${FULL_SNAPSHOT_ID}/config/webserverips/* /home/${FULL_SNAPSHOT_ID}/config/webserverpublicips/* /home/${FULL_SNAPSHOT_ID}/runtime/*lock*"
 
