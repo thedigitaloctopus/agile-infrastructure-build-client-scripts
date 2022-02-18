@@ -391,14 +391,14 @@ fi
 #Check that the configuration directory is mounted
 while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/mount | /bin/grep '/home/${FULL_SNAPSHOT_ID}/config'"`" = "" ] )
 do
-    status "Wating for the configuration directory to be mounted...."
+    status "Waiting for the configuration directory to be mounted...."
     /bin/sleep 30
 done
 
 #Check that the configuration directory is mounted
 while ( [ "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/ls /home/${FULL_SNAPSHOT_ID}/config/credentials/shit"`" = "" ] )
 do
-    status "Wating for the database credentials to be available...."
+    status "Waiting for the database credentials to be available...."
     /bin/sleep 30
 done
 
