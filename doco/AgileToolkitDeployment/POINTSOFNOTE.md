@@ -61,4 +61,6 @@ Vultr, for example, only allows one firewall per server with a 50 rules limit. T
 
 22. This toolkit is entended to by used in such a way that managed DBs are only used when making PRODUCTION deployments. When you are in development mode it is expected that you will use the database that these scripts install on your VPS servers. 
 
+23. This toolkit supports Postgres database installs for some CMS systems. I just did some testing with joomla extensions and it seems like Postgres support is not as common as mysql support is (which is the default). Therefore it is recommended for maximum compatibility to use mysql rather than postgres (with the Joomla CMS at least). 
+
 
