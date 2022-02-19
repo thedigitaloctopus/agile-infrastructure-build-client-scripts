@@ -59,4 +59,6 @@ Vultr, for example, only allows one firewall per server with a 50 rules limit. T
 
 21. When you deploy using snapshots you will need to deploy using the same build machine configuration that the snapshot was built with. You can do this either by always deploying from the same build machine or by using a backup of the build machine that the snapshot was generated from by following: [Backup Build Machine](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/doco/AgileToolkitDeployment/RetrievingBuildMachineBackup.md)
 
+22. This toolkit is entended to by used in such a way that managed DBs are only used when making PRODUCTION deployments. When you are in development mode it is expected that you will use the database that these scripts install on your VPS servers. 
+
 
