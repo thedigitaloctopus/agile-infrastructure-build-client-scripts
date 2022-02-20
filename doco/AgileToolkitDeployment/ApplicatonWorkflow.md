@@ -6,13 +6,14 @@ IN DEVELOPMENT MODE:
 2. Modify the virgin copy of your CMS system to create a bespoke application  
 3. Once you are happy with your bespoke application create a baseline of it using (on your build machine):    
   
-**${BUILD_HOME}/helperscripts/PerformWebsiteBaseline.sh** and **${BUILD_HOME}/helperscripts/PerformDatabaseBaseline.sh**  
+**${BUILD_HOME}/helperscripts/PerformWebsiteBaseline.sh** and **${BUILD_HOME}/helperscripts/PerformDatabaseBaseline.sh** 
+  
 4. Take the servers that are currently deployed offline (shut them down and destroy them)  
 5. Deploy (for testing purposes as well as workflow purposes) from the baseline that you have created in 3.  
 6. Once the baseline is deployed to your custom url, make a temporal backup of it (hourly, weekly etc.) using (on your build machine): 
   
-**${BUILD_HOME}/helperscripts/PerformWebsiteBackup.sh** and **${BUILD_HOME}/helperscripts/PerformDatabaseBackup.sh**  
-
+**${BUILD_HOME}/helperscripts/PerformWebsiteBackup.sh** and **${BUILD_HOME}/helperscripts/PerformDatabaseBackup.sh**    
+  
 IN PRODUCTION MODE:  
 
 1. Deploy from the temporal backup that you made in 7. above. You have a choice you can   
