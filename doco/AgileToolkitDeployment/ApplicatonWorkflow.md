@@ -23,23 +23,23 @@ and
 
 **NOTE 1:** It is essential that your APPLICATION_IDENTIFIER is set when you are making a backup or a baseline.  
     
-The APPLICATIONIDENTIFIER should be set to 1 if your application is Joomla based  
-The APPLICATIONIDENTIFIER should be set to 2 if your application is Wordpress based  
-The APPLICATIONIDENTIFIER should be set to 3 if your application is Drupal based  
-The APPLICATIONIDENTIFIER should be set to 4 if your application is Moodle based  
+The **APPLICATIONIDENTIFIER** should be set to **1** if your application is **Joomla** based  
+The **APPLICATIONIDENTIFIER** should be set to **2** if your application is **Wordpress** based  
+The **APPLICATIONIDENTIFIER** should be set to **3** if your application is **Drupal** based  
+The **APPLICATIONIDENTIFIER** should be set to **4** if your application is **Moodle** based  
 
 If it is not set correctly you can modify it by executing the following scripts on your webserver machine and the database machine from the build machine:  
     
 **cd ${BUILD_HOME}/helperscripts/**  
 
-**./ExecuteOnWebserver.sh "/home/${SERVER_USERNAME}/providerscripts/utilities/StoreConfigValue.sh \"APPLICATIONIDENTIFIER\" \"(1|2|3|4)\""**
+**./ExecuteOnWebserver.sh "/home/${SERVER_USERNAME}/providerscripts/utilities/StoreConfigValue.sh \"APPLICATIONIDENTIFIER\" \"(1|2|3|4)\""**  
     
-Alternatively, you can simply use "ConnectToWebserver.sh" and "ConnectToDatabase.sh" and change the value of "APPLICATIONIDENTIFIER" to "(1|2|3|4)" in the files:
+Alternatively, you can simply use **"ConnectToWebserver.sh"** and **"ConnectToDatabase.sh"** and change the value of **"APPLICATIONIDENTIFIER"** to **"(1|2|3|4)"** in the files:  
     
-**/home/${SERVER_USERNAME}/.ssh/webserver_configuration_settings.dat**
+**/home/${SERVER_USERNAME}/.ssh/webserver_configuration_settings.dat**  
     
 and  
     
-**/home/${SERVER_USERNAME}/.ssh/database_configuration_settings.dat**
+**/home/${SERVER_USERNAME}/.ssh/database_configuration_settings.dat**  
 
 **NOTE 2:** you can also make special "manual" backups which means you can take a backup at any time and it will be stored in a repository marked, "manual". 
