@@ -34,12 +34,24 @@ If it is not set correctly you can modify it by executing the following scripts 
 
 **./ExecuteOnWebserver.sh "/home/${SERVER_USERNAME}/providerscripts/utilities/StoreConfigValue.sh \"APPLICATIONIDENTIFIER\" \"(1|2|3|4)\""**  
     
-Alternatively, you can simply use **"ConnectToWebserver.sh"** and **"ConnectToDatabase.sh"** and change the value of **"APPLICATIONIDENTIFIER"** to **"(1|2|3|4)"** in the files:  
-    
-**/home/${SERVER_USERNAME}/.ssh/webserver_configuration_settings.dat**  
-    
-and  
-    
-**/home/${SERVER_USERNAME}/.ssh/database_configuration_settings.dat**  
-
 **NOTE 2:** you can also make special "manual" backups which means you can take a backup at any time and it will be stored in a repository marked, "manual". 
+
+**APPLICATION WORKFLOW SUMMARY**
+
+IN DEVELOPMENT MODE:  
+
+1. Deploy a virgin copy of your chosen CMS system    
+2. Modify the virgin copy of your CMS system to create a bespoke application  
+3. Once you are happy with your bespoke application create a baseline of it using (on your build machine):    
+**${BUILD_HOME}/helperscripts/PerformWebsiteBaseline.sh** and **${BUILD_HOME}/helperscripts/PerformDatabaseBaseline.sh**  
+4. Take the servers that are currently deployed offline (shut them down and destroy them)  
+5. Deploy (for testing purposes as well as workflow purposes) from the baseline that you have created in 3.  
+6. Once the baseline is deployed to your custom url, make a temporal backup of it (hourly, weekly etc.) using (on your build machine):  
+**${BUILD_HOME}/helperscripts/PerformWebsiteBackup.sh** and **${BUILD_HOME}/helperscripts/PerformDatabaseBackup.sh**  
+
+IN PRODUCTION MODE:  
+
+1. Deploy from the temporal backup that you made in 7. above. You have a choice you can   
+    a. Choose to make snasphots of the machines as they deploy  
+    b. Just be done with it and not bother using snapshots in which case this is your "live" deployment and you can start onboarding users. Autoscaled webservers will take longer to provision using this technique but, if you are happy with that (your application doesn't need rapid scaling) that's fine.  
+2. If you made snapshots of your machines, then, you need to take those servers you provisioned the snapshots from offline (shutdown and destroy them) and redeploy using the snapshots previously generated (in step a above).   
