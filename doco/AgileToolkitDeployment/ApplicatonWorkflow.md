@@ -38,6 +38,8 @@ If it is not set correctly you can modify it by executing the following scripts 
 
 **./ExecuteOnWebserver.sh "/home/${SERVER_USERNAME}/providerscripts/utilities/StoreConfigValue.sh \"APPLICATIONIDENTIFIER\" \"(1|2|3|4)\""**  
     
-**NOTE 2:** you can also make special "manual" backups which means you can take a backup at any time and it will be stored in a repository marked, "manual". 
+**NOTE 2:**  
+  
+You can also make special "manual" backups which means you can take a backup at any time and it will be stored in a repository marked, "manual". 
 
  
