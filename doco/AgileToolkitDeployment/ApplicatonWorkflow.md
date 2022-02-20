@@ -23,7 +23,9 @@ IN PRODUCTION MODE:
 
 --------------
 
-**NOTE 1:** It is essential that your APPLICATION_IDENTIFIER is set when you are making a backup or a baseline.  
+**NOTE 1:**  
+  
+It is essential that your APPLICATION_IDENTIFIER is set when you are making a backup or a baseline.  
     
 The **APPLICATIONIDENTIFIER** should be set to **1** if your application is **Joomla** based  
 The **APPLICATIONIDENTIFIER** should be set to **2** if your application is **Wordpress** based  
