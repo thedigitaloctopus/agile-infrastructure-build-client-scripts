@@ -13,6 +13,8 @@ IN DEVELOPMENT MODE:
 6. Once the baseline is deployed to your custom url, make a temporal backup of it (hourly, weekly etc.) using (on your build machine): 
   
 **${BUILD_HOME}/helperscripts/PerformWebsiteBackup.sh** and **${BUILD_HOME}/helperscripts/PerformDatabaseBackup.sh**    
+
+Click here for [more detail](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/doco/AgileToolkitDeployment/BackupProcessOverview.md) on the backup procedure/process. 
   
 IN PRODUCTION MODE:  
 
