@@ -14,7 +14,7 @@ Managed databases are not intended to be used in development mode, rather, use t
 ### PRODUCTION MODE
 
 In production mode, there is four machine types: there is are autoscaler machines, there are webserver machines, there is a database server and there's a build machine upon which the build is initiated. There can also be (should also be) a managed database running to which your webservers are connecting.  
-The autoscaler machine monitors the webservers for responsiveness and is responsible for initiating (and performing) the build of new servers according to [scaling criteria](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/doco/AgileToolkitDeployment/AutoscalingConfiguration.md) (statically defined).  
+The autoscaler machine monitors the webservers for responsiveness and is responsible for initiating (and performing) the build of new servers according to [scaling criteria](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/doco/AgileToolkitDeployment/ScalingConfiguration.md) (statically defined).  
 The webservers have their ip addresses registered with a DNS system and load balancing between them performed using round robin.  
 The Database server is resposible for runnng the database system. The Database system can use DBaaS managed databases but our own "database machine" it still needs to run in such a scenario as we depend on our own custom backups which our database machine knows about.
 
