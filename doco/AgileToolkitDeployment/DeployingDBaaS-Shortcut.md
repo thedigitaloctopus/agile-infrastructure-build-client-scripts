@@ -44,15 +44,15 @@ If you are using exoscale managed databases you can set the following in your te
 
 So an example of this would be in your template or override: 
 
-1. DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:ch-gva-2:hobbyist-1:testdb1"  
-3. DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:pg:ch-gva-2:hobbyist-1:testdb1"  
+1. DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:ch-gva-2:hobbyist-2:testdb1"  
+3. DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:pg:ch-gva-2:hobbyist-2:testdb1"  
   
 So, for the first example:  
   
 db-type="MySQL"  
 db-engine="mysql"  
 region="ch-gva-2"  
-size="hobbyist-1"  
+size="hobbyist-2"  
 db-name="testdb1" 
 
 So,  
@@ -60,7 +60,7 @@ So,
   **db-type** can be: **"MySQL", "Postgres"**  
   **db-engine** can be **"mysql", "pg"**  
   **region** can be **"ch-gva-2", "de-fra-1", "de-muc-1", "at-vie-1", "ch-dk-2", "bg-sof-1"**  
-  **size** can be **"startup-[4|8|16|32|64|128|255]", business-[4|8|16|32|64|128|255]", premium-[4|8|16|32|64|128|255]"**  
+  **size** can be **"hobbyist-2", "startup-[4|8|16|32|64|128|255]", "business-[4|8|16|32|64|128|255]", "premium-[4|8|16|32|64|128|255]"**  
   **db-name** can be a unique string for your database, for example, **"testdatabase"**  
   
   ----------
