@@ -41,7 +41,7 @@ The full set of services that are supported by the core of the toolkit and which
 1. For VPS services, one of - Digital Ocean, Linode, Exoscale, Vultr, AWS
 2. For Email services, one of - Amazon SES, Mailjet or Sendpulse
 3. For Git based services, one of - Bitbucket, Github or Gitlab
-4. For DNS services, one of - Cloudflare, Digital Ocean, Exoscale, Linode, Vultr (note, Cloudflare has additional security features which are absent from naked dns services which is why it is probably best practice to use Cloudflare even if there is some extra hassle to set it up which you can find out about here: [Cloudflare DNS](https://community.cloudflare.com/t/step-1-adding-your-domain-to-cloudflare/64309)
+4. For DNS services, one of - Cloudflare, Digital Ocean, Exoscale, Linode, Vultr (note, Cloudflare has additional security features which are absent from naked dns services which is why it is probably best practice to use Cloudflare even if there is some extra hassle to set it up which you can find out about here: [Cloudflare DNS](https://community.cloudflare.com/t/step-1-adding-your-domain-to-cloudflare/64309))
 5. For object store services, one of - Digital Ocean Spaces, Exoscale Object Store, Linode Object Store, Vultr Object Store or Amazon S3
 6. These providers AWS, Exoscale and Digital Ocean currently support managed DB systems but other providers are projected to make offerings of managed DB solutions as well in the near future. If you can't use a managed database solution with your chosen provider, you might want to look into "Several Nines" which supports (for example, Vultr and Linode). I haven't tried "Several Nines", but, if you try it and it works OK, I would like to hear about it.
 
