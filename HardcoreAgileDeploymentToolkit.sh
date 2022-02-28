@@ -323,6 +323,11 @@ start=`/bin/date +%s`
 
 . ${BUILD_HOME}/buildscripts/BuildAndDeployDBaaS.sh
 
+status "################################################################################################################################################"
+status "Cleaning out the configuration bucket and expired config settings in the datastore"
+status "################################################################################################################################################"
+. ${BUILD_HOME}/providerscripts/datastore/PurgeDatastore.sh
+
 if ( [ "${AUTOSCALE_FROM_SNAPSHOTS}" = "1" ] )
 then
     if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
