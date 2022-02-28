@@ -609,6 +609,11 @@ export PRE_BUILD="1"
 
 . ${BUILD_HOME}/buildscripts/BuildAndDeployDBaaS.sh
 
+status "################################################################################################################################################"
+status "Cleaning out the configuration bucket and expired config settings in the datastore"
+status "################################################################################################################################################"
+. ${BUILD_HOME}/providerscripts/datastore/PurgeDatastore.sh
+
 status "##############################################################################################"
 status "A recommended solution if you want to roll your own mail server with a custom domain for your"
 status "users' email addresses is to be found at: https://www.iredmail.org/"
