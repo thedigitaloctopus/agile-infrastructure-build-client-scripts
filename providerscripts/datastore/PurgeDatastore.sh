@@ -27,7 +27,7 @@ then
     
     if ( [ "`/usr/bin/s3cmd ls s3://${config_bucket}`" != "" ] )
     then
-        status "Purging bucket ${config_bucket}... this MAY take up to 5 minutes to complete"
+        status "Purging bucket ${config_bucket}. Please wait...."
         /usr/bin/s3cmd --recursive --force del s3://${config_bucket}
     fi
 fi
