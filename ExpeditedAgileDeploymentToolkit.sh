@@ -508,6 +508,14 @@ start=`/bin/date +%s`
 
 . ${BUILD_HOME}/buildscripts/BuildAndDeployDBaaS.sh
 
+if ( [ "${ENABLE_EFS}" = "0" ] || [ "${ENABLE_EFS}" = "" ] )
+then
+    status "################################################################################################################################################"
+    status "Cleaning out the configuration bucket and expired config settings in the datastore"
+    status "################################################################################################################################################"
+    . ${BUILD_HOME}/providerscripts/datastore/PurgeDatastore.sh
+fi
+
 if ( [ "${AUTOSCALE_FROM_SNAPSHOTS}" = "1" ] )
 then
     status "###############################################################################################################################################"
