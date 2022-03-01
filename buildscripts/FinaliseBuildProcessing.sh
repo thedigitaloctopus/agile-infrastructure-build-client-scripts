@@ -157,7 +157,7 @@ done < ${BUILD_HOME}/builddescriptors/envdump.dat
 /bin/date
 status "OK, good news, all done your servers are configured and responsive"
 status "If you check with your acceleration/DNS provider, in this case : ${DNS_CHOICE} and once you see ip addresses appear for your domain: ${WEBSITE_URL}"
-status "You should be able to navigate to your website now in your browser at: https://${WEBSITE_URL}"
+status "You should shortly be able to navigate to your website in your browser at: https://${WEBSITE_URL}"
 status ""
 status ""
 status "#########################################################################################"
