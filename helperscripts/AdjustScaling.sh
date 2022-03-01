@@ -1,7 +1,7 @@
 #!/bin/sh
 ########################################################################################################
 # Author: Peter Winter
-# Date  : 13/03/2022
+# Date  : 13/01/2022
 # Description : This script will adjust the scaling settings for your infrastructure
 ########################################################################################################
 # License Agreement:
@@ -61,21 +61,8 @@ export BUILD_HOME="`/bin/pwd | /bin/sed 's/\/helper.*//g'`"
 /bin/echo "Please enter the name of the build of the server you wish to connect with"
 read BUILD_IDENTIFIER
 
-/bin/chmod 744 ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat
-
-website_url="`/bin/cat ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat | /bin/grep 'WEBSITEURL' | /usr/bin/awk -F':' '{print $NF}'`"
-
-/bin/chmod 644 ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat
-
-/bin/echo "Your website URL is set to: ${website_url} is this correct (Y|N)"
-
-read response
-
-if ( [ "${response}" != "Y" ] && [ "${response}" != "y" ] )
-then
-    /bin/echo "OK, can you please tell me what the URL is to be?"
-    read website_url
-fi
+/bin/echo "OK, can you please tell me what the URL is to be?"
+read website_url
 
 configbucket="`/bin/echo ${website_url} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`"
 configbucket="${configbucket}-config"
