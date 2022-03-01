@@ -26,24 +26,24 @@ WEBSITE_URL="${1}"
 configbucket="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`"
 configbucket="${configbucket}-config"
 
-if ( [ "$3" = "recursive" ] )
+if ( [ "$4" = "recursive" ] )
 then
-    /usr/bin/s3cmd --recursive put $1 s3://${configbucket}/$2
+    /usr/bin/s3cmd --recursive put $2 s3://${configbucket}/$3
 else
-    if ( [ -f ${1} ] )
+    if ( [ -f ${2} ] )
     then
-        /usr/bin/s3cmd put $1 s3://${configbucket}/$2
-    elif ( [ -f ./${1} ] )
+        /usr/bin/s3cmd put $2 s3://${configbucket}/$3
+    elif ( [ -f ./${2} ] )
     then
-        /usr/bin/s3cmd put ./$1 s3://${configbucket}/$2
-        /bin/rm ./$1
-    elif ( [ -f /tmp/${1} ] )
+        /usr/bin/s3cmd put ./$2 s3://${configbucket}/$3
+        /bin/rm ./$2
+    elif ( [ -f /tmp/${2} ] )
     then
-        /usr/bin/s3cmd put /tmp/$1 s3://${configbucket}/$2
+        /usr/bin/s3cmd put /tmp/$2 s3://${configbucket}/$3
     else
         /bin/mkdir -p /tmp/${directory}
-        /bin/touch /tmp/$1
-        /usr/bin/s3cmd put /tmp/$1 s3://${configbucket}/$2
-        /bin/rm /tmp/$1
+        /bin/touch /tmp/$2
+        /usr/bin/s3cmd put /tmp/$2 s3://${configbucket}/$3
+        /bin/rm /tmp/$2
     fi
 fi
