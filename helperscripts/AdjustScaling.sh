@@ -77,6 +77,13 @@ fi
 
 original_no_webservers="`/bin/grep "NO_WEBSERVERS" ./profile.cnf | /usr/bin/awk -F'=' '{print $NF}'`"
 
+if ( [ "${original_no_webservers}" = "" ] )
+then
+    orignal_no_webservers="0"
+    /bin/echo  "SCALING_MODE=static" > ./profile.cnf
+    /bin/echo  "NO_WEBSERVERS=0" >> ./profile.cnf
+fi
+
 /bin/echo "Your number of webservers is currently set to: ${original_no_webservers}"
 /bin/echo "What do you want to set your number of webservers to, please enter the number of webservers you want as an integer"
 
@@ -85,5 +92,11 @@ read no_webservers
 /bin/sed -i "s/NO_WEBSERVER.*/NO_WEBSERVERS=${no_webservers}/" ./profile.cnf
 
 /usr/bin/s3cmd put ./profile.cnf s3://${configbucket}/scalingprofile/profile.cnf
+
+/usr/bin/s3cmd --force get s3://${configbucket}/scalingprofile/profile.cnf
+
+new_no_webservers="`/bin/grep "NO_WEBSERVERS" ./profile.cnf | /usr/bin/awk -F'=' '{print $NF}'`"
+
+/bin/echo "Your number of webservers has been successfully set to: ${new_no_webservers}"
 
 /bin/rm ./profile.cnf
