@@ -125,8 +125,11 @@ fi
 
 #Tell our infrastructure, 'yes, I am happy that you are up and running and functioning correctly'.
 #Other scripts can then check if the build has completed correctly before they action
-/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /bin/touch /home/${SERVER_USER}/config/INSTALLEDSUCCESSFULLY"
-/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /bin/touch /home/${SERVER_USER}/runtime/INSTALLEDSUCCESSFULLY"
+#/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /bin/touch /home/${SERVER_USER}/config/INSTALLEDSUCCESSFULLY"
+#/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /bin/touch /home/${SERVER_USER}/runtime/INSTALLEDSUCCESSFULLY"
+
+${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} INSTALLEDSUCCESSFULLY INSTALLEDSUCCESSFULLY
+${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} ENABLESYNCTUNNEL
 
 status "Just giving the servers a little bit of time to complete their internal initialisation. Please wait...."
 
