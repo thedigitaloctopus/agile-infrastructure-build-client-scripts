@@ -48,7 +48,7 @@ then
     fi
 else
     status "You don't seem to have an SMTP settings configured. This is fine it just means that you system emails won't be sent"
-    status "If you are happy not to set any SMTP settings, then, enter 'N' or 'n' below, anything else to to configure your SMTP settings next"
+    status "If you are happy not to set any SMTP settings, then, enter 'N' or 'n' below, anything else to configure your SMTP settings next"
     read response
     if ( [ "${response}" = "N" ] || [ "${response}" = "n" ] )
     then
