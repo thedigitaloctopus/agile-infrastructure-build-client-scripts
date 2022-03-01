@@ -64,8 +64,8 @@ configbucket="${configbucket}-config"
 
 if ( [ "`/usr/bin/s3cmd ls s3://${configbucket}`" = "" ] )
 then
-    /bin/echo "Can't find the configration bucket in your datastore for website: ${website_url}"
-    /bin/echo "I have to exit, run the script again using a url with an existing configuration bucket"
+    /bin/echo "Can't find the configuration bucket in your datastore for website: ${website_url}"
+    /bin/echo "I have to exit, run the script again using a URL with an existing configuration bucket"
     exit
 fi
 
