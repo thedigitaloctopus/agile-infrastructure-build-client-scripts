@@ -42,6 +42,10 @@ then
     status "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     status "################################################################"
     status ""
+    status "#################################################################"
+    status "Your database credentials are:"
+    . ${BUILD_HOME}/providerscripts/datastore/DisplayCredentials.sh
+    status "#################################################################"
 fi
 
 if ( [ "${APPLICATION}" = "drupal" ] && [ "${BASELINE_DB_REPOSITORY}" = "VIRGIN" ] )
