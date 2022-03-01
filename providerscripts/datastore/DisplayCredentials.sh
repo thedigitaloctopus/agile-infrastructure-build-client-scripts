@@ -28,6 +28,18 @@ then
     if ( [ "`/usr/bin/s3cmd ls s3://${config_bucket}`" != "" ] )
     then
         /usr/bin/s3cmd --force get s3://${config_bucket}/credentials/shit
-        /bin/cat ./shit
+if ( [ "${DATASTORE_CHOICE}" = "amazonS3" ] || [ "${DATASTORE_CHOICE}" = "digitalocean" ] || [ "${DATASTORE_CHOICE}" = "exoscale" ] || [ "${DATASTORE_CHOICE}" = "linode" ] || [ "${DATASTORE_CHOICE}" = "vultr" ] )
+then
+    config_bucket="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`-config"
+    
+    if ( [ "`/usr/bin/s3cmd ls s3://${config_bucket}`" != "" ] )
+    then
+        /usr/bin/s3cmd --force get s3://${config_bucket}/credentials/shit
+
+        /bin/echo "Database name: `/bin/sed 1!d ./shit`" >&3
+        /bin/echo "Database password: `/bin/sed 2!d ./shit`" >&3
+        /bin/echo "Database username: `/bin/sed 3!d ./shit`" >&3
+    fi
+fi
     fi
 fi
