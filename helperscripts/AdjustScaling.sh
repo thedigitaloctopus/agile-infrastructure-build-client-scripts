@@ -61,7 +61,7 @@ export BUILD_HOME="`/bin/pwd | /bin/sed 's/\/helper.*//g'`"
 /bin/echo "Please enter the name of the build of the server you wish to connect with"
 read BUILD_IDENTIFIER
 
-/bin/echo "OK, can you please tell me what the URL is to be?"
+/bin/echo "OK, can you please tell me the FULL URL for the website you want to scale up/down is."
 read website_url
 
 configbucket="`/bin/echo ${website_url} | /usr/bin/awk -F'.' '{ for(i = 1; i <= NF; i++) { print $i; } }' | /usr/bin/cut -c1-3 | /usr/bin/tr '\n' '-' | /bin/sed 's/-//g'`"
@@ -69,34 +69,38 @@ configbucket="${configbucket}-config"
 
 if ( [ "`/usr/bin/s3cmd ls s3://${configbucket}`" = "" ] )
 then
-    /bin/echo "Can't find the cofigration bucket in your datastore for website: ${website_url}"
+    /bin/echo "Can't find the configration bucket in your datastore for website: ${website_url}"
+    /bin/echo "I have to exit, run the script again using a url with an existing configuration bucket"
     exit
 fi
 
-/usr/bin/s3cmd --force get s3://${configbucket}/scalingprofile/profile.cnf
+/usr/bin/s3cmd --force get s3://${configbucket}/scalingprofile/profile.cnf 1>/dev/null
 
 original_no_webservers="`/bin/grep "NO_WEBSERVERS" ./profile.cnf | /usr/bin/awk -F'=' '{print $NF}'`"
 
 if ( [ "${original_no_webservers}" = "" ] )
 then
-    orignal_no_webservers="0"
+    original_no_webservers="0"
     /bin/echo  "SCALING_MODE=static" > ./profile.cnf
     /bin/echo  "NO_WEBSERVERS=0" >> ./profile.cnf
 fi
 
+/bin/echo "##################################################################################################################"
 /bin/echo "Your number of webservers is currently set to: ${original_no_webservers}"
 /bin/echo "What do you want to set your number of webservers to, please enter the number of webservers you want as an integer"
-
+/bin/echo "##################################################################################################################"
 read no_webservers
 
 /bin/sed -i "s/NO_WEBSERVER.*/NO_WEBSERVERS=${no_webservers}/" ./profile.cnf
 
-/usr/bin/s3cmd put ./profile.cnf s3://${configbucket}/scalingprofile/profile.cnf
+/usr/bin/s3cmd put ./profile.cnf s3://${configbucket}/scalingprofile/profile.cnf 1>/dev/null
 
-/usr/bin/s3cmd --force get s3://${configbucket}/scalingprofile/profile.cnf
+/usr/bin/s3cmd --force get s3://${configbucket}/scalingprofile/profile.cnf 1>/dev/null
 
 new_no_webservers="`/bin/grep "NO_WEBSERVERS" ./profile.cnf | /usr/bin/awk -F'=' '{print $NF}'`"
 
+/bin/echo ""
 /bin/echo "Your number of webservers has been successfully set to: ${new_no_webservers}"
+/bin/echo ""
 
 /bin/rm ./profile.cnf
