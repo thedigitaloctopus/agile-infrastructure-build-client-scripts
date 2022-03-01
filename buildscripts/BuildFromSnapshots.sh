@@ -933,10 +933,13 @@ done
 
 #Tell our infrastructure, 'yes, I am happy that you are up and running and functioning correctly'. Other
 #scripts can then check if the build has completed before any action is taken
-/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/touch /home/${FULL_SNAPSHOT_ID}/config/INSTALLEDSUCCESSFULLY"
+#/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/touch /home/${FULL_SNAPSHOT_ID}/config/INSTALLEDSUCCESSFULLY"
 
 #Allow synctunnel to become active
-/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/touch /home/${FULL_SNAPSHOT_ID}/config/ENABLESYNCTUNNEL"
+#/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/touch /home/${FULL_SNAPSHOT_ID}/config/ENABLESYNCTUNNEL"
+
+${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} INSTALLEDSUCCESSFULLY INSTALLEDSUCCESSFULLY
+${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} ENABLESYNCTUNNEL ENABLESYNCTUNNEL
 
 
 # If we got to here then we really are doing quite well and we can assume that the environment is Ok to use next
