@@ -71,6 +71,11 @@ fi
 
 /usr/bin/s3cmd --force get s3://${configbucket}/scalingprofile/profile.cnf 1>/dev/null 2>/dev/null
 
+if ( [ ! -f ./profile.cnf ] )
+then
+    /bin/echo "Warning, couldn't find profile file, will try and create a new one for you"
+fi
+
 original_no_webservers="`/bin/grep "NO_WEBSERVERS" ./profile.cnf | /usr/bin/awk -F'=' '{print $NF}'`"
 
 if ( [ "${original_no_webservers}" = "" ] )
