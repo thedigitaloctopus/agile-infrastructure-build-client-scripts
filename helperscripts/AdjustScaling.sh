@@ -69,7 +69,7 @@ then
     exit
 fi
 
-/usr/bin/s3cmd --force get s3://${configbucket}/scalingprofile/profile.cnf 1>/dev/null
+/usr/bin/s3cmd --force get s3://${configbucket}/scalingprofile/profile.cnf 1>/dev/null 2>/dev/null
 
 original_no_webservers="`/bin/grep "NO_WEBSERVERS" ./profile.cnf | /usr/bin/awk -F'=' '{print $NF}'`"
 
@@ -88,9 +88,9 @@ read no_webservers
 
 /bin/sed -i "s/NO_WEBSERVER.*/NO_WEBSERVERS=${no_webservers}/" ./profile.cnf
 
-/usr/bin/s3cmd put ./profile.cnf s3://${configbucket}/scalingprofile/profile.cnf 1>/dev/null
+/usr/bin/s3cmd put ./profile.cnf s3://${configbucket}/scalingprofile/profile.cnf 1>/dev/null 2>/dev/null
 
-/usr/bin/s3cmd --force get s3://${configbucket}/scalingprofile/profile.cnf 1>/dev/null
+/usr/bin/s3cmd --force get s3://${configbucket}/scalingprofile/profile.cnf 1>/dev/null 2>/dev/null
 
 new_no_webservers="`/bin/grep "NO_WEBSERVERS" ./profile.cnf | /usr/bin/awk -F'=' '{print $NF}'`"
 
