@@ -27,7 +27,7 @@ fi
 
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
-    /usr/bin/ap-get -qq -y install libmagic-dev
+    /usr/bin/ap-get -qq -y install python3-magic
     /usr/bin/apt-get -qq -y -f install python3-pip
     /bin/rm /usr/bin/python
     /bin/ln -s /usr/bin/python3 /usr/bin/python
@@ -37,7 +37,7 @@ fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
-    /usr/bin/ap-get -qq -y install libmagic-dev
+    /usr/bin/ap-get -qq -y install python3-magic
     /usr/bin/apt -qq -y install python3-pip
     /bin/rm /usr/bin/python
     /bin/ln -s /usr/bin/python3 /usr/bin/python
