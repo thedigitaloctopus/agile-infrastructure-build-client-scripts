@@ -89,7 +89,8 @@ then
 fi
 
 #/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/datastore/SetupConfig.sh forcepurge"
-
+status "Applying application branding, please wait....."
+/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/applicationscripts/ApplyApplicationBranding.sh"
 #Do some checks to find out if the build has completed correctly, before we say we are finished
 /bin/mkdir -p ${BUILD_HOME}/runtimedata/${CLOUDHOST}/
 /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/INITIALBUILDCOMPLETED
