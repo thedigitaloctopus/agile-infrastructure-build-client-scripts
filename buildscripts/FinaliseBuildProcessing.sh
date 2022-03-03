@@ -88,7 +88,7 @@ then
     . ${BUILD_HOME}/providerscripts/datastore/PersistSnapshotData.sh
 fi
 
-/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/datastore/SetupConfig.sh forcepurge"
+#/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${WSIP} "${SUDO} /home/${SERVER_USER}/providerscripts/datastore/SetupConfig.sh forcepurge"
 
 #Do some checks to find out if the build has completed correctly, before we say we are finished
 /bin/mkdir -p ${BUILD_HOME}/runtimedata/${CLOUDHOST}/
