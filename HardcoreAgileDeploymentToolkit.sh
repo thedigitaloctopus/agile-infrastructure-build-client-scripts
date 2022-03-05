@@ -376,22 +376,6 @@ else
     ##Do the build finalisation procedures
     . ${BUILD_HOME}/buildscripts/FinaliseBuildProcessing.sh
 fi
-
-for ASIP in "`/bin/echo ${ASIPS} | /bin/sed 's/:/ /g'`"
-do
-    ${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} ${ASIP} "autoscalerpublicip/${ASIP}"
-done
-
-for AS_PRIVATE_IP in "`/bin/echo ${ASIP_PRIVATES} | /bin/sed 's/:/ /g'`"
-do
-    ${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} ${ASIP} "autoscalerip/${AS_PRIVATE_IP}"
-done
-
-${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} ${ASIP} "webserverips/${WSIP_PRIVATE}"
-${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} ${ASIP} "webserverpublicips/${WSIP}"
-
-${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} ${ASIP} "databaseip/${DBIP_PRIVATE}"
-${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} ${ASIP} "databasepublicip/${DBIP}"
     
 status "Just making a final adjustment to your native firewalling system , please wait...."
 export PRE_BUILD="0"
