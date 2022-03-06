@@ -29,5 +29,7 @@ then
     then
         status "Purging bucket ${config_bucket}. Please wait...."
         /usr/bin/s3cmd --recursive --force del s3://${config_bucket}
+    else
+        /usr/bin/s3cmd mb s3://${config_bucket}
     fi
 fi
