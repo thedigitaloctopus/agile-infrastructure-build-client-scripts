@@ -396,6 +396,12 @@ This is the port that the SSH daemon will be listening on for connections. You c
 
 This enables you to switch off the DIRECTORIES_TO_MOUNT procedure. You might want to do this if you are in development mode and you don't need to share assets between multiple webservers. If this is set to "0" it means that the assets you generate whilst you are developing are stored on the webservers local file system and not in the S3 datastore. It means that the assets can't be shared, but, there might be a performance increase if you are interested in that. 
 
+There are three settings you can use:
+
+"0" means just use the webservers actual directories for asset storage (this will likely only be the case if you have ver few assets to store)
+"1" means use S3FS (not recommended) or EFS if you are on AWS to mount assets buckets into your webserver's filesystem assets are then written directly to these services when your application stores an asset
+"2" means that the polling asset storage mechanism will be used which means that every minute, a cronjob runs which looks for new asset files which have been written by the application to the filesystem and these asset files are moved to S3 buckets which can then be use a CDN to distribute the assets from the bucket directly from within the application. 
+
 -----
 
 ### BUILD_CHOICE
