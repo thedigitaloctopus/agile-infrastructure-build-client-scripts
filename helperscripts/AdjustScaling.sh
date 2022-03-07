@@ -69,6 +69,25 @@ then
     exit
 fi
 
+if ( [ "`/usr/bin/s3cmd del s3://${configbucket}/SWITCHOFFSCALING`" != "" ] )
+then
+    /bin/echo "Sorry, scaling is switched off at the moment. You can switch it on using this script"
+    exit
+fi
+
+if ( [ "${2}" = "off" ] )
+then
+    /bin/touch /tmp/SWITCHOFFSCALING
+    /usr/bin/s3cmd put /tmp/SWITCHOFFSCALING s3://${configbucket}/
+    /bin/rm /tmp/SWITCHOFFSCALING
+    exit
+fi
+
+if ( [ "${2}" = "on" ] )
+then
+    /usr/bin/s3cmd del s3://${configbucket}/SWITCHOFFSCALING
+fi
+
 /usr/bin/s3cmd --force get s3://${configbucket}/scalingprofile/profile.cnf 1>/dev/null 2>/dev/null
 
 if ( [ ! -f ./profile.cnf ] )
@@ -104,3 +123,7 @@ new_no_webservers="`/bin/grep "NO_WEBSERVERS" ./profile.cnf | /usr/bin/awk -F'='
 /bin/echo ""
 
 /bin/rm ./profile.cnf
+
+
+
+
