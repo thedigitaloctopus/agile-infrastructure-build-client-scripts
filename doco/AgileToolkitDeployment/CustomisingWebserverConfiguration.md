@@ -10,3 +10,4 @@ If you edit the files to be your ideal configuration and updated them in github,
 If you have different applications which need different webserver configurations, then, obviously, you can have a fork for each of the different configurations and so use the same deployment methods to deploy differently configured servers. 
 If you really wanted to you could add a flag which you set during the deployment which selects from deveral different webserver configurations which you have set for example, if you had an apache configuration for your social networking application and a different one for your ecommerce site, you could modify the code such that you can select one or the other as a switch, for example, WEBSERVER_CONFIG:1 or WEBSERVER_CONFIG:2 and in that way have a very fine grained control over your webserver configuration. Most likely though you will just want to have seperate forks for each configuration. 
 
+ 
