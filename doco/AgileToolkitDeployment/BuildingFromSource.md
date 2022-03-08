@@ -1,4 +1,5 @@
-You have the choice to build certain compoenents of the toolkit from source or from the regular repositories. 
+You have the choice to build certain components of the toolkit from source or from the regular repositories.   
+
 The advantage of building from source is that it gives you more control and you can use the very latest versions of software that the repos haven't caught up with yet which can be more secure. The disadvantage is that it is more complex and there is more that might go wrong and also the machines can take longer to build and deploy. 
 
 In order to configure how you want each eligible component to be built you need to edit the file ${BUILD_HOME}/buiddescriptors/buildstyles.dat in your fork.
@@ -11,8 +12,6 @@ The settings work as follows:
 -----
 ##### NGINX:source
 ##### NGINX:repo
-##### NGINX:source:modsecurity
-##### NGINX:repo:modsecurity
 -----
 ##### If you are building for APACHE you can select one of:
 -----
@@ -31,7 +30,7 @@ The settings work as follows:
 ##### POSTGRES:source
 ##### POSTGRES:repo
 -----
-##### If you are using S3FS for your config and assets you can select one of:
+##### If you are using S3FS for your config and assets (not recommended) you can select one of:
 -----
 ##### S3FS:source
 ##### S3FS:repo
