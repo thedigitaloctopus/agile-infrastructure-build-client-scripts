@@ -12,13 +12,13 @@ What will happen during a **full build** (with the AgileDeploymentToolkit) scrip
 
 5. You will answer all the questions (correctly) and the build will run
 
-6. At the end of the build the environment that was used will be stored in a file:
+6. At the end of the build the environment that was used will be stored in a file:  
 
-**${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}**
+**${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}**  
 
-Which you can use next time to build from without answering all the questions or you can take a separate copy of and replace 
+Which you can use next time to build from without answering all the questions or you can take a separate copy of and replace  
 
-**${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}** 
+**${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}**  
 
 with any time you want to do the same build again. 
 
@@ -38,14 +38,14 @@ For Option 1, you can:
 
 For Option 2, you can: 
 
-1. On your laptop clone the build client scripts for example (or from your fork):
+1. On your laptop clone the build client scripts for example (or from your fork):  
 
-2. **git clone https://github.com/agile-deployer/agile-infrastructure-build-client-scripts.git**
+2. **git clone https://github.com/agile-deployer/agile-infrastructure-build-client-scripts.git**  
 
-3. **cd agile-infrastructure-build-client-scripts**
+3. **cd agile-infrastructure-build-client-scripts**  
 
-4. **/bin/sh ./helperscripts/GenerateOverrideTemplate.sh** and answer the questions as it asks them
+4. **/bin/sh ./helperscripts/GenerateOverrideTemplate.sh** and answer the questions as it asks them  
 
-5. **/bin/sh ./helperscripts/GenerateHardcoreUserDataScript.sh** and answer the questions as it asks them
+5. **/bin/sh ./helperscripts/GenerateHardcoreUserDataScript.sh** and answer the questions as it asks them  
 
-6. **cd ${BUILD_HOME}/userdatascripts** and copy the script that has been generated and post it into the user-data of a new VPS machine. 
+6. **cd ${BUILD_HOME}/userdatascripts** and copy the script that has been generated and post it into the user-data of a new VPS machine.   
