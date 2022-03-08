@@ -6,7 +6,7 @@
 
 To baseline an application follow these steps
 
-1. Deploy a virgin copy of your chosen CMS system and develop your application
+1. Deploy a virgin copy of your chosen CMS system and develop your application to your satisfaction. 
 
 2. SSH onto the build machine that you deployed your virgin CMS application from originally
 
@@ -31,7 +31,7 @@ To baseline an application follow these steps
   #####  [baseline_name]-webroot-sourcecode-baseline  
   #####  [baseline_name]-db-baseline  
 	
-5. Once your repositories are created in step 4 above, 
+5. Once your repositories are created in step 4 above on your build machine, 
 
     ##### cd ${BUILD_HOME/helperscripts  
 	 
@@ -57,7 +57,7 @@ To baseline an application follow these steps
 
 Obviously to deploy from a baseline you need a pair of baselined repositories as described above. Presuming that:
 
-When youi are deploying from a baseline using the Expedited or the Full Build just answering the questions should keep you on track.
+When you are deploying from a baseline using the Expedited or the Full Build just answering the questions should keep you on track.
 
 If you are deploying from a baseline using the hardcore build method, then, you need to be interested in the following parameters:
 
@@ -72,8 +72,6 @@ If you are deploying from a baseline using the hardcore build method, then, you 
 **export DIRECTORIES_TO_MOUNT="wp-content.uploads"** You need to mention which assets directory need to be mounted from the object store (the example here is wordpress)  
 
 **export APPLICATION_IDENTIFIER="2"**  This needs to be set to 1 for joomla, 2 for wordpress, 3 for drupal or 4 for moodle  
-
-**export SELECTED_TEMPLATE="3"** This need to be set to 2 for joomla 3 for wordpress 4 for drupal and 5 for moodle  
 	
 You can refer to the specification for more detail.
 
@@ -93,18 +91,29 @@ You can make a backup on from the build machine by runining the backup scripts f
 
 **${BUILD_HOME}/helperscripts/PerformDatabaseBackup.sh**  
 
-There is a special periodicity available on the build machine which is "all" and when you select this, it will make a backup for all time based periodicities. 
+There is a special periodicity available on the build machine which is "all" and when you select this, it will make a backup for all time based periodicities at once. 
 
 ---------------------------------------------------------------------------------------------------------
 
-##### HOW BACKUPS ARE MADE FROM CRON
+##### HOW TEMPORAL BACKUPS ARE MADE FROM CRON
 
 The backups are created by calling the script
 
-**${HOME}/git/Backup.sh** from cron.  
+**${HOME}/cron/BackupFromCron.sh** on the webserver machine  
+
+and  
+
+**${HOME}/cron/BackupFromCron.sh** on the database machine 
+
+You can generate backups directly from the command on your live machines as follows:  
+
+**${HOME}/providerscripts/git/Backup.sh** on the webserver machine  
+
+and  
+
+**${HOME}/providerscripts/git/Backup.sh** on the database machine  
 
 You pass in the build periodicity **"HOURLY", "DAILY", "WEEKLY", "MONTHLY", "BIMONTHLY", "SHUTDOWN" or "MANUAL"** and the **BUILD_IDENTIFIER** and that will then create a backup (including the necessary repository) with your git provider.  
-Similarly for the database machine as well.  
 
 ---------------------------------------------------------------------------------------------------------
 
@@ -120,13 +129,13 @@ The shutdown periodicity is a special case such that if a webserver is being shu
 
 ##### SWITCH OFF HOURLY BACKUPS
 
-When I was using AWS I noticed I was racking up quite a bill due to my writing of hourly backups to an external git provider. It wasn't cripplingly high cost, although I am very poor, so I had to take note. So, what I did was to provide an option to switch off hourly backups. Now I don't know whether I was getting a bill because of how things were configured or whether it was just considered "data out" and therefore billable. With all the other providers I didn't have this problem, but, this is there just to let you know that there is a configuration switch such that you can switch off hourly backups if you need to and save a few quid. Your base periodicity will then be daily or once every 24 hours which should be 24 times less expensive. 
+When I was using AWS (not whinging, just saying) I noticed I was racking up quite a bill due to my writing of hourly backups to an external git provider. It wasn't cripplingly high cost, although I am very poor, so I had to take note. So, what I did was to provide an option to switch off hourly backups. Now I don't know whether I was getting a bill because of how things were configured or whether it was just considered "data out" and therefore billable. With all the other providers I didn't have this problem, but, this is there just to let you know that there is a configuration switch such that you can switch off hourly backups if you need to and save a few quid. Your base periodicity will then be daily or once every 24 hours which should be 24 times less expensive. 
 
 ------------------------------------------------------------------------------------------------------------
 
 ##### DEPLOYING FROM A BACKUP
 	
-	To deploy from a backup, you can answer the questions appropriately during an expedited or full build, but, if you are using an hardcore build, then, you need to set the following parameters:
+To deploy from a backup, you can answer the questions appropriately during an expedited or full build, but, if you are using an hardcore build, then, you need to set the following parameters:
 
 **APPLICATION="wordpress"** - This needs to be either joomla, wordpress, drupal or moodle  
 
@@ -152,11 +161,11 @@ When I was using AWS I noticed I was racking up quite a bill due to my writing o
 
 #####  THE ASSETS ARE STORED IN THE CLOUD AND ARE THEREFORE NOT PART OF THE BACKUPS BUT ARE PART OF THE BASELINES  
 	
-Its normal to set PERSIST_ASSETS_TO_CLOUD to 0 for baselines and virgin builds. This is because the cloud is only used to offload assets.
-So ordinarily if your application users are going to be generating assets you want them to be stored in your datastore and distributed from there using a CND (see elsewhere in this doco). Note, if your assets are stored in the cloud i.e. PERSIST_ASSETS_TO_CLOUD is set to 1, then, it is the only place where those assets are stored, there aren't any backups, so if you were to delete the assets by mistake, for example, it might hose your application. Its just a bucket with assets in it at the end of the day, so its not hard to make backups if you want to. 
+Its normal to set PERSIST_ASSETS_TO_CLOUD to 0 for baselines and virgin builds. This is because the cloud is only used to offload assets for a production build.
+So ordinarily if your application users are going to be generating assets you want them to be stored in your datastore and distributed from there using a CDN (see elsewhere in this doco). Note, if your assets are stored in the cloud i.e. PERSIST_ASSETS_TO_CLOUD is set to 1 or 2, then, it is the only place where those assets are stored, there aren't any backups, so if you were to delete the assets from the bucket they are stoed in by mistake, for example, it might hose your application. Therefore it is up to you to set up a backup policy for the assets that are stored in you S3 bucket. Its just a bucket with assets in it at the end of the day, so its not hard to make backups if you want to. 
 
 -------------------------------------------------------------------------------------------------------------
 
 ###### SUPERSAFE BACKUPS  
 
-The authoritative backups that are made for your application are stored in git repositories. However, if you switch on "super safe backups", then, a copy of your backups will also be written to your datastore. This gives you two sets of backups one in your git repositories and one in your datastore. This is common advise, backup and backup again. In other words, under normal operation within a week of running your website, you will have 2 hourly backups, one with your git provider and one in your datastore, you will have 2 daily backups, one with your git provider and one with your datastore and you will have 2 weekly backups, one with your git provider and one with your datastore. This is quite a few backups which you can fall back on and, of course, the weekly backups will be a week old but losing a weeks worth is better than losing it entirely. 
+The authoritative backups that are made for your application are stored in git repositories. However, if you switch on "super safe backups", then, a copy of your backups will also be written to your datastore. This gives you two sets of backups one in your git repositories and one in your datastore. This is common advise, backup and backup again. In other words, under normal operation within a week of running your website, you will have 2 hourly backups available, one with your git provider and one in your datastore, you will have 2 daily backups available, one with your git provider and one with your datastore and you will have 2 weekly backups available, one with your git provider and one with your datastore. This is quite a few backups which you can fall back on and, of course, the weekly backups will be a week old but losing a weeks worth is better than losing it entirely. 
