@@ -59,4 +59,4 @@ if you run these scripts they will try to connect to whichever type of machine i
 	
 it will switch you to the root user. By using this technique it helps because the username (if you keep it secure) for your servers is not well known, whereas if you have the username as root, it is well known. A username which is not well known is another factor which an assailant will need to know to break into your server estate.
 
-**NOTE: You should be able to see how essential it is to keep the username and private key used by your helperscripts when they connect to your server secure. Those values are essetially root access to your servers with which an assailant can do anything he likes with your setup.**
+**NOTE: You should be able to see how essential it is to keep the username and private key used by your helperscripts when they connect to your server secure. Those values are essentially root access to your servers with which an assailant can do anything he likes with your setup.**
