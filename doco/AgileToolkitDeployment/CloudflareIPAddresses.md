@@ -6,7 +6,7 @@ You need to keep an eye on these ip addresses:
 
 they are added to the native firewalling system  
 
-[here](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/providerscripts/security/firewall/GetDNSIPs.sh)  
+[here](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/providerscripts/security/firewall/GetProxyDNSIPs.sh)  
 
 and for the UFW firewall  
 
