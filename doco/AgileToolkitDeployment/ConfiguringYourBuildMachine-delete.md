@@ -55,7 +55,9 @@ if you run these scripts they will try to connect to whichever type of machine i
 
 9. If you look into what your helperscript is doing, you will see it is connecting with a reasonably complex user name. This is effectively your root user and should be treated as such. Standard root logins are disabled and you have to connect with this user, so, this username and its SSH key pair MUST be kept secure to keep your server machines safe. Once you are onto your webserver, for example, you can go to  
 
-	**${HOME}/.ssh** and find a script **"Super.sh"**. If you run this script, **"/bin/sh Super.sh"**  
+**${HOME}/.ssh** and find a script **"Super.sh"**  
+	
+If you run this script, **"/bin/sh Super.sh"**  
 	
 it will switch you to the root user. By using this technique it helps because the username (if you keep it secure) for your servers is not well known, whereas if you have the username as root, it is well known. A username which is not well known is another factor which an assailant will need to know to break into your server estate.
 
