@@ -1,4 +1,5 @@
-If you are deploying an expedited or a hardcore build, there is a little trick you can do to deploy using a DBaaS or managed database service in your template or template override
+If you are deploying an expedited or a hardcore build, there is a little trick you can do to deploy using a DBaaS or managed database service in your template or template override that will deploy your database from as part of the build process using command line tools.  
+
 The managed database you describe here will spin up automatically through the build process
 
 ### Digital Ocean
