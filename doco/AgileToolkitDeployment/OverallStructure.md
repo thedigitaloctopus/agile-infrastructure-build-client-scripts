@@ -1,4 +1,4 @@
-You can read about my idea for having registration servers which (currently) are not implememted [here](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/doco/AgileToolkitDeployment/RegistrationServer.md).
+You can read about my idea for having registration servers which (currently) are not implemented [here](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/doco/AgileToolkitDeployment/RegistrationServer.md).
 
 The overriding ethos of this toolkit is in regards to agile deployment meaning that it is completely decoupled from any particular provider. 
 So, one of the features that I have made use of in development is the "Zero Trust" feature that is built in to Cloudflare which enables access codes to be required before access to a webproperty.
