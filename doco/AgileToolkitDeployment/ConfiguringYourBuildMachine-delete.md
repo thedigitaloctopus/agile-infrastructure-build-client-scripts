@@ -31,7 +31,7 @@ With that done, here is a more detailed review of the protocol for authenticatio
 2. Paste the whole of your fully populated template override script into the user data of a VPS machine that you have provisioned with your provider and spin it up.  
 3. After a couple of minutes, you will be able to SSH onto your build machine using a command such as:  
 
-**ssh -p 1035 agile-deployer@ip-address-of-build-machine**
+   **ssh -p 1035 agile-deployer@ip-address-of-build-machine**
 
    You won't be able to authenticate using password based authentication, it will have to be public/private key pairs.  
 	
