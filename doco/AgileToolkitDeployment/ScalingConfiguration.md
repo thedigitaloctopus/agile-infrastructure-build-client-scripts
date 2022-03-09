@@ -1,4 +1,6 @@
-You can configure the number of webservers that are running in the file **s3://${configbucket}/scalingprofile/profile.cnf**  
+You can configure the number of webservers that are running in the file  
+
+**s3://${configbucket}/scalingprofile/profile.cnf**  
 
 In most circumstances you will want to ssh onto your build machine and run the script: 
 
