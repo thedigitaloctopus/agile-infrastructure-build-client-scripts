@@ -24,3 +24,4 @@ In this case: "_KR8Y_2t"
 Decrypt the backup into the directory ./home in your current directory  
 
 >      openssl enc -d -pbkdf2  -md md5 -pass pass:_KR8Y_2t -in ./backup-*Dec*31*.tar.gz  | /bin/tar -xv  
+ 
