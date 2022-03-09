@@ -1,3 +1,7 @@
+This is how to approach deploying your managed database using the GUI system of your cloudhost and then setting the configuration you need to access it. 
+Note, there is a quicker way which uses command line tools and doesn't involve you using the gui system to pre-prepare your database for your deloyment
+which you can read about [here](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/doco/AgileToolkitDeployment/DeployingDBaaS-Shortcut.md)
+
 #### IMPORTANT:  
 
 Don't necessarily expect your DB dump files to automatically import from one DBaaS provider to another without first manually verifying it first. Each DBaaS provider may put things in the dump files which only work correctly within the configuration of their system. 
