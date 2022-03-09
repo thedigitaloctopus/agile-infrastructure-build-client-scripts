@@ -1,6 +1,6 @@
 You might want to fork the toolkit at deployment time because, for example, you might want to have values set for the buildstyles.dat file directly in your fork of the repository when you are using template overrides method to deploy with. Just be open to the idea that there are scenarios where you will likely want to deploy from a fork rather than from the toolkit directly. In fact it is recommended best practice to deploy from your own fork.
 
-**IMPORTANT: If you fork these repositories, and have them as public repositories, do not enter sensitive parameters into the templating configruation files without first making them private. Instead override them using the user data init script of your build server. To see how to override using the user data init script of your webserver (or stack script if you are on linode) plese refer to:**
+**IMPORTANT: If you fork these repositories, and have them as public repositories, do not commit sensitive parameters into the templating configuration files without first making them private. Instead override them using the user data init script of your build server. To see how to override using the user data init script of your webserver (or stack script if you are on linode) plese refer to:**
 
 [Override](https://github.com/agile-deployer/agile-infrastructure-build-client-scripts/blob/master/templatedconfigurations/templateoverrides.md)
 
