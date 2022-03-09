@@ -15,7 +15,7 @@ The aim of this toolkit is not global domination it is about providing local soc
 5. In your main application server update your firewalls as necessary to allow through connections from the ipaddress that the new user has registered and manually add the user to the database.
 6. As you create the new user, email them a new password (that you created the account with) to their supplied email address (fred@testsocial.org) and set your application to require they enter a new password upon first login as well as 2FA.
 7. The user should then be able to log in to your main application (www.testsocial.org) whilst the main application is totally firewalled off to all except authorised ip addresses.
-8. During ordinary usage if the user changes IP address then they will have to revisit the registration server and either update the ip address that is associated to their email address or have the registration automatically detect their new ip address and in both cases, reconfigure the firwall as needed.
+8. During ordinary usage if the user changes IP address then they will have to revisit the registration server and either update the ip address that is associated to their email address or have the registration automatically detect their new ip address and in both cases, reconfigure the firewall as needed.
 
 This is the best approach I can think of to maximally firewall off the main application so that its very hard for bad actors to access it without an acceptable IP address.  
 
