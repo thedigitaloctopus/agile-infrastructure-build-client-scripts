@@ -33,21 +33,19 @@ If the script detemines that the certificate has short life left on it, then, it
 **${HOME}/security/ObtainSSLCertificate.sh**
 
 The **ObtainSSLCertificate.sh** script will then actually go and generate a new certificate with long life validity.                                                                                                      
-Once the new certificate is generated, it is stored in ${HOME}/.lego/certificates                                                                                                                                          
-So, I thought about this. The certificate could just be kept on the shared config directory and we could have all our webservers use it from one place with only one copy, but, if there were ever to be a failure, then it would be more difficult to recover.                                                                                                                                                                          
-   So, this newly generated certificate is replicated to three places:                                                                                                                                                                   
+Once the new certificate is generated, it is stored in ${HOME}/.lego/certificates                                                                                                                                                                                                                                                        So, this newly generated certificate is replicated to three places:                                                                                                                                                                   
    **1) /home/${SERVER_USER}/ssl/letsencrypt/live/${WEBSITE_URL}/cert.pem**                                       
-   **2) ${HOME}/config/ssl/cert.pem**                                                                                           
+   **2) s3://${config_bucket}/ssl/cert.pem**                                                                                           
    **3) ${HOME}/.ssh/cert.pem**  
   
 The one that the webservers use is **/home/${SERVER_USER}/ssl/letsencrypt/live/${WEBSITE_URL}/cert.pem**  
 
-The config directory copy is used for replication. Each of the webservers (the ones that didn't obtain the lock previously) monitor the ${HOME}/config/ssl directory for newly generated certificates and replicate a new one to their file systems. The script which monitors the config directory for newly generated certificates is: ${HOME}/security/MonitorForNewSSLCertificate.sh. If any of the webservers find a newly generated certificate it is assumed that this is the certificate that should be used and it is replicated to 
+The config bucket copy is used for replication. Each of the webservers (the ones that didn't obtain the lock previously) monitor the ${HOME}/config/ssl directory for newly generated certificates and replicate a new one to their file systems. The script which monitors the config directory for newly generated certificates is: ${HOME}/security/MonitorForNewSSLCertificate.sh. If any of the webservers find a newly generated certificate it is assumed that this is the certificate that should be used and it is replicated to 
 
 **/home/${SERVER_USER}/ssl/letsencrypt/live/${WEBSITE_URL}/cert.pem** on that machine.
 
 The **${HOME}/.ssh** directory is used to keep a history of issued certificates. When a new certificate is issued, the preceeding one is annoted with 'previous' and the date giving a trail of previously issued certificates.
 
-NB. the autoscaler also continually monitors the **${HOME}/config/ssl** directory for new certificates and grabs a copy for itself of any new ones. It then uses the new certificate to give to any newly spawned webservers as a result of an autoscaling event. 
+NB. the autoscaler also continually monitors the **s3://${config_bucket}/ssl** directory for new certificates and grabs a copy for itself of any new ones. It then uses the new certificate to give to any newly spawned webservers as a result of an autoscaling event. 
 
 NB2. If a certificate is ever failed to be issued, an email is sent out to the admin and also, letsencrypt themselves send out reminder emails if a certificate is getting long in the tooth according to their records and hasn't been renewed.
