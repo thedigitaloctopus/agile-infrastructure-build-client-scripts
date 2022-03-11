@@ -218,10 +218,13 @@ then
             /usr/local/bin/linode-cli databases mysql-create --label ${label} --engine ${engine} --cluster_size ${cluster_size} --region ${db_region} --type ${machine_type}
         fi
     
+        status ""
+        status "####################################################################################################################################################"
         status "I couldn't see how to get the connection information from the linode-cli command line tool, so you will have to obtain it from the linode gui system"
         status "Once your database is provisioned (which you can check in the linode GUI system, please provide us with the following information which you can obra1in through the connection details within the linode gui"
         status "You will need to collect your databases's hostname, username, password, the database's name from the linode GUI system once it has finished provisioning"
-        status "Press <enter> to progress once your database is provisioned and you have collected the above information"
+        status "####################################################################################################################################################"
+        status "Press <enter> to progress AFTER your database is showing as provisioned and you have collected the above information"
         read x
     
         status "Please enter your databases' hostname, for example: lin-965-1053-mysql-primary.servers.linodedb.net"
