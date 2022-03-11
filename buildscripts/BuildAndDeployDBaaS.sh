@@ -202,10 +202,27 @@ fi
 #########################################################################################################
 if ( [ "${CLOUDHOST}" = "linode" ] && [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
 then
-  #  engine="`/usr/local/bin/linode-cli --json databases engines | jq '.[].id' | /bin/grep ${engine_type} | /bin/sed 's/\"//g' | /usr/bin/tail -1`"
-    /usr/local/bin/linode-cli databases mysql-create --label ${BUILD_IDENTIFIER} --engine ${engine}
-    database_id="`/usr/local/bin/linode-cli --json databases mysql-list | jq '.[] | select(.["label"] | contains ("${BUILD_IDENTIFIER}")) | .id'`"
+    if ( [ "`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/grep DBAAS`" != "" ] )
+    then
+        DATABASE_TYPE="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /usr/bin/awk -F':' '{print $1}'`"
+        status "Your database is being provisioned, please wait....."
+        /usr/local/bin/linode-cli databases mysql-create --label ${BUILD_IDENTIFIER} --engine ${engine}
+        database_id="`/usr/local/bin/linode-cli --json databases mysql-list | jq '.[] | select(.["label"] | contains ("${BUILD_IDENTIFIER}")) | .id'`"
     
+        status "Once your database is provisioned (which you can check in the linode GUI system, please provide us with the following information which you can obra1in through the connection details within the linode gui"
+        status "Press <enter> to progress"
+        read x
+    
+        status "Please enter your databases' hostname, for example: lin-965-1053-mysql-primary.servers.linodedb.net"
+        read DBaaS_HOSTNAME
+        status "Please enter your database's username, for example, testdatabaseuser"
+        read DBaaS_USERNAME
+        status "Please enter your database's password, for example, hfuweiwfvb4hbf"
+        read DBaaS_PASSWORD
+        status "Please enter your database's name, for example, testdatabase"
+        read DBaaS_DBNAME
+        export DATABASE_INSTALLATION_TYPE="DBaaS"
+    fi
 fi
 
 #########################################################################################################
