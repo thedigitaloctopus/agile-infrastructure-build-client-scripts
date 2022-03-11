@@ -196,32 +196,46 @@ then
 fi
 
 #########################################################################################################
-#DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:ch-gva-2:hobbyist-2:testdb1"
-#DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:pg:ch-gva-2:hobbyist-2:testdb1"
 #DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:<engine>:<region>:<machine_type>:<label>:<cluster_size>
+#DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql/8.0.26:eu-west:g6-nanode-1:testdb:1"
 #########################################################################################################
 if ( [ "${CLOUDHOST}" = "linode" ] && [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
 then
     if ( [ "`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/grep DBAAS`" != "" ] )
     then
         DATABASE_TYPE="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /usr/bin/awk -F':' '{print $1}'`"
+        label="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /usr/bin/awk -F':' '{print $6}'`"
+        engine="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /usr/bin/awk -F':' '{print $3}'`"
+        cluster_size="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /usr/bin/awk -F':' '{print $7}'`" 
+        db_region="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /usr/bin/awk -F':' '{print $4}'`"
+        machine_type="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /usr/bin/awk -F':' '{print $5}'`"
+        
         status "Your database is being provisioned, please wait....."
-        /usr/local/bin/linode-cli databases mysql-create --label ${BUILD_IDENTIFIER} --engine ${engine}
-        database_id="`/usr/local/bin/linode-cli --json databases mysql-list | jq '.[] | select(.["label"] | contains ("${BUILD_IDENTIFIER}")) | .id'`"
+        database_id="`/usr/local/bin/linode-cli --json databases mysql-list | jq '.[] | select(.["label"] | contains ("${label}")) | .id'`"
+        
+        if ( [ "${database_id}" = "" ] )
+        then
+            /usr/local/bin/linode-cli databases mysql-create --label ${label} --engine ${engine} --cluster_size ${cluster_size} --region ${db_region} --type ${machine_type}
+        fi
     
+        status "I couldn't see how to get the connection information from the linode-cli command line tool, so you will have to obtain it from the linode gui system"
         status "Once your database is provisioned (which you can check in the linode GUI system, please provide us with the following information which you can obra1in through the connection details within the linode gui"
         status "You will need to collect your databases's hostname, username, password, the database's name from the linode GUI system once it has finished provisioning"
-        status "Press <enter> to progress once you have collected the above information"
+        status "Press <enter> to progress once your database is provisioned and you have collected the above information"
         read x
     
         status "Please enter your databases' hostname, for example: lin-965-1053-mysql-primary.servers.linodedb.net"
-        read DBaaS_HOSTNAME
+        read response
+        export DBaaS_HOSTNAME="${response}"
         status "Please enter your database's username, for example, testdatabaseuser"
-        read DBaaS_USERNAME
+        read response
+        export DBaaS_USERNAME="${response}"
         status "Please enter your database's password, for example, hfuweiwfvb4hbf"
-        read DBaaS_PASSWORD
+        read response
+        export DBaaS_PASSWORD="${response}"
         status "Please enter your database's name, for example, testdatabase"
-        read DBaaS_DBNAME
+        read response
+        export DBaaS_DBNAME="${response}"
         export DATABASE_INSTALLATION_TYPE="DBaaS"
     fi
 fi
