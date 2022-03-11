@@ -86,14 +86,21 @@ So,
   db-name="testdb"
   cluster-size="1"
   
-  db-type can be **"mysql"**
-  db-engine can be **"mysql/8.0.26"** or **"mysql/5.7.30"** - at the time of writing you can check what engines are available for you by issuing **"linode-cli databases engines"** command.
-  region can be **"ap-west,ca-central,ap-southeast,us-central,us-west,us-southeast,us-east,eu-west,ap-south,eu-central,ap-northeast"
-  machine-size="g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-standard-8,g6-standard-16,g6-standard-20,g6-standard-24,g6-standard-32,g7-highmem-1,g7-highmem-2,g7-highmem-4,g7-highmem-8,g7-highmem-16,g6-dedicated-2,g6-dedicated-4,g6-dedicated-8,g6-dedicated-16,g6-dedicated-32,g6-dedicated-48,g6-dedicated-50,g6-dedicated-56,g6-dedicated-64"**
-  db-name can be any reasonable string you choose
-  cluster-size, as far as I know, can be **1** or **3**
+  db-type can be **"mysql"**  
   
-  When using linode you will be prompted for other variables such as database name, hostname of the database and so on, which you have to get from the GUI system because as far as I know, they are not accessible through the CLI. 
+  db-engine can be **"mysql/8.0.26"** or **"mysql/5.7.30"** - at the time of writing you can check what engines are available for you by issuing **"linode-cli databases engines"** command.  
+  
+  region can be **"ap-west,ca-central,ap-southeast,us-central,us-west,us-southeast,us-east,eu-west,ap-south,eu-central,ap-northeast"  
+  
+  machine-size=**"g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-standard-8,g6-standard-16,g6-standard-20,g6-standard-24,g6-standard-32,g7-highmem-1,g7-highmem-2,g7-highmem-4,g7-highmem-8,g7-highmem-16,g6-dedicated-2,g6-dedicated-4,g6-dedicated-8,g6-dedicated-16,g6-dedicated-32,g6-dedicated-48,g6-dedicated-50,g6-dedicated-56,g6-dedicated-64"**  
+  
+  db-name can be any reasonable string you choose  
+  
+  cluster-size, as far as I know, can be **1** or **3**  
+  
+  
+  When using linode you will be prompted for other variables such as database name, hostname of the database and so on, which you have to get from the GUI system because as far as I know, they are not accessible through the CLI.   
+  
   
   -------------------
   
@@ -122,15 +129,24 @@ So,
   db-username="testdatabaseuser1"  
   db-password="ghdbRtjh=g"
   
-  **db-type** can be: **"MySQL", "Postgres"**  
-  **db-engine** can be: **"mysql", "postgresql"**  
+  **db-type** can be: **"MySQL", "Postgres"**    
+  
+  **db-engine** can be: **"mysql", "postgresql"**   
+  
   **region** can be:  
-  **us-east-1a,us-east-1b,us-east-1c,us-east-1d,us-east-1e,us-east-1f,us-west-2a,us-west-2b,us-west-2c,us-west-1a,us-west-1b,eu-west-1a,eu-west-1b,eu-west-1c,eu-central-1a,eu-central-1b,ap-southeast-1a,ap-southeast-1b,ap-southeast-2a,ap-southeast-2b,ap-southeast-2c,ap-northeast-1a,ap-northeast-1c,sa-east-1a,sa-east-1b,sa-east-1c,ap-south-1a,ap-south-1b**  
-  **size** can be: **"db.t3.micro,db.t3.small,db.t3.medium,db.t3.large,db.t3.xlarge,db.t3.2xlarge"**  
-  **db-name** can be a descriptive name for your database, for example, **"TestDatabase"** (note, must be no spaces in the db-name parameter)  
+  **us-east-1a,us-east-1b,us-east-1c,us-east-1d,us-east-1e,us-east-1f,us-west-2a,us-west-2b,us-west-2c,us-west-1a,us-west-1b,eu-west-1a,eu-west-1b,eu-west-1c,eu-central-1a,eu-central-1b,ap-southeast-1a,ap-southeast-1b,ap-southeast-2a,ap-southeast-2b,ap-southeast-2c,ap-northeast-1a,ap-northeast-1c,sa-east-1a,sa-east-1b,sa-east-1c,ap-south-1a,ap-south-1b**   
+  
+  **size** can be: **"db.t3.micro,db.t3.small,db.t3.medium,db.t3.large,db.t3.xlarge,db.t3.2xlarge"**   
+  
+  **db-name** can be a descriptive name for your database, for example, **"TestDatabase"** (note, must be no spaces in the db-name parameter)    
+  
   **db-identifier** can be a unique string for your database, for example, **"testdb4"**   
-  **storage-capacity** disk storage capacity of your database, for example, **"20"** for 20GB  
-  **db-username** the username for your database for example, **"testdatabaseuser1"**  
-  **db-password** the password for your database for example, **"ghdbRtjh=g""**  
+  
+  **storage-capacity** disk storage capacity of your database, for example, **"20"** for 20GB   
+  
+  **db-username** the username for your database for example, **"testdatabaseuser1"**   
+  
+  **db-password** the password for your database for example, **"ghdbRtjh=g""**    
+  
 
   
