@@ -58,3 +58,29 @@ then
         /usr/bin/exo dbaas update --zone ${DATABASE_REGION} ${DBaaS_DBNAME} --mysql-ip-filter=${ips}
     fi
 fi
+
+if ( [ "${CLOUDHOST}" = "linode" ] && [ "${DATABASE_INSTALLATION_TYPE}"="DBaaS" ] )
+then
+   if ( [ "${ASIP}" != "" ] )
+   then
+       ips="${ASIP},${WSIP},${DBIP},${BUILD_CLIENT_IP}"
+   else
+       ips="${WSIP},${DBIP},${BUILD_CLIENT_IP}"
+   fi
+   
+   status "Tightening the firewall on your mysql database for your webserver with following IPs: ${ips}"    
+   /usr/local/bin/linode-cli databases mysql-update --label "${DBaaS_DBNAME}" --allow-list"${ips}"
+
+   # if ( [ "${DATABASE_ENGINE}" = "pg" ] )
+   # then
+   #     status "Tightening the firewall on your postgres database for your webserver with following IPs: ${ips}"    
+   #     /usr/bin/exo dbaas update --zone ${DATABASE_REGION} ${DBaaS_DBNAME} --pg-ip-filter=${ips}
+   # elif ( [ "${DATABASE_ENGINE}" = "mysql" ] )
+   # then
+   #     status "Tightening the firewall on your mysql database for your webserver with following IPs: ${ips}"    
+   #     /usr/bin/exo dbaas update --zone ${DATABASE_REGION} ${DBaaS_DBNAME} --mysql-ip-filter=${ips}
+   # fi
+fi
+
+
+
