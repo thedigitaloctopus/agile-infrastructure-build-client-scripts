@@ -198,10 +198,11 @@ fi
 #########################################################################################################
 #DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:ch-gva-2:hobbyist-2:testdb1"
 #DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:pg:ch-gva-2:hobbyist-2:testdb1"
+#DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:<engine>:<region>:<machine_type>:<label>:<cluster_size>
 #########################################################################################################
 if ( [ "${CLOUDHOST}" = "linode" ] && [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
 then
-    engine="`/usr/local/bin/linode-cli --json databases engines | jq '.[].id' | /bin/grep 'mysql/8' | /bin/sed 's/\"//g' | /usr/bin/tail -1`"
+  #  engine="`/usr/local/bin/linode-cli --json databases engines | jq '.[].id' | /bin/grep ${engine_type} | /bin/sed 's/\"//g' | /usr/bin/tail -1`"
     /usr/local/bin/linode-cli databases mysql-create --label ${BUILD_IDENTIFIER} --engine ${engine}
     database_id="`/usr/local/bin/linode-cli --json databases mysql-list | jq '.[] | select(.["label"] | contains ("${BUILD_IDENTIFIER}")) | .id'`"
     
