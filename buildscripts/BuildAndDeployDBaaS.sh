@@ -196,6 +196,16 @@ then
 fi
 
 #########################################################################################################
+#DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:ch-gva-2:hobbyist-2:testdb1"
+#DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:pg:ch-gva-2:hobbyist-2:testdb1"
+#########################################################################################################
+if ( [ "${CLOUDHOST}" = "linode" ] && [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
+then
+    engine="`/usr/local/bin/linode-cli --json databases engines | jq '.[].id' | /bin/grep 'mysql/8' | /bin/sed 's/\"//g' | /usr/bin/tail -1`"
+    /usr/local/bin/linode-cli databases mysql-create --label ${BUILD_IDENTIFIER} --engine ${engine}
+fi
+
+#########################################################################################################
 #DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:eu-west-1b:db.t3.micro:TestDatabase:testdb:20:testdatabaseuser1:ghdbRtjh=g"
 #DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mariadb:eu-west-1b:db.t3.micro:TestDatabase:testdb:20:testdatabaseuser1:ghdbRtjh=g"
 #DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:postgres:eu-west-1a:db.t3.micro:TestDatabase:testdb:20:testdatabaseuser1:ghdbRtjh=g"
