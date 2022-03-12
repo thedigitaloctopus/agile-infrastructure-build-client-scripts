@@ -70,7 +70,7 @@ then
    
    status "Tightening the firewall on your mysql database for your webserver with following IPs: ${ips}"  
 
-    /usr/bin/curl -H "Content-Type: application/json" -H "Authorization: Bearer ${TOKEN}" -X PUT -d "{ \"allow_list\": [ ${ips} ] }" https://api.linode.com/v4beta/databases/mysql/instances/971
+    /usr/bin/curl -H "Content-Type: application/json" -H "Authorization: Bearer ${TOKEN}" -X PUT -d "{ \"allow_list\": [ ${ips} ] }" https://api.linode.com/v4beta/databases/mysql/instances/${DATABASE_ID}
  
    # Couldn't get this to work so having to use curl
     #  /usr/local/bin/linode-cli databases mysql-update --label "${DBaaS_DBNAME}" --allow-list"${ips}"
