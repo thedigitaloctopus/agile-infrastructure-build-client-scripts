@@ -216,11 +216,11 @@ then
         if ( [ "${database_id}" = "" ] )
         then
             /usr/local/bin/linode-cli databases mysql-create --label ${label} --engine ${engine} --cluster_size ${cluster_size} --region ${db_region} --type ${machine_type}
-            DATABASE_ID="`/usr/local/bin/linode-cli --json databases mysql-list | jq ".[] | select(.[\"label\"] | contains (\"${label}\")) | .id"`"
+            DATABASE_ID="`/usr/local/bin/linode-cli --json databases mysql-list | jq ".[] | select(.[\\"label\\"] | contains (\\"${label}\\")) | .id"`"
             while ( [ "${DATABASE_ID}" = "" ] )
             do
                /bin/sleep 20
-               DATABASE_ID="`/usr/local/bin/linode-cli --json databases mysql-list | jq ".[] | select(.[\"label\"] | contains (\"${label}\")) | .id"`"
+               DATABASE_ID="`/usr/local/bin/linode-cli --json databases mysql-list | jq ".[] | select(.[\\"label\\"] | contains (\\"${label}\\")) | .id"`"
             done
         fi
     
