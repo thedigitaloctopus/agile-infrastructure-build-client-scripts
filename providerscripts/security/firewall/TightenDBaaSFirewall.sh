@@ -63,9 +63,9 @@ if ( [ "${CLOUDHOST}" = "linode" ] && [ "${DATABASE_INSTALLATION_TYPE}"="DBaaS" 
 then
    if ( [ "${ASIP}" != "" ] )
    then
-       ips="\"${ASIP}\",\"${WSIP}\",\"${DBIP}\",\"${BUILD_CLIENT_IP}\""
+       ips="\"${ASIP}/32\",\"${WSIP}/32\",\"${DBIP}/32\",\"${BUILD_CLIENT_IP}/32\""
    else
-       ips="\"${WSIP}\",\"${DBIP}\",\"${BUILD_CLIENT_IP}\""
+       ips="\"${WSIP}/32\",\"${DBIP}/32\",\"${BUILD_CLIENT_IP}/32\""
    fi
    
    status "Tightening the firewall on your mysql database for your webserver with following IPs: ${ips}"  
