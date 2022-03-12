@@ -249,7 +249,7 @@ then
         read response
         export DATABASE_INSTALLATION_TYPE="DBaaS"
         
-        /usr/bin/curl -H "Content-Type: application/json" -H "Authorization: Bearer ${TOKEN} -X PUT -d "{ \"allow_list\": [ \"0.0.0.0/0\" ] }" https://api.linode.com/v4beta/databases/mysql/instances/${DATABASE_ID}
+        /usr/bin/curl -H "Content-Type: application/json" -H "Authorization: Bearer ${TOKEN}" -X PUT -d "{ \"allow_list\": [ \"0.0.0.0/0\" ] }" https://api.linode.com/v4beta/databases/mysql/instances/${DATABASE_ID}
     fi
 fi
 
