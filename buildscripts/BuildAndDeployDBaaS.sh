@@ -243,10 +243,6 @@ then
         status "Please enter the port number that your database is running on"
         read response
         export DB_PORT="${response}"
-        status "Please use the GUI system to set access allowance for 192.168.0.0/16 - this will allow access from private ip addresses"
-        status "I couldn't see any way to add and remove individual ip addresses using the linode-cli command script which would be preferable to generalised access"
-        status "Press <enter> to continue"
-        read response
         export DATABASE_INSTALLATION_TYPE="DBaaS"
         
         /usr/bin/curl -H "Content-Type: application/json" -H "Authorization: Bearer ${TOKEN}" -X PUT -d "{ \"allow_list\": [ \"0.0.0.0/0\" ] }" https://api.linode.com/v4beta/databases/mysql/instances/${DATABASE_ID}
