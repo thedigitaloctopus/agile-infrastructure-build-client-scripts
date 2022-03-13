@@ -236,7 +236,7 @@ then
         status "Please enter your databases' hostname, for example: lin-965-1053-mysql-primary.servers.linodedb.net"
         read response
         export DBaaS_HOSTNAME="${response}"
-        status "Please enter your database's username, for example, testdatabaseuser"
+        status "Please enter your database's username, for example, linroot"
         read response
         export DBaaS_USERNAME="${response}"
         status "Please enter your database's password, for example, hfuweiwfvb4hbf"
