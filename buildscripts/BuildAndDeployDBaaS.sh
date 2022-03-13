@@ -211,9 +211,9 @@ then
         machine_type="`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /usr/bin/awk -F':' '{print $5}'`"
         
         status "Your database is being provisioned, please wait....."
-        DATABASE_ID="`/usr/local/bin/linode-cli --json databases mysql-list | jq ".[] | select(.[\"label\"] | contains (\"${label}\")) | .id"`"
+        DATABASE_ID="`/usr/local/bin/linode-cli --json databases mysql-list | jq ".[] | select(.[\\"label\\"] | contains (\\"${label}\\")) | .id"`"
         
-        if ( [ "${database_id}" = "" ] )
+        if ( [ "${DATABASE_ID}" = "" ] )
         then
             /usr/local/bin/linode-cli databases mysql-create --label ${label} --engine ${engine} --cluster_size ${cluster_size} --region ${db_region} --type ${machine_type}
             DATABASE_ID="`/usr/local/bin/linode-cli --json databases mysql-list | jq ".[] | select(.[\\"label\\"] | contains (\\"${label}\\")) | .id"`"
