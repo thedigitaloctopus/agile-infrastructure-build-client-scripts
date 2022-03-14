@@ -69,7 +69,7 @@ then
     exit
 fi
 
-if ( [ "`/usr/bin/s3cmd del s3://${configbucket}/SWITCHOFFSCALING`" != "" ] )
+if ( [ "`/usr/bin/s3cmd ls s3://${configbucket}/SWITCHOFFSCALING`" != "" ] )
 then
     /bin/echo "Sorry, scaling is switched off at the moment. You can't switch it on using this script"
     exit
