@@ -70,7 +70,7 @@ So,
   
   If you are using Linode Managed Databases you can set the following in your template override:
   
-  ##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>:DBAAS:\<db-engine\>:\<region\>:\<machine-size\>:\<db-name\>:\<cluster-size\>"  
+  ##### DATABASE_DBaaS_INSTALLATION_TYPE="\<db-type\>:DBAAS:\<db-engine\>:\<region\>:\<machine-size\>:\<cluster-size\>"  
   ##### DATABASE_INSTALLATION_TYPE="DBaaS" 
   
   So, an example of this in your template or override would be:
@@ -83,7 +83,6 @@ So,
   db-engine="mysql/8.0.26"
   region="eu-west"
   machine-size="g6-nanode-1"
-  db-name="testdb"
   cluster-size="1"
   
   db-type can be **"mysql"**  
@@ -93,8 +92,6 @@ So,
   region can be **"ap-west,ca-central,ap-southeast,us-central,us-west,us-southeast,us-east,eu-west,ap-south,eu-central,ap-northeast"  
   
   machine-size=**"g6-nanode-1,g6-standard-1,g6-standard-2,g6-standard-4,g6-standard-6,g6-standard-8,g6-standard-16,g6-standard-20,g6-standard-24,g6-standard-32,g7-highmem-1,g7-highmem-2,g7-highmem-4,g7-highmem-8,g7-highmem-16,g6-dedicated-2,g6-dedicated-4,g6-dedicated-8,g6-dedicated-16,g6-dedicated-32,g6-dedicated-48,g6-dedicated-50,g6-dedicated-56,g6-dedicated-64"**  
-  
-  db-name can be any reasonable string you choose  
   
   cluster-size, as far as I know, can be **1** or **3**  
   
