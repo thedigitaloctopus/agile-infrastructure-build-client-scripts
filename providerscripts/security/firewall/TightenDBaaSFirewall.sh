@@ -70,8 +70,6 @@ then
    
    status "Tightening the firewall on your mysql database for your webserver with following IPs: ${ips}"  
    
-   /bin/echo "TOKEN:${TOKEN} ips:${ips} DATABASE_ID:${DATABASE_ID}" > /tmp/file
-
    /usr/bin/curl -H "Content-Type: application/json" -H "Authorization: Bearer ${TOKEN}" -X PUT -d "{ \"allow_list\": [ ${ips} ] }" https://api.linode.com/v4beta/databases/mysql/instances/${DATABASE_ID}
  
    # Couldn't get this to work so having to use curl
