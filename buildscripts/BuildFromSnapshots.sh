@@ -199,26 +199,19 @@ then
     #and use new keys but we'll say, 'no you don't, you have to use the ones we recorded earlier'.
 
     /bin/mv  ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}  ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.$$
-
     /bin/cp ${BUILD_HOME}/snapshots/${FULL_SNAPSHOT_ID}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}
-
     /bin/mv  ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub  ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub.$$
-
     /bin/cp ${BUILD_HOME}/snapshots/${FULL_SNAPSHOT_ID}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER}.pub
-
     /bin/mv ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials.$$
-
     /bin/cp -r ${BUILD_HOME}/snapshots/${FULL_SNAPSHOT_ID}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/
 
     SERVER_USER_PASSWORD="`/bin/cat ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}-credentials/SERVERUSERPASSWORD`"
-
     SUDO="DEBIAN_FRONTEND=noninteractive /bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E "
 
     ########AUTOSCALER config#################
         
     for ASIP in ${ASIPS_CLEANED}
     do
-       
         #Wait until the autoscaler has been fully provisioned from its snapshot
         status "Trying to connect to the autoscaler to perform initialisation...."
         /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "exit"
@@ -235,10 +228,8 @@ then
         #There might be some stuff on the autoscaler which is from the build when the snapshots were generated, like IP addresses and so on, so
         #clear them out as they have now been changed/renewed
 
-        /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/rm -rf /home/${FULL_SNAPSHOT_ID}/runtime/INITIALCONFIGSET /home/${FULL_SNAPSHOT_ID}/runtime/NETCONFIGURED /home/${FULL_SNAPSHOT_ID}/runtime/*lock* /home/${FULL_SNAPSHOT_ID}/runtime/CONFIG-PRIMED"
-        
+        /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /bin/rm -rf /home/${FULL_SNAPSHOT_ID}/runtime/INITIALCONFIGSET /home/${FULL_SNAPSHOT_ID}/runtime/NETCONFIGURED /home/${FULL_SNAPSHOT_ID}/runtime/*lock* /home/${FULL_SNAPSHOT_ID}/runtime/CONFIG-PRIMED"     
         /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDARCHIVE\" \"${BUILD_ARCHIVE_CHOICE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"AUTOSCALE\" \"${WEBSERVER_SNAPSHOT_NAME}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"SNAPSHOTID\" \"${WEBSERVER_IMAGE_ID}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"SNAPAUTOSCALE\" \"1\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"KEYID\" \"${PUBLIC_KEY_ID}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDCLIENTIP\" \"${BUILD_CLIENT_IP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"MYPUBLICIP\" \"${ASIP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"MYIP\" \"${ASIP_PRIVATE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIPS\" \"${ASIPS}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIP_PRIVATES\" \"${ASIP_PRIVATES}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASPUBLICIP\" \"${ASIP}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIP\" \"${ASIP_PRIVATE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBPUBLICIP\" \"${DBIP}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBIP\" \"${DBIP_PRIVATE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DATABASEINSTALLATIONTYPE\" \"${DATABASE_INSTALLATION_TYPE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSHOSTNAME\" \"${DBaaS_HOSTNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSDBNAME\" \"${DBaaS_DBNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSHOSTNAME\" \"${DBaaS_HOSTNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSUSERNAME\" \"${DBaaS_USERNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSPASSWORD\" \"${DBaaS_PASSWORD}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DATABASEDBaaSINSTALLATIONTYPE\" \"${DATABASE_DBaaS_INSTALLATION_TYPE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBPORT\" \"${DB_PORT}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValueWebserver.sh \"DATABASEINSTALLATIONTYPE\" \"${DATABASE_INSTALLATION_TYPE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValueWebserver.sh \"DBaaSHOSTNAME\" \"${DBaaS_HOSTNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValueWebserver.sh \"DBaaSDBNAME\" \"${DBaaS_DBNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValueWebserver.sh \"DBaaSHOSTNAME\" \"${DBaaS_HOSTNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValueWebserver.sh \"DBaaSUSERNAME\" \"${DBaaS_USERNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValueWebserver.sh \"DBaaSPASSWORD\" \"${DBaaS_PASSWORD}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValueWebserver.sh \"DATABASEDBaaSINSTALLATIONTYPE\" \"${DATABASE_DBaaS_INSTALLATION_TYPE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValueWebserver.sh \"DBPORT\" \"${DB_PORT}\""
-
         /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${ASIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/RefreshNetworking.sh"
 
         #Reinitialise everything by rebooting the machine
@@ -273,7 +264,6 @@ then
     #Refesh the networking. This means that the firewall needs to be reset and regenerated as the ip addresses have changed and also,
     #private networking can be refreshed here if the way that the provider is setup to be, requires it
     /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${WSIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/RefreshNetworking.sh"
-
     /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${WSIP} "${SUDO} /sbin/shutdown -r now"
 
 
@@ -307,7 +297,6 @@ then
     fi
     
     ${BUILD_HOME}/providerscripts/dns/AddRecord.sh "${zoneid}" "${DNS_USERNAME}" "${DNS_SECURITY_KEY}" "${WEBSITE_URL}" "${WSIP}" "true" "${DNS_CHOICE}" "${DNS_REGION}" "${WEBSITE_URL}"
-
     /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${WSIP} "${SUDO} /sbin/shutdown -r now"
 
     ##############DB config#################################
@@ -331,7 +320,6 @@ then
     #Removing the BUILDARCHIVECHOICE means that we can choose a new build archive to use, (baseline, hourly and so on, specific to this build)
 
     /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${DBIP} "${SUDO} /bin/rm -rf /home/${FULL_SNAPSHOT_ID}/runtime/NETCONFIGURED /home/${FULL_SNAPSHOT_ID}/runtime/*lock* /home/${FULL_SNAPSHOT_ID}/runtime/CONFIG-PRIMED"
-
     /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${DBIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDCLIENTIP\" \"${BUILD_CLIENT_IP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDARCHIVECHOICE\" \"${BUILD_ARCHIVE_CHOICE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIP\" \"${ASIP_PRIVATE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASPUBLICIP\" \"${ASIP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"MYPUBLICIP\" \"${DBIP}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"MYIP\" \"${DBIP_PRIVATE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"WSIP\" \"${WSIP_PRIVATE}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"WSPUBLICIP\" \"${WSIP}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIPS\" \"${ASIPS}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"ASIP_PRIVATES\" \"${ASIP_PRIVATES}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DATABASEINSTALLATIONTYPE\" \"${DATABASE_INSTALLATION_TYPE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSDBNAME\" \"${DBaaS_DBNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSHOSTNAME\" \"${DBaaS_HOSTNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSUSERNAME\" \"${DBaaS_USERNAME}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBaaSPASSWORD\" \"${DBaaS_PASSWORD}\"; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DATABASEDBaaSINSTALLATIONTYPE\" \"${DATABASE_DBaaS_INSTALLATION_TYPE}\" ; ${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"DBPORT\" \"${DB_PORT}\""
 
 
@@ -364,10 +352,8 @@ fi
 # then, when we rerun the config process, we need to select an hourly backup, for example, to sync here with our hourly backup repo/db
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${WSIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDARCHIVECHOICE\" \"${BUILD_ARCHIVE_CHOICE}\""
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${WSIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/applicationscripts/SyncLatestApplication.sh ${APPLICATION_REPOSITORY_PROVIDER} ${APPLICATION_REPOSITORY_USERNAME} ${APPLICATION_REPOSITORY_PASSWORD} ${APPLICATION_REPOSITORY_OWNER} ${BUILD_ARCHIVE_CHOICE} ${DATASTORE_CHOICE} ${BUILD_IDENTIFIER} ${WEBSITE_NAME}"
-
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${DBIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreConfigValue.sh \"BUILDARCHIVECHOICE\" \"${BUILD_ARCHIVE_CHOICE}\""
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${DBIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/applicationdb/InstallApplicationDB.sh force"
-
 
 status "Performing any post processing that is needed for your application. This may take a little while depending on your application, Please wait...."
 /usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${FULL_SNAPSHOT_ID}@${WSIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/application/processing/PerformPostProcessingByApplication.sh ${FULL_SNAPSHOT_ID}"
@@ -396,7 +382,6 @@ done
 
 ${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} INSTALLEDSUCCESSFULLY INSTALLEDSUCCESSFULLY
 ${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} ENABLESYNCTUNNEL ENABLESYNCTUNNEL
-
 
 # If we got to here then we really are doing quite well and we can assume that the environment is Ok to use next
 # time around, so dump it to a config file
