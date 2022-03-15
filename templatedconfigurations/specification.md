@@ -811,5 +811,5 @@ These are the full IDs of the images that your servers will be built off if you 
 
 ### SELECTED_TEMPLATE
 
-When you are making a "hardcore" build, you need to supplyu the number of the template you are generating a script for for example, "1", "2", "3"
+When you are making a "hardcore" build, you need to supply the number of the template you are generating a script for for example, "1", "2", "3"
 
