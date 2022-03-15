@@ -72,9 +72,7 @@ then
     do
         /usr/local/bin/doctl databases firewalls remove ${uuid}
     done
-    
- #   /usr/local/bin/doctl databases firewalls append ${cluster_id} --rule ip_addr:${BUILD_CLIENT_IP}    
-   
+       
     status "Creating a database neame ${DATABASE_NAME} in cluster: ${cluster_id}"
     
     /usr/local/bin/doctl databases db create ${cluster_id} ${DATABASE_NAME}
@@ -272,7 +270,6 @@ then
         DATABASE_NAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $4}'`"
         DATABASE_IDENTIFIER="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $5}'`"
         ALLOCATED_STORAGE="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $6}'`"
-      #  DB_PORT="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $7}'`"
         DATABASE_USERNAME="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $8}'`"
         DATABASE_PASSWORD="`/bin/echo ${database_details} | /usr/bin/awk -F':' '{print $9}'`"
 
@@ -288,7 +285,6 @@ then
         fi
 
         security_group_id="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
-
         security_group_id1="`/usr/bin/aws ec2 describe-security-groups | /usr/bin/jq '.SecurityGroups[] | .GroupName + " " + .GroupId' | /bin/grep AgileDeploymentToolkitWebserversSecurityGroup | /bin/sed 's/\"//g' | /usr/bin/awk '{print $NF}'`"
 
 
