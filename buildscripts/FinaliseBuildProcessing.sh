@@ -131,7 +131,7 @@ fi
 ${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} INSTALLEDSUCCESSFULLY INSTALLEDSUCCESSFULLY
 ${BUILD_HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${WEBSITE_URL} ENABLESYNCTUNNEL
 
-status "Just giving the servers a little bit of time to complete their internal initialisation. Please wait...."
+status "Just giving the servers a little bit of time (2 minutes) to complete their internal initialisation. Please wait...."
 
 /bin/sleep 120
 
