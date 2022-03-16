@@ -115,9 +115,11 @@ do
         /bin/echo
         if ( [ "${setting}" != "" ] )
         then
+             value="`/bin/echo ${value} | /bin/sed 's|/|\\\/|g'`"
             /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"${setting}\"/g" ${newoverridescript}
             /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" default=\"${setting}\"\/>/g" ${newoverridescript}.stack
         else
+            value="`/bin/echo ${value} | /bin/sed 's|/|\\\/|g'`"
             /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"${value}\"/g" ${newoverridescript}
             /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" default=\"${value}\"\/>/g" ${newoverridescript}.stack
         fi
@@ -152,6 +154,7 @@ then
             /bin/sed "/### ${livevariable}/,/----/!d;/----/q" ${BUILD_HOME}/templatedconfigurations/specification.md
             /bin/echo "Found a variable ${livevariable} what do you want to set it to?"
             value="`/bin/grep -w "^export ${livevariable}=" ${overridescript} | /usr/bin/awk -F'"' '{print $2}'`"
+            value="`/bin/echo ${value} | /bin/sed 's|/|\\\/|g'`"
             /bin/echo "Its current value is \"${value}\" press <enter> to retain, anything else to override"
             read setting
             /bin/echo "OK, thanks..."
@@ -179,6 +182,7 @@ else
        fi
        if ( ( [ "`/bin/grep 'NOT REQUIRED' ${overridescript} | /bin/grep "^export ${livevariable}="`" = "" ] ) && ( [ "`/bin/grep 'MANDATORY' ${overridescript} | /bin/grep "^export ${livevariable}="`" = "" ] ) )
        then 
+          value="`/bin/echo ${value} | /bin/sed 's|/|\\\/|g'`"
           /bin/sed -i "s/^export ${livevariable}=.*/export ${livevariable}=\"${value}\"/g" ${newoverridescript}
           /bin/sed -i "s/^export ${livevariable}=.*/# <UDF name=\"${livevariable}\" label=\"${display_name}\" default=\"${value}\"\/>/g" ${newoverridescript}.stack
        fi
