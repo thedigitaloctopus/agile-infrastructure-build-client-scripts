@@ -114,7 +114,6 @@ then
                 ${BUILD_HOME}/installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
                 #Make Sure python PIP is at the latest version:
                 status "Updating Python....."
-               # ${BUILD_HOME}/installscripts/PurgePython.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
                 ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
                 ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
                 /bin/touch ${BUILD_HOME}/runtimedata/AGUPDATEDSOFTWARE
@@ -126,7 +125,6 @@ then
                 ${BUILD_HOME}/installscripts/Upgrade.sh "debian" >>${UPGRADE_LOG} 2>&1
                 #Make Sure python PIP is at the latest version:
                 status "Updating Python....."
-              #  ${BUILD_HOME}/installscripts/PurgePython.sh "debian" >>${UPGRADE_LOG} 2>&1
                 ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "debian" >>${UPGRADE_LOG} 2>&1
                 ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "debian" >>${UPGRADE_LOG} 2>&1
                 /bin/touch ${BUILD_HOME}/runtimedata/AGUPDATEDSOFTWARE
@@ -381,14 +379,6 @@ then
     ${BUILD_HOME}/installscripts/InstallUFW.sh "${BUILDOS}"
 fi
 
-##Ask the user what cloudhost (has to be a supported cloudhost) they want to deploy to this time
-#. ${BUILD_HOME}/SelectCloudhost.sh
-#
-##Configure the datastore (s3cmd tool)
-#. ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
-#. ${BUILD_HOME}/providerscripts/datastore/ObtainSnapshotData.sh
-#. ${BUILD_HOME}/buildscripts/InitialiseSMTPMailServer.sh
-
 #These have to be persisted here for later use (necessary in case we decide to use the .dat file from a previous build, in which case these
 #values may be different to what we have set this time). To see where these are mostly set, look to the end of the Finaliser script in the
 #buildscripts directory
@@ -590,7 +580,6 @@ SERVER_USER_PASSWORD="`/usr/bin/openssl rand -base64 32 | /usr/bin/tr -cd 'a-zA-
 . ${BUILD_HOME}/initscripts/InitialiseCaching.sh
 . ${BUILD_HOME}/initscripts/InitialiseGuardianGateway.sh
 . ${BUILD_HOME}/initscripts/InitialiseDatabase.sh
-#. ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 . ${BUILD_HOME}/BackupBuildMachine.sh
 . ${BUILD_HOME}/initscripts/InitialiseBuildParams.sh
 . ${BUILD_HOME}/initscripts/InitialiseDatastore.sh
@@ -695,8 +684,6 @@ then
     done
     . ${BUILD_HOME}/buildscripts/BuildFromSnapshots.sh
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
-#    export PRE_BUILD="0"
-#    . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
     /bin/touch /tmp/PRIME_FIREWALL
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
@@ -744,8 +731,6 @@ else
     . ${BUILD_HOME}/buildscripts/BuildWebserver.sh
     . ${BUILD_HOME}/buildscripts/BuildDatabase.sh
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
-#    export PRE_BUILD="0"
-#    . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
     /bin/touch /tmp/PRIME_FIREWALL
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
