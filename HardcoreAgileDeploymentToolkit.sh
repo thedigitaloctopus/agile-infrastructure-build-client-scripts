@@ -174,7 +174,7 @@ then
     status "###################################################################################################################################"
     status "You need to run this script either directly as root or with the sudo command as it needs to make some installations to your machine"
     status "If this is a problem and you don't want stuff installed on your machine, I recommend that you spin up a dedicated build machine"
-    status "in the cloud for dedicated use when building/deploying with this toolkit (ubuntu 20.04 or debian 10) are suitable build machines to use"
+    status "in the cloud for dedicated use when building/deploying with this toolkit (ubuntu 20.04 and up or debian 10 and up ) are suitable build machines to use"
     status "###################################################################################################################################"
     exit
 fi
