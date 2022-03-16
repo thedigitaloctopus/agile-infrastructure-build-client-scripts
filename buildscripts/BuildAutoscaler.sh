@@ -94,8 +94,6 @@ do
         if ( [ "${OS_TYPE}" = "" ] )
         then
             OS_TYPE="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${AS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
-        #else
-        #    ostype="${OS_TYPE}"
         fi
         
         status "Initialising a new server machine, please wait......"
@@ -277,7 +275,6 @@ do
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/autoscaler_configuration_settings.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh >/dev/null 2>&1
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/builddescriptors/buildstylesscp.dat ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/buildstyles.dat >/dev/null 2>&1
 
-
         #This is a call to our script to configure out provider. Have a look in the script to see what it's up to
         ${BUILD_HOME}/providerscripts/cloudhost/ConfigureProvider.sh ${BUILD_HOME} ${CLOUDHOST} ${BUILD_IDENTIFIER} ${ALGORITHM} ${ip} ${SERVER_USER} ${SERVER_USER_PASSWORD}
 
@@ -323,23 +320,17 @@ do
         #call for that reason and that reason alone
         /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive cd /home/${SERVER_USER} && /home/${SERVER_USER}/bootstrap/GitPull.sh ${INFRASTRUCTURE_REPOSITORY_PROVIDER} ${INFRASTRUCTURE_REPOSITORY_USERNAME} ${INFRASTRUCTURE_REPOSITORY_PASSWORD} ${INFRASTRUCTURE_REPOSITORY_OWNER} agile-infrastructure-autoscaler-scripts"
 
-
         #The BUILD_CHOICE relates to which periodicity of backup we want to build our webserver(s) from. This is recorded on our autoscaler here
         if ( [ "${BUILD_CHOICE}" = "0" ] )
         then
             #This is a virgin build so this is something like a vanilla version of a CMS system
-            #/bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:virgin
-            #/usr/bin/scp ${OPTIONS} ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/BUILDARCHIVE:virgin ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/BUILDARCHIVE:virgin
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVE' 'virgin'" 
-    
-    
         elif ( [ "${BUILD_CHOICE}" = "1" ] )
         then
             #This is a virgin build from the baseline of our application. When we developed our application, the last thing we should
             #have done is made a final baseline which can then be used to take our application live. Once it is live we will start
             #makeing periodic backups and we can build off those backups if we want to
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/providerscripts/utilities/StoreConfigValue.sh 'BUILDARCHIVECHOICE' 'baseline'" 
-
         elif ( [ "${BUILD_CHOICE}" = "2" ] )
         then
             #This builds from a backup which is one hour old
@@ -395,7 +386,6 @@ do
 
         /bin/sleep 10
 
-
         done="0"
         alive=""
         #Start checking that the autoscaler is "built and alive" The last thing that the as.sh script does is reboot the machine
@@ -407,9 +397,7 @@ do
         do
             count1="`/usr/bin/expr ${count1} + 1`"
             alive="`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/ls /home/${SERVER_USER}/runtime/AUTOSCALER_READY"`"
-
             status "Testing if the autoscaler built correctly and is allowing connections....."
-
             /bin/sleep 30
 
             if ( [ "${alive}" = "/home/${SERVER_USER}/runtime/AUTOSCALER_READY" ] )
