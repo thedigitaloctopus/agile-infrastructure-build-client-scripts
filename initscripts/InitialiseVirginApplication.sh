@@ -77,21 +77,21 @@ then
         /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/APPLICATION:joomla
         APPLICATION="joomla"
         DIRECTORIES_TO_MOUNT="images"
-elif ( [ "${APPLICATION}" = "2" ] )
+    elif ( [ "${APPLICATION}" = "2" ] )
     then
         APPLICATION_BASELINE_SOURCECODE_REPOSITORY="WORDPRESS"
         BASELINE_DB_REPOSITORY="VIRGIN"
         APPLICATION="wordpress"
         /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/APPLICATION:wordpress
         DIRECTORIES_TO_MOUNT="wp-content.uploads"
-elif ( [ "${APPLICATION}" = "3" ] )
+    elif ( [ "${APPLICATION}" = "3" ] )
     then
         APPLICATION_BASELINE_SOURCECODE_REPOSITORY="MOODLE:${MOODLE_VERSION}"
         BASELINE_DB_REPOSITORY="VIRGIN"
         APPLICATION="moodle"
         /bin/touch ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/APPLICATION:moodle
         DIRECTORIES_TO_MOUNT="moodledata.filedir"
-elif ( [ "${APPLICATION}" = "4" ] )
+    elif ( [ "${APPLICATION}" = "4" ] )
     then
         status "Plese input the version number of drupal that you wish to install."
         status "You can find the latest version number at:"
