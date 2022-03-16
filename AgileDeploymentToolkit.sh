@@ -64,7 +64,7 @@ status "########################################################################
 status "WARNING, THIS SCRIPT WILL MAKE CHANGES AND INSTALL SOFTWWARE ON YOUR MACHINE. YOU SHOULD BE USING A DEDICATED LINUX MACHINE EITHER"
 status "RUNNING ON A VPS SYSTEM, OR POSSIBLY OFF A PERSISTENT USB ON YOUR LOCAL MACHINE"
 status "IF YOU ARE RUNNING THIS ON A LOCAL MACHINE, I RECOMMEND 'MX LINUX' ON A PERSISTENT USB"
-status "IF YOU ARE RUNNING ON A VPS SYSTEM, UBUNTU 20.04 and DEBIAN 10 ARE SUPPORTED"
+status "IF YOU ARE RUNNING ON A VPS SYSTEM, UBUNTU 20.04 and up and DEBIAN 10 and up ARE SUPPORTED"
 status "ENSURE THE MACHINE YOU ARE RUNNING THIS SCRIPT ON IS SECURED AS IT WILL HOLD SENSITIVE CREDENTIALS AND SO ON WITHIN ITS FILESYSTEM"
 status "ONCE THE BUILD PROCESS COMPLETES"
 status "IF YOU CONTINUE, YOU ACKNOWLEDGE THIS....."
@@ -204,7 +204,7 @@ then
     status "###################################################################################################################################"
     status "You need to run this script either directly as root or with the sudo command as it needs to make some installations to your machine"
     status "If this is a problem and you don't want stuff installed on your machine, I recommend that you spin up a dedicated build machine"
-    status "in the cloud for dedicated use when building/deploying with this toolkit (ubuntu 20.04 or debian 10) are suitable build machines to use"
+    status "in the cloud for dedicated use when building/deploying with this toolkit (ubuntu 20.04 and up or debian 10 and up) are suitable build machines to use"
     status "###################################################################################################################################"
     exit
 fi
