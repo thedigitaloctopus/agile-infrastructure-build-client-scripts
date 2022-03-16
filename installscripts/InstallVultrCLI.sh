@@ -27,19 +27,13 @@ fi
 
 if ( [ "${BUILD_OS}" = "ubuntu" ] )
 then
-    #official deprecated
-   # /usr/bin/git clone https://github.com/vultr/vultr-cli.git
-   # cd vultr-cli
-   # /usr/bin/make builds/vultr-cli_linux_amd64
-   # /bin/cp builds/vultr* /usr/bin/vultr
-   # cd ..
     
     #Official
     /usr/bin/go get -u github.com/vultr/vultr-cli/v2
     vultrcli="`/usr/bin/find / -name "vultr-cli" -print | /bin/grep bin | /bin/grep vultr-cli`"
     /bin/cp ${vultrcli} /usr/bin/vultr
    
-   #Clonk
+    #Clonk
     #latest="`/usr/bin/curl https://github.com/JamesClonk/vultr/releases/latest | /bin/sed 's/.*tag\///g' | /bin/sed 's/\".*//g' | /bin/sed 's/v//g'`"
     #/usr/bin/wget https://github.com/JamesClonk/vultr/releases/download/v${latest}/vultr_${latest}_Linux-64bit.tar.gz
     #if ( [ ! -d ${BUILD_HOME}/vultr ] )
@@ -53,12 +47,6 @@ fi
 
 if ( [ "${BUILD_OS}" = "debian" ] )
 then
-    #official deprecated 
- #   /usr/bin/git clone https://github.com/vultr/vultr-cli.git
- #   cd vultr-cli
- #   /usr/bin/make builds/vultr-cli_linux_amd64
-  #  /bin/cp builds/vultr* /usr/bin/vultr
-   # cd ..
    
     #Official
     /usr/bin/go get -u github.com/vultr/vultr-cli/v2
