@@ -72,8 +72,8 @@ then
    
    /usr/bin/curl -H "Content-Type: application/json" -H "Authorization: Bearer ${TOKEN}" -X PUT -d "{ \"allow_list\": [ ${ips} ] }" https://api.linode.com/v4beta/databases/mysql/instances/${DATABASE_ID}
  
-   # Couldn't get this to work so having to use curl
-    #  /usr/local/bin/linode-cli databases mysql-update --label "${DBaaS_DBNAME}" --allow-list"${ips}"
+   # Couldn't get this to work so had to use curl as above
+   #  /usr/local/bin/linode-cli databases mysql-update --label "${DBaaS_DBNAME}" --allow-list"${ips}"
 
 fi
 
