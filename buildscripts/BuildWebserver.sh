@@ -86,8 +86,6 @@ do
         if ( [ "${OS_TYPE}" = "" ] )
         then
             OS_TYPE="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${WS_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
-        #else
-        #    ostype="${OS_TYPE}"
         fi
 
         status "Initialising a new server machine, please wait......"
@@ -248,9 +246,7 @@ do
         fi
         
         /usr/bin/ssh ${OPTIONS} ${DEFAULT_USER}@${ip} "DEBIAN_FRONTEND=noninteractive /bin/sh -c '${SUDO} /usr/sbin/adduser --disabled-password --force-badname --gecos \"\" ${SERVER_USER} ; /bin/echo ${SERVER_USER}:${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/chpasswd ; ${SUDO} /usr/bin/gpasswd -a ${SERVER_USER} sudo ; ${SUDO} /bin/mkdir -p /home/${SERVER_USER}/.ssh ; ${SUDO} /bin/chown -R ${SERVER_USER}.${SERVER_USER} /home/${SERVER_USER}/ ; ${SUDO} /bin/chmod 700 /home/${SERVER_USER}/.ssh ; ${SUDO} /bin/chmod 400 /home/${SERVER_USER}/.ssh/authorized_keys' ; ${SUDO} /bin/sed -i '$ a\ ClientAliveInterval 60\nTCPKeepAlive yes\nClientAliveCountMax 10000' /etc/ssh/sshd_config ; ${SUDO} /bin/sed -i 's/.*PermitRootLogin.*$/PermitRootLogin no/g' /etc/ssh/sshd_config ;  ${SUDO} /usr/sbin/service sshd restart"
-
         status "It looks like the machine is booted and accepting connections, so, let's pass it all our configuration stuff that it needs"
-
         /usr/bin/scp ${OPTIONS} ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} ${SERVER_USER}@${ip}:/home/${SERVER_USER}/.ssh/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY
                 
         /bin/cp /dev/null ${BUILD_HOME}/runtimedata/${CLOUDHOST}/${BUILD_IDENTIFIER}/webserver_configuration_settings.dat
@@ -276,12 +272,10 @@ do
         #configure for the cloudhost provider we are using
         ${BUILD_HOME}/providerscripts/cloudhost/ConfigureProvider.sh ${BUILD_HOME} ${CLOUDHOST} ${BUILD_IDENTIFIER} ${ALGORITHM} ${ip} ${SERVER_USER}
 
-
         #Here we are configuring our datastore provider. Earlier, when we we inputting all out config details at the beginning of
         #the scripts, we got all the credential information for our datastore provider. So, we can safely assume that this is OK
         #to reuse and we pass it to our autoscaler which can then pass it to any webservers it spawns and so on giving us a single
         #place where we authenticated for our datastore and then we simply reuse those credentials multiple times and in multiple places
-
         ${BUILD_HOME}/providerscripts/datastore/ConfigureDatastoreProvider.sh ${DATASTORE_CHOICE} ${ip} ${CLOUDHOST} ${BUILD_IDENTIFIER} ${ALGORITHM} ${BUILD_HOME} ${SERVER_USER} ${SERVER_USER_PASSWORD}
 
         #Our sourcecode which actually defines what a webserver will do and how it will function is held in a git repo. So, if
@@ -317,27 +311,27 @@ do
         then
             #We are building a virgin system
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /bin/sh /home/${SERVER_USER}/ws.sh 'virgin' ${SERVER_USER}"
-    elif ( [ "${BUILD_CHOICE}" = "1" ] )
+        elif ( [ "${BUILD_CHOICE}" = "1" ] )
         then
             #We are building from a baseline
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /bin/sh /home/${SERVER_USER}/ws.sh 'baseline' ${SERVER_USER}"
-    elif ( [ "${BUILD_CHOICE}" = "2" ] )
+        elif ( [ "${BUILD_CHOICE}" = "2" ] )
         then
             #We are building from an hourly backup
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /bin/sh /home/${SERVER_USER}/ws.sh 'hourly' ${SERVER_USER}"
-    elif ( [ "${BUILD_CHOICE}" = "3" ] )
+        elif ( [ "${BUILD_CHOICE}" = "3" ] )
         then
             #We are building from an daily backup
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /bin/sh /home/${SERVER_USER}/ws.sh 'daily' ${SERVER_USER}"
-    elif ( [ "${BUILD_CHOICE}" = "4" ] )
+        elif ( [ "${BUILD_CHOICE}" = "4" ] )
         then
             #We are building from an weekly backup
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /bin/sh /home/${SERVER_USER}/ws.sh 'weekly' ${SERVER_USER}"
-    elif ( [ "${BUILD_CHOICE}" = "5" ] )
+        elif ( [ "${BUILD_CHOICE}" = "5" ] )
         then
             #We are building from an monthly backup
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /bin/sh /home/${SERVER_USER}/ws.sh 'monthly' ${SERVER_USER}"
-    elif ( [ "${BUILD_CHOICE}" = "6" ] )
+        elif ( [ "${BUILD_CHOICE}" = "6" ] )
         then
             #We are building from an bimonthly backup
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /bin/sh /home/${SERVER_USER}/ws.sh 'bimonthly' ${SERVER_USER}"
@@ -435,9 +429,6 @@ do
 
             if ( [ "${PRODUCTION}" != "0" ] && [ "${DEVELOPMENT}" != "1" ] )
             then
-                # Give a copy of the ssl certificate generated to the autoscaler for use when building new webservers when autoscaling
-                #ASIP="`/bin/ls ${BUILD_HOME}/runtimedata/ips/${CLOUDHOST}/${BUILD_IDENTIFIER}/ASIP:* | /usr/bin/awk -F':' '{print $2}'`"
-
                 ASIPS_CLEANED="`/bin/echo ${ASIPS} | /bin/sed 's/\:/ /g'`"
                 for ASIP in ${ASIPS_CLEANED}
                 do
