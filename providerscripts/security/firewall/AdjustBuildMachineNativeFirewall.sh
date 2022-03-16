@@ -1,5 +1,24 @@
-#!/bin/sh
-
+#!/bin/bash
+########################################################################################
+# Author: Peter Winter
+# Date  : 12/07/2021
+# Description : This will apply any native firewalling to the build machine
+########################################################################################
+# License Agreement:
+# This file is part of The Agile Deployment Toolkit.
+# The Agile Deployment Toolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# The Agile Deployment Toolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
+#########################################################################################
+#########################################################################################
+#set -x
 
 if ( [ "${CLOUDHOST}" = "digitalocean" ] )
 then
@@ -180,10 +199,6 @@ then
     fi
     
     /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id}  --ip-permissions  "`/usr/bin/aws ec2 describe-security-groups --output json --group-ids ${security_group_id} --query "SecurityGroups[0].IpPermissions"`"   
-            
-  #  /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port ${SSH_PORT} --cidr 0.0.0.0/0 
-  #  /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 22 --cidr 0.0.0.0/0
-  #  /usr/bin/aws ec2 revoke-security-group-ingress --group-id ${security_group_id} --protocol tcp --port 0-65535 --cidr 0.0.0.0/0
 
     if ( [ "${ip}" != "NOIP" ] )
     then
@@ -204,7 +219,5 @@ then
     else
         /usr/bin/aws ec2 authorize-security-group-ingress --group-id ${security_group_id} --ip-permissions IpProtocol=tcp,FromPort=${SSH_PORT},ToPort=${SSH_PORT},IpRanges="[{0.0.0.0/0}]"
     fi
-    
-
 fi
     
