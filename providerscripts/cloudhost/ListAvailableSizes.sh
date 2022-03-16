@@ -34,7 +34,7 @@ then
     if ( [ "${buildos}" = "ubuntu" ] )
     then
         /bin/echo "10G 50G 200G 300G 400G"
-elif ( [ "${buildos}" = "debian" ] )
+    elif ( [ "${buildos}" = "debian" ] )
     then
         /bin/echo "10G 50G 200G 300G 400G"
     fi
