@@ -67,8 +67,6 @@ then
         ${BUILD_HOME}/installscripts/Update.sh "${buildos}"
         ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "${buildos}"
         ${BUILD_HOME}/installscripts/InstallLinodeCLI.sh "${buildos}"
-      #  /usr/bin/unlink /usr/bin/python
-      #  /usr/bin/ln -s /usr/bin/python3 /usr/bin/python
     fi
 fi
 if ( [ "${cloudhost}" = "vultr" ] )
@@ -95,7 +93,6 @@ then
         ${BUILD_HOME}/installscripts/InstallSudo.sh "${buildos}"
         ${BUILD_HOME}/installscripts/InstallJQ.sh "${buildos}"
         ${BUILD_HOME}/installscripts/InstallAWSCLI.sh "${buildos}"
-     #   ${BUILD_HOME}/installscripts/InstallAWSCLI53.sh "${buildos}"
     fi
 fi
 
