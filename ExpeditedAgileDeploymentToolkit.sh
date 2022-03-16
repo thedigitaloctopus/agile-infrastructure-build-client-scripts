@@ -181,7 +181,6 @@ then
                 ${BUILD_HOME}/installscripts/Upgrade.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
                 #Make Sure python PIP is at the latest version:
                 status "Updating python"
-              #  ${BUILD_HOME}/installscripts/PurgePython.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
                 ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "ubuntu" >>${UPGRADE_LOG} 2>&1 
                 ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "ubuntu" >>${UPGRADE_LOG} 2>&1
                 status "Updating the CS tool"
@@ -217,7 +216,6 @@ then
                 ${BUILD_HOME}/installscripts/Upgrade.sh "debian" >>${UPGRADE_LOG} 2>&1
                 #Make Sure python PIP is at the latest version:
                 status "Updating python"
-            #    ${BUILD_HOME}/installscripts/PurgePython.sh "debian" >>${UPGRADE_LOG} 2>&1 
                 ${BUILD_HOME}/installscripts/InstallPythonPIP.sh "debian" >>${UPGRADE_LOG} 2>&1 
                 ${BUILD_HOME}/installscripts/InstallPythonDateUtil.sh "debian" >>${UPGRADE_LOG} 2>&1
                 status "Updating the CS tool"
@@ -428,7 +426,6 @@ status ""
 . ${BUILD_HOME}/initscripts/InitialiseSMTPMailServer.sh
 . ${BUILD_HOME}/providerscripts/datastore/SetupConfiguration.sh
 . ${BUILD_HOME}/providerscripts/datastore/ObtainSnapshotData.sh
-#. ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 . ${BUILD_HOME}/BackupBuildMachine.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
@@ -548,8 +545,6 @@ then
     done
     . ${BUILD_HOME}/buildscripts/BuildFromSnapshots.sh
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
- #   export PRE_BUILD="0"
- #   . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
     /bin/touch /tmp/PRIME_FIREWALL
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
@@ -593,8 +588,6 @@ else
     . ${BUILD_HOME}/buildscripts/BuildWebserver.sh
     . ${BUILD_HOME}/buildscripts/BuildDatabase.sh
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenDBaaSFirewall.sh
- #   export PRE_BUILD="0"
- #   . ${BUILD_HOME}/providerscripts/security/firewall/CheckNativeFirewall.sh
     /bin/touch /tmp/PRIME_FIREWALL
     . ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
 
