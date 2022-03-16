@@ -31,7 +31,7 @@ then
     then
         buildosversion="`/bin/echo ${buildosversion} | /bin/sed 's/\./-/g'`"
         /bin/echo "ubuntu-${buildosversion}-x64"
-elif ( [ "${buildos}" = "debian" ] )
+    elif ( [ "${buildos}" = "debian" ] )
     then
         /bin/echo "debian-${buildosversion}-x64"
     fi
@@ -43,7 +43,7 @@ then
     then
         /usr/local/bin/cs listTemplates templatefilter=featured | jq ".template[] | select( .displaytext | contains(\"Ubuntu ${buildosversion} LTS 64-bit\")) | .id" | /bin/sed 's/\"//g' | /usr/bin/tail -n -1
         /usr/local/bin/cs listTemplates templatefilter=featured | jq ".template[] | select( .displaytext | contains(\"Ubuntu ${buildosversion} 64-bit\")) | .id" | /bin/sed 's/\"//g' | /usr/bin/tail -n -1
-elif ( [ "${buildos}" = "debian" ] )
+    elif ( [ "${buildos}" = "debian" ] )
     then
         /usr/local/bin/cs listTemplates templatefilter=featured | jq ".template[] | select( .displaytext | contains(\"Debian ${buildosversion} 64-bit\")) | .id" | /bin/sed 's/\"//g' | /usr/bin/tail -n -1
         /usr/local/bin/cs listTemplates templatefilter=featured | jq ".template[] | select( .displaytext | contains(\"Debian ${buildosversion} (Buster) 64-bit\")) | .id" | /bin/sed 's/\"//g' | /usr/bin/tail -n -1
@@ -56,7 +56,7 @@ then
     if ( [ "${buildos}" = "ubuntu" ] )
     then
         /bin/echo "Ubuntu ${buildosversion}"
-elif ( [ "${buildos}" = "debian" ] )
+    elif ( [ "${buildos}" = "debian" ] )
     then
         /bin/echo "Debian ${buildosversion}"
     fi
@@ -67,7 +67,7 @@ then
     if ( [ "${buildos}" = "ubuntu" ] )
     then
         /bin/echo "Ubuntu ${buildosversion} x64"
-elif ( [ "${buildos}" = "debian" ] )
+    elif ( [ "${buildos}" = "debian" ] )
     then
         /bin/echo "Debian ${buildosversion} x64"
     fi
@@ -78,7 +78,7 @@ then
     if ( [ "${OS_TYPE}" != "" ] )
     then
         /bin/echo "${OS_TYPE}"
-elif ( [ "${buildos}" = "ubuntu" ] )
+    elif ( [ "${buildos}" = "ubuntu" ] )
     then
         /bin/echo "################################################################################################################" >&3
         /bin/echo "Please enter the ami in the format ami-xxxxxxxxxxxxxxx that you wish to use for this ubuntu based machine" >&3
