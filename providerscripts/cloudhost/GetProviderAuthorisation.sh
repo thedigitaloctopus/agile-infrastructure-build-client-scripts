@@ -77,8 +77,6 @@ then
     do
         /bin/rm -r ${BUILD_HOME}/runtimedata/${cloudhost}
         /bin/mkdir ${BUILD_HOME}/runtimedata/${cloudhost}
-        #/bin/rm ${BUILD_HOME}/runtimedata/${cloudhost}/ACCESS_KEY 2>/dev/null
-       # /bin/rm ${BUILD_HOME}/runtimedata/${cloudhost}/SECRET_KEY 2>/dev/null
         /bin/rm ${HOME}/.cloudstack.ini 2>/dev/null
         status "Couldn't find valid authentication keys for Exoscale"
         status ""
