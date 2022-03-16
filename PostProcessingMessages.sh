@@ -105,7 +105,6 @@ then
     status "Please make a note of them but remember to keep them safe and secret"
     status "============================"
     . ${BUILD_HOME}/providerscripts/datastore/DisplayCredentials.sh
-   # status "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /bin/cat /home/${SERVER_USER}/config/credentials/shit"`"
     status "============================"
     
     /bin/sleep 10
@@ -123,7 +122,6 @@ then
     status "Please make a note of them but remember to keep them safe and secret"
     status "============="
     . ${BUILD_HOME}/providerscripts/datastore/DisplayCredentials.sh
-   # status "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /bin/cat /home/${SERVER_USER}/config/credentials/shit"`"
     status "============="
     status "Please press the <enter> key to acknowledge this message and that you have made a note of the credentials and the build will be complete."
     status "###########################################################################################################################################"
@@ -140,7 +138,6 @@ then
     status "Please make a note of them but remember to keep them safe and secret"
     status "============="
     . ${BUILD_HOME}/providerscripts/datastore/DisplayCredentials.sh
-   # status "`/usr/bin/ssh -p ${SSH_PORT} ${OPTIONS} ${SERVER_USER}@${DBIP} "${SUDO} /bin/cat /home/${SERVER_USER}/config/credentials/shit"`"
     status "============="
     
     username="${BUILD_IDENTIFIER}-webmaster"
