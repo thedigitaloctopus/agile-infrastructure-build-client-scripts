@@ -90,8 +90,6 @@ do
         if ( [ "${OS_TYPE}" = "" ] )
         then
             OS_TYPE="`${BUILD_HOME}/providerscripts/cloudhost/GetOperatingSystemVersion.sh ${DB_SIZE} ${CLOUDHOST} ${BUILDOS} ${BUILDOS_VERSION}`"
-        #else
-        #    ostype="${OS_TYPE}"
         fi
 
         status "Initialising a new server machine, please wait......"
@@ -327,27 +325,27 @@ do
         then
             #We are building a virgin installation
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/db.sh 'virgin' ${SERVER_USER} ${BUILD_TYPE}"
-    elif ( [ "${BUILD_CHOICE}" = "1" ] )
+        elif ( [ "${BUILD_CHOICE}" = "1" ] )
         then
             #We are building from a baseline
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/db.sh 'baseline' ${SERVER_USER} ${BUILD_TYPE}"
-    elif ( [ "${BUILD_CHOICE}" = "2" ] )
+        elif ( [ "${BUILD_CHOICE}" = "2" ] )
         then
             #We are building from an hourly backup
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/db.sh 'hourly' ${SERVER_USER} ${BUILD_TYPE}"
-    elif ( [ "${BUILD_CHOICE}" = "3" ] )
+        elif ( [ "${BUILD_CHOICE}" = "3" ] )
         then
             #We are building from an daily backup
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/db.sh 'daily' ${SERVER_USER} ${BUILD_TYPE}"
-    elif ( [ "${BUILD_CHOICE}" = "4" ] )
+        elif ( [ "${BUILD_CHOICE}" = "4" ] )
         then
             #We are building from an weekly backup
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/db.sh 'weekly' ${SERVER_USER} ${BUILD_TYPE}"
-    elif ( [ "${BUILD_CHOICE}" = "5" ] )
+        elif ( [ "${BUILD_CHOICE}" = "5" ] )
         then
             #We are building from an monthly backup
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/db.sh 'monthly' ${SERVER_USER} ${BUILD_TYPE}"
-    elif ( [ "${BUILD_CHOICE}" = "6" ] )
+        elif ( [ "${BUILD_CHOICE}" = "6" ] )
         then
             #We are building from an bimonthly backup
             /usr/bin/ssh ${OPTIONS} ${SERVER_USER}@${ip} "${CUSTOM_USER_SUDO} /home/${SERVER_USER}/db.sh 'bimonthly' ${SERVER_USER} ${BUILD_TYPE}"
