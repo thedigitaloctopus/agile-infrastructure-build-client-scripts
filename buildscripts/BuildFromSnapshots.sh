@@ -333,7 +333,7 @@ while ( [ "${credentials_confirmed}" != "1" ] )
 do
     status "Couldn't confirm database credentials, trying again....."
     . ${BUILD_HOME}/providerscripts/datastore/ConfirmCredentials.sh
-    /bin/sleep 10
+    /bin/sleep 30
 done
 
 
