@@ -106,9 +106,15 @@ fi
 
 /bin/echo "##################################################################################################################"
 /bin/echo "Your number of webservers is currently set to: ${original_no_webservers}"
-/bin/echo "What do you want to set your number of webservers to, please enter the number of webservers you want as an integer"
+/bin/echo "What do you want to set your number of webservers to, please enter the number (2 or more) of webservers you want - as an integer"
 /bin/echo "##################################################################################################################"
 read no_webservers
+
+while ( [ "${no_webservers}" -lt "2" ] )
+do
+    /bin/echo "Number of webservers has to be 2 or more. Please input a different value"
+    read no_webservers
+done
 
 /bin/sed -i "s/NO_WEBSERVER.*/NO_WEBSERVERS=${no_webservers}/" ./profile.cnf
 
