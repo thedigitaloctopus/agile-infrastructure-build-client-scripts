@@ -47,7 +47,7 @@ then
     status "############################################################################################################"
     status "" 
 
-    status "Do you want to use Elastic File System (make sure that your user has a security policy which allows it)"
+    status "Do you want to use Elastic File System (make sure that your AWS IAM security keys allow EFS actions in their policy)"
     status "Please enter Y or N"
 
     read answer
