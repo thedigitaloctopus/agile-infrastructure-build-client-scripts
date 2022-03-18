@@ -48,6 +48,6 @@ Once you are satisfied that all the necessary variables are set in your override
 
 **PLEASE NOTE**
 
-If you are using, for example, EFS, then when you generate your snapshots in the first phase, you need to make sure that, for example, ENABLE_EFS=1, DIRECTORIES_TO_MOUNT="images" and PERSIST_ASSETS_TO_CLOUD="1". If you set these values to anything else when you generate your snapshots, they will remain as you set them when you autoscale from these snapshots, in other words, if ENABLE_EFS="0" when you generated your snapshots, the ADT won't change the setting if you set it to ENABLE_EFS="1" when you autoscale off your snapshots later on. 
+If you are using, for example, EFS, then when you generate your snapshots in the first phase, you need to make sure that, for example, ENABLE_EFS=1, DIRECTORIES_TO_MOUNT="images" and PERSIST_ASSETS_TO_CLOUD="1". If you set these values to anything else when you generate your snapshots, they will remain as you set them when you autoscale from these snapshots, in other words, if ENABLE_EFS="0" when you generated your snapshots, the ADT won't change the setting if you set it to ENABLE_EFS="1" when you autoscale off your snapshots later on. In shots, snapshots should be generated how you want your live machined to be. 
 
 
