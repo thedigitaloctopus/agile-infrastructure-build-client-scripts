@@ -35,21 +35,6 @@ then
     status "############################################################################################################################################"
 fi
 
-if ( [ "${CLOUDHOST}" = "aws" ] && [ "${ENABLE_EFS}" != "1" ] )
-then
-    /usr/bin/banner "WARNING" >&3
-    status "############################################################################################################################################"
-    status "You are strongly advised to enable EFS (Elastic File System) when making an AWS deployment"
-    status "At the moment you are choosing to make an S3FS based deployment which might rack up your costs"
-    status "############################################################################################################################################"
-    status "If you want me to enable EFS for you, then, type 'Y' or 'y' below"
-    read response
-    if ( [ "${response}" = "y" ] || [ "${response}" = "Y" ] )
-    then
-        export ENABLE_EFS="1"
-    fi
-fi
-
 if ( [ "${BUILD_ARCHIVE_CHOICE}" = "virgin" ] || [ "${BUILD_ARCHIVE_CHOICE}" = "baseline" ] )
 then
     PRODUCTION="0"
