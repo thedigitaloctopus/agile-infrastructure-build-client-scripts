@@ -63,7 +63,7 @@ then
     then
         aws_region="`/bin/grep region ~/.aws/config | /usr/bin/awk '{print $NF}'`"
 
-        DIRECTORIES_TO_MOUNT="${DIRECTORIES_TO_MOUNT}:config"
+        DIRECTORIES_TO_MOUNT="${DIRECTORIES_TO_MOUNT}"
     
         for assettype in `/bin/echo ${DIRECTORIES_TO_MOUNT} | /bin/sed 's/:/ /g'`
         do
