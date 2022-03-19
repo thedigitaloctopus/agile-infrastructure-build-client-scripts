@@ -116,6 +116,7 @@ then
         if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
         then
             status "You are deploying for DBaaS which means you need to choose a second or additional subnet (in a different availability zone)"
+            status "Please enter the subnet id of a second subnet from the list above"
             read subnet_id1
             while ( [ "${subnet_id}" = "${subnet_id1}" ] )
             do
