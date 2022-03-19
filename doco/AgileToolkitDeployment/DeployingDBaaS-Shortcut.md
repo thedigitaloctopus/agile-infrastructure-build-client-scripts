@@ -110,9 +110,9 @@ So,
   
   So an example of this would be in your template or override:  
 
- 1. DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:eu-west-1b:db.t3.micro:TestDatabase:testdb:20:testdatabaseuser1:ghdbRtjh=g"  
- 2. DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mariadb:eu-west-1b:db.t3.micro:TestDatabase:testdb:20:testdatabaseuser1:ghdbRtjh=g"   
- 3. DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:postgres:eu-west-1a:db.t3.micro:TestDatabase:testdb:20:testdatabaseuser1:ghdbRtjh=g"  
+ 1. DATABASE_DBaaS_INSTALLATION_TYPE="MySQL:DBAAS:mysql:eu-west-1b:db.t3.micro:TestDatabase:testdb:20:testdatabaseuser:ghdbRtjh=g"  
+ 2. DATABASE_DBaaS_INSTALLATION_TYPE="Maria:DBAAS:mariadb:eu-west-1b:db.t3.micro:TestDatabase:testdb:20:testdatabaseuser:ghdbRtjh=g"   
+ 3. DATABASE_DBaaS_INSTALLATION_TYPE="Postgres:DBAAS:postgres:eu-west-1a:db.t3.micro:TestDatabase:testdb:20:testdatabaseuser:ghdbRtjh=g"  
   
   So, for the first example:  
   
@@ -123,7 +123,7 @@ So,
   db-name="TestDatabase"  
   db-identifier="testdb4"  
   storage-capacity="20"  
-  db-username="testdatabaseuser1"  
+  db-username="testdatabaseuser"  
   db-password="ghdbRtjh=g"
   
   **db-type** can be: **"MySQL", "Postgres"**    
@@ -141,7 +141,7 @@ So,
   
   **storage-capacity** disk storage capacity of your database, for example, **"20"** for 20GB   
   
-  **db-username** the username for your database for example, **"testdatabaseuser1"**   
+  **db-username** the username for your database for example, **"testdatabaseuser"**   
   
   **db-password** the password for your database for example, **"ghdbRtjh=g""**    
   
