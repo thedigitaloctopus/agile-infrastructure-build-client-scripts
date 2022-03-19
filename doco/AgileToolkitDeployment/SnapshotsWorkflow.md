@@ -50,4 +50,8 @@ Once you are satisfied that all the necessary variables are set in your override
 
 If you are using, for example, EFS, then when you generate your snapshots in the first phase, you need to make sure that, for example, ENABLE_EFS=1, DIRECTORIES_TO_MOUNT="images" and PERSIST_ASSETS_TO_CLOUD="1". If you set these values to anything else when you generate your snapshots, they will remain as you set them when you autoscale from these snapshots, in other words, if ENABLE_EFS="0" when you generated your snapshots, the ADT won't change the setting if you set it to ENABLE_EFS="1" when you autoscale off your snapshots later on. In short, snapshots should be generated how you want your live machines to be. 
 
+**PLEASE NOTE 2**  
+
+Your database credentials, username, password and database name must be kept the same between the build you make which generates the snapshots and the build you make which is the deployment of the snapshots. If you want to change the database name or the password for your database, its a pain, but, you will need to regenerate your snapshots with the credentials set as desired to then be used in your live snapshot based deployment situation. 
+
 
