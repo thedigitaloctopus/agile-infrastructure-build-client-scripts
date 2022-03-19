@@ -303,8 +303,11 @@ then
         /usr/bin/aws rds delete-db-subnet-group --db-subnet-group-name "AgileDeploymentToolkitSubnetGroup" 
         /usr/bin/aws rds create-db-subnet-group --db-subnet-group-name "AgileDeploymentToolkitSubnetGroup" --db-subnet-group-description "Agile Deployment DB subnet group" --subnet-ids "${SUBNET_ID}" "${SUBNET_ID1}"
 
-        /usr/bin/aws rds create-db-instance --db-name "${DATABASE_NAME}" --db-instance-identifier "${DATABASE_IDENTIFIER}" --allocated-storage "${ALLOCATED_STORAGE}" --db-instance-class "${DATABASE_SIZE}" --engine "${DATABASE_ENGINE}" --master-username "${DATABASE_USERNAME}"  --master-user-password "${DATABASE_PASSWORD}" --availability-zone "${DATABASE_REGION}" --db-subnet-group-name agiledeploymentdbsubnetgroup --port ${DB_PORT} --no-publicly-accessible  --storage-encrypted --vpc-security-group-ids ${security_group_id} ${security_group_id1} --db-subnet-group-name "AgileDeploymentToolkitSubnetGroup"
-
+        if ( [ "`/usr/bin/aws rds create-db-instance --db-name "${DATABASE_NAME}" --db-instance-identifier "${DATABASE_IDENTIFIER}" --allocated-storage "${ALLOCATED_STORAGE}" --db-instance-class "${DATABASE_SIZE}" --engine "${DATABASE_ENGINE}" --master-username "${DATABASE_USERNAME}"  --master-user-password "${DATABASE_PASSWORD}" --availability-zone "${DATABASE_REGION}" --db-subnet-group-name agiledeploymentdbsubnetgroup --port ${DB_PORT} --no-publicly-accessible  --storage-encrypted --vpc-security-group-ids ${security_group_id} ${security_group_id1} --db-subnet-group-name \"AgileDeploymentToolkitSubnetGroup\" 2>&1 | /bin/grep "instance already exists"`" != "" ] )
+        then
+             status "Using existing database ${DATABASE_NAME}"
+        fi
+        
         if ( [ "$?" = "0" ] )
         then
             db_name=""
