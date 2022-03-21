@@ -339,6 +339,7 @@ done
 
 if ( [ "${DATABASE_INSTALLATION_TYPE}" = "DBaaS" ] )
 then
+    /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${WSIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreDatabaseCredentials.sh \"${DBaaS_DBNAME}\" \"${DBaaS_PASSWORD}\" \"${DBaaS_USERNAME}\"" 
     /usr/bin/ssh -i ${BUILD_HOME}/keys/${CLOUDHOST}/${BUILD_IDENTIFIER}/id_${ALGORITHM}_AGILE_DEPLOYMENT_BUILD_KEY_${BUILD_IDENTIFIER} -o ConnectTimeout=10 -o ConnectionAttempts=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p ${SSH_PORT} ${FULL_SNAPSHOT_ID}@${DBIP} "${SUDO} /home/${FULL_SNAPSHOT_ID}/providerscripts/utilities/StoreDatabaseCredentials.sh \"${DBaaS_DBNAME}\" \"${DBaaS_PASSWORD}\" \"${DBaaS_USERNAME}\""                   
 fi
 
