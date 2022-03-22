@@ -5,7 +5,7 @@ export APPLICATION="" #MANDATORY joomla, wordpress, drupal or moodle
 export LINODEACCOUNT_USERNAME="" #MANDATORY
 export BUILD_CHOICE="2" #MANDATORY 2=hourly, 3=daily, 4=weekly, 5=monthly, 6=bimonthly
 export BUILD_ARCHIVE_CHOICE="hourly" #MANDATORY hourly, daily, weekly, monthly, bimonthly
-export PERSIST_ASSETS_TO_CLOUD="1" #This should only be 0 if your application has a very small number of assets
+export PERSIST_ASSETS_TO_CLOUD="1" #MANDATORY
 export APPLICATION_IDENTIFIER="" #MANDATORY - 1 for joomla, 2 for wordpress, 3 for drupal, 4 for moodle
 export DIRECTORIES_TO_MOUNT="" #MANDATORY The directories of dynamic assets in your webroot that will be mounted from S3
 export S3_ACCESS_KEY=""  #MANDATORY
@@ -47,7 +47,7 @@ export DEVELOPMENT="0"
 export SUPERSAFE_WEBROOT="1"
 export WEBSERVER_CHOICE="NGINX"
 export NO_AUTOSCALERS="1"
-export NUMBER_WS="1"
+export NUMBER_WS="2"
 export SUPERSAFE_DB="1"
 export DISABLE_HOURLY="0"
 export DATABASE_INSTALLATION_TYPE="MySQL"
