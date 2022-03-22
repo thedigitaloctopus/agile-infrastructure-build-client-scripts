@@ -137,7 +137,7 @@ So,
   
   **db-name** can be a descriptive name for your database, for example, **"TestDatabase"** (note, must be no spaces in the db-name parameter)    
   
-  **db-identifier** can be a unique string for your database, for example, **"testdb4"**   
+  **db-identifier** can be a unique string for your database, for example, **"testdb4"**  (do not use any upper case letters for the db-identifier)  
   
   **storage-capacity** disk storage capacity of your database, for example, **"20"** for 20GB   
   
