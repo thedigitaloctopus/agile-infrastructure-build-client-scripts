@@ -322,7 +322,7 @@ WordPress - export DIRECTORIES_TO_MOUNT="wp-content.uploads" - When the CMS is W
 These settings are twinned. It only makes sense for them to be in one of two configurations:
 
 Production mode : PRODUCTION="1", DEVELOPMENT="0"
-Development mode : PRODUCTION="0", DEVELOPMENY="1"
+Development mode : PRODUCTION="0", DEVELOPMENT="1"
 
 These settings must be altered as a pair. When in production, an autoscaler or autoscalers are deployed and you can set NUMBER_WS. On the autoscaler machine you can modify ${HOME}/config/scalingprofile/profile.cfg to set the number of webservers to deploy and also, in the crontab, you can set ScaleUp and ScaleDown script parameters to enable a time up and time down scaling. For example, you might scale up to 5 webservers at 7:30 AM each morning using the crontab in expectation of daily usage and scale back down to (not less than 2) for resilence at 11:30 in anticipation of a quiet night. 
 
