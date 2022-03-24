@@ -62,15 +62,18 @@ then
     DATABASE_INSTALLATION_TYPE="Maria"
 fi
 
-if ( [ "${DATABASE_INSTALLATION_TYPE}" = "Postgres" ] && [ "${APPLICATION}" = "joomla" ] )
+if ( ( [ "${DATABASE_INSTALLATION_TYPE}" = "Postgres" ] || [ "`/bin/echo ${DATABASE_DBaaS_INSTALLATION_TYPE} | /bin/grep "Postgres"`" != "" ] ) && [ "${APPLICATION}" = "joomla" ] )
 then
-    status "################################################################"
-    status "Sorry, I don't know how to set anything other than the default port - 5432 for the postgres database when using joomla"
-    status "Setting expected postgres port to 5432"
-    status "################################################################"
-    /bin/sed -i '/DB_PORT=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
-    /bin/echo "export DB_PORT=\"5432\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
-    DB_PORT=5432
+    if ( [ "${DB_PORT}" != "5432" ] )
+    then
+        status "################################################################"
+        status "Sorry, I don't know how to set anything other than the default port - 5432 for the postgres database when using joomla"
+        status "Setting expected postgres port to 5432"
+        status "################################################################"
+        /bin/sed -i '/DB_PORT=/d' ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+        /bin/echo "export DB_PORT=\"5432\"" >> ${BUILD_HOME}/buildconfiguration/${CLOUDHOST}/${BUILD_IDENTIFIER}
+        DB_PORT=5432
+    fi
 fi
 
 
