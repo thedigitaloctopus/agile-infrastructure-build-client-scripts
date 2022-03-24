@@ -270,9 +270,12 @@ Make sure these tokens have the rights to create and destroy repositories as wel
 
 At the moment, there are three SMTP email service providers. Enter the number value, "1", "2" or "3" to select which provider you want to use for your SMTP service. If you leave these variables blank, you simply won't receive any system emails to give status updated on build progression, server intialisations and so on. You are free to leave these variables blank, as you choose.
 
-Enter "1" - Sendpulse (www.sendpulse.com)
-Enter "2" - Google (gmail)
-Enter "3" - AWS SES 
+Enter "1" - Sendpulse (www.sendpulse.com). 
+
+Enter "2" - Google (gmail). 
+
+Enter "3" - AWS SES. 
+
 
 -----
 
