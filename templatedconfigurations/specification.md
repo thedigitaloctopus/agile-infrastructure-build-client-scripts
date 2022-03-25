@@ -520,7 +520,7 @@ Available sizes to choose from are:
 
 Digital Ocean: 512mb,1gb,2gb,4gb,8gb,16gb,32gb,48gb,64gb (there are other sizes, but, restricting to these keeps in simple for most uses)  
 
-Exoscale: 10G,50G,200G,300G,400G  
+Exoscale: 10G,50G,200G,300G,400G  **NOTE, YOU ALSO HAVE TO SET THE CORRESPONDING VALUE FOR SERVER_TYPE - DEFINED NEXT IN THIS SPEC**
       
       if you select 10G that will deploy a machine of type: "Tiny 1024mb 1cpu"
       if you select 50G that will deploy a machine of type: "Medium 4096mb 2cpu"
