@@ -100,3 +100,5 @@ fi
 
 /usr/bin/find /home/${BUILDMACHINE_USER} -type d -exec chmod 755 {} \;
 /usr/bin/find /home/${BUILDMACHINE_USER} -type f -exec chmod 644 {} \;
+
+/home/${BUILDMACHINE_USER}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
