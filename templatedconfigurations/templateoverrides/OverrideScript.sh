@@ -100,6 +100,3 @@ fi
 
 /usr/bin/find /home/${BUILDMACHINE_USER} -type d -exec chmod 755 {} \;
 /usr/bin/find /home/${BUILDMACHINE_USER} -type f -exec chmod 644 {} \;
-
-/bin/chmod 755 /home/agile-deployer/agile-infrastructure-build-client-scripts/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
-/home/${BUILDMACHINE_USER}/agile-infrastructure-build-client-scripts/providerscripts/security/firewall/TightenBuildMachineFirewall.sh
