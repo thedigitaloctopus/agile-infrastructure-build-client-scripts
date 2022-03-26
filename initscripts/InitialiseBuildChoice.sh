@@ -589,10 +589,16 @@ then
             status "Press <enter> when you are ready to continue"
             read input
             status "Making a safety backup: s3://${ASSETS_BUCKET}-backup-$$ in your ${DATASTORE_CHOICE} datastore from a previous build of this website - ${WEBSITE_URL} , please wait....."
-            /usr/bin/s3cmd mb s3://${ASSETS_BUCKET}-backup-$$
-            /usr/bin/s3cmd sync s3://${ASSETS_BUCKET} s3://${ASSETS_BUCKET}-backup-$$
-            /usr/bin/s3cmd --recursive --force del s3://${ASSETS_BUCKET}
-            status "OK, thanks for waiting. You can find your previously deployed assets in s3://${ASSETS_BUCKET} in your ${DATASTORE_CHOICE} datastore."
+            
+            ${BUILD_HOME}/providerscripts/datastore/MountDatastore.sh ${DATASTORE_CHOICE} ${ASSETS_BUCKET}-backup-$$
+            ${BUILD_HOME}/providerscripts/datastore/SyncDatastore.sh ${DATASTORE_CHOICE} ${ASSETS_BUCKET} ${ASSETS_BUCKET}-backup-$$
+            ${BUILD_HOME}/providerscripts/datastore/DeleteFromDatastore.sh ${DATASTORE_CHOICE} ${ASSETS_BUCKET}
+            
+            #/usr/bin/s3cmd mb s3://${ASSETS_BUCKET}-backup-$$
+            #/usr/bin/s3cmd sync s3://${ASSETS_BUCKET} s3://${ASSETS_BUCKET}-backup-$$
+            #/usr/bin/s3cmd --recursive --force del s3://${ASSETS_BUCKET}
+            
+            status "OK, thanks for waiting. You can find your previously deployed assets in s3://${ASSETS_BUCKET}-backup-$$ in your ${DATASTORE_CHOICE} datastore."
             status " please press <enter> to continue"
             read x
         fi
