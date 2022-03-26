@@ -53,14 +53,18 @@ then
    CLOUDHOST="${4}"
 fi
 
-/usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT /tmp
+${BUILD_HOME}/providerscripts/datastore/GetFromDatastore.sh ${DATASTORE_CHOICE} authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT /tmp
+#/usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT /tmp
 
 if ( [ -f /tmp/FIREWALL-EVENT ] || [ -f /tmp/PRIME_FIREWALL ] )
 then
     /bin/rm /tmp/*FIREWALL*
 
-    /usr/bin/s3cmd --force del s3://authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT 2>/dev/null
-    /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat /root
+    ${BUILD_HOME}/providerscripts/datastore/DeleteFromDatastore.sh ${DATASTORE_CHOICE} authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT
+    ${BUILD_HOME}/providerscripts/datastore/GetFromDatastore.sh ${DATASTORE_CHOICE} authip-${BUILD_IDENTIFIER}/authorised-ips.dat /root
+
+   # /usr/bin/s3cmd --force del s3://authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT 2>/dev/null
+   # /usr/bin/s3cmd --force get s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat /root
 
    if ( [ "${LAPTOP_IP}" = "" ] )
    then
