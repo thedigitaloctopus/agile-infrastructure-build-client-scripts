@@ -83,9 +83,12 @@ then
 
            if ( [ "`${BUILD_HOME}/providerscripts/datastore/ListFromDatastore.sh ${DATASTORE_CHOICE} authip-${BUILD_IDENTIFIER}`" = "" ] )
            then
-               /usr/bin/s3cmd mb s3://authip-${BUILD_IDENTIFIER}
+               ${BUILD_HOME}/providerscripts/datastore/ListFromDatastore.sh ${DATASTORE_CHOICE} authip-${BUILD_IDENTIFIER
+              # /usr/bin/s3cmd mb s3://authip-${BUILD_IDENTIFIER}
            fi
-           /usr/bin/s3cmd put /root/authorised-ips.dat s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
+          # /usr/bin/s3cmd put /root/authorised-ips.dat s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
+           ${BUILD_HOME}/providerscripts/datastore/PutToDatastore.sh ${DATASTORE_CHOICE} /root/authorised-ips.dat s3://authip-${BUILD_IDENTIFIER}/authorised-ips.dat
+
        fi
    fi
 
