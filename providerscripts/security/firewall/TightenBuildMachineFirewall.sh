@@ -78,7 +78,10 @@ then
            /bin/echo "${LAPTOP_IP}" >> /root/authorised-ips.dat
            /usr/bin/uniq /root/authorised-ips.dat > /root/authorised-ips.dat.$$
            /bin/mv /root/authorised-ips.dat.$$ /root/authorised-ips.dat
-           if ( [ "`/usr/bin/s3cmd ls s3://authip-${BUILD_IDENTIFIER}`" = "" ] )
+           
+          #if ( [ "`/usr/bin/s3cmd ls s3://authip-${BUILD_IDENTIFIER}`" = "" ] )
+
+           if ( [ "`${BUILD_HOME}/providerscripts/datastore/ListFromDatastore.sh ${DATASTORE_CHOICE} authip-${BUILD_IDENTIFIER}`" = "" ] )
            then
                /usr/bin/s3cmd mb s3://authip-${BUILD_IDENTIFIER}
            fi
