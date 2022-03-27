@@ -18,13 +18,18 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 ######################################################################################
 ######################################################################################
-#set -x
+set -x
 
 datastore_provider="$1"
 datastore_to_get="`/bin/echo $2 | /usr/bin/cut -c-63`"
 
 if ( [ "${datastore_provider}" = "amazonS3" ] || [ "${datastore_provider}" = "digitalocean" ] || [ "${datastore_provider}" = "exoscale" ] || [ "${datastore_provider}" = "linode" ] || [ "${datastore_provider}" = "vultr" ] )
 then
-    /usr/bin/s3cmd --force --recursive get s3://${datastore_to_get}
+    if ( [ "${3}" != "" ] )
+    then
+        /usr/bin/s3cmd --force --recursive get s3://${datastore_to_get} ${3}
+    else
+        /usr/bin/s3cmd --force --recursive get s3://${datastore_to_get}
+    fi
 fi
 
