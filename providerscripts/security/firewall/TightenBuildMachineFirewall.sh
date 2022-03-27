@@ -25,11 +25,11 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #######################################################################################################
 #######################################################################################################
-#set -x
+set -x
 
 if ( [ "`/usr/bin/crontab -l | /bin/grep Tighten`" = "" ] )
 then
-    /bin/echo "*/1 * * * * ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh ${BUILD_IDENTIFIER} ${BUILD_HOME} ${SSH_PORT} ${CLOUDHOST}" >> /var/spool/cron/crontabs/root
+    /bin/echo "*/1 * * * * ${BUILD_HOME}/providerscripts/security/firewall/TightenBuildMachineFirewall.sh ${BUILD_IDENTIFIER} ${BUILD_HOME} ${SSH_PORT} ${DATASTORE_PROVIDER} ${CLOUDHOST}" >> /var/spool/cron/crontabs/root
     /usr/bin/crontab -u root /var/spool/cron/crontabs/root
 fi
 
@@ -50,7 +50,12 @@ fi
 
 if ( [ "${4}" != "" ] )
 then
-   CLOUDHOST="${4}"
+    DATASTORE_CHOICE="${4}"
+fi
+
+if ( [ "${5}" != "" ] )
+then
+    CLOUDHOST="${5}"
 fi
 
 ${BUILD_HOME}/providerscripts/datastore/GetFromDatastore.sh ${DATASTORE_CHOICE} authip-${BUILD_IDENTIFIER}/FIREWALL-EVENT /tmp
