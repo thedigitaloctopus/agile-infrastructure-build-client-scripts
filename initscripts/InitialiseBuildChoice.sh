@@ -64,7 +64,7 @@ elif ( [ "${BUILD_CHOICE}" = "6" ] )
 fi
 
 #If we don't have a config file from a previous build or, we are forcing ourselves to be new, then, we can do the below
-if ( ( [ "${EXPEDITED}" != "1" ] && ( [ "${PREVIOUS_BUILD_CONFIG}" = "0" ] || [ "${USE_NEW}" = "1" ] ) )
+if ( [ "${EXPEDITED}" != "1" ] && ( [ "${PREVIOUS_BUILD_CONFIG}" = "0" ] || [ "${USE_NEW}" = "1" ] ) )
 then
     DEVELOPMENT="0"
     PRODUCTION="0"
