@@ -430,6 +430,8 @@ status ""
 . ${BUILD_HOME}/providerscripts/cloudhost/ValidateProviderAuthorisation.sh
 . ${BUILD_HOME}/providerscripts/cloudhost/SetupAdditionalCloudhostTools.sh
 . ${BUILD_HOME}/providerscripts/datastore/PersistBuildClientIP.sh
+export EXPEDITED="1"
+. ${BUILD_HOME}/initscripts/InitialiseBuildChoice.sh
 export PRE_BUILD="1"
 . ${BUILD_HOME}/providerscripts/security/firewall/SetupNativeFirewall.sh
 
