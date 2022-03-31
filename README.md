@@ -4,7 +4,7 @@
 
 #### OVERVIEW:
 
-To provide a way of deploying server systems using nothing but parameterised scripting, from scratch, in such a way that a customer can either use the servers for development or production whilst retaining full access to and control of their server systems. As it goes, this is a simple solution meaning it doesn't use anything fancy, just linux shell scripting. 
+To provide a way of deploying server systems using nothing but parameterised scripting, from scratch, in such a way that a customer can either use the servers for development or production whilst retaining full access to and control of their server systems. As it goes, this is a simple solution meaning it doesn't use anything fancy, just linux shell scripting. Like car mechanics might like to do their own car maintenance, server mechanics might like to do their own server builds and this can help with that. To a skilled user there's quite a few advantages, agility, flexibility, customisation, for example, I haven't built in phpadmin to this solution, but, if you wanted it you can modify the scripts and have it available in short order. The core philosophy is to be agile in other words, to not be tightly coupled to any particular provider. 
 
 ----------------------------
 
